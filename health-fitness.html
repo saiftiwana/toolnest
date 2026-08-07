@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Free Health & Fitness Calculators | ToolNest</title><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Health & Fitness</h1><p>Quick, private wellness estimates — nothing leaves your browser.</p></header><main>
+
+<div class="card"><h2>BMI Calculator</h2><p class="desc">Calculate your Body Mass Index from height and weight.</p><div class="row"><input type="number" id="bmiWeight" placeholder="Weight (kg)" value="70"><input type="number" id="bmiHeight" placeholder="Height (cm)" value="170"><button id="bmiBtn">Calculate</button></div><p class="stat" id="bmiResult"></p></div>
+
+<div class="card"><h2>Ideal Body Weight Calculator</h2><p class="desc">Estimate ideal body weight from height and gender (Devine formula).</p><div class="row"><select id="ibwGender"><option value="male">Male</option><option value="female">Female</option></select><input type="number" id="ibwHeight" placeholder="Height (cm)" value="170"><button id="ibwBtn">Calculate</button></div><p class="stat" id="ibwResult"></p></div>
+
+<div class="card"><h2>Calorie &amp; Macro Calculator</h2><p class="desc">General estimate, not medical advice.</p><div class="row"><select id="calGender"><option value="male">Male</option><option value="female">Female</option></select><input type="number" id="calAge" placeholder="Age" value="30"></div><div class="row" style="margin-top:12px;"><input type="number" id="calWeight" placeholder="Weight (kg)" value="70"><input type="number" id="calHeight" placeholder="Height (cm)" value="170"><button id="calBtn">Calculate</button></div><p class="stat" id="calResult"></p></div>
+
+<div class="card"><h2>Hydration Timer</h2><p class="desc">General wellness estimate.</p><div class="row"><input type="number" id="hydWeight" placeholder="Weight (kg)" value="70"><button id="hydCalcBtn">Show Target</button></div><p class="stat" id="hydResult"></p></div>
+
+<div class="card"><h2>Runner's Pace Predictor</h2><p class="desc">Uses the Riegel formula.</p><div class="row"><input type="number" id="paceDist" placeholder="Distance (km)" value="5"><input type="text" id="paceTime" placeholder="Time (mm:ss)" value="25:00"><button id="paceBtn">Predict</button></div><p class="stat" id="paceResult" style="white-space:pre-line;"></p></div>
+
+<div class="card"><h2>Sleep Cycle Planner</h2><p class="desc">Based on 90-minute sleep cycles.</p><div class="row"><select id="sleepMode"><option value="wake">I need to wake up at...</option><option value="now">Going to bed now</option></select><input type="time" id="sleepTime" value="07:00"><button id="sleepBtn">Calculate</button></div><p class="stat" id="sleepResult" style="white-space:pre-line;"></p></div>
+
+<div class="card"><h2>Period &amp; Ovulation Calculator</h2><p class="desc">Estimate your next period and fertile window based on your average cycle length.</p><div class="row"><input type="date" id="povLastPeriod"><input type="number" id="povCycleLength" placeholder="Cycle length (days)" value="28"><button id="povBtn">Calculate</button></div><p class="stat" id="povResult" style="white-space:pre-line;"></p></div>
+
+<div class="card"><h2>Pregnancy Due Date Calculator</h2><p class="desc">Estimate your due date from the first day of your last period.</p><div class="row"><input type="date" id="dueLmp"><button id="dueBtn">Calculate</button></div><p class="stat" id="dueResult" style="white-space:pre-line;"></p></div>
+
+</main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer><script>
+document.getElementById('bmiBtn').addEventListener('click',()=>{
+  const weight=+document.getElementById('bmiWeight').value;const heightCm=+document.getElementById('bmiHeight').value;
+  if(!weight||!heightCm)return alert('Fill in all fields');
+  const heightM=heightCm/100;const bmi=weight/(heightM*heightM);
+  let category='';
+  if(bmi<18.5)category='Underweight';else if(bmi<25)category='Normal weight';else if(bmi<30)category='Overweight';else category='Obese';
+  document.getElementById('bmiResult').textContent=`BMI: ${bmi.toFixed(1)} — ${category}`;
+});
+
+document.getElementById('ibwBtn').addEventListener('click',()=>{
+  const gender=document.getElementById('ibwGender').value;const heightCm=+document.getElementById('ibwHeight').value;
+  if(!heightCm)return alert('Enter height');
+  const totalInches=heightCm/2.54;const inchesOver5ft=Math.max(0,totalInches-60);
+  const ibw=gender==='male'?50+2.3*inchesOver5ft:45.5+2.3*inchesOver5ft;
+  document.getElementById('ibwResult').textContent=`Estimated Ideal Body Weight: ${ibw.toFixed(1)} kg`;
+});
+
+document.getElementById('calBtn').addEventListener('click',()=>{const gender=document.getElementById('calGender').value;const age=+document.getElementById('calAge').value;const weight=+document.getElementById('calWeight').value;const height=+document.getElementById('calHeight').value;if(!age||!weight||!height)return alert('Fill in all fields');let bmr=gender==='male'?(10*weight+6.25*height-5*age+5):(10*weight+6.25*height-5*age-161);const maintenance=bmr*1.4;document.getElementById('calResult').textContent=`Estimated maintenance: ~${maintenance.toFixed(0)} kcal/day`;});
+
+document.getElementById('hydCalcBtn').addEventListener('click',()=>{const weight=+document.getElementById('hydWeight').value;if(!weight)return alert('Enter weight');document.getElementById('hydResult').textContent=`Target: ~${(weight*0.033).toFixed(1)} liters/day`;});
+
+document.getElementById('paceBtn').addEventListener('click',()=>{const dist=+document.getElementById('paceDist').value;const timeStr=document.getElementById('paceTime').value.trim();const parts=timeStr.split(':').map(Number);let seconds;if(parts.length===2)seconds=parts[0]*60+parts[1];else return alert('Enter time as mm:ss');if(!dist)return alert('Enter distance');const distances={'5K':5,'10K':10,'Half Marathon':21.1,'Marathon':42.2};let out='';for(const[label,d]of Object.entries(distances)){const predicted=seconds*Math.pow(d/dist,1.06);const m=Math.floor(predicted/60);const s=Math.floor(predicted%60);out+=`${label}: ${m}:${s.toString().padStart(2,'0')}\n`;}document.getElementById('paceResult').textContent=out.trim();});
+
+document.getElementById('sleepBtn').addEventListener('click',()=>{const mode=document.getElementById('sleepMode').value;const timeVal=document.getElementById('sleepTime').value;if(!timeVal)return alert('Choose a time');const[h,m]=timeVal.split(':').map(Number);const base=new Date();base.setHours(h,m,0,0);let out='';if(mode==='wake'){out='Go to bed at:\n';for(let c=6;c>=4;c--){const bt=new Date(base.getTime()-(c*90+15)*60000);out+=`${c} cycles: ${bt.getHours().toString().padStart(2,'0')}:${bt.getMinutes().toString().padStart(2,'0')}\n`;}}else{out='Wake up at:\n';for(let c=4;c<=6;c++){const wt=new Date(base.getTime()+(c*90+15)*60000);out+=`${c} cycles: ${wt.getHours().toString().padStart(2,'0')}:${wt.getMinutes().toString().padStart(2,'0')}\n`;}}document.getElementById('sleepResult').textContent=out.trim();});
+
+document.getElementById('povBtn').addEventListener('click',()=>{
+  const lastStr=document.getElementById('povLastPeriod').value;const cycleLen=+document.getElementById('povCycleLength').value||28;
+  if(!lastStr)return alert('Choose the first day of your last period');
+  const last=new Date(lastStr);const nextPeriod=new Date(last.getTime()+cycleLen*86400000);
+  const ovulation=new Date(nextPeriod.getTime()-14*86400000);
+  const fertileStart=new Date(ovulation.getTime()-5*86400000);const fertileEnd=new Date(ovulation.getTime()+1*86400000);
+  const fmt=d=>d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  document.getElementById('povResult').textContent=`Estimated next period: ${fmt(nextPeriod)}\nEstimated ovulation: ${fmt(ovulation)}\nFertile window: ${fmt(fertileStart)} – ${fmt(fertileEnd)}\n\nThis is an estimate based on average cycles; actual timing varies from person to person.`;
+});
+
+document.getElementById('dueBtn').addEventListener('click',()=>{
+  const lmpStr=document.getElementById('dueLmp').value;
+  if(!lmpStr)return alert('Choose the first day of your last period');
+  const lmp=new Date(lmpStr);const dueDate=new Date(lmp.getTime()+280*86400000);
+  const today=new Date();const daysPregnant=Math.floor((today-lmp)/86400000);
+  const weeksPregnant=Math.floor(daysPregnant/7);const daysRemainder=daysPregnant%7;
+  const fmt=d=>d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  let gestInfo=(daysPregnant>=0&&daysPregnant<=300)?`Current gestational age: about ${weeksPregnant} weeks, ${daysRemainder} days\n`:'';
+  document.getElementById('dueResult').textContent=`${gestInfo}Estimated due date: ${fmt(dueDate)}\n\nBased on a standard 280-day (40-week) pregnancy from your last period. Your doctor's ultrasound estimate may differ slightly.`;
+});
+</script>
+<script src="script.js"></script></body></html>

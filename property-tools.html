@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Free Property & Construction Tools | ToolNest</title><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Property & Construction Tools</h1><p>Land, building, and property math made easy.</p></header><main>
+
+<div class="card"><h2>Marla / Kanal to Sq Ft Converter</h2><p class="desc">Quick conversion using your preferred Marla standard.</p><div class="row"><input type="number" id="mkMarla" placeholder="Marla" value="0"><input type="number" id="mkKanal" placeholder="Kanal" value="0"></div><div class="row" style="margin-top:12px;"><select id="mkStandard"><option value="225">1 Marla = 225 sq ft (Standard)</option><option value="272.25">1 Marla = 272.25 sq ft (Older/Regional)</option><option value="custom">Custom sq ft per Marla</option></select><input type="number" id="mkCustomValue" placeholder="Custom sq ft/Marla" style="display:none; width:160px;"><button id="mkBtn">Convert</button></div><p class="stat" id="mkResult"></p></div>
+
+<div class="card"><h2>Construction Bricks Calculator</h2><p class="desc">Estimate bricks needed for a wall (standard brick 9"×4.5"×3" with mortar joint).</p><div class="row"><input type="number" id="brickLen" placeholder="Wall length (ft)" value="10"><input type="number" id="brickHt" placeholder="Wall height (ft)" value="10"></div><div class="row" style="margin-top:12px;"><input type="number" id="brickThick" placeholder="Wall thickness (inches)" value="9"><button id="brickBtn">Calculate</button></div><p class="stat" id="brickResult"></p></div>
+
+<div class="card"><h2>Cement & Concrete Volume Calculator</h2><p class="desc">Find concrete volume and cement bags for a given mix ratio.</p><div class="row"><input type="number" id="ccLen" placeholder="Length (ft)" value="10"><input type="number" id="ccWid" placeholder="Width (ft)" value="10"></div><div class="row" style="margin-top:12px;"><input type="number" id="ccThick" placeholder="Thickness (inches)" value="4"><select id="ccMix"><option value="1:2:4">1:2:4 (Standard)</option><option value="1:1.5:3">1:1.5:3 (Strong)</option><option value="1:3:6">1:3:6 (Lean)</option></select><button id="ccBtn">Calculate</button></div><p class="stat" id="ccResult" style="white-space:pre-line;"></p></div>
+
+<div class="card"><h2>Paint Estimator</h2><p class="desc">Estimate total paint needed and rough cost for a house.</p><div class="row"><input type="number" id="peArea" placeholder="Total wall area (sq ft)" value="1000"><input type="number" id="peCoats" placeholder="Coats" value="2"></div><div class="row" style="margin-top:12px;"><input type="number" id="peCoverage" placeholder="Coverage (sq ft/liter)" value="120"><input type="number" id="peRate" placeholder="Price per liter" value="0"><button id="peBtn">Calculate</button></div><p class="stat" id="peResult"></p></div>
+
+<div class="card"><h2>Flooring Tile Calculator</h2><p class="desc">Find how many tiles you need, including wastage.</p><div class="row"><input type="number" id="ftRoomLen" placeholder="Room length (ft)" value="12"><input type="number" id="ftRoomWid" placeholder="Room width (ft)" value="10"></div><div class="row" style="margin-top:12px;"><input type="number" id="ftTileLen" placeholder="Tile length (inches)" value="24"><input type="number" id="ftTileWid" placeholder="Tile width (inches)" value="24"><input type="number" id="ftWaste" placeholder="Wastage %" value="10"><button id="ftBtn">Calculate</button></div><p class="stat" id="ftResult"></p></div>
+
+<div class="card"><h2>Property Loan EMI Calculator</h2><p class="desc">Monthly installment for any property loan.</p><div class="row"><input type="number" id="emiAmount" placeholder="Loan amount" value="5000000"><input type="number" id="emiRate" placeholder="Annual interest rate %" value="12"></div><div class="row" style="margin-top:12px;"><input type="number" id="emiYears" placeholder="Loan term (years)" value="20"><button id="emiBtn">Calculate</button></div><p class="stat" id="emiResult"></p></div>
+
+<div class="card"><h2>Rental Yield Calculator</h2><p class="desc">Find the gross rental yield of a property.</p><div class="row"><input type="number" id="ryValue" placeholder="Property value" value="10000000"><input type="number" id="ryRent" placeholder="Monthly rent" value="40000"><button id="ryBtn">Calculate</button></div><p class="stat" id="ryResult"></p></div>
+
+<div class="card"><h2>Plot Area Calculator (Irregular)</h2><p class="desc">Estimate the area of an irregular 4-sided plot using its two diagonals and the angle-free trapezoid method (average of parallel-ish sides).</p><div class="row"><input type="number" id="plotSide1" placeholder="Side A (ft)" value="0"><input type="number" id="plotSide2" placeholder="Side B (opposite, ft)" value="0"></div><div class="row" style="margin-top:12px;"><input type="number" id="plotSide3" placeholder="Side C (ft)" value="0"><input type="number" id="plotSide4" placeholder="Side D (opposite, ft)" value="0"></div><div class="row" style="margin-top:12px;"><select id="plotStandard"><option value="225">1 Marla = 225 sq ft (Standard)</option><option value="272.25">1 Marla = 272.25 sq ft (Older/Regional)</option><option value="custom">Custom sq ft per Marla</option></select><input type="number" id="plotCustomValue" placeholder="Custom sq ft/Marla" style="display:none; width:160px;"><button id="plotBtn">Estimate Area</button></div><p class="stat" id="plotResult"></p></div>
+
+<div class="card"><h2>Construction Cost Estimator</h2><p class="desc">Rough total cost based on covered area and rate per sq ft.</p><div class="row"><input type="number" id="ccstArea" placeholder="Covered area (sq ft)" value="1500"><input type="number" id="ccstRate" placeholder="Rate per sq ft" value="3000"><button id="ccstBtn">Estimate</button></div><p class="stat" id="ccstResult"></p></div>
+
+<div class="card"><h2>Land Measurement Converter</h2><p class="desc">Convert between Marla, Kanal, Acre, Hectare, Sq Ft, Sq Yard, and Sq Meter.</p><div class="row"><input type="number" id="lmValue" placeholder="Value" value="1"><select id="lmUnit"><option value="marla">Marla</option><option value="kanal">Kanal</option><option value="acre">Acre</option><option value="hectare">Hectare</option><option value="sqft">Sq Ft</option><option value="sqyd">Sq Yard</option><option value="sqm">Sq Meter</option></select></div><div class="row" style="margin-top:12px;"><select id="lmStandard"><option value="225">1 Marla = 225 sq ft (Standard)</option><option value="272.25">1 Marla = 272.25 sq ft (Older/Regional)</option><option value="custom">Custom sq ft per Marla</option></select><input type="number" id="lmCustomValue" placeholder="Custom sq ft/Marla" style="display:none; width:160px;"><button id="lmBtn">Convert</button></div><p class="stat" id="lmResult" style="white-space:pre-line;"></p></div>
+
+<div class="card"><h2>Mortgage Calculator</h2><p class="desc">Monthly mortgage payment including down payment.</p><div class="row"><input type="number" id="mortPrice" placeholder="Property price" value="10000000"><input type="number" id="mortDown" placeholder="Down payment" value="2000000"></div><div class="row" style="margin-top:12px;"><input type="number" id="mortRate" placeholder="Annual interest rate %" value="12"><input type="number" id="mortYears" placeholder="Term (years)" value="20"><button id="mortBtn">Calculate</button></div><p class="stat" id="mortResult" style="white-space:pre-line;"></p></div>
+
+<div class="card"><h2>Map Scale & Distance Calculator</h2><p class="desc">Convert between map distance and real-world distance using a scale ratio.</p><div class="row"><input type="text" id="scaleRatio" placeholder="Scale e.g. 1:50000" value="1:50000"><input type="number" id="scaleMapDist" placeholder="Distance on map (cm)" value="0"></div><div class="row" style="margin-top:12px;"><button id="scaleToRealBtn">To Real Distance</button><input type="number" id="scaleRealDist" placeholder="Real distance (km)" value="0"><button class="secondary" id="scaleToMapBtn">To Map Distance</button></div><p class="stat" id="scaleResult"></p></div>
+
+</main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+
+<script>
+// Marla/Kanal to Sq Ft
+const mkStandardSel=document.getElementById('mkStandard');
+const mkCustomInput=document.getElementById('mkCustomValue');
+mkStandardSel.addEventListener('change',()=>{
+  mkCustomInput.style.display=mkStandardSel.value==='custom'?'inline-block':'none';
+});
+document.getElementById('mkBtn').addEventListener('click',()=>{
+  const marla=+document.getElementById('mkMarla').value||0;
+  const kanal=+document.getElementById('mkKanal').value||0;
+  const totalMarla=kanal*20+marla;
+  let sqftPerMarla;
+  if(mkStandardSel.value==='custom'){
+    sqftPerMarla=+mkCustomInput.value;
+    if(!sqftPerMarla)return document.getElementById('mkResult').textContent='Enter a custom sq ft per Marla value';
+  }else{
+    sqftPerMarla=+mkStandardSel.value;
+  }
+  const sqft=totalMarla*sqftPerMarla;
+  const sqyd=sqft/9;
+  const sqm=sqft*0.092903;
+  document.getElementById('mkResult').textContent=`${totalMarla} Marla (@ ${sqftPerMarla} sq ft/Marla) = ${sqft.toFixed(0)} sq ft = ${sqyd.toFixed(1)} sq yd = ${sqm.toFixed(1)} sq m`;
+});
+
+// Construction Bricks
+document.getElementById('brickBtn').addEventListener('click',()=>{
+  const len=+document.getElementById('brickLen').value;const ht=+document.getElementById('brickHt').value;
+  const thickIn=+document.getElementById('brickThick').value;
+  if(!len||!ht||!thickIn)return document.getElementById('brickResult').textContent='Fill in all fields';
+  const wallAreaSqFt=len*ht;
+  const brickLenIn=9,brickHtIn=3,mortarIn=0.5;
+  const bricksPerSqFtFace=144/((brickLenIn+mortarIn)*(brickHtIn+mortarIn));
+  const thicknessLayers=Math.max(1,Math.round(thickIn/9));
+  const totalBricks=Math.ceil(wallAreaSqFt*bricksPerSqFtFace*thicknessLayers);
+  document.getElementById('brickResult').textContent=`Estimated bricks needed: ${totalBricks} (add 5-10% extra for breakage)`;
+});
+
+// Cement & Concrete Volume
+document.getElementById('ccBtn').addEventListener('click',()=>{
+  const len=+document.getElementById('ccLen').value;const wid=+document.getElementById('ccWid').value;
+  const thickIn=+document.getElementById('ccThick').value;
+  if(!len||!wid||!thickIn)return document.getElementById('ccResult').textContent='Fill in all fields';
+  const thickFt=thickIn/12;
+  const volumeCuFt=len*wid*thickFt;
+  const mix=document.getElementById('ccMix').value.split(':').map(Number);
+  const totalParts=mix[0]+mix[1]+mix[2];
+  const dryVolume=volumeCuFt*1.54;
+  const cementCuFt=dryVolume*(mix[0]/totalParts);
+  const cementBags=cementCuFt/1.25;
+  const sandCuFt=dryVolume*(mix[1]/totalParts);
+  const aggCuFt=dryVolume*(mix[2]/totalParts);
+  document.getElementById('ccResult').textContent=`Concrete Volume: ${volumeCuFt.toFixed(2)} cu ft\nCement: ${cementBags.toFixed(1)} bags (50kg)\nSand: ${sandCuFt.toFixed(2)} cu ft\nAggregate: ${aggCuFt.toFixed(2)} cu ft`;
+});
+
+// Paint Estimator
+document.getElementById('peBtn').addEventListener('click',()=>{
+  const area=+document.getElementById('peArea').value;const coats=+document.getElementById('peCoats').value||1;
+  const coverage=+document.getElementById('peCoverage').value;const rate=+document.getElementById('peRate').value||0;
+  if(!area||!coverage)return document.getElementById('peResult').textContent='Fill in all fields';
+  const liters=(area*coats)/coverage;
+  const cost=liters*rate;
+  document.getElementById('peResult').textContent=`Paint needed: ${liters.toFixed(1)} liters${rate?` | Estimated cost: ${cost.toFixed(0)}`:''}`;
+});
+
+// Flooring Tile Calculator
+document.getElementById('ftBtn').addEventListener('click',()=>{
+  const roomLen=+document.getElementById('ftRoomLen').value;const roomWid=+document.getElementById('ftRoomWid').value;
+  const tileLenIn=+document.getElementById('ftTileLen').value;const tileWidIn=+document.getElementById('ftTileWid').value;
+  const waste=+document.getElementById('ftWaste').value||0;
+  if(!roomLen||!roomWid||!tileLenIn||!tileWidIn)return document.getElementById('ftResult').textContent='Fill in all fields';
+  const roomAreaSqFt=roomLen*roomWid;
+  const tileAreaSqFt=(tileLenIn/12)*(tileWidIn/12);
+  const tilesNeeded=Math.ceil((roomAreaSqFt/tileAreaSqFt)*(1+waste/100));
+  document.getElementById('ftResult').textContent=`Room area: ${roomAreaSqFt.toFixed(1)} sq ft | Tiles needed: ${tilesNeeded}`;
+});
+
+// Property Loan EMI
+document.getElementById('emiBtn').addEventListener('click',()=>{
+  const p=+document.getElementById('emiAmount').value;const annualRate=+document.getElementById('emiRate').value;
+  const years=+document.getElementById('emiYears').value;
+  if(!p||!annualRate||!years)return document.getElementById('emiResult').textContent='Fill in all fields';
+  const r=annualRate/12/100;const n=years*12;
+  const emi=p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  const totalPay=emi*n;
+  document.getElementById('emiResult').textContent=`Monthly EMI: ${emi.toFixed(0)} | Total Payment: ${totalPay.toFixed(0)} | Total Interest: ${(totalPay-p).toFixed(0)}`;
+});
+
+// Rental Yield
+document.getElementById('ryBtn').addEventListener('click',()=>{
+  const value=+document.getElementById('ryValue').value;const rent=+document.getElementById('ryRent').value;
+  if(!value||!rent)return document.getElementById('ryResult').textContent='Fill in all fields';
+  const annualRent=rent*12;
+  const yieldPct=(annualRent/value)*100;
+  document.getElementById('ryResult').textContent=`Annual Rent: ${annualRent.toFixed(0)} | Gross Rental Yield: ${yieldPct.toFixed(2)}%`;
+});
+
+// Plot Area (Irregular)
+const plotStandardSel=document.getElementById('plotStandard');
+const plotCustomInput=document.getElementById('plotCustomValue');
+plotStandardSel.addEventListener('change',()=>{
+  plotCustomInput.style.display=plotStandardSel.value==='custom'?'inline-block':'none';
+});
+document.getElementById('plotBtn').addEventListener('click',()=>{
+  const a=+document.getElementById('plotSide1').value;const b=+document.getElementById('plotSide2').value;
+  const c=+document.getElementById('plotSide3').value;const d=+document.getElementById('plotSide4').value;
+  if(!a||!b||!c||!d)return document.getElementById('plotResult').textContent='Enter all four sides';
+  let sqftPerMarla;
+  if(plotStandardSel.value==='custom'){
+    sqftPerMarla=+plotCustomInput.value;
+    if(!sqftPerMarla)return document.getElementById('plotResult').textContent='Enter a custom sq ft per Marla value';
+  }else{
+    sqftPerMarla=+plotStandardSel.value;
+  }
+  const avgLen=(a+b)/2;const avgWid=(c+d)/2;
+  const area=avgLen*avgWid;
+  document.getElementById('plotResult').textContent=`Estimated Area: ${area.toFixed(1)} sq ft (${(area/sqftPerMarla).toFixed(2)} Marla @ ${sqftPerMarla} sq ft/Marla) — approximation only, for an exact survey consult a surveyor`;
+});
+
+// Construction Cost Estimator
+document.getElementById('ccstBtn').addEventListener('click',()=>{
+  const area=+document.getElementById('ccstArea').value;const rate=+document.getElementById('ccstRate').value;
+  if(!area||!rate)return document.getElementById('ccstResult').textContent='Fill in all fields';
+  const total=area*rate;
+  document.getElementById('ccstResult').textContent=`Estimated Construction Cost: ${total.toFixed(0)}`;
+});
+
+// Land Measurement Converter
+const lmStandardSel=document.getElementById('lmStandard');
+const lmCustomInput=document.getElementById('lmCustomValue');
+lmStandardSel.addEventListener('change',()=>{
+  lmCustomInput.style.display=lmStandardSel.value==='custom'?'inline-block':'none';
+});
+document.getElementById('lmBtn').addEventListener('click',()=>{
+  const val=+document.getElementById('lmValue').value;const unit=document.getElementById('lmUnit').value;
+  if(!val)return document.getElementById('lmResult').textContent='Enter a value';
+  let sqftPerMarla;
+  if(lmStandardSel.value==='custom'){
+    sqftPerMarla=+lmCustomInput.value;
+    if(!sqftPerMarla)return document.getElementById('lmResult').textContent='Enter a custom sq ft per Marla value';
+  }else{
+    sqftPerMarla=+lmStandardSel.value;
+  }
+  const LAND_UNITS_TO_SQFT={marla:sqftPerMarla,kanal:sqftPerMarla*20,acre:43560,hectare:107639,sqft:1,sqyd:9,sqm:10.7639};
+  const sqft=val*LAND_UNITS_TO_SQFT[unit];
+  const out=[];
+  for(const u in LAND_UNITS_TO_SQFT){
+    if(u===unit)continue;
+    out.push(`${(sqft/LAND_UNITS_TO_SQFT[u]).toFixed(3)} ${u}`);
+  }
+  document.getElementById('lmResult').textContent=`${val} ${unit} (@ ${sqftPerMarla} sq ft/Marla) = ${sqft.toFixed(1)} sq ft\n`+out.join(' | ');
+});
+
+// Mortgage Calculator
+document.getElementById('mortBtn').addEventListener('click',()=>{
+  const price=+document.getElementById('mortPrice').value;const down=+document.getElementById('mortDown').value||0;
+  const annualRate=+document.getElementById('mortRate').value;const years=+document.getElementById('mortYears').value;
+  if(!price||!annualRate||!years)return document.getElementById('mortResult').textContent='Fill in all fields';
+  const loan=price-down;
+  const r=annualRate/12/100;const n=years*12;
+  const monthly=loan*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  const totalPay=monthly*n;
+  document.getElementById('mortResult').textContent=`Loan Amount: ${loan.toFixed(0)}\nMonthly Payment: ${monthly.toFixed(0)}\nTotal Payment: ${totalPay.toFixed(0)}\nTotal Interest: ${(totalPay-loan).toFixed(0)}`;
+});
+
+// Map Scale & Distance
+document.getElementById('scaleToRealBtn').addEventListener('click',()=>{
+  const ratioStr=document.getElementById('scaleRatio').value.trim();
+  const mapCm=+document.getElementById('scaleMapDist').value;
+  const parts=ratioStr.split(':').map(Number);
+  if(parts.length!==2||!parts[1]||!mapCm)return document.getElementById('scaleResult').textContent='Enter a valid scale (1:50000) and map distance';
+  const realCm=mapCm*parts[1];
+  const realKm=realCm/100000;
+  document.getElementById('scaleResult').textContent=`Real distance: ${realKm.toFixed(3)} km (${(realKm*1000).toFixed(0)} m)`;
+});
+document.getElementById('scaleToMapBtn').addEventListener('click',()=>{
+  const ratioStr=document.getElementById('scaleRatio').value.trim();
+  const realKm=+document.getElementById('scaleRealDist').value;
+  const parts=ratioStr.split(':').map(Number);
+  if(parts.length!==2||!parts[1]||!realKm)return document.getElementById('scaleResult').textContent='Enter a valid scale (1:50000) and real distance';
+  const realCm=realKm*100000;
+  const mapCm=realCm/parts[1];
+  document.getElementById('scaleResult').textContent=`Map distance: ${mapCm.toFixed(2)} cm`;
+});
+</script>
+<script src="script.js"></script></body></html>

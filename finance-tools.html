@@ -1,0 +1,108 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Free Finance & Investment Tools | ToolNest</title><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Finance & Investment Tools</h1><p>Plan, calculate, and track your money.</p></header><main>
+
+<div class="card"><h2>SIP & Investment Return Calculator</h2><p class="desc">Estimate the future value of a monthly investment (SIP).</p><div class="row"><input type="number" id="sipMonthly" placeholder="Monthly investment" value="5000"><input type="number" id="sipRate" placeholder="Expected annual return %" value="12"></div><div class="row" style="margin-top:12px;"><input type="number" id="sipYears" placeholder="Years" value="10"><button id="sipBtn">Calculate</button></div><p class="stat" id="sipResult"></p></div>
+
+<div class="card"><h2>Simple & Compound Interest Calculator</h2><p class="desc">Compare simple and compound interest on the same amount.</p><div class="row"><input type="number" id="siPrincipal" placeholder="Principal" value="10000"><input type="number" id="siRate" placeholder="Annual rate %" value="8"></div><div class="row" style="margin-top:12px;"><input type="number" id="siYears" placeholder="Years" value="5"><select id="siCompound"><option value="1">Yearly</option><option value="2">Half-Yearly</option><option value="4">Quarterly</option><option value="12">Monthly</option></select><button id="siBtn">Calculate</button></div><p class="stat" id="siResult" style="white-space:pre-line;"></p></div>
+
+<div class="card"><h2>Sales Tax / GST Calculator</h2><p class="desc">Add tax to a price, or find the pre-tax price from a total.</p><div class="row"><input type="number" id="gstAmount" placeholder="Amount" value="1000"><input type="number" id="gstRate" placeholder="Tax rate %" value="17"></div><div class="row" style="margin-top:12px;"><button id="gstAddBtn">Add Tax (Exclusive)</button><button class="secondary" id="gstRemoveBtn">Remove Tax (Inclusive)</button></div><p class="stat" id="gstResult"></p></div>
+
+<div class="card"><h2>Crypto / Stock Profit & Loss Calculator</h2><p class="desc">Work out your profit or loss on a trade.</p><div class="row"><input type="number" id="plBuy" placeholder="Buy price" value="0"><input type="number" id="plSell" placeholder="Sell price" value="0"></div><div class="row" style="margin-top:12px;"><input type="number" id="plQty" placeholder="Quantity" value="1"><input type="number" id="plFees" placeholder="Total fees" value="0"><button id="plBtn">Calculate</button></div><p class="stat" id="plResult"></p></div>
+
+<div class="card"><h2>Inflation Calculator</h2><p class="desc">See how inflation erodes purchasing power over time.</p><div class="row"><input type="number" id="infAmount" placeholder="Amount today" value="100000"><input type="number" id="infRate" placeholder="Inflation rate %/year" value="7"></div><div class="row" style="margin-top:12px;"><input type="number" id="infYears" placeholder="Years" value="10"><button id="infBtn">Calculate</button></div><p class="stat" id="infResult" style="white-space:pre-line;"></p></div>
+
+<div class="card"><h2>Salary / Take-Home Pay Calculator</h2><p class="desc">Estimate your net pay after tax and deductions.</p><div class="row"><input type="number" id="salGross" placeholder="Gross salary (monthly)" value="100000"><input type="number" id="salTax" placeholder="Tax rate %" value="10"></div><div class="row" style="margin-top:12px;"><input type="number" id="salDeductions" placeholder="Other deductions" value="0"><button id="salBtn">Calculate</button></div><p class="stat" id="salResult"></p></div>
+
+<div class="card"><h2>Savings Goal Calculator</h2><p class="desc">Find out how long it will take to reach a savings goal.</p><div class="row"><input type="number" id="sgGoal" placeholder="Goal amount" value="1000000"><input type="number" id="sgCurrent" placeholder="Current savings" value="0"></div><div class="row" style="margin-top:12px;"><input type="number" id="sgMonthly" placeholder="Monthly contribution" value="10000"><input type="number" id="sgRate" placeholder="Annual return %" value="8"><button id="sgBtn">Calculate</button></div><p class="stat" id="sgResult"></p></div>
+
+</main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+
+<script>
+// SIP Calculator
+document.getElementById('sipBtn').addEventListener('click',()=>{
+  const monthly=+document.getElementById('sipMonthly').value;
+  const rate=+document.getElementById('sipRate').value/100/12;
+  const months=+document.getElementById('sipYears').value*12;
+  if(!monthly||!months)return document.getElementById('sipResult').textContent='Fill in all fields';
+  const fv=monthly*((Math.pow(1+rate,months)-1)/rate)*(1+rate);
+  const invested=monthly*months;
+  document.getElementById('sipResult').textContent=`Invested: ${invested.toFixed(0)} | Future Value: ${fv.toFixed(0)} | Gains: ${(fv-invested).toFixed(0)}`;
+});
+
+// Simple & Compound Interest
+document.getElementById('siBtn').addEventListener('click',()=>{
+  const p=+document.getElementById('siPrincipal').value;
+  const r=+document.getElementById('siRate').value;
+  const t=+document.getElementById('siYears').value;
+  const n=+document.getElementById('siCompound').value;
+  if(!p||!t)return document.getElementById('siResult').textContent='Fill in all fields';
+  const simple=p*r*t/100;
+  const compound=p*Math.pow(1+(r/100)/n,n*t)-p;
+  document.getElementById('siResult').textContent=`Simple Interest: ${simple.toFixed(2)} (Total: ${(p+simple).toFixed(2)})\nCompound Interest: ${compound.toFixed(2)} (Total: ${(p+compound).toFixed(2)})`;
+});
+
+// GST / Sales Tax
+document.getElementById('gstAddBtn').addEventListener('click',()=>{
+  const amt=+document.getElementById('gstAmount').value;const rate=+document.getElementById('gstRate').value;
+  if(!amt)return document.getElementById('gstResult').textContent='Enter an amount';
+  const tax=amt*(rate/100);
+  document.getElementById('gstResult').textContent=`Tax: ${tax.toFixed(2)} | Total (incl. tax): ${(amt+tax).toFixed(2)}`;
+});
+document.getElementById('gstRemoveBtn').addEventListener('click',()=>{
+  const amt=+document.getElementById('gstAmount').value;const rate=+document.getElementById('gstRate').value;
+  if(!amt)return document.getElementById('gstResult').textContent='Enter an amount';
+  const base=amt/(1+rate/100);
+  document.getElementById('gstResult').textContent=`Pre-tax amount: ${base.toFixed(2)} | Tax included: ${(amt-base).toFixed(2)}`;
+});
+
+// Crypto / Stock P&L
+document.getElementById('plBtn').addEventListener('click',()=>{
+  const buy=+document.getElementById('plBuy').value;const sell=+document.getElementById('plSell').value;
+  const qty=+document.getElementById('plQty').value||1;const fees=+document.getElementById('plFees').value||0;
+  if(!buy||!sell)return document.getElementById('plResult').textContent='Enter buy and sell prices';
+  const cost=buy*qty;
+  const proceeds=sell*qty-fees;
+  const pl=proceeds-cost;
+  const pct=(pl/cost)*100;
+  document.getElementById('plResult').textContent=`${pl>=0?'Profit':'Loss'}: ${Math.abs(pl).toFixed(2)} (${pct.toFixed(2)}%)`;
+});
+
+// Inflation Calculator
+document.getElementById('infBtn').addEventListener('click',()=>{
+  const amount=+document.getElementById('infAmount').value;const rate=+document.getElementById('infRate').value/100;
+  const years=+document.getElementById('infYears').value;
+  if(!amount||!years)return document.getElementById('infResult').textContent='Fill in all fields';
+  const futureCost=amount*Math.pow(1+rate,years);
+  const purchasingPower=amount/Math.pow(1+rate,years);
+  document.getElementById('infResult').textContent=`In ${years} years, today's ${amount} will need to be ~${futureCost.toFixed(0)} to buy the same things.\nToday's ${amount} will feel like only ~${purchasingPower.toFixed(0)} in ${years} years.`;
+});
+
+// Salary / Take-Home
+document.getElementById('salBtn').addEventListener('click',()=>{
+  const gross=+document.getElementById('salGross').value;const taxRate=+document.getElementById('salTax').value/100;
+  const deductions=+document.getElementById('salDeductions').value||0;
+  if(!gross)return document.getElementById('salResult').textContent='Enter gross salary';
+  const tax=gross*taxRate;
+  const net=gross-tax-deductions;
+  document.getElementById('salResult').textContent=`Tax: ${tax.toFixed(2)} | Deductions: ${deductions.toFixed(2)} | Take-Home Pay: ${net.toFixed(2)}`;
+});
+
+// Savings Goal
+document.getElementById('sgBtn').addEventListener('click',()=>{
+  const goal=+document.getElementById('sgGoal').value;const current=+document.getElementById('sgCurrent').value||0;
+  const monthly=+document.getElementById('sgMonthly').value;const rate=+document.getElementById('sgRate').value/100/12;
+  if(!goal||!monthly)return document.getElementById('sgResult').textContent='Fill in all fields';
+  let balance=current;let months=0;
+  const maxMonths=1200;
+  while(balance<goal&&months<maxMonths){
+    balance=balance*(1+rate)+monthly;
+    months++;
+  }
+  if(months>=maxMonths){
+    document.getElementById('sgResult').textContent='This goal will take more than 100 years at this rate. Try increasing your monthly contribution.';
+  }else{
+    const years=Math.floor(months/12);const remMonths=months%12;
+    document.getElementById('sgResult').textContent=`You'll reach your goal in ${years} years, ${remMonths} months (${months} total months).`;
+  }
+});
+</script>
+<script src="script.js"></script></body></html>

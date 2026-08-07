@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Free Digital, Web & Security Tools | ToolNest</title><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"><style>
+.dt-card{border-radius:18px;}
+.dt-label{display:block; font-size:.85rem; font-weight:600; color:var(--grove); margin-bottom:6px;}
+[data-theme=dark] .dt-label{color:var(--kinno-bright);}
+.dt-field{margin-top:14px;}
+.dt-output-box{margin-top:12px; background:#fffdf6; border:1px solid var(--line); border-radius:12px; padding:14px;}
+[data-theme=dark] .dt-output-box{background:#1f2a22;}
+.dt-stat-grid{display:flex; justify-content:center; gap:22px; flex-wrap:wrap; margin-top:16px;}
+.dt-stat{text-align:center;}
+.dt-stat-label{font-size:.72rem; letter-spacing:.03em; color:#8a8a75; text-transform:uppercase;}
+.dt-stat-value{font-size:1.3rem; font-weight:700; color:var(--grove); margin-top:2px;}
+[data-theme=dark] .dt-stat-value{color:var(--kinno-bright);}
+.dt-tab-btn{background:transparent; border:1px solid var(--line); color:var(--grove); font-weight:600;}
+.dt-tab-btn.active{background:var(--grove); color:#fff; border-color:var(--grove);}
+[data-theme=dark] .dt-tab-btn{color:var(--kinno-bright);}
+.dt-gauge{font-size:2.6rem; font-weight:800; color:var(--grove); text-align:center;}
+[data-theme=dark] .dt-gauge{color:var(--kinno-bright);}
+</style></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Digital, Web &amp; Security Tools</h1><p>Speed, IP, DNS, and other internet essentials — right in your browser.</p></header><main>
+
+<div class="card dt-card"><h2>Internet Speed Test</h2><p class="desc">Real download &amp; upload speed test using Cloudflare's public speed network. Results vary by network conditions.</p><div class="dt-gauge" id="stGaugeValue">--</div><p style="text-align:center; font-size:.8rem; color:#8a8a75; margin-top:2px;">Mbps</p><div class="row" style="justify-content:center; margin-top:10px;"><button id="stStartBtn">Start Test</button></div><div class="dt-stat-grid"><div class="dt-stat"><div class="dt-stat-label">Download</div><div class="dt-stat-value" id="stDownload">--</div></div><div class="dt-stat"><div class="dt-stat-label">Upload</div><div class="dt-stat-value" id="stUpload">--</div></div><div class="dt-stat"><div class="dt-stat-label">Ping</div><div class="dt-stat-value" id="stPing">--</div></div><div class="dt-stat"><div class="dt-stat-label">Jitter</div><div class="dt-stat-value" id="stJitter">--</div></div></div><p class="stat" id="stStatus" style="text-align:center;"></p><p class="stat" id="stIspInfo" style="text-align:center; font-size:.8rem; color:#8a8a75;"></p></div>
+
+<div class="card dt-card"><h2>My IP Address &amp; Location Finder</h2><p class="desc">Auto-detects your public IP address, approximate location, and internet provider.</p><div class="row" style="justify-content:center;"><button id="ipRefreshBtn">Detect My IP</button></div><div id="ipResultBox" style="display:none;"><div class="row" style="justify-content:center; align-items:center; gap:10px; margin-top:16px;"><span id="ipAddressText" style="font-size:1.5rem; font-weight:700; color:var(--grove);"></span><button class="secondary" id="ipCopyBtn">Copy IP</button></div><div class="dt-output-box"><p class="stat" id="ipDetailsText" style="white-space:pre-line; margin:0;"></p></div><img id="ipMapImg" style="margin-top:12px; border-radius:12px; border:1px solid var(--line); max-width:100%; display:none;" alt="Approximate location map"></div><p class="stat" id="ipStatus" style="text-align:center;"></p></div>
+
+<div class="card dt-card"><h2>DNS Lookup Tool</h2><p class="desc">Query A, AAAA, CNAME, MX, TXT, NS, and SOA records for any domain.</p><div class="dt-field"><label class="dt-label" for="dnsDomain">Domain name</label><input type="text" id="dnsDomain" placeholder="e.g. example.com" style="width:100%;"></div><div class="dt-field"><label class="dt-label" for="dnsType">Record type</label><select id="dnsType" style="width:100%;"><option value="A">A</option><option value="AAAA">AAAA</option><option value="CNAME">CNAME</option><option value="MX">MX</option><option value="TXT">TXT</option><option value="NS">NS</option><option value="SOA">SOA</option></select></div><div class="row" style="margin-top:12px;"><button id="dnsLookupBtn">Lookup</button></div><div id="dnsResultWrap" style="margin-top:14px; overflow-x:auto;"></div><p class="stat" id="dnsStatus"></p></div>
+
+<div class="card dt-card"><h2>User Agent Finder</h2><p class="desc">See what your browser and device report to every website you visit.</p><div class="dt-output-box"><p class="stat" id="uaDetails" style="white-space:pre-line; margin:0;"></p></div><div class="dt-field"><label class="dt-label" for="uaRawString">Raw User Agent string</label><textarea id="uaRawString" readonly style="min-height:70px;"></textarea></div><div class="row" style="margin-top:10px;"><button class="secondary" data-copy="uaRawString">📋 Copy Raw UA</button></div></div>
+
+<div class="card dt-card"><h2>QR Code Scanner</h2><p class="desc">Upload an image containing a QR code to decode it instantly.</p><div class="dt-field"><label class="dt-label" for="qrScanInput">Upload QR code image</label><input type="file" id="qrScanInput" accept="image/*"></div><canvas id="qrScanCanvas" style="display:none; max-width:100%; margin-top:10px; border-radius:12px; border:1px solid var(--line);"></canvas><div id="qrScanResultBox" style="display:none;" class="dt-output-box"><label class="dt-label" for="qrScanOutput">Decoded content</label><textarea id="qrScanOutput" readonly style="min-height:70px;"></textarea><div class="row" style="margin-top:10px;"><button class="secondary" data-copy="qrScanOutput">📋 Copy</button></div></div><p class="stat" id="qrScanStatus"></p></div>
+
+<div class="card dt-card"><h2>HTML Entity Encoder / Decoder</h2><p class="desc">Convert text to and from HTML entities, with line breaks preserved.</p><div class="row"><button id="heModeEncodeBtn" class="dt-tab-btn active">Encode</button><button id="heModeDecodeBtn" class="dt-tab-btn">Decode</button></div><div class="dt-field"><label class="dt-label" for="heInput">Input text</label><textarea id="heInput" style="min-height:120px;"></textarea></div><div class="dt-field"><label class="dt-label" for="heOutput">Result</label><textarea id="heOutput" readonly style="min-height:120px;" class="dt-output-box"></textarea></div><div class="row" style="margin-top:10px;"><button class="secondary" data-copy="heOutput">📋 Copy Output</button></div></div>
+
+<div class="card dt-card"><h2>Ping &amp; Latency Tester</h2><p class="desc">Estimates round-trip latency to a website using HTTP requests. This is a browser-based approximation, not a true ICMP ping.</p><div class="dt-field"><label class="dt-label" for="pingTarget">Website or domain</label><input type="text" id="pingTarget" placeholder="e.g. google.com" value="google.com" style="width:100%;"></div><div class="dt-field"><label class="dt-label" for="pingCount">Number of pings</label><select id="pingCount" style="width:100%;"><option value="5">5</option><option value="10" selected>10</option><option value="20">20</option></select></div><div class="row" style="margin-top:12px;"><button id="pingStartBtn">Start Ping Test</button></div><div class="dt-stat-grid"><div class="dt-stat"><div class="dt-stat-label">Min</div><div class="dt-stat-value" id="pingMin">--</div></div><div class="dt-stat"><div class="dt-stat-label">Avg</div><div class="dt-stat-value" id="pingAvg">--</div></div><div class="dt-stat"><div class="dt-stat-label">Max</div><div class="dt-stat-value" id="pingMax">--</div></div><div class="dt-stat"><div class="dt-stat-label">Loss</div><div class="dt-stat-value" id="pingLoss">--</div></div></div><p class="stat" id="pingLog" style="white-space:pre-line; font-family:monospace; font-size:.78rem; margin-top:10px;"></p></div>
+
+</main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+
+<script>
+// shared copy-button handler (same pattern used on text-tools.html)
+document.querySelectorAll('[data-copy]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const target=document.getElementById(btn.getAttribute('data-copy'));
+    if(!target)return;
+    const text=target.value!==undefined?target.value:target.textContent;
+    if(!text)return;
+    const done=()=>{const old=btn.textContent;btn.textContent='✅ Copied';setTimeout(()=>btn.textContent=old,1200);};
+    if(window.toolnestCopyText){window.toolnestCopyText(text,done);}else{navigator.clipboard.writeText(text).then(done);}
+  });
+});
+function loadScript(src){
+  return new Promise((resolve,reject)=>{
+    if(document.querySelector(`script[src="${src}"]`))return resolve();
+    const s=document.createElement('script');
+    s.src=src;s.onload=resolve;s.onerror=()=>reject(new Error('Failed to load '+src));
+    document.head.appendChild(s);
+  });
+}
+
+// ---------- Shared IP info fetcher ----------
+function normalizeIpData(data,sourceUrl){
+  if(sourceUrl.includes('ipapi.co')){
+    return {ip:data.ip, city:data.city, region:data.region, country:data.country_name, isp:data.org, lat:data.latitude, lon:data.longitude};
+  }
+  return {ip:data.ip, city:data.city, region:data.region, country:data.country, isp:(data.connection&&(data.connection.isp||data.connection.org))||'Unknown', lat:data.latitude, lon:data.longitude};
+}
+async function fetchIpInfo(){
+  const sources=['https://ipapi.co/json/','https://ipwho.is/'];
+  let lastErr;
+  for(const url of sources){
+    try{
+      const res=await fetch(url,{cache:'no-store'});
+      const data=await res.json();
+      if(data&&(data.ip||data.city))return normalizeIpData(data,url);
+    }catch(err){lastErr=err;}
+  }
+  throw lastErr||new Error('Could not fetch IP info');
+}
+
+// ---------- 1. Internet Speed Test ----------
+async function measurePing(){
+  const times=[];
+  for(let i=0;i<6;i++){
+    const t0=performance.now();
+    try{await fetch('https://speed.cloudflare.com/__down?bytes=0',{cache:'no-store'});}catch(e){}
+    times.push(performance.now()-t0);
+  }
+  const avg=times.reduce((a,b)=>a+b,0)/times.length;
+  const jitter=Math.max(...times)-Math.min(...times);
+  return {avg,jitter};
+}
+async function measureDownload(onProgress){
+  const bytes=20000000;
+  const t0=performance.now();
+  const res=await fetch(`https://speed.cloudflare.com/__down?bytes=${bytes}`,{cache:'no-store'});
+  const reader=res.body.getReader();
+  let received=0;
+  while(true){
+    const{done,value}=await reader.read();
+    if(done)break;
+    received+=value.length;
+    const elapsed=(performance.now()-t0)/1000;
+    if(elapsed>0.05)onProgress((received*8/1e6)/elapsed);
+  }
+  const totalTime=(performance.now()-t0)/1000;
+  return (received*8/1e6)/totalTime;
+}
+async function measureUpload(){
+  const size=5000000;
+  const data=new Uint8Array(size);
+  const t0=performance.now();
+  await fetch('https://speed.cloudflare.com/__up',{method:'POST',body:data,cache:'no-store'});
+  const totalTime=(performance.now()-t0)/1000;
+  return (size*8/1e6)/totalTime;
+}
+document.getElementById('stStartBtn').addEventListener('click',async()=>{
+  const btn=document.getElementById('stStartBtn');btn.disabled=true;
+  ['stDownload','stUpload','stPing','stJitter'].forEach(id=>document.getElementById(id).textContent='--');
+  document.getElementById('stGaugeValue').textContent='--';
+  document.getElementById('stIspInfo').textContent='';
+  try{
+    document.getElementById('stStatus').textContent='Testing ping...';
+    const pingRes=await measurePing();
+    document.getElementById('stPing').textContent=pingRes.avg.toFixed(0)+' ms';
+    document.getElementById('stJitter').textContent=pingRes.jitter.toFixed(0)+' ms';
+    document.getElementById('stStatus').textContent='Testing download speed...';
+    const dl=await measureDownload(mbps=>{document.getElementById('stGaugeValue').textContent=mbps.toFixed(1);});
+    document.getElementById('stDownload').textContent=dl.toFixed(1)+' Mbps';
+    document.getElementById('stGaugeValue').textContent=dl.toFixed(1);
+    document.getElementById('stStatus').textContent='Testing upload speed...';
+    const ul=await measureUpload();
+    document.getElementById('stUpload').textContent=ul.toFixed(1)+' Mbps';
+    document.getElementById('stStatus').textContent='Test complete.';
+    fetchIpInfo().then(info=>{document.getElementById('stIspInfo').textContent=`${info.isp||'Unknown ISP'} — ${info.city||''}${info.city&&info.country?', ':''}${info.country||''}`;}).catch(()=>{});
+  }catch(err){
+    document.getElementById('stStatus').textContent='Test failed — please check your internet connection and try again.';
+  }
+  btn.disabled=false;
+});
+
+// ---------- 2. My IP Address & Location Finder ----------
+async function runIpDetect(){
+  document.getElementById('ipStatus').textContent='Detecting...';
+  document.getElementById('ipResultBox').style.display='none';
+  try{
+    const info=await fetchIpInfo();
+    document.getElementById('ipAddressText').textContent=info.ip;
+    document.getElementById('ipDetailsText').textContent=`City: ${info.city||'Unknown'}\nRegion: ${info.region||'Unknown'}\nCountry: ${info.country||'Unknown'}\nISP: ${info.isp||'Unknown'}`;
+    document.getElementById('ipResultBox').style.display='block';
+    if(info.lat&&info.lon){
+      const mapImg=document.getElementById('ipMapImg');
+      mapImg.src=`https://staticmap.openstreetmap.de/staticmap.php?center=${info.lat},${info.lon}&zoom=10&size=500x220&markers=${info.lat},${info.lon},red-pushpin`;
+      mapImg.style.display='block';
+    }
+    document.getElementById('ipStatus').textContent='';
+  }catch(err){
+    document.getElementById('ipStatus').textContent='Could not detect your IP right now. Please try again.';
+  }
+}
+document.getElementById('ipRefreshBtn').addEventListener('click',runIpDetect);
+document.getElementById('ipCopyBtn').addEventListener('click',()=>{
+  const ip=document.getElementById('ipAddressText').textContent;
+  if(!ip)return;
+  const btn=document.getElementById('ipCopyBtn');
+  const done=()=>{const old=btn.textContent;btn.textContent='✅ Copied';setTimeout(()=>btn.textContent=old,1200);};
+  if(window.toolnestCopyText)window.toolnestCopyText(ip,done);else navigator.clipboard.writeText(ip).then(done);
+});
+window.addEventListener('DOMContentLoaded',runIpDetect);
+
+// ---------- 3. DNS Lookup Tool ----------
+document.getElementById('dnsLookupBtn').addEventListener('click',async()=>{
+  const domain=document.getElementById('dnsDomain').value.trim();
+  const type=document.getElementById('dnsType').value;
+  if(!domain)return alert('Enter a domain name first');
+  document.getElementById('dnsStatus').textContent='Looking up...';
+  document.getElementById('dnsResultWrap').innerHTML='';
+  try{
+    const res=await fetch(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=${type}`);
+    const data=await res.json();
+    if(!data.Answer||!data.Answer.length){
+      document.getElementById('dnsStatus').textContent=`No ${type} records found for ${domain}.`;
+      return;
+    }
+    const typeNames={1:'A',28:'AAAA',5:'CNAME',15:'MX',16:'TXT',2:'NS',6:'SOA'};
+    let html='<table style="width:100%; border-collapse:collapse; font-size:.85rem;"><tr style="text-align:left; border-bottom:1px solid var(--line);"><th style="padding:6px;">Name</th><th style="padding:6px;">Type</th><th style="padding:6px;">TTL</th><th style="padding:6px;">Data</th></tr>';
+    data.Answer.forEach(rec=>{
+      html+=`<tr style="border-bottom:1px solid var(--line);"><td style="padding:6px;">${rec.name}</td><td style="padding:6px;">${typeNames[rec.type]||rec.type}</td><td style="padding:6px;">${rec.TTL}</td><td style="padding:6px; word-break:break-all;">${rec.data}</td></tr>`;
+    });
+    html+='</table>';
+    document.getElementById('dnsResultWrap').innerHTML=html;
+    document.getElementById('dnsStatus').textContent='';
+  }catch(err){
+    document.getElementById('dnsStatus').textContent='Lookup failed. Please check the domain and try again.';
+  }
+});
+
+// ---------- 4. User Agent Finder ----------
+function parseUserAgent(){
+  const ua=navigator.userAgent;
+  let browser='Unknown',browserVer='';
+  if(/Edg\//.test(ua)){browser='Edge';browserVer=(ua.match(/Edg\/([\d.]+)/)||[])[1]||'';}
+  else if(/OPR\//.test(ua)){browser='Opera';browserVer=(ua.match(/OPR\/([\d.]+)/)||[])[1]||'';}
+  else if(/Chrome\//.test(ua)&&!/Chromium/.test(ua)){browser='Chrome';browserVer=(ua.match(/Chrome\/([\d.]+)/)||[])[1]||'';}
+  else if(/Firefox\//.test(ua)){browser='Firefox';browserVer=(ua.match(/Firefox\/([\d.]+)/)||[])[1]||'';}
+  else if(/Safari\//.test(ua)&&/Version\//.test(ua)){browser='Safari';browserVer=(ua.match(/Version\/([\d.]+)/)||[])[1]||'';}
+  let os='Unknown';
+  if(/Windows NT 10/.test(ua))os='Windows 10/11';
+  else if(/Windows NT/.test(ua))os='Windows';
+  else if(/Mac OS X/.test(ua))os='macOS';
+  else if(/Android/.test(ua))os='Android';
+  else if(/iPhone|iPad|iPod/.test(ua))os='iOS';
+  else if(/Linux/.test(ua))os='Linux';
+  let device='Desktop';
+  if(/Mobi|Android/.test(ua))device='Mobile';
+  if(/iPad|Tablet/.test(ua))device='Tablet';
+  return{browser,browserVer,os,device};
+}
+window.addEventListener('DOMContentLoaded',()=>{
+  const info=parseUserAgent();
+  document.getElementById('uaDetails').textContent=`Browser: ${info.browser} ${info.browserVer}\nOperating System: ${info.os}\nDevice Type: ${info.device}\nScreen Resolution: ${screen.width}x${screen.height}\nViewport: ${window.innerWidth}x${window.innerHeight}\nPixel Ratio: ${window.devicePixelRatio}`;
+  document.getElementById('uaRawString').value=navigator.userAgent;
+});
+
+// ---------- 5. QR Code Scanner ----------
+document.getElementById('qrScanInput').addEventListener('change',async(e)=>{
+  const file=e.target.files[0];
+  if(!file)return;
+  const statusEl=document.getElementById('qrScanStatus');
+  statusEl.textContent='Reading image...';
+  document.getElementById('qrScanResultBox').style.display='none';
+  try{
+    if(typeof jsQR==='undefined')await loadScript('https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js');
+    const img=new Image();
+    img.onload=()=>{
+      const canvas=document.getElementById('qrScanCanvas');
+      canvas.width=img.width;canvas.height=img.height;
+      const ctx=canvas.getContext('2d');
+      ctx.drawImage(img,0,0);
+      canvas.style.display='block';
+      const imageData=ctx.getImageData(0,0,canvas.width,canvas.height);
+      const code=jsQR(imageData.data,imageData.width,imageData.height);
+      if(code){
+        document.getElementById('qrScanOutput').value=code.data;
+        document.getElementById('qrScanResultBox').style.display='block';
+        statusEl.textContent='QR code decoded successfully.';
+      }else{
+        statusEl.textContent='No QR code found in this image. Try a clearer photo.';
+      }
+    };
+    img.src=URL.createObjectURL(file);
+  }catch(err){
+    statusEl.textContent='Could not load the QR scanner. Please check your internet connection and try again.';
+  }
+});
+
+// ---------- 6. HTML Entity Encoder / Decoder ----------
+let heMode='encode';
+function heSetMode(mode){
+  heMode=mode;
+  document.getElementById('heModeEncodeBtn').className='dt-tab-btn'+(mode==='encode'?' active':'');
+  document.getElementById('heModeDecodeBtn').className='dt-tab-btn'+(mode==='decode'?' active':'');
+  heConvert();
+}
+function heConvert(){
+  const input=document.getElementById('heInput').value;
+  const div=document.createElement('div');
+  let output='';
+  if(heMode==='encode'){
+    div.textContent=input;
+    output=div.innerHTML;
+  }else{
+    div.innerHTML=input;
+    output=div.textContent;
+  }
+  document.getElementById('heOutput').value=output;
+}
+document.getElementById('heModeEncodeBtn').addEventListener('click',()=>heSetMode('encode'));
+document.getElementById('heModeDecodeBtn').addEventListener('click',()=>heSetMode('decode'));
+document.getElementById('heInput').addEventListener('input',heConvert);
+
+// ---------- 7. Ping & Latency Tester ----------
+document.getElementById('pingStartBtn').addEventListener('click',async()=>{
+  let target=document.getElementById('pingTarget').value.trim();
+  if(!target)return alert('Enter a domain first');
+  if(!/^https?:\/\//.test(target))target='https://'+target;
+  const count=+document.getElementById('pingCount').value;
+  const btn=document.getElementById('pingStartBtn');btn.disabled=true;
+  const times=[];let failed=0;let log='';
+  document.getElementById('pingLog').textContent='';
+  for(let i=0;i<count;i++){
+    const t0=performance.now();
+    try{
+      await fetch(target,{mode:'no-cors',cache:'no-store'});
+      const t=performance.now()-t0;
+      times.push(t);
+      log+=`Ping ${i+1}: ${t.toFixed(0)} ms\n`;
+    }catch(err){
+      failed++;
+      log+=`Ping ${i+1}: timeout\n`;
+    }
+    document.getElementById('pingLog').textContent=log;
+    await new Promise(r=>setTimeout(r,150));
+  }
+  if(times.length){
+    document.getElementById('pingMin').textContent=Math.min(...times).toFixed(0)+' ms';
+    document.getElementById('pingMax').textContent=Math.max(...times).toFixed(0)+' ms';
+    document.getElementById('pingAvg').textContent=(times.reduce((a,b)=>a+b,0)/times.length).toFixed(0)+' ms';
+  }else{
+    document.getElementById('pingMin').textContent='--';document.getElementById('pingMax').textContent='--';document.getElementById('pingAvg').textContent='--';
+  }
+  document.getElementById('pingLoss').textContent=((failed/count)*100).toFixed(0)+'%';
+  btn.disabled=false;
+});
+</script>
+<script src="script.js"></script></body></html>
