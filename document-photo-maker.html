@@ -1,0 +1,803 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Document Photo Maker Online Free | ToolNest</title><meta name="description" content="Create passport, ID, visa and custom document photos online free. Resize, crop and prepare document photos for your required size."><link rel="canonical" href="https://toolnest.link/document-photo-maker.html"><meta property="og:title" content="Document Photo Maker Online Free | ToolNest"><meta property="og:description" content="Create passport, ID, visa and custom document photos online. Resize, crop and prepare photos for your required document size."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/document-photo-maker.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Document Photo Maker Online Free</h1><p>Create passport, visa, ID, application, CV and custom-size document photos with cropping, sizing, positioning, background and print-ready export.</p></header><main>
+<div class="card" id="dpm"><h2>Document Photo Maker</h2><p class="desc">Create passport, visa, ID, application, CV and custom-size document photos — free, private, 100% in your browser.</p>
+
+<h3 style="margin-top:4px;">1. Upload Photo</h3>
+<div class="field"><label class="field-label" for="dpmInput">Choose your photo</label><div class="dropzone" id="dpmDropzone"><input type="file" id="dpmInput" accept="image/jpeg,image/png,image/webp"><p>Drag &amp; drop, click to browse, or paste an image (Ctrl/Cmd+V)</p></div></div>
+<p class="stat" id="dpmFileInfo" style="white-space:pre-line;"></p>
+<div class="row" style="margin-top:8px;"><button class="secondary" id="dpmReplaceBtn" style="display:none;">Replace Photo</button><button class="secondary" id="dpmClearBtn" style="display:none;">Clear</button></div>
+
+<h3>2. Document Type &amp; Country</h3>
+<div class="row"><div class="field"><label class="field-label" for="dpmDocType">Document type</label><select id="dpmDocType">
+<option value="passport">Passport Photo</option>
+<option value="visa">Visa Photo</option>
+<option value="nationalid">National ID / ID Card Photo</option>
+<option value="drivinglicense">Driving License Photo</option>
+<option value="studentid">Student ID Photo</option>
+<option value="employeeid">Employee / Office ID Photo</option>
+<option value="application">Application Photo</option>
+<option value="cv">CV / Resume Photo</option>
+<option value="profile">Profile Photo</option>
+<option value="custom">Custom Document Photo</option>
+</select></div>
+<div class="field" id="dpmCountryField"><label class="field-label" for="dpmCountry">Country / Region</label><select id="dpmCountry">
+<option value="pakistan">Pakistan</option>
+<option value="india">India</option>
+<option value="uae">UAE</option>
+<option value="saudi">Saudi Arabia</option>
+<option value="uk">United Kingdom</option>
+<option value="usa">United States</option>
+<option value="canada">Canada</option>
+<option value="australia">Australia</option>
+<option value="eu">EU / Schengen</option>
+<option value="china">China</option>
+<option value="japan">Japan</option>
+<option value="other">Other / Custom</option>
+</select></div></div>
+<p class="stat" id="dpmPresetNote" style="font-size:.8rem; color:#8a8a75;"></p>
+
+<h3>3. Photo Size</h3>
+<div class="row"><div class="field"><label class="field-label" for="dpmUnit">Unit</label><select id="dpmUnit"><option value="mm">Millimeters</option><option value="in">Inches</option><option value="px">Pixels</option></select></div><div class="field"><label class="field-label" for="dpmDpi">DPI</label><select id="dpmDpi"><option value="300">300 DPI</option><option value="600">600 DPI</option></select></div></div>
+<div class="row" style="margin-top:12px;" id="dpmCustomSizeRow"><div class="field"><label class="field-label" for="dpmCustomW">Width</label><input type="number" id="dpmCustomW" value="35" step="0.1"></div><div class="field"><label class="field-label" for="dpmCustomH">Height</label><input type="number" id="dpmCustomH" value="45" step="0.1"></div></div>
+<p class="stat" id="dpmSizeSummary" style="font-weight:600;"></p>
+
+<h3>4. Smart Crop</h3>
+<div class="row" style="margin-bottom:10px;"><div class="field"><label class="field-label" for="dpmFit">Auto crop</label><select id="dpmFit"><option value="cover">Fill frame (cover)</option><option value="contain">Fit without cropping</option></select></div></div>
+<div id="dpmStageWrap" style="position:relative; display:inline-block; max-width:100%; touch-action:none;">
+<canvas id="dpmStage" style="border:1px solid var(--line); border-radius:6px; max-width:100%; touch-action:none; cursor:grab; background:#f2ecd8;"></canvas>
+<canvas id="dpmGuideOverlay" style="position:absolute; left:0; top:0; pointer-events:none;"></canvas>
+</div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="dpmZoom">Zoom (<span id="dpmZoomVal">1.0</span>x)</label><input type="range" id="dpmZoom" min="1" max="3" step="0.01" value="1"></div><div class="field"><label class="field-label" for="dpmRotate">Rotate (<span id="dpmRotateVal">0</span>&deg;)</label><input type="range" id="dpmRotate" min="-45" max="45" step="1" value="0"></div></div>
+<div class="row" style="margin-top:8px;"><button class="secondary" id="dpmRotateLeft">&#8634; Rotate 90&deg;</button><button class="secondary" id="dpmRotateRight">&#8635; Rotate 90&deg;</button><button class="secondary" id="dpmCenterBtn">Center Image</button><button class="secondary" id="dpmResetCropBtn">Reset Crop</button><button class="secondary" id="dpmResetPositionBtn">Reset Position</button></div>
+
+<h3>5. Face Position</h3>
+<div class="row"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="dpmShowGuide" checked> Show face position guide</label></div>
+<p class="stat" style="font-size:.8rem; color:#8a8a75; margin-top:6px;">Automatic face detection isn't included in this tool — use the guide lines (top margin, eye level, bottom margin) to manually center the face by dragging the photo or using the buttons below.</p>
+<div class="row" style="margin-top:8px;">
+<button class="secondary" id="dpmMoveUp">&uarr; Up</button><button class="secondary" id="dpmMoveDown">&darr; Down</button><button class="secondary" id="dpmMoveLeft">&larr; Left</button><button class="secondary" id="dpmMoveRight">&rarr; Right</button>
+</div>
+
+<h3>6. Background</h3>
+<div class="row"><div class="field"><label class="field-label" for="dpmBgMode">Background</label><select id="dpmBgMode">
+<option value="original">Original Background</option>
+<option value="remove">Remove Background (Transparent)</option>
+<option value="white">White</option>
+<option value="offwhite">Off-White</option>
+<option value="lightblue">Light Blue</option>
+<option value="blue">Blue</option>
+<option value="gray">Gray</option>
+<option value="custom">Custom Color</option>
+<option value="customimage">Custom Background Image</option>
+<option value="blur">Background Blur</option>
+</select></div>
+<div class="field" id="dpmBgColorField" style="display:none;"><label class="field-label" for="dpmBgColor">Custom color</label><input type="color" id="dpmBgColor" value="#ffffff"></div>
+<div class="field" id="dpmBgImageField" style="display:none;"><label class="field-label" for="dpmBgImageInput">Background image</label><input type="file" id="dpmBgImageInput" accept="image/*"></div>
+<div class="field" id="dpmBgBlurField" style="display:none;"><label class="field-label" for="dpmBgBlurAmount">Blur amount</label><input type="range" id="dpmBgBlurAmount" min="2" max="20" value="8"></div>
+</div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="dpmProcessBgBtn" style="display:none;">Process Background</button><button class="secondary" id="dpmResetBgBtn">Reset Background</button></div>
+<div class="progress-track" id="dpmBgProgressTrack" style="display:none;"><div class="progress-fill" id="dpmBgProgressFill"></div></div>
+<p class="stat" id="dpmBgStatus" style="font-size:.85rem;"></p>
+
+<h3>7. Adjust</h3>
+<div class="sliders">
+<div><label class="field-label" for="dpmBrightness">Brightness</label><input type="range" id="dpmBrightness" min="50" max="150" value="100"></div>
+<div><label class="field-label" for="dpmContrast">Contrast</label><input type="range" id="dpmContrast" min="50" max="150" value="100"></div>
+<div><label class="field-label" for="dpmExposure">Exposure</label><input type="range" id="dpmExposure" min="50" max="150" value="100"></div>
+<div><label class="field-label" for="dpmSaturate">Saturation</label><input type="range" id="dpmSaturate" min="0" max="200" value="100"></div>
+<div><label class="field-label" for="dpmSharpness">Sharpness</label><input type="range" id="dpmSharpness" min="0" max="100" value="0"></div>
+<div><label class="field-label" for="dpmTemperature">Temperature</label><input type="range" id="dpmTemperature" min="-100" max="100" value="0"></div>
+<div><label class="field-label" for="dpmShadows">Shadows</label><input type="range" id="dpmShadows" min="-50" max="50" value="0"></div>
+<div><label class="field-label" for="dpmHighlights">Highlights</label><input type="range" id="dpmHighlights" min="-50" max="50" value="0"></div>
+</div>
+<div class="row" style="margin-top:8px;"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="dpmGrayscale"> Grayscale</label><button class="secondary" id="dpmResetAdjustBtn">Reset Adjustments</button></div>
+
+<h3>8. Photo Check</h3>
+<div class="row"><button id="dpmCheckBtn">Run Photo Check</button></div>
+<div id="dpmCheckResults" style="margin-top:10px;"></div>
+
+<h3>9. Before / After</h3>
+<div class="ba-row" id="dpmBaRow" style="margin-top:10px;">
+<div class="ba-col"><canvas class="preview" id="dpmBeforeCanvas"></canvas><p>Before</p></div>
+<div class="ba-col"><canvas class="preview" id="dpmAfterCanvas"></canvas><p>After</p></div>
+</div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="dpmResetAllBtn">Reset All Changes</button></div>
+
+<h3>10. Print Sheet</h3>
+<div class="row"><div class="field"><label class="field-label" for="dpmPaper">Paper size</label><select id="dpmPaper"><option value="4x6">4&times;6 inch</option><option value="5x7">5&times;7 inch</option><option value="a4">A4</option><option value="a5">A5</option><option value="custom">Custom</option></select></div><div class="field"><label class="field-label" for="dpmPaperOrient">Orientation</label><select id="dpmPaperOrient"><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></div></div>
+<div class="row" style="margin-top:12px; display:none;" id="dpmCustomPaperRow"><div class="field"><label class="field-label" for="dpmPaperW">Paper width (mm)</label><input type="number" id="dpmPaperW" value="152"></div><div class="field"><label class="field-label" for="dpmPaperH">Paper height (mm)</label><input type="number" id="dpmPaperH" value="102"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="dpmCopies">Number of copies</label><input type="number" id="dpmCopies" value="8" min="1" max="60"></div><div class="field"><label class="field-label" for="dpmMargin">Margin (mm)</label><input type="number" id="dpmMargin" value="3" min="0" max="30"></div><div class="field"><label class="field-label" for="dpmSpacing">Spacing (mm)</label><input type="number" id="dpmSpacing" value="2" min="0" max="20"></div></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="dpmBuildSheetBtn">Auto Arrange / Preview Sheet</button></div>
+<p class="stat" id="dpmSheetInfo"></p>
+<canvas class="preview" id="dpmSheetCanvas" style="display:none;"></canvas>
+
+<h3>11. Export</h3>
+<div class="row"><div class="field"><label class="field-label" for="dpmExportFormat">Format</label><select id="dpmExportFormat"><option value="jpg">JPG</option><option value="png">PNG</option><option value="pdf">PDF</option></select></div><div class="field"><label class="field-label" for="dpmExportQuality">Quality</label><input type="range" id="dpmExportQuality" min="60" max="100" value="92"></div></div>
+<div class="row" style="margin-top:12px;"><button id="dpmDownloadBtn">Download Photo</button><button class="secondary" id="dpmDownloadSheetBtn">Download Print Sheet</button></div>
+<p class="stat" id="dpmExportInfo"></p>
+</div>
+<div class="seo-content"><h3>How to Use the Document Photo Maker</h3><ol><li><strong>Upload Photo:</strong> Choose, drag & drop, or paste a clear photo of the subject.</li><li><strong>Select Document Type:</strong> Pick Passport, Visa, ID, Application, CV, or Custom.</li><li><strong>Select Country/Region:</strong> Choose the region to load its common technical photo size.</li><li><strong>Confirm Photo Size:</strong> Review or adjust the width, height, unit, and DPI.</li><li><strong>Auto Crop / Position:</strong> Zoom, drag, and rotate the photo using the face position guide.</li><li><strong>Choose Background:</strong> Keep the original, remove it, or apply white, colored, or blurred backgrounds.</li><li><strong>Optional Adjustments:</strong> Fine-tune brightness, contrast, sharpness, and more.</li><li><strong>Photo Check:</strong> Run the built-in check for dimensions, resolution, and background.</li><li><strong>Choose Output:</strong> Pick a single photo or an auto-arranged print sheet.</li><li><strong>Download:</strong> Export as JPG, PNG, or PDF, ready to submit or print.</li></ol>
+<h3>Why Use This Tool</h3><p>Making a document photo online free without signup is now possible in one place instead of hunting for a different tool for every document type. This document photo maker online free tool handles passport, visa, ID, application, CV, and fully custom document sizes side by side, so you don't need five different websites for five different photo requirements.</p>
+<h3>How It Works</h3><p>This custom document photo maker online works by combining a document-type and country size lookup with a face-position crop guide, an optional client-side background remover, and a print-ready sheet layout generator — all running locally in your browser with no image ever uploaded to a server. Choosing a document type and country auto-fills a commonly used technical size (in mm, inches, or pixels), and the crop tool then locks to that exact aspect ratio while you zoom, drag, and rotate the photo into place.</p>
+<h3>Key Features</h3><p>As a passport photo size converter and custom document photo size online tool, it covers ten document types — Passport, Visa, National ID, Driving Licence, Student ID, Employee ID, Application, CV/Resume, Profile, and fully Custom — each with editable width, height, unit, and DPI settings, so nothing is locked in if your requirement differs slightly. The background remover for documents runs as an isolated step with its own progress bar, so the rest of the editor — crop, size, adjustments — stays fully usable while it works, and results can be placed onto a white, off-white, light blue, blue, gray, custom color, or custom image background, or simply blurred.</p>
+<h3>Common Use Cases</h3><p>Students and job seekers preparing a passport size photo online free before a visa or ID application use the document type and country presets to get a properly sized starting point. Freelancers and applicants create a resize photo for document online in the exact custom pixel or millimeter size a specific form requests, using the Custom Document Photo option. Anyone needing several physical copies for an in-person application uses the print sheet maker to arrange multiple copies of the same document photo size maker online output onto a single 4x6, 5x7, A4, or A5 sheet, ready to print at home or at a photo shop.</p>
+<h3>Tips for Best Results</h3><p>Always double-check your specific country or institution's current official photo requirements before submitting, since this tool provides commonly used technical dimensions and preparation guidance rather than a guaranteed-accepted result. For the cleanest background swap, run the background remover step first and confirm the subject's edges look clean before picking a solid background color, since a rushed or low-contrast source photo can make automatic background isolation less precise.</p>
+<h3>Privacy &amp; Security</h3><p>Because ToolNest processes everything entirely within your browser using client-side JavaScript, your files never leave your device. There is no server-side storage, no third-party analytics attached to your data, and no risk of a breach exposing files you processed months ago.</p>
+<div class="faq-block"><details><summary>How can I make a document photo online for free?</summary><p>Upload a photo, choose your document type and country, confirm or adjust the size, crop and position the subject, then export as JPG, PNG, or PDF — the entire process runs free in your browser.</p></details><details><summary>How do I resize a photo for a document?</summary><p>Select Custom Document Photo as the document type, enter your required width and height in pixels, millimeters, or inches, and the crop tool will lock to that exact aspect ratio.</p></details><details><summary>How can I make a passport-size photo from a selfie?</summary><p>Upload the selfie, choose Passport Photo as the document type and your country, then use the zoom and drag controls with the face position guide to center your face before exporting.</p></details><details><summary>How do I make a 35x45mm photo online?</summary><p>Choose Passport or Visa Photo as the document type for a country that commonly uses 35x45mm, or select Custom Document Photo and enter 35mm by 45mm directly.</p></details><details><summary>How can I make a 2x2 photo online?</summary><p>Select Custom Document Photo, switch the unit to Inches, and enter 2 by 2 — the crop tool will then lock to a square 2x2 inch frame.</p></details><details><summary>Can I make an ID photo online without registration?</summary><p>Yes, no account or sign-up is required for any part of this tool, including the background remover and print sheet maker.</p></details><details><summary>Can I create a visa photo online?</summary><p>Yes, Visa Photo is a dedicated document type with its own country-based size presets, separate from the Passport Photo option.</p></details><details><summary>How do I make a custom-size document photo?</summary><p>Choose Custom Document Photo from the document type list, then enter your own width, height, unit, and DPI before cropping and exporting.</p></details><details><summary>Can I print multiple document photos on one page?</summary><p>Yes, the Print Sheet section automatically arranges as many copies as fit on a 4x6, 5x7, A4, A5, or custom paper size, based on your margin and spacing settings.</p></details><details><summary>How do I resize a photo to a required document size?</summary><p>Pick the matching document type and country if one exists, or use Custom Document Photo to type in the exact size a form or office has requested.</p></details></div></div><div class="seo-content"><h3>Related Image Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="image-compressor.html">Image Compressor</a></li>
+<li><a href="photo-enhancer.html">Photo Enhancer</a></li>
+<li><a href="watermark-maker.html">Watermark Maker</a></li>
+<li><a href="collage-maker.html">Collage Maker</a></li>
+<li><a href="image-to-base64.html">Image to Base64</a></li>
+</ul></div>
+</main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Document Photo Maker","applicationCategory":"PhotographyApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/document-photo-maker.html"},
+{"@type":"HowTo","name":"How to Make a Document Photo Online","step":[
+{"@type":"HowToStep","text":"Upload your photo."},
+{"@type":"HowToStep","text":"Select the document type."},
+{"@type":"HowToStep","text":"Select your country or region."},
+{"@type":"HowToStep","text":"Confirm the photo size."},
+{"@type":"HowToStep","text":"Crop and position the photo using the face guide."},
+{"@type":"HowToStep","text":"Choose a background option."},
+{"@type":"HowToStep","text":"Make optional adjustments."},
+{"@type":"HowToStep","text":"Run the photo check."},
+{"@type":"HowToStep","text":"Choose single photo or print sheet output."},
+{"@type":"HowToStep","text":"Download the result."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How can I make a document photo online for free?","acceptedAnswer":{"@type":"Answer","text":"Upload a photo, choose your document type and country, confirm or adjust the size, crop and position the subject, then export as JPG, PNG, or PDF."}},
+{"@type":"Question","name":"How do I resize a photo for a document?","acceptedAnswer":{"@type":"Answer","text":"Select Custom Document Photo as the document type, enter your required width and height, and the crop tool locks to that exact aspect ratio."}},
+{"@type":"Question","name":"How can I make a passport-size photo from a selfie?","acceptedAnswer":{"@type":"Answer","text":"Upload the selfie, choose Passport Photo and your country, then use zoom and drag with the face position guide to center your face."}},
+{"@type":"Question","name":"How do I make a 35x45mm photo online?","acceptedAnswer":{"@type":"Answer","text":"Choose Passport or Visa Photo for a country that commonly uses 35x45mm, or select Custom Document Photo and enter 35mm by 45mm directly."}},
+{"@type":"Question","name":"How can I make a 2x2 photo online?","acceptedAnswer":{"@type":"Answer","text":"Select Custom Document Photo, switch the unit to Inches, and enter 2 by 2 for a square 2x2 inch frame."}},
+{"@type":"Question","name":"Can I make an ID photo online without registration?","acceptedAnswer":{"@type":"Answer","text":"Yes, no account or sign-up is required for any part of this tool."}},
+{"@type":"Question","name":"Can I create a visa photo online?","acceptedAnswer":{"@type":"Answer","text":"Yes, Visa Photo is a dedicated document type with its own country-based size presets."}},
+{"@type":"Question","name":"How do I make a custom-size document photo?","acceptedAnswer":{"@type":"Answer","text":"Choose Custom Document Photo, then enter your own width, height, unit, and DPI before cropping and exporting."}},
+{"@type":"Question","name":"Can I print multiple document photos on one page?","acceptedAnswer":{"@type":"Answer","text":"Yes, the Print Sheet section automatically arranges copies on 4x6, 5x7, A4, A5, or custom paper based on margin and spacing."}},
+{"@type":"Question","name":"How do I resize a photo to a required document size?","acceptedAnswer":{"@type":"Answer","text":"Pick a matching document type and country preset, or use Custom Document Photo to type in the exact size requested."}}
+]}
+]}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script>/* ===== Document Photo Maker engine ===== */
+const dpmEl = id => document.getElementById(id);
+const dpmInput = dpmEl('dpmInput'), dpmDropzone = dpmEl('dpmDropzone');
+const dpmStage = dpmEl('dpmStage'), dpmGuideOverlay = dpmEl('dpmGuideOverlay');
+const dpmSctx = dpmStage.getContext('2d'), dpmGctx = dpmGuideOverlay.getContext('2d');
+const STAGE_MAX = 340;
+
+let dpmImg=null, dpmBgRemovedImg=null, dpmCustomBgImg=null, dpmOrigFile=null;
+let dpmCrop = {zoom:1, offsetX:0, offsetY:0, rotation:0};
+let dpmTargetW=413, dpmTargetH=531, dpmTargetWmm=35, dpmTargetHmm=45, dpmDpi=300;
+let dpmStageW=340, dpmStageH=437;
+let dpmSheetBlobInfo=null;
+
+/* ---------- unit conversion ---------- */
+function mmToPx(mm,dpi){return Math.round((mm/25.4)*dpi);}
+function inToPx(inch,dpi){return Math.round(inch*dpi);}
+function pxFromUnit(val,unit,dpi){
+  if(unit==='mm')return mmToPx(val,dpi);
+  if(unit==='in')return inToPx(val,dpi);
+  return Math.round(val);
+}
+
+/* ---------- document/country presets (mm, W x H) ---------- */
+const DPM_MM_PRESETS = {
+  passport:{default:{w:35,h:45},pakistan:{w:35,h:45},india:{w:51,h:51},uae:{w:43,h:55},saudi:{w:40,h:60},uk:{w:35,h:45},usa:{w:51,h:51},canada:{w:50,h:70},australia:{w:35,h:45},eu:{w:35,h:45},china:{w:33,h:48},japan:{w:45,h:45}},
+  visa:{default:{w:35,h:45},pakistan:{w:35,h:45},india:{w:51,h:51},uae:{w:43,h:55},saudi:{w:40,h:60},uk:{w:35,h:45},usa:{w:51,h:51},canada:{w:50,h:70},australia:{w:35,h:45},eu:{w:35,h:45},china:{w:33,h:48},japan:{w:45,h:45}},
+  nationalid:{default:{w:35,h:45}},
+  drivinglicense:{default:{w:35,h:45}},
+  studentid:{default:{w:35,h:45}},
+  employeeid:{default:{w:35,h:45}},
+  application:{default:{w:35,h:45}},
+  cv:{default:{w:35,h:45}},
+  profile:{default:{w:35,h:45}},
+  custom:{default:{w:35,h:45}}
+};
+function dpmGetPresetMm(docType,country){
+  const table = DPM_MM_PRESETS[docType] || DPM_MM_PRESETS.passport;
+  return table[country] || table.default;
+}
+
+/* ---------- upload handling ---------- */
+function dpmValidateFile(file){
+  const okTypes=['image/jpeg','image/png','image/webp'];
+  if(!okTypes.includes(file.type))return 'Unsupported file type. Please choose a JPG, PNG, or WebP image.';
+  if(file.size>25*1024*1024)return 'This image is too large (over 25 MB). Please choose a smaller file.';
+  return null;
+}
+function dpmLoadFile(file){
+  if(!file)return;
+  const err=dpmValidateFile(file);
+  if(err){dpmEl('dpmFileInfo').textContent=err;return;}
+  dpmOrigFile=file;
+  const img=new Image();
+  img.onload=()=>{
+    if(img.width<200||img.height<200){
+      dpmEl('dpmFileInfo').textContent='This image is quite small ('+img.width+'x'+img.height+'px) and may look blurry when printed. A larger photo is recommended.';
+    }
+    dpmImg=img;
+    dpmBgRemovedImg=null;
+    dpmCrop={zoom:1,offsetX:0,offsetY:0,rotation:0};
+    dpmEl('dpmFileInfo').textContent=`File: ${file.name}\nOriginal size: ${img.width} x ${img.height}px\nFile size: ${(file.size/1024).toFixed(0)} KB\nFormat: ${file.type.replace('image/','').toUpperCase()}`;
+    dpmEl('dpmReplaceBtn').style.display='inline-block';
+    dpmEl('dpmClearBtn').style.display='inline-block';
+    dpmUpdateSizeFromControls();
+    dpmDrawBeforeCanvas();
+    dpmRenderStage();
+    dpmRenderAfterPreview();
+  };
+  img.onerror=()=>{dpmEl('dpmFileInfo').textContent='This file could not be read as an image. It may be corrupted — please try another photo.';};
+  img.src=URL.createObjectURL(file);
+}
+dpmInput.addEventListener('change',e=>dpmLoadFile(e.target.files[0]));
+['dragover','dragenter'].forEach(evt=>dpmDropzone.addEventListener(evt,e=>{e.preventDefault();dpmDropzone.classList.add('dragover');}));
+['dragleave','drop'].forEach(evt=>dpmDropzone.addEventListener(evt,e=>{e.preventDefault();dpmDropzone.classList.remove('dragover');}));
+dpmDropzone.addEventListener('drop',e=>{const file=e.dataTransfer.files[0];if(file){dpmInput.files=e.dataTransfer.files;dpmLoadFile(file);}});
+document.addEventListener('paste',e=>{
+  if(!e.clipboardData)return;
+  for(const item of e.clipboardData.items){
+    if(item.type.startsWith('image/')){const file=item.getAsFile();if(file)dpmLoadFile(file);break;}
+  }
+});
+dpmEl('dpmReplaceBtn').addEventListener('click',()=>dpmInput.click());
+dpmEl('dpmClearBtn').addEventListener('click',dpmResetAllTool);
+
+/* ---------- document type / country / size ---------- */
+function dpmUpdateSizeFromControls(){
+  const docType=dpmEl('dpmDocType').value;
+  const country=dpmEl('dpmCountry').value;
+  const unit=dpmEl('dpmUnit').value;
+  dpmDpi=+dpmEl('dpmDpi').value;
+  const isCustom = docType==='custom';
+  dpmEl('dpmCountryField').style.display = (docType==='passport'||docType==='visa'||docType==='nationalid') ? 'flex' : 'none';
+  dpmEl('dpmCustomSizeRow').style.display = isCustom ? 'flex' : 'none';
+  let wMm,hMm;
+  if(isCustom){
+    const cw=+dpmEl('dpmCustomW').value, ch=+dpmEl('dpmCustomH').value;
+    if(!cw||!ch||cw<=0||ch<=0){
+      dpmEl('dpmSizeSummary').textContent='Enter a valid custom width and height greater than 0.';
+      return;
+    }
+    if(unit==='mm'){wMm=cw;hMm=ch;}
+    else if(unit==='in'){wMm=cw*25.4;hMm=ch*25.4;}
+    else{ // px: derive mm equivalent at chosen DPI just for reference
+      wMm=(cw/dpmDpi)*25.4; hMm=(ch/dpmDpi)*25.4;
+    }
+  }else{
+    const preset=dpmGetPresetMm(docType,country);
+    wMm=preset.w; hMm=preset.h;
+  }
+  dpmTargetWmm=wMm; dpmTargetHmm=hMm;
+  if(isCustom && unit==='px'){
+    dpmTargetW=Math.round(+dpmEl('dpmCustomW').value);
+    dpmTargetH=Math.round(+dpmEl('dpmCustomH').value);
+  }else{
+    dpmTargetW=mmToPx(wMm,dpmDpi);
+    dpmTargetH=mmToPx(hMm,dpmDpi);
+  }
+  if(dpmTargetW<40||dpmTargetH<40){dpmEl('dpmSizeSummary').textContent='Output size is too small. Please increase the dimensions.';return;}
+  if(dpmTargetW>6000||dpmTargetH>6000){dpmEl('dpmSizeSummary').textContent='Output size is too large. Please reduce the dimensions.';return;}
+  const wIn=(wMm/25.4).toFixed(2), hIn=(hMm/25.4).toFixed(2);
+  dpmEl('dpmSizeSummary').textContent=`Target size: ${wMm.toFixed(1)} x ${hMm.toFixed(1)} mm (${wIn}" x ${hIn}") — ${dpmTargetW} x ${dpmTargetH} px @ ${dpmDpi} DPI`;
+  const noteMap={passport:'Common technical size for the selected country — always confirm with the receiving office before submission.',visa:'Common technical size for the selected country — not a guarantee of official acceptance.',nationalid:'Commonly used size — check your specific issuing authority for exact requirements.',custom:'Custom size entered manually.'};
+  dpmEl('dpmPresetNote').textContent = noteMap[docType] || 'General preparation guidance, not an official approval.';
+  const aspect = dpmTargetW/dpmTargetH;
+  const stageMax=STAGE_MAX;
+  if(aspect>=1){dpmStageW=stageMax; dpmStageH=Math.round(stageMax/aspect);}
+  else{dpmStageH=stageMax; dpmStageW=Math.round(stageMax*aspect);}
+  dpmStage.width=dpmStageW; dpmStage.height=dpmStageH;
+  dpmGuideOverlay.width=dpmStageW; dpmGuideOverlay.height=dpmStageH;
+  dpmGuideOverlay.style.width=dpmStageW+'px'; dpmGuideOverlay.style.height=dpmStageH+'px';
+  dpmRenderStage();
+  dpmDrawGuideOverlay();
+  if(dpmImg)dpmRenderAfterPreview();
+}
+['dpmDocType','dpmCountry','dpmUnit','dpmDpi','dpmCustomW','dpmCustomH'].forEach(id=>{
+  dpmEl(id).addEventListener('change',dpmUpdateSizeFromControls);
+  dpmEl(id).addEventListener('input',dpmUpdateSizeFromControls);
+});
+
+/* ---------- crop cover math ---------- */
+function dpmCoverDraw(imgW,imgH,frameW,frameH,zoom,offsetX,offsetY){
+  const baseScale=Math.max(frameW/imgW, frameH/imgH);
+  const scale=baseScale*zoom;
+  const drawW=imgW*scale, drawH=imgH*scale;
+  const drawX=(frameW-drawW)/2+offsetX, drawY=(frameH-drawH)/2+offsetY;
+  return {drawX,drawY,drawW,drawH,scale};
+}
+function dpmContainDraw(imgW,imgH,frameW,frameH,zoom,offsetX,offsetY){
+  const baseScale=Math.min(frameW/imgW, frameH/imgH);
+  const scale=baseScale*zoom;
+  const drawW=imgW*scale, drawH=imgH*scale;
+  const drawX=(frameW-drawW)/2+offsetX, drawY=(frameH-drawH)/2+offsetY;
+  return {drawX,drawY,drawW,drawH,scale};
+}
+function dpmGetSourceImg(){
+  const mode=dpmEl('dpmBgMode').value;
+  if(mode!=='original' && dpmBgRemovedImg) return dpmBgRemovedImg;
+  return dpmImg;
+}
+function dpmDrawSubjectOnto(ctx,frameW,frameH,srcImg){
+  const fitMode=dpmEl('dpmFit').value;
+  const fn = fitMode==='contain' ? dpmContainDraw : dpmCoverDraw;
+  const r = fn(srcImg.width,srcImg.height,frameW,frameH,dpmCrop.zoom,dpmCrop.offsetX,dpmCrop.offsetY);
+  ctx.save();
+  ctx.translate(frameW/2,frameH/2);
+  ctx.rotate(dpmCrop.rotation*Math.PI/180);
+  ctx.translate(-frameW/2,-frameH/2);
+  ctx.drawImage(srcImg,r.drawX,r.drawY,r.drawW,r.drawH);
+  ctx.restore();
+}
+
+/* ---------- background fill helpers ---------- */
+const DPM_BG_COLORS={white:'#ffffff',offwhite:'#f5f3ee',lightblue:'#cfe8fb',blue:'#4a90d9',gray:'#c9c9c9'};
+function dpmDrawBackgroundOnto(ctx,frameW,frameH){
+  const mode=dpmEl('dpmBgMode').value;
+  if(mode==='original'||mode==='remove')return;
+  if(DPM_BG_COLORS[mode]){ctx.fillStyle=DPM_BG_COLORS[mode];ctx.fillRect(0,0,frameW,frameH);return;}
+  if(mode==='custom'){ctx.fillStyle=dpmEl('dpmBgColor').value;ctx.fillRect(0,0,frameW,frameH);return;}
+  if(mode==='customimage' && dpmCustomBgImg){
+    const r=dpmCoverDraw(dpmCustomBgImg.width,dpmCustomBgImg.height,frameW,frameH,1,0,0);
+    ctx.drawImage(dpmCustomBgImg,r.drawX,r.drawY,r.drawW,r.drawH);
+    return;
+  }
+  if(mode==='blur' && dpmImg){
+    const blurAmt=+dpmEl('dpmBgBlurAmount').value;
+    ctx.save();
+    ctx.filter=`blur(${blurAmt}px)`;
+    const r=dpmCoverDraw(dpmImg.width,dpmImg.height,frameW,frameH,dpmCrop.zoom,dpmCrop.offsetX,dpmCrop.offsetY);
+    ctx.translate(frameW/2,frameH/2);ctx.rotate(dpmCrop.rotation*Math.PI/180);ctx.translate(-frameW/2,-frameH/2);
+    ctx.drawImage(dpmImg,r.drawX,r.drawY,r.drawW,r.drawH);
+    ctx.restore();
+    ctx.filter='none';
+    return;
+  }
+  // fallback plain white if isolation-needed mode but no removed image yet
+  ctx.fillStyle='#ffffff';ctx.fillRect(0,0,frameW,frameH);
+}
+
+/* ---------- adjustments ---------- */
+function dpmBuildFilterString(){
+  const b=+dpmEl('dpmBrightness').value, c=+dpmEl('dpmContrast').value, e=+dpmEl('dpmExposure').value, s=+dpmEl('dpmSaturate').value;
+  const gray=dpmEl('dpmGrayscale').checked?100:0;
+  const effB=b*(e/100);
+  return `brightness(${effB}%) contrast(${c}%) saturate(${s}%) grayscale(${gray}%)`;
+}
+function dpmApplySharpen(ctx,w,h,amt){
+  if(amt<=0)return;
+  const imgData=ctx.getImageData(0,0,w,h);
+  const src=imgData.data; const out=new Uint8ClampedArray(src);
+  const k=amt*0.5;
+  for(let y=1;y<h-1;y++){
+    for(let x=1;x<w-1;x++){
+      for(let c=0;c<3;c++){
+        const i=(y*w+x)*4+c;
+        const top=src[((y-1)*w+x)*4+c],bot=src[((y+1)*w+x)*4+c],left=src[(y*w+x-1)*4+c],right=src[(y*w+x+1)*4+c],center=src[i];
+        out[i]=center*(1+4*k)-(top+bot+left+right)*k;
+      }
+    }
+  }
+  imgData.data.set(out);
+  ctx.putImageData(imgData,0,0);
+}
+function dpmApplyTemperature(ctx,w,h){
+  const temp=+dpmEl('dpmTemperature').value;
+  if(temp===0)return;
+  ctx.save();
+  ctx.globalCompositeOperation='overlay';
+  ctx.fillStyle=temp>0?`rgba(255,150,40,${Math.abs(temp)/100*0.3})`:`rgba(40,140,255,${Math.abs(temp)/100*0.3})`;
+  ctx.fillRect(0,0,w,h);
+  ctx.restore();
+}
+function dpmApplyShadowsHighlights(ctx,w,h){
+  const shadows=+dpmEl('dpmShadows').value, highlights=+dpmEl('dpmHighlights').value;
+  if(shadows===0 && highlights===0)return;
+  const imgData=ctx.getImageData(0,0,w,h);
+  const data=imgData.data;
+  const sFactor=shadows/50, hFactor=highlights/50;
+  for(let i=0;i<data.length;i+=4){
+    if(data[i+3]===0)continue;
+    for(let c=0;c<3;c++){
+      let v=data[i+c];
+      const lum=v/255;
+      if(sFactor!==0){const w2=Math.pow(1-lum,2);v+=sFactor*40*w2;}
+      if(hFactor!==0){const w2=Math.pow(lum,2);v+=hFactor*40*w2;}
+      data[i+c]=Math.max(0,Math.min(255,v));
+    }
+  }
+  ctx.putImageData(imgData,0,0);
+}
+function dpmApplyAdjustments(canvas){
+  const w=canvas.width,h=canvas.height;
+  const ctx=canvas.getContext('2d');
+  const temp=document.createElement('canvas'); temp.width=w; temp.height=h;
+  temp.getContext('2d').drawImage(canvas,0,0);
+  ctx.clearRect(0,0,w,h);
+  ctx.filter=dpmBuildFilterString();
+  ctx.drawImage(temp,0,0);
+  ctx.filter='none';
+  dpmApplyTemperature(ctx,w,h);
+  dpmApplyShadowsHighlights(ctx,w,h);
+  dpmApplySharpen(ctx,w,h,+dpmEl('dpmSharpness').value);
+}
+
+/* ---------- stage (crop preview) rendering ---------- */
+function dpmRenderStage(){
+  if(!dpmImg)return;
+  dpmSctx.clearRect(0,0,dpmStageW,dpmStageH);
+  dpmDrawBackgroundOnto(dpmSctx,dpmStageW,dpmStageH);
+  const srcImg=dpmGetSourceImg();
+  dpmDrawSubjectOnto(dpmSctx,dpmStageW,dpmStageH,srcImg);
+}
+function dpmDrawGuideOverlay(){
+  dpmGctx.clearRect(0,0,dpmStageW,dpmStageH);
+  if(!dpmEl('dpmShowGuide').checked)return;
+  dpmGctx.strokeStyle='rgba(224,122,44,0.85)';
+  dpmGctx.lineWidth=1;
+  dpmGctx.setLineDash([5,4]);
+  const topMargin=dpmStageH*0.10, chinLine=dpmStageH*0.82, eyeLine=dpmStageH*0.44;
+  [topMargin,eyeLine,chinLine].forEach(y=>{
+    dpmGctx.beginPath();dpmGctx.moveTo(0,y);dpmGctx.lineTo(dpmStageW,y);dpmGctx.stroke();
+  });
+  dpmGctx.beginPath();dpmGctx.moveTo(dpmStageW/2,0);dpmGctx.lineTo(dpmStageW/2,dpmStageH);dpmGctx.stroke();
+  dpmGctx.setLineDash([]);
+  dpmGctx.fillStyle='rgba(224,122,44,0.9)';
+  dpmGctx.font='10px Arial';
+  dpmGctx.fillText('head top',4,topMargin-3);
+  dpmGctx.fillText('eye level',4,eyeLine-3);
+  dpmGctx.fillText('chin/shoulders',4,chinLine-3);
+}
+
+/* ---------- stage drag (pan) ---------- */
+let dpmDragging=false, dpmDragStartX=0, dpmDragStartY=0, dpmDragOrigOffX=0, dpmDragOrigOffY=0;
+function dpmGetPointerPos(e){
+  const rect=dpmStage.getBoundingClientRect();
+  const cx=e.touches?e.touches[0].clientX:e.clientX;
+  const cy=e.touches?e.touches[0].clientY:e.clientY;
+  return {x:cx-rect.left,y:cy-rect.top};
+}
+function dpmDragStart(e){
+  if(!dpmImg)return;
+  dpmDragging=true;
+  const p=dpmGetPointerPos(e);
+  dpmDragStartX=p.x;dpmDragStartY=p.y;
+  dpmDragOrigOffX=dpmCrop.offsetX;dpmDragOrigOffY=dpmCrop.offsetY;
+  dpmStage.style.cursor='grabbing';
+  e.preventDefault();
+}
+function dpmDragMove(e){
+  if(!dpmDragging)return;
+  const p=dpmGetPointerPos(e);
+  dpmCrop.offsetX=dpmDragOrigOffX+(p.x-dpmDragStartX);
+  dpmCrop.offsetY=dpmDragOrigOffY+(p.y-dpmDragStartY);
+  dpmRenderStage();
+  e.preventDefault();
+}
+function dpmDragEnd(){dpmDragging=false;dpmStage.style.cursor='grab';dpmRenderAfterPreview();}
+dpmStage.addEventListener('mousedown',dpmDragStart);
+dpmStage.addEventListener('mousemove',dpmDragMove);
+window.addEventListener('mouseup',dpmDragEnd);
+dpmStage.addEventListener('touchstart',dpmDragStart,{passive:false});
+dpmStage.addEventListener('touchmove',dpmDragMove,{passive:false});
+dpmStage.addEventListener('touchend',dpmDragEnd);
+
+/* ---------- zoom / rotate / move controls ---------- */
+dpmEl('dpmZoom').addEventListener('input',function(){dpmEl('dpmZoomVal').textContent=(+this.value).toFixed(2);dpmRenderStage();});
+dpmEl('dpmZoom').addEventListener('change',()=>{dpmCrop.zoom=+dpmEl('dpmZoom').value;dpmRenderAfterPreview();});
+dpmEl('dpmRotate').addEventListener('input',function(){dpmEl('dpmRotateVal').textContent=this.value;dpmCrop.rotation=+this.value;dpmRenderStage();});
+dpmEl('dpmRotate').addEventListener('change',dpmRenderAfterPreview);
+dpmEl('dpmZoom').addEventListener('input',()=>{dpmCrop.zoom=+dpmEl('dpmZoom').value;});
+dpmEl('dpmRotateLeft').addEventListener('click',()=>{dpmCrop.rotation=((dpmCrop.rotation-90)+360)%360;if(dpmCrop.rotation>180)dpmCrop.rotation-=360;dpmEl('dpmRotate').value=Math.max(-45,Math.min(45,dpmCrop.rotation));dpmRenderStage();dpmRenderAfterPreview();});
+dpmEl('dpmRotateRight').addEventListener('click',()=>{dpmCrop.rotation=((dpmCrop.rotation+90)+360)%360;if(dpmCrop.rotation>180)dpmCrop.rotation-=360;dpmEl('dpmRotate').value=Math.max(-45,Math.min(45,dpmCrop.rotation));dpmRenderStage();dpmRenderAfterPreview();});
+dpmEl('dpmCenterBtn').addEventListener('click',()=>{dpmCrop.offsetX=0;dpmCrop.offsetY=0;dpmRenderStage();dpmRenderAfterPreview();});
+dpmEl('dpmResetCropBtn').addEventListener('click',()=>{dpmCrop={zoom:1,offsetX:0,offsetY:0,rotation:0};dpmEl('dpmZoom').value=1;dpmEl('dpmZoomVal').textContent='1.0';dpmEl('dpmRotate').value=0;dpmEl('dpmRotateVal').textContent='0';dpmRenderStage();dpmRenderAfterPreview();});
+dpmEl('dpmResetPositionBtn').addEventListener('click',()=>{dpmCrop.offsetX=0;dpmCrop.offsetY=0;dpmRenderStage();dpmRenderAfterPreview();});
+const DPM_MOVE_STEP=8;
+dpmEl('dpmMoveUp').addEventListener('click',()=>{dpmCrop.offsetY-=DPM_MOVE_STEP;dpmRenderStage();dpmRenderAfterPreview();});
+dpmEl('dpmMoveDown').addEventListener('click',()=>{dpmCrop.offsetY+=DPM_MOVE_STEP;dpmRenderStage();dpmRenderAfterPreview();});
+dpmEl('dpmMoveLeft').addEventListener('click',()=>{dpmCrop.offsetX-=DPM_MOVE_STEP;dpmRenderStage();dpmRenderAfterPreview();});
+dpmEl('dpmMoveRight').addEventListener('click',()=>{dpmCrop.offsetX+=DPM_MOVE_STEP;dpmRenderStage();dpmRenderAfterPreview();});
+dpmEl('dpmShowGuide').addEventListener('change',dpmDrawGuideOverlay);
+dpmEl('dpmFit').addEventListener('change',()=>{dpmRenderStage();dpmRenderAfterPreview();});
+
+/* ---------- background mode UI + processing ---------- */
+function dpmUpdateBgFieldsVisibility(){
+  const mode=dpmEl('dpmBgMode').value;
+  dpmEl('dpmBgColorField').style.display=mode==='custom'?'flex':'none';
+  dpmEl('dpmBgImageField').style.display=mode==='customimage'?'flex':'none';
+  dpmEl('dpmBgBlurField').style.display=mode==='blur'?'flex':'none';
+  const needsIsolation=['remove','white','offwhite','lightblue','blue','gray','custom','customimage'].includes(mode);
+  dpmEl('dpmProcessBgBtn').style.display=(needsIsolation && !dpmBgRemovedImg && dpmImg)?'inline-block':'none';
+}
+dpmEl('dpmBgMode').addEventListener('change',()=>{dpmUpdateBgFieldsVisibility();dpmRenderStage();dpmRenderAfterPreview();});
+dpmEl('dpmBgColor').addEventListener('input',()=>{dpmRenderStage();dpmRenderAfterPreview();});
+dpmEl('dpmBgBlurAmount').addEventListener('input',()=>{dpmRenderStage();dpmRenderAfterPreview();});
+dpmEl('dpmBgImageInput').addEventListener('change',e=>{
+  const file=e.target.files[0]; if(!file)return;
+  const img=new Image();
+  img.onload=()=>{dpmCustomBgImg=img;dpmRenderStage();dpmRenderAfterPreview();};
+  img.src=URL.createObjectURL(file);
+});
+
+async function dpmLoadBgRemovalLib(){
+  const urls=['https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.5/dist/browser.mjs','https://cdn.jsdelivr.net/npm/@imgly/background-removal/dist/browser.mjs','https://unpkg.com/@imgly/background-removal@1.5.5/dist/browser.mjs','https://esm.sh/@imgly/background-removal@1.5.5'];
+  let lastErr;
+  for(const url of urls){
+    try{const mod=await import(url);if(mod&&mod.removeBackground)return mod;}catch(err){lastErr=err;}
+  }
+  throw lastErr||new Error('Could not load the background removal library');
+}
+function dpmIsResultBlank(img){
+  const check=document.createElement('canvas');
+  check.width=Math.min(img.width,600); check.height=Math.min(img.height,600);
+  const cctx=check.getContext('2d');
+  cctx.drawImage(img,0,0,check.width,check.height);
+  let data;
+  try{data=cctx.getImageData(0,0,check.width,check.height).data;}catch(e){return false;}
+  let opaqueCount=0;
+  for(let i=3;i<data.length;i+=4){if(data[i]>10)opaqueCount++;}
+  return opaqueCount===0;
+}
+dpmEl('dpmProcessBgBtn').addEventListener('click',async()=>{
+  if(!dpmOrigFile)return;
+  const statusEl=dpmEl('dpmBgStatus');
+  const track=dpmEl('dpmBgProgressTrack'), fill=dpmEl('dpmBgProgressFill');
+  track.style.display='block'; fill.style.width='0%';
+  statusEl.textContent='Loading AI model (first time only, cached after)...';
+  dpmEl('dpmProcessBgBtn').disabled=true;
+  try{
+    const {removeBackground}=await dpmLoadBgRemovalLib();
+    statusEl.textContent='Removing background...';
+    const blob=await removeBackground(dpmOrigFile,{progress:(key,current,total)=>{
+      if(total){const pct=Math.round((current/total)*100);fill.style.width=pct+'%';const phase=key&&key.includes('fetch')?'Downloading model':'Processing image';statusEl.textContent=`${phase}... ${pct}%`;}
+    }});
+    const url=URL.createObjectURL(blob);
+    const img=new Image();
+    img.onload=()=>{
+      if(dpmIsResultBlank(img)){
+        statusEl.textContent='The background removal produced an empty result. Please try again, or try a clearer photo.';
+        track.style.display='none';
+        dpmEl('dpmProcessBgBtn').disabled=false;
+        return;
+      }
+      dpmBgRemovedImg=img;
+      statusEl.textContent='Background isolated. You can now pick a background color or image above.';
+      track.style.display='none';
+      dpmEl('dpmProcessBgBtn').style.display='none';
+      dpmEl('dpmProcessBgBtn').disabled=false;
+      dpmRenderStage();
+      dpmRenderAfterPreview();
+    };
+    img.onerror=()=>{statusEl.textContent='The processed image could not be loaded. Please try again.';track.style.display='none';dpmEl('dpmProcessBgBtn').disabled=false;};
+    img.src=url;
+  }catch(err){
+    statusEl.textContent='Could not remove the background. Please check your internet connection and try again.';
+    track.style.display='none';
+    dpmEl('dpmProcessBgBtn').disabled=false;
+  }
+});
+
+/* ---------- adjustment live updates ---------- */
+['dpmBrightness','dpmContrast','dpmExposure','dpmSaturate','dpmSharpness','dpmTemperature','dpmShadows','dpmHighlights'].forEach(id=>{
+  dpmEl(id).addEventListener('input',()=>{dpmRenderAfterPreview();});
+});
+dpmEl('dpmGrayscale').addEventListener('change',dpmRenderAfterPreview);
+dpmEl('dpmResetAdjustBtn').addEventListener('click',()=>{
+  dpmEl('dpmBrightness').value=100;dpmEl('dpmContrast').value=100;dpmEl('dpmExposure').value=100;dpmEl('dpmSaturate').value=100;
+  dpmEl('dpmSharpness').value=0;dpmEl('dpmTemperature').value=0;dpmEl('dpmShadows').value=0;dpmEl('dpmHighlights').value=0;dpmEl('dpmGrayscale').checked=false;
+  dpmRenderAfterPreview();
+});
+
+/* ---------- before/after preview ---------- */
+function dpmDrawBeforeCanvas(){
+  if(!dpmImg)return;
+  const bc=dpmEl('dpmBeforeCanvas');
+  const maxDim=340;
+  const scale=Math.min(1,maxDim/Math.max(dpmImg.width,dpmImg.height));
+  bc.width=Math.round(dpmImg.width*scale); bc.height=Math.round(dpmImg.height*scale);
+  bc.getContext('2d').drawImage(dpmImg,0,0,bc.width,bc.height);
+}
+function dpmRenderComposite(canvas,outW,outH){
+  canvas.width=outW; canvas.height=outH;
+  const ctx=canvas.getContext('2d');
+  ctx.clearRect(0,0,outW,outH);
+  dpmDrawBackgroundOnto(ctx,outW,outH);
+  const srcImg=dpmGetSourceImg();
+  dpmDrawSubjectOnto(ctx,outW,outH,srcImg);
+  dpmApplyAdjustments(canvas);
+}
+function dpmRenderAfterPreview(){
+  if(!dpmImg)return;
+  const ac=dpmEl('dpmAfterCanvas');
+  const previewW=Math.min(340,dpmTargetW), previewH=Math.round(previewW*(dpmTargetH/dpmTargetW));
+  dpmRenderComposite(ac,previewW,previewH);
+}
+
+/* ---------- photo check ---------- */
+function dpmRunPhotoCheck(){
+  if(!dpmImg){dpmEl('dpmCheckResults').innerHTML='<p class="stat">Upload a photo first.</p>';return;}
+  const results=[];
+  results.push({label:'Dimensions',status:'pass',msg:`Output will be exactly ${dpmTargetW} x ${dpmTargetH}px, matching your selected size.`});
+  results.push({label:'Aspect Ratio',status:'pass',msg:`Crop frame matches the required ${(dpmTargetW/dpmTargetH).toFixed(3)} aspect ratio.`});
+  const fitMode=dpmEl('dpmFit').value;
+  const baseScale=(fitMode==='contain'?Math.min:Math.max)(dpmTargetW/dpmImg.width, dpmTargetH/dpmImg.height)*dpmCrop.zoom;
+  if(baseScale<=1){
+    results.push({label:'Resolution',status:'pass',msg:'Source photo resolution is sufficient for sharp output at this size.'});
+  }else{
+    results.push({label:'Resolution',status:'needs-adjustment',msg:'Image resolution may be too low for the selected output size — try a higher-resolution photo or reduce zoom.'});
+  }
+  const bgMode=dpmEl('dpmBgMode').value;
+  const needsIsolation=['remove','white','offwhite','lightblue','blue','gray','custom','customimage'].includes(bgMode);
+  if(bgMode==='original'){
+    results.push({label:'Background',status:'not-available',msg:'Background not changed. Most official document photos require a plain white or light background — consider switching Background to White.'});
+  }else if(needsIsolation && !dpmBgRemovedImg){
+    results.push({label:'Background',status:'needs-adjustment',msg:'Click "Process Background" in the Background section to isolate the subject before this background choice takes effect.'});
+  }else{
+    results.push({label:'Background',status:'pass',msg:'A plain background is applied.'});
+  }
+  if(dpmEl('dpmShowGuide').checked){
+    results.push({label:'Face Centering',status:'not-available',msg:'Automatic face detection is not available — visually confirm the face sits between the guide lines shown on the crop preview.'});
+    results.push({label:'Eye Position',status:'not-available',msg:'Check that the eyes line up with the "eye level" guide line before exporting.'});
+    results.push({label:'Head Position',status:'not-available',msg:'Check that the top of the head is near the "head top" guide line and the chin/shoulders near the bottom guide line.'});
+  }
+  const wIn=dpmTargetW/dpmDpi, hIn=dpmTargetH/dpmDpi;
+  const approxBytes = dpmTargetW*dpmTargetH*3*0.3; // rough JPEG estimate
+  results.push({label:'File Size',status:'pass',msg:`Estimated export size: roughly ${(approxBytes/1024).toFixed(0)} KB as JPG (actual size depends on quality setting).`});
+  results.push({label:'Orientation',status: dpmTargetW<=dpmTargetH ? 'pass':'needs-adjustment', msg: dpmTargetW<=dpmTargetH ? 'Portrait orientation matches typical document photo requirements.' : 'This output is wider than it is tall — confirm landscape orientation is actually required for this document type.'});
+  const html=results.map(r=>{
+    const badge = r.status==='pass' ? '\u2705 Pass' : (r.status==='needs-adjustment' ? '\u26a0\ufe0f Needs Adjustment' : '\u2139\ufe0f Not Available');
+    return `<div class="row" style="margin-top:6px; align-items:flex-start;"><strong style="min-width:130px;">${r.label}:</strong><span>${badge} — ${r.msg}</span></div>`;
+  }).join('');
+  dpmEl('dpmCheckResults').innerHTML=html+'<p class="stat" style="margin-top:10px; font-size:.78rem; color:#8a8a75;">This is a preparation and self-check tool, not an official or government approval service. Always confirm exact requirements with the receiving office.</p>';
+}
+dpmEl('dpmCheckBtn').addEventListener('click',dpmRunPhotoCheck);
+
+/* ---------- print sheet ---------- */
+const DPM_PAPER_MM={'4x6':{w:101.6,h:152.4},'5x7':{w:127,h:178},'a4':{w:210,h:297},'a5':{w:148,h:210}};
+function dpmGetPaperMm(){
+  const key=dpmEl('dpmPaper').value;
+  let dims = key==='custom' ? {w:+dpmEl('dpmPaperW').value,h:+dpmEl('dpmPaperH').value} : DPM_PAPER_MM[key];
+  if(!dims.w||!dims.h||dims.w<=0||dims.h<=0)return null;
+  if(dpmEl('dpmPaperOrient').value==='landscape' && dims.h>dims.w){dims={w:dims.h,h:dims.w};}
+  if(dpmEl('dpmPaperOrient').value==='portrait' && dims.w>dims.h){dims={w:dims.h,h:dims.w};}
+  return dims;
+}
+dpmEl('dpmPaper').addEventListener('change',()=>{
+  dpmEl('dpmCustomPaperRow').style.display = dpmEl('dpmPaper').value==='custom' ? 'flex' : 'none';
+});
+let dpmSheetCompositeCanvas=null;
+dpmEl('dpmBuildSheetBtn').addEventListener('click',()=>{
+  if(!dpmImg)return alert('Upload and prepare a photo first.');
+  const paper=dpmGetPaperMm();
+  if(!paper)return dpmEl('dpmSheetInfo').textContent='Enter a valid custom paper width and height.';
+  const marginMm=+dpmEl('dpmMargin').value||0;
+  const spacingMm=+dpmEl('dpmSpacing').value||0;
+  const copiesRequested=Math.max(1,Math.min(60,+dpmEl('dpmCopies').value||1));
+  const usableW=paper.w-marginMm*2, usableH=paper.h-marginMm*2;
+  if(usableW<=0||usableH<=0)return dpmEl('dpmSheetInfo').textContent='Margins are too large for this paper size.';
+  const cols=Math.max(1,Math.floor((usableW+spacingMm)/(dpmTargetWmm+spacingMm)));
+  const rows=Math.max(1,Math.floor((usableH+spacingMm)/(dpmTargetHmm+spacingMm)));
+  const maxFit=cols*rows;
+  if(maxFit<1)return dpmEl('dpmSheetInfo').textContent='This photo size does not fit on the selected paper with the current margins.';
+  const copies=Math.min(copiesRequested,maxFit);
+  const dpi=dpmDpi;
+  const sheetPxW=mmToPx(paper.w,dpi), sheetPxH=mmToPx(paper.h,dpi);
+  const marginPx=mmToPx(marginMm,dpi), spacingPx=mmToPx(spacingMm,dpi);
+  const photoW=dpmTargetW, photoH=dpmTargetH;
+  const finalCanvas=document.createElement('canvas');
+  finalCanvas.width=photoW; finalCanvas.height=photoH;
+  dpmRenderComposite(finalCanvas,photoW,photoH);
+  const sheet=document.createElement('canvas');
+  sheet.width=sheetPxW; sheet.height=sheetPxH;
+  const sctx=sheet.getContext('2d');
+  sctx.fillStyle='#ffffff'; sctx.fillRect(0,0,sheetPxW,sheetPxH);
+  let placed=0;
+  outer:
+  for(let r=0;r<rows;r++){
+    for(let c=0;c<cols;c++){
+      if(placed>=copies)break outer;
+      const x=marginPx+c*(photoW+spacingPx);
+      const y=marginPx+r*(photoH+spacingPx);
+      sctx.drawImage(finalCanvas,x,y,photoW,photoH);
+      placed++;
+    }
+  }
+  dpmSheetCompositeCanvas=sheet;
+  const previewCanvas=dpmEl('dpmSheetCanvas');
+  const previewScale=Math.min(1,420/sheetPxW);
+  previewCanvas.width=Math.round(sheetPxW*previewScale);
+  previewCanvas.height=Math.round(sheetPxH*previewScale);
+  previewCanvas.getContext('2d').drawImage(sheet,0,0,previewCanvas.width,previewCanvas.height);
+  previewCanvas.style.display='block';
+  dpmEl('dpmSheetInfo').textContent=`Arranged ${placed} of ${copiesRequested} requested copies (${cols} x ${rows} grid fits on this paper) — sheet size ${sheetPxW} x ${sheetPxH}px @ ${dpi} DPI.`;
+});
+
+/* ---------- export ---------- */
+dpmEl('dpmDownloadBtn').addEventListener('click',()=>{
+  if(!dpmImg)return alert('Upload a photo first.');
+  const format=dpmEl('dpmExportFormat').value;
+  const quality=+dpmEl('dpmExportQuality').value/100;
+  const finalCanvas=document.createElement('canvas');
+  dpmRenderComposite(finalCanvas,dpmTargetW,dpmTargetH);
+  if(format==='pdf'){
+    if(typeof window.jspdf==='undefined')return alert('PDF library still loading, please try again in a moment.');
+    const {jsPDF}=window.jspdf;
+    const wMm=dpmTargetWmm, hMm=dpmTargetHmm;
+    const doc=new jsPDF({unit:'mm',format:[Math.max(wMm,10),Math.max(hMm,10)]});
+    const dataUrl=finalCanvas.toDataURL('image/jpeg',0.95);
+    doc.addImage(dataUrl,'JPEG',0,0,wMm,hMm);
+    doc.save('document-photo.pdf');
+    dpmEl('dpmExportInfo').textContent=`Downloaded PDF: ${wMm.toFixed(1)} x ${hMm.toFixed(1)} mm.`;
+    return;
+  }
+  const mime = format==='png' ? 'image/png' : 'image/jpeg';
+  finalCanvas.toBlob(blob=>{
+    if(!blob)return alert('Could not generate the file. Please try again.');
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='document-photo.'+(format==='png'?'png':'jpg');
+    a.click();
+    dpmEl('dpmExportInfo').textContent=`Downloaded ${format.toUpperCase()}: ${dpmTargetW} x ${dpmTargetH}px, approx ${(blob.size/1024).toFixed(0)} KB.`;
+  },mime,format==='png'?undefined:quality);
+});
+dpmEl('dpmDownloadSheetBtn').addEventListener('click',()=>{
+  if(!dpmSheetCompositeCanvas)return alert('Click "Auto Arrange / Preview Sheet" first.');
+  const format=dpmEl('dpmExportFormat').value;
+  if(format==='pdf'){
+    if(typeof window.jspdf==='undefined')return alert('PDF library still loading, please try again in a moment.');
+    const {jsPDF}=window.jspdf;
+    const paper=dpmGetPaperMm();
+    const doc=new jsPDF({unit:'mm',format:[paper.w,paper.h]});
+    const dataUrl=dpmSheetCompositeCanvas.toDataURL('image/jpeg',0.95);
+    doc.addImage(dataUrl,'JPEG',0,0,paper.w,paper.h);
+    doc.save('print-sheet.pdf');
+    return;
+  }
+  dpmSheetCompositeCanvas.toBlob(blob=>{
+    if(!blob)return alert('Could not generate the print sheet file.');
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='print-sheet.jpg';
+    a.click();
+  },'image/jpeg',0.95);
+});
+
+/* ---------- reset all ---------- */
+function dpmResetAllTool(){
+  dpmImg=null;dpmBgRemovedImg=null;dpmCustomBgImg=null;dpmOrigFile=null;dpmSheetCompositeCanvas=null;
+  dpmCrop={zoom:1,offsetX:0,offsetY:0,rotation:0};
+  dpmInput.value='';
+  dpmEl('dpmFileInfo').textContent='';
+  dpmEl('dpmReplaceBtn').style.display='none';
+  dpmEl('dpmClearBtn').style.display='none';
+  dpmSctx.clearRect(0,0,dpmStage.width,dpmStage.height);
+  dpmGctx.clearRect(0,0,dpmGuideOverlay.width,dpmGuideOverlay.height);
+  dpmEl('dpmBeforeCanvas').getContext('2d').clearRect(0,0,dpmEl('dpmBeforeCanvas').width,dpmEl('dpmBeforeCanvas').height);
+  dpmEl('dpmAfterCanvas').getContext('2d').clearRect(0,0,dpmEl('dpmAfterCanvas').width,dpmEl('dpmAfterCanvas').height);
+  dpmEl('dpmCheckResults').innerHTML='';
+  dpmEl('dpmSheetInfo').textContent='';
+  dpmEl('dpmSheetCanvas').style.display='none';
+  dpmEl('dpmExportInfo').textContent='';
+  dpmEl('dpmBgStatus').textContent='';
+  dpmEl('dpmZoom').value=1;dpmEl('dpmZoomVal').textContent='1.0';
+  dpmEl('dpmRotate').value=0;dpmEl('dpmRotateVal').textContent='0';
+  dpmEl('dpmBgMode').value='original';
+  dpmUpdateBgFieldsVisibility();
+}
+dpmEl('dpmResetAllBtn').addEventListener('click',dpmResetAllTool);
+dpmEl('dpmResetBgBtn').addEventListener('click',()=>{
+  dpmBgRemovedImg=null;dpmCustomBgImg=null;
+  dpmEl('dpmBgMode').value='original';
+  dpmEl('dpmBgColor').value='#ffffff';
+  dpmEl('dpmBgImageInput').value='';
+  dpmEl('dpmBgBlurAmount').value=8;
+  dpmEl('dpmBgStatus').textContent='';
+  dpmUpdateBgFieldsVisibility();
+  dpmRenderStage();
+  if(dpmImg)dpmRenderAfterPreview();
+});
+
+/* ---------- initial setup ---------- */
+dpmUpdateSizeFromControls();
+dpmUpdateBgFieldsVisibility();
+</script><script src="script.js"></script></body></html>
