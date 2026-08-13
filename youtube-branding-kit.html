@@ -1,0 +1,470 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>YouTube Branding Kit - Free Thumbnail & Banner Maker | ToolNest</title><meta name="description" content="Design a matching YouTube thumbnail (1280x720) and channel banner (2560x1440) from one brand profile, free, no watermark, 100% private."><link rel="canonical" href="https://toolnest.link/youtube-branding-kit.html"><meta property="og:title" content="YouTube Branding Kit | ToolNest"><meta property="og:description" content="Design a matching YouTube thumbnail and channel banner from one brand profile, free, no watermark, 100% private."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/youtube-branding-kit.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>YouTube Branding Kit</h1><p>One brand profile, matching thumbnails and channel banners, live mock previews — free, no watermark, 100% private.</p></header><main>
+<div class="card" id="yk"><h2>YouTube Branding Kit</h2><p class="desc">Design a matching Thumbnail (1280&times;720) and Channel Banner (2560&times;1440) from one shared brand style — free, no watermark, 100% private.</p>
+
+<h3 style="margin-top:4px;">1. Brand Profile (applies to both formats)</h3>
+<div class="row"><div class="field"><label class="field-label" for="ykBrandName">Brand / Channel name</label><input type="text" id="ykBrandName" placeholder="Your Channel Name"></div><div class="field"><label class="field-label" for="ykBrandTagline">Tagline</label><input type="text" id="ykBrandTagline" placeholder="Optional tagline"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="ykLogoInput">Logo (optional)</label><input type="file" id="ykLogoInput" accept="image/*"></div><div class="field"><label class="field-label" for="ykBrandFont">Typography</label><select id="ykBrandFont"><option value="Arial">Arial</option><option value="Georgia">Georgia</option><option value="Impact">Impact</option><option value="Verdana">Verdana</option><option value="'Courier New'">Courier New</option></select></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="ykPrimaryColor">Primary color</label><input type="color" id="ykPrimaryColor" value="#1f3d2b"></div><div class="field"><label class="field-label" for="ykSecondaryColor">Secondary color</label><input type="color" id="ykSecondaryColor" value="#ffffff"></div><div class="field"><label class="field-label" for="ykAccentColor">Accent color</label><input type="color" id="ykAccentColor" value="#e07a2c"></div></div>
+<div class="row" style="margin-top:12px;"><button id="ykApplyBrandBtn">Apply Brand Style to Both</button></div>
+
+<h3>2. Workspace</h3>
+<div class="row" id="ykWorkspaceTabs">
+<button class="secondary yk-wtab active" data-ws="thumbnail">YouTube Thumbnail (1280&times;720)</button>
+<button class="secondary yk-wtab" data-ws="banner">Channel Banner (2560&times;1440)</button>
+</div>
+
+<h3>3. Background</h3>
+<div class="field"><label class="field-label" for="ykBgInput">Background image (optional)</label><div class="dropzone" id="ykBgDropzone"><input type="file" id="ykBgInput" accept="image/*"><p>Drag &amp; drop, or click to browse</p></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="ykBgColor">Background color (used if no image)</label><input type="color" id="ykBgColor" value="#1f3d2b"></div></div>
+
+<h3>4. Template Gallery</h3>
+<div class="row" id="ykTemplateRow" style="flex-wrap:wrap;"></div>
+
+<h3>5. Text Layers</h3>
+<div id="ykLayerList" style="margin-top:6px;"></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="ykAddLayerBtn">+ Add Text Layer</button></div>
+
+<div id="ykLayerEditor" style="margin-top:14px; display:none; border:1px solid var(--line); border-radius:8px; padding:12px;">
+<p class="field-label-block">Editing layer</p>
+<div class="row"><div class="field" style="flex:2;"><label class="field-label" for="ykLayerText">Text</label><input type="text" id="ykLayerText" placeholder="Layer text"></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="ykLayerFont">Font</label><select id="ykLayerFont"><option value="Arial">Arial</option><option value="Georgia">Georgia</option><option value="Impact">Impact</option><option value="Verdana">Verdana</option><option value="'Courier New'">Courier New</option></select></div><div class="field"><label class="field-label" for="ykLayerSize">Size (<span id="ykLayerSizeVal">90</span>px)</label><input type="range" id="ykLayerSize" min="20" max="200" value="90"></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="ykLayerColor">Text color</label><input type="color" id="ykLayerColor" value="#ffffff"></div><div class="field"><label class="field-label" for="ykLayerStroke">Outline color</label><input type="color" id="ykLayerStroke" value="#000000"></div></div>
+<div class="row" style="margin-top:10px;"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="ykLayerBold" checked> Bold</label><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="ykLayerItalic"> Italic</label><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="ykLayerShadow" checked> Shadow</label></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="ykLayerAlign">Horizontal</label><select id="ykLayerAlign"><option value="left">Left</option><option value="center" selected>Center</option><option value="right">Right</option></select></div><div class="field"><label class="field-label" for="ykLayerPosition">Vertical</label><select id="ykLayerPosition"><option value="top">Top</option><option value="middle" selected>Middle</option><option value="bottom">Bottom</option></select></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="ykLayerOffsetX">Fine-tune X offset (px)</label><input type="number" id="ykLayerOffsetX" value="0"></div><div class="field"><label class="field-label" for="ykLayerOffsetY">Fine-tune Y offset (px)</label><input type="number" id="ykLayerOffsetY" value="0"></div></div>
+</div>
+
+<h3>6. Preview</h3>
+<canvas id="ykCanvas" style="max-width:100%; border:1px solid var(--line); border-radius:6px; display:block; margin-top:8px;"></canvas>
+<div class="row" style="margin-top:10px;"><button id="ykRenderBtn">Render Preview</button></div>
+
+<h3>7. Live Mock Preview</h3>
+<div id="ykSearchMock" style="display:flex; gap:10px; margin-top:10px; padding:10px; border:1px solid var(--line); border-radius:8px; max-width:420px;">
+<img id="ykSearchMockThumb" style="width:168px; height:94px; border-radius:6px; object-fit:cover; background:#ddd;" alt="Thumbnail preview">
+<div><p style="margin:0; font-weight:600; font-size:.9rem;" id="ykSearchMockTitle">Your Video Title Goes Here</p><p style="margin:6px 0 0; font-size:.78rem; color:#8a8a75;" id="ykSearchMockChannel">Your Channel Name</p><p style="margin:2px 0 0; font-size:.78rem; color:#8a8a75;">1.2K views &bull; 3 days ago</p></div>
+</div>
+<div id="ykBannerMock" style="display:none; margin-top:10px;">
+<div style="position:relative; max-width:500px; border:1px solid var(--line); border-radius:6px; overflow:hidden;">
+<img id="ykBannerMockImg" style="width:100%; display:block;" alt="Banner preview">
+<div style="position:absolute; border:2px dashed rgba(255,255,255,.8); top:0; bottom:0; left:50%; transform:translateX(-50%); width:60.4%;"></div>
+</div>
+<p class="stat" style="font-size:.78rem; color:#8a8a75; margin-top:4px;">Dashed box = safe area guaranteed visible on desktop, tablet, mobile, and TV.</p>
+</div>
+
+<h3>8. Export</h3>
+<div class="row"><button id="ykDownloadCurrentBtn">Download Current Format</button><button class="secondary" id="ykDownloadBothBtn">Download Both Sizes</button><button class="secondary" id="ykResetBtn">Reset Branding Kit</button></div>
+<p class="stat" id="ykExportInfo"></p>
+</div>
+<div class="seo-content">
+<h3>How to Use YouTube Branding Kit</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Set Up Your Brand:</strong> Enter your channel name, tagline, logo, colors, and font once.</li><li><strong>Apply Brand Style:</strong> One click syncs your colors, font, and logo to both formats.</li><li><strong>Switch Workspace:</strong> Move between Thumbnail (1280&times;720) and Banner (2560&times;1440) — nothing is lost.</li><li><strong>Pick a Template:</strong> Start from a Bold, Minimal, Educational, Gaming, or Business layout.</li><li><strong>Add Text Layers:</strong> Add, style, and reorder multiple independent text layers.</li><li><strong>Check the Mock Preview:</strong> See how it looks in YouTube search results or on your channel page.</li><li><strong>Export:</strong> Download the current format, or both sizes at once.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>A free youtube branding kit thumbnail and banner maker browser tool no watermark means your channel's colors, logo, and fonts stay consistent across every thumbnail and the channel banner without redoing the setup each time. Instead of a thumbnail maker and a separate banner maker with no connection between them, this instant youtube graphics maker thumbnail banner editor keeps one shared brand profile that applies to both formats in a single click.</p>
+<h3>How It Works</h3>
+<p>This complete youtube visual kit designer client side tool uses the same canvas-based rendering that powered the original Thumbnail Maker and Channel Banner Maker, now sharing one brand profile and supporting multiple independent text layers per design instead of a single line of text. Switching between the Thumbnail and Banner workspace tabs preserves whatever you were working on in each — nothing resets when you switch back and forth.</p>
+<h3>Key Features</h3>
+<p>As a custom youtube graphics suite 1280x720 and 2560x1440 tool, five code-driven templates are available for each format — Bold, Minimal, Educational, Gaming, and Business for thumbnails, and Minimal, Creator, Business, Gaming, and Educational for banners — loading instantly with no external image assets to download. A live YouTube Search mock preview shows your thumbnail next to a sample title and channel name the way it would appear in real search results, while a Channel Page mock preview overlays the standard safe-area guide so text and logos stay visible across desktop, tablet, mobile, and TV. One click downloads both the 1280×720 thumbnail and 2560×1440 banner together.</p>
+<h3>Common Use Cases</h3>
+<p>A creator rebranding their channel sets up a brand profile once with their logo and color palette, applies it to both formats, then fine-tunes each with its own text layers. Someone launching a new video series picks the Educational or Gaming thumbnail template as a starting point and swaps in their own title text and colors. A channel preparing for a full visual refresh checks the Channel Page mock preview to confirm their new banner's key text sits inside the safe area before publishing, then downloads both sizes in one click.</p>
+<h3>Tips</h3>
+<p>Keep your most important text inside the dashed safe-area guide shown in the Channel Page mock preview — anything outside it can be cropped on some devices. For thumbnails, short, high-contrast text (light text with a dark outline, or the reverse) tends to stay readable even at the small size YouTube displays in search results and suggested videos.</p>
+<h3>Frequently Asked Questions</h3>
+<div class='faq-item'><h4>Can I create both thumbnails and banners in the same session?</h4><p>Yes, switch between the Thumbnail and Banner workspace tabs at any time — each keeps its own background, layers, and settings.</p></div><div class='faq-item'><h4>What are YouTube's exact specifications for thumbnails and channel banners?</h4><p>Thumbnails export at 1280×720px and banners at 2560×1440px, matching YouTube's standard upload dimensions.</p></div><div class='faq-item'><h4>How do safe zones ensure my graphics look good across mobile and desktop views?</h4><p>The Channel Page mock preview overlays the standard safe area that stays visible across desktop, tablet, mobile, and TV, so you can keep key text and logos inside it.</p></div><div class='faq-item'><h4>Can I save my branding templates for reuse across videos?</h4><p>Your brand profile (colors, font, logo) can be reapplied to both formats anytime with Apply Brand Style, and the code-driven templates are always available to start a fresh design.</p></div><div class='faq-item'><h4>Does the tool include pre-designed stickers and branding elements?</h4><p>The tool focuses on text layers, your own uploaded logo, and background images or colors rather than a sticker library, keeping designs clean and fast-loading.</p></div><div class='faq-item'><h4>How do I ensure my thumbnails have high click-through rates?</h4><p>Use short, high-contrast text with an outline or shadow enabled, keep the focal point centered or near the safe margins, and preview it in the YouTube Search mock before publishing.</p></div><div class='faq-item'><h4>Is the branding kit completely watermark-free for commercial use?</h4><p>Yes, exported thumbnails and banners have no watermark.</p></div><div class='faq-item'><h4>Can I use multiple text layers on one thumbnail or banner?</h4><p>Yes, add as many independent text layers as needed, each with its own font, size, color, outline, and position.</p></div><div class='faq-item'><h4>Can I download both the thumbnail and banner at once?</h4><p>Yes, the Download Both Sizes button exports the 1280×720 thumbnail and 2560×1440 banner together in one click.</p></div>
+</div>
+<div class="seo-content"><h3>Related YouTube Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="title-generator.html">Title Generator</a></li>
+<li><a href="description-template-builder.html">Description Template Builder</a></li>
+<li><a href="tag-keyword-generator.html">Tag & Keyword Generator</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"YouTube Branding Kit","applicationCategory":"DesignApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/youtube-branding-kit.html"},
+{"@type":"HowTo","name":"How to Use the YouTube Branding Kit","step":[
+{"@type":"HowToStep","text":"Set up your brand name, logo, colors, and font."},
+{"@type":"HowToStep","text":"Apply the brand style to both formats."},
+{"@type":"HowToStep","text":"Switch between Thumbnail and Banner workspaces."},
+{"@type":"HowToStep","text":"Pick a template or start from scratch."},
+{"@type":"HowToStep","text":"Add and style multiple text layers."},
+{"@type":"HowToStep","text":"Check the live mock preview."},
+{"@type":"HowToStep","text":"Download the current format or both sizes."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Can I create both thumbnails and banners in the same session?","acceptedAnswer":{"@type":"Answer","text":"Yes, switch between the Thumbnail and Banner workspace tabs at any time; each keeps its own settings."}},
+{"@type":"Question","name":"What are YouTube's exact specifications for thumbnails and channel banners?","acceptedAnswer":{"@type":"Answer","text":"Thumbnails export at 1280x720px and banners at 2560x1440px."}},
+{"@type":"Question","name":"How do safe zones ensure my graphics look good across mobile and desktop views?","acceptedAnswer":{"@type":"Answer","text":"The Channel Page mock preview overlays the standard safe area visible across desktop, tablet, mobile, and TV."}},
+{"@type":"Question","name":"Can I save my branding templates for reuse across videos?","acceptedAnswer":{"@type":"Answer","text":"Your brand profile can be reapplied to both formats anytime with Apply Brand Style."}},
+{"@type":"Question","name":"Does the tool include pre-designed stickers and branding elements?","acceptedAnswer":{"@type":"Answer","text":"The tool focuses on text layers, your own logo, and backgrounds rather than a sticker library."}},
+{"@type":"Question","name":"How do I ensure my thumbnails have high click-through rates?","acceptedAnswer":{"@type":"Answer","text":"Use short, high-contrast text with an outline, and preview it in the YouTube Search mock before publishing."}},
+{"@type":"Question","name":"Is the branding kit completely watermark-free for commercial use?","acceptedAnswer":{"@type":"Answer","text":"Yes, exported thumbnails and banners have no watermark."}},
+{"@type":"Question","name":"Can I use multiple text layers on one thumbnail or banner?","acceptedAnswer":{"@type":"Answer","text":"Yes, add as many independent text layers as needed, each with its own styling."}}
+]}
+]}
+</script>
+<script>/* ===== YouTube Branding Kit engine ===== */
+const ykEl = id => document.getElementById(id);
+
+const YK_SIZES = { thumbnail: {w:1280, h:720}, banner: {w:2560, h:1440} };
+
+function ykNewWorkspace(){
+  return { bgImg:null, bgColor:'#1f3d2b', layers:[], activeLayerId:null };
+}
+let ykWorkspaces = { thumbnail: ykNewWorkspace(), banner: ykNewWorkspace() };
+let ykActiveWs = 'thumbnail';
+let ykBrandLogoImg = null;
+let ykLayerIdCounter = 1;
+
+const ykCanvas = ykEl('ykCanvas');
+const ykCtx = ykCanvas.getContext('2d');
+
+/* ---------- workspace tab switching (state preserved per workspace) ---------- */
+document.querySelectorAll('.yk-wtab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.yk-wtab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    ykActiveWs = btn.dataset.ws;
+    ykEl('ykBgColor').value = ykWorkspaces[ykActiveWs].bgColor;
+    ykRenderTemplateGallery();
+    ykRenderLayerList();
+    ykEl('ykLayerEditor').style.display = 'none';
+    ykEl('ykSearchMock').style.display = ykActiveWs==='thumbnail' ? 'flex' : 'none';
+    ykEl('ykBannerMock').style.display = ykActiveWs==='banner' ? 'block' : 'none';
+    ykRender();
+  });
+});
+
+/* ---------- background upload (per active workspace) ---------- */
+const ykBgInput = ykEl('ykBgInput'), ykBgDropzone = ykEl('ykBgDropzone');
+function ykLoadBgFile(file){
+  if(!file) return;
+  const img = new Image();
+  img.onload = ()=>{ ykWorkspaces[ykActiveWs].bgImg = img; ykRender(); };
+  img.src = URL.createObjectURL(file);
+}
+ykBgInput.addEventListener('change', e=>ykLoadBgFile(e.target.files[0]));
+['dragover','dragenter'].forEach(evt=>ykBgDropzone.addEventListener(evt,e=>{e.preventDefault();ykBgDropzone.classList.add('dragover');}));
+['dragleave','drop'].forEach(evt=>ykBgDropzone.addEventListener(evt,e=>{e.preventDefault();ykBgDropzone.classList.remove('dragover');}));
+ykBgDropzone.addEventListener('drop', e=>{ const file=e.dataTransfer.files[0]; if(file){ ykBgInput.files=e.dataTransfer.files; ykLoadBgFile(file); } });
+ykEl('ykBgColor').addEventListener('input', function(){ ykWorkspaces[ykActiveWs].bgColor = this.value; ykRender(); });
+
+/* ---------- logo upload ---------- */
+ykEl('ykLogoInput').addEventListener('change', e=>{
+  const file = e.target.files[0]; if(!file) return;
+  const img = new Image();
+  img.onload = ()=>{ ykBrandLogoImg = img; };
+  img.src = URL.createObjectURL(file);
+});
+
+/* ---------- text layers: model + list + editor ---------- */
+function ykNewLayer(overrides){
+  return Object.assign({
+    id: 'layer'+(ykLayerIdCounter++),
+    text: 'New Text',
+    font: 'Arial',
+    size: 90,
+    color: '#ffffff',
+    stroke: '#000000',
+    bold: true,
+    italic: false,
+    shadow: true,
+    align: 'center',
+    position: 'middle',
+    offsetX: 0,
+    offsetY: 0
+  }, overrides||{});
+}
+function ykRenderLayerList(){
+  const ws = ykWorkspaces[ykActiveWs];
+  const list = ykEl('ykLayerList');
+  list.innerHTML = '';
+  if(!ws.layers.length){
+    list.innerHTML = '<p class="stat" style="font-size:.85rem; color:#8a8a75;">No text layers yet — click "+ Add Text Layer" below.</p>';
+    return;
+  }
+  ws.layers.forEach((layer, idx)=>{
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.style.cssText = 'margin-top:6px; align-items:center;';
+    const span = document.createElement('span');
+    span.style.cssText = 'flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:.85rem;';
+    span.textContent = `${idx+1}. ${layer.text || '(empty text)'}`;
+    row.appendChild(span);
+
+    const editBtn = document.createElement('button');
+    editBtn.className='secondary'; editBtn.textContent='Edit'; editBtn.style.cssText='padding:2px 10px; font-size:.78rem;';
+    editBtn.addEventListener('click', ()=>ykOpenLayerEditor(layer.id));
+
+    const upBtn = document.createElement('button');
+    upBtn.className='secondary'; upBtn.textContent='\u2191'; upBtn.style.cssText='padding:2px 8px;';
+    upBtn.addEventListener('click', ()=>{ if(idx>0){ [ws.layers[idx-1],ws.layers[idx]]=[ws.layers[idx],ws.layers[idx-1]]; ykRenderLayerList(); ykRender(); } });
+
+    const downBtn = document.createElement('button');
+    downBtn.className='secondary'; downBtn.textContent='\u2193'; downBtn.style.cssText='padding:2px 8px;';
+    downBtn.addEventListener('click', ()=>{ if(idx<ws.layers.length-1){ [ws.layers[idx+1],ws.layers[idx]]=[ws.layers[idx],ws.layers[idx+1]]; ykRenderLayerList(); ykRender(); } });
+
+    const delBtn = document.createElement('button');
+    delBtn.className='fl-remove'; delBtn.textContent='\u2715';
+    delBtn.addEventListener('click', ()=>{
+      ws.layers.splice(idx,1);
+      if(ws.activeLayerId===layer.id){ ws.activeLayerId=null; ykEl('ykLayerEditor').style.display='none'; }
+      ykRenderLayerList(); ykRender();
+    });
+
+    row.appendChild(editBtn); row.appendChild(upBtn); row.appendChild(downBtn); row.appendChild(delBtn);
+    list.appendChild(row);
+  });
+}
+function ykOpenLayerEditor(layerId){
+  const ws = ykWorkspaces[ykActiveWs];
+  const layer = ws.layers.find(l=>l.id===layerId);
+  if(!layer) return;
+  ws.activeLayerId = layerId;
+  ykEl('ykLayerText').value = layer.text;
+  ykEl('ykLayerFont').value = layer.font;
+  ykEl('ykLayerSize').value = layer.size;
+  ykEl('ykLayerSizeVal').textContent = layer.size;
+  ykEl('ykLayerColor').value = layer.color;
+  ykEl('ykLayerStroke').value = layer.stroke;
+  ykEl('ykLayerBold').checked = layer.bold;
+  ykEl('ykLayerItalic').checked = layer.italic;
+  ykEl('ykLayerShadow').checked = layer.shadow;
+  ykEl('ykLayerAlign').value = layer.align;
+  ykEl('ykLayerPosition').value = layer.position;
+  ykEl('ykLayerOffsetX').value = layer.offsetX;
+  ykEl('ykLayerOffsetY').value = layer.offsetY;
+  ykEl('ykLayerEditor').style.display = 'block';
+}
+function ykSyncActiveLayerFromEditor(){
+  const ws = ykWorkspaces[ykActiveWs];
+  const layer = ws.layers.find(l=>l.id===ws.activeLayerId);
+  if(!layer) return;
+  layer.text = ykEl('ykLayerText').value;
+  layer.font = ykEl('ykLayerFont').value;
+  layer.size = +ykEl('ykLayerSize').value;
+  layer.color = ykEl('ykLayerColor').value;
+  layer.stroke = ykEl('ykLayerStroke').value;
+  layer.bold = ykEl('ykLayerBold').checked;
+  layer.italic = ykEl('ykLayerItalic').checked;
+  layer.shadow = ykEl('ykLayerShadow').checked;
+  layer.align = ykEl('ykLayerAlign').value;
+  layer.position = ykEl('ykLayerPosition').value;
+  layer.offsetX = +ykEl('ykLayerOffsetX').value || 0;
+  layer.offsetY = +ykEl('ykLayerOffsetY').value || 0;
+  ykRenderLayerList();
+  ykRender();
+}
+['ykLayerText','ykLayerFont','ykLayerColor','ykLayerStroke','ykLayerBold','ykLayerItalic','ykLayerShadow','ykLayerAlign','ykLayerPosition','ykLayerOffsetX','ykLayerOffsetY'].forEach(id=>{
+  ykEl(id).addEventListener('input', ykSyncActiveLayerFromEditor);
+  ykEl(id).addEventListener('change', ykSyncActiveLayerFromEditor);
+});
+ykEl('ykLayerSize').addEventListener('input', function(){ ykEl('ykLayerSizeVal').textContent=this.value; ykSyncActiveLayerFromEditor(); });
+
+ykEl('ykAddLayerBtn').addEventListener('click', ()=>{
+  const ws = ykWorkspaces[ykActiveWs];
+  const layer = ykNewLayer();
+  ws.layers.push(layer);
+  ykRenderLayerList();
+  ykOpenLayerEditor(layer.id);
+  ykRender();
+});
+
+/* ---------- config-based template gallery (code-driven, no external assets) ---------- */
+const YK_THUMB_TEMPLATES = {
+  bold:        {bgColor:'#e07a2c', layers:[ykNewLayer({text:'YOUR TITLE HERE', font:'Impact', size:120, color:'#ffffff', stroke:'#000000', bold:true, align:'center', position:'middle'})]},
+  minimal:     {bgColor:'#f2ecd8', layers:[ykNewLayer({text:'Your Title', font:'Georgia', size:70, color:'#1f3d2b', stroke:'#f2ecd8', bold:false, align:'left', position:'bottom', offsetX:20, offsetY:-30})]},
+  educational: {bgColor:'#2c5f8a', layers:[ykNewLayer({text:'LESSON 1: Getting Started', font:'Verdana', size:64, color:'#ffffff', stroke:'#0d2b40', bold:true, align:'left', position:'top', offsetX:20, offsetY:20})]},
+  gaming:      {bgColor:'#1a0f2e', layers:[ykNewLayer({text:'EPIC WIN!', font:'Impact', size:130, color:'#39ff14', stroke:'#000000', bold:true, align:'center', position:'middle'})]},
+  business:    {bgColor:'#1f3d2b', layers:[ykNewLayer({text:'Grow Your Business', font:'Arial', size:80, color:'#ffffff', stroke:'#0d1f14', bold:true, align:'center', position:'bottom', offsetY:-40})]}
+};
+const YK_BANNER_TEMPLATES = {
+  minimal:     {bgColor:'#f2ecd8', layers:[ykNewLayer({text:'Your Channel Name', font:'Georgia', size:80, color:'#1f3d2b', stroke:'#f2ecd8', bold:false, align:'center', position:'middle'})]},
+  creator:     {bgColor:'#e07a2c', layers:[ykNewLayer({text:'Subscribe for New Videos Every Week', font:'Arial', size:70, color:'#ffffff', stroke:'#7a3d10', bold:true, align:'center', position:'middle'})]},
+  business:    {bgColor:'#1f3d2b', layers:[ykNewLayer({text:'Official Channel', font:'Arial', size:70, color:'#ffffff', stroke:'#0d1f14', bold:true, align:'center', position:'middle'})]},
+  gaming:      {bgColor:'#1a0f2e', layers:[ykNewLayer({text:'LIVE STREAMS \u00b7 GAMEPLAY \u00b7 REVIEWS', font:'Impact', size:60, color:'#39ff14', stroke:'#000000', bold:true, align:'center', position:'middle'})]},
+  educational: {bgColor:'#2c5f8a', layers:[ykNewLayer({text:'Learn Something New Every Day', font:'Verdana', size:65, color:'#ffffff', stroke:'#0d2b40', bold:true, align:'center', position:'middle'})]}
+};
+function ykRenderTemplateGallery(){
+  const templates = ykActiveWs==='thumbnail' ? YK_THUMB_TEMPLATES : YK_BANNER_TEMPLATES;
+  const row = ykEl('ykTemplateRow');
+  row.innerHTML = '';
+  Object.keys(templates).forEach(key=>{
+    const btn = document.createElement('button');
+    btn.className = 'secondary';
+    btn.textContent = key.charAt(0).toUpperCase()+key.slice(1);
+    btn.addEventListener('click', ()=>ykApplyTemplate(key));
+    row.appendChild(btn);
+  });
+}
+function ykApplyTemplate(key){
+  const templates = ykActiveWs==='thumbnail' ? YK_THUMB_TEMPLATES : YK_BANNER_TEMPLATES;
+  const tpl = templates[key];
+  if(!tpl) return;
+  const ws = ykWorkspaces[ykActiveWs];
+  ws.bgColor = tpl.bgColor;
+  ws.layers = tpl.layers.map(l=>ykNewLayer(l));
+  ws.activeLayerId = null;
+  ykEl('ykBgColor').value = tpl.bgColor;
+  ykEl('ykLayerEditor').style.display = 'none';
+  ykRenderLayerList();
+  ykRender();
+}
+
+/* ---------- core canvas render (preserves original background-fit + text-draw logic, extended for multiple layers) ---------- */
+function ykDrawLayerText(ctx, w, h, layer){
+  if(!layer.text) return;
+  ctx.font = `${layer.italic?'italic ':''}${layer.bold?'bold ':''}${layer.size}px ${layer.font}`;
+  ctx.textAlign = layer.align;
+  ctx.textBaseline = 'middle';
+  let x;
+  if(layer.align==='left') x = w*0.047;
+  else if(layer.align==='right') x = w*0.953;
+  else x = w/2;
+  let y;
+  if(layer.position==='top') y = layer.size;
+  else if(layer.position==='bottom') y = h-layer.size;
+  else y = h/2;
+  x += layer.offsetX; y += layer.offsetY;
+  if(layer.shadow){
+    ctx.shadowColor = 'rgba(0,0,0,0.7)';
+    ctx.shadowBlur = layer.size/8;
+    ctx.shadowOffsetX = 3; ctx.shadowOffsetY = 3;
+  }else{
+    ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0;
+  }
+  if(layer.stroke){
+    ctx.strokeStyle = layer.stroke;
+    ctx.lineWidth = layer.size/9;
+    ctx.strokeText(layer.text, x, y);
+  }
+  ctx.fillStyle = layer.color;
+  ctx.fillText(layer.text, x, y);
+  ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0;
+}
+function ykRenderToCanvas(canvas, ctx, wsKey){
+  const {w, h} = YK_SIZES[wsKey];
+  const ws = ykWorkspaces[wsKey];
+  canvas.width = w; canvas.height = h;
+  if(ws.bgImg){
+    const scale = Math.max(w/ws.bgImg.width, h/ws.bgImg.height);
+    const dw = ws.bgImg.width*scale, dh = ws.bgImg.height*scale;
+    ctx.drawImage(ws.bgImg, (w-dw)/2, (h-dh)/2, dw, dh);
+  }else{
+    ctx.fillStyle = ws.bgColor;
+    ctx.fillRect(0,0,w,h);
+  }
+  ws.layers.forEach(layer=>ykDrawLayerText(ctx, w, h, layer));
+  if(ykBrandLogoImg){
+    const logoH = h*0.14;
+    const logoW = logoH*(ykBrandLogoImg.width/ykBrandLogoImg.height);
+    const margin = w*0.02;
+    ctx.drawImage(ykBrandLogoImg, margin, margin, logoW, logoH);
+  }
+}
+function ykRender(){
+  ykRenderToCanvas(ykCanvas, ykCtx, ykActiveWs);
+  ykUpdateMockPreviews();
+}
+ykEl('ykRenderBtn').addEventListener('click', ykRender);
+
+/* ---------- Apply Brand Style (syncs to BOTH workspaces at once) ---------- */
+ykEl('ykApplyBrandBtn').addEventListener('click', ()=>{
+  const primary = ykEl('ykPrimaryColor').value;
+  const secondary = ykEl('ykSecondaryColor').value;
+  const accent = ykEl('ykAccentColor').value;
+  const font = ykEl('ykBrandFont').value;
+  const brandName = ykEl('ykBrandName').value.trim();
+  const tagline = ykEl('ykBrandTagline').value.trim();
+
+  ['thumbnail','banner'].forEach(wsKey=>{
+    const ws = ykWorkspaces[wsKey];
+    ws.bgColor = primary;
+    if(!ws.layers.length){
+      ws.layers.push(ykNewLayer({text: brandName || 'Your Channel Name', font, color:secondary, stroke:accent, position:'middle', align:'center'}));
+      if(tagline) ws.layers.push(ykNewLayer({text:tagline, font, size:40, color:accent, stroke:'', position:'bottom', align:'center', offsetY:-20}));
+    }else{
+      ws.layers.forEach((layer,i)=>{
+        layer.font = font;
+        layer.color = i%2===0 ? secondary : accent;
+        layer.stroke = i%2===0 ? accent : secondary;
+      });
+    }
+  });
+  ykEl('ykBgColor').value = primary;
+  ykRenderLayerList();
+  ykRender();
+  ykEl('ykExportInfo').textContent = 'Brand style applied to both Thumbnail and Banner.';
+});
+
+/* ---------- live mock previews ---------- */
+function ykUpdateMockPreviews(){
+  if(ykActiveWs==='thumbnail'){
+    ykCanvas.toBlob(blob=>{
+      if(!blob) return;
+      ykEl('ykSearchMockThumb').src = URL.createObjectURL(blob);
+    }, 'image/jpeg', 0.85);
+    const layers = ykWorkspaces.thumbnail.layers;
+    const firstText = layers.length ? layers[0].text : '';
+    ykEl('ykSearchMockTitle').textContent = firstText || 'Your Video Title Goes Here';
+    ykEl('ykSearchMockChannel').textContent = ykEl('ykBrandName').value.trim() || 'Your Channel Name';
+  }else{
+    ykCanvas.toBlob(blob=>{
+      if(!blob) return;
+      ykEl('ykBannerMockImg').src = URL.createObjectURL(blob);
+    }, 'image/jpeg', 0.85);
+  }
+}
+
+/* ---------- export ---------- */
+function ykDownloadCanvasAs(canvas, filename){
+  return new Promise(resolve=>{
+    canvas.toBlob(blob=>{
+      if(!blob){ resolve(false); return; }
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      a.click();
+      resolve(true);
+    }, 'image/jpeg', 0.92);
+  });
+}
+ykEl('ykDownloadCurrentBtn').addEventListener('click', async ()=>{
+  ykRender();
+  const filename = ykActiveWs==='thumbnail' ? 'thumbnail.jpg' : 'channel-banner.jpg';
+  await ykDownloadCanvasAs(ykCanvas, filename);
+  ykEl('ykExportInfo').textContent = `Downloaded ${filename} (${YK_SIZES[ykActiveWs].w}\u00d7${YK_SIZES[ykActiveWs].h}px).`;
+});
+ykEl('ykDownloadBothBtn').addEventListener('click', async ()=>{
+  const offCanvas = document.createElement('canvas');
+  const offCtx = offCanvas.getContext('2d');
+  ykRenderToCanvas(offCanvas, offCtx, 'thumbnail');
+  await ykDownloadCanvasAs(offCanvas, 'thumbnail.jpg');
+  ykRenderToCanvas(offCanvas, offCtx, 'banner');
+  await ykDownloadCanvasAs(offCanvas, 'channel-banner.jpg');
+  ykRender();
+  ykEl('ykExportInfo').textContent = 'Downloaded both thumbnail.jpg (1280\u00d7720) and channel-banner.jpg (2560\u00d71440).';
+});
+
+/* ---------- reset (guarded with confirmation) ---------- */
+ykEl('ykResetBtn').addEventListener('click', ()=>{
+  if(!confirm('Reset the entire Branding Kit? This clears the brand profile, both workspaces, and all text layers. This cannot be undone.')) return;
+  ykWorkspaces = { thumbnail: ykNewWorkspace(), banner: ykNewWorkspace() };
+  ykBrandLogoImg = null;
+  ykEl('ykBrandName').value = '';
+  ykEl('ykBrandTagline').value = '';
+  ykEl('ykLogoInput').value = '';
+  ykEl('ykBrandFont').value = 'Arial';
+  ykEl('ykPrimaryColor').value = '#1f3d2b';
+  ykEl('ykSecondaryColor').value = '#ffffff';
+  ykEl('ykAccentColor').value = '#e07a2c';
+  ykEl('ykBgColor').value = '#1f3d2b';
+  ykEl('ykBgInput').value = '';
+  ykEl('ykLayerEditor').style.display = 'none';
+  ykRenderLayerList();
+  ykRender();
+  ykEl('ykExportInfo').textContent = 'Branding Kit reset.';
+});
+
+/* ---------- init ---------- */
+ykRenderTemplateGallery();
+ykRenderLayerList();
+ykRender();
+</script><script src="script.js"></script></body></html>
