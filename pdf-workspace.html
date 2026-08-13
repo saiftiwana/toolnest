@@ -1,0 +1,491 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>PDF Workspace - Merge, Split & Compress PDFs Free | ToolNest</title><meta name="description" content="Merge, split, compress, reorder, rotate and watermark PDF files online free, no file limit, 100% private in your browser."><link rel="canonical" href="https://toolnest.link/pdf-workspace.html"><meta property="og:title" content="PDF Workspace | ToolNest"><meta property="og:description" content="Merge, split, compress, reorder, rotate and watermark PDF files online free, no file limit, 100% private."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/pdf-workspace.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>PDF Workspace</h1><p>Merge, split, compress, reorder, rotate, and watermark PDFs — no file limit, 100% private, all in your browser.</p></header><main>
+<div class="card" id="pw"><h2>PDF Workspace</h2><p class="desc">Merge, split, compress, reorder, rotate and delete PDF pages — no file limit, 100% private, all in your browser.</p>
+
+<h3 style="margin-top:4px;">1. Upload PDF Files</h3>
+<div class="field"><label class="field-label" for="pwInput">Choose PDF files (any number)</label><div class="dropzone" id="pwDropzone"><input type="file" id="pwInput" accept="application/pdf" multiple><p>Drag &amp; drop PDF files here, or click to browse — no file limit</p></div></div>
+<p class="stat" id="pwFileSummary"></p>
+<div id="pwFileList" style="margin-top:8px;"></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="pwLoadThumbsBtn" style="display:none;">Show Page Thumbnails</button><button class="secondary" id="pwClearAllBtn" style="display:none;">Clear All</button></div>
+<div class="progress-track" id="pwThumbProgressTrack" style="display:none;"><div class="progress-fill" id="pwThumbProgressFill"></div></div>
+<p class="stat" id="pwThumbStatus" style="font-size:.8rem;"></p>
+
+<h3>2. Pages</h3>
+<p class="stat" style="font-size:.8rem; color:#8a8a75;">Reorder (using the &uarr;/&darr; buttons or by dragging on desktop), rotate, or delete any page below — these edits apply to Merge, Split, and Compress alike.</p>
+<div id="pwPageGrid" style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;"></div>
+
+<h3>3. Choose Output</h3>
+<div class="row" id="pwModeTabs">
+<button class="secondary pw-tab active" data-mode="merge">Merge</button>
+<button class="secondary pw-tab" data-mode="split">Split</button>
+<button class="secondary pw-tab" data-mode="compress">Compress</button>
+</div>
+
+<div id="pwMergePanel" style="margin-top:14px;">
+<p class="stat" style="font-size:.85rem;">Combines every page currently in the list above, in the current order, into one PDF.</p>
+<button id="pwMergeBtn">Merge &amp; Download</button>
+</div>
+
+<div id="pwSplitPanel" style="margin-top:14px; display:none;">
+<div class="row"><button class="secondary" id="pwSelectAllBtn">Select All</button><button class="secondary" id="pwDeselectAllBtn">Deselect All</button></div>
+<div class="row" style="margin-top:12px;"><button id="pwExtractBtn">Extract Selected Pages</button><button class="secondary" id="pwSplitEveryBtn">Split Every Page (ZIP)</button></div>
+</div>
+
+<div id="pwCompressPanel" style="margin-top:14px; display:none;">
+<div class="row"><div class="field"><label class="field-label" for="pwCompressLevel">Compression preset</label><select id="pwCompressLevel"><option value="low">Low</option><option value="balanced" selected>Balanced</option><option value="strong">Strong</option></select></div></div>
+<div class="row" style="margin-top:12px;"><button id="pwCompressBtn">Compress &amp; Download</button></div>
+<p class="stat" id="pwCompressResult" style="white-space:pre-line;"></p>
+</div>
+
+<h3>4. Optional: Page Numbers &amp; Watermark</h3>
+<div class="row"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="pwAddPageNumbers"> Add page numbers</label><div class="field" id="pwPageNumPosField" style="display:none;"><label class="field-label" for="pwPageNumPos">Position</label><select id="pwPageNumPos"><option value="bottom-center">Bottom Center</option><option value="bottom-right">Bottom Right</option><option value="top-right">Top Right</option></select></div></div>
+<div class="row" style="margin-top:10px;"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="pwAddWatermark"> Add text watermark</label><div class="field" id="pwWatermarkTextField" style="display:none;"><label class="field-label" for="pwWatermarkText">Watermark text</label><input type="text" id="pwWatermarkText" placeholder="e.g. CONFIDENTIAL"></div></div>
+
+<h3>5. Result</h3>
+<p class="stat" id="pwResultInfo" style="white-space:pre-line;"></p>
+</div>
+<div class="seo-content">
+<h3>How to Use PDF Workspace</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Upload PDFs:</strong> Drag and drop any number of PDF files, or click to browse.</li><li><strong>Review Pages:</strong> Click "Show Page Thumbnails" for a visual preview of every page.</li><li><strong>Edit Pages:</strong> Reorder with the up/down buttons or drag, rotate, or delete any page.</li><li><strong>Choose Output:</strong> Pick Merge, Split, or Compress from the tabs.</li><li><strong>Optional Extras:</strong> Add page numbers and/or a text watermark before exporting.</li><li><strong>Download:</strong> Get your finished PDF (or ZIP for split pages) instantly.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>An all in one pdf tool suite merge split compress browser tool means not bouncing between three separate tabs to combine files, pull out a few pages, and shrink the result before sending it on. This professional pdf workspace no software install needed tool keeps every page you upload in one shared, editable list, so reordering, rotating, or deleting a page updates the file that Merge, Split, and Compress all work from.</p>
+<h3>How It Works</h3>
+<p>This client side pdf editor no server upload required tool uses the same trusted PDF processing engine as ToolNest's original merge, split, and compress tools, now sharing one page list instead of three separate uploads. Page thumbnails render on demand — only when you click "Show Page Thumbnails" — using a dedicated preview library loaded just for that step, keeping the initial page load fast.</p>
+<h3>Key Features</h3>
+<p>As a pdf merge split compress all features in one dashboard tool, there's no cap on how many PDF files you can select at once. Reordering, rotating, and deleting pages apply to whichever output you choose next, so a typical Merge → Rotate → Compress workflow needs only one upload. Optional page numbers and a diagonal text watermark can be added to the final output in any mode, and Compress reports the original size, compressed size, bytes saved, and percentage reduction for full transparency.</p>
+<h3>Common Use Cases</h3>
+<p>Someone combining scanned chapters from several PDF files uses the shared page list to drag pages into the right final order before merging. Someone preparing a document for email uses Compress with the Strong preset to shrink an oversized PDF, then checks the before/after size breakdown to confirm it fits an attachment limit. Someone pulling specific pages from a long report selects just the needed pages with the checkboxes in Split mode and downloads only that subset as a new PDF.</p>
+<h3>Tips</h3>
+<p>Because thumbnails render one page at a time using your device's own processing power, very large uploads (many files or hundreds of pages) can take a little longer to preview — the tool still works for Merge, Split, and Compress even before thumbnails finish loading. Compression works by removing metadata and optimizing internal PDF structure rather than recompressing embedded images, so an already-optimized or image-heavy PDF may only shrink a little.</p>
+<h3>Frequently Asked Questions</h3>
+<div class='faq-item'><h4>Can I merge, split, and compress PDFs in one session without refreshing?</h4><p>Yes, all three operations share the same uploaded page list, so you can switch between Merge, Split, and Compress tabs without re-uploading.</p></div><div class='faq-item'><h4>Are my confidential business PDFs completely private during processing?</h4><p>Yes, every operation — merging, splitting, compressing, rotating, and previewing — happens locally in your browser; files are never uploaded to a server.</p></div><div class='faq-item'><h4>How does browser-based PDF processing protect sensitive documents?</h4><p>Since files never leave your device, there's no server-side storage, transmission, or third-party access to worry about.</p></div><div class='faq-item'><h4>Can I batch process multiple PDF operations at once?</h4><p>Yes, reordering, rotating, and deleting pages apply across all uploaded files together, and Merge, Split, and Compress all work from that same combined page list.</p></div><div class='faq-item'><h4>What compression quality level maintains readability?</h4><p>All three presets — Low, Balanced, and Strong — only affect metadata and structural optimization, not image quality, so text and image readability is preserved at every level.</p></div><div class='faq-item'><h4>Is the PDF workspace mobile-friendly on iOS and Android browsers?</h4><p>Yes, page reordering, rotation, and deletion are all available through tap-friendly buttons in addition to drag-and-drop for desktop.</p></div><div class='faq-item'><h4>How many PDF files can I process simultaneously?</h4><p>There is no fixed limit — select as many PDF files as you need in a single session.</p></div><div class='faq-item'><h4>Are there file size limits for uploads or operations?</h4><p>No artificial limit is set by the tool itself, though very large files will naturally take longer to process depending on your device's available memory.</p></div><div class='faq-item'><h4>Can I add page numbers or a watermark to my PDF?</h4><p>Yes, optional page numbers (in three positions) and a diagonal text watermark can both be applied to the final output in any mode.</p></div><div class='faq-item'><h4>Can I rotate or delete just one page instead of the whole document?</h4><p>Yes, each page in the list has its own rotate and delete controls, so edits can be made to individual pages without affecting the rest.</p></div>
+</div>
+<div class="seo-content"><h3>Related PDF Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="pdf-info-viewer.html">PDF Info Viewer</a></li>
+<li><a href="image-to-pdf.html">Image to PDF</a></li>
+<li><a href="text-to-pdf.html">Text to PDF</a></li>
+<li><a href="document-photo-maker.html">Document Photo Maker</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"PDF Workspace","applicationCategory":"BusinessApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/pdf-workspace.html"},
+{"@type":"HowTo","name":"How to Use the PDF Workspace","step":[
+{"@type":"HowToStep","text":"Upload any number of PDF files."},
+{"@type":"HowToStep","text":"Click Show Page Thumbnails to preview pages."},
+{"@type":"HowToStep","text":"Reorder, rotate, or delete pages as needed."},
+{"@type":"HowToStep","text":"Choose Merge, Split, or Compress."},
+{"@type":"HowToStep","text":"Optionally add page numbers or a watermark."},
+{"@type":"HowToStep","text":"Download the finished file."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Can I merge, split, and compress PDFs in one session without refreshing?","acceptedAnswer":{"@type":"Answer","text":"Yes, all three operations share the same uploaded page list, so you can switch between tabs without re-uploading."}},
+{"@type":"Question","name":"Are my confidential business PDFs completely private during processing?","acceptedAnswer":{"@type":"Answer","text":"Yes, every operation happens locally in your browser; files are never uploaded to a server."}},
+{"@type":"Question","name":"How does browser-based PDF processing protect sensitive documents?","acceptedAnswer":{"@type":"Answer","text":"Since files never leave your device, there is no server-side storage or transmission involved."}},
+{"@type":"Question","name":"Can I batch process multiple PDF operations at once?","acceptedAnswer":{"@type":"Answer","text":"Yes, reordering, rotating, and deleting pages apply across all uploaded files together."}},
+{"@type":"Question","name":"What compression quality level maintains readability?","acceptedAnswer":{"@type":"Answer","text":"All presets only affect metadata and structural optimization, not image quality."}},
+{"@type":"Question","name":"Is the PDF workspace mobile-friendly on iOS and Android browsers?","acceptedAnswer":{"@type":"Answer","text":"Yes, page reordering, rotation, and deletion are available through tap-friendly buttons."}},
+{"@type":"Question","name":"How many PDF files can I process simultaneously?","acceptedAnswer":{"@type":"Answer","text":"There is no fixed limit on the number of PDF files you can select."}},
+{"@type":"Question","name":"Are there file size limits for uploads or operations?","acceptedAnswer":{"@type":"Answer","text":"No artificial limit is set by the tool itself."}}
+]}
+]}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script>/* ===== PDF Workspace engine ===== */
+const pwEl = id => document.getElementById(id);
+
+let pwFiles = [];        // {file, pdfDoc (lazy, pdf-lib PDFDocument), pageCount}
+let pwWorkingPages = [];  // {fileIdx, pageIdx, rotation, selected}
+let pwActiveMode = 'merge';
+let pwThumbsLoaded = false;
+
+function pwDownloadBytes(bytes, filename, type){
+  const blob = new Blob([bytes], {type});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+}
+function pwPdfLibReady(){
+  if(typeof PDFLib === 'undefined'){
+    alert('PDF library still loading. Please wait a moment and try again.');
+    return false;
+  }
+  return true;
+}
+
+/* ---------- upload (no file count limit) ---------- */
+const pwInput = pwEl('pwInput'), pwDropzone = pwEl('pwDropzone');
+function pwAddFiles(fileList){
+  const newFiles = Array.from(fileList).filter(f=>f.type==='application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
+  if(!newFiles.length) return;
+  newFiles.forEach(file=>{
+    pwFiles.push({file, pdfDoc:null, pageCount:null});
+  });
+  pwRenderFileList();
+  pwEl('pwClearAllBtn').style.display = 'inline-block';
+  pwParseNewFiles();
+}
+pwInput.addEventListener('change', e=>{ pwAddFiles(e.target.files); e.target.value=''; });
+['dragover','dragenter'].forEach(evt=>pwDropzone.addEventListener(evt,e=>{e.preventDefault();pwDropzone.classList.add('dragover');}));
+['dragleave','drop'].forEach(evt=>pwDropzone.addEventListener(evt,e=>{e.preventDefault();pwDropzone.classList.remove('dragover');}));
+pwDropzone.addEventListener('drop', e=>{ if(e.dataTransfer.files.length) pwAddFiles(e.dataTransfer.files); });
+
+function pwRenderFileList(){
+  const listDiv = pwEl('pwFileList');
+  listDiv.innerHTML = '';
+  pwFiles.forEach((f,i)=>{
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.style.cssText = 'margin-top:4px; align-items:center;';
+    const span = document.createElement('span');
+    span.style.cssText = 'flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:.85rem;';
+    span.textContent = `${i+1}. ${f.file.name}${f.pageCount!=null ? ' — '+f.pageCount+' page(s)' : ' — reading...'}`;
+    const rmBtn = document.createElement('button');
+    rmBtn.className = 'fl-remove';
+    rmBtn.textContent = '\u2715';
+    rmBtn.addEventListener('click', ()=>{ pwRemoveFile(i); });
+    row.appendChild(span);
+    row.appendChild(rmBtn);
+    listDiv.appendChild(row);
+  });
+  const totalSizeKb = pwFiles.reduce((sum,f)=>sum+f.file.size,0)/1024;
+  pwEl('pwFileSummary').textContent = pwFiles.length ? `${pwFiles.length} file(s) selected, ${totalSizeKb.toFixed(0)} KB total` : '';
+}
+function pwRemoveFile(idx){
+  pwFiles.splice(idx,1);
+  pwWorkingPages = pwWorkingPages.filter(p=>p.fileIdx!==idx).map(p=>p.fileIdx>idx ? {...p, fileIdx:p.fileIdx-1} : p);
+  pwRenderFileList();
+  pwRenderPageGrid();
+  if(!pwFiles.length){
+    pwEl('pwClearAllBtn').style.display='none';
+    pwEl('pwLoadThumbsBtn').style.display='none';
+  }
+}
+pwEl('pwClearAllBtn').addEventListener('click', ()=>{
+  pwFiles = [];
+  pwWorkingPages = [];
+  pwThumbsLoaded = false;
+  pwInput.value = '';
+  pwRenderFileList();
+  pwRenderPageGrid();
+  pwEl('pwClearAllBtn').style.display='none';
+  pwEl('pwLoadThumbsBtn').style.display='none';
+  pwEl('pwThumbStatus').textContent='';
+  pwEl('pwResultInfo').textContent='';
+  pwEl('pwCompressResult').textContent='';
+});
+
+/* ---------- parse newly added files into working pages ---------- */
+async function pwParseNewFiles(){
+  if(!pwPdfLibReady()) return;
+  const {PDFDocument} = PDFLib;
+  for(let i=0;i<pwFiles.length;i++){
+    const f = pwFiles[i];
+    if(f.pdfDoc) continue;
+    try{
+      const bytes = await f.file.arrayBuffer();
+      const doc = await PDFDocument.load(bytes);
+      f.pdfDoc = doc;
+      f.pageCount = doc.getPageCount();
+      for(let p=0;p<f.pageCount;p++){
+        pwWorkingPages.push({fileIdx:i, pageIdx:p, rotation:0, selected:false});
+      }
+    }catch(err){
+      f.pageCount = 0;
+      f.error = 'Could not read this PDF (it may be corrupted or password-protected).';
+    }
+    pwRenderFileList();
+  }
+  pwEl('pwLoadThumbsBtn').style.display = pwWorkingPages.length ? 'inline-block' : 'none';
+  pwRenderPageGrid();
+}
+
+/* ---------- page grid (text-based by default, thumbnails on demand) ---------- */
+function pwRenderPageGrid(){
+  const grid = pwEl('pwPageGrid');
+  grid.innerHTML = '';
+  pwWorkingPages.forEach((pg, idx)=>{
+    const card = document.createElement('div');
+    card.className = 'pw-page-card';
+    card.style.cssText = 'border:1px solid var(--line); border-radius:6px; padding:6px; width:110px; text-align:center; background:#fffdf6;';
+    card.dataset.idx = idx;
+
+    if(pwActiveMode === 'split'){
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = pg.selected;
+      cb.style.cssText = 'float:left;';
+      cb.addEventListener('change', ()=>{ pg.selected = cb.checked; });
+      card.appendChild(cb);
+    }
+
+    const thumbWrap = document.createElement('div');
+    thumbWrap.className = 'pw-thumb-wrap';
+    thumbWrap.style.cssText = `width:90px; height:110px; margin:4px auto; background:#f2ecd8; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:.7rem; color:#8a8a75; transform:rotate(${pg.rotation}deg); transition:transform .2s;`;
+    thumbWrap.textContent = pwThumbsLoaded ? '...' : `Pg ${pg.pageIdx+1}`;
+    card.appendChild(thumbWrap);
+
+    const label = document.createElement('p');
+    label.style.cssText = 'margin:2px 0; font-size:.7rem; color:#4a4a3d;';
+    label.textContent = `File ${pg.fileIdx+1}, Pg ${pg.pageIdx+1}`;
+    card.appendChild(label);
+
+    const btnRow = document.createElement('div');
+    btnRow.style.cssText = 'display:flex; gap:2px; justify-content:center; flex-wrap:wrap;';
+
+    const upBtn = document.createElement('button');
+    upBtn.className = 'secondary'; upBtn.textContent = '\u2191'; upBtn.style.cssText='padding:2px 6px; font-size:.7rem;';
+    upBtn.addEventListener('click', ()=>{ if(idx>0){ pwMovePage(idx, idx-1); } });
+
+    const downBtn = document.createElement('button');
+    downBtn.className = 'secondary'; downBtn.textContent = '\u2193'; downBtn.style.cssText='padding:2px 6px; font-size:.7rem;';
+    downBtn.addEventListener('click', ()=>{ if(idx<pwWorkingPages.length-1){ pwMovePage(idx, idx+1); } });
+
+    const rotBtn = document.createElement('button');
+    rotBtn.className = 'secondary'; rotBtn.textContent = '\u21bb'; rotBtn.style.cssText='padding:2px 6px; font-size:.7rem;';
+    rotBtn.addEventListener('click', ()=>{ pg.rotation = (pg.rotation+90)%360; pwRenderPageGrid(); });
+
+    const delBtn = document.createElement('button');
+    delBtn.className = 'fl-remove'; delBtn.textContent = '\u2715'; delBtn.style.cssText='padding:2px 6px; font-size:.7rem;';
+    delBtn.addEventListener('click', ()=>{ pwWorkingPages.splice(idx,1); pwRenderPageGrid(); });
+
+    btnRow.appendChild(upBtn); btnRow.appendChild(downBtn); btnRow.appendChild(rotBtn); btnRow.appendChild(delBtn);
+    card.appendChild(btnRow);
+
+    card.draggable = true;
+    card.addEventListener('dragstart', e=>{ e.dataTransfer.setData('text/plain', String(idx)); });
+    card.addEventListener('dragover', e=>{ e.preventDefault(); });
+    card.addEventListener('drop', e=>{
+      e.preventDefault();
+      const fromIdx = +e.dataTransfer.getData('text/plain');
+      pwMovePage(fromIdx, idx);
+    });
+
+    grid.appendChild(card);
+  });
+  const summary = pwWorkingPages.length ? `${pwWorkingPages.length} page(s) total` : 'No pages loaded yet — upload PDF files above.';
+  pwEl('pwThumbStatus').textContent = pwThumbsLoaded ? pwEl('pwThumbStatus').textContent : summary;
+  if(pwThumbsLoaded) pwRenderThumbnailImages();
+}
+function pwMovePage(fromIdx, toIdx){
+  const copy = pwWorkingPages.slice();
+  const [item] = copy.splice(fromIdx,1);
+  copy.splice(toIdx,0,item);
+  pwWorkingPages = copy;
+  pwRenderPageGrid();
+}
+
+/* ---------- lazy thumbnail rendering via pdf.js (only when requested) ---------- */
+function pwLoadPdfJs(){
+  return new Promise((resolve, reject)=>{
+    if(window.pdfjsLib){ resolve(window.pdfjsLib); return; }
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    script.onload = ()=>{
+      if(window.pdfjsLib){
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        resolve(window.pdfjsLib);
+      }else reject(new Error('pdf.js failed to initialize'));
+    };
+    script.onerror = ()=> reject(new Error('Could not load the thumbnail preview library'));
+    document.head.appendChild(script);
+  });
+}
+const pwPdfJsDocCache = {};
+async function pwGetPdfJsDoc(fileIdx){
+  if(pwPdfJsDocCache[fileIdx]) return pwPdfJsDocCache[fileIdx];
+  const bytes = await pwFiles[fileIdx].file.arrayBuffer();
+  const doc = await window.pdfjsLib.getDocument({data:bytes}).promise;
+  pwPdfJsDocCache[fileIdx] = doc;
+  return doc;
+}
+pwEl('pwLoadThumbsBtn').addEventListener('click', async ()=>{
+  const statusEl = pwEl('pwThumbStatus');
+  const track = pwEl('pwThumbProgressTrack'), fill = pwEl('pwThumbProgressFill');
+  track.style.display = 'block'; fill.style.width='0%';
+  statusEl.textContent = 'Loading thumbnail preview library...';
+  try{
+    await pwLoadPdfJs();
+    pwThumbsLoaded = true;
+    await pwRenderThumbnailImages();
+    track.style.display = 'none';
+  }catch(err){
+    statusEl.textContent = 'Could not load page thumbnails. You can still use Merge, Split, and Compress without previews.';
+    track.style.display = 'none';
+  }
+});
+async function pwRenderThumbnailImages(){
+  const cards = Array.from(document.querySelectorAll('.pw-page-card'));
+  const track = pwEl('pwThumbProgressTrack'), fill = pwEl('pwThumbProgressFill');
+  const statusEl = pwEl('pwThumbStatus');
+  track.style.display = 'block';
+  for(let i=0;i<cards.length;i++){
+    const idx = +cards[i].dataset.idx;
+    const pg = pwWorkingPages[idx];
+    if(!pg) continue;
+    const wrap = cards[i].querySelector('.pw-thumb-wrap');
+    try{
+      const pdfJsDoc = await pwGetPdfJsDoc(pg.fileIdx);
+      const page = await pdfJsDoc.getPage(pg.pageIdx+1);
+      const viewport = page.getViewport({scale:0.25});
+      const canvas = document.createElement('canvas');
+      canvas.width = viewport.width; canvas.height = viewport.height;
+      await page.render({canvasContext:canvas.getContext('2d'), viewport}).promise;
+      wrap.innerHTML = '';
+      canvas.style.cssText = 'max-width:100%; max-height:100%;';
+      wrap.appendChild(canvas);
+    }catch(err){
+      wrap.textContent = `Pg ${pg.pageIdx+1}`;
+    }
+    fill.style.width = Math.round(((i+1)/cards.length)*100)+'%';
+    statusEl.textContent = `Rendering thumbnails... ${i+1}/${cards.length}`;
+  }
+  statusEl.textContent = `${cards.length} page(s) shown.`;
+  track.style.display = 'none';
+}
+
+/* ---------- mode tabs ---------- */
+document.querySelectorAll('.pw-tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.pw-tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    pwActiveMode = btn.dataset.mode;
+    pwEl('pwMergePanel').style.display = pwActiveMode==='merge' ? 'block' : 'none';
+    pwEl('pwSplitPanel').style.display = pwActiveMode==='split' ? 'block' : 'none';
+    pwEl('pwCompressPanel').style.display = pwActiveMode==='compress' ? 'block' : 'none';
+    pwRenderPageGrid();
+  });
+});
+pwEl('pwSelectAllBtn').addEventListener('click', ()=>{ pwWorkingPages.forEach(p=>p.selected=true); pwRenderPageGrid(); });
+pwEl('pwDeselectAllBtn').addEventListener('click', ()=>{ pwWorkingPages.forEach(p=>p.selected=false); pwRenderPageGrid(); });
+
+/* ---------- page numbers / watermark toggles ---------- */
+pwEl('pwAddPageNumbers').addEventListener('change', function(){ pwEl('pwPageNumPosField').style.display = this.checked ? 'flex' : 'none'; });
+pwEl('pwAddWatermark').addEventListener('change', function(){ pwEl('pwWatermarkTextField').style.display = this.checked ? 'flex' : 'none'; });
+
+/* ---------- build the working PDF from current page state ---------- */
+async function pwBuildWorkingPdf(pagesSubset){
+  const {PDFDocument, rgb, degrees} = PDFLib;
+  const outDoc = await PDFDocument.create();
+  const pages = pagesSubset || pwWorkingPages;
+  for(const pg of pages){
+    const srcDoc = pwFiles[pg.fileIdx].pdfDoc;
+    const [copied] = await outDoc.copyPages(srcDoc, [pg.pageIdx]);
+    if(pg.rotation){
+      const current = copied.getRotation().angle || 0;
+      copied.setRotation(degrees(current + pg.rotation));
+    }
+    outDoc.addPage(copied);
+  }
+  const addNumbers = pwEl('pwAddPageNumbers').checked;
+  const addWatermark = pwEl('pwAddWatermark').checked;
+  const watermarkText = pwEl('pwWatermarkText').value.trim();
+  const numPos = pwEl('pwPageNumPos').value;
+  if(addNumbers || (addWatermark && watermarkText)){
+    const outPages = outDoc.getPages();
+    outPages.forEach((page, i)=>{
+      const {width, height} = page.getSize();
+      if(addWatermark && watermarkText){
+        page.drawText(watermarkText, {
+          x: width/2 - (watermarkText.length*7), y: height/2,
+          size: 36, color: rgb(0.7,0.7,0.7), opacity: 0.35, rotate: degrees(45)
+        });
+      }
+      if(addNumbers){
+        const label = String(i+1);
+        let x = width/2 - 5, y = 20;
+        if(numPos==='bottom-right'){ x = width-40; y = 20; }
+        else if(numPos==='top-right'){ x = width-40; y = height-30; }
+        page.drawText(label, {x, y, size:10, color: rgb(0.2,0.2,0.2)});
+      }
+    });
+  }
+  return outDoc;
+}
+
+/* ---------- Merge & Download ---------- */
+pwEl('pwMergeBtn').addEventListener('click', async ()=>{
+  if(!pwPdfLibReady()) return;
+  if(!pwWorkingPages.length) return alert('Upload at least one PDF file first.');
+  pwEl('pwResultInfo').textContent = 'Building your PDF...';
+  try{
+    const outDoc = await pwBuildWorkingPdf();
+    const bytes = await outDoc.save();
+    pwDownloadBytes(bytes, 'merged.pdf', 'application/pdf');
+    pwEl('pwResultInfo').textContent = `Done! Combined ${pwWorkingPages.length} page(s) from ${pwFiles.length} file(s) into merged.pdf (${(bytes.length/1024).toFixed(0)} KB).`;
+  }catch(err){
+    pwEl('pwResultInfo').textContent = 'Error building the PDF: '+err.message;
+  }
+});
+
+/* ---------- Split: Extract Selected Pages ---------- */
+pwEl('pwExtractBtn').addEventListener('click', async ()=>{
+  if(!pwPdfLibReady()) return;
+  const selected = pwWorkingPages.filter(p=>p.selected);
+  if(!selected.length) return alert('Select at least one page first (checkboxes on each page).');
+  pwEl('pwResultInfo').textContent = 'Extracting selected pages...';
+  try{
+    const outDoc = await pwBuildWorkingPdf(selected);
+    const bytes = await outDoc.save();
+    pwDownloadBytes(bytes, 'extracted-pages.pdf', 'application/pdf');
+    pwEl('pwResultInfo').textContent = `Done! Extracted ${selected.length} page(s) into extracted-pages.pdf (${(bytes.length/1024).toFixed(0)} KB).`;
+  }catch(err){
+    pwEl('pwResultInfo').textContent = 'Error extracting pages: '+err.message;
+  }
+});
+
+/* ---------- Split: Every Page as ZIP ---------- */
+pwEl('pwSplitEveryBtn').addEventListener('click', async ()=>{
+  if(!pwPdfLibReady()) return;
+  if(!pwWorkingPages.length) return alert('Upload at least one PDF file first.');
+  if(typeof JSZip === 'undefined') return alert('ZIP library still loading. Please wait and try again.');
+  pwEl('pwResultInfo').textContent = 'Splitting every page...';
+  try{
+    const zip = new JSZip();
+    for(let i=0;i<pwWorkingPages.length;i++){
+      const outDoc = await pwBuildWorkingPdf([pwWorkingPages[i]]);
+      const bytes = await outDoc.save();
+      zip.file(`page-${i+1}.pdf`, bytes);
+    }
+    const zipBlob = await zip.generateAsync({type:'blob'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(zipBlob);
+    a.download = 'split-pages.zip';
+    a.click();
+    pwEl('pwResultInfo').textContent = `Done! Split into ${pwWorkingPages.length} page(s), downloaded as split-pages.zip.`;
+  }catch(err){
+    pwEl('pwResultInfo').textContent = 'Error splitting pages: '+err.message;
+  }
+});
+
+/* ---------- Compress & Download ---------- */
+pwEl('pwCompressBtn').addEventListener('click', async ()=>{
+  if(!pwPdfLibReady()) return;
+  if(!pwWorkingPages.length) return alert('Upload at least one PDF file first.');
+  const level = pwEl('pwCompressLevel').value;
+  pwEl('pwCompressResult').textContent = 'Compressing...';
+  try{
+    const baselineDoc = await pwBuildWorkingPdf();
+    const baselineBytes = await baselineDoc.save();
+
+    const outDoc = await pwBuildWorkingPdf();
+    if(level!=='low'){
+      outDoc.setTitle(''); outDoc.setAuthor(''); outDoc.setSubject(''); outDoc.setKeywords([]); outDoc.setProducer(''); outDoc.setCreator('');
+    }
+    if(level==='strong'){
+      try{ const form = outDoc.getForm(); form.flatten(); }catch(e){}
+    }
+    const outBytes = await outDoc.save({useObjectStreams:true});
+    pwDownloadBytes(outBytes, 'compressed.pdf', 'application/pdf');
+
+    const before = baselineBytes.length;
+    const after = outBytes.length;
+    const savedBytes = before-after;
+    const savedPct = ((1-(after/before))*100);
+    pwEl('pwCompressResult').textContent = `Original Size: ${(before/1024).toFixed(0)} KB\nCompressed Size: ${(after/1024).toFixed(0)} KB\nBytes Saved: ${(savedBytes/1024).toFixed(0)} KB\nReduction: ${savedPct>0?savedPct.toFixed(1):'0.0'}%${savedPct<=0?' (this PDF is likely already optimized or image-heavy, so reduction is minimal)':''}`;
+  }catch(err){
+    pwEl('pwCompressResult').textContent = 'Error compressing: '+err.message;
+  }
+});
+
+/* ---------- init ---------- */
+pwEl('pwPageNumPos').value = 'bottom-center';
+</script><script src="script.js"></script></body></html>
