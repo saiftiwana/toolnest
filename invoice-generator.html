@@ -1,13 +1,49 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Free Invoice Generator Online – Tax Calculator, Print to PDF | ToolNest</title><meta name="description" content="Create a professional invoice online free, add line items, auto tax calculation, print to PDF."><link rel="canonical" href="https://toolnest.link/invoice-generator.html"><meta property="og:title" content="Free Invoice Generator | ToolNest"><meta property="og:description" content="Create an invoice free, print or save as PDF."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/invoice-generator.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"><style>@media print{header,.search-wrap,.card:not(#invoicePrintArea),footer,nav,.seo-content{display:none !important}}</style></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Invoice Generator</h1><p>Create a professional invoice — free, instant.</p></header><main>
-<div class="card" id="invoicePrintArea"><h2>Invoice Generator</h2><p class="desc">Fill in the details, add line items, and print as PDF — free, instant.</p><div class="row"><div class="field"><label class="field-label" for="invBusiness">Your business name</label><input type="text" id="invBusiness" placeholder="Your business name"></div><div class="field"><label class="field-label" for="invClient">Client name</label><input type="text" id="invClient" placeholder="Client name"></div></div><div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="invNumber">Invoice #</label><input type="text" id="invNumber" value="INV-001"></div><div class="field"><label class="field-label" for="invDate">Date</label><input type="date" id="invDate"></div></div><label class="field-label-block" for="invItems">Line items</label><div id="invItems" style="margin-top:6px;"></div><div class="row" style="margin-top:12px;"><button class="secondary" id="invAddItemBtn">+ Add Item</button><div class="field" style="max-width:160px;"><label class="field-label" for="invCurrency">Currency</label><select id="invCurrency"><option value="$">USD ($)</option><option value="Rs">PKR (Rs)</option><option value="&euro;">EUR (&euro;)</option><option value="&pound;">GBP (&pound;)</option><option value="&#8377;">INR (&#8377;)</option></select></div><div class="field" style="max-width:120px;"><label class="field-label" for="invTaxRate">Tax %</label><input type="number" id="invTaxRate" value="0"></div></div><div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="invNotes">Notes (optional)</label><textarea id="invNotes" placeholder="Thank you for your business!"></textarea></div><div class="field"><label class="field-label" for="invTerms">Payment terms (optional)</label><input type="text" id="invTerms" placeholder="e.g. Due within 15 days"></div></div><p class="stat" id="invTotals" style="font-size:1.1rem;"></p><div class="row" style="margin-top:12px;"><button id="invCalcBtn">Calculate Total</button><button class="secondary" id="invPrintBtn">Print / Save as PDF</button><button class="secondary" id="invResetBtn">Reset</button></div>
+<div class="card" id="invoicePrintArea"><h2>Invoice Generator</h2><p class="desc">Fill in the details, add line items, and print or export as PDF — free, instant, private.</p>
+
+<h3 style="margin-top:4px;">1. Business Profile</h3>
+<div class="row"><div class="field"><label class="field-label" for="invBusiness">Your business name</label><input type="text" id="invBusiness" placeholder="Your business name"></div><div class="field"><label class="field-label" for="invBusinessAddress">Business address</label><input type="text" id="invBusinessAddress" placeholder="Optional"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="invLogoInput">Logo (optional)</label><input type="file" id="invLogoInput" accept="image/*"></div><div class="field"><label class="field-label" for="invTemplate">Template</label><select id="invTemplate"><option value="classic">Classic</option><option value="modern">Modern</option><option value="minimal">Minimal</option></select></div></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="invSaveProfileBtn">Save Business Profile</button></div>
+<img id="invLogoPreview" style="display:none; max-height:60px; margin-top:8px;">
+
+<h3>2. Client</h3>
+<div class="row"><div class="field"><label class="field-label" for="invSavedClients">Saved clients</label><select id="invSavedClients"><option value="">-- New client --</option></select></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="invClient">Client name</label><input type="text" id="invClient" placeholder="Client name"></div><div class="field"><label class="field-label" for="invClientAddress">Client address</label><input type="text" id="invClientAddress" placeholder="Optional"></div></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="invSaveClientBtn">Save This Client</button></div>
+
+<h3>3. Invoice Details</h3>
+<div class="row"><div class="field"><label class="field-label" for="invNumber">Invoice #</label><input type="text" id="invNumber" value="INV-001"></div><div class="field"><label class="field-label" for="invDate">Date</label><input type="date" id="invDate"></div><div class="field"><label class="field-label" for="invStatus">Status</label><select id="invStatus"><option value="">None</option><option value="paid">Paid</option><option value="unpaid">Unpaid</option><option value="overdue">Overdue</option></select></div></div>
+
+<h3>4. Line Items</h3>
+<label class="field-label-block" for="invItems">Items</label>
+<div id="invItems" style="margin-top:6px;"></div>
+<div class="row" style="margin-top:12px;"><button class="secondary" id="invAddItemBtn">+ Add Item</button><div class="field" style="max-width:160px;"><label class="field-label" for="invCurrency">Currency</label><select id="invCurrency"><option value="$">USD ($)</option><option value="Rs">PKR (Rs)</option><option value="&euro;">EUR (&euro;)</option><option value="&pound;">GBP (&pound;)</option><option value="&#8377;">INR (&#8377;)</option></select></div></div>
+
+<h3>5. Discount &amp; Tax</h3>
+<div class="row"><div class="field"><label class="field-label" for="invDiscountType">Discount type</label><select id="invDiscountType"><option value="none">None</option><option value="flat">Flat amount</option><option value="percent">Percentage</option></select></div><div class="field"><label class="field-label" for="invDiscountValue">Discount value</label><input type="number" id="invDiscountValue" value="0"></div></div>
+<div id="invTaxLines" style="margin-top:12px;"></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="invAddTaxBtn">+ Add Tax Line</button></div>
+
+<h3>6. Notes</h3>
+<div class="row"><div class="field"><label class="field-label" for="invNotes">Notes (optional)</label><textarea id="invNotes" placeholder="Thank you for your business!"></textarea></div><div class="field"><label class="field-label" for="invTerms">Payment terms (optional)</label><input type="text" id="invTerms" placeholder="e.g. Due within 15 days"></div></div>
+
+<p class="stat" id="invTotals" style="font-size:1.1rem; white-space:pre-line;"></p>
+<div class="row" style="margin-top:12px; flex-wrap:wrap;"><button id="invCalcBtn">Calculate Total</button><button class="secondary" id="invPrintBtn">Print / Save as PDF</button><button class="secondary" id="invSaveHistoryBtn">Save to History</button><button class="secondary" id="invResetBtn">Reset</button></div>
+<p class="stat" id="invStatusMsg" style="font-size:.8rem;"></p>
+
+<h3>7. Invoice History</h3>
+<div id="invHistoryList" style="margin-top:8px;"></div>
+<div class="row" style="margin-top:8px;"><button class="secondary" id="invClearHistoryBtn">Clear All History</button></div>
+</div>
 <div class="seo-content"><h3>How to Use the Invoice Generator</h3><ol><li><strong>Enter Business Details:</strong> Input your business name, client name, and invoice number.</li><li><strong>Add Line Items:</strong> Insert product/service descriptions, quantities, and prices.</li><li><strong>Print or Save as PDF:</strong> Calculate totals with tax, then print directly to PDF.</li></ol>
 <h3>Why Use This Tool</h3><p>Creating a professional invoice online for free, with tax calculation and instant printing, is a routine need for freelancers and small businesses. This tool builds a clean, structured invoice with line items and automatic tax totals, ready to print or save as a PDF directly from your browser. It skips the monthly subscription that many invoicing platforms require just to send a handful of bills each month.</p>
 <h3>How It Works</h3><p>This invoice-maker and billing-document-generator organizes your business details, client information, and line items into a structured layout, calculating subtotal, tax, and total automatically as you enter quantities and prices. It's a free, no-signup alternative to Invoice Simple and Wave's invoice generator, using your browser's native print-to-PDF function for the final export.</p>
-<h3>Key Features</h3><p>The tax-calculation-tool lets you add unlimited line items with description, quantity, and price fields, recalculating the subtotal, tax amount, and grand total instantly whenever you click Calculate. As a billing-and-invoicing tool, the Print / Save as PDF button uses a dedicated print stylesheet that hides navigation and other page elements, producing a clean, professional-looking invoice document. The dedicated print stylesheet hides site navigation and other page chrome automatically, so the printed or saved PDF shows only the invoice content. Each line item can now be removed individually, a currency selector adjusts the symbol shown throughout the totals, and optional notes and payment terms fields round out a complete, professional invoice.</p>
+<h3>Key Features</h3><p>The tax-calculation-tool lets you add unlimited line items with description, quantity, and price fields, recalculating the subtotal, tax amount, and grand total instantly whenever you click Calculate. As a billing-and-invoicing tool, the Print / Save as PDF button uses a dedicated print stylesheet that hides navigation and other page elements, producing a clean, professional-looking invoice document. The dedicated print stylesheet hides site navigation and other page chrome automatically, so the printed or saved PDF shows only the invoice content. A saved Business Profile (with logo, address, and a Classic, Modern, or Minimal template) and a saved client list mean returning users don't retype the same details on every invoice, invoice numbers auto-suggest the next sequential number, flat or percentage discounts and multiple named tax lines apply before the final total, a Paid, Unpaid, or Overdue stamp marks the invoice status visually, and a browser-based invoice history lets you reload or duplicate any past invoice. Each line item can now be removed individually, a currency selector adjusts the symbol shown throughout the totals, and optional notes and payment terms fields round out a complete, professional invoice.</p>
 <h3>Common Use Cases</h3><p>Freelancers bill clients for completed project work with a professional-looking invoice. Small business owners generate invoices for product sales without an accounting software subscription. Consultants track billable hours and services across multiple line items on a single invoice, and contractors send itemized invoices for materials and labor separately. Tutors and instructors bill hourly for individual lesson sessions with a simple, itemized breakdown.</p>
 <h3>Tips for Best Results</h3><p>Keep your invoice number sequential and consistent (like INV-001, INV-002) for easier bookkeeping and client reference down the line. Double-check your tax rate percentage before finalizing, since it's applied to the full subtotal across all line items. Preview the print layout before finalizing to confirm every line item and total displays correctly on the printed page.</p>
 <h3>A Quick Note</h3><p>A clean, consistent invoice format helps a business look more established and makes it easier for clients to process payments quickly without confusion.</p><h3>Privacy &amp; Security</h3><p>Because ToolNest processes everything entirely within your browser using client-side JavaScript, your files never leave your device. There is no server-side storage, no third-party analytics attached to your data, and no risk of a breach exposing files you processed months ago.</p>
-<div class="faq-block"><details><summary>What essential elements should a professional invoice include?</summary><p>A complete invoice typically includes business name, client name, invoice number, date, itemized charges, and a calculated total including any applicable tax.</p></details><details><summary>How do I calculate sales tax automatically on an invoice?</summary><p>Enter your tax rate as a percentage in the tax field, and the tool automatically calculates and adds it to your subtotal for the final total.</p></details><details><summary>Can I add unlimited line items to a single invoice?</summary><p>Yes, click the Add Item button as many times as needed to include additional line items in your invoice.</p></details><details><summary>How do I save the invoice as a PDF file?</summary><p>Click Print / Save as PDF, then choose 'Save as PDF' as the destination in your browser's print dialog.</p></details></div></div><div class="seo-content"><h3>Related Business Tools</h3><ul style="line-height:2;padding-left:20px;"><li><a href="resume-cv-builder.html">Resume / CV Builder</a></li><li><a href="barcode-generator.html">Barcode Generator</a></li><li><a href="qr-code-generator.html">QR Code Generator</a></li></ul></div></div>
+<div class="faq-block"><details><summary>What essential elements should a professional invoice include?</summary><p>A complete invoice typically includes business name, client name, invoice number, date, itemized charges, and a calculated total including any applicable tax.</p></details><details><summary>How do I calculate sales tax automatically on an invoice?</summary><p>Add one or more tax lines with a name and percentage rate, and the tool automatically calculates and adds each to your subtotal (after any discount) for the final total.</p></details><details><summary>Can I add unlimited line items to a single invoice?</summary><p>Yes, click the Add Item button as many times as needed to include additional line items in your invoice.</p></details><details><summary>How do I save the invoice as a PDF file?</summary><p>Click Print / Save as PDF, then choose 'Save as PDF' as the destination in your browser's print dialog.</p></details><details><summary>Can I save my business details so I don't retype them every time?</summary><p>Yes, fill in your Business Profile (name, address, logo, and template) and click Save Business Profile — it will load automatically the next time you open this tool in the same browser.</p></details><details><summary>Can I reuse a client's details across multiple invoices?</summary><p>Yes, click Save This Client after entering a client's name and address, then select them from the Saved Clients dropdown on future invoices.</p></details><details><summary>Can I apply a discount before calculating tax?</summary><p>Yes, choose a flat amount or percentage discount, which is subtracted from the subtotal before any tax lines are applied.</p></details><details><summary>Can I mark an invoice as Paid, Unpaid, or Overdue?</summary><p>Yes, the Status dropdown adds a visible colored stamp to the invoice showing its payment status.</p></details><details><summary>Can I reopen or duplicate a previous invoice?</summary><p>Yes, click Save to History to store the current invoice in this browser, then use Load or Duplicate from the Invoice History list at any time.</p></details></div></div><div class="seo-content"><h3>Related Business Tools</h3><ul style="line-height:2;padding-left:20px;"><li><a href="resume-cv-builder.html">Resume / CV Builder</a></li><li><a href="barcode-generator.html">Barcode Generator</a></li><li><a href="qr-code-generator.html">QR Code Generator</a></li></ul></div></div>
 </main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -15,10 +51,332 @@
 {"@type":"HowTo","name":"How to Create an Invoice","step":[{"@type":"HowToStep","text":"Enter business and client details."},{"@type":"HowToStep","text":"Add line items and tax rate."},{"@type":"HowToStep","text":"Print or save as PDF."}]},
 {"@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"What essential elements should a professional invoice include?","acceptedAnswer":{"@type":"Answer","text":"A complete invoice typically includes business name, client name, invoice number, date, itemized charges, and a calculated total including tax."}},
-{"@type":"Question","name":"How do I calculate sales tax automatically on an invoice?","acceptedAnswer":{"@type":"Answer","text":"Enter your tax rate as a percentage in the tax field, and the tool automatically calculates and adds it to your subtotal."}},
+{"@type":"Question","name":"How do I calculate sales tax automatically on an invoice?","acceptedAnswer":{"@type":"Answer","text":"Add one or more tax lines with a name and percentage rate, and the tool automatically calculates and adds each to your subtotal."}},
 {"@type":"Question","name":"Can I add unlimited line items to a single invoice?","acceptedAnswer":{"@type":"Answer","text":"Yes, click the Add Item button as many times as needed to include additional line items."}},
-{"@type":"Question","name":"How do I save the invoice as a PDF file?","acceptedAnswer":{"@type":"Answer","text":"Click Print / Save as PDF, then choose 'Save as PDF' as the destination in your browser's print dialog."}}
+{"@type":"Question","name":"How do I save the invoice as a PDF file?","acceptedAnswer":{"@type":"Answer","text":"Click Print / Save as PDF, then choose 'Save as PDF' as the destination in your browser's print dialog."}},
+{"@type":"Question","name":"Can I save my business details so I don't retype them every time?","acceptedAnswer":{"@type":"Answer","text":"Yes, fill in your Business Profile and click Save Business Profile to have it load automatically next time."}},
+{"@type":"Question","name":"Can I reuse a client's details across multiple invoices?","acceptedAnswer":{"@type":"Answer","text":"Yes, click Save This Client, then select them from the Saved Clients dropdown on future invoices."}},
+{"@type":"Question","name":"Can I apply a discount before calculating tax?","acceptedAnswer":{"@type":"Answer","text":"Yes, choose a flat amount or percentage discount, subtracted from the subtotal before tax lines are applied."}},
+{"@type":"Question","name":"Can I mark an invoice as Paid, Unpaid, or Overdue?","acceptedAnswer":{"@type":"Answer","text":"Yes, the Status dropdown adds a visible colored stamp showing the invoice's payment status."}},
+{"@type":"Question","name":"Can I reopen or duplicate a previous invoice?","acceptedAnswer":{"@type":"Answer","text":"Yes, Save to History stores the invoice in this browser, and Load or Duplicate can retrieve it anytime."}}
 ]}
 ]}
 </script>
-<script>let invItemCount=0;function addInvoiceItem(){invItemCount++;const div=document.createElement('div');div.className='row';div.style.marginTop='8px';const descInput=document.createElement('input');descInput.type='text';descInput.placeholder='Description';descInput.className='inv-desc';descInput.style.flex='2';const qtyInput=document.createElement('input');qtyInput.type='number';qtyInput.placeholder='Qty';qtyInput.className='inv-qty';qtyInput.value='1';qtyInput.style.width='70px';const priceInput=document.createElement('input');priceInput.type='number';priceInput.placeholder='Price';priceInput.className='inv-price';priceInput.value='0';priceInput.style.width='90px';const rmBtn=document.createElement('button');rmBtn.type='button';rmBtn.className='fl-remove';rmBtn.textContent='\u2715';rmBtn.addEventListener('click',()=>{div.remove();});div.appendChild(descInput);div.appendChild(qtyInput);div.appendChild(priceInput);div.appendChild(rmBtn);document.getElementById('invItems').appendChild(div);}document.getElementById('invAddItemBtn').addEventListener('click',addInvoiceItem);addInvoiceItem();addInvoiceItem();document.getElementById('invCalcBtn').addEventListener('click',()=>{const descs=document.querySelectorAll('.inv-desc');const qtys=document.querySelectorAll('.inv-qty');const prices=document.querySelectorAll('.inv-price');let subtotal=0;for(let i=0;i<descs.length;i++){const q=+qtys[i].value||0;const p=+prices[i].value||0;subtotal+=q*p;}const taxRate=+document.getElementById('invTaxRate').value||0;const tax=subtotal*taxRate/100;const total=subtotal+tax;const currency=document.getElementById('invCurrency').value;document.getElementById('invTotals').innerHTML=`Subtotal: ${currency}${subtotal.toFixed(2)} | Tax: ${currency}${tax.toFixed(2)} | Total: ${currency}${total.toFixed(2)}`;});document.getElementById('invPrintBtn').addEventListener('click',()=>{window.print();});document.getElementById('invResetBtn').addEventListener('click',()=>{document.getElementById('invBusiness').value='';document.getElementById('invClient').value='';document.getElementById('invNumber').value='INV-001';document.getElementById('invDate').value='';document.getElementById('invTaxRate').value=0;document.getElementById('invCurrency').value='$';document.getElementById('invNotes').value='';document.getElementById('invTerms').value='';document.getElementById('invItems').innerHTML='';invItemCount=0;addInvoiceItem();addInvoiceItem();document.getElementById('invTotals').textContent='';});</script><script src="script.js"></script></body></html>
+<script>/* ===== Invoice Generator engine (upgraded) ===== */
+const invEl = id => document.getElementById(id);
+
+/* ---------- localStorage keys ---------- */
+const INV_PROFILE_KEY = 'toolnest_invoice_business_profile';
+const INV_CLIENTS_KEY = 'toolnest_invoice_clients';
+const INV_HISTORY_KEY = 'toolnest_invoice_history';
+const INV_LASTNUM_KEY = 'toolnest_invoice_last_number';
+
+let invLogoDataUrl = null;
+
+/* ---------- Business Profile ---------- */
+function invSaveProfile(){
+  const profile = {
+    name: invEl('invBusiness').value,
+    address: invEl('invBusinessAddress').value,
+    template: invEl('invTemplate').value,
+    logo: invLogoDataUrl
+  };
+  try{ localStorage.setItem(INV_PROFILE_KEY, JSON.stringify(profile)); }catch(e){}
+}
+function invLoadProfile(){
+  let profile;
+  try{ profile = JSON.parse(localStorage.getItem(INV_PROFILE_KEY)); }catch(e){}
+  if(!profile) return;
+  invEl('invBusiness').value = profile.name||'';
+  invEl('invBusinessAddress').value = profile.address||'';
+  invEl('invTemplate').value = profile.template||'classic';
+  if(profile.logo){
+    invLogoDataUrl = profile.logo;
+    invEl('invLogoPreview').src = profile.logo;
+    invEl('invLogoPreview').style.display = 'block';
+  }
+}
+invEl('invLogoInput').addEventListener('change', e=>{
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    invLogoDataUrl = reader.result;
+    invEl('invLogoPreview').src = invLogoDataUrl;
+    invEl('invLogoPreview').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+});
+invEl('invSaveProfileBtn').addEventListener('click', ()=>{
+  invSaveProfile();
+  invEl('invStatusMsg').textContent = 'Business profile saved to this browser.';
+});
+
+/* ---------- Client management ---------- */
+function invGetClients(){
+  try{ return JSON.parse(localStorage.getItem(INV_CLIENTS_KEY))||[]; }catch(e){ return []; }
+}
+function invSaveClients(list){
+  try{ localStorage.setItem(INV_CLIENTS_KEY, JSON.stringify(list)); }catch(e){}
+}
+function invRenderClientDropdown(){
+  const sel = invEl('invSavedClients');
+  const clients = invGetClients();
+  sel.innerHTML = '<option value="">-- New client --</option>';
+  clients.forEach((c,i)=>{
+    const opt = document.createElement('option');
+    opt.value = i; opt.textContent = c.name;
+    sel.appendChild(opt);
+  });
+}
+invEl('invSavedClients').addEventListener('change', function(){
+  if(this.value===''){ invEl('invClient').value=''; invEl('invClientAddress').value=''; return; }
+  const clients = invGetClients();
+  const c = clients[+this.value];
+  if(c){ invEl('invClient').value = c.name; invEl('invClientAddress').value = c.address||''; }
+});
+invEl('invSaveClientBtn').addEventListener('click', ()=>{
+  const name = invEl('invClient').value.trim();
+  if(!name) return alert('Enter a client name first.');
+  const address = invEl('invClientAddress').value;
+  const clients = invGetClients();
+  const existingIdx = clients.findIndex(c=>c.name.toLowerCase()===name.toLowerCase());
+  if(existingIdx>=0) clients[existingIdx] = {name, address};
+  else clients.push({name, address});
+  invSaveClients(clients);
+  invRenderClientDropdown();
+  invEl('invStatusMsg').textContent = `Client "${name}" saved.`;
+});
+
+/* ---------- Auto invoice numbering ---------- */
+function invSuggestNextNumber(){
+  let last;
+  try{ last = localStorage.getItem(INV_LASTNUM_KEY); }catch(e){}
+  if(!last) return;
+  const match = last.match(/^(.*?)(\d+)$/);
+  if(match){
+    const prefix = match[1];
+    const num = (+match[2]+1).toString().padStart(match[2].length,'0');
+    invEl('invNumber').value = prefix+num;
+  }
+}
+function invStoreLastNumber(){
+  try{ localStorage.setItem(INV_LASTNUM_KEY, invEl('invNumber').value); }catch(e){}
+}
+
+/* ---------- Line items (preserved add/remove pattern) ---------- */
+let invItemCount = 0;
+function invAddItem(prefill){
+  invItemCount++;
+  const div = document.createElement('div');
+  div.className='row'; div.style.marginTop='8px';
+  const descInput = document.createElement('input');
+  descInput.type='text'; descInput.placeholder='Description'; descInput.className='inv-desc'; descInput.style.flex='2';
+  const qtyInput = document.createElement('input');
+  qtyInput.type='number'; qtyInput.placeholder='Qty'; qtyInput.className='inv-qty'; qtyInput.value='1'; qtyInput.style.width='70px';
+  const priceInput = document.createElement('input');
+  priceInput.type='number'; priceInput.placeholder='Price'; priceInput.className='inv-price'; priceInput.value='0'; priceInput.style.width='90px';
+  const rmBtn = document.createElement('button');
+  rmBtn.type='button'; rmBtn.className='fl-remove'; rmBtn.textContent='\u2715';
+  rmBtn.addEventListener('click', ()=>{ div.remove(); });
+  div.appendChild(descInput); div.appendChild(qtyInput); div.appendChild(priceInput); div.appendChild(rmBtn);
+  invEl('invItems').appendChild(div);
+  if(prefill){ descInput.value=prefill.desc||''; qtyInput.value=prefill.qty||1; priceInput.value=prefill.price||0; }
+}
+invEl('invAddItemBtn').addEventListener('click', ()=>invAddItem());
+invAddItem(); invAddItem();
+
+/* ---------- Multiple tax lines ---------- */
+function invAddTaxLine(prefill){
+  const div = document.createElement('div');
+  div.className='row'; div.style.marginTop='8px';
+  const labelInput = document.createElement('input');
+  labelInput.type='text'; labelInput.placeholder='Tax name (e.g. VAT)'; labelInput.className='inv-tax-label'; labelInput.style.flex='1';
+  const rateInput = document.createElement('input');
+  rateInput.type='number'; rateInput.placeholder='Rate %'; rateInput.className='inv-tax-rate'; rateInput.style.width='90px'; rateInput.value='0';
+  const rmBtn = document.createElement('button');
+  rmBtn.type='button'; rmBtn.className='fl-remove'; rmBtn.textContent='\u2715';
+  rmBtn.addEventListener('click', ()=>{ div.remove(); });
+  div.appendChild(labelInput); div.appendChild(rateInput); div.appendChild(rmBtn);
+  invEl('invTaxLines').appendChild(div);
+  if(prefill){ labelInput.value=prefill.label||''; rateInput.value=prefill.rate||0; }
+}
+invEl('invAddTaxBtn').addEventListener('click', ()=>invAddTaxLine());
+invAddTaxLine({label:'Tax', rate:0});
+
+/* ---------- Calculate totals (subtotal -> discount -> multiple taxes) ---------- */
+function invCalculate(){
+  const descs = document.querySelectorAll('.inv-desc');
+  const qtys = document.querySelectorAll('.inv-qty');
+  const prices = document.querySelectorAll('.inv-price');
+  let subtotal = 0;
+  for(let i=0;i<descs.length;i++){
+    const q = +qtys[i].value||0, p = +prices[i].value||0;
+    subtotal += q*p;
+  }
+  const discountType = invEl('invDiscountType').value;
+  const discountValue = +invEl('invDiscountValue').value||0;
+  let discountAmount = 0;
+  if(discountType==='flat') discountAmount = discountValue;
+  else if(discountType==='percent') discountAmount = subtotal*(discountValue/100);
+  discountAmount = Math.min(discountAmount, subtotal);
+  const afterDiscount = subtotal-discountAmount;
+
+  const taxLabels = document.querySelectorAll('.inv-tax-label');
+  const taxRates = document.querySelectorAll('.inv-tax-rate');
+  let totalTax = 0;
+  const taxBreakdown = [];
+  for(let i=0;i<taxRates.length;i++){
+    const rate = +taxRates[i].value||0;
+    const amount = afterDiscount*(rate/100);
+    totalTax += amount;
+    if(rate>0) taxBreakdown.push(`${taxLabels[i].value||'Tax'} (${rate}%): ${amount.toFixed(2)}`);
+  }
+  const total = afterDiscount+totalTax;
+  const currency = invEl('invCurrency').value;
+  let lines = [`Subtotal: ${currency}${subtotal.toFixed(2)}`];
+  if(discountAmount>0) lines.push(`Discount: -${currency}${discountAmount.toFixed(2)}`);
+  taxBreakdown.forEach(t=>lines.push(t.replace(/: (.*)$/, `: ${currency}$1`)));
+  lines.push(`Total: ${currency}${total.toFixed(2)}`);
+  invEl('invTotals').innerHTML = lines.join('\n');
+  return {subtotal, discountAmount, totalTax, total};
+}
+invEl('invCalcBtn').addEventListener('click', invCalculate);
+
+/* ---------- Status stamp (visual badge on the invoice) ---------- */
+function invUpdateStatusStamp(){
+  let stamp = document.getElementById('invStatusStamp');
+  const status = invEl('invStatus').value;
+  if(!status){
+    if(stamp) stamp.remove();
+    return;
+  }
+  if(!stamp){
+    stamp = document.createElement('div');
+    stamp.id = 'invStatusStamp';
+    stamp.style.cssText = 'position:absolute; top:10px; right:10px; padding:6px 16px; border:3px solid; border-radius:6px; font-weight:bold; font-size:1.1rem; transform:rotate(-8deg); text-transform:uppercase; pointer-events:none;';
+    document.getElementById('invoicePrintArea').style.position = 'relative';
+    document.getElementById('invoicePrintArea').appendChild(stamp);
+  }
+  const colors = { paid:'#2e7d32', unpaid:'#b8860b', overdue:'#c0392b' };
+  stamp.style.color = colors[status];
+  stamp.style.borderColor = colors[status];
+  stamp.textContent = status;
+}
+invEl('invStatus').addEventListener('change', invUpdateStatusStamp);
+
+/* ---------- Templates (header styling for print) ---------- */
+function invApplyTemplate(){
+  const template = invEl('invTemplate').value;
+  const area = invEl('invoicePrintArea');
+  area.classList.remove('inv-tpl-classic','inv-tpl-modern','inv-tpl-minimal');
+  area.classList.add('inv-tpl-'+template);
+}
+invEl('invTemplate').addEventListener('change', invApplyTemplate);
+
+/* ---------- Print ---------- */
+invEl('invPrintBtn').addEventListener('click', ()=>{
+  invStoreLastNumber();
+  window.print();
+});
+
+/* ---------- Invoice History (localStorage) ---------- */
+function invCollectSnapshot(){
+  return {
+    business: invEl('invBusiness').value, businessAddress: invEl('invBusinessAddress').value,
+    client: invEl('invClient').value, clientAddress: invEl('invClientAddress').value,
+    number: invEl('invNumber').value, date: invEl('invDate').value, status: invEl('invStatus').value,
+    currency: invEl('invCurrency').value,
+    items: Array.from(document.querySelectorAll('#invItems .row')).map(row=>({
+      desc: row.querySelector('.inv-desc').value, qty: row.querySelector('.inv-qty').value, price: row.querySelector('.inv-price').value
+    })),
+    discountType: invEl('invDiscountType').value, discountValue: invEl('invDiscountValue').value,
+    taxes: Array.from(document.querySelectorAll('#invTaxLines .row')).map(row=>({
+      label: row.querySelector('.inv-tax-label').value, rate: row.querySelector('.inv-tax-rate').value
+    })),
+    notes: invEl('invNotes').value, terms: invEl('invTerms').value,
+    savedAt: new Date().toISOString()
+  };
+}
+function invGetHistory(){
+  try{ return JSON.parse(localStorage.getItem(INV_HISTORY_KEY))||[]; }catch(e){ return []; }
+}
+function invSaveHistory(list){
+  try{ localStorage.setItem(INV_HISTORY_KEY, JSON.stringify(list)); }catch(e){}
+}
+function invRenderHistory(){
+  const list = invGetHistory();
+  const container = invEl('invHistoryList');
+  if(!list.length){ container.innerHTML = '<p class="stat" style="font-size:.85rem; color:#8a8a75;">No saved invoices yet.</p>'; return; }
+  container.innerHTML = '';
+  list.forEach((snap,i)=>{
+    const row = document.createElement('div');
+    row.className='row'; row.style.cssText='margin-top:6px; align-items:center;';
+    const span = document.createElement('span');
+    span.style.cssText='flex:1; font-size:.85rem;';
+    span.textContent = `${snap.number} \u2014 ${snap.client||'(no client)'} \u2014 ${snap.date||''}`;
+    const loadBtn = document.createElement('button');
+    loadBtn.className='secondary'; loadBtn.textContent='Load'; loadBtn.style.cssText='padding:2px 10px; font-size:.78rem;';
+    loadBtn.addEventListener('click', ()=>invLoadSnapshot(snap));
+    const dupBtn = document.createElement('button');
+    dupBtn.className='secondary'; dupBtn.textContent='Duplicate'; dupBtn.style.cssText='padding:2px 10px; font-size:.78rem;';
+    dupBtn.addEventListener('click', ()=>{ const copy=Object.assign({},snap); copy.number=snap.number+'-copy'; invLoadSnapshot(copy); });
+    const delBtn = document.createElement('button');
+    delBtn.className='fl-remove'; delBtn.textContent='\u2715';
+    delBtn.addEventListener('click', ()=>{ list.splice(i,1); invSaveHistory(list); invRenderHistory(); });
+    row.appendChild(span); row.appendChild(loadBtn); row.appendChild(dupBtn); row.appendChild(delBtn);
+    container.appendChild(row);
+  });
+}
+function invLoadSnapshot(snap){
+  invEl('invBusiness').value = snap.business||''; invEl('invBusinessAddress').value = snap.businessAddress||'';
+  invEl('invClient').value = snap.client||''; invEl('invClientAddress').value = snap.clientAddress||'';
+  invEl('invNumber').value = snap.number||''; invEl('invDate').value = snap.date||''; invEl('invStatus').value = snap.status||'';
+  invEl('invCurrency').value = snap.currency||'$';
+  invEl('invItems').innerHTML=''; invItemCount=0;
+  (snap.items||[]).forEach(it=>invAddItem(it));
+  if(!snap.items || !snap.items.length){ invAddItem(); invAddItem(); }
+  invEl('invDiscountType').value = snap.discountType||'none'; invEl('invDiscountValue').value = snap.discountValue||0;
+  invEl('invTaxLines').innerHTML='';
+  (snap.taxes||[]).forEach(t=>invAddTaxLine(t));
+  if(!snap.taxes || !snap.taxes.length) invAddTaxLine({label:'Tax', rate:0});
+  invEl('invNotes').value = snap.notes||''; invEl('invTerms').value = snap.terms||'';
+  invUpdateStatusStamp();
+  invCalculate();
+  invEl('invStatusMsg').textContent = `Loaded invoice ${snap.number}.`;
+}
+invEl('invSaveHistoryBtn').addEventListener('click', ()=>{
+  const snap = invCollectSnapshot();
+  const list = invGetHistory();
+  list.unshift(snap);
+  invSaveHistory(list.slice(0,50));
+  invRenderHistory();
+  invStoreLastNumber();
+  invEl('invStatusMsg').textContent = `Invoice ${snap.number} saved to history.`;
+});
+invEl('invClearHistoryBtn').addEventListener('click', ()=>{
+  if(!confirm('Clear all saved invoice history? This cannot be undone.')) return;
+  localStorage.removeItem(INV_HISTORY_KEY);
+  invRenderHistory();
+});
+
+/* ---------- Reset ---------- */
+invEl('invResetBtn').addEventListener('click', ()=>{
+  invEl('invClient').value=''; invEl('invClientAddress').value=''; invEl('invSavedClients').value='';
+  invEl('invNumber').value='INV-001'; invEl('invDate').value=''; invEl('invStatus').value='';
+  invEl('invCurrency').value='$';
+  invEl('invItems').innerHTML=''; invItemCount=0; invAddItem(); invAddItem();
+  invEl('invDiscountType').value='none'; invEl('invDiscountValue').value=0;
+  invEl('invTaxLines').innerHTML=''; invAddTaxLine({label:'Tax', rate:0});
+  invEl('invNotes').value=''; invEl('invTerms').value='';
+  invEl('invTotals').textContent='';
+  invEl('invStatusMsg').textContent='';
+  invUpdateStatusStamp();
+});
+
+/* ---------- init ---------- */
+invLoadProfile();
+invRenderClientDropdown();
+invRenderHistory();
+invSuggestNextNumber();
+invApplyTemplate();
+</script><script src="script.js"></script></body></html>
