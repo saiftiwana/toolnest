@@ -1,0 +1,532 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Color Toolkit - Free Color Picker, Palette & CMYK Converter | ToolNest</title><meta name="description" content="Pick colors from images, extract palettes, convert HEX/RGB/HSL/CMYK, generate color schemes and check color-blind accessibility, free and private."><link rel="canonical" href="https://toolnest.link/color-toolkit.html"><meta property="og:title" content="Color Toolkit | ToolNest"><meta property="og:description" content="Pick colors, extract palettes, convert formats, generate schemes and check color-blind accessibility, free and private."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/color-toolkit.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Color Toolkit</h1><p>Pick, extract, convert, generate schemes, and check color-blind accessibility — one shared color state, 100% private.</p></header><main>
+<div class="card" id="ck"><h2>Color Toolkit</h2><p class="desc">Pick colors from images, extract palettes, convert HEX/RGB/HSL/CMYK, generate color schemes, and check color-blind accessibility — free, private, all in your browser.</p>
+
+<h3 style="margin-top:4px;">1. Current Color</h3>
+<div class="row" style="align-items:center;"><div id="ckCurrentSwatch" style="width:60px;height:60px;border-radius:8px;border:1px solid var(--line); background:#e07a2c; flex-shrink:0;"></div><p class="stat" id="ckCurrentInfo" style="white-space:pre-line; flex:1;">HEX: #E07A2C\nRGB: rgb(224, 122, 44)\nHSL: hsl(26, 74%, 53%)\nCMYK: C:0 M:46 Y:80 K:12</p></div>
+<div class="row" style="margin-top:8px;"><button class="secondary" id="ckCopyCurrentHex">\U0001F4CB Copy HEX</button><button class="secondary" id="ckCopyCurrentRgb">\U0001F4CB Copy RGB</button><button class="secondary" id="ckCopyCurrentHsl">\U0001F4CB Copy HSL</button><button class="secondary" id="ckAddCurrentToPalette">+ Add to Palette</button></div>
+
+<h3>2. Workspace Mode</h3>
+<div class="row" id="ckModeTabs">
+<button class="secondary ck-mtab active" data-mode="pick">Pick from Image</button>
+<button class="secondary ck-mtab" data-mode="extract">Extract Palette</button>
+<button class="secondary ck-mtab" data-mode="convert">Convert Formats</button>
+</div>
+
+<div id="ckPickPanel" style="margin-top:14px;">
+<div class="field"><label class="field-label" for="ckPickInput">Choose image to sample</label><div class="dropzone" id="ckPickDropzone"><input type="file" id="ckPickInput" accept="image/*"><p>Drag &amp; drop an image here, or click to browse</p></div></div>
+<canvas class="preview" id="ckPickCanvas" style="display:none; cursor:crosshair;"></canvas>
+<div class="row" style="margin-top:12px; align-items:center;"><canvas id="ckPickZoomCanvas" width="80" height="80" style="border:1px solid var(--line);border-radius:6px;image-rendering:pixelated;display:none;flex-shrink:0;"></canvas><span class="stat" id="ckPickHint">Click the image to pick a color</span></div>
+</div>
+
+<div id="ckExtractPanel" style="margin-top:14px; display:none;">
+<div class="field"><label class="field-label" for="ckExtractInput">Choose image to analyze</label><div class="dropzone" id="ckExtractDropzone"><input type="file" id="ckExtractInput" accept="image/*"><p>Drag &amp; drop an image here, or click to browse</p></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="ckExtractCount">Number of colors</label><select id="ckExtractCount"><option value="4">4</option><option value="6" selected>6</option><option value="8">8</option><option value="10">10</option></select></div><button id="ckExtractBtn">Extract Palette</button></div>
+<div class="row" id="ckExtractResult" style="margin-top:16px; flex-wrap:wrap;"></div>
+<p class="stat" style="font-size:.8rem; color:#8a8a75;">Click any swatch to set it as the Current Color above.</p>
+</div>
+
+<div id="ckConvertPanel" style="margin-top:14px; display:none;">
+<div class="row"><div class="field"><label class="field-label" for="ckConvHex">HEX</label><input type="text" id="ckConvHex" value="#E07A2C"></div><div class="field"><label class="field-label" for="ckConvR">R</label><input type="number" id="ckConvR" value="224" min="0" max="255"></div><div class="field"><label class="field-label" for="ckConvG">G</label><input type="number" id="ckConvG" value="122" min="0" max="255"></div><div class="field"><label class="field-label" for="ckConvB">B</label><input type="number" id="ckConvB" value="44" min="0" max="255"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="ckConvCmyk">CMYK (C,M,Y,K)</label><input type="text" id="ckConvCmyk" placeholder="0,46,80,12"></div><button class="secondary" id="ckConvCmykBtn">Convert CMYK \u2192 Current Color</button></div>
+</div>
+
+<h3>3. Color Scheme Generator</h3>
+<div class="row"><button class="secondary" data-scheme="complementary">Complementary</button><button class="secondary" data-scheme="analogous">Analogous</button><button class="secondary" data-scheme="triadic">Triadic</button><button class="secondary" data-scheme="splitcomplementary">Split-Complementary</button><button class="secondary" data-scheme="monochromatic">Monochromatic</button></div>
+<div class="row" id="ckSchemeResult" style="margin-top:12px; flex-wrap:wrap;"></div>
+
+<h3>4. Shades &amp; Tints</h3>
+<p class="field-label-block">Tints (lighter)</p>
+<div class="row" id="ckTintsRow" style="flex-wrap:wrap; gap:4px;"></div>
+<p class="field-label-block" style="margin-top:10px;">Shades (darker)</p>
+<div class="row" id="ckShadesRow" style="flex-wrap:wrap; gap:4px;"></div>
+
+<h3>5. Color-Blindness Simulation</h3>
+<div class="row"><div class="field"><label class="field-label" for="ckBlindMode">Simulate</label><select id="ckBlindMode"><option value="none">None</option><option value="protanopia">Protanopia</option><option value="deuteranopia">Deuteranopia</option><option value="tritanopia">Tritanopia</option><option value="grayscale">Grayscale</option></select></div></div>
+<div class="row" id="ckBlindResult" style="margin-top:12px; flex-wrap:wrap;"></div>
+<p class="stat" style="font-size:.78rem; color:#8a8a75;">This is an approximate simulation for design guidance, not a medical diagnostic tool.</p>
+
+<h3>6. Session Color History</h3>
+<div class="row" id="ckHistoryRow" style="flex-wrap:wrap; gap:4px;"></div>
+<div class="row" style="margin-top:8px;"><button class="secondary" id="ckClearHistoryBtn">Clear History</button></div>
+
+<h3>7. Custom Palette &amp; Export</h3>
+<div class="row" id="ckPaletteRow" style="flex-wrap:wrap; gap:4px;"></div>
+<p class="stat" id="ckPaletteEmpty" style="font-size:.85rem; color:#8a8a75;">Your palette is empty — use "+ Add to Palette" anywhere in this tool to build one.</p>
+<div class="row" style="margin-top:10px; flex-wrap:wrap;"><button class="secondary" id="ckExportHexBtn">\U0001F4CB Copy HEX List</button><button class="secondary" id="ckExportCssBtn">\U0001F4CB Copy CSS Variables</button><button class="secondary" id="ckExportJsonBtn">\U0001F4CB Copy JSON</button><button class="secondary" id="ckExportSheetBtn">Download Swatch Sheet</button><button class="secondary" id="ckClearPaletteBtn">Clear Palette</button></div>
+</div>
+<div class="seo-content">
+<h3>How to Use Color Toolkit</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Pick a Mode:</strong> Pick from Image, Extract Palette, or Convert Formats.</li><li><strong>Set a Current Color:</strong> Click any pixel, swatch, or type a HEX/RGB/CMYK value.</li><li><strong>Generate a Scheme:</strong> Try Complementary, Analogous, Triadic, Split-Complementary, or Monochromatic.</li><li><strong>Check Shades &amp; Tints:</strong> A 10-step lighter and darker scale updates automatically.</li><li><strong>Preview Accessibility:</strong> Simulate Protanopia, Deuteranopia, Tritanopia, or Grayscale.</li><li><strong>Build a Palette:</strong> Click "+ Add to Palette" on any swatch you want to keep.</li><li><strong>Export:</strong> Copy CSS variables, JSON, a HEX list, or download a swatch sheet.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>An all in one color design tool palette picker hex converter tool means not switching between three separate tabs to sample a color, pull a palette from a photo, and check its CMYK print value. This complete color toolkit picker palette extractor cmyk hex free tool keeps one shared Current Color that every part of the workspace reads from and updates, so a color picked from an image is instantly ready to convert, build a scheme from, or check for print.</p>
+<h3>How It Works</h3>
+<p>This unified color workspace hex rgb cmyk extraction tool uses the same trusted eyedropper, palette extraction, and CMYK conversion logic as ToolNest's original three color tools, now sharing one central color state. Picking a pixel, clicking an extracted swatch, or typing a HEX or RGB value all update the same Current Color panel, which then automatically recalculates connected schemes, shade and tint scales, and the accessibility simulation preview.</p>
+<h3>Key Features</h3>
+<p>As a professional color toolkit for designers web and print tool, five color scheme types calculate instantly from the current color using standard hue-rotation math: Complementary, Analogous, Triadic, Split-Complementary, and Monochromatic. A 10-step lighter tint scale and 10-step darker shade scale update automatically for every color you select, and a color-blindness simulation preview approximates how your palette appears under Protanopia, Deuteranopia, Tritanopia, or Grayscale. A running custom palette can be exported as copy-ready CSS variables, structured JSON, a plain HEX list, or a downloadable swatch sheet image, and a session color history keeps your last 20 picks one click away.</p>
+<h3>Common Use Cases</h3>
+<p>A designer building a website color system picks a brand color from a logo image, generates its Analogous scheme for supporting UI colors, and exports the whole set as CSS variables ready to paste into a stylesheet. Someone preparing print materials extracts a palette from a product photo, checks each color's CMYK breakdown in Convert Formats, and confirms the palette still reads clearly under the color-blindness simulation before finalizing artwork. A design student explores how a single brand color transforms into five different scheme types to compare options before choosing a final direction.</p>
+<h3>Tips</h3>
+<p>The color-blindness simulation is an approximation meant to guide design decisions, not a diagnostic tool — when in doubt, pair simulated colors with the Accessibility Contrast Checker to confirm text stays readable. Building up a custom palette as you go (using the small + button on any swatch) makes exporting a finished, curated set far easier than trying to remember which colors you liked from an extracted palette or scheme.</p>
+<h3>Frequently Asked Questions</h3>
+<div class=faq-block><details><summary>Can I extract palettes, pick individual colors, and convert CMYK in one session?</summary><p>Yes, all three modes share the same Current Color, so switching between Pick from Image, Extract Palette, and Convert Formats keeps your work connected.</p></details><details><summary>How accurate is color extraction from photos for design matching?</summary><p>Extraction groups similar pixel colors and returns the most common clusters, which works well for dominant colors but may simplify subtle gradients or lighting variations.</p></details><details><summary>Does the toolkit support both print (CMYK) and web (HEX/RGB) workflows?</summary><p>Yes, the Current Color panel always shows HEX, RGB, HSL, and CMYK together, and Convert Formats lets you start from any of them.</p></details><details><summary>Are uploaded images stored or processed on a server?</summary><p>No, all image processing for picking colors and extracting palettes happens locally in your browser.</p></details><details><summary>Can I save custom color palettes for future projects?</summary><p>Within a session, yes — build a palette with the + Add to Palette button and export it as CSS, JSON, a HEX list, or a swatch sheet image to reuse in your project files.</p></details><details><summary>How do I ensure color consistency between print and web designs?</summary><p>Check the CMYK values shown in the Current Color panel alongside the HEX/RGB values so you have both the print and web equivalent of the same color on hand.</p></details><details><summary>What file formats are supported for import/export?</summary><p>Images can be uploaded as JPG, PNG, or WebP for picking and extracting; palettes export as CSS variables, JSON, a plain HEX list, or a PNG swatch sheet.</p></details><details><summary>Is the color toolkit mobile-friendly for on-site design work?</summary><p>Yes, all controls including the eyedropper, mode tabs, and export buttons are usable on a touchscreen.</p></details><details><summary>What color schemes can I generate from a single color?</summary><p>Complementary, Analogous, Triadic, Split-Complementary, and Monochromatic schemes all calculate instantly from your current color.</p></details><details><summary>Can I preview how my palette looks to someone with color blindness?</summary><p>Yes, the Color-Blindness Simulation section shows an approximate preview for Protanopia, Deuteranopia, Tritanopia, and Grayscale.</p></details></div>
+</div>
+<div class="seo-content"><h3>Related Design Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="favicon-generator.html">Favicon Generator</a></li>
+<li><a href="signature-maker.html">Signature Maker</a></li>
+<li><a href="accessibility-contrast-checker.html">Accessibility Contrast Checker</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Color Toolkit","applicationCategory":"DesignApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/color-toolkit.html"},
+{"@type":"HowTo","name":"How to Use the Color Toolkit","step":[
+{"@type":"HowToStep","text":"Choose Pick from Image, Extract Palette, or Convert Formats."},
+{"@type":"HowToStep","text":"Set a Current Color by clicking a pixel, swatch, or typing a value."},
+{"@type":"HowToStep","text":"Generate a color scheme from the current color."},
+{"@type":"HowToStep","text":"Review the automatic shades and tints scale."},
+{"@type":"HowToStep","text":"Preview the color-blindness simulation."},
+{"@type":"HowToStep","text":"Add colors to your custom palette."},
+{"@type":"HowToStep","text":"Export as CSS, JSON, HEX list, or a swatch sheet."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Can I extract palettes, pick individual colors, and convert CMYK in one session?","acceptedAnswer":{"@type":"Answer","text":"Yes, all three modes share the same Current Color, so your work stays connected as you switch between them."}},
+{"@type":"Question","name":"How accurate is color extraction from photos for design matching?","acceptedAnswer":{"@type":"Answer","text":"Extraction groups similar pixel colors and returns the most common clusters, working well for dominant colors."}},
+{"@type":"Question","name":"Does the toolkit support both print (CMYK) and web (HEX/RGB) workflows?","acceptedAnswer":{"@type":"Answer","text":"Yes, the Current Color panel always shows HEX, RGB, HSL, and CMYK together."}},
+{"@type":"Question","name":"Are uploaded images stored or processed on a server?","acceptedAnswer":{"@type":"Answer","text":"No, all image processing happens locally in your browser."}},
+{"@type":"Question","name":"Can I save custom color palettes for future projects?","acceptedAnswer":{"@type":"Answer","text":"Within a session, build a palette and export it as CSS, JSON, a HEX list, or a swatch sheet image."}},
+{"@type":"Question","name":"How do I ensure color consistency between print and web designs?","acceptedAnswer":{"@type":"Answer","text":"Check the CMYK values alongside the HEX/RGB values shown together in the Current Color panel."}},
+{"@type":"Question","name":"What file formats are supported for import/export?","acceptedAnswer":{"@type":"Answer","text":"Images can be JPG, PNG, or WebP; palettes export as CSS variables, JSON, a HEX list, or a PNG swatch sheet."}},
+{"@type":"Question","name":"Is the color toolkit mobile-friendly for on-site design work?","acceptedAnswer":{"@type":"Answer","text":"Yes, all controls are usable on a touchscreen."}},
+{"@type":"Question","name":"What color schemes can I generate from a single color?","acceptedAnswer":{"@type":"Answer","text":"Complementary, Analogous, Triadic, Split-Complementary, and Monochromatic schemes all calculate instantly."}},
+{"@type":"Question","name":"Can I preview how my palette looks to someone with color blindness?","acceptedAnswer":{"@type":"Answer","text":"Yes, the simulation shows an approximate preview for Protanopia, Deuteranopia, Tritanopia, and Grayscale."}}
+]}
+]}
+</script>
+<script>/* ===== Color Toolkit engine ===== */
+const ckEl = id => document.getElementById(id);
+
+/* ---------- verified conversion functions ---------- */
+function ckRgbToHsl(r,g,b){
+  r/=255; g/=255; b/=255;
+  const max=Math.max(r,g,b), min=Math.min(r,g,b);
+  let h,s,l=(max+min)/2;
+  if(max===min){ h=s=0; }
+  else{
+    const d=max-min;
+    s = l>0.5 ? d/(2-max-min) : d/(max+min);
+    switch(max){
+      case r: h=(g-b)/d+(g<b?6:0); break;
+      case g: h=(b-r)/d+2; break;
+      case b: h=(r-g)/d+4; break;
+    }
+    h/=6;
+  }
+  return {h:h*360, s:s*100, l:l*100};
+}
+function ckHslToRgb(h,s,l){
+  h/=360; s/=100; l/=100;
+  let r,g,b;
+  if(s===0){ r=g=b=l; }
+  else{
+    const hue2rgb=(p,q,t)=>{
+      if(t<0)t+=1; if(t>1)t-=1;
+      if(t<1/6) return p+(q-p)*6*t;
+      if(t<1/2) return q;
+      if(t<2/3) return p+(q-p)*(2/3-t)*6;
+      return p;
+    };
+    const q = l<0.5 ? l*(1+s) : l+s-l*s;
+    const p = 2*l-q;
+    r=hue2rgb(p,q,h+1/3); g=hue2rgb(p,q,h); b=hue2rgb(p,q,h-1/3);
+  }
+  return {r:Math.round(r*255), g:Math.round(g*255), b:Math.round(b*255)};
+}
+function ckRgbToHex(r,g,b){ return '#'+[r,g,b].map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0')).join('').toUpperCase(); }
+function ckHexToRgb(hex){
+  hex = (hex||'').trim().replace('#','');
+  if(hex.length===3) hex = hex.split('').map(c=>c+c).join('');
+  if(!/^[0-9a-fA-F]{6}$/.test(hex)) return null;
+  return {r:parseInt(hex.slice(0,2),16), g:parseInt(hex.slice(2,4),16), b:parseInt(hex.slice(4,6),16)};
+}
+function ckRgbToCmyk(r,g,b){
+  const rf=r/255, gf=g/255, bf=b/255;
+  const k = 1-Math.max(rf,gf,bf);
+  const c = k===1 ? 0 : (1-rf-k)/(1-k);
+  const m = k===1 ? 0 : (1-gf-k)/(1-k);
+  const y = k===1 ? 0 : (1-bf-k)/(1-k);
+  return {c:Math.round(c*100), m:Math.round(m*100), y:Math.round(y*100), k:Math.round(k*100)};
+}
+function ckCmykToRgb(c,m,y,k){
+  const cf=c/100, mf=m/100, yf=y/100, kf=k/100;
+  return {
+    r: Math.round(255*(1-cf)*(1-kf)),
+    g: Math.round(255*(1-mf)*(1-kf)),
+    b: Math.round(255*(1-yf)*(1-kf))
+  };
+}
+
+/* ---------- global shared color state ---------- */
+let ckCurrentColor = { hex:'#E07A2C', r:224, g:122, b:44 };
+let ckHistory = [];
+let ckCustomPalette = [];
+let ckActiveMode = 'pick';
+
+function ckSetCurrentColor(hex, opts){
+  const rgb = ckHexToRgb(hex);
+  if(!rgb) return;
+  ckCurrentColor = { hex: hex.toUpperCase().startsWith('#')?hex.toUpperCase():'#'+hex.toUpperCase(), r:rgb.r, g:rgb.g, b:rgb.b };
+  ckRenderCurrentColorPanel();
+  ckRenderSchemesIfAny();
+  ckRenderTintsShades();
+  ckRenderColorBlindPreview();
+  if(typeof ckSyncConvertFields === 'function') ckSyncConvertFields();
+  if(!(opts && opts.skipHistory)) ckAddToHistory(ckCurrentColor.hex);
+}
+function ckRenderCurrentColorPanel(){
+  const {hex,r,g,b} = ckCurrentColor;
+  const hsl = ckRgbToHsl(r,g,b);
+  const cmyk = ckRgbToCmyk(r,g,b);
+  ckEl('ckCurrentSwatch').style.background = hex;
+  ckEl('ckCurrentInfo').textContent = `HEX: ${hex}\nRGB: rgb(${r}, ${g}, ${b})\nHSL: hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)\nCMYK: C:${cmyk.c} M:${cmyk.m} Y:${cmyk.y} K:${cmyk.k}`;
+}
+
+/* ---------- copy helpers ---------- */
+function ckCopyGeneric(text, btn){
+  const done = ()=>{ const old=btn.textContent; btn.textContent='\u2705 Copied'; setTimeout(()=>btn.textContent=old,1200); };
+  if(window.toolnestCopyText) window.toolnestCopyText(text, done);
+  else navigator.clipboard.writeText(text).then(done);
+}
+ckEl('ckCopyCurrentHex').addEventListener('click', function(){ ckCopyGeneric(ckCurrentColor.hex, this); });
+ckEl('ckCopyCurrentRgb').addEventListener('click', function(){ ckCopyGeneric(`rgb(${ckCurrentColor.r}, ${ckCurrentColor.g}, ${ckCurrentColor.b})`, this); });
+ckEl('ckCopyCurrentHsl').addEventListener('click', function(){ const hsl=ckRgbToHsl(ckCurrentColor.r,ckCurrentColor.g,ckCurrentColor.b); ckCopyGeneric(`hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`, this); });
+
+/* ---------- mode tabs ---------- */
+document.querySelectorAll('.ck-mtab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.ck-mtab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    ckActiveMode = btn.dataset.mode;
+    ckEl('ckPickPanel').style.display = ckActiveMode==='pick' ? 'block' : 'none';
+    ckEl('ckExtractPanel').style.display = ckActiveMode==='extract' ? 'block' : 'none';
+    ckEl('ckConvertPanel').style.display = ckActiveMode==='convert' ? 'block' : 'none';
+  });
+});
+
+/* ---------- Mode 1: Pick from Image (preserves original eyedropper logic) ---------- */
+let ckPickImg = null;
+const ckPickCanvas = ckEl('ckPickCanvas'), ckpctx = ckPickCanvas.getContext('2d');
+const ckPickZoomCanvas = ckEl('ckPickZoomCanvas'), ckpzctx = ckPickZoomCanvas.getContext('2d');
+const ckPickDropzone = ckEl('ckPickDropzone'), ckPickInput = ckEl('ckPickInput');
+function ckLoadPickFile(file){
+  if(!file) return;
+  const img = new Image();
+  img.onload = ()=>{
+    ckPickImg = img;
+    ckPickCanvas.width = img.width; ckPickCanvas.height = img.height;
+    ckpctx.drawImage(img,0,0);
+    ckPickCanvas.style.display = 'block';
+  };
+  img.src = URL.createObjectURL(file);
+}
+ckPickInput.addEventListener('change', e=>ckLoadPickFile(e.target.files[0]));
+['dragover','dragenter'].forEach(evt=>ckPickDropzone.addEventListener(evt,e=>{e.preventDefault();ckPickDropzone.classList.add('dragover');}));
+['dragleave','drop'].forEach(evt=>ckPickDropzone.addEventListener(evt,e=>{e.preventDefault();ckPickDropzone.classList.remove('dragover');}));
+ckPickDropzone.addEventListener('drop', e=>{ const file=e.dataTransfer.files[0]; if(file){ ckPickInput.files=e.dataTransfer.files; ckLoadPickFile(file); } });
+ckPickCanvas.addEventListener('click', e=>{
+  const rect = ckPickCanvas.getBoundingClientRect();
+  const scaleX = ckPickCanvas.width/rect.width, scaleY = ckPickCanvas.height/rect.height;
+  const x = Math.floor((e.clientX-rect.left)*scaleX);
+  const y = Math.floor((e.clientY-rect.top)*scaleY);
+  const d = ckpctx.getImageData(x,y,1,1).data;
+  const hex = ckRgbToHex(d[0],d[1],d[2]);
+  ckSetCurrentColor(hex);
+  ckEl('ckPickHint').textContent = `Picked ${hex} at (${x}, ${y})`;
+  const zoomSize=8;
+  const sx=Math.max(0,x-zoomSize/2), sy=Math.max(0,y-zoomSize/2);
+  ckpzctx.imageSmoothingEnabled=false;
+  ckpzctx.clearRect(0,0,80,80);
+  ckpzctx.drawImage(ckPickCanvas, sx, sy, zoomSize, zoomSize, 0,0,80,80);
+  ckPickZoomCanvas.style.display='inline-block';
+});
+
+/* ---------- Mode 2: Extract Palette (preserves original extraction algorithm) ---------- */
+let ckExtractImg = null;
+const ckExtractDropzone = ckEl('ckExtractDropzone'), ckExtractInput = ckEl('ckExtractInput');
+function ckLoadExtractFile(file){
+  if(!file) return;
+  const img = new Image();
+  img.onload = ()=>{ ckExtractImg = img; };
+  img.src = URL.createObjectURL(file);
+}
+ckExtractInput.addEventListener('change', e=>ckLoadExtractFile(e.target.files[0]));
+['dragover','dragenter'].forEach(evt=>ckExtractDropzone.addEventListener(evt,e=>{e.preventDefault();ckExtractDropzone.classList.add('dragover');}));
+['dragleave','drop'].forEach(evt=>ckExtractDropzone.addEventListener(evt,e=>{e.preventDefault();ckExtractDropzone.classList.remove('dragover');}));
+ckExtractDropzone.addEventListener('drop', e=>{ const file=e.dataTransfer.files[0]; if(file){ ckExtractInput.files=e.dataTransfer.files; ckLoadExtractFile(file); } });
+
+ckEl('ckExtractBtn').addEventListener('click', ()=>{
+  if(!ckExtractImg) return alert('Choose an image first');
+  const count = +ckEl('ckExtractCount').value;
+  const canvas = document.createElement('canvas');
+  const scale = Math.min(1, 150/ckExtractImg.width);
+  canvas.width = ckExtractImg.width*scale; canvas.height = ckExtractImg.height*scale;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(ckExtractImg,0,0,canvas.width,canvas.height);
+  const data = ctx.getImageData(0,0,canvas.width,canvas.height).data;
+  const buckets = {};
+  for(let i=0;i<data.length;i+=4){
+    const r=Math.round(data[i]/32)*32, g=Math.round(data[i+1]/32)*32, b=Math.round(data[i+2]/32)*32;
+    const key = `${r},${g},${b}`;
+    buckets[key] = (buckets[key]||0)+1;
+  }
+  const sorted = Object.entries(buckets).sort((a,b)=>b[1]-a[1]).slice(0,count);
+  const colors = sorted.map(([rgb])=>{
+    const [r,g,b] = rgb.split(',').map(v=>Math.min(255,Number(v)));
+    return ckRgbToHex(r,g,b);
+  });
+  ckRenderSwatchRow('ckExtractResult', colors, true);
+});
+
+/* ---------- shared swatch-row renderer (click = set current color, + button = add to palette) ---------- */
+function ckRenderSwatchRow(containerId, hexArray, showAddBtn){
+  const container = ckEl(containerId);
+  container.innerHTML = '';
+  hexArray.forEach(hex=>{
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'text-align:center;';
+    const swatch = document.createElement('button');
+    swatch.type = 'button';
+    swatch.style.cssText = `width:56px;height:56px;border-radius:6px;background:${hex};border:1px solid var(--line);cursor:pointer;display:block;`;
+    swatch.title = 'Click to set as Current Color';
+    swatch.addEventListener('click', ()=>ckSetCurrentColor(hex));
+    const label = document.createElement('p');
+    label.style.cssText = 'margin:4px 0 0;font-size:.68rem;';
+    label.textContent = hex;
+    wrap.appendChild(swatch); wrap.appendChild(label);
+    if(showAddBtn){
+      const addBtn = document.createElement('button');
+      addBtn.className='secondary'; addBtn.textContent='+'; addBtn.title='Add to Palette';
+      addBtn.style.cssText='padding:1px 8px; font-size:.7rem; margin-top:2px;';
+      addBtn.addEventListener('click', (e)=>{ e.stopPropagation(); ckAddToPalette(hex); });
+      wrap.appendChild(addBtn);
+    }
+    container.appendChild(wrap);
+  });
+}
+
+/* ---------- Mode 3: Convert Formats (live-synced HEX/RGB + CMYK button) ---------- */
+let ckSyncing = false;
+function ckSyncConvertFields(){
+  if(ckSyncing) return;
+  ckSyncing = true;
+  ckEl('ckConvHex').value = ckCurrentColor.hex;
+  ckEl('ckConvR').value = ckCurrentColor.r;
+  ckEl('ckConvG').value = ckCurrentColor.g;
+  ckEl('ckConvB').value = ckCurrentColor.b;
+  ckSyncing = false;
+}
+ckEl('ckConvHex').addEventListener('input', function(){
+  if(ckSyncing) return;
+  const rgb = ckHexToRgb(this.value);
+  if(rgb) ckSetCurrentColor(this.value);
+});
+['ckConvR','ckConvG','ckConvB'].forEach(id=>{
+  ckEl(id).addEventListener('input', ()=>{
+    if(ckSyncing) return;
+    const r=+ckEl('ckConvR').value||0, g=+ckEl('ckConvG').value||0, b=+ckEl('ckConvB').value||0;
+    ckSetCurrentColor(ckRgbToHex(r,g,b));
+  });
+});
+ckEl('ckConvCmykBtn').addEventListener('click', ()=>{
+  const parts = ckEl('ckConvCmyk').value.split(',').map(n=>parseFloat(n.trim()));
+  if(parts.length!==4 || parts.some(isNaN)) return alert('Enter as: C,M,Y,K (0-100 each)');
+  if(parts.some(v=>v<0||v>100)) return alert('Each CMYK value must be between 0 and 100');
+  const rgb = ckCmykToRgb(parts[0],parts[1],parts[2],parts[3]);
+  ckSetCurrentColor(ckRgbToHex(rgb.r,rgb.g,rgb.b));
+});
+
+/* ---------- Add to Palette from Current Color panel ---------- */
+ckEl('ckAddCurrentToPalette').addEventListener('click', ()=>ckAddToPalette(ckCurrentColor.hex));
+
+/* ---------- Color Scheme Generator ---------- */
+function ckGenerateScheme(type){
+  const hsl = ckRgbToHsl(ckCurrentColor.r, ckCurrentColor.g, ckCurrentColor.b);
+  const wrap = h => ((h%360)+360)%360;
+  let hues;
+  if(type==='complementary') hues=[hsl.h, wrap(hsl.h+180)];
+  else if(type==='analogous') hues=[wrap(hsl.h-30), hsl.h, wrap(hsl.h+30)];
+  else if(type==='triadic') hues=[hsl.h, wrap(hsl.h+120), wrap(hsl.h+240)];
+  else if(type==='splitcomplementary') hues=[hsl.h, wrap(hsl.h+150), wrap(hsl.h+210)];
+  else if(type==='monochromatic'){
+    return [20,35,50,65,80,90].map(l=>{ const c=ckHslToRgb(hsl.h,hsl.s,l); return ckRgbToHex(c.r,c.g,c.b); });
+  }
+  return hues.map(h=>{ const c=ckHslToRgb(h,hsl.s,hsl.l); return ckRgbToHex(c.r,c.g,c.b); });
+}
+document.querySelectorAll('[data-scheme]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const colors = ckGenerateScheme(btn.dataset.scheme);
+    ckRenderSwatchRow('ckSchemeResult', colors, true);
+  });
+});
+let ckLastSchemeType = null;
+function ckRenderSchemesIfAny(){
+  if(ckLastSchemeType) ckRenderSwatchRow('ckSchemeResult', ckGenerateScheme(ckLastSchemeType), true);
+}
+
+/* ---------- Shades & Tints (auto-updates on color change) ---------- */
+function ckRenderTintsShades(){
+  const {r,g,b} = ckCurrentColor;
+  const tints=[], shades=[];
+  for(let i=1;i<=10;i++){
+    const pct = i/11;
+    tints.push(ckRgbToHex(r+(255-r)*pct, g+(255-g)*pct, b+(255-b)*pct));
+    shades.push(ckRgbToHex(r*(1-pct), g*(1-pct), b*(1-pct)));
+  }
+  ckRenderMiniSwatchRow('ckTintsRow', tints);
+  ckRenderMiniSwatchRow('ckShadesRow', shades);
+}
+function ckRenderMiniSwatchRow(containerId, hexArray){
+  const container = ckEl(containerId);
+  container.innerHTML = '';
+  hexArray.forEach(hex=>{
+    const btn = document.createElement('button');
+    btn.type='button';
+    btn.style.cssText = `width:32px;height:32px;border-radius:4px;background:${hex};border:1px solid var(--line);cursor:pointer;`;
+    btn.title = hex+' (click to set as Current Color)';
+    btn.addEventListener('click', ()=>ckSetCurrentColor(hex));
+    container.appendChild(btn);
+  });
+}
+
+/* ---------- Color-Blindness Simulation (pure math, no external library) ---------- */
+function ckApplyColorBlindMatrix(r,g,b,type){
+  if(type==='grayscale'){
+    const gray = Math.round(0.299*r+0.587*g+0.114*b);
+    return {r:gray,g:gray,b:gray};
+  }
+  let matrix;
+  if(type==='protanopia') matrix=[[0.567,0.433,0],[0.558,0.442,0],[0,0.242,0.758]];
+  else if(type==='deuteranopia') matrix=[[0.625,0.375,0],[0.7,0.3,0],[0,0.3,0.7]];
+  else if(type==='tritanopia') matrix=[[0.95,0.05,0],[0,0.433,0.567],[0,0.475,0.525]];
+  else return {r,g,b};
+  const nr = matrix[0][0]*r+matrix[0][1]*g+matrix[0][2]*b;
+  const ng = matrix[1][0]*r+matrix[1][1]*g+matrix[1][2]*b;
+  const nb = matrix[2][0]*r+matrix[2][1]*g+matrix[2][2]*b;
+  return {r:Math.round(Math.min(255,Math.max(0,nr))), g:Math.round(Math.min(255,Math.max(0,ng))), b:Math.round(Math.min(255,Math.max(0,nb)))};
+}
+function ckRenderColorBlindPreview(){
+  const mode = ckEl('ckBlindMode').value;
+  const container = ckEl('ckBlindResult');
+  container.innerHTML = '';
+  if(mode==='none'){
+    container.innerHTML = '<p class="stat" style="font-size:.85rem; color:#8a8a75;">Select a simulation type above to preview your current palette.</p>';
+    return;
+  }
+  const sourceColors = ckCustomPalette.length ? ckCustomPalette : [ckCurrentColor.hex];
+  sourceColors.forEach(hex=>{
+    const rgb = ckHexToRgb(hex);
+    if(!rgb) return;
+    const sim = ckApplyColorBlindMatrix(rgb.r, rgb.g, rgb.b, mode);
+    const simHex = ckRgbToHex(sim.r, sim.g, sim.b);
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'text-align:center;';
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex; gap:2px;';
+    const orig = document.createElement('div');
+    orig.style.cssText = `width:28px;height:40px;background:${hex};border:1px solid var(--line);`;
+    const simmed = document.createElement('div');
+    simmed.style.cssText = `width:28px;height:40px;background:${simHex};border:1px solid var(--line);`;
+    row.appendChild(orig); row.appendChild(simmed);
+    wrap.appendChild(row);
+    const label = document.createElement('p');
+    label.style.cssText = 'margin:4px 0 0; font-size:.65rem;';
+    label.textContent = 'orig / sim';
+    wrap.appendChild(label);
+    container.appendChild(wrap);
+  });
+}
+ckEl('ckBlindMode').addEventListener('change', ckRenderColorBlindPreview);
+
+/* ---------- Session Color History ---------- */
+function ckAddToHistory(hex){
+  ckHistory = ckHistory.filter(h=>h!==hex);
+  ckHistory.unshift(hex);
+  ckHistory = ckHistory.slice(0,20);
+  ckRenderHistory();
+}
+function ckRenderHistory(){
+  ckRenderMiniSwatchRow('ckHistoryRow', ckHistory);
+}
+ckEl('ckClearHistoryBtn').addEventListener('click', ()=>{ ckHistory=[]; ckRenderHistory(); });
+
+/* ---------- Custom Palette + Export ---------- */
+function ckAddToPalette(hex){
+  if(!ckCustomPalette.includes(hex)) ckCustomPalette.push(hex);
+  ckRenderPalette();
+}
+function ckRenderPalette(){
+  const container = ckEl('ckPaletteRow');
+  container.innerHTML = '';
+  ckEl('ckPaletteEmpty').style.display = ckCustomPalette.length ? 'none' : 'block';
+  ckCustomPalette.forEach((hex,idx)=>{
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'text-align:center;';
+    const swatch = document.createElement('button');
+    swatch.type='button';
+    swatch.style.cssText = `width:48px;height:48px;border-radius:6px;background:${hex};border:1px solid var(--line);cursor:pointer;`;
+    swatch.title = hex;
+    swatch.addEventListener('click', ()=>ckSetCurrentColor(hex));
+    const rmBtn = document.createElement('button');
+    rmBtn.className='fl-remove'; rmBtn.textContent='\u2715'; rmBtn.style.cssText='padding:0 6px; font-size:.7rem;';
+    rmBtn.addEventListener('click', (e)=>{ e.stopPropagation(); ckCustomPalette.splice(idx,1); ckRenderPalette(); ckRenderColorBlindPreview(); });
+    wrap.appendChild(swatch); wrap.appendChild(rmBtn);
+    container.appendChild(wrap);
+  });
+  ckRenderColorBlindPreview();
+}
+ckEl('ckClearPaletteBtn').addEventListener('click', ()=>{ ckCustomPalette=[]; ckRenderPalette(); });
+
+ckEl('ckExportHexBtn').addEventListener('click', function(){
+  if(!ckCustomPalette.length) return alert('Add at least one color to your palette first.');
+  ckCopyGeneric(ckCustomPalette.join(', '), this);
+});
+ckEl('ckExportCssBtn').addEventListener('click', function(){
+  if(!ckCustomPalette.length) return alert('Add at least one color to your palette first.');
+  const text = ':root {\n'+ckCustomPalette.map((h,i)=>`  --color-${i+1}: ${h};`).join('\n')+'\n}';
+  ckCopyGeneric(text, this);
+});
+ckEl('ckExportJsonBtn').addEventListener('click', function(){
+  if(!ckCustomPalette.length) return alert('Add at least one color to your palette first.');
+  const data = ckCustomPalette.map(hex=>{
+    const rgb = ckHexToRgb(hex);
+    const hsl = ckRgbToHsl(rgb.r,rgb.g,rgb.b);
+    return {hex, rgb:`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`, hsl:`hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`};
+  });
+  ckCopyGeneric(JSON.stringify(data, null, 2), this);
+});
+ckEl('ckExportSheetBtn').addEventListener('click', ()=>{
+  if(!ckCustomPalette.length) return alert('Add at least one color to your palette first.');
+  const swatchSize = 100;
+  const canvas = document.createElement('canvas');
+  canvas.width = swatchSize*ckCustomPalette.length;
+  canvas.height = swatchSize+30;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#fff'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  ckCustomPalette.forEach((hex,i)=>{
+    ctx.fillStyle = hex;
+    ctx.fillRect(i*swatchSize,0,swatchSize,swatchSize);
+    ctx.fillStyle = '#000';
+    ctx.font = '12px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(hex, i*swatchSize+swatchSize/2, swatchSize+18);
+  });
+  canvas.toBlob(blob=>{
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'palette.png';
+    a.click();
+  });
+});
+
+/* ---------- init ---------- */
+ckSetCurrentColor('#E07A2C', {skipHistory:true});
+ckAddToHistory('#E07A2C');
+</script><script src="script.js"></script></body></html>
