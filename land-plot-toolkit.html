@@ -1,0 +1,654 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Land & Plot Toolkit - Marla Converter, Plot Area & Land Division | ToolNest</title><meta name="description" content="Convert land units, measure plots, calculate irregular plot area, and divide land among partners or heirs, free and private with a downloadable land record summary."><link rel="canonical" href="https://toolnest.link/land-plot-toolkit.html"><meta property="og:title" content="Land & Plot Toolkit | ToolNest"><meta property="og:description" content="Convert land units, measure plots, calculate irregular plot area, and divide land among partners or heirs, free and private."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/land-plot-toolkit.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"><style>@media print{header,.search-wrap,footer,nav,.seo-content{display:none !important}}</style></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Land & Plot Toolkit</h1><p>Convert land units, measure and compare plots, calculate irregular areas, estimate value, and divide land — one Marla standard, 100% private.</p></header><main>
+<div class="card" id="lpk"><h2>Land &amp; Plot Toolkit</h2><p class="desc">Convert land units, measure plots, calculate irregular plot area, and divide land among partners or heirs — free, private, all in your browser.</p>
+
+<h3 style="margin-top:4px;">1. Marla Standard (applies across this whole toolkit)</h3>
+<div class="row"><div class="field"><label class="field-label" for="lpkStandard">Marla standard</label><select id="lpkStandard"><option value="225">1 Marla = 225 sq ft (Standard)</option><option value="272.25">1 Marla = 272.25 sq ft (Older/Regional)</option><option value="custom">Custom sq ft per Marla</option></select></div><input type="number" id="lpkCustomValue" placeholder="Custom sq ft/Marla" style="display:none; max-width:180px;"></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="lpkSaveDraftBtn">Save to This Browser</button><button class="secondary" id="lpkLoadDraftBtn">Load Saved Data</button><button class="secondary" id="lpkClearDraftBtn">Clear Saved Data</button></div>
+<p class="stat" id="lpkDraftStatus" style="font-size:.8rem;"></p>
+
+<h3>2. Workspace</h3>
+<div class="row" id="lpkTabs">
+<button class="secondary lpk-tab active" data-tab="convert">Land Unit Converter</button>
+<button class="secondary lpk-tab" data-tab="measure">Land Measurement</button>
+<button class="secondary lpk-tab" data-tab="irregular">Irregular Plot</button>
+<button class="secondary lpk-tab" data-tab="division">Land &amp; Plot Division</button>
+</div>
+
+<div id="lpkConvertPanel" style="margin-top:14px;">
+<div class="row"><div class="field"><label class="field-label" for="lmValue">Value</label><input type="number" id="lmValue" value="1"></div><div class="field"><label class="field-label" for="lmUnit">Unit</label><select id="lmUnit"><option value="marla">Marla</option><option value="kanal">Kanal</option><option value="acre">Acre</option><option value="hectare">Hectare</option><option value="sqft">Sq Ft</option><option value="sqyd">Sq Yard</option><option value="sqm">Sq Meter</option></select></div><button id="lmBtn">Convert</button></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="lmCopyAll">\U0001F4CB Copy All Results</button></div>
+<p class="stat" id="lmSummary" style="font-weight:600;"></p>
+<div id="lmResultList" style="margin-top:8px;"></div>
+</div>
+
+<div id="lpkMeasurePanel" style="margin-top:14px; display:none;">
+<div class="row"><div class="field"><label class="field-label" for="lpkMLength">Length (ft)</label><input type="number" id="lpkMLength" value="0"></div><div class="field"><label class="field-label" for="lpkMWidth">Width (ft)</label><input type="number" id="lpkMWidth" value="0"></div><button id="lpkMeasureBtn">Calculate</button></div>
+<canvas id="lpkMeasurePreview" width="280" height="180" style="margin-top:12px; border:1px solid var(--line); border-radius:6px; max-width:100%;"></canvas>
+<p class="stat" id="lpkMeasureResult" style="white-space:pre-line;"></p>
+</div>
+
+<div id="lpkIrregularPanel" style="margin-top:14px; display:none;">
+<div class="row"><div class="field"><label class="field-label" for="lpkSideCount">Number of sides</label><select id="lpkSideCount"><option value="3">3 (Triangle)</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option></select></div></div>
+<div id="lpkSideInputs" style="margin-top:10px;"></div>
+<div id="lpkDiagonalInputs" style="margin-top:10px;"></div>
+<div class="row" style="margin-top:10px;"><button id="lpkIrregularBtn">Calculate Area</button><button class="secondary" id="lpkAddComparisonBtn">+ Add to Comparison</button></div>
+<canvas id="lpkIrregularPreview" width="280" height="220" style="margin-top:12px; border:1px solid var(--line); border-radius:6px; max-width:100%;"></canvas>
+<p class="stat" id="lpkIrregularResult" style="white-space:pre-line;"></p>
+
+<h3>Property Valuation Estimator</h3>
+<div class="row"><div class="field"><label class="field-label" for="lpkRate">Rate per unit</label><input type="number" id="lpkRate" value="0"></div><div class="field"><label class="field-label" for="lpkRateUnit">Unit</label><select id="lpkRateUnit"><option value="sqft">Sq Ft</option><option value="marla">Marla</option><option value="kanal">Kanal</option></select></div><button class="secondary" id="lpkValuationBtn">Estimate Value</button></div>
+<p class="stat" id="lpkValuationResult"></p>
+
+<h3>Plot Comparison</h3>
+<div id="lpkComparisonTable" style="margin-top:8px; overflow-x:auto;"></div>
+<div class="row" style="margin-top:8px;"><button class="secondary" id="lpkClearComparisonBtn">Clear Comparison</button></div>
+</div>
+
+<div id="lpkDivisionPanel" style="margin-top:14px; display:none;">
+<div class="row"><div class="field"><label class="field-label" for="lpkDivTotal">Total plot area</label><input type="number" id="lpkDivTotal" value="10000"></div><div class="field"><label class="field-label" for="lpkDivUnit">Unit</label><select id="lpkDivUnit"><option value="sqft" selected>Sq Ft</option><option value="marla">Marla</option><option value="kanal">Kanal</option></select></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="lpkDivMode">Division mode</label><select id="lpkDivMode"><option value="ratio">By Shares/Ratios</option><option value="equal">Equal Division</option><option value="fixed">Fixed Portion + Remainder</option></select></div></div>
+
+<div id="lpkDivFixedRow" style="margin-top:10px; display:none;"><div class="row"><div class="field"><label class="field-label" for="lpkDivFixedLabel">Reserved portion label</label><input type="text" id="lpkDivFixedLabel" placeholder="e.g. Road / House Reserve"></div><div class="field"><label class="field-label" for="lpkDivFixedAmount">Reserved amount</label><input type="number" id="lpkDivFixedAmount" value="0"></div><div class="field"><label class="field-label" for="lpkDivFixedUnit">Unit</label><select id="lpkDivFixedUnit"><option value="sqft">Sq Ft</option><option value="marla">Marla</option><option value="kanal">Kanal</option></select></div></div></div>
+
+<div id="lpkDivEqualRow" style="margin-top:10px; display:none;"><div class="field"><label class="field-label" for="lpkDivEqualN">Number of people</label><input type="number" id="lpkDivEqualN" value="2" min="1"></div></div>
+
+<div id="lpkDivShareRows" style="margin-top:10px;"></div>
+<div class="row" style="margin-top:10px;" id="lpkDivAddShareRow"><button class="secondary" id="lpkAddShareBtn">+ Add Person/Share</button></div>
+
+<div class="row" style="margin-top:12px;"><button id="lpkDivideBtn">Divide Plot</button><button class="secondary" id="lpkDivReset">Reset Division</button></div>
+<div id="lpkDivBarWrap" style="margin-top:14px; display:none;">
+<div style="display:flex; width:100%; height:28px; border-radius:6px; overflow:hidden; border:1px solid var(--line);" id="lpkDivBar"></div>
+<div id="lpkDivLegend" style="margin-top:8px; display:flex; flex-wrap:wrap; gap:10px;"></div>
+</div>
+<div id="lpkDivTable" style="margin-top:12px; overflow-x:auto;"></div>
+</div>
+
+<h3>3. Land Record Summary</h3>
+<div class="row"><button id="lpkDownloadPdfBtn">Download Land Record Summary PDF</button><button class="secondary" id="lpkPrintBtn">Print</button></div>
+<p class="stat" id="lpkPdfStatus" style="font-size:.8rem;"></p>
+</div>
+<div class="seo-content">
+<h3>How to Use Land & Plot Toolkit</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Set Marla Standard:</strong> Choose 225 sq ft, 272.25 sq ft, or your own custom value.</li><li><strong>Convert Units:</strong> Switch between Marla, Kanal, Acre, Hectare, Sq Ft, Sq Yd, and Sq M instantly.</li><li><strong>Measure a Rectangular Plot:</strong> Enter length and width for an instant area with a visual preview.</li><li><strong>Calculate an Irregular Plot:</strong> Enter 3, 4, 5, or 6 sides (plus diagonals) for an accurate area.</li><li><strong>Compare Plots:</strong> Add multiple calculated plots to a side-by-side comparison table.</li><li><strong>Estimate Value:</strong> Multiply the plot area by a rate per unit for a quick valuation.</li><li><strong>Divide the Land:</strong> Split a plot by ratio, equally, or reserve a fixed portion first.</li><li><strong>Export:</strong> Download a Land Record Summary PDF or save your session to this browser.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>A complete land measurement toolkit marla converter irregular plot calculator free tool means not switching between a Marla converter, a separate plot area calculator, and a spreadsheet for splitting land among family members. This unified land measurement converter marla kanal acres all units tool applies one shared Marla standard — 225 sq ft, 272.25 sq ft, or your own custom local value — across every conversion, plot calculation, and land division in the toolkit.</p>
+<h3>How It Works</h3>
+<p>This professional land measurement suite for real estate tool uses the same trusted unit conversion and plot area formulas as ToolNest's original three land tools, now sharing one Marla standard setting and adding a proper multi-side irregular plot engine. Instead of a rough averaging shortcut, irregular plots with 3, 4, 5, or 6 sides are calculated by splitting the shape into triangles from side and diagonal lengths and applying Heron's formula to each — the same rigorous method used for exact triangle geometry, verified to reproduce known areas precisely for squares, rectangles, and regular polygons.</p>
+<h3>Key Features</h3>
+<p>As an instant property plot calculator and unit converter tool, the Land Measurement mode includes a live visual rectangle preview, and the Irregular Plot mode draws an approximate shape reconstruction from your entered measurements alongside the calculated area. A Plot Comparison table lets you stack multiple calculated plots side by side to see relative size, and a Property Valuation Estimator multiplies your plot's area by a rate per square foot, Marla, or Kanal for a quick estimated value. The new Land & Plot Division engine — searched as a land division calculator, plot share calculator, or marla distribution tool — splits a total area by custom ratios among partners or heirs, equally among any number of people, or by reserving a fixed portion (like a road or house plot) before dividing the remainder, complete with a visual stacked share bar and a detailed breakdown table.</p>
+<h3>Common Use Cases</h3>
+<p>A property buyer converts a listed plot size from Kanal into square feet and square meters to compare it against other listings using consistent units. Someone documenting an irregularly shaped family plot measures each side and one or two diagonals, calculates the area with Heron's formula, and adds it to the comparison table alongside a neighboring plot. Siblings dividing an inherited plot use the Land & Plot Division engine to reserve a shared access road first, then split the remaining area among themselves by an agreed ratio, downloading a Land Record Summary PDF that documents exactly how the land was divided.</p>
+<h3>Tips</h3>
+<p>For irregular plots, more accurate diagonal measurements produce a more accurate area — if you're unsure of a diagonal, measuring it directly on-site with a tape or laser measure gives far better results than estimating it. When dividing land by shares, ratios like 2:1:1 and percentages like 40%:30%:30% both work the same way — enter whichever your family or partnership already uses, and always keep this tool's output as a planning reference rather than a substitute for a registered survey or legal land division document.</p>
+<h3>Frequently Asked Questions</h3>
+<div class=faq-block><details><summary>Can I convert between all regional and international land units in one tool?</summary><p>Yes, the Land Unit Converter covers Marla, Kanal, Acre, Hectare, Sq Ft, Sq Yard, and Sq Meter with instant reverse conversion from any unit.</p></details><details><summary>What is the standard Marla measurement (225 vs 272.25 sq ft)?</summary><p>Both are commonly used regional standards; this toolkit lets you pick either one, or enter your own custom sq ft per Marla value, and applies it consistently across every calculation.</p></details><details><summary>How do I calculate the area of an irregularly shaped plot?</summary><p>Enter the plot's side lengths in order and any required diagonal lengths in the Irregular Plot tab; the toolkit supports 3, 4, 5, or 6-sided plots.</p></details><details><summary>Does the toolkit support both South Asian (Marla/Kanal) and international units?</summary><p>Yes, Marla and Kanal are available alongside Acre, Hectare, Sq Ft, Sq Yard, and Sq Meter throughout the toolkit.</p></details><details><summary>How accurate is Heron's formula for irregular land plot calculations?</summary><p>Heron's formula is mathematically exact given correct side and diagonal measurements; the main source of error is measurement accuracy in the field, not the formula itself.</p></details><details><summary>Can I convert final plot area into multiple unit formats simultaneously?</summary><p>Yes, every plot calculation shows the area in square feet, square yards, square meters, Marla, and Kanal together.</p></details><details><summary>Is the conversion tool useful for real estate property valuation?</summary><p>Yes, the Property Valuation Estimator multiplies your calculated area by a rate per unit for a quick estimated value, and all conversions support comparing listings in consistent units.</p></details><details><summary>What information do I need to calculate irregular plot areas?</summary><p>You need each side length in order around the plot, plus one diagonal for a 4-sided plot, two for a 5-sided plot, and so on — no diagonal is needed for a simple 3-sided (triangular) plot.</p></details><details><summary>How do I divide a plot of land among multiple people?</summary><p>Use the Land & Plot Division tab to split a total area by custom ratios, equally among any number of people, or by reserving a fixed portion first and dividing the remainder.</p></details><details><summary>Can I compare the area of multiple plots side by side?</summary><p>Yes, add any calculated irregular plot to the Plot Comparison table to see areas and unit conversions side by side.</p></details></div>
+</div>
+<div class="seo-content"><h3>Related Property Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="construction-bricks-calculator.html">Construction Bricks Calculator</a></li>
+<li><a href="cement-concrete-volume-calculator.html">Cement & Concrete Volume Calculator</a></li>
+<li><a href="construction-cost-estimator.html">Construction Cost Estimator</a></li>
+<li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Land & Plot Toolkit","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/land-plot-toolkit.html"},
+{"@type":"HowTo","name":"How to Use the Land & Plot Toolkit","step":[
+{"@type":"HowToStep","text":"Set your Marla standard."},
+{"@type":"HowToStep","text":"Convert between land units."},
+{"@type":"HowToStep","text":"Measure a rectangular plot."},
+{"@type":"HowToStep","text":"Calculate an irregular plot's area."},
+{"@type":"HowToStep","text":"Compare multiple plots."},
+{"@type":"HowToStep","text":"Estimate property value."},
+{"@type":"HowToStep","text":"Divide land among partners or heirs."},
+{"@type":"HowToStep","text":"Download a Land Record Summary PDF."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Can I convert between all regional and international land units in one tool?","acceptedAnswer":{"@type":"Answer","text":"Yes, covering Marla, Kanal, Acre, Hectare, Sq Ft, Sq Yard, and Sq Meter with instant reverse conversion."}},
+{"@type":"Question","name":"What is the standard Marla measurement (225 vs 272.25 sq ft)?","acceptedAnswer":{"@type":"Answer","text":"Both are commonly used; you can pick either or enter a custom value, applied consistently across the toolkit."}},
+{"@type":"Question","name":"How do I calculate the area of an irregularly shaped plot?","acceptedAnswer":{"@type":"Answer","text":"Enter side lengths in order and any required diagonals; 3, 4, 5, or 6-sided plots are supported."}},
+{"@type":"Question","name":"Does the toolkit support both South Asian (Marla/Kanal) and international units?","acceptedAnswer":{"@type":"Answer","text":"Yes, Marla and Kanal are available alongside Acre, Hectare, Sq Ft, Sq Yard, and Sq Meter."}},
+{"@type":"Question","name":"How accurate is Heron's formula for irregular land plot calculations?","acceptedAnswer":{"@type":"Answer","text":"Mathematically exact given correct measurements; accuracy depends on field measurement precision."}},
+{"@type":"Question","name":"Can I convert final plot area into multiple unit formats simultaneously?","acceptedAnswer":{"@type":"Answer","text":"Yes, every calculation shows square feet, square yards, square meters, Marla, and Kanal together."}},
+{"@type":"Question","name":"Is the conversion tool useful for real estate property valuation?","acceptedAnswer":{"@type":"Answer","text":"Yes, the Property Valuation Estimator multiplies area by a rate per unit for a quick estimate."}},
+{"@type":"Question","name":"What information do I need to calculate irregular plot areas?","acceptedAnswer":{"@type":"Answer","text":"Each side length in order, plus one diagonal per side beyond a triangle (none needed for a 3-sided plot)."}},
+{"@type":"Question","name":"How do I divide a plot of land among multiple people?","acceptedAnswer":{"@type":"Answer","text":"Use the Land & Plot Division tab to split by custom ratios, equally, or by reserving a fixed portion first."}},
+{"@type":"Question","name":"Can I compare the area of multiple plots side by side?","acceptedAnswer":{"@type":"Answer","text":"Yes, add calculated plots to the Plot Comparison table to see areas and conversions side by side."}}
+]}
+]}
+</script>
+<script>/* ===== Land & Plot Toolkit engine ===== */
+const lpkEl = id => document.getElementById(id);
+
+/* ---------- shared copy handler ---------- */
+document.querySelectorAll('[data-copy]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.getAttribute('data-copy'));
+    if(!target) return;
+    const text = btn.getAttribute('data-copy-mode')==='text' ? target.textContent : target.value;
+    if(!text) return;
+    const done = ()=>{ const old=btn.textContent; btn.textContent='\u2705 Copied'; setTimeout(()=>btn.textContent=old,1200); };
+    if(window.toolnestCopyText){ window.toolnestCopyText(text, done); } else { navigator.clipboard.writeText(text).then(done); }
+  });
+});
+function lpkCopyGeneric(text, btn){
+  const done = ()=>{ const old=btn.textContent; btn.textContent='\u2705 Copied'; setTimeout(()=>btn.textContent=old,1200); };
+  if(window.toolnestCopyText) window.toolnestCopyText(text, done); else navigator.clipboard.writeText(text).then(done);
+}
+
+/* ---------- global Marla standard (drives everything in this toolkit) ---------- */
+const lpkStandardSel = lpkEl('lpkStandard');
+const lpkCustomInput = lpkEl('lpkCustomValue');
+lpkStandardSel.addEventListener('change', ()=>{
+  lpkCustomInput.style.display = lpkStandardSel.value==='custom' ? 'inline-block' : 'none';
+});
+function lpkGetSqftPerMarla(){
+  if(lpkStandardSel.value==='custom'){
+    const v = +lpkCustomInput.value;
+    if(!v||v<=0) return null;
+    return v;
+  }
+  return +lpkStandardSel.value;
+}
+
+/* ---------- workspace tabs ---------- */
+document.querySelectorAll('.lpk-tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.lpk-tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const tab = btn.dataset.tab;
+    lpkEl('lpkConvertPanel').style.display = tab==='convert' ? 'block' : 'none';
+    lpkEl('lpkMeasurePanel').style.display = tab==='measure' ? 'block' : 'none';
+    lpkEl('lpkIrregularPanel').style.display = tab==='irregular' ? 'block' : 'none';
+    lpkEl('lpkDivisionPanel').style.display = tab==='division' ? 'block' : 'none';
+  });
+});
+
+/* ---------- Land Unit Converter (preserved logic, now uses shared Marla standard) ---------- */
+let lmLastResultText = '';
+lpkEl('lmBtn').addEventListener('click', ()=>{
+  const val = +lpkEl('lmValue').value;
+  const unit = lpkEl('lmUnit').value;
+  if(!val||val<=0) return lpkEl('lmSummary').textContent='Enter a valid positive value';
+  const sqftPerMarla = lpkGetSqftPerMarla();
+  if(sqftPerMarla===null) return lpkEl('lmSummary').textContent='Enter a valid custom sq ft per Marla value (greater than 0)';
+  const LAND_UNITS_TO_SQFT = {marla:sqftPerMarla, kanal:sqftPerMarla*20, acre:43560, hectare:107639, sqft:1, sqyd:9, sqm:10.7639};
+  const unitLabels = {marla:'Marla', kanal:'Kanal', acre:'Acre', hectare:'Hectare', sqft:'Sq Ft', sqyd:'Sq Yard', sqm:'Sq Meter'};
+  const sqft = val*LAND_UNITS_TO_SQFT[unit];
+  const summaryLine = `${val} ${unitLabels[unit]} (@ ${sqftPerMarla} sq ft/Marla) equals:`;
+  lpkEl('lmSummary').textContent = summaryLine;
+  const listDiv = lpkEl('lmResultList');
+  listDiv.innerHTML = '';
+  let allLines = [summaryLine];
+  for(const u in LAND_UNITS_TO_SQFT){
+    if(u===unit) continue;
+    const converted = (sqft/LAND_UNITS_TO_SQFT[u]).toFixed(3);
+    const line = `${converted} ${unitLabels[u]}`;
+    allLines.push(line);
+    const row = document.createElement('div');
+    row.className='row'; row.style.cssText='margin-top:6px; align-items:center;';
+    const span = document.createElement('span'); span.style.flex='1'; span.textContent=line;
+    const copyBtn = document.createElement('button');
+    copyBtn.className='secondary'; copyBtn.textContent='\U0001F4CB'; copyBtn.style.cssText='padding:2px 10px; font-size:.8rem;';
+    copyBtn.addEventListener('click', ()=>lpkCopyGeneric(line, copyBtn));
+    row.appendChild(span); row.appendChild(copyBtn);
+    listDiv.appendChild(row);
+  }
+  lmLastResultText = allLines.join('\n');
+});
+lpkEl('lmCopyAll').addEventListener('click', function(){
+  if(!lmLastResultText) return;
+  lpkCopyGeneric(lmLastResultText, this);
+});
+
+/* ---------- Land Measurement (Length x Width) with visual preview ---------- */
+function lpkDrawRectanglePreview(canvas, lenFt, widFt){
+  const ctx = canvas.getContext('2d');
+  const w=canvas.width, h=canvas.height;
+  ctx.clearRect(0,0,w,h);
+  if(!lenFt||!widFt||lenFt<=0||widFt<=0) return;
+  const pad=20;
+  const scale = Math.min((w-pad*2)/lenFt, (h-pad*2)/widFt);
+  const rw = lenFt*scale, rh = widFt*scale;
+  const x0 = (w-rw)/2, y0=(h-rh)/2;
+  ctx.fillStyle = '#f2ecd8';
+  ctx.fillRect(x0,y0,rw,rh);
+  ctx.strokeStyle = '#1f3d2b';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(x0,y0,rw,rh);
+  ctx.fillStyle = '#1f3d2b';
+  ctx.font = '11px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText(`${lenFt} ft`, x0+rw/2, y0-6);
+  ctx.save();
+  ctx.translate(x0-10, y0+rh/2);
+  ctx.rotate(-Math.PI/2);
+  ctx.fillText(`${widFt} ft`, 0, 0);
+  ctx.restore();
+}
+lpkEl('lpkMeasureBtn').addEventListener('click', ()=>{
+  const len = +lpkEl('lpkMLength').value, wid = +lpkEl('lpkMWidth').value;
+  if(!len||!wid||len<=0||wid<=0) return lpkEl('lpkMeasureResult').textContent='Enter a valid positive length and width.';
+  const sqftPerMarla = lpkGetSqftPerMarla();
+  if(sqftPerMarla===null) return lpkEl('lpkMeasureResult').textContent='Enter a valid custom sq ft per Marla value (greater than 0)';
+  const area = len*wid;
+  const marla = area/sqftPerMarla;
+  const kanal = marla/20;
+  const sqyd = area/9;
+  const sqm = area*0.092903;
+  lpkEl('lpkMeasureResult').textContent = `Area: ${area.toFixed(1)} sq ft\n= ${sqyd.toFixed(1)} sq yd\n= ${sqm.toFixed(1)} sq m\n= ${marla.toFixed(2)} Marla (@ ${sqftPerMarla} sq ft/Marla)\n= ${kanal.toFixed(3)} Kanal`;
+  lpkDrawRectanglePreview(lpkEl('lpkMeasurePreview'), len, wid);
+});
+
+/* ---------- Irregular Plot: dynamic side/diagonal inputs ---------- */
+function lpkRenderSideInputs(){
+  const n = +lpkEl('lpkSideCount').value;
+  const sideDiv = lpkEl('lpkSideInputs');
+  sideDiv.innerHTML = '<label class="field-label-block">Side lengths (ft), in order around the plot</label>';
+  const sideRow = document.createElement('div');
+  sideRow.className='row'; sideRow.style.cssText='flex-wrap:wrap; margin-top:6px;';
+  for(let i=1;i<=n;i++){
+    const field = document.createElement('div');
+    field.className='field'; field.style.cssText='min-width:80px;';
+    field.innerHTML = `<label class="field-label" for="lpkSide${i}">Side ${i}</label><input type="number" id="lpkSide${i}" class="lpk-side-input" value="0">`;
+    sideRow.appendChild(field);
+  }
+  sideDiv.appendChild(sideRow);
+
+  const diagDiv = lpkEl('lpkDiagonalInputs');
+  diagDiv.innerHTML = '';
+  const diagCount = Math.max(0, n-3);
+  if(diagCount>0){
+    diagDiv.innerHTML = '<label class="field-label-block">Diagonal lengths (ft), from corner 1</label>';
+    const diagRow = document.createElement('div');
+    diagRow.className='row'; diagRow.style.cssText='flex-wrap:wrap; margin-top:6px;';
+    for(let i=1;i<=diagCount;i++){
+      const field = document.createElement('div');
+      field.className='field'; field.style.cssText='min-width:80px;';
+      field.innerHTML = `<label class="field-label" for="lpkDiag${i}">Diagonal ${i}</label><input type="number" id="lpkDiag${i}" class="lpk-diag-input" value="0">`;
+      diagRow.appendChild(field);
+    }
+    diagDiv.appendChild(diagRow);
+  }
+}
+lpkEl('lpkSideCount').addEventListener('change', lpkRenderSideInputs);
+lpkRenderSideInputs();
+
+/* ---------- verified Heron's-formula fan-triangulation for N-sided polygons ---------- */
+function lpkHeronArea(a,b,c){
+  if(a+b<=c || a+c<=b || b+c<=a) return null;
+  const s=(a+b+c)/2;
+  const val=s*(s-a)*(s-b)*(s-c);
+  if(val<=0) return null;
+  return Math.sqrt(val);
+}
+function lpkPolygonArea(sides, diagonals){
+  const n = sides.length;
+  if(n<3) return null;
+  if(n===3) return lpkHeronArea(sides[0],sides[1],sides[2]);
+  if(diagonals.length !== n-3) return null;
+  let total = 0;
+  const t1 = lpkHeronArea(sides[0], sides[1], diagonals[0]);
+  if(t1===null) return null;
+  total += t1;
+  for(let i=0;i<diagonals.length-1;i++){
+    const t = lpkHeronArea(diagonals[i], sides[i+2], diagonals[i+1]);
+    if(t===null) return null;
+    total += t;
+  }
+  const lastD = diagonals[diagonals.length-1];
+  const tlast = lpkHeronArea(lastD, sides[n-2], sides[n-1]);
+  if(tlast===null) return null;
+  total += tlast;
+  return total;
+}
+
+/* ---------- approximate vertex reconstruction for lightweight visual preview ---------- */
+function lpkCircleIntersect(p1, r1, p2, r2){
+  const dx=p2.x-p1.x, dy=p2.y-p1.y;
+  const d = Math.sqrt(dx*dx+dy*dy);
+  if(d===0 || d>r1+r2 || d<Math.abs(r1-r2)) return null;
+  const a = (r1*r1-r2*r2+d*d)/(2*d);
+  const h2 = r1*r1-a*a;
+  if(h2<0) return null;
+  const h = Math.sqrt(h2);
+  const mx = p1.x+a*dx/d, my=p1.y+a*dy/d;
+  return { x: mx - h*dy/d, y: my + h*dx/d };
+}
+function lpkReconstructVertices(sides, diagonals){
+  const n = sides.length;
+  const V = [{x:0,y:0}];
+  V.push({x:sides[0], y:0});
+  if(n===3){
+    const p = lpkCircleIntersect(V[0], sides[2], V[1], sides[1]);
+    if(!p) return null;
+    V.push(p);
+    return V;
+  }
+  const p3 = lpkCircleIntersect(V[0], diagonals[0], V[1], sides[1]);
+  if(!p3) return null;
+  V.push(p3);
+  for(let i=0;i<diagonals.length-1;i++){
+    const prevDiagPoint = V[V.length-1];
+    const p = lpkCircleIntersect(V[0], diagonals[i+1], prevDiagPoint, sides[i+2]);
+    if(!p) return null;
+    V.push(p);
+  }
+  const lastPoint = V[V.length-1];
+  const pLast = lpkCircleIntersect(V[0], sides[n-1], lastPoint, sides[n-2]);
+  if(!pLast) return null;
+  V.push(pLast);
+  return V;
+}
+function lpkDrawPolygonPreview(canvas, vertices){
+  const ctx = canvas.getContext('2d');
+  const w=canvas.width, h=canvas.height;
+  ctx.clearRect(0,0,w,h);
+  if(!vertices||vertices.length<3) return;
+  const xs=vertices.map(v=>v.x), ys=vertices.map(v=>v.y);
+  const minX=Math.min(...xs), maxX=Math.max(...xs), minY=Math.min(...ys), maxY=Math.max(...ys);
+  const pad=24;
+  const scale = Math.min((w-pad*2)/Math.max(1,maxX-minX), (h-pad*2)/Math.max(1,maxY-minY));
+  const offX = pad-minX*scale + (w-pad*2-(maxX-minX)*scale)/2;
+  const offY = pad-minY*scale + (h-pad*2-(maxY-minY)*scale)/2;
+  ctx.beginPath();
+  vertices.forEach((v,i)=>{
+    const px=v.x*scale+offX, py=v.y*scale+offY;
+    if(i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+  });
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(224,122,44,0.25)';
+  ctx.fill();
+  ctx.strokeStyle = '#1f3d2b';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+
+/* ---------- Irregular Plot: calculate + comparison ---------- */
+let lpkLastIrregularResult = null;
+let lpkComparisonList = [];
+
+lpkEl('lpkIrregularBtn').addEventListener('click', ()=>{
+  const sideInputs = Array.from(document.querySelectorAll('.lpk-side-input'));
+  const diagInputs = Array.from(document.querySelectorAll('.lpk-diag-input'));
+  const sides = sideInputs.map(i=>+i.value);
+  const diagonals = diagInputs.map(i=>+i.value);
+  if(sides.some(s=>!s||s<=0)) return lpkEl('lpkIrregularResult').textContent='Enter all side lengths as positive numbers.';
+  if(diagonals.length>0 && diagonals.some(d=>!d||d<=0)) return lpkEl('lpkIrregularResult').textContent='Enter all diagonal lengths as positive numbers.';
+  const sqftPerMarla = lpkGetSqftPerMarla();
+  if(sqftPerMarla===null) return lpkEl('lpkIrregularResult').textContent='Enter a valid custom sq ft per Marla value (greater than 0)';
+  const area = lpkPolygonArea(sides, diagonals);
+  if(area===null) return lpkEl('lpkIrregularResult').textContent='These side and diagonal lengths do not form a valid shape (they fail the triangle rule). Please double-check your measurements.';
+  const sqyd = area/9, sqm = area*0.092903, marla = area/sqftPerMarla, kanal = marla/20;
+  lpkEl('lpkIrregularResult').textContent = `Estimated Area (${sides.length}-sided plot):\n${area.toFixed(1)} sq ft\n${sqyd.toFixed(1)} sq yd\n${sqm.toFixed(1)} sq m\n${marla.toFixed(2)} Marla (@ ${sqftPerMarla} sq ft/Marla)\n${kanal.toFixed(3)} Kanal\n\nCalculated using triangulation with Heron's formula from your entered sides and diagonals. This is an estimate, not a survey-grade measurement. For an exact area, consult a licensed surveyor.`;
+  lpkLastIrregularResult = {sides:sides.slice(), diagonals:diagonals.slice(), area, marla, kanal, sqyd, sqm};
+  const vertices = lpkReconstructVertices(sides, diagonals);
+  lpkDrawPolygonPreview(lpkEl('lpkIrregularPreview'), vertices);
+});
+
+lpkEl('lpkAddComparisonBtn').addEventListener('click', ()=>{
+  if(!lpkLastIrregularResult) return alert('Calculate a plot area first.');
+  lpkComparisonList.push(Object.assign({id:'plot'+(lpkComparisonList.length+1)}, lpkLastIrregularResult));
+  lpkRenderComparisonTable();
+});
+lpkEl('lpkClearComparisonBtn').addEventListener('click', ()=>{
+  lpkComparisonList = [];
+  lpkRenderComparisonTable();
+});
+function lpkRenderComparisonTable(){
+  const container = lpkEl('lpkComparisonTable');
+  if(!lpkComparisonList.length){ container.innerHTML='<p class="stat" style="font-size:.85rem; color:#8a8a75;">No plots added to comparison yet.</p>'; return; }
+  let html = '<table style="width:100%; border-collapse:collapse; font-size:.85rem;"><tr style="text-align:left; border-bottom:1px solid var(--line);"><th style="padding:6px;">Plot</th><th style="padding:6px;">Sides</th><th style="padding:6px;">Sq Ft</th><th style="padding:6px;">Marla</th><th style="padding:6px;">Kanal</th></tr>';
+  const maxArea = Math.max(...lpkComparisonList.map(p=>p.area));
+  lpkComparisonList.forEach((p,i)=>{
+    const diffPct = maxArea ? ((p.area/maxArea)*100).toFixed(0) : 100;
+    html += `<tr style="border-bottom:1px solid var(--line);"><td style="padding:6px;">${p.id}</td><td style="padding:6px;">${p.sides.length}</td><td style="padding:6px;">${p.area.toFixed(0)} (${diffPct}% of largest)</td><td style="padding:6px;">${p.marla.toFixed(2)}</td><td style="padding:6px;">${p.kanal.toFixed(3)}</td></tr>`;
+  });
+  html += '</table>';
+  container.innerHTML = html;
+}
+lpkRenderComparisonTable();
+
+/* ---------- Property Valuation Estimator ---------- */
+lpkEl('lpkValuationBtn').addEventListener('click', ()=>{
+  if(!lpkLastIrregularResult) return alert('Calculate a plot area first.');
+  const rate = +lpkEl('lpkRate').value;
+  const rateUnit = lpkEl('lpkRateUnit').value;
+  if(!rate||rate<=0) return lpkEl('lpkValuationResult').textContent='Enter a valid rate per unit.';
+  const sqftPerMarla = lpkGetSqftPerMarla();
+  let quantity;
+  if(rateUnit==='sqft') quantity = lpkLastIrregularResult.area;
+  else if(rateUnit==='marla') quantity = lpkLastIrregularResult.marla;
+  else quantity = lpkLastIrregularResult.kanal;
+  const estValue = quantity*rate;
+  lpkEl('lpkValuationResult').textContent = `Estimated Value: ${estValue.toLocaleString(undefined,{maximumFractionDigits:0})} (${quantity.toFixed(2)} ${rateUnit} \u00d7 rate ${rate} per ${rateUnit})\n\nThis is a simple estimate based on your entered rate, not a professional appraisal.`;
+});
+
+/* ---------- Land & Plot Division engine ---------- */
+function lpkDivUnitToSqft(value, unit, sqftPerMarla){
+  if(unit==='sqft') return value;
+  if(unit==='marla') return value*sqftPerMarla;
+  if(unit==='kanal') return value*sqftPerMarla*20;
+  return value;
+}
+lpkEl('lpkDivMode').addEventListener('change', function(){
+  lpkEl('lpkDivFixedRow').style.display = this.value==='fixed' ? 'block' : 'none';
+  lpkEl('lpkDivEqualRow').style.display = this.value==='equal' ? 'block' : 'none';
+  lpkEl('lpkDivShareRows').style.display = this.value==='equal' ? 'none' : 'block';
+  lpkEl('lpkDivAddShareRow').style.display = this.value==='equal' ? 'none' : 'flex';
+});
+function lpkAddShareRow(prefillLabel, prefillRatio){
+  const div = document.createElement('div');
+  div.className='row'; div.style.marginTop='8px';
+  div.innerHTML = `<input type="text" placeholder="Name/Label" class="lpk-share-label" style="flex:1;" value="${prefillLabel||''}"><input type="number" placeholder="Ratio/Share" class="lpk-share-ratio" style="width:100px;" value="${prefillRatio||1}">`;
+  const rmBtn = document.createElement('button');
+  rmBtn.type='button'; rmBtn.className='fl-remove'; rmBtn.textContent='\u2715';
+  rmBtn.addEventListener('click', ()=>{ div.remove(); });
+  div.appendChild(rmBtn);
+  lpkEl('lpkDivShareRows').appendChild(div);
+}
+lpkAddShareRow('Partner A', 1);
+lpkAddShareRow('Partner B', 1);
+lpkEl('lpkAddShareBtn').addEventListener('click', ()=>lpkAddShareRow());
+
+const LPK_DIV_COLORS = ['#1f3d2b','#e07a2c','#5b9bd5','#a35c20','#7a9e6b','#c2622e','#3f6b8a','#d1a15a'];
+let lpkLastDivisionResult = null;
+
+lpkEl('lpkDivideBtn').addEventListener('click', ()=>{
+  const totalVal = +lpkEl('lpkDivTotal').value;
+  const totalUnit = lpkEl('lpkDivUnit').value;
+  const sqftPerMarla = lpkGetSqftPerMarla();
+  if(sqftPerMarla===null) return alert('Enter a valid custom sq ft per Marla value (greater than 0)');
+  if(!totalVal||totalVal<=0) return alert('Enter a valid total plot area.');
+  const totalSqft = lpkDivUnitToSqft(totalVal, totalUnit, sqftPerMarla);
+  const mode = lpkEl('lpkDivMode').value;
+  let shares = [];
+
+  if(mode==='equal'){
+    const n = Math.max(1, +lpkEl('lpkDivEqualN').value||1);
+    for(let i=1;i<=n;i++) shares.push({label:`Person ${i}`, sqft: totalSqft/n});
+  }else if(mode==='ratio'){
+    const labels = document.querySelectorAll('.lpk-share-label');
+    const ratios = document.querySelectorAll('.lpk-share-ratio');
+    const raw = [];
+    for(let i=0;i<ratios.length;i++){
+      const r = +ratios[i].value;
+      if(r>0) raw.push({label: labels[i].value || `Share ${i+1}`, ratio:r});
+    }
+    if(!raw.length) return alert('Add at least one share with a positive ratio.');
+    const totalRatio = raw.reduce((s,x)=>s+x.ratio,0);
+    shares = raw.map(x=>({label:x.label, sqft: totalSqft*(x.ratio/totalRatio)}));
+  }else if(mode==='fixed'){
+    const fixedLabel = lpkEl('lpkDivFixedLabel').value || 'Reserved Portion';
+    const fixedAmount = +lpkEl('lpkDivFixedAmount').value||0;
+    const fixedUnit = lpkEl('lpkDivFixedUnit').value;
+    const fixedSqft = lpkDivUnitToSqft(fixedAmount, fixedUnit, sqftPerMarla);
+    if(fixedSqft<0 || fixedSqft>totalSqft) return alert('The reserved portion cannot be larger than the total plot area.');
+    const remainder = totalSqft-fixedSqft;
+    const labels = document.querySelectorAll('.lpk-share-label');
+    const ratios = document.querySelectorAll('.lpk-share-ratio');
+    const raw = [];
+    for(let i=0;i<ratios.length;i++){
+      const r = +ratios[i].value;
+      if(r>0) raw.push({label: labels[i].value || `Share ${i+1}`, ratio:r});
+    }
+    if(!raw.length) return alert('Add at least one share with a positive ratio for the remaining area.');
+    const totalRatio = raw.reduce((s,x)=>s+x.ratio,0);
+    shares.push({label:fixedLabel, sqft:fixedSqft});
+    raw.forEach(x=>shares.push({label:x.label, sqft: remainder*(x.ratio/totalRatio)}));
+  }
+
+  shares = shares.map(s=>({...s, pct:(s.sqft/totalSqft)*100, marla:s.sqft/sqftPerMarla, kanal:(s.sqft/sqftPerMarla)/20, sqyd:s.sqft/9}));
+  lpkLastDivisionResult = {totalSqft, shares, sqftPerMarla};
+  lpkRenderDivisionOutput();
+});
+
+function lpkRenderDivisionOutput(){
+  if(!lpkLastDivisionResult) return;
+  const {shares} = lpkLastDivisionResult;
+  const barWrap = lpkEl('lpkDivBarWrap');
+  const bar = lpkEl('lpkDivBar');
+  const legend = lpkEl('lpkDivLegend');
+  bar.innerHTML=''; legend.innerHTML='';
+  shares.forEach((s,i)=>{
+    const color = LPK_DIV_COLORS[i%LPK_DIV_COLORS.length];
+    const seg = document.createElement('div');
+    seg.style.cssText = `width:${s.pct}%; background:${color};`;
+    seg.title = `${s.label}: ${s.pct.toFixed(1)}%`;
+    bar.appendChild(seg);
+    const legendItem = document.createElement('div');
+    legendItem.style.cssText = 'display:flex; align-items:center; gap:6px; font-size:.8rem;';
+    legendItem.innerHTML = `<span style="width:12px;height:12px;border-radius:3px;background:${color};display:inline-block;"></span>${s.label}: ${s.pct.toFixed(1)}%`;
+    legend.appendChild(legendItem);
+  });
+  barWrap.style.display = 'block';
+
+  let html = '<table style="width:100%; border-collapse:collapse; font-size:.85rem;"><tr style="text-align:left; border-bottom:1px solid var(--line);"><th style="padding:6px;">Share</th><th style="padding:6px;">%</th><th style="padding:6px;">Sq Ft</th><th style="padding:6px;">Marla</th><th style="padding:6px;">Kanal</th><th style="padding:6px;">Sq Yd</th></tr>';
+  shares.forEach(s=>{
+    html += `<tr style="border-bottom:1px solid var(--line);"><td style="padding:6px;">${s.label}</td><td style="padding:6px;">${s.pct.toFixed(1)}%</td><td style="padding:6px;">${s.sqft.toFixed(0)}</td><td style="padding:6px;">${s.marla.toFixed(2)}</td><td style="padding:6px;">${s.kanal.toFixed(3)}</td><td style="padding:6px;">${s.sqyd.toFixed(1)}</td></tr>`;
+  });
+  html += '</table>';
+  lpkEl('lpkDivTable').innerHTML = html;
+}
+lpkEl('lpkDivReset').addEventListener('click', ()=>{
+  lpkEl('lpkDivTotal').value=10000;
+  lpkEl('lpkDivUnit').value='sqft';
+  lpkEl('lpkDivMode').value='ratio';
+  lpkEl('lpkDivMode').dispatchEvent(new Event('change'));
+  lpkEl('lpkDivShareRows').innerHTML='';
+  lpkAddShareRow('Partner A',1);
+  lpkAddShareRow('Partner B',1);
+  lpkEl('lpkDivFixedLabel').value='';
+  lpkEl('lpkDivFixedAmount').value=0;
+  lpkEl('lpkDivEqualN').value=2;
+  lpkEl('lpkDivBarWrap').style.display='none';
+  lpkEl('lpkDivTable').innerHTML='';
+  lpkLastDivisionResult = null;
+});
+
+/* ---------- Local browser drafts ---------- */
+const LPK_STORAGE_KEY = 'toolnest_land_plot_toolkit_draft';
+lpkEl('lpkSaveDraftBtn').addEventListener('click', ()=>{
+  try{
+    const data = {
+      standard: lpkStandardSel.value, customValue: lpkCustomInput.value,
+      lastIrregular: lpkLastIrregularResult, comparisonList: lpkComparisonList,
+      lastDivision: lpkLastDivisionResult
+    };
+    localStorage.setItem(LPK_STORAGE_KEY, JSON.stringify(data));
+    lpkEl('lpkDraftStatus').textContent = 'Saved to this browser. Your data stays on this device only.';
+  }catch(e){
+    lpkEl('lpkDraftStatus').textContent = 'Could not save (your browser may be blocking local storage).';
+  }
+});
+lpkEl('lpkLoadDraftBtn').addEventListener('click', ()=>{
+  let data;
+  try{ data = JSON.parse(localStorage.getItem(LPK_STORAGE_KEY)); }catch(e){}
+  if(!data) return lpkEl('lpkDraftStatus').textContent = 'No saved data found on this browser.';
+  lpkStandardSel.value = data.standard||'225';
+  lpkCustomInput.value = data.customValue||'';
+  lpkCustomInput.style.display = lpkStandardSel.value==='custom' ? 'inline-block' : 'none';
+  if(data.comparisonList){ lpkComparisonList = data.comparisonList; lpkRenderComparisonTable(); }
+  if(data.lastIrregular){ lpkLastIrregularResult = data.lastIrregular; }
+  if(data.lastDivision){ lpkLastDivisionResult = data.lastDivision; lpkRenderDivisionOutput(); }
+  lpkEl('lpkDraftStatus').textContent = 'Loaded your saved data.';
+});
+lpkEl('lpkClearDraftBtn').addEventListener('click', ()=>{
+  localStorage.removeItem(LPK_STORAGE_KEY);
+  lpkEl('lpkDraftStatus').textContent = 'Saved data cleared from this browser.';
+});
+
+/* ---------- Print ---------- */
+lpkEl('lpkPrintBtn').addEventListener('click', ()=>window.print());
+
+/* ---------- Land Record Summary PDF (jsPDF loaded dynamically only when requested) ---------- */
+function lpkLoadJsPdf(){
+  return new Promise((resolve, reject)=>{
+    if(window.jspdf){ resolve(window.jspdf); return; }
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    script.onload = ()=> window.jspdf ? resolve(window.jspdf) : reject(new Error('jsPDF failed to initialize'));
+    script.onerror = ()=> reject(new Error('Could not load the PDF library'));
+    document.head.appendChild(script);
+  });
+}
+lpkEl('lpkDownloadPdfBtn').addEventListener('click', async ()=>{
+  const statusEl = lpkEl('lpkPdfStatus');
+  statusEl.textContent = 'Preparing your Land Record Summary...';
+  try{
+    const {jsPDF} = await lpkLoadJsPdf();
+    const doc = new jsPDF();
+    let y = 18;
+    doc.setFontSize(18); doc.setFont(undefined,'bold');
+    doc.text('Land Record Summary', 15, y); y+=10;
+    doc.setFontSize(10); doc.setFont(undefined,'normal');
+    const sqftPerMarla = lpkGetSqftPerMarla();
+    doc.text(`Marla Standard Used: ${sqftPerMarla||'(not set)'} sq ft per Marla`, 15, y); y+=10;
+
+    if(lpkLastIrregularResult){
+      doc.setFontSize(13); doc.setFont(undefined,'bold'); doc.setTextColor(31,61,43);
+      doc.text('Irregular Plot Calculation', 15, y); doc.setTextColor(0,0,0); y+=7;
+      doc.setFontSize(10); doc.setFont(undefined,'normal');
+      const r = lpkLastIrregularResult;
+      doc.text(`Sides: ${r.sides.join(', ')} ft`, 15, y); y+=6;
+      if(r.diagonals.length) { doc.text(`Diagonals: ${r.diagonals.join(', ')} ft`, 15, y); y+=6; }
+      doc.text(`Area: ${r.area.toFixed(1)} sq ft = ${r.marla.toFixed(2)} Marla = ${r.kanal.toFixed(3)} Kanal`, 15, y); y+=10;
+    }
+
+    if(lpkComparisonList.length){
+      doc.setFontSize(13); doc.setFont(undefined,'bold'); doc.setTextColor(31,61,43);
+      doc.text('Plot Comparison', 15, y); doc.setTextColor(0,0,0); y+=7;
+      doc.setFontSize(10); doc.setFont(undefined,'normal');
+      lpkComparisonList.forEach(p=>{
+        doc.text(`${p.id}: ${p.area.toFixed(0)} sq ft, ${p.marla.toFixed(2)} Marla, ${p.kanal.toFixed(3)} Kanal`, 15, y); y+=6;
+      });
+      y+=4;
+    }
+
+    if(lpkLastDivisionResult){
+      doc.setFontSize(13); doc.setFont(undefined,'bold'); doc.setTextColor(31,61,43);
+      doc.text('Land Division Breakdown', 15, y); doc.setTextColor(0,0,0); y+=7;
+      doc.setFontSize(10); doc.setFont(undefined,'normal');
+      doc.text(`Total Area: ${lpkLastDivisionResult.totalSqft.toFixed(0)} sq ft`, 15, y); y+=6;
+      lpkLastDivisionResult.shares.forEach(s=>{
+        if(y>270){ doc.addPage(); y=20; }
+        doc.text(`${s.label}: ${s.pct.toFixed(1)}% = ${s.sqft.toFixed(0)} sq ft = ${s.marla.toFixed(2)} Marla = ${s.kanal.toFixed(3)} Kanal`, 15, y); y+=6;
+      });
+      y+=4;
+    }
+
+    if(!lpkLastIrregularResult && !lpkComparisonList.length && !lpkLastDivisionResult){
+      doc.setFontSize(10);
+      doc.text('No calculations recorded yet in this session.', 15, y); y+=6;
+    }
+
+    y+=6;
+    doc.setFontSize(8); doc.setTextColor(120,120,120);
+    doc.text('Generated by ToolNest Land & Plot Toolkit \u2014 estimates only, not a survey-grade or legal document.', 15, y);
+
+    doc.save('land-record-summary.pdf');
+    statusEl.textContent = 'Land Record Summary downloaded.';
+  }catch(err){
+    statusEl.textContent = 'Could not generate the PDF. Please check your internet connection and try again.';
+  }
+});
+</script><script src="script.js"></script></body></html>

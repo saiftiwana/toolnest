@@ -3,3 +3,4 @@
 @media (max-width:480px){.ba-row{flex-direction:column}.ba-col{min-width:100%}}
 .ck-mtab.active{background:var(--kinno);color:#fff;border-color:var(--kinno)}
 .sat-tab.active{background:var(--kinno);color:#fff;border-color:var(--kinno)}
+.lpk-tab.active{background:var(--kinno);color:#fff;border-color:var(--kinno)}
