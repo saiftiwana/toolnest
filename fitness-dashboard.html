@@ -1,0 +1,548 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Fitness Dashboard - Free BMI, Calorie & Macro Calculator | ToolNest</title><meta name="description" content="Complete fitness health calculator: BMI, body fat, calories, macros, ideal weight and a daily meal planner, all free and private in your browser."><link rel="canonical" href="https://toolnest.link/fitness-dashboard.html"><meta property="og:title" content="Fitness Dashboard | ToolNest"><meta property="og:description" content="Complete fitness health calculator: BMI, body fat, calories, macros, ideal weight and a daily meal planner, all free and private."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/fitness-dashboard.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"><style>@media print{header,.search-wrap,footer,nav,.seo-content{display:none !important}}</style></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Fitness Dashboard</h1><p>BMI, body fat, calories, macros, ideal weight, and a localized daily meal planner — one profile, one dashboard, 100% private.</p></header><main>
+<div class="card" id="fd"><h2>Fitness Dashboard</h2><p class="desc">Enter your profile once to get your BMI, body fat %, calorie & macro targets, ideal weight, and a localized daily meal plan — free, private, all in your browser.</p>
+
+<h3 style="margin-top:4px;">1. Your Profile</h3>
+<div class="row"><div class="field"><label class="field-label" for="fdGender">Gender</label><select id="fdGender"><option value="male">Male</option><option value="female">Female</option></select></div><div class="field"><label class="field-label" for="fdAge">Age</label><input type="number" id="fdAge" value="30"></div><div class="field"><label class="field-label" for="fdUnit">Units</label><select id="fdUnit"><option value="metric">Metric (kg, cm)</option><option value="imperial">Imperial (lb, ft/in)</option></select></div></div>
+<div class="row" style="margin-top:12px;" id="fdMetricRow"><div class="field"><label class="field-label" for="fdWeight">Weight (kg)</label><input type="number" id="fdWeight" value="70"></div><div class="field"><label class="field-label" for="fdHeight">Height (cm)</label><input type="number" id="fdHeight" value="170"></div></div>
+<div class="row" style="margin-top:12px; display:none;" id="fdImperialRow"><div class="field"><label class="field-label" for="fdWeightLb">Weight (lb)</label><input type="number" id="fdWeightLb" value="154"></div><div class="field"><label class="field-label" for="fdHeightFt">Height (ft)</label><input type="number" id="fdHeightFt" value="5"></div><div class="field"><label class="field-label" for="fdHeightIn">Height (in)</label><input type="number" id="fdHeightIn" value="7"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="fdActivity">Activity level</label><select id="fdActivity"><option value="1.2">Sedentary (little or no exercise)</option><option value="1.375">Lightly active (1-3 days/week)</option><option value="1.55" selected>Moderately active (3-5 days/week)</option><option value="1.725">Very active (6-7 days/week)</option><option value="1.9">Extra active (physical job / 2x training)</option></select></div><div class="field"><label class="field-label" for="fdGoal">Fitness goal</label><select id="fdGoal"><option value="maintain">Maintain weight</option><option value="lose">Lose weight</option><option value="gain">Gain weight</option></select></div></div>
+<div class="row" style="margin-top:12px;"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="fdShowBodyFat"> Add neck/waist/hip measurements for Body Fat % (optional)</label></div>
+<div class="row" style="margin-top:10px; display:none;" id="fdBodyFatRow"><div class="field"><label class="field-label" for="fdNeck">Neck</label><input type="number" id="fdNeck" placeholder="cm"></div><div class="field"><label class="field-label" for="fdWaist">Waist</label><input type="number" id="fdWaist" placeholder="cm"></div><div class="field" id="fdHipField" style="display:none;"><label class="field-label" for="fdHip">Hip</label><input type="number" id="fdHip" placeholder="cm"></div></div>
+
+<div class="row" style="margin-top:16px;"><button id="fdCalcBtn">Calculate My Fitness Dashboard</button><button class="secondary" id="fdDownloadPdfBtn">Download PDF Report</button><button class="secondary" id="fdPrintBtn">Print Report</button><button class="secondary" data-copy="fdCopyText" data-copy-mode="text">\U0001F4CB Copy Results</button><button class="secondary" id="fdResetBtn">Reset</button></div>
+<p class="stat" id="fdPdfStatus" style="font-size:.8rem;"></p>
+
+<div id="fdResultsWrap" style="display:none;">
+<h3>2. BMI</h3>
+<canvas id="fdBmiGauge" width="320" height="80" style="max-width:100%; display:block;"></canvas>
+<p class="stat" id="fdBmiResult" style="white-space:pre-line;"></p>
+
+<h3>3. Body Fat % (US Navy Method)</h3>
+<p class="stat" id="fdBodyFatResult" style="white-space:pre-line;"></p>
+
+<h3>4. Calories & Metabolism</h3>
+<p class="stat" id="fdCalorieResult" style="white-space:pre-line;"></p>
+
+<h3>5. Ideal Body Weight</h3>
+<p class="stat" id="fdIbwResult" style="white-space:pre-line;"></p>
+
+<h3>6. Macro Split</h3>
+<div class="row"><div class="field"><label class="field-label" for="fdDietType">Diet type</label><select id="fdDietType"><option value="balanced">Balanced (50/20/30)</option><option value="lowcarb">Low-Carb (20/40/40)</option><option value="highprotein">High-Protein (35/40/25)</option><option value="keto">Keto (5/25/70)</option></select></div></div>
+<div class="row" style="margin-top:12px; align-items:flex-start;"><canvas id="fdMacroPie" width="180" height="180"></canvas><div id="fdMacroLegend" style="flex:1; min-width:160px;"></div></div>
+
+<h3>7. Daily Meal &amp; Protein Budget Planner</h3>
+<p class="stat" style="font-size:.8rem; color:#8a8a75;">Estimated values for general planning purposes only, not precise nutritional analysis.</p>
+<div class="row" style="margin-top:8px;"><div class="field"><label class="field-label" for="fdCuisine">Cuisine</label><select id="fdCuisine"><option value="western">Global / Western</option><option value="local">South Asian / Local</option></select></div><button class="secondary" id="fdAutoGenBtn">Auto-Generate Sample Meal Plan</button></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="fdMealBreakfast">Breakfast</label><select id="fdMealBreakfast"><option value="">None</option></select></div><div class="field"><label class="field-label" for="fdMealLunch">Lunch</label><select id="fdMealLunch"><option value="">None</option></select></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="fdMealDinner">Dinner</label><select id="fdMealDinner"><option value="">None</option></select></div><div class="field"><label class="field-label" for="fdMealSnack">Snack</label><select id="fdMealSnack"><option value="">None</option></select></div></div>
+<div style="margin-top:14px;">
+<p class="field-label-block">Calories: <span id="fdCalProgressText">0 / 0 kcal</span></p>
+<div class="progress-track"><div class="progress-fill" id="fdCalProgressFill" style="background:#e07a2c;"></div></div>
+<p class="field-label-block" style="margin-top:10px;">Protein: <span id="fdProteinProgressText">0 / 0 g</span></p>
+<div class="progress-track"><div class="progress-fill" id="fdProteinProgressFill" style="background:#1f3d2b;"></div></div>
+</div>
+<p class="stat" id="fdMealTotals" style="white-space:pre-line; margin-top:10px;"></p>
+</div>
+</div>
+<div class="seo-content">
+<h3>How to Use Fitness Dashboard</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Enter Your Profile:</strong> Gender, age, height, weight, activity level, and fitness goal — once.</li><li><strong>Optional Body Fat:</strong> Add neck, waist, and hip measurements for a US Navy Method body fat % estimate.</li><li><strong>Calculate:</strong> Click "Calculate My Fitness Dashboard" to run all connected calculations at once.</li><li><strong>Review BMI:</strong> See your score plotted on a visual gauge with category.</li><li><strong>Check Calories & Macros:</strong> View BMR, TDEE, and goal-adjusted calorie target.</li><li><strong>Pick a Diet Type:</strong> Switch between Balanced, Low-Carb, High-Protein, or Keto splits.</li><li><strong>Build a Meal Plan:</strong> Choose your cuisine and pick meals, or click Auto-Generate.</li><li><strong>Export:</strong> Download a PDF Fitness Report, print it, or copy the results.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>A complete fitness health calculator bmi weight macro tracker free tool means not juggling five different calculator tabs to plan a single day of eating. This personal fitness dashboard bmi tdee macro calculator combines every core body metric — BMI, body fat, BMR, TDEE, ideal weight, and macros — into one connected workspace, so changing your weight or activity level once updates every downstream number automatically.</p>
+<h3>How It Works</h3>
+<p>This instant body metrics bmi calorie and macro tracker online runs the same trusted formulas used by the individual BMI, Ideal Body Weight, and Calorie/Macro tools — the standard BMI formula, the Devine ideal body weight formula, and the Mifflin-St Jeor BMR equation — now connected so BMR flows into TDEE, TDEE flows into your goal-adjusted calorie target, and that target flows into your chosen macro split. An added US Navy Method body fat estimator uses neck, waist, and hip measurements as an optional extra data point alongside BMI.</p>
+<h3>Key Features</h3>
+<p>As a free fitness calculator no signup health data private tool, every calculation happens locally in your browser tab, with nothing uploaded anywhere. Four diet-type macro presets — Balanced, Low-Carb, High-Protein, and Keto — instantly recalculate protein, carb, and fat grams and redraw a live macro pie chart, while a Localized Daily Meal & Protein Budget Planner lets you switch between a Global/Western or South Asian/Local food list, build a day of meals against your calorie and protein targets with live progress bars, or auto-generate a starting sample plan in one click.</p>
+<h3>Common Use Cases</h3>
+<p>Someone starting a weight loss plan uses the goal selector and diet-type presets to see calories, protein, carbs and fat targets update together instead of doing the math separately. Someone comparing muscle-gain nutrition strategies switches between High-Protein and Balanced splits to see how the same calorie target reshapes into different macro grams. Someone planning meals around local food uses the South Asian/Local cuisine list to build a daily plan from roti, daal, biryani and curry options sized to their own calorie and protein budget, and downloads the finished plan as a one-page PDF fitness report.</p>
+<h3>Tips</h3>
+<p>Body fat % and TDEE are both estimates — the visual gauge and progress bars are meant to guide day-to-day decisions, not replace a lab-grade body composition scan or advice from a doctor or dietitian, especially for anyone managing a medical condition. Because the meal planner uses fixed representative food items rather than an exhaustive nutrition database, treat the Auto-Generate plan as a starting point to adjust portions from, not an exact prescription.</p>
+<h3>Frequently Asked Questions</h3>
+<div class='faq-item'><h4>Is all my personal health data stored only in my browser with zero server uploads?</h4><p>Yes, every calculation in the Fitness Dashboard runs entirely client-side in your browser; nothing is uploaded to or stored on a server.</p></div><div class='faq-item'><h4>How do BMI, ideal body weight, and macro targets interconnect for fitness planning?</h4><p>Your weight and height drive BMI and ideal body weight, while your BMR, activity level, and goal drive your calorie target, which is then split into macros — changing any core input recalculates everything connected to it.</p></div><div class='faq-item'><h4>Can I track fitness metrics across multiple calculations without creating an account?</h4><p>Yes, no account or sign-up is required at any point — just enter your profile and calculate.</p></div><div class='faq-item'><h4>What activity level should I select for accurate TDEE estimation?</h4><p>Select the level that best matches your typical week: Sedentary for little or no exercise, up through Extra Active for a physical job combined with intense training.</p></div><div class='faq-item'><h4>Are calculations 100% private and compliant with health data standards?</h4><p>All processing happens locally in your browser with no data transmitted anywhere, so no personal health data ever leaves your device.</p></div><div class='faq-item'><h4>How does the dashboard help with weight loss vs. muscle gain goals?</h4><p>Selecting Lose Weight or Gain Weight adjusts your daily calorie target by roughly 500 calories from maintenance, and the diet-type presets let you match a macro split to that goal.</p></div><div class='faq-item'><h4>How is Body Fat % calculated in this tool?</h4><p>Body Fat % uses the US Navy Method, based on neck, waist, height, and (for women) hip circumference measurements you enter.</p></div><div class='faq-item'><h4>Can I plan meals for South Asian or local food instead of Western food?</h4><p>Yes, the meal planner includes a dedicated South Asian/Local cuisine list alongside the Global/Western list, covering items like roti, daal, biryani, and curries.</p></div>
+</div>
+<div class="seo-content"><h3>Related Health Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="hydration-timer.html">Hydration Timer</a></li>
+<li><a href="runners-pace-predictor.html">Runner's Pace Predictor</a></li>
+<li><a href="sleep-cycle-planner.html">Sleep Cycle Planner</a></li>
+<li><a href="period-ovulation-calculator.html">Period & Ovulation Calculator</a></li>
+<li><a href="pregnancy-due-date-calculator.html">Pregnancy Due Date Calculator</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Fitness Dashboard","applicationCategory":"HealthApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/fitness-dashboard.html"},
+{"@type":"HowTo","name":"How to Use the Fitness Dashboard","step":[
+{"@type":"HowToStep","text":"Enter your profile: gender, age, height, weight, activity level, and goal."},
+{"@type":"HowToStep","text":"Optionally add neck, waist, and hip measurements for body fat percentage."},
+{"@type":"HowToStep","text":"Click Calculate to run BMI, body fat, BMR, TDEE, ideal weight, and macros together."},
+{"@type":"HowToStep","text":"Choose a diet type to see updated macro grams and chart."},
+{"@type":"HowToStep","text":"Build or auto-generate a daily meal plan matching your targets."},
+{"@type":"HowToStep","text":"Download a PDF report, print, or copy the results."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is all my personal health data stored only in my browser with zero server uploads?","acceptedAnswer":{"@type":"Answer","text":"Yes, every calculation runs entirely client-side in your browser; nothing is uploaded to or stored on a server."}},
+{"@type":"Question","name":"How do BMI, ideal body weight, and macro targets interconnect for fitness planning?","acceptedAnswer":{"@type":"Answer","text":"Weight and height drive BMI and ideal body weight, while BMR, activity level, and goal drive your calorie target, which is then split into macros."}},
+{"@type":"Question","name":"Can I track fitness metrics across multiple calculations without creating an account?","acceptedAnswer":{"@type":"Answer","text":"Yes, no account or sign-up is required at any point."}},
+{"@type":"Question","name":"What activity level should I select for accurate TDEE estimation?","acceptedAnswer":{"@type":"Answer","text":"Select the level that best matches your typical week, from Sedentary through Extra Active."}},
+{"@type":"Question","name":"Are calculations 100% private and compliant with health data standards?","acceptedAnswer":{"@type":"Answer","text":"All processing happens locally in your browser with no data transmitted anywhere."}},
+{"@type":"Question","name":"How does the dashboard help with weight loss vs. muscle gain goals?","acceptedAnswer":{"@type":"Answer","text":"Selecting Lose Weight or Gain Weight adjusts your daily calorie target from maintenance, and diet-type presets match a macro split to that goal."}},
+{"@type":"Question","name":"How is Body Fat % calculated in this tool?","acceptedAnswer":{"@type":"Answer","text":"Body Fat % uses the US Navy Method based on neck, waist, height, and hip circumference measurements."}},
+{"@type":"Question","name":"Can I plan meals for South Asian or local food instead of Western food?","acceptedAnswer":{"@type":"Answer","text":"Yes, the meal planner includes a dedicated South Asian/Local cuisine list alongside the Global/Western list."}}
+]}
+]}
+</script>
+<script>/* ===== Fitness Dashboard engine ===== */
+const fdEl = id => document.getElementById(id);
+let fdLastCalc = null;
+
+/* ---------- unit toggle ---------- */
+const fdUnitSel = fdEl('fdUnit');
+fdUnitSel.addEventListener('change', () => {
+  const metric = fdUnitSel.value === 'metric';
+  fdEl('fdMetricRow').style.display = metric ? 'flex' : 'none';
+  fdEl('fdImperialRow').style.display = metric ? 'none' : 'flex';
+});
+fdEl('fdShowBodyFat').addEventListener('change', function(){
+  fdEl('fdBodyFatRow').style.display = this.checked ? 'flex' : 'none';
+});
+fdEl('fdGender').addEventListener('change', function(){
+  fdEl('fdHipField').style.display = this.value === 'female' ? 'flex' : 'none';
+});
+
+/* ---------- preserved core formulas (unchanged from original 3 tools) ---------- */
+function fdGetWeightHeightKgCm(){
+  const metric = fdUnitSel.value === 'metric';
+  let weightKg, heightCm;
+  if(metric){
+    weightKg = +fdEl('fdWeight').value;
+    heightCm = +fdEl('fdHeight').value;
+  }else{
+    const weightLb = +fdEl('fdWeightLb').value;
+    weightKg = weightLb * 0.453592;
+    const ft = +fdEl('fdHeightFt').value;
+    const inch = +fdEl('fdHeightIn').value || 0;
+    heightCm = (ft*12+inch) * 2.54;
+  }
+  return {weightKg, heightCm};
+}
+function fdCalcBMI(weightKg, heightCm){
+  const heightM = heightCm/100;
+  const bmi = weightKg/(heightM*heightM);
+  let category = '';
+  if(bmi<18.5) category='Underweight';
+  else if(bmi<25) category='Normal weight';
+  else if(bmi<30) category='Overweight';
+  else category='Obese';
+  return {bmi, category};
+}
+function fdCalcIBW(gender, heightCm){
+  const totalInches = heightCm/2.54;
+  const inchesOver5ft = Math.max(0, totalInches-60);
+  const ibwKg = gender==='male' ? 50+2.3*inchesOver5ft : 45.5+2.3*inchesOver5ft;
+  return ibwKg;
+}
+function fdCalcBMR(gender, weightKg, heightCm, age){
+  return gender==='male' ? (10*weightKg+6.25*heightCm-5*age+5) : (10*weightKg+6.25*heightCm-5*age-161);
+}
+
+/* ---------- new: Navy body fat method (verified against inches-formula) ---------- */
+function fdNavyBodyFat(gender, neckCm, waistCm, hipCm, heightCm){
+  if(gender==='male'){
+    if(waistCm<=neckCm) return null;
+    const denom = 1.0324 - 0.19077*Math.log10(waistCm-neckCm) + 0.15456*Math.log10(heightCm);
+    return 495/denom - 450;
+  }else{
+    if((waistCm+hipCm)<=neckCm) return null;
+    const denom = 1.29579 - 0.35004*Math.log10(waistCm+hipCm-neckCm) + 0.22100*Math.log10(heightCm);
+    return 495/denom - 450;
+  }
+}
+
+/* ---------- diet macro presets ---------- */
+const FD_DIET_PRESETS = {
+  balanced:{carbs:50,protein:20,fat:30,label:'Balanced (50/20/30)'},
+  lowcarb:{carbs:20,protein:40,fat:40,label:'Low-Carb (20/40/40)'},
+  highprotein:{carbs:35,protein:40,fat:25,label:'High-Protein (35/40/25)'},
+  keto:{carbs:5,protein:25,fat:70,label:'Keto (5/25/70)'}
+};
+
+/* ---------- BMI gauge (horizontal color-zone bar with pointer) ---------- */
+function fdDrawBmiGauge(bmi){
+  const canvas = fdEl('fdBmiGauge');
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  ctx.clearRect(0,0,w,h);
+  const barY = 30, barH = 18;
+  const minBmi = 15, maxBmi = 40;
+  const zones = [
+    {from:15, to:18.5, color:'#5b9bd5'},
+    {from:18.5, to:25, color:'#4caf50'},
+    {from:25, to:30, color:'#e0a72c'},
+    {from:30, to:40, color:'#d9534f'}
+  ];
+  zones.forEach(z=>{
+    const x1 = ((z.from-minBmi)/(maxBmi-minBmi))*w;
+    const x2 = ((z.to-minBmi)/(maxBmi-minBmi))*w;
+    ctx.fillStyle = z.color;
+    ctx.fillRect(x1, barY, x2-x1, barH);
+  });
+  const clamped = Math.max(minBmi, Math.min(maxBmi, bmi));
+  const px = ((clamped-minBmi)/(maxBmi-minBmi))*w;
+  ctx.fillStyle = '#1f3d2b';
+  ctx.beginPath();
+  ctx.moveTo(px, barY-4);
+  ctx.lineTo(px-7, barY-16);
+  ctx.lineTo(px+7, barY-16);
+  ctx.closePath();
+  ctx.fill();
+  ctx.font = 'bold 12px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText(bmi.toFixed(1), px, barY-20);
+  ctx.font = '9px Arial';
+  ctx.fillStyle = '#4a4a3d';
+  const labels = [{t:'Underweight',v:16.5},{t:'Normal',v:21.5},{t:'Overweight',v:27.5},{t:'Obese',v:34}];
+  labels.forEach(l=>{
+    const lx = ((l.v-minBmi)/(maxBmi-minBmi))*w;
+    ctx.fillText(l.t, lx, barY+barH+14);
+  });
+}
+
+/* ---------- macro pie chart ---------- */
+function fdDrawMacroPie(proteinPct, carbsPct, fatPct){
+  const canvas = fdEl('fdMacroPie');
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  ctx.clearRect(0,0,w,h);
+  const cx = w/2, cy = h/2, r = Math.min(w,h)/2-6;
+  const slices = [
+    {label:'Protein', pct:proteinPct, color:'#1f3d2b'},
+    {label:'Carbs', pct:carbsPct, color:'#e07a2c'},
+    {label:'Fat', pct:fatPct, color:'#5b9bd5'}
+  ];
+  let start = -Math.PI/2;
+  slices.forEach(s=>{
+    const angle = (s.pct/100)*Math.PI*2;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,start,start+angle);
+    ctx.closePath();
+    ctx.fillStyle = s.color;
+    ctx.fill();
+    start += angle;
+  });
+  const legend = fdEl('fdMacroLegend');
+  legend.innerHTML = slices.map(s=>`<div style="display:flex;align-items:center;gap:8px;margin-top:6px;"><span style="width:14px;height:14px;border-radius:3px;background:${s.color};display:inline-block;"></span><span>${s.label}: ${s.pct}%</span></div>`).join('');
+}
+
+/* ---------- meal planner food database ---------- */
+const FD_FOOD_DB = {
+  western:{
+    breakfast:[
+      {name:'Oatmeal with Banana', cal:280, protein:8},
+      {name:'Scrambled Eggs (3) + Toast', cal:320, protein:20},
+      {name:'Greek Yogurt with Almonds', cal:280, protein:22},
+      {name:'Protein Smoothie (Whey+Milk+Banana)', cal:300, protein:28}
+    ],
+    lunch:[
+      {name:'Grilled Chicken Breast + Rice + Broccoli', cal:520, protein:45},
+      {name:'Salmon + Quinoa + Salad', cal:550, protein:38},
+      {name:'Turkey Sandwich + Side Salad', cal:450, protein:30},
+      {name:'Chicken Caesar Salad', cal:480, protein:35}
+    ],
+    dinner:[
+      {name:'Grilled Chicken + Sweet Potato + Vegetables', cal:500, protein:42},
+      {name:'Baked Salmon + Rice + Asparagus', cal:540, protein:36},
+      {name:'Beef Stir-fry with Vegetables + Rice', cal:560, protein:34},
+      {name:'Pasta with Chicken and Tomato Sauce', cal:580, protein:32}
+    ],
+    snack:[
+      {name:'Whey Protein Shake', cal:130, protein:25},
+      {name:'Greek Yogurt', cal:130, protein:20},
+      {name:'Almonds (handful)', cal:170, protein:6},
+      {name:'Apple with Peanut Butter', cal:220, protein:7}
+    ]
+  },
+  local:{
+    breakfast:[
+      {name:'Paratha with Dahi', cal:380, protein:10},
+      {name:'Boiled Eggs (2) with Roti', cal:260, protein:15},
+      {name:'Chana Chaat', cal:250, protein:12},
+      {name:'Milk Tea with Toast + Egg', cal:300, protein:14}
+    ],
+    lunch:[
+      {name:'Chicken Biryani', cal:480, protein:24},
+      {name:'Daal + Roti (2) + Sabzi', cal:420, protein:20},
+      {name:'Chicken Curry + Rice', cal:520, protein:32},
+      {name:'Fish Curry + Rice', cal:460, protein:28}
+    ],
+    dinner:[
+      {name:'Roti (2) + Sabzi + Daal', cal:400, protein:18},
+      {name:'Chicken Karahi + Roti (2)', cal:550, protein:38},
+      {name:'Keema + Roti (2)', cal:520, protein:32},
+      {name:'Chana Curry + Rice', cal:450, protein:20}
+    ],
+    snack:[
+      {name:'Dahi (1 cup)', cal:150, protein:8},
+      {name:'Mixed Nuts', cal:170, protein:6},
+      {name:'Fruit Chaat', cal:120, protein:3},
+      {name:'Milk Tea', cal:80, protein:2}
+    ]
+  }
+};
+const FD_SLOT_PCT = {breakfast:0.25, lunch:0.35, dinner:0.30, snack:0.10};
+const FD_SLOT_SELECTS = {breakfast:'fdMealBreakfast', lunch:'fdMealLunch', dinner:'fdMealDinner', snack:'fdMealSnack'};
+
+function fdPopulateMealSelects(){
+  const cuisine = fdEl('fdCuisine').value;
+  const db = FD_FOOD_DB[cuisine];
+  for(const slot in FD_SLOT_SELECTS){
+    const sel = fdEl(FD_SLOT_SELECTS[slot]);
+    const prevVal = sel.value;
+    sel.innerHTML = '<option value="">None</option>' + db[slot].map((item,i)=>`<option value="${i}">${item.name} (${item.cal} kcal, ${item.protein}g protein)</option>`).join('');
+    sel.value = '';
+  }
+}
+fdEl('fdCuisine').addEventListener('change', ()=>{ fdPopulateMealSelects(); fdUpdateMealTotals(); });
+
+function fdUpdateMealTotals(){
+  const cuisine = fdEl('fdCuisine').value;
+  const db = FD_FOOD_DB[cuisine];
+  let totalCal=0, totalProtein=0;
+  const chosen = [];
+  for(const slot in FD_SLOT_SELECTS){
+    const sel = fdEl(FD_SLOT_SELECTS[slot]);
+    if(sel.value!==''){
+      const item = db[slot][+sel.value];
+      totalCal += item.cal;
+      totalProtein += item.protein;
+      chosen.push(`${slot.charAt(0).toUpperCase()+slot.slice(1)}: ${item.name} (${item.cal} kcal, ${item.protein}g)`);
+    }
+  }
+  const targetCal = fdLastCalc ? fdLastCalc.targetCalories : 0;
+  const targetProtein = fdLastCalc ? fdLastCalc.proteinG : 0;
+  fdEl('fdCalProgressText').textContent = `${totalCal.toFixed(0)} / ${targetCal.toFixed(0)} kcal`;
+  fdEl('fdProteinProgressText').textContent = `${totalProtein.toFixed(0)} / ${targetProtein.toFixed(0)} g`;
+  const calPct = targetCal ? Math.min(100,(totalCal/targetCal)*100) : 0;
+  const proteinPct = targetProtein ? Math.min(100,(totalProtein/targetProtein)*100) : 0;
+  fdEl('fdCalProgressFill').style.width = calPct+'%';
+  fdEl('fdProteinProgressFill').style.width = proteinPct+'%';
+  fdEl('fdMealTotals').textContent = chosen.length ? ('Selected meals:\n'+chosen.join('\n')) : 'No meals selected yet.';
+}
+Object.values(FD_SLOT_SELECTS).forEach(id=>fdEl(id).addEventListener('change', fdUpdateMealTotals));
+
+fdEl('fdAutoGenBtn').addEventListener('click', ()=>{
+  if(!fdLastCalc){ alert('Click "Calculate My Fitness Dashboard" first.'); return; }
+  const cuisine = fdEl('fdCuisine').value;
+  const db = FD_FOOD_DB[cuisine];
+  const targetCalories = fdLastCalc.targetCalories;
+  for(const slot in FD_SLOT_SELECTS){
+    const subTarget = targetCalories*FD_SLOT_PCT[slot];
+    let bestIdx=0, bestDiff=Infinity;
+    db[slot].forEach((item,i)=>{
+      const diff = Math.abs(item.cal-subTarget);
+      if(diff<bestDiff){bestDiff=diff; bestIdx=i;}
+    });
+    fdEl(FD_SLOT_SELECTS[slot]).value = String(bestIdx);
+  }
+  fdUpdateMealTotals();
+});
+
+/* ---------- main calculate ---------- */
+function fdRecomputeMacros(){
+  if(!fdLastCalc) return;
+  const dietKey = fdEl('fdDietType').value;
+  const preset = FD_DIET_PRESETS[dietKey];
+  const targetCalories = fdLastCalc.targetCalories;
+  const proteinG = (targetCalories*(preset.protein/100))/4;
+  const carbsG = (targetCalories*(preset.carbs/100))/4;
+  const fatG = (targetCalories*(preset.fat/100))/9;
+  fdLastCalc.proteinG = proteinG;
+  fdLastCalc.carbsG = carbsG;
+  fdLastCalc.fatG = fatG;
+  fdLastCalc.dietLabel = preset.label;
+  fdDrawMacroPie(preset.protein, preset.carbs, preset.fat);
+  fdEl('fdCalorieResult').textContent = `BMR: ${fdLastCalc.bmr.toFixed(0)} kcal/day\nTDEE (maintenance): ${fdLastCalc.tdee.toFixed(0)} kcal/day\nGoal: ${fdLastCalc.goalLabel} \u2192 Target: ${targetCalories.toFixed(0)} kcal/day\n\nDiet Type: ${preset.label}\nProtein: ${proteinG.toFixed(0)} g\nCarbohydrates: ${carbsG.toFixed(0)} g\nFat: ${fatG.toFixed(0)} g`;
+  fdUpdateMealTotals();
+  fdBuildCopyText();
+}
+fdEl('fdDietType').addEventListener('change', fdRecomputeMacros);
+
+function fdBuildCopyText(){
+  if(!fdLastCalc) return;
+  const c = fdLastCalc;
+  let bodyFatLine = c.bodyFatPct!=null ? `Body Fat % (US Navy): ${c.bodyFatPct.toFixed(1)}%\n` : '';
+  const text = `FITNESS DASHBOARD SUMMARY\n\nBMI: ${c.bmi.toFixed(1)} (${c.bmiCategory})\n${bodyFatLine}BMR: ${c.bmr.toFixed(0)} kcal/day\nTDEE: ${c.tdee.toFixed(0)} kcal/day\nGoal: ${c.goalLabel} -> Target: ${c.targetCalories.toFixed(0)} kcal/day\nIdeal Body Weight: ${c.ibwKg.toFixed(1)} kg (${(c.ibwKg*2.20462).toFixed(1)} lb)\nCurrent Weight: ${c.weightKg.toFixed(1)} kg\n\nDiet Type: ${c.dietLabel}\nProtein: ${c.proteinG.toFixed(0)} g | Carbs: ${c.carbsG.toFixed(0)} g | Fat: ${c.fatG.toFixed(0)} g`;
+  let holder = document.getElementById('fdCopyText');
+  if(!holder){
+    holder = document.createElement('div');
+    holder.id = 'fdCopyText';
+    holder.style.display = 'none';
+    document.body.appendChild(holder);
+  }
+  holder.textContent = text;
+}
+document.querySelectorAll('[data-copy]').forEach(btn=>{btn.addEventListener('click',()=>{const target=document.getElementById(btn.getAttribute('data-copy'));if(!target)return;const text=btn.getAttribute('data-copy-mode')==='text'?target.textContent:target.value;if(!text)return;const done=()=>{const old=btn.textContent;btn.textContent='\u2705 Copied';setTimeout(()=>btn.textContent=old,1200);};if(window.toolnestCopyText){window.toolnestCopyText(text,done);}else{navigator.clipboard.writeText(text).then(done);}});});
+
+fdEl('fdCalcBtn').addEventListener('click', ()=>{
+  const gender = fdEl('fdGender').value;
+  const age = +fdEl('fdAge').value;
+  const {weightKg, heightCm} = fdGetWeightHeightKgCm();
+  if(!age||age<=0||!weightKg||weightKg<=0||!heightCm||heightCm<=0){
+    alert('Enter valid positive values for age, weight, and height.');
+    return;
+  }
+  const {bmi, category} = fdCalcBMI(weightKg, heightCm);
+  const ibwKg = fdCalcIBW(gender, heightCm);
+  const bmr = fdCalcBMR(gender, weightKg, heightCm, age);
+  const activityFactor = +fdEl('fdActivity').value;
+  const tdee = bmr*activityFactor;
+  const goal = fdEl('fdGoal').value;
+  let targetCalories = tdee;
+  if(goal==='lose') targetCalories = tdee-500;
+  else if(goal==='gain') targetCalories = tdee+500;
+  targetCalories = Math.max(1200, targetCalories);
+  const goalLabel = goal==='lose'?'Weight Loss':goal==='gain'?'Weight Gain':'Maintenance';
+
+  let bodyFatPct = null;
+  if(fdEl('fdShowBodyFat').checked){
+    const neck = +fdEl('fdNeck').value;
+    const waist = +fdEl('fdWaist').value;
+    const hip = gender==='female' ? +fdEl('fdHip').value : 0;
+    if(neck>0 && waist>0 && (gender==='male' || hip>0)){
+      bodyFatPct = fdNavyBodyFat(gender, neck, waist, hip, heightCm);
+    }
+  }
+
+  fdLastCalc = {gender, age, weightKg, heightCm, bmi, bmiCategory:category, ibwKg, bmr, tdee, goalLabel, targetCalories, bodyFatPct};
+
+  fdEl('fdResultsWrap').style.display = 'block';
+  fdDrawBmiGauge(bmi);
+  fdEl('fdBmiResult').textContent = `Your BMI: ${bmi.toFixed(1)} \u2014 ${category}`;
+
+  if(bodyFatPct!=null && !isNaN(bodyFatPct)){
+    fdEl('fdBodyFatResult').textContent = `Estimated Body Fat: ${bodyFatPct.toFixed(1)}%\nMethod: US Navy Circumference Method\n\nThis is an estimate; actual body composition can vary based on measurement technique.`;
+  }else{
+    fdEl('fdBodyFatResult').textContent = 'Check "Add neck/waist/hip measurements" above and fill them in to see your estimated Body Fat %.';
+  }
+
+  const diffKg = weightKg-ibwKg;
+  fdEl('fdIbwResult').textContent = `Estimated Ideal Body Weight: ${ibwKg.toFixed(1)} kg (${(ibwKg*2.20462).toFixed(1)} lb)\nMethod: Devine formula\nYour current weight: ${weightKg.toFixed(1)} kg\nDifference: ${diffKg>=0?'+':''}${diffKg.toFixed(1)} kg vs. ideal`;
+
+  fdRecomputeMacros();
+  fdPopulateMealSelects();
+  fdUpdateMealTotals();
+  fdEl('fdResultsWrap').scrollIntoView({behavior:'smooth', block:'nearest'});
+});
+
+/* ---------- reset ---------- */
+fdEl('fdResetBtn').addEventListener('click', ()=>{
+  fdEl('fdGender').value='male'; fdEl('fdAge').value=30;
+  fdUnitSel.value='metric'; fdEl('fdMetricRow').style.display='flex'; fdEl('fdImperialRow').style.display='none';
+  fdEl('fdWeight').value=70; fdEl('fdHeight').value=170;
+  fdEl('fdWeightLb').value=154; fdEl('fdHeightFt').value=5; fdEl('fdHeightIn').value=7;
+  fdEl('fdActivity').value='1.55'; fdEl('fdGoal').value='maintain';
+  fdEl('fdShowBodyFat').checked=false; fdEl('fdBodyFatRow').style.display='none';
+  fdEl('fdNeck').value=''; fdEl('fdWaist').value=''; fdEl('fdHip').value='';
+  fdEl('fdHipField').style.display='none';
+  fdEl('fdDietType').value='balanced';
+  fdEl('fdCuisine').value='western';
+  Object.values(FD_SLOT_SELECTS).forEach(id=>fdEl(id).value='');
+  fdEl('fdResultsWrap').style.display='none';
+  fdEl('fdPdfStatus').textContent='';
+  fdLastCalc=null;
+  const holder=document.getElementById('fdCopyText');
+  if(holder) holder.textContent='';
+});
+
+/* ---------- print ---------- */
+fdEl('fdPrintBtn').addEventListener('click', ()=>{
+  if(!fdLastCalc){ alert('Click "Calculate My Fitness Dashboard" first.'); return; }
+  window.print();
+});
+
+/* ---------- PDF report (jsPDF loaded dynamically only when requested) ---------- */
+function fdLoadJsPdf(){
+  return new Promise((resolve, reject)=>{
+    if(window.jspdf){ resolve(window.jspdf); return; }
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    script.onload = ()=> window.jspdf ? resolve(window.jspdf) : reject(new Error('jsPDF failed to initialize'));
+    script.onerror = ()=> reject(new Error('Could not load the PDF library'));
+    document.head.appendChild(script);
+  });
+}
+fdEl('fdDownloadPdfBtn').addEventListener('click', async ()=>{
+  if(!fdLastCalc){ alert('Click "Calculate My Fitness Dashboard" first.'); return; }
+  const statusEl = fdEl('fdPdfStatus');
+  statusEl.textContent = 'Preparing PDF report...';
+  try{
+    const {jsPDF} = await fdLoadJsPdf();
+    const doc = new jsPDF();
+    const c = fdLastCalc;
+    let y = 18;
+    doc.setFontSize(18); doc.setFont(undefined,'bold');
+    doc.text('Fitness Report', 15, y); y+=10;
+    doc.setFontSize(10); doc.setFont(undefined,'normal');
+    doc.text(`Gender: ${c.gender} | Age: ${c.age} | Weight: ${c.weightKg.toFixed(1)} kg | Height: ${c.heightCm.toFixed(1)} cm`, 15, y); y+=10;
+
+    doc.setFontSize(13); doc.setFont(undefined,'bold'); doc.setTextColor(31,61,43);
+    doc.text('BMI', 15, y); doc.setTextColor(0,0,0); y+=7;
+    doc.setFontSize(10); doc.setFont(undefined,'normal');
+    doc.text(`${c.bmi.toFixed(1)} - ${c.bmiCategory}`, 15, y); y+=10;
+
+    if(c.bodyFatPct!=null && !isNaN(c.bodyFatPct)){
+      doc.setFontSize(13); doc.setFont(undefined,'bold'); doc.setTextColor(31,61,43);
+      doc.text('Body Fat % (US Navy Method)', 15, y); doc.setTextColor(0,0,0); y+=7;
+      doc.setFontSize(10); doc.setFont(undefined,'normal');
+      doc.text(`${c.bodyFatPct.toFixed(1)}% (estimate)`, 15, y); y+=10;
+    }
+
+    doc.setFontSize(13); doc.setFont(undefined,'bold'); doc.setTextColor(31,61,43);
+    doc.text('Calories & Metabolism', 15, y); doc.setTextColor(0,0,0); y+=7;
+    doc.setFontSize(10); doc.setFont(undefined,'normal');
+    doc.text(`BMR: ${c.bmr.toFixed(0)} kcal/day  |  TDEE: ${c.tdee.toFixed(0)} kcal/day`, 15, y); y+=6;
+    doc.text(`Goal: ${c.goalLabel}  ->  Target: ${c.targetCalories.toFixed(0)} kcal/day`, 15, y); y+=10;
+
+    doc.setFontSize(13); doc.setFont(undefined,'bold'); doc.setTextColor(31,61,43);
+    doc.text('Ideal Body Weight', 15, y); doc.setTextColor(0,0,0); y+=7;
+    doc.setFontSize(10); doc.setFont(undefined,'normal');
+    doc.text(`${c.ibwKg.toFixed(1)} kg (Devine formula) vs. current ${c.weightKg.toFixed(1)} kg`, 15, y); y+=10;
+
+    doc.setFontSize(13); doc.setFont(undefined,'bold'); doc.setTextColor(31,61,43);
+    doc.text(`Macro Split - ${c.dietLabel}`, 15, y); doc.setTextColor(0,0,0); y+=7;
+    doc.setFontSize(10); doc.setFont(undefined,'normal');
+    doc.text(`Protein: ${c.proteinG.toFixed(0)} g  |  Carbs: ${c.carbsG.toFixed(0)} g  |  Fat: ${c.fatG.toFixed(0)} g`, 15, y); y+=6;
+    const pieCanvas = fdEl('fdMacroPie');
+    try{
+      const pieData = pieCanvas.toDataURL('image/png');
+      doc.addImage(pieData, 'PNG', 15, y, 35, 35);
+      y += 40;
+    }catch(e){ y+=4; }
+
+    doc.setFontSize(13); doc.setFont(undefined,'bold'); doc.setTextColor(31,61,43);
+    doc.text('Daily Meal Plan', 15, y); doc.setTextColor(0,0,0); y+=7;
+    doc.setFontSize(10); doc.setFont(undefined,'normal');
+    const cuisine = fdEl('fdCuisine').value;
+    const db = FD_FOOD_DB[cuisine];
+    let anyMeal=false;
+    for(const slot in FD_SLOT_SELECTS){
+      const sel = fdEl(FD_SLOT_SELECTS[slot]);
+      if(sel.value!==''){
+        anyMeal=true;
+        const item = db[slot][+sel.value];
+        const line = `${slot.charAt(0).toUpperCase()+slot.slice(1)}: ${item.name} (${item.cal} kcal, ${item.protein}g protein)`;
+        const split = doc.splitTextToSize(line, 180);
+        doc.text(split, 15, y); y += 6*split.length;
+      }
+    }
+    if(!anyMeal){ doc.text('No meals selected - use the Meal Planner section to add one.', 15, y); y+=6; }
+    y += 4;
+    doc.setFontSize(8); doc.setTextColor(120,120,120);
+    doc.text('Estimates for general planning only, not medical or professional nutrition advice.', 15, y);
+
+    doc.save('fitness-report.pdf');
+    statusEl.textContent = 'PDF downloaded.';
+  }catch(err){
+    statusEl.textContent = 'Could not generate the PDF. Please check your internet connection and try again.';
+  }
+});
+</script><script src="script.js"></script></body></html>
