@@ -1,0 +1,437 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Student Academic Toolkit - Free GPA, CGPA & Attendance | ToolNest</title><meta name="description" content="Track GPA, cumulative CGPA across semesters, and attendance targets in one dashboard, free, private, with a downloadable semester report."><link rel="canonical" href="https://toolnest.link/student-academic-toolkit.html"><meta property="og:title" content="Student Academic Toolkit | ToolNest"><meta property="og:description" content="Track GPA, cumulative CGPA, and attendance targets in one dashboard, free, private, with a downloadable semester report."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/student-academic-toolkit.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"><style>@media print{header,.search-wrap,footer,nav,.seo-content{display:none !important}}</style></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Student Academic Toolkit</h1><p>GPA, multi-semester CGPA, and attendance planning in one dashboard — free, private, with a downloadable semester report.</p></header><main>
+<div class="card" id="sat"><h2>Student Academic Toolkit</h2><p class="desc">Track GPA, cumulative CGPA across semesters, and attendance targets in one dashboard — free, private, all in your browser.</p>
+
+<h3 style="margin-top:4px;">1. Student Profile (optional)</h3>
+<div class="row"><div class="field"><label class="field-label" for="satName">Student name</label><input type="text" id="satName" placeholder="Optional"></div><div class="field"><label class="field-label" for="satInstitution">Institution</label><input type="text" id="satInstitution" placeholder="Optional"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="satProgram">Program</label><input type="text" id="satProgram" placeholder="Optional"></div><div class="field"><label class="field-label" for="satSemesterLabel">Current semester</label><input type="text" id="satSemesterLabel" placeholder="e.g. Fall 2026"></div></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="satSaveDraftBtn">Save to This Browser</button><button class="secondary" id="satLoadDraftBtn">Load Saved Data</button><button class="secondary" id="satClearDraftBtn">Clear Saved Data</button></div>
+<p class="stat" id="satDraftStatus" style="font-size:.8rem;"></p>
+
+<h3>2. Unified Dashboard</h3>
+<p class="stat" id="satDashboard" style="white-space:pre-line; font-weight:600;">Add courses, semesters, and attendance below to see your combined dashboard.</p>
+
+<h3>3. Workspace</h3>
+<div class="row" id="satTabs">
+<button class="secondary sat-tab active" data-tab="gpa">GPA Calculator</button>
+<button class="secondary sat-tab" data-tab="cgpa">CGPA &amp; Multi-Semester</button>
+<button class="secondary sat-tab" data-tab="attendance">Attendance Planner</button>
+</div>
+
+<div id="satGpaPanel" style="margin-top:14px;">
+<label class="field-label-block">Courses</label>
+<div id="gpaRows" style="margin-top:6px;"></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="gpaAddBtn">+ Add Course</button><button id="gpaCalcBtn">Calculate GPA</button><button class="secondary" data-copy="gpaResult" data-copy-mode="text">\U0001F4CB Copy Result</button><button class="secondary" id="gpaReset">Reset Courses</button></div>
+<p class="stat" id="gpaResult" style="white-space:pre-line;"></p>
+</div>
+
+<div id="satCgpaPanel" style="margin-top:14px; display:none;">
+<h3 style="margin-top:0;">CGPA \u2194 Percentage</h3>
+<div class="row"><div class="field"><label class="field-label" for="cgpaInput">Your CGPA</label><input type="number" id="cgpaInput" step="0.01"></div><div class="field"><label class="field-label" for="cgpaScale">Scale</label><select id="cgpaScale"><option value="4">Out of 4.0</option><option value="10">Out of 10.0</option></select></div><button id="cgpaBtn">CGPA \u2192 Percentage</button></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="pctInput">Your Percentage</label><input type="number" id="pctInput" step="0.01"></div><button class="secondary" id="pctToCgpaBtn">Percentage \u2192 CGPA</button></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" data-copy="cgpaResult" data-copy-mode="text">\U0001F4CB Copy Result</button><button class="secondary" id="cgpaReset">Reset</button></div>
+<p class="stat" id="cgpaResult"></p>
+<p class="stat" style="font-size:.78rem; color:#8a8a75;">Conversion multipliers (like 9.5 for a 10-point scale) vary by institution — check your university's exact formula before relying on this for official purposes.</p>
+
+<h3>Multi-Semester CGPA Tracker</h3>
+<div id="satSemesterRows" style="margin-top:6px;"></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="satAddSemesterBtn">+ Add Semester</button><button id="satCalcCgpaBtn">Calculate Cumulative CGPA</button><button class="secondary" id="satSemesterReset">Reset Semesters</button></div>
+<p class="stat" id="satCumulativeResult" style="white-space:pre-line;"></p>
+</div>
+
+<div id="satAttendancePanel" style="margin-top:14px; display:none;">
+<div class="row"><div class="field"><label class="field-label" for="attAttended">Classes attended</label><input type="number" id="attAttended" value="0"></div><div class="field"><label class="field-label" for="attTotal">Total classes</label><input type="number" id="attTotal" value="0"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="attTarget">Required %</label><input type="number" id="attTarget" value="75"></div><button id="attBtn">Calculate</button></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" data-copy="attResult" data-copy-mode="text">\U0001F4CB Copy Result</button><button class="secondary" id="attReset">Reset</button></div>
+<p class="stat" id="attResult" style="white-space:pre-line;"></p>
+
+<h3>Scenario Planner</h3>
+<div class="row"><div class="field"><label class="field-label" for="satScenarioX">If I attend the next</label><input type="number" id="satScenarioX" value="5"></div><span style="align-self:center; padding-top:18px;">classes...</span></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="satScenarioBtn">Project My Attendance</button></div>
+<p class="stat" id="satScenarioResult" style="white-space:pre-line;"></p>
+</div>
+
+<h3>4. Semester Report</h3>
+<div class="row"><button id="satDownloadPdfBtn">Download Semester Report PDF</button><button class="secondary" id="satPrintBtn">Print Report</button></div>
+<p class="stat" id="satPdfStatus" style="font-size:.8rem;"></p>
+</div>
+<div class="seo-content">
+<h3>How to Use Student Academic Toolkit</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Optional Profile:</strong> Add your name, institution, program, and semester.</li><li><strong>Enter Courses:</strong> Add, duplicate, or remove course rows with credits and grades.</li><li><strong>Calculate GPA:</strong> Get your semester GPA, credit hours, and quality points.</li><li><strong>Track CGPA:</strong> Convert CGPA to a percentage, or log multiple semesters for a cumulative CGPA.</li><li><strong>Plan Attendance:</strong> Check your current % and run "what if" scenarios.</li><li><strong>Check the Dashboard:</strong> See GPA, CGPA, and attendance together in one summary.</li><li><strong>Export:</strong> Download a Semester Report PDF, print it, or save your data to this browser.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>A complete student academic toolkit gpa cgpa attendance calculator free tool means not tracking grades in one app, cumulative CGPA in a spreadsheet, and attendance in a third place. This all in one student calculator gpa percentage attendance tool keeps your course list, semester history, and attendance numbers together, with a unified dashboard that shows your semester GPA, cumulative CGPA, and attendance percentage side by side as you update any of them.</p>
+<h3>How It Works</h3>
+<p>This unified academic calculator for semester and cumulative grades tool uses the same trusted GPA point scale, CGPA-to-percentage formula, and attendance math as ToolNest's original three academic tools, now sharing one workspace with tab navigation between GPA Calculator, CGPA & Multi-Semester, and Attendance Planner. The Multi-Semester tracker applies a standard credit-weighted average across every semester you log, and the Attendance Scenario Planner projects your percentage forward if you attend a set number of upcoming classes.</p>
+<h3>Key Features</h3>
+<p>As a student performance tracker gpa cgpa attendance dashboard tool, course rows can be added, removed, or duplicated (useful for repeating a similar course entry with a different grade), and every course automatically calculates its quality points. The Attendance Scenario Planner answers three practical questions at once: how your percentage changes if you attend the next few classes, how many classes you need to hit your target, and how many you can still miss and stay above it. A one-page Semester Report PDF pulls together your profile, full course breakdown, GPA, cumulative CGPA, and attendance standing, and your data can optionally be saved to this browser for next time with a single Clear Saved Data option to remove it.</p>
+<h3>Common Use Cases</h3>
+<p>A student checking eligibility for a scholarship logs their courses for the term, checks the resulting GPA, then switches to Multi-Semester to see how it affects their cumulative CGPA across their whole degree so far. Someone close to an attendance cutoff uses the Scenario Planner to see exactly how many of the next classes they must attend to climb back above their institution's required percentage. A student preparing for an advising meeting downloads a Semester Report PDF that lays out every course, grade, and quality point alongside their GPA and CGPA in one document.</p>
+<h3>Tips</h3>
+<p>CGPA-to-percentage multipliers genuinely differ between institutions, so treat the converted percentage as a general estimate and confirm your university's exact formula for anything official like a transcript request or scholarship application. Saved data stays only in this specific browser on this specific device — if you switch browsers or clear your browsing data, use Download Semester Report PDF beforehand to keep a permanent copy.</p>
+<h3>Frequently Asked Questions</h3>
+<div class=faq-block><details><summary>Can I manage all three academic metrics (GPA, CGPA, attendance) in one toolkit?</summary><p>Yes, the GPA Calculator, CGPA & Multi-Semester, and Attendance Planner tabs share one dashboard that updates as you use each one.</p></details><details><summary>Is my student academic data completely private and device-local?</summary><p>Yes, all calculations happen in your browser, and Save to This Browser stores data using your browser's local storage only — nothing is sent to a server.</p></details><details><summary>How do different institutions' grading scales affect my calculations?</summary><p>The GPA Calculator uses a standard 4.0-scale letter grade mapping, and CGPA-to-percentage conversion multipliers are adjustable, but always confirm your specific institution's exact scale for official purposes.</p></details><details><summary>Can I calculate GPA for multiple semesters cumulatively?</summary><p>Yes, the Multi-Semester tracker lets you log each semester's GPA and credit hours to calculate an overall credit-weighted cumulative CGPA.</p></details><details><summary>How accurate is the CGPA to percentage conversion across universities?</summary><p>It's a general estimate using common multipliers (like 9.5 for a 10-point scale); exact formulas vary by institution.</p></details><details><summary>What attendance percentage is typically required to remain eligible?</summary><p>Requirements vary by institution, commonly falling between 75% and 85% — set your own target percentage in the Attendance Planner to match your school's policy.</p></details><details><summary>Can I project how my attendance will change if I attend upcoming classes?</summary><p>Yes, the Scenario Planner calculates your projected percentage if you attend a set number of upcoming classes, in addition to the classes needed or missable for your target.</p></details><details><summary>Does the toolkit work offline without internet connection?</summary><p>The calculators work fully offline once the page is loaded; only the optional PDF export needs an internet connection the first time to load its library.</p></details></div>
+</div>
+<div class="seo-content"><h3>Related Education Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="marks-percentage-calculator.html">Marks Percentage Calculator</a></li>
+<li><a href="final-grade-calculator.html">Final Grade Calculator</a></li>
+<li><a href="citation-generator.html">Citation Generator</a></li>
+<li><a href="discount-scholarship-calculator.html">Discount & Scholarship Calculator</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Student Academic Toolkit","applicationCategory":"EducationalApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/student-academic-toolkit.html"},
+{"@type":"HowTo","name":"How to Use the Student Academic Toolkit","step":[
+{"@type":"HowToStep","text":"Optionally add your student profile."},
+{"@type":"HowToStep","text":"Add your courses with credits and grades."},
+{"@type":"HowToStep","text":"Calculate your semester GPA."},
+{"@type":"HowToStep","text":"Log semesters to track cumulative CGPA."},
+{"@type":"HowToStep","text":"Check attendance and run scenario projections."},
+{"@type":"HowToStep","text":"View the combined dashboard."},
+{"@type":"HowToStep","text":"Download a Semester Report PDF."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Can I manage all three academic metrics (GPA, CGPA, attendance) in one toolkit?","acceptedAnswer":{"@type":"Answer","text":"Yes, the GPA, CGPA & Multi-Semester, and Attendance tabs share one dashboard."}},
+{"@type":"Question","name":"Is my student academic data completely private and device-local?","acceptedAnswer":{"@type":"Answer","text":"Yes, all calculations happen in your browser and saved data uses local storage only."}},
+{"@type":"Question","name":"How do different institutions' grading scales affect my calculations?","acceptedAnswer":{"@type":"Answer","text":"The GPA Calculator uses a standard 4.0-scale mapping; always confirm your institution's exact scale for official purposes."}},
+{"@type":"Question","name":"Can I calculate GPA for multiple semesters cumulatively?","acceptedAnswer":{"@type":"Answer","text":"Yes, the Multi-Semester tracker calculates a credit-weighted cumulative CGPA across logged semesters."}},
+{"@type":"Question","name":"How accurate is the CGPA to percentage conversion across universities?","acceptedAnswer":{"@type":"Answer","text":"It is a general estimate using common multipliers; exact formulas vary by institution."}},
+{"@type":"Question","name":"What attendance percentage is typically required to remain eligible?","acceptedAnswer":{"@type":"Answer","text":"Requirements vary by institution, commonly between 75% and 85%."}},
+{"@type":"Question","name":"Can I project how my attendance will change if I attend upcoming classes?","acceptedAnswer":{"@type":"Answer","text":"Yes, the Scenario Planner projects your percentage after attending a set number of upcoming classes."}},
+{"@type":"Question","name":"Does the toolkit work offline without internet connection?","acceptedAnswer":{"@type":"Answer","text":"The calculators work fully offline; only the PDF export needs internet the first time to load its library."}}
+]}
+]}
+</script>
+<script>/* ===== Student Academic Toolkit engine ===== */
+const satEl = id => document.getElementById(id);
+
+/* ---------- copy handler (shared across the page) ---------- */
+document.querySelectorAll('[data-copy]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.getAttribute('data-copy'));
+    if(!target) return;
+    const text = btn.getAttribute('data-copy-mode')==='text' ? target.textContent : target.value;
+    if(!text) return;
+    const done = ()=>{ const old=btn.textContent; btn.textContent='\u2705 Copied'; setTimeout(()=>btn.textContent=old,1200); };
+    if(window.toolnestCopyText){ window.toolnestCopyText(text, done); } else { navigator.clipboard.writeText(text).then(done); }
+  });
+});
+
+/* ---------- workspace tabs ---------- */
+document.querySelectorAll('.sat-tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.sat-tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const tab = btn.dataset.tab;
+    satEl('satGpaPanel').style.display = tab==='gpa' ? 'block' : 'none';
+    satEl('satCgpaPanel').style.display = tab==='cgpa' ? 'block' : 'none';
+    satEl('satAttendancePanel').style.display = tab==='attendance' ? 'block' : 'none';
+  });
+});
+
+/* ---------- state (feeds the unified dashboard) ---------- */
+let satLastGpa = null;      // {gpa, totalCredits, totalPoints}
+let satLastCgpa = null;     // {cgpa}
+let satLastAttendance = null; // {pct, att, total, target}
+
+function satUpdateDashboard(){
+  const parts = [];
+  if(satLastGpa) parts.push(`Current Semester GPA: ${satLastGpa.gpa.toFixed(2)} (${satLastGpa.totalCredits} credit hrs)`);
+  if(satLastCgpa) parts.push(`Cumulative CGPA: ${satLastCgpa.cgpa.toFixed(3)}`);
+  if(satLastAttendance) parts.push(`Attendance: ${satLastAttendance.pct.toFixed(1)}% (target ${satLastAttendance.target}%)`);
+  satEl('satDashboard').textContent = parts.length ? parts.join('\n') : 'Add courses, semesters, and attendance below to see your combined dashboard.';
+}
+
+/* ---------- GPA Calculator (preserves original grade-point logic, adds Duplicate) ---------- */
+const gradePoints = {'A+':4.0,'A':4.0,'A-':3.7,'B+':3.3,'B':3.0,'B-':2.7,'C+':2.3,'C':2.0,'C-':1.7,'D':1.0,'F':0.0};
+function gpaAddRow(prefill){
+  const div = document.createElement('div');
+  div.className = 'row';
+  div.style.marginTop = '8px';
+  let opts = '';
+  for(const g in gradePoints) opts += `<option value="${g}">${g}</option>`;
+  div.innerHTML = `<input type="text" placeholder="Course name" class="gpa-name" style="flex:1;"><input type="number" placeholder="Credit hrs" class="gpa-credit" value="3" style="width:90px;"><select class="gpa-grade">${opts}</select>`;
+  const dupBtn = document.createElement('button');
+  dupBtn.type='button'; dupBtn.className='secondary'; dupBtn.textContent='\u29C9'; dupBtn.title='Duplicate row'; dupBtn.style.cssText='padding:2px 8px;';
+  dupBtn.addEventListener('click', ()=>{
+    gpaAddRow({
+      name: div.querySelector('.gpa-name').value,
+      credit: div.querySelector('.gpa-credit').value,
+      grade: div.querySelector('.gpa-grade').value
+    });
+  });
+  const rmBtn = document.createElement('button');
+  rmBtn.type='button'; rmBtn.className='fl-remove'; rmBtn.textContent='\u2715';
+  rmBtn.addEventListener('click', ()=>{ div.remove(); });
+  div.appendChild(dupBtn);
+  div.appendChild(rmBtn);
+  satEl('gpaRows').appendChild(div);
+  if(prefill){
+    div.querySelector('.gpa-name').value = prefill.name||'';
+    div.querySelector('.gpa-credit').value = prefill.credit||3;
+    div.querySelector('.gpa-grade').value = prefill.grade||'A';
+  }
+}
+gpaAddRow(); gpaAddRow(); gpaAddRow();
+satEl('gpaAddBtn').addEventListener('click', ()=>gpaAddRow());
+satEl('gpaCalcBtn').addEventListener('click', ()=>{
+  const credits = document.querySelectorAll('.gpa-credit');
+  const grades = document.querySelectorAll('.gpa-grade');
+  let totalPoints=0, totalCredits=0;
+  for(let i=0;i<credits.length;i++){
+    const c = +credits[i].value||0;
+    const g = gradePoints[grades[i].value];
+    totalPoints += c*g;
+    totalCredits += c;
+  }
+  if(!totalCredits) return satEl('gpaResult').textContent='Add at least one course';
+  const gpa = totalPoints/totalCredits;
+  satEl('gpaResult').textContent = `Your GPA: ${gpa.toFixed(2)}\nTotal Credit Hours: ${totalCredits}\nTotal Quality Points: ${totalPoints.toFixed(2)}\n\nBased on ${credits.length} course(s) on a 4.0 scale.`;
+  satLastGpa = {gpa, totalCredits, totalPoints};
+  satUpdateDashboard();
+});
+satEl('gpaReset').addEventListener('click', ()=>{
+  satEl('gpaRows').innerHTML='';
+  gpaAddRow(); gpaAddRow(); gpaAddRow();
+  satEl('gpaResult').textContent='';
+  satLastGpa = null;
+  satUpdateDashboard();
+});
+
+/* ---------- CGPA <-> Percentage (preserved logic) ---------- */
+satEl('cgpaBtn').addEventListener('click', ()=>{
+  const cgpa = +satEl('cgpaInput').value;
+  const scale = +satEl('cgpaScale').value;
+  if(!cgpa) return satEl('cgpaResult').textContent='Enter your CGPA';
+  const pct = scale===10 ? cgpa*9.5 : (cgpa/4)*100;
+  satEl('cgpaResult').textContent = `CGPA ${cgpa} (out of ${scale}.0) \u2248 ${pct.toFixed(2)}%`;
+});
+satEl('pctToCgpaBtn').addEventListener('click', ()=>{
+  const pct = +satEl('pctInput').value;
+  const scale = +satEl('cgpaScale').value;
+  if(!pct) return satEl('cgpaResult').textContent='Enter your percentage';
+  const cgpa = scale===10 ? pct/9.5 : (pct/100)*4;
+  satEl('cgpaResult').textContent = `Percentage ${pct}% \u2248 CGPA ${cgpa.toFixed(2)} (out of ${scale}.0)`;
+});
+satEl('cgpaReset').addEventListener('click', ()=>{
+  satEl('cgpaInput').value=''; satEl('pctInput').value=''; satEl('cgpaScale').value='4';
+  satEl('cgpaResult').textContent='';
+});
+
+/* ---------- Multi-Semester CGPA tracker (NEW) ---------- */
+function satAddSemesterRow(prefill){
+  const div = document.createElement('div');
+  div.className = 'row';
+  div.style.marginTop = '8px';
+  div.innerHTML = `<input type="text" placeholder="Semester label (e.g. Fall 2025)" class="sat-sem-label" style="flex:1;"><input type="number" placeholder="GPA" class="sat-sem-gpa" step="0.01" style="width:80px;"><input type="number" placeholder="Credit hrs" class="sat-sem-credit" style="width:90px;">`;
+  const rmBtn = document.createElement('button');
+  rmBtn.type='button'; rmBtn.className='fl-remove'; rmBtn.textContent='\u2715';
+  rmBtn.addEventListener('click', ()=>{ div.remove(); });
+  div.appendChild(rmBtn);
+  satEl('satSemesterRows').appendChild(div);
+  if(prefill){
+    div.querySelector('.sat-sem-label').value = prefill.label||'';
+    div.querySelector('.sat-sem-gpa').value = prefill.gpa||'';
+    div.querySelector('.sat-sem-credit').value = prefill.credit||'';
+  }
+}
+satAddSemesterRow({label:'Semester 1'});
+satAddSemesterRow({label:'Semester 2'});
+satEl('satAddSemesterBtn').addEventListener('click', ()=>satAddSemesterRow());
+satEl('satCalcCgpaBtn').addEventListener('click', ()=>{
+  const labels = document.querySelectorAll('.sat-sem-label');
+  const gpas = document.querySelectorAll('.sat-sem-gpa');
+  const credits = document.querySelectorAll('.sat-sem-credit');
+  let totalPoints=0, totalCredits=0, rows=[];
+  for(let i=0;i<gpas.length;i++){
+    const g = +gpas[i].value, c = +credits[i].value;
+    if(!g || !c) continue;
+    totalPoints += g*c;
+    totalCredits += c;
+    rows.push(`${labels[i].value||'Semester '+(i+1)}: GPA ${g.toFixed(2)}, ${c} credit hrs`);
+  }
+  if(!totalCredits) return satEl('satCumulativeResult').textContent='Enter at least one semester with a GPA and credit hours.';
+  const cgpa = totalPoints/totalCredits;
+  satEl('satCumulativeResult').textContent = `Cumulative CGPA: ${cgpa.toFixed(3)}\nTotal Credit Hours: ${totalCredits}\n\n${rows.join('\n')}`;
+  satLastCgpa = {cgpa};
+  satUpdateDashboard();
+});
+satEl('satSemesterReset').addEventListener('click', ()=>{
+  satEl('satSemesterRows').innerHTML='';
+  satAddSemesterRow({label:'Semester 1'});
+  satAddSemesterRow({label:'Semester 2'});
+  satEl('satCumulativeResult').textContent='';
+  satLastCgpa = null;
+  satUpdateDashboard();
+});
+
+/* ---------- Attendance Calculator (preserved logic) ---------- */
+satEl('attBtn').addEventListener('click', ()=>{
+  const att = +satEl('attAttended').value;
+  const total = +satEl('attTotal').value;
+  const target = +satEl('attTarget').value||75;
+  if(!total) return satEl('attResult').textContent='Enter total classes';
+  const missed = total-att;
+  const pct = (att/total)*100;
+  let extra='';
+  if(pct>=target){
+    const maxMiss = Math.floor((att-(target/100)*total)/(target/100));
+    extra = `You can miss ${Math.max(0,maxMiss)} more class(es) and stay above ${target}%.`;
+  }else{
+    const need = Math.ceil(((target/100)*total-att)/(1-target/100));
+    extra = `You need to attend ${Math.max(0,need)} more class(es) in a row to reach ${target}%.`;
+  }
+  satEl('attResult').textContent = `Current Attendance: ${pct.toFixed(1)}%\nClasses Attended: ${att} of ${total}\nClasses Missed: ${missed}\nTarget: ${target}%\n\n${extra}`;
+  satLastAttendance = {pct, att, total, target};
+  satUpdateDashboard();
+});
+satEl('attReset').addEventListener('click', ()=>{
+  satEl('attAttended').value=0; satEl('attTotal').value=0; satEl('attTarget').value=75;
+  satEl('attResult').textContent='';
+  satLastAttendance = null;
+  satUpdateDashboard();
+});
+
+/* ---------- Attendance Scenario Planner (NEW) ---------- */
+satEl('satScenarioBtn').addEventListener('click', ()=>{
+  const att = +satEl('attAttended').value;
+  const total = +satEl('attTotal').value;
+  const target = +satEl('attTarget').value||75;
+  const x = +satEl('satScenarioX').value;
+  if(!total) return satEl('satScenarioResult').textContent='Enter your current attendance numbers above first.';
+  if(!x || x<0) return satEl('satScenarioResult').textContent='Enter a valid number of upcoming classes.';
+  const newAttended = att+x, newTotal = total+x;
+  const newPct = (newAttended/newTotal)*100;
+  const currentPct = (att/total)*100;
+  let statusLine = newPct>=target ? `That would put you at or above your ${target}% target.` : `That would still leave you below your ${target}% target.`;
+  satEl('satScenarioResult').textContent = `If you attend all of the next ${x} class(es):\nNew Attendance: ${newAttended} of ${newTotal} = ${newPct.toFixed(1)}%\n(currently ${currentPct.toFixed(1)}%)\n\n${statusLine}`;
+});
+
+/* ---------- Local browser draft save/load (per spec, localStorage, zero server transmission) ---------- */
+const SAT_STORAGE_KEY = 'toolnest_student_academic_toolkit_draft';
+function satCollectDraft(){
+  const courses = Array.from(document.querySelectorAll('#gpaRows .row')).map(row=>({
+    name: row.querySelector('.gpa-name').value,
+    credit: row.querySelector('.gpa-credit').value,
+    grade: row.querySelector('.gpa-grade').value
+  }));
+  const semesters = Array.from(document.querySelectorAll('#satSemesterRows .row')).map(row=>({
+    label: row.querySelector('.sat-sem-label').value,
+    gpa: row.querySelector('.sat-sem-gpa').value,
+    credit: row.querySelector('.sat-sem-credit').value
+  }));
+  return {
+    profile: {
+      name: satEl('satName').value, institution: satEl('satInstitution').value,
+      program: satEl('satProgram').value, semesterLabel: satEl('satSemesterLabel').value
+    },
+    courses, semesters,
+    attendance: { attended: satEl('attAttended').value, total: satEl('attTotal').value, target: satEl('attTarget').value }
+  };
+}
+satEl('satSaveDraftBtn').addEventListener('click', ()=>{
+  try{
+    localStorage.setItem(SAT_STORAGE_KEY, JSON.stringify(satCollectDraft()));
+    satEl('satDraftStatus').textContent = 'Saved to this browser. Your data stays on this device only.';
+  }catch(e){
+    satEl('satDraftStatus').textContent = 'Could not save (your browser may be blocking local storage).';
+  }
+});
+satEl('satLoadDraftBtn').addEventListener('click', ()=>{
+  let data;
+  try{ data = JSON.parse(localStorage.getItem(SAT_STORAGE_KEY)); }catch(e){}
+  if(!data) return satEl('satDraftStatus').textContent = 'No saved data found on this browser.';
+  satEl('satName').value = data.profile?.name||'';
+  satEl('satInstitution').value = data.profile?.institution||'';
+  satEl('satProgram').value = data.profile?.program||'';
+  satEl('satSemesterLabel').value = data.profile?.semesterLabel||'';
+  if(data.courses && data.courses.length){
+    satEl('gpaRows').innerHTML='';
+    data.courses.forEach(c=>gpaAddRow(c));
+  }
+  if(data.semesters && data.semesters.length){
+    satEl('satSemesterRows').innerHTML='';
+    data.semesters.forEach(s=>satAddSemesterRow(s));
+  }
+  if(data.attendance){
+    satEl('attAttended').value = data.attendance.attended||0;
+    satEl('attTotal').value = data.attendance.total||0;
+    satEl('attTarget').value = data.attendance.target||75;
+  }
+  satEl('satDraftStatus').textContent = 'Loaded your saved data.';
+});
+satEl('satClearDraftBtn').addEventListener('click', ()=>{
+  localStorage.removeItem(SAT_STORAGE_KEY);
+  satEl('satDraftStatus').textContent = 'Saved data cleared from this browser.';
+});
+
+/* ---------- Print ---------- */
+satEl('satPrintBtn').addEventListener('click', ()=>window.print());
+
+/* ---------- Semester Report PDF (jsPDF loaded dynamically only when requested) ---------- */
+function satLoadJsPdf(){
+  return new Promise((resolve, reject)=>{
+    if(window.jspdf){ resolve(window.jspdf); return; }
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    script.onload = ()=> window.jspdf ? resolve(window.jspdf) : reject(new Error('jsPDF failed to initialize'));
+    script.onerror = ()=> reject(new Error('Could not load the PDF library'));
+    document.head.appendChild(script);
+  });
+}
+satEl('satDownloadPdfBtn').addEventListener('click', async ()=>{
+  const statusEl = satEl('satPdfStatus');
+  statusEl.textContent = 'Preparing your Semester Report...';
+  try{
+    const {jsPDF} = await satLoadJsPdf();
+    const doc = new jsPDF();
+    let y = 18;
+    doc.setFontSize(18); doc.setFont(undefined,'bold');
+    doc.text('Semester Report', 15, y); y+=10;
+
+    doc.setFontSize(10); doc.setFont(undefined,'normal');
+    const name = satEl('satName').value || '(not provided)';
+    const institution = satEl('satInstitution').value || '(not provided)';
+    const program = satEl('satProgram').value || '(not provided)';
+    const semLabel = satEl('satSemesterLabel').value || '(not provided)';
+    doc.text(`Student: ${name}`, 15, y); y+=6;
+    doc.text(`Institution: ${institution}   Program: ${program}`, 15, y); y+=6;
+    doc.text(`Semester: ${semLabel}`, 15, y); y+=10;
+
+    doc.setFontSize(13); doc.setFont(undefined,'bold'); doc.setTextColor(31,61,43);
+    doc.text('Courses', 15, y); doc.setTextColor(0,0,0); y+=7;
+    doc.setFontSize(10); doc.setFont(undefined,'normal');
+    const rows = document.querySelectorAll('#gpaRows .row');
+    rows.forEach(row=>{
+      const cname = row.querySelector('.gpa-name').value || '(untitled course)';
+      const credit = row.querySelector('.gpa-credit').value || '0';
+      const grade = row.querySelector('.gpa-grade').value;
+      const qp = (gradePoints[grade]*(+credit||0)).toFixed(2);
+      const line = `${cname} \u2014 ${credit} credit hrs \u2014 Grade ${grade} \u2014 Quality Points ${qp}`;
+      const split = doc.splitTextToSize(line, 180);
+      doc.text(split, 15, y); y += 6*split.length;
+    });
+    y += 4;
+
+    doc.setFontSize(13); doc.setFont(undefined,'bold'); doc.setTextColor(31,61,43);
+    doc.text('Summary', 15, y); doc.setTextColor(0,0,0); y+=7;
+    doc.setFontSize(10); doc.setFont(undefined,'normal');
+    if(satLastGpa) { doc.text(`Semester GPA: ${satLastGpa.gpa.toFixed(2)} (${satLastGpa.totalCredits} credit hrs)`, 15, y); y+=6; }
+    else { doc.text('Semester GPA: not calculated yet', 15, y); y+=6; }
+    if(satLastCgpa) { doc.text(`Cumulative CGPA: ${satLastCgpa.cgpa.toFixed(3)}`, 15, y); y+=6; }
+    else { doc.text('Cumulative CGPA: not calculated yet', 15, y); y+=6; }
+    if(satLastAttendance){ doc.text(`Attendance: ${satLastAttendance.pct.toFixed(1)}% (${satLastAttendance.att} of ${satLastAttendance.total}, target ${satLastAttendance.target}%)`, 15, y); y+=6; }
+    else { doc.text('Attendance: not calculated yet', 15, y); y+=6; }
+
+    y+=6;
+    doc.setFontSize(8); doc.setTextColor(120,120,120);
+    doc.text('Generated by ToolNest Student Academic Toolkit \u2014 for personal tracking use.', 15, y);
+
+    doc.save('semester-report.pdf');
+    statusEl.textContent = 'Semester Report downloaded.';
+  }catch(err){
+    statusEl.textContent = 'Could not generate the PDF. Please check your internet connection and try again.';
+  }
+});
+
+/* ---------- init ---------- */
+satUpdateDashboard();
+</script><script src="script.js"></script></body></html>
