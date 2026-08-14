@@ -1,0 +1,412 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>UI/UX Mesh Gradient Generator - Free CSS Gradient Tool | ToolNest</title><meta name="description" content="Create editable mesh gradients for websites and SaaS UI, free, with CSS, SVG and PNG export, 100% private in your browser."><link rel="canonical" href="https://toolnest.link/mesh-gradient-generator.html"><meta property="og:title" content="UI/UX Mesh Gradient Generator | ToolNest"><meta property="og:description" content="Create editable mesh gradients for websites and SaaS UI, free, with CSS, SVG and PNG export."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/mesh-gradient-generator.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>UI/UX Mesh Gradient Generator</h1><p>Design editable mesh gradients with draggable nodes, curated presets, and CSS/SVG/PNG export — free, private, all in your browser.</p></header><main>
+<div class="card" id="mg"><h2>UI/UX Mesh Gradient Generator</h2><p class="desc">Create editable modern mesh gradients for websites, SaaS UI and landing pages — free, private, with CSS/SVG/PNG export.</p>
+
+<h3 style="margin-top:4px;">1. Canvas Size</h3>
+<div class="row"><div class="field"><label class="field-label" for="mgSizePreset">Preset</label><select id="mgSizePreset"><option value="square">Square (500&times;500)</option><option value="landscape">Landscape (800&times;450)</option><option value="portrait">Portrait (450&times;800)</option><option value="hero">Website Hero (1200&times;600)</option><option value="banner">Social Banner (1200&times;630)</option><option value="custom">Custom</option></select></div><div class="field" id="mgCustomWField" style="display:none;"><label class="field-label" for="mgCustomW">Width</label><input type="number" id="mgCustomW" value="600"></div><div class="field" id="mgCustomHField" style="display:none;"><label class="field-label" for="mgCustomH">Height</label><input type="number" id="mgCustomH" value="400"></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="mgBorderRadius">Border radius (<span id="mgBorderRadiusVal">0</span>px)</label><input type="range" id="mgBorderRadius" min="0" max="60" value="0"></div></div>
+
+<h3>2. Presets</h3>
+<div class="row" id="mgPresetRow" style="flex-wrap:wrap;"></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="mgRandomizeBtn">Randomize</button><button class="secondary" id="mgResetBtn">Reset</button></div>
+
+<h3>3. Mesh Editor</h3>
+<p class="stat" style="font-size:.8rem; color:#8a8a75;">Click the canvas to add a node. Drag nodes to reposition. Select a node below to edit it.</p>
+<div style="position:relative; max-width:100%; touch-action:none;">
+<canvas id="mgCanvas" style="max-width:100%; border:1px solid var(--line); border-radius:6px; display:block; cursor:crosshair;"></canvas>
+</div>
+<div id="mgNodeEditor" style="display:none; margin-top:12px; border:1px solid var(--line); border-radius:8px; padding:12px;">
+<p class="field-label-block">Editing selected node</p>
+<div class="row"><div class="field"><label class="field-label" for="mgNodeColor">Color</label><input type="color" id="mgNodeColor" value="#e07a2c"></div><div class="field"><label class="field-label" for="mgNodeSize">Size (<span id="mgNodeSizeVal">50</span>%)</label><input type="range" id="mgNodeSize" min="15" max="90" value="50"></div><div class="field"><label class="field-label" for="mgNodeOpacity">Opacity (<span id="mgNodeOpacityVal">80</span>%)</label><input type="range" id="mgNodeOpacity" min="10" max="100" value="80"></div></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="mgDeleteNodeBtn">Delete This Node</button></div>
+</div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="mgBaseColor">Base background color</label><input type="color" id="mgBaseColor" value="#1f3d2b"></div></div>
+
+<h3>4. Preview</h3>
+<div class="row"><button class="secondary" data-preview="light">Light UI Preview</button><button class="secondary" data-preview="dark">Dark UI Preview</button></div>
+<div id="mgUiPreview" style="margin-top:10px; padding:20px; border-radius:8px; border:1px solid var(--line);"><div id="mgUiPreviewInner" style="border-radius:6px; padding:16px; color:#fff; font-size:.85rem;">Sample card content over your mesh gradient</div></div>
+
+<h3>5. CSS Output</h3>
+<textarea id="mgCssOutput" readonly style="min-height:100px; font-family:monospace; font-size:.78rem;"></textarea>
+<div class="row" style="margin-top:8px;"><button class="secondary" data-copy="mgCssOutput" data-copy-mode="value">\U0001F4CB Copy CSS</button><button class="secondary" id="mgCopyVarsBtn">\U0001F4CB Copy CSS Variables</button></div>
+
+<h3>6. Export</h3>
+<div class="row" style="flex-wrap:wrap;"><button id="mgDownloadPngBtn">Download PNG</button><button class="secondary" id="mgDownloadSvgBtn">Download SVG</button><button class="secondary" id="mgExportJsonBtn">\U0001F4CB Export JSON Preset</button><button class="secondary" id="mgImportJsonBtn">Import JSON Preset</button><input type="file" id="mgImportJsonInput" accept="application/json" style="display:none;"></div>
+</div>
+<div class="seo-content">
+<h3>How to Use UI/UX Mesh Gradient Generator</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Pick a Canvas Size:</strong> Choose Square, Landscape, Portrait, Hero, Banner, or a custom size.</li><li><strong>Start from a Preset:</strong> Try Aurora, Sunset, Ocean, or any of the 10 curated themes, or click Randomize.</li><li><strong>Edit the Mesh:</strong> Click the canvas to add nodes, drag to reposition, and adjust color/size/opacity per node.</li><li><strong>Check the Preview:</strong> Toggle Light and Dark UI previews to see how it looks in context.</li><li><strong>Copy or Export:</strong> Copy the CSS, copy CSS variables, or download as PNG, SVG, or a JSON preset.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>A CSS mesh gradient generator tool means designing a modern, soft-blended gradient background visually instead of hand-tuning radial-gradient CSS values by trial and error. This mesh gradient generator online tool builds real, valid CSS as you edit, so what you see in the preview is exactly what you copy into your project.</p>
+<h3>How It Works</h3>
+<p>This UI mesh gradient generator tool represents a mesh gradient as a set of colored nodes, each positioned on a canvas with its own size and opacity, layered as CSS radial-gradient backgrounds that blend into each other. Dragging a node updates its position live, and the generated CSS, SVG, and PNG all stay in sync with exactly what's shown in the editor.</p>
+<h3>Key Features</h3>
+<p>As a mesh gradient background generator, 10 curated presets — Aurora, Sunset, Ocean, Pastel, Neon, Purple/Blue, Warm, Cool, Minimal, and SaaS — provide a fast starting point, and Randomize generates a fresh combination in one click for quick exploration. Five canvas size presets cover common use cases from square social posts to full website hero banners, plus a custom size option. Light and Dark UI preview panels show how the gradient reads behind real interface content, and export options cover copy-ready CSS, CSS custom properties (variables), a downloadable PNG, a valid SVG file, and a JSON preset you can save and re-import later.</p>
+<h3>Common Use Cases</h3>
+<p>A designer building a SaaS landing page starts from the SaaS preset, nudges the node positions to match the page's layout, and copies the CSS directly into their stylesheet. Someone creating social media graphics picks the Social Banner canvas size, tries a few presets against the Light and Dark preview panels, and downloads a PNG for use as a background image. A developer wants a reusable gradient across a design system, so they export the CSS custom properties and reference the mesh-color variables throughout their component library.</p>
+<h3>Tips</h3>
+<p>Fewer nodes with larger sizes tend to produce a softer, more spacious-feeling gradient, while more smaller nodes create a busier, more detailed look — both are valid depending on whether the gradient sits behind text (where softer usually reads better) or stands alone as a visual. When exporting SVG for use in design software, remember the first node you added renders on top, the same stacking behavior used in the generated CSS, so reordering which node is added first changes which color dominates in overlapping areas.</p>
+<h3>Frequently Asked Questions</h3>
+<div class=faq-block><details><summary>What is a mesh gradient and why is it popular in UI design?</summary><p>A mesh gradient blends multiple colors smoothly across a surface using several gradient points rather than a single linear or radial gradient, giving backgrounds a soft, modern, organic look popular in SaaS and landing page design.</p></details><details><summary>How do I use mesh gradients in web design and CSS?</summary><p>Copy the generated CSS (a background-color plus layered radial-gradient background-image) directly into your stylesheet, or use the copied CSS custom properties to reference the colors elsewhere in your design.</p></details><details><summary>Can I export mesh gradients as CSS code for websites?</summary><p>Yes, click Copy CSS to get ready-to-paste background-color and background-image properties matching exactly what's shown in the preview.</p></details><details><summary>What color combinations work best for mesh gradients?</summary><p>Colors that are close in hue but vary in brightness create a subtle, cohesive look, while more contrasting hues (like the Aurora or Neon presets) create a bolder, more energetic result — try a few presets to compare.</p></details><details><summary>How to create a mesh gradient that matches brand colors?</summary><p>Select each node and set its color to your brand's palette using the color picker, adjusting size and opacity until the blend looks balanced.</p></details><details><summary>What file format is best for saving mesh gradient designs?</summary><p>Use the JSON preset export to save and reload your exact editable design later, PNG for a fixed raster image, or SVG for a scalable vector version.</p></details><details><summary>What's the difference between mesh, linear, and radial gradients?</summary><p>A linear gradient blends colors along a straight line and a radial gradient blends outward from one center point, while a mesh gradient combines multiple radial gradient points to create a more complex, organic blend.</p></details><details><summary>Can I create gradients that work across different devices?</summary><p>Yes, the generated CSS uses standard radial-gradient syntax supported across all modern browsers and devices.</p></details></div>
+</div>
+<div class="seo-content"><h3>Related Design Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="color-toolkit.html">Color Toolkit</a></li>
+<li><a href="favicon-generator.html">Favicon Generator</a></li>
+<li><a href="signature-maker.html">Signature Maker</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"UI/UX Mesh Gradient Generator","applicationCategory":"DesignApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/mesh-gradient-generator.html"},
+{"@type":"HowTo","name":"How to Create a Mesh Gradient","step":[
+{"@type":"HowToStep","text":"Choose a canvas size."},
+{"@type":"HowToStep","text":"Start from a preset or randomize."},
+{"@type":"HowToStep","text":"Add and drag nodes to edit the mesh."},
+{"@type":"HowToStep","text":"Check the light and dark UI preview."},
+{"@type":"HowToStep","text":"Copy the CSS or export PNG/SVG/JSON."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is a mesh gradient and why is it popular in UI design?","acceptedAnswer":{"@type":"Answer","text":"A mesh gradient blends multiple colors smoothly using several gradient points, giving backgrounds a soft, modern look."}},
+{"@type":"Question","name":"How do I use mesh gradients in web design and CSS?","acceptedAnswer":{"@type":"Answer","text":"Copy the generated CSS directly into your stylesheet."}},
+{"@type":"Question","name":"Can I export mesh gradients as CSS code for websites?","acceptedAnswer":{"@type":"Answer","text":"Yes, Copy CSS gives ready-to-paste background properties."}},
+{"@type":"Question","name":"What color combinations work best for mesh gradients?","acceptedAnswer":{"@type":"Answer","text":"Close hues create subtle blends, while contrasting hues create bolder results."}},
+{"@type":"Question","name":"How to create a mesh gradient that matches brand colors?","acceptedAnswer":{"@type":"Answer","text":"Set each node's color to your brand palette and adjust size and opacity."}},
+{"@type":"Question","name":"What file format is best for saving mesh gradient designs?","acceptedAnswer":{"@type":"Answer","text":"JSON preset for editable reuse, PNG for raster, or SVG for vector."}},
+{"@type":"Question","name":"What's the difference between mesh, linear, and radial gradients?","acceptedAnswer":{"@type":"Answer","text":"Mesh gradients combine multiple radial gradient points for a more complex, organic blend."}},
+{"@type":"Question","name":"Can I create gradients that work across different devices?","acceptedAnswer":{"@type":"Answer","text":"Yes, the CSS uses standard radial-gradient syntax supported across modern browsers."}}
+]}
+]}
+</script>
+<script>/* ===== UI/UX Mesh Gradient Generator engine ===== */
+const mgEl = id => document.getElementById(id);
+
+let mgNodes = []; // {id, x, y (0-100), color, size (0-100), opacity (0-100)}
+let mgIdCounter = 1;
+let mgBaseColor = '#1f3d2b';
+let mgSelectedNodeId = null;
+let mgCanvasW = 500, mgCanvasH = 500;
+let mgBorderRadius = 0;
+
+const MG_SIZE_PRESETS = { square:[500,500], landscape:[800,450], portrait:[450,800], hero:[1200,600], banner:[1200,630] };
+
+function mgHexToRgba(hex, opacityPct){
+  hex = hex.replace('#','');
+  const r = parseInt(hex.slice(0,2),16), g = parseInt(hex.slice(2,4),16), b = parseInt(hex.slice(4,6),16);
+  return `rgba(${r}, ${g}, ${b}, ${(opacityPct/100).toFixed(2)})`;
+}
+function mgNewNode(x,y,color,size,opacity){
+  return { id:'n'+(mgIdCounter++), x, y, color: color||'#e07a2c', size: size!=null?size:50, opacity: opacity!=null?opacity:80 };
+}
+
+/* ---------- canvas size controls ---------- */
+mgEl('mgSizePreset').addEventListener('change', function(){
+  const isCustom = this.value==='custom';
+  mgEl('mgCustomWField').style.display = isCustom ? 'flex' : 'none';
+  mgEl('mgCustomHField').style.display = isCustom ? 'flex' : 'none';
+  if(!isCustom){ [mgCanvasW, mgCanvasH] = MG_SIZE_PRESETS[this.value]; }
+  else { mgCanvasW = +mgEl('mgCustomW').value; mgCanvasH = +mgEl('mgCustomH').value; }
+  mgRender();
+});
+['mgCustomW','mgCustomH'].forEach(id=>mgEl(id).addEventListener('input', ()=>{
+  mgCanvasW = +mgEl('mgCustomW').value || mgCanvasW;
+  mgCanvasH = +mgEl('mgCustomH').value || mgCanvasH;
+  mgRender();
+}));
+mgEl('mgBorderRadius').addEventListener('input', function(){
+  mgBorderRadius = +this.value;
+  mgEl('mgBorderRadiusVal').textContent = mgBorderRadius;
+  mgRender();
+});
+mgEl('mgBaseColor').addEventListener('input', function(){ mgBaseColor = this.value; mgRender(); });
+
+/* ---------- CSS generation ---------- */
+function mgBuildGradientCss(){
+  if(!mgNodes.length) return `background-color: ${mgBaseColor};`;
+  const layers = mgNodes.map(n => `radial-gradient(circle at ${n.x.toFixed(1)}% ${n.y.toFixed(1)}%, ${mgHexToRgba(n.color, n.opacity)} 0%, transparent ${n.size}%)`);
+  return `background-color: ${mgBaseColor};\nbackground-image: ${layers.join(',\n  ')};`;
+}
+function mgBuildCssVars(){
+  return mgNodes.map((n,i)=>`--mesh-color-${i+1}: ${n.color};`).join('\n');
+}
+
+/* ---------- canvas rendering (matches CSS layering: first node = topmost) ---------- */
+const mgCanvas = mgEl('mgCanvas');
+const mgctx = mgCanvas.getContext('2d');
+let mgDisplayScale = 1;
+let mgDraggingNodeId = null;
+
+function mgRenderCanvasGraphic(canvas, ctx, w, h){
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle = mgBaseColor;
+  ctx.fillRect(0,0,w,h);
+  // draw in REVERSE order so the first-listed node ends up visually on top, matching CSS background-image layering rules
+  for(let i=mgNodes.length-1; i>=0; i--){
+    const n = mgNodes[i];
+    const cx = (n.x/100)*w, cy = (n.y/100)*h;
+    const radius = (n.size/100)*Math.max(w,h);
+    const grad = ctx.createRadialGradient(cx,cy,0,cx,cy,radius);
+    grad.addColorStop(0, mgHexToRgba(n.color, n.opacity));
+    grad.addColorStop(1, mgHexToRgba(n.color, 0));
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,0,w,h);
+  }
+}
+function mgRenderEditorCanvas(){
+  const maxW = 500;
+  mgDisplayScale = Math.min(1, maxW/mgCanvasW);
+  mgCanvas.width = mgCanvasW*mgDisplayScale;
+  mgCanvas.height = mgCanvasH*mgDisplayScale;
+  mgRenderCanvasGraphic(mgCanvas, mgctx, mgCanvas.width, mgCanvas.height);
+  mgNodes.forEach(n=>{
+    const px = (n.x/100)*mgCanvas.width, py=(n.y/100)*mgCanvas.height;
+    mgctx.beginPath();
+    mgctx.arc(px,py, n.id===mgSelectedNodeId?9:6, 0, Math.PI*2);
+    mgctx.fillStyle = n.id===mgSelectedNodeId ? '#ffffff' : n.color;
+    mgctx.fill();
+    mgctx.strokeStyle = '#1f3d2b';
+    mgctx.lineWidth = 2;
+    mgctx.stroke();
+  });
+}
+function mgRender(){
+  mgRenderEditorCanvas();
+  mgEl('mgCssOutput').value = mgBuildGradientCss();
+  const previewEl = mgEl('mgUiPreviewInner');
+  previewEl.style.backgroundColor = mgBaseColor;
+  if(mgNodes.length){
+    const layers = mgNodes.map(n => `radial-gradient(circle at ${n.x.toFixed(1)}% ${n.y.toFixed(1)}%, ${mgHexToRgba(n.color, n.opacity)} 0%, transparent ${n.size}%)`);
+    previewEl.style.backgroundImage = layers.join(', ');
+  }else{
+    previewEl.style.backgroundImage = 'none';
+  }
+  previewEl.style.borderRadius = mgBorderRadius+'px';
+}
+
+function mgGetCanvasPoint(e){
+  const rect = mgCanvas.getBoundingClientRect();
+  const scaleX = mgCanvas.width/rect.width, scaleY = mgCanvas.height/rect.height;
+  return { x:(e.clientX-rect.left)*scaleX, y:(e.clientY-rect.top)*scaleY };
+}
+mgCanvas.addEventListener('pointerdown', e=>{
+  const pt = mgGetCanvasPoint(e);
+  let closest=null, closestDist=Infinity;
+  mgNodes.forEach(n=>{
+    const px=(n.x/100)*mgCanvas.width, py=(n.y/100)*mgCanvas.height;
+    const dist = Math.hypot(pt.x-px, pt.y-py);
+    if(dist<closestDist){ closestDist=dist; closest=n; }
+  });
+  if(closest && closestDist<25){
+    mgDraggingNodeId = closest.id;
+    mgSelectNode(closest.id);
+    mgCanvas.setPointerCapture(e.pointerId);
+  }else{
+    const xPct = (pt.x/mgCanvas.width)*100, yPct=(pt.y/mgCanvas.height)*100;
+    const node = mgNewNode(xPct, yPct);
+    mgNodes.push(node);
+    mgSelectNode(node.id);
+    mgRender();
+  }
+});
+mgCanvas.addEventListener('pointermove', e=>{
+  if(!mgDraggingNodeId) return;
+  const node = mgNodes.find(n=>n.id===mgDraggingNodeId);
+  if(!node) return;
+  const pt = mgGetCanvasPoint(e);
+  node.x = Math.max(0, Math.min(100, (pt.x/mgCanvas.width)*100));
+  node.y = Math.max(0, Math.min(100, (pt.y/mgCanvas.height)*100));
+  mgRender();
+});
+['pointerup','pointercancel'].forEach(evt=>mgCanvas.addEventListener(evt, ()=>{ mgDraggingNodeId=null; }));
+
+function mgSelectNode(id){
+  mgSelectedNodeId = id;
+  const node = mgNodes.find(n=>n.id===id);
+  if(!node){ mgEl('mgNodeEditor').style.display='none'; return; }
+  mgEl('mgNodeEditor').style.display='block';
+  mgEl('mgNodeColor').value = node.color;
+  mgEl('mgNodeSize').value = node.size; mgEl('mgNodeSizeVal').textContent = node.size;
+  mgEl('mgNodeOpacity').value = node.opacity; mgEl('mgNodeOpacityVal').textContent = node.opacity;
+}
+['mgNodeColor','mgNodeSize','mgNodeOpacity'].forEach(id=>{
+  mgEl(id).addEventListener('input', ()=>{
+    const node = mgNodes.find(n=>n.id===mgSelectedNodeId);
+    if(!node) return;
+    node.color = mgEl('mgNodeColor').value;
+    node.size = +mgEl('mgNodeSize').value; mgEl('mgNodeSizeVal').textContent=node.size;
+    node.opacity = +mgEl('mgNodeOpacity').value; mgEl('mgNodeOpacityVal').textContent=node.opacity;
+    mgRender();
+  });
+});
+mgEl('mgDeleteNodeBtn').addEventListener('click', ()=>{
+  mgNodes = mgNodes.filter(n=>n.id!==mgSelectedNodeId);
+  mgSelectedNodeId = null;
+  mgEl('mgNodeEditor').style.display='none';
+  mgRender();
+});
+
+/* ---------- presets (10 curated theme configs) ---------- */
+const MG_PRESETS = {
+  aurora: { base:'#0d1b2a', nodes:[{x:20,y:20,color:'#39ff88',size:55,opacity:70},{x:75,y:35,color:'#5b9bd5',size:60,opacity:65},{x:50,y:80,color:'#a35cff',size:50,opacity:60}] },
+  sunset: { base:'#3d1f2b', nodes:[{x:15,y:70,color:'#ff6b35',size:60,opacity:75},{x:70,y:20,color:'#ffb340',size:55,opacity:70},{x:85,y:80,color:'#c0392b',size:45,opacity:60}] },
+  ocean: { base:'#062c3e', nodes:[{x:20,y:30,color:'#1a8fb5',size:60,opacity:70},{x:80,y:60,color:'#0d5c75',size:55,opacity:65},{x:50,y:85,color:'#4fc3d9',size:45,opacity:55}] },
+  pastel: { base:'#faf3ec', nodes:[{x:25,y:25,color:'#ffc4d6',size:55,opacity:60},{x:75,y:30,color:'#c4e0ff',size:55,opacity:60},{x:50,y:80,color:'#d4c4ff',size:50,opacity:55}] },
+  neon: { base:'#0a0014', nodes:[{x:20,y:30,color:'#ff00e5',size:55,opacity:75},{x:80,y:40,color:'#00fff0',size:55,opacity:70},{x:50,y:85,color:'#39ff14',size:45,opacity:65}] },
+  purpleblue: { base:'#12082e', nodes:[{x:25,y:25,color:'#7b2ff7',size:60,opacity:70},{x:75,y:60,color:'#3a86ff',size:55,opacity:65},{x:50,y:85,color:'#5b2fbf',size:45,opacity:60}] },
+  warm: { base:'#2b1810', nodes:[{x:20,y:30,color:'#e07a2c',size:60,opacity:70},{x:75,y:50,color:'#c0392b',size:50,opacity:60},{x:50,y:85,color:'#f0a458',size:45,opacity:55}] },
+  cool: { base:'#0f1f2b', nodes:[{x:20,y:30,color:'#3a86c8',size:60,opacity:70},{x:75,y:50,color:'#2fbf9f',size:50,opacity:60},{x:50,y:85,color:'#5b9bd5',size:45,opacity:55}] },
+  minimal: { base:'#f2ecd8', nodes:[{x:30,y:40,color:'#e0d5c0',size:60,opacity:50},{x:70,y:60,color:'#d5c9b0',size:55,opacity:45}] },
+  saas: { base:'#1f3d2b', nodes:[{x:20,y:25,color:'#e07a2c',size:55,opacity:60},{x:80,y:35,color:'#5b9bd5',size:60,opacity:55},{x:50,y:85,color:'#2fbf9f',size:50,opacity:50}] }
+};
+function mgApplyPreset(key){
+  const preset = MG_PRESETS[key];
+  if(!preset) return;
+  mgBaseColor = preset.base;
+  mgEl('mgBaseColor').value = preset.base;
+  mgNodes = preset.nodes.map(n=>mgNewNode(n.x,n.y,n.color,n.size,n.opacity));
+  mgSelectedNodeId = null;
+  mgEl('mgNodeEditor').style.display='none';
+  mgRender();
+}
+function mgRenderPresetGallery(){
+  const row = mgEl('mgPresetRow');
+  row.innerHTML = '';
+  Object.keys(MG_PRESETS).forEach(key=>{
+    const btn = document.createElement('button');
+    btn.className='secondary';
+    btn.textContent = key.charAt(0).toUpperCase()+key.slice(1);
+    btn.addEventListener('click', ()=>mgApplyPreset(key));
+    row.appendChild(btn);
+  });
+}
+mgRenderPresetGallery();
+
+/* ---------- randomize / reset ---------- */
+function mgRandomColor(){
+  const hues = [10,25,40,150,170,190,210,260,290,330];
+  const h = hues[Math.floor(Math.random()*hues.length)];
+  const s = 55+Math.random()*30, l = 45+Math.random()*15;
+  const c = (1-Math.abs(2*l/100-1))*s/100;
+  const x = c*(1-Math.abs((h/60)%2-1));
+  const m = l/100-c/2;
+  let r,g,b;
+  if(h<60){r=c;g=x;b=0;} else if(h<120){r=x;g=c;b=0;} else if(h<180){r=0;g=c;b=x;}
+  else if(h<240){r=0;g=x;b=c;} else if(h<300){r=x;g=0;b=c;} else {r=c;g=0;b=x;}
+  const toHex = v => Math.round((v+m)*255).toString(16).padStart(2,'0');
+  return '#'+toHex(r)+toHex(g)+toHex(b);
+}
+mgEl('mgRandomizeBtn').addEventListener('click', ()=>{
+  const count = 2+Math.floor(Math.random()*3);
+  mgNodes = [];
+  for(let i=0;i<count;i++){
+    mgNodes.push(mgNewNode(15+Math.random()*70, 15+Math.random()*70, mgRandomColor(), 40+Math.random()*30, 55+Math.random()*30));
+  }
+  mgBaseColor = mgRandomColor();
+  mgEl('mgBaseColor').value = mgBaseColor;
+  mgSelectedNodeId = null;
+  mgEl('mgNodeEditor').style.display='none';
+  mgRender();
+});
+mgEl('mgResetBtn').addEventListener('click', ()=>{
+  mgNodes = [];
+  mgBaseColor = '#1f3d2b';
+  mgEl('mgBaseColor').value = mgBaseColor;
+  mgSelectedNodeId = null;
+  mgEl('mgNodeEditor').style.display='none';
+  mgRender();
+});
+
+/* ---------- light/dark UI preview toggle ---------- */
+document.querySelectorAll('[data-preview]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const mode = btn.dataset.preview;
+    mgEl('mgUiPreview').style.background = mode==='dark' ? '#1a1a1a' : '#ffffff';
+  });
+});
+
+/* ---------- copy handlers ---------- */
+document.querySelectorAll('[data-copy]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.getAttribute('data-copy'));
+    if(!target) return;
+    const text = btn.getAttribute('data-copy-mode')==='text' ? target.textContent : target.value;
+    if(!text) return;
+    const done = ()=>{ const old=btn.textContent; btn.textContent='\u2705 Copied'; setTimeout(()=>btn.textContent=old,1200); };
+    if(window.toolnestCopyText){ window.toolnestCopyText(text, done); } else { navigator.clipboard.writeText(text).then(done); }
+  });
+});
+mgEl('mgCopyVarsBtn').addEventListener('click', function(){
+  const text = mgBuildCssVars();
+  const done = ()=>{ const old=this.textContent; this.textContent='\u2705 Copied'; setTimeout(()=>this.textContent=old,1200); };
+  if(window.toolnestCopyText) window.toolnestCopyText(text, done); else navigator.clipboard.writeText(text).then(done);
+});
+
+/* ---------- PNG export ---------- */
+mgEl('mgDownloadPngBtn').addEventListener('click', ()=>{
+  const canvas = document.createElement('canvas');
+  canvas.width = mgCanvasW; canvas.height = mgCanvasH;
+  const ctx = canvas.getContext('2d');
+  mgRenderCanvasGraphic(canvas, ctx, mgCanvasW, mgCanvasH);
+  canvas.toBlob(blob=>{
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'mesh-gradient.png';
+    a.click();
+  });
+});
+
+/* ---------- SVG export (native radialGradient defs, layered to match CSS stacking) ---------- */
+mgEl('mgDownloadSvgBtn').addEventListener('click', ()=>{
+  let defs = '';
+  let rects = `<rect width="100%" height="100%" fill="${mgBaseColor}"/>`;
+  // SVG later elements paint on top, so draw in REVERSE order so first-listed node ends up topmost (matches CSS)
+  for(let i=mgNodes.length-1; i>=0; i--){
+    const n = mgNodes[i];
+    const gid = 'grad'+i;
+    defs += `<radialGradient id="${gid}" cx="${n.x}%" cy="${n.y}%" r="${n.size}%"><stop offset="0%" stop-color="${n.color}" stop-opacity="${n.opacity/100}"/><stop offset="100%" stop-color="${n.color}" stop-opacity="0"/></radialGradient>`;
+    rects += `<rect width="100%" height="100%" fill="url(#${gid})"/>`;
+  }
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${mgCanvasW}" height="${mgCanvasH}" viewBox="0 0 ${mgCanvasW} ${mgCanvasH}"><defs>${defs}</defs>${rects}</svg>`;
+  const blob = new Blob([svg], {type:'image/svg+xml'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'mesh-gradient.svg';
+  a.click();
+});
+
+/* ---------- JSON preset export/import ---------- */
+mgEl('mgExportJsonBtn').addEventListener('click', function(){
+  const data = { baseColor: mgBaseColor, canvasW: mgCanvasW, canvasH: mgCanvasH, borderRadius: mgBorderRadius, nodes: mgNodes.map(n=>({x:n.x,y:n.y,color:n.color,size:n.size,opacity:n.opacity})) };
+  const text = JSON.stringify(data, null, 2);
+  const done = ()=>{ const old=this.textContent; this.textContent='\u2705 Copied'; setTimeout(()=>this.textContent=old,1200); };
+  if(window.toolnestCopyText) window.toolnestCopyText(text, done); else navigator.clipboard.writeText(text).then(done);
+});
+mgEl('mgImportJsonBtn').addEventListener('click', ()=>mgEl('mgImportJsonInput').click());
+mgEl('mgImportJsonInput').addEventListener('change', e=>{
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    try{
+      const data = JSON.parse(reader.result);
+      mgBaseColor = data.baseColor || mgBaseColor;
+      mgEl('mgBaseColor').value = mgBaseColor;
+      if(data.canvasW && data.canvasH){
+        mgCanvasW = data.canvasW; mgCanvasH = data.canvasH;
+        mgEl('mgSizePreset').value = 'custom';
+        mgEl('mgCustomWField').style.display='flex'; mgEl('mgCustomHField').style.display='flex';
+        mgEl('mgCustomW').value = mgCanvasW; mgEl('mgCustomH').value = mgCanvasH;
+      }
+      mgBorderRadius = data.borderRadius || 0;
+      mgEl('mgBorderRadius').value = mgBorderRadius; mgEl('mgBorderRadiusVal').textContent = mgBorderRadius;
+      mgNodes = (data.nodes||[]).map(n=>mgNewNode(n.x,n.y,n.color,n.size,n.opacity));
+      mgSelectedNodeId = null;
+      mgEl('mgNodeEditor').style.display='none';
+      mgRender();
+    }catch(err){
+      alert('Could not read this preset file. Please choose a valid JSON preset exported from this tool.');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+/* ---------- init ---------- */
+mgApplyPreset('saas');
+</script><script src="script.js"></script></body></html>
