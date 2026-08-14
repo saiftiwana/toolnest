@@ -1,0 +1,521 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Business Card Maker - Free Online Design Tool | ToolNest</title><meta name="description" content="Design, customize and export a professional front and back business card free, with QR code, logo upload, and print-ready PDF export."><link rel="canonical" href="https://toolnest.link/business-card-maker.html"><meta property="og:title" content="Business Card Maker | ToolNest"><meta property="og:description" content="Design and export a professional business card free, with QR code and print-ready PDF export."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/business-card-maker.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Business Card Maker</h1><p>Design a professional front and back business card with 6 templates, a working QR code, and print-ready PDF export — free, private.</p></header><main>
+<div class="card" id="bc"><h2>Business Card Maker</h2><p class="desc">Design, customize and export a professional front &amp; back business card — free, private, print-ready.</p>
+
+<h3 style="margin-top:4px;">1. Business Details</h3>
+<div class="row"><div class="field"><label class="field-label" for="bcName">Full name</label><input type="text" id="bcName" placeholder="Full name"></div><div class="field"><label class="field-label" for="bcTitle">Job title</label><input type="text" id="bcTitle" placeholder="Job title"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="bcCompany">Company name</label><input type="text" id="bcCompany" placeholder="Company name"></div><div class="field"><label class="field-label" for="bcTagline">Tagline (optional)</label><input type="text" id="bcTagline" placeholder="Optional tagline"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="bcPhone">Phone</label><input type="text" id="bcPhone" placeholder="+1 234 567 8900"></div><div class="field"><label class="field-label" for="bcEmail">Email</label><input type="text" id="bcEmail" placeholder="name@company.com"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="bcWebsite">Website (optional)</label><input type="text" id="bcWebsite" placeholder="www.company.com"></div><div class="field"><label class="field-label" for="bcAddress">Address (optional)</label><input type="text" id="bcAddress" placeholder="Business address"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="bcLogoInput">Logo (optional)</label><input type="file" id="bcLogoInput" accept="image/*"></div><div class="field"><label class="field-label" for="bcPhotoInput">Photo (optional)</label><input type="file" id="bcPhotoInput" accept="image/*"></div></div>
+
+<h3>2. Template</h3>
+<div class="row" id="bcTemplateRow" style="flex-wrap:wrap;"></div>
+
+<h3>3. Design Customization</h3>
+<div class="row"><div class="field"><label class="field-label" for="bcPrimaryColor">Primary color</label><input type="color" id="bcPrimaryColor" value="#1f3d2b"></div><div class="field"><label class="field-label" for="bcAccentColor">Accent color</label><input type="color" id="bcAccentColor" value="#e07a2c"></div><div class="field"><label class="field-label" for="bcTextColor">Text color</label><input type="color" id="bcTextColor" value="#ffffff"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="bcFont">Font</label><select id="bcFont"><option value="Arial, sans-serif">Arial</option><option value="Georgia, serif">Georgia</option><option value="Verdana, sans-serif">Verdana</option><option value="'Courier New', monospace">Courier New</option></select></div><div class="field"><label class="field-label" for="bcAlign">Text alignment</label><select id="bcAlign"><option value="left">Left</option><option value="center">Center</option></select></div></div>
+
+<h3>4. Card Size</h3>
+<div class="row"><div class="field"><label class="field-label" for="bcSizePreset">Size</label><select id="bcSizePreset"><option value="standard">Standard (3.5&times;2 in)</option><option value="square">Square (2.5&times;2.5 in)</option><option value="custom">Custom</option></select></div><div class="field"><label class="field-label" for="bcOrientation">Orientation</label><select id="bcOrientation"><option value="landscape">Landscape</option><option value="portrait">Portrait</option></select></div></div>
+<div class="row" style="margin-top:10px; display:none;" id="bcCustomSizeRow"><div class="field"><label class="field-label" for="bcCustomW">Width (in)</label><input type="number" id="bcCustomW" value="3.5" step="0.1"></div><div class="field"><label class="field-label" for="bcCustomH">Height (in)</label><input type="number" id="bcCustomH" value="2" step="0.1"></div></div>
+
+<h3>5. Front / Back</h3>
+<div class="row"><button class="secondary bc-side-tab active" data-side="front">Front</button><button class="secondary bc-side-tab" data-side="back">Back</button></div>
+
+<div id="bcBackOptions" style="margin-top:12px; display:none;">
+<div class="row"><div class="field"><label class="field-label" for="bcBackContent">Back side content</label><select id="bcBackContent"><option value="qr">QR Code</option><option value="message">Short Message</option><option value="social">Social Links</option><option value="address">Address Focus</option></select></div></div>
+<div class="row" style="margin-top:10px; display:none;" id="bcQrTypeRow"><div class="field"><label class="field-label" for="bcQrType">QR content</label><select id="bcQrType"><option value="website">Website URL</option><option value="vcard">vCard (Contact)</option><option value="phone">Phone</option></select></div></div>
+<div class="row" style="margin-top:10px; display:none;" id="bcBackMessageRow"><div class="field"><label class="field-label" for="bcBackMessage">Short message</label><input type="text" id="bcBackMessage" placeholder="e.g. Thank you for connecting!"></div></div>
+<div class="row" style="margin-top:10px; display:none;" id="bcSocialRow"><div class="field"><label class="field-label" for="bcSocial1">Social link 1</label><input type="text" id="bcSocial1" placeholder="e.g. @yourhandle (Instagram)"></div><div class="field"><label class="field-label" for="bcSocial2">Social link 2</label><input type="text" id="bcSocial2" placeholder="e.g. linkedin.com/in/you"></div></div>
+</div>
+
+<h3>6. Live Preview</h3>
+<canvas id="bcCanvas" class="preview" style="max-width:100%; border:1px solid var(--line); border-radius:6px; display:block;"></canvas>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="bcZoomInBtn">Zoom In</button><button class="secondary" id="bcZoomOutBtn">Zoom Out</button><button class="secondary" id="bcZoomResetBtn">Reset Zoom</button></div>
+
+<h3>7. Save / Load</h3>
+<div class="row"><button class="secondary" id="bcSaveDraftBtn">Save Draft</button><button class="secondary" id="bcLoadDraftBtn">Load Draft</button><button class="secondary" id="bcResetBtn">Reset Design</button></div>
+<p class="stat" id="bcDraftStatus" style="font-size:.8rem;"></p>
+
+<h3>8. Export</h3>
+<div class="row" style="flex-wrap:wrap;"><button id="bcDownloadPngBtn">Download PNG (Current Side)</button><button class="secondary" id="bcDownloadJpgBtn">Download JPG</button><button class="secondary" id="bcDownloadPdfBtn">Download PDF (Front + Back)</button></div>
+<div class="row" style="margin-top:10px;"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="bcBleedGuides"> Include bleed guides &amp; crop marks in PDF</label></div>
+<p class="stat" id="bcExportStatus" style="font-size:.8rem;"></p>
+</div>
+<div class="seo-content">
+<h3>How to Use Business Card Maker</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Enter Business Details:</strong> Name, title, company, contact info, and optional logo/photo.</li><li><strong>Choose a Template:</strong> Pick from Classic, Modern, Minimal, Corporate, Creative, or Elegant.</li><li><strong>Customize:</strong> Set primary, accent, and text colors, font, and alignment.</li><li><strong>Design the Back:</strong> Add a QR code, short message, social links, or an address focus.</li><li><strong>Preview:</strong> Zoom in to check details on both sides.</li><li><strong>Export:</strong> Download PNG, JPG, or a print-ready PDF with both sides.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>A business card maker online tool means designing both sides of a professional card without hiring a designer or opening design software you don't already know how to use. This professional business card maker tool covers the whole workflow — details, template, colors, a working QR code on the back, and print-ready export — in one place.</p>
+<h3>How It Works</h3>
+<p>This printable business card maker tool builds your card on a canvas sized to real print dimensions, so what exports matches what you designed. Six templates control genuinely different layouts — not just different colors — from Classic's centered symmetry to Modern's colored side panel to Creative's diagonal color split, and the QR code on the back reuses the same QR generation this site's dedicated QR Code Generator uses, so it scans reliably.</p>
+<h3>Key Features</h3>
+<p>As a business card maker with logo tool, upload your own logo and an optional headshot photo, then choose independent primary, accent, and text colors plus a font that applies consistently across the card. The back side supports four content types: a QR code (linking to your website, a vCard contact card, or a phone number), a short thank-you message, social links, or an address-focused layout. Export as PNG or JPG for digital sharing, or as a business card maker PDF combining both sides with optional bleed guides and crop marks for professional printing, and save your design as a draft to pick up again later in the same browser.</p>
+<h3>Common Use Cases</h3>
+<p>A freelancer building their first business card enters their details, tries a few templates against their brand colors, and adds a vCard QR code on the back so new contacts can save their info with one scan. A small business owner preparing cards for a trade show uses the Corporate template with their logo and a QR code linking to their website, then downloads the print-ready PDF with bleed guides for their printer. Someone updating an existing card's contact details reloads their saved draft, changes the phone number, and re-exports without rebuilding the whole design.</p>
+<h3>Tips</h3>
+<p>Keep text a reasonable distance from the card edges, especially if you plan to print with bleed, since content too close to the trim line risks being cut off — the bleed guide overlay in the PDF export shows exactly where the safe area sits. For the QR code on the back, the vCard option is especially useful at networking events since it lets people save your full contact details in one scan instead of just opening a link.</p>
+<h3>Frequently Asked Questions</h3>
+<div class=faq-block><details><summary>What information should I include on a professional business card?</summary><p>Name, job title, company name, and at least one or two ways to reach you (phone, email, or website) covers the essentials; a logo and tagline are common additions.</p></details><details><summary>How do I create a print-ready business card file?</summary><p>Choose your card size, design both sides, and download the PDF with bleed guides and crop marks enabled if your printer requires them.</p></details><details><summary>Can I add a QR code to my business card design?</summary><p>Yes, choose QR Code as the back side content and select whether it should link to your website, share your contact details as a vCard, or dial your phone number.</p></details><details><summary>What file format should I download for printing?</summary><p>PDF is best for professional printing since it combines both sides at the correct size; PNG or JPG work well for digital sharing or simple home printing.</p></details><details><summary>Does the design include bleed and crop marks for printers?</summary><p>Yes, enable the bleed guides and crop marks option before downloading the PDF if your printer needs them.</p></details><details><summary>Can I save multiple business card versions and edit later?</summary><p>Yes, use Save Draft to store your current design in this browser, and Load Draft to continue editing it later.</p></details><details><summary>What information should I include on a professional business card?</summary><p>Beyond name and contact details, a tagline or short description of what you do can help people remember your card after an event.</p></details><details><summary>Is there a template option if I don't want to design from scratch?</summary><p>Yes, all six templates come with a complete layout already applied — just fill in your details and colors.</p></details></div>
+</div>
+<div class="seo-content"><h3>Related Design &amp; Business Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="qr-code-generator.html">QR Code Generator</a></li>
+<li><a href="invoice-generator.html">Invoice Generator</a></li>
+<li><a href="resume-cv-builder.html">Resume/CV Builder</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Business Card Maker","applicationCategory":"DesignApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/business-card-maker.html"},
+{"@type":"HowTo","name":"How to Design a Business Card","step":[
+{"@type":"HowToStep","text":"Enter your business details and upload a logo."},
+{"@type":"HowToStep","text":"Choose a template."},
+{"@type":"HowToStep","text":"Customize colors, font, and alignment."},
+{"@type":"HowToStep","text":"Design the back side with a QR code or other content."},
+{"@type":"HowToStep","text":"Preview both sides."},
+{"@type":"HowToStep","text":"Export as PNG, JPG, or PDF."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What information should I include on a professional business card?","acceptedAnswer":{"@type":"Answer","text":"Name, job title, company name, and at least one or two contact methods."}},
+{"@type":"Question","name":"How do I create a print-ready business card file?","acceptedAnswer":{"@type":"Answer","text":"Download the PDF with bleed guides and crop marks enabled if your printer requires them."}},
+{"@type":"Question","name":"Can I add a QR code to my business card design?","acceptedAnswer":{"@type":"Answer","text":"Yes, choose QR Code as the back side content, linking to your website, a vCard, or your phone number."}},
+{"@type":"Question","name":"What file format should I download for printing?","acceptedAnswer":{"@type":"Answer","text":"PDF is best for professional printing since it combines both sides at the correct size."}},
+{"@type":"Question","name":"Does the design include bleed and crop marks for printers?","acceptedAnswer":{"@type":"Answer","text":"Yes, enable the bleed guides and crop marks option before downloading the PDF."}},
+{"@type":"Question","name":"Can I save multiple business card versions and edit later?","acceptedAnswer":{"@type":"Answer","text":"Yes, use Save Draft and Load Draft to continue editing later in the same browser."}}
+]}
+]}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script>/* ===== Business Card Maker engine ===== */
+const bcEl = id => document.getElementById(id);
+
+let bcLogoImg = null, bcPhotoImg = null;
+let bcActiveSide = 'front';
+let bcTemplate = 'classic';
+let bcZoom = 1;
+const BC_DPI = 300;
+
+const BC_TEMPLATES = ['classic','modern','minimal','corporate','creative','elegant'];
+function bcRenderTemplateGallery(){
+  const row = bcEl('bcTemplateRow');
+  row.innerHTML = '';
+  BC_TEMPLATES.forEach(t=>{
+    const btn = document.createElement('button');
+    btn.className = 'secondary' + (t===bcTemplate?' active':'');
+    btn.textContent = t.charAt(0).toUpperCase()+t.slice(1);
+    btn.addEventListener('click', ()=>{ bcTemplate=t; bcRenderTemplateGallery(); bcRender(); });
+    row.appendChild(btn);
+  });
+}
+bcRenderTemplateGallery();
+
+/* ---------- logo/photo upload ---------- */
+bcEl('bcLogoInput').addEventListener('change', e=>{
+  const file=e.target.files[0]; if(!file) return;
+  const img=new Image();
+  img.onload=()=>{ bcLogoImg=img; bcRender(); };
+  img.src=URL.createObjectURL(file);
+});
+bcEl('bcPhotoInput').addEventListener('change', e=>{
+  const file=e.target.files[0]; if(!file) return;
+  const img=new Image();
+  img.onload=()=>{ bcPhotoImg=img; bcRender(); };
+  img.src=URL.createObjectURL(file);
+});
+
+/* ---------- card size ---------- */
+const BC_SIZE_PRESETS = { standard:[3.5,2], square:[2.5,2.5] };
+bcEl('bcSizePreset').addEventListener('change', function(){
+  bcEl('bcCustomSizeRow').style.display = this.value==='custom' ? 'flex' : 'none';
+  bcRender();
+});
+bcEl('bcOrientation').addEventListener('change', bcRender);
+['bcCustomW','bcCustomH'].forEach(id=>bcEl(id).addEventListener('input', bcRender));
+function bcGetCardSizeInches(){
+  let w,h;
+  if(bcEl('bcSizePreset').value==='custom'){ w=+bcEl('bcCustomW').value||3.5; h=+bcEl('bcCustomH').value||2; }
+  else [w,h] = BC_SIZE_PRESETS[bcEl('bcSizePreset').value];
+  if(bcEl('bcOrientation').value==='portrait' && w>h) [w,h]=[h,w];
+  if(bcEl('bcOrientation').value==='landscape' && h>w) [w,h]=[h,w];
+  return {w,h};
+}
+
+/* ---------- side tabs ---------- */
+document.querySelectorAll('.bc-side-tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.bc-side-tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    bcActiveSide = btn.dataset.side;
+    bcEl('bcBackOptions').style.display = bcActiveSide==='back' ? 'block' : 'none';
+    bcRender();
+  });
+});
+bcEl('bcBackContent').addEventListener('change', function(){
+  bcEl('bcQrTypeRow').style.display = this.value==='qr' ? 'flex' : 'none';
+  bcEl('bcBackMessageRow').style.display = this.value==='message' ? 'flex' : 'none';
+  bcEl('bcSocialRow').style.display = this.value==='social' ? 'flex' : 'none';
+  bcRender();
+});
+['bcQrType','bcBackMessage','bcSocial1','bcSocial2'].forEach(id=>bcEl(id).addEventListener('input', bcRender));
+['bcName','bcTitle','bcCompany','bcTagline','bcPhone','bcEmail','bcWebsite','bcAddress','bcPrimaryColor','bcAccentColor','bcTextColor','bcFont','bcAlign'].forEach(id=>{
+  bcEl(id).addEventListener('input', bcRender);
+  bcEl(id).addEventListener('change', bcRender);
+});
+
+/* ---------- QR code generation (reuses the same qrcodejs library used site-wide, no duplicate engine) ---------- */
+function bcBuildQrContent(){
+  const type = bcEl('bcQrType').value;
+  const name=bcEl('bcName').value, phone=bcEl('bcPhone').value, email=bcEl('bcEmail').value, website=bcEl('bcWebsite').value, company=bcEl('bcCompany').value;
+  if(type==='website') return website || 'https://example.com';
+  if(type==='phone') return phone ? `tel:${phone}` : '';
+  if(type==='vcard'){
+    let lines=['BEGIN:VCARD','VERSION:3.0',`FN:${name||''}`];
+    if(company) lines.push(`ORG:${company}`);
+    if(phone) lines.push(`TEL:${phone}`);
+    if(email) lines.push(`EMAIL:${email}`);
+    lines.push('END:VCARD');
+    return lines.join('\n');
+  }
+  return website||'';
+}
+function bcGenerateQrCanvas(content, size){
+  return new Promise(resolve=>{
+    if(typeof QRCode==='undefined' || !content){ resolve(null); return; }
+    const holder = document.createElement('div');
+    holder.style.position='fixed'; holder.style.left='-9999px';
+    document.body.appendChild(holder);
+    new QRCode(holder, {text:content, width:size, height:size, colorDark:'#000000', colorLight:'#ffffff', correctLevel:QRCode.CorrectLevel.M});
+    setTimeout(()=>{
+      const canvas = holder.querySelector('canvas');
+      const result = canvas ? canvas : null;
+      if(result){
+        const copy = document.createElement('canvas');
+        copy.width=result.width; copy.height=result.height;
+        copy.getContext('2d').drawImage(result,0,0);
+        document.body.removeChild(holder);
+        resolve(copy);
+      }else{
+        document.body.removeChild(holder);
+        resolve(null);
+      }
+    }, 80);
+  });
+}
+
+/* ---------- template layouts (structurally distinct per spec requirement) ---------- */
+function bcDrawFront(ctx, w, h, colors, info){
+  const {primary, accent, text, font, align} = colors;
+  ctx.textBaseline = 'alphabetic';
+  const pad = w*0.06;
+
+  if(bcTemplate==='classic'){
+    ctx.fillStyle = primary; ctx.fillRect(0,0,w,h);
+    if(bcLogoImg){ const lh=h*0.22, lw=lh*(bcLogoImg.width/bcLogoImg.height); ctx.drawImage(bcLogoImg,(w-lw)/2,pad,lw,lh); }
+    ctx.fillStyle = text; ctx.textAlign='center'; ctx.font=`bold ${h*0.09}px ${font}`;
+    ctx.fillText(info.name, w/2, h*0.5);
+    ctx.font=`${h*0.05}px ${font}`; ctx.fillStyle=accent;
+    ctx.fillText(info.title, w/2, h*0.58);
+    ctx.strokeStyle=accent; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(w*0.3,h*0.65); ctx.lineTo(w*0.7,h*0.65); ctx.stroke();
+    ctx.font=`${h*0.04}px ${font}`; ctx.fillStyle=text;
+    ctx.fillText([info.phone,info.email].filter(Boolean).join('  |  '), w/2, h*0.78);
+    ctx.fillText(info.company, w/2, h*0.88);
+  }
+  else if(bcTemplate==='modern'){
+    ctx.fillStyle = text==='#ffffff'?'#ffffff':'#f5f5f0'; ctx.fillRect(0,0,w,h);
+    ctx.fillStyle = primary; ctx.fillRect(w*0.62,0,w*0.38,h);
+    ctx.textAlign='left';
+    ctx.fillStyle = primary; ctx.font=`bold ${h*0.11}px ${font}`;
+    ctx.fillText(info.name, pad, h*0.35);
+    ctx.fillStyle = accent; ctx.font=`${h*0.055}px ${font}`;
+    ctx.fillText(info.title, pad, h*0.48);
+    ctx.fillStyle = '#333'; ctx.font=`${h*0.045}px ${font}`;
+    ctx.fillText(info.company, pad, h*0.62);
+    ctx.fillStyle = text; ctx.font=`${h*0.042}px ${font}`; ctx.textAlign='left';
+    [info.phone, info.email, info.website].filter(Boolean).forEach((line,i)=>{
+      ctx.fillText(line, w*0.66, h*(0.3+i*0.15));
+    });
+    if(bcLogoImg){ const lh=h*0.18, lw=lh*(bcLogoImg.width/bcLogoImg.height); ctx.drawImage(bcLogoImg, pad, h*0.08, lw, lh); }
+  }
+  else if(bcTemplate==='minimal'){
+    ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle = '#ddd'; ctx.lineWidth=1; ctx.strokeRect(4,4,w-8,h-8);
+    ctx.textAlign='left';
+    ctx.fillStyle = primary; ctx.font=`${h*0.08}px ${font}`;
+    ctx.fillText(info.name, pad, h*0.28);
+    ctx.fillStyle = '#888'; ctx.font=`${h*0.04}px ${font}`;
+    ctx.fillText(info.title+(info.company?' \u2014 '+info.company:''), pad, h*0.38);
+    ctx.strokeStyle=accent; ctx.beginPath(); ctx.moveTo(pad,h*0.5); ctx.lineTo(w-pad,h*0.5); ctx.stroke();
+    ctx.fillStyle = '#333'; ctx.font=`${h*0.04}px ${font}`;
+    ctx.fillText([info.phone,info.email].filter(Boolean).join('   '), pad, h*0.65);
+    if(info.website) ctx.fillText(info.website, pad, h*0.75);
+    if(bcLogoImg){ const lh=h*0.16, lw=lh*(bcLogoImg.width/bcLogoImg.height); ctx.drawImage(bcLogoImg, w-lw-pad, h-lh-pad, lw, lh); }
+  }
+  else if(bcTemplate==='corporate'){
+    ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,w,h);
+    ctx.fillStyle = primary; ctx.fillRect(0,0,w,h*0.12);
+    ctx.fillStyle = text; ctx.font=`bold ${h*0.06}px ${font}`; ctx.textAlign='left';
+    ctx.fillText(info.company||'Company', pad, h*0.09);
+    if(bcLogoImg){ const lh=h*0.08, lw=lh*(bcLogoImg.width/bcLogoImg.height); ctx.drawImage(bcLogoImg, w-lw-pad, h*0.02, lw, lh); }
+    ctx.fillStyle = '#222'; ctx.font=`bold ${h*0.09}px ${font}`;
+    ctx.fillText(info.name, pad, h*0.42);
+    ctx.fillStyle = accent; ctx.font=`${h*0.05}px ${font}`;
+    ctx.fillText(info.title, pad, h*0.53);
+    ctx.fillStyle = '#444'; ctx.font=`${h*0.04}px ${font}`; ctx.textAlign='right';
+    [info.phone,info.email,info.address].filter(Boolean).forEach((line,i)=>{
+      ctx.fillText(line, w-pad, h*(0.72+i*0.1));
+    });
+  }
+  else if(bcTemplate==='creative'){
+    ctx.fillStyle = primary; ctx.fillRect(0,0,w,h);
+    ctx.fillStyle = accent;
+    ctx.beginPath(); ctx.moveTo(0,h); ctx.lineTo(w*0.55,h); ctx.lineTo(w*0.3,0); ctx.lineTo(0,0); ctx.closePath(); ctx.fill();
+    ctx.textAlign='right';
+    ctx.fillStyle = text; ctx.font=`bold ${h*0.1}px ${font}`;
+    ctx.fillText(info.name, w-pad, h*0.4);
+    ctx.font=`${h*0.05}px ${font}`;
+    ctx.fillText(info.title, w-pad, h*0.5);
+    ctx.font=`${h*0.04}px ${font}`;
+    ctx.fillText([info.phone,info.email].filter(Boolean).join('  '), w-pad, h*0.78);
+    ctx.fillText(info.company, w-pad, h*0.88);
+    if(bcLogoImg){ const lh=h*0.2, lw=lh*(bcLogoImg.width/bcLogoImg.height); ctx.drawImage(bcLogoImg, pad, pad, lw, lh); }
+  }
+  else if(bcTemplate==='elegant'){
+    ctx.fillStyle = '#fdfaf3'; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle = accent; ctx.lineWidth=1.5; ctx.strokeRect(w*0.04,h*0.08,w*0.92,h*0.84);
+    ctx.textAlign='center';
+    ctx.fillStyle = primary; ctx.font=`${h*0.09}px Georgia, serif`;
+    const spaced = info.name.toUpperCase().split('').join('\u200a\u200a');
+    ctx.fillText(spaced, w/2, h*0.45);
+    ctx.fillStyle = accent; ctx.font=`italic ${h*0.045}px Georgia, serif`;
+    ctx.fillText(info.title, w/2, h*0.56);
+    ctx.fillStyle = '#555'; ctx.font=`${h*0.035}px Georgia, serif`;
+    ctx.fillText([info.phone,info.email].filter(Boolean).join('   \u2022   '), w/2, h*0.72);
+    ctx.fillText(info.company, w/2, h*0.8);
+  }
+}
+
+/* ---------- back side rendering ---------- */
+let bcQrCanvasCache = null, bcQrCacheKey = '';
+async function bcDrawBack(ctx, w, h, colors, info){
+  const {primary, accent, text, font} = colors;
+  ctx.fillStyle = primary; ctx.fillRect(0,0,w,h);
+  const backType = bcEl('bcBackContent').value;
+  const pad = w*0.08;
+
+  if(backType==='qr'){
+    const content = bcBuildQrContent();
+    const key = content;
+    if(key !== bcQrCacheKey){
+      bcQrCanvasCache = await bcGenerateQrCanvas(content, 300);
+      bcQrCacheKey = key;
+    }
+    ctx.fillStyle = text; ctx.textAlign='center';
+    ctx.font = `bold ${h*0.06}px ${font}`;
+    ctx.fillText(info.company||info.name, w/2, h*0.18);
+    if(bcQrCanvasCache){
+      const qrSize = h*0.55;
+      ctx.fillStyle='#ffffff'; ctx.fillRect(w/2-qrSize/2-6, h*0.25-6, qrSize+12, qrSize+12);
+      ctx.drawImage(bcQrCanvasCache, w/2-qrSize/2, h*0.25, qrSize, qrSize);
+    }
+    ctx.font = `${h*0.04}px ${font}`; ctx.fillStyle=accent;
+    ctx.fillText('Scan to connect', w/2, h*0.92);
+  }else if(backType==='message'){
+    ctx.fillStyle = text; ctx.textAlign='center'; ctx.font=`italic ${h*0.075}px ${font}`;
+    const msg = bcEl('bcBackMessage').value || 'Thank you for connecting!';
+    ctx.fillText(msg, w/2, h*0.5);
+    ctx.font=`${h*0.04}px ${font}`; ctx.fillStyle=accent;
+    ctx.fillText(info.company||info.name, w/2, h*0.68);
+  }else if(backType==='social'){
+    ctx.fillStyle = text; ctx.textAlign='center'; ctx.font=`bold ${h*0.07}px ${font}`;
+    ctx.fillText('Connect With Us', w/2, h*0.28);
+    ctx.font=`${h*0.05}px ${font}`; ctx.fillStyle=accent;
+    const s1=bcEl('bcSocial1').value, s2=bcEl('bcSocial2').value;
+    [s1,s2].filter(Boolean).forEach((s,i)=>{ ctx.fillStyle=text; ctx.fillText(s, w/2, h*(0.5+i*0.15)); });
+  }else if(backType==='address'){
+    ctx.fillStyle = text; ctx.textAlign='center'; ctx.font=`bold ${h*0.06}px ${font}`;
+    ctx.fillText(info.company||info.name, w/2, h*0.35);
+    ctx.font=`${h*0.045}px ${font}`;
+    ctx.fillText(info.address||'Business address', w/2, h*0.55);
+    ctx.fillStyle=accent; ctx.font=`${h*0.04}px ${font}`;
+    ctx.fillText(info.website||info.phone||'', w/2, h*0.72);
+  }
+}
+
+/* ---------- main render pipeline (preview uses a capped display size; export uses true 300dpi separately) ---------- */
+const bcCanvas = bcEl('bcCanvas');
+const bcctx = bcCanvas.getContext('2d');
+function bcGetColorsAndInfo(){
+  const colors = {
+    primary: bcEl('bcPrimaryColor').value,
+    accent: bcEl('bcAccentColor').value,
+    text: bcEl('bcTextColor').value,
+    font: bcEl('bcFont').value,
+    align: bcEl('bcAlign').value
+  };
+  const info = {
+    name: bcEl('bcName').value || 'Your Name',
+    title: bcEl('bcTitle').value || 'Job Title',
+    company: bcEl('bcCompany').value || '',
+    phone: bcEl('bcPhone').value || '',
+    email: bcEl('bcEmail').value || '',
+    website: bcEl('bcWebsite').value || '',
+    address: bcEl('bcAddress').value || ''
+  };
+  return {colors, info};
+}
+async function bcRender(){
+  const {w:wIn, h:hIn} = bcGetCardSizeInches();
+  const baseDisplayDpi = 110; // comfortable on-screen preview resolution
+  const w = Math.round(wIn*baseDisplayDpi*bcZoom), h = Math.round(hIn*baseDisplayDpi*bcZoom);
+  bcCanvas.width = w; bcCanvas.height = h;
+  const {colors, info} = bcGetColorsAndInfo();
+  if(bcActiveSide==='front') bcDrawFront(bcctx, w, h, colors, info);
+  else await bcDrawBack(bcctx, w, h, colors, info);
+}
+bcEl('bcZoomInBtn').addEventListener('click', ()=>{ bcZoom=Math.min(2.5,bcZoom+0.25); bcRender(); });
+bcEl('bcZoomOutBtn').addEventListener('click', ()=>{ bcZoom=Math.max(0.5,bcZoom-0.25); bcRender(); });
+bcEl('bcZoomResetBtn').addEventListener('click', ()=>{ bcZoom=1; bcRender(); });
+
+/* ---------- render at true print resolution for export (separate from on-screen preview) ---------- */
+async function bcRenderExportCanvas(side){
+  const {w:wIn, h:hIn} = bcGetCardSizeInches();
+  const w = Math.round(wIn*BC_DPI), h = Math.round(hIn*BC_DPI);
+  const canvas = document.createElement('canvas');
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d');
+  const {colors, info} = bcGetColorsAndInfo();
+  if(side==='front') bcDrawFront(ctx, w, h, colors, info);
+  else await bcDrawBack(ctx, w, h, colors, info);
+  return canvas;
+}
+
+/* ---------- PNG / JPG export (uses true-resolution export canvas) ---------- */
+bcEl('bcDownloadPngBtn').addEventListener('click', async ()=>{
+  bcEl('bcExportStatus').textContent = 'Preparing PNG...';
+  const canvas = await bcRenderExportCanvas(bcActiveSide);
+  canvas.toBlob(blob=>{
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`business-card-${bcActiveSide}.png`; a.click();
+    bcEl('bcExportStatus').textContent = 'PNG downloaded.';
+  });
+});
+bcEl('bcDownloadJpgBtn').addEventListener('click', async ()=>{
+  bcEl('bcExportStatus').textContent = 'Preparing JPG...';
+  const canvas = await bcRenderExportCanvas(bcActiveSide);
+  canvas.toBlob(blob=>{
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`business-card-${bcActiveSide}.jpg`; a.click();
+    bcEl('bcExportStatus').textContent = 'JPG downloaded.';
+  }, 'image/jpeg', 0.92);
+});
+
+/* ---------- PDF export (front+back, lazy-loaded pdf-lib, optional bleed/crop marks) ---------- */
+function bcLoadScript(src){
+  return new Promise((resolve,reject)=>{
+    const script=document.createElement('script'); script.src=src;
+    script.onload=resolve; script.onerror=()=>reject(new Error('Could not load a required library'));
+    document.head.appendChild(script);
+  });
+}
+async function bcEnsurePdfLib(){ if(!window.PDFLib) await bcLoadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js'); }
+
+bcEl('bcDownloadPdfBtn').addEventListener('click', async ()=>{
+  const statusEl = bcEl('bcExportStatus');
+  statusEl.textContent = 'Loading PDF library...';
+  try{
+    await bcEnsurePdfLib();
+    const {PDFDocument} = window.PDFLib;
+    const outDoc = await PDFDocument.create();
+    const {w:wIn, h:hIn} = bcGetCardSizeInches();
+    const includeBleed = bcEl('bcBleedGuides').checked;
+    const bleedIn = includeBleed ? 0.125 : 0; // standard 1/8" bleed
+    const pageWpt = (wIn+bleedIn*2)*72, pageHpt = (hIn+bleedIn*2)*72;
+
+    for(const side of ['front','back']){
+      statusEl.textContent = `Rendering ${side}...`;
+      const canvas = await bcRenderExportCanvas(side);
+      const jpegUrl = canvas.toDataURL('image/jpeg', 0.95);
+      const jpegBytes = await (await fetch(jpegUrl)).arrayBuffer();
+      const embedded = await outDoc.embedJpg(jpegBytes);
+      const page = outDoc.addPage([pageWpt, pageHpt]);
+      page.drawImage(embedded, {x:0, y:0, width:pageWpt, height:pageHpt});
+      if(includeBleed){
+        const {rgb} = window.PDFLib;
+        const bleedPt = bleedIn*72;
+        const markLen = 10;
+        page.drawRectangle({x:bleedPt, y:bleedPt, width:pageWpt-bleedPt*2, height:pageHpt-bleedPt*2, borderColor:rgb(0,0.6,1), borderWidth:0.75, opacity:0, borderOpacity:0.8});
+        const corners = [[0,0],[pageWpt,0],[0,pageHpt],[pageWpt,pageHpt]];
+        corners.forEach(([cx,cy])=>{
+          const dx = cx===0?1:-1, dy=cy===0?1:-1;
+          page.drawLine({start:{x:cx+dx*2, y:cy+dy*bleedPt}, end:{x:cx+dx*(bleedPt+markLen), y:cy+dy*bleedPt}, thickness:0.75, color:rgb(0,0,0)});
+          page.drawLine({start:{x:cx+dx*bleedPt, y:cy+dy*2}, end:{x:cx+dx*bleedPt, y:cy+dy*(bleedPt+markLen)}, thickness:0.75, color:rgb(0,0,0)});
+        });
+      }
+    }
+    const outBytes = await outDoc.save();
+    const blob = new Blob([outBytes], {type:'application/pdf'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='business-card.pdf'; a.click();
+    statusEl.textContent = `PDF downloaded (front + back${includeBleed?', with bleed guides & crop marks':''}).`;
+  }catch(err){
+    statusEl.textContent = 'Could not generate the PDF. Please try again.';
+  }
+});
+
+/* ---------- Save / Load draft (localStorage) ---------- */
+const BC_DRAFT_KEY = 'toolnest_business_card_draft';
+bcEl('bcSaveDraftBtn').addEventListener('click', ()=>{
+  const draft = {
+    fields: {}, template: bcTemplate,
+    sizePreset: bcEl('bcSizePreset').value, orientation: bcEl('bcOrientation').value,
+    customW: bcEl('bcCustomW').value, customH: bcEl('bcCustomH').value,
+    backContent: bcEl('bcBackContent').value, qrType: bcEl('bcQrType').value,
+    backMessage: bcEl('bcBackMessage').value, social1: bcEl('bcSocial1').value, social2: bcEl('bcSocial2').value,
+    logo: bcLogoImg ? bcLogoImg.src : null, photo: bcPhotoImg ? bcPhotoImg.src : null
+  };
+  ['bcName','bcTitle','bcCompany','bcTagline','bcPhone','bcEmail','bcWebsite','bcAddress','bcPrimaryColor','bcAccentColor','bcTextColor','bcFont','bcAlign'].forEach(id=>{
+    draft.fields[id] = bcEl(id).value;
+  });
+  try{
+    localStorage.setItem(BC_DRAFT_KEY, JSON.stringify(draft));
+    bcEl('bcDraftStatus').textContent = 'Draft saved to this browser.';
+  }catch(e){
+    bcEl('bcDraftStatus').textContent = 'Could not save (storage may be full or blocked).';
+  }
+});
+bcEl('bcLoadDraftBtn').addEventListener('click', ()=>{
+  let draft;
+  try{ draft = JSON.parse(localStorage.getItem(BC_DRAFT_KEY)); }catch(e){}
+  if(!draft) return bcEl('bcDraftStatus').textContent = 'No saved draft found on this browser.';
+  Object.keys(draft.fields||{}).forEach(id=>{ const el=bcEl(id); if(el) el.value = draft.fields[id]; });
+  bcTemplate = draft.template || 'classic';
+  bcRenderTemplateGallery();
+  bcEl('bcSizePreset').value = draft.sizePreset||'standard';
+  bcEl('bcCustomSizeRow').style.display = draft.sizePreset==='custom' ? 'flex':'none';
+  bcEl('bcOrientation').value = draft.orientation||'landscape';
+  bcEl('bcCustomW').value = draft.customW||3.5; bcEl('bcCustomH').value = draft.customH||2;
+  bcEl('bcBackContent').value = draft.backContent||'qr';
+  bcEl('bcBackContent').dispatchEvent(new Event('change'));
+  bcEl('bcQrType').value = draft.qrType||'website';
+  bcEl('bcBackMessage').value = draft.backMessage||'';
+  bcEl('bcSocial1').value = draft.social1||''; bcEl('bcSocial2').value = draft.social2||'';
+  const loadImg = (src, setter)=>{ if(!src) return; const img=new Image(); img.onload=()=>{ setter(img); bcRender(); }; img.src=src; };
+  loadImg(draft.logo, img=>bcLogoImg=img);
+  loadImg(draft.photo, img=>bcPhotoImg=img);
+  bcRender();
+  bcEl('bcDraftStatus').textContent = 'Draft loaded.';
+});
+bcEl('bcResetBtn').addEventListener('click', ()=>{
+  if(!confirm('Reset the card design? Unsaved changes will be lost.')) return;
+  ['bcName','bcTitle','bcCompany','bcTagline','bcPhone','bcEmail','bcWebsite','bcAddress','bcBackMessage','bcSocial1','bcSocial2'].forEach(id=>bcEl(id).value='');
+  bcEl('bcPrimaryColor').value='#1f3d2b'; bcEl('bcAccentColor').value='#e07a2c'; bcEl('bcTextColor').value='#ffffff';
+  bcEl('bcFont').value='Arial, sans-serif'; bcEl('bcAlign').value='left';
+  bcEl('bcSizePreset').value='standard'; bcEl('bcCustomSizeRow').style.display='none'; bcEl('bcOrientation').value='landscape';
+  bcEl('bcBackContent').value='qr'; bcEl('bcBackContent').dispatchEvent(new Event('change'));
+  bcLogoImg=null; bcPhotoImg=null;
+  bcEl('bcLogoInput').value=''; bcEl('bcPhotoInput').value='';
+  bcTemplate='classic'; bcRenderTemplateGallery();
+  bcZoom=1;
+  bcEl('bcDraftStatus').textContent='';
+  bcEl('bcExportStatus').textContent='';
+  bcRender();
+});
+
+/* ---------- init ---------- */
+bcRender();
+</script><script src="script.js"></script></body></html>
