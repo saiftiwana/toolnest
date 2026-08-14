@@ -1,0 +1,556 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Document Scanner & PDF Maker Free Online | ToolNest</title><meta name="description" content="Scan documents with your camera or upload photos, straighten and enhance them, combine multiple pages, and export a clean PDF, free and 100% private."><link rel="canonical" href="https://toolnest.link/document-scanner-pdf-maker.html"><meta property="og:title" content="Document Scanner & PDF Maker | ToolNest"><meta property="og:description" content="Scan documents, straighten and enhance them, combine multiple pages, and export a clean PDF, free and 100% private."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/document-scanner-pdf-maker.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Document Scanner & PDF Maker</h1><p>Capture or upload, straighten with perspective correction, enhance, and export a multi-page PDF — free, private, all in your browser.</p></header><main>
+<div class="card" id="ds"><h2>Document Scanner &amp; PDF Maker</h2><p class="desc">Capture or upload documents, straighten and clean them up, combine multiple pages, and export a clean PDF — free, private, all in your browser.</p>
+
+<h3 style="margin-top:4px;">1. Add Pages</h3>
+<div class="row"><div class="field"><label class="field-label" for="dsCameraInput">Capture with camera</label><input type="file" id="dsCameraInput" accept="image/*" capture="environment"></div><div class="field"><label class="field-label" for="dsUploadInput">Or upload image(s)</label><input type="file" id="dsUploadInput" accept="image/*" multiple></div></div>
+
+<h3>2. Pages</h3>
+<div id="dsPageStrip" style="display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;"></div>
+<p class="stat" id="dsPageHint" style="font-size:.8rem; color:#8a8a75;">No pages yet — capture or upload a document above.</p>
+
+<div id="dsEditor" style="display:none; margin-top:16px; border:1px solid var(--line); border-radius:8px; padding:14px;">
+<h3 style="margin-top:0;">3. Adjust Corners</h3>
+<p class="stat" style="font-size:.8rem; color:#8a8a75;">Drag the four corner handles to match your document's edges, then apply the correction.</p>
+<div style="position:relative; max-width:100%; touch-action:none;" id="dsCropWrap">
+<canvas id="dsCropCanvas" style="max-width:100%; border:1px solid var(--line); border-radius:6px; display:block;"></canvas>
+</div>
+<div class="row" style="margin-top:10px;"><button id="dsApplyCropBtn">Apply Perspective Correction</button><button class="secondary" id="dsResetCornersBtn">Reset Corners</button></div>
+
+<h3>4. Enhance</h3>
+<div class="row"><div class="field"><label class="field-label" for="dsFilter">Filter</label><select id="dsFilter"><option value="original">Original (Color)</option><option value="grayscale">Grayscale</option><option value="bw">Black &amp; White</option><option value="enhanced">Enhanced (Sharper Text)</option></select></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="dsBrightness">Brightness (<span id="dsBrightnessVal">0</span>)</label><input type="range" id="dsBrightness" min="-100" max="100" value="0"></div><div class="field"><label class="field-label" for="dsContrast">Contrast (<span id="dsContrastVal">0</span>)</label><input type="range" id="dsContrast" min="-100" max="100" value="0"></div></div>
+<div class="row" style="margin-top:10px; display:none;" id="dsThresholdRow"><div class="field"><label class="field-label" for="dsThreshold">B&amp;W Threshold (<span id="dsThresholdVal">128</span>)</label><input type="range" id="dsThreshold" min="0" max="255" value="128"></div></div>
+
+<h3>5. Page Actions</h3>
+<div class="row"><button class="secondary" id="dsRotateLeftBtn">&#8634; Rotate Left</button><button class="secondary" id="dsRotateRightBtn">&#8635; Rotate Right</button><button class="secondary" id="dsDuplicateBtn">Duplicate Page</button><button class="secondary" id="dsDeleteBtn">Delete Page</button></div>
+
+<h3>6. Preview</h3>
+<canvas class="preview" id="dsResultCanvas"></canvas>
+</div>
+
+<h3>7. PDF Settings</h3>
+<div class="row"><div class="field"><label class="field-label" for="dsPageSize">Page size</label><select id="dsPageSize"><option value="original">Original (fit each page)</option><option value="a4">A4</option><option value="letter">Letter</option></select></div><div class="field"><label class="field-label" for="dsOrientation">Orientation</label><select id="dsOrientation"><option value="auto">Auto (match page)</option><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></div><div class="field"><label class="field-label" for="dsQuality">Quality</label><select id="dsQuality"><option value="small">Small (more compression)</option><option value="balanced" selected>Balanced</option><option value="high">High Quality</option></select></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="dsFilename">Filename</label><input type="text" id="dsFilename" value="scanned-document"></div></div>
+
+<div class="row" style="margin-top:14px;"><button id="dsExportBtn">Export PDF</button><button class="secondary" id="dsClearAllBtn">Clear All Pages</button></div>
+<div class="progress-track" id="dsProgressTrack" style="display:none;"><div class="progress-fill" id="dsProgressFill"></div></div>
+<p class="stat" id="dsStatus" style="font-size:.85rem; white-space:pre-line;"></p>
+</div>
+<div class="seo-content">
+<h3>How to Use Document Scanner & PDF Maker</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Capture or Upload:</strong> Take a photo with your camera, or upload existing images.</li><li><strong>Adjust Corners:</strong> Drag the four handles to match your document's edges.</li><li><strong>Apply Correction:</strong> Straighten the page with one click.</li><li><strong>Enhance:</strong> Choose Grayscale, Black & White, or Enhanced, and fine-tune brightness/contrast.</li><li><strong>Add More Pages:</strong> Repeat for every page of your document.</li><li><strong>Set PDF Options:</strong> Choose page size, orientation, and quality.</li><li><strong>Export:</strong> Download your finished multi-page PDF.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>An online document scanner pdf maker free tool turns a phone photo of a paper document into a clean, straightened, multi-page PDF without installing a dedicated scanning app. This scan document to pdf online tool runs the entire process — from photo to corrected, enhanced, combined PDF — locally in your browser.</p>
+<h3>How It Works</h3>
+<p>This document scanner pdf maker tool uses perspective correction (the same underlying geometry used by dedicated scanning apps) to straighten a document photographed at an angle: you position four corner handles on the document's edges, and the tool mathematically warps that quadrilateral into a flat rectangle, correcting the keystone distortion that comes from photographing a flat page from an angle. From there, Grayscale, Black & White, and Enhanced filters process the straightened image for readability, and every page you add joins one combined PDF.</p>
+<h3>Key Features</h3>
+<p>As a scan document without upload tool, corner detection starts with a sensible default box that you drag into place — since no automatic edge detection is perfectly reliable across every lighting condition and background, manual adjustment with touch-friendly handles keeps results accurate for real-world photos. Black & White mode includes an adjustable threshold for scanned text, Enhanced mode sharpens text edges for crisper readability, and brightness/contrast sliders fine-tune results further. Multiple pages can be captured or uploaded, reordered isn't needed since pages appear in the order added, and each page supports independent rotation, duplication, or deletion before a single combined PDF is exported with your choice of page size, orientation, and quality.</p>
+<h3>Common Use Cases</h3>
+<p>Someone digitizing a stack of paper receipts photographs each one, corrects the perspective, and combines them into a single PDF for an expense report. A student scanning handwritten lecture notes uses Black & White mode with an adjusted threshold to make the pages print-ready and easy to read. Someone archiving an old printed contract photographs each page, straightens and cleans up the scan quality, and exports a properly ordered multi-page PDF copy.</p>
+<h3>Tips</h3>
+<p>Photograph documents in even lighting and directly enough that all four corners are visible in the frame — this makes dragging the corner handles into position faster and gives the perspective correction more accurate source pixels to work with. For handwritten or faint text, try Black & White mode and adjust the threshold slider while watching the live preview, since the right threshold varies with how the original page was lit when photographed.</p>
+<h3>Frequently Asked Questions</h3>
+<div class=faq-block><details><summary>How do I scan a document without installing a mobile app?</summary><p>Capture a photo directly in this tool using your device camera, or upload an existing photo — no separate app or installation is needed.</p></details><details><summary>Is my document data safe when using this online scanner?</summary><p>Yes, the entire scanning, correction, and PDF creation process runs locally in your browser; documents are never uploaded to a server.</p></details><details><summary>Can I scan multiple pages and combine them into one PDF file?</summary><p>Yes, add as many pages as you need — each is captured, corrected, and enhanced independently, then combined into a single PDF on export.</p></details><details><summary>How does the document scanner handle photos taken at an angle?</summary><p>Drag the four corner handles onto your document's actual edges, and Apply Perspective Correction mathematically straightens the angled photo into a flat rectangle.</p></details><details><summary>Can I edit or reorder pages after adding them?</summary><p>Yes, each page can be rotated, duplicated, or deleted from the page strip at any time before exporting.</p></details><details><summary>Does this tool convert scans into searchable, editable text?</summary><p>No, this tool creates image-based PDF pages; it doesn't perform text recognition (OCR), so scanned pages are not searchable or editable as text.</p></details><details><summary>Is the document scanner completely free to use?</summary><p>Yes, there are no hidden fees, watermarks, or page limits.</p></details><details><summary>Can I choose the PDF page size and quality?</summary><p>Yes, choose Original (matching each page's own proportions), A4, or Letter, along with Small, Balanced, or High quality compression.</p></details></div>
+</div>
+<div class="seo-content"><h3>Related File &amp; PDF Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="pdf-workspace.html">PDF Workspace</a></li>
+<li><a href="image-to-pdf.html">Image to PDF</a></li>
+<li><a href="pdf-grayscale-converter.html">PDF Grayscale &amp; B/W Converter</a></li>
+<li><a href="document-photo-maker.html">Document Photo Maker</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Document Scanner & PDF Maker","applicationCategory":"BusinessApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/document-scanner-pdf-maker.html"},
+{"@type":"HowTo","name":"How to Scan a Document and Create a PDF","step":[
+{"@type":"HowToStep","text":"Capture a photo or upload an image of your document."},
+{"@type":"HowToStep","text":"Drag the four corners to match the document's edges."},
+{"@type":"HowToStep","text":"Apply perspective correction to straighten it."},
+{"@type":"HowToStep","text":"Choose an enhancement filter and adjust brightness/contrast."},
+{"@type":"HowToStep","text":"Add more pages if needed."},
+{"@type":"HowToStep","text":"Set PDF page size, orientation, and quality."},
+{"@type":"HowToStep","text":"Export the combined PDF."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I scan a document without installing a mobile app?","acceptedAnswer":{"@type":"Answer","text":"Capture a photo directly with your device camera in this browser tool, or upload an existing photo."}},
+{"@type":"Question","name":"Is my document data safe when using this online scanner?","acceptedAnswer":{"@type":"Answer","text":"Yes, the entire process runs locally in your browser; documents are never uploaded to a server."}},
+{"@type":"Question","name":"Can I scan multiple pages and combine them into one PDF file?","acceptedAnswer":{"@type":"Answer","text":"Yes, add as many pages as needed and export them together as one combined PDF."}},
+{"@type":"Question","name":"How does the document scanner handle photos taken at an angle?","acceptedAnswer":{"@type":"Answer","text":"Drag the four corner handles onto the document's edges, then apply perspective correction to straighten it."}},
+{"@type":"Question","name":"Can I edit or reorder pages after adding them?","acceptedAnswer":{"@type":"Answer","text":"Yes, each page can be rotated, duplicated, or deleted before exporting."}},
+{"@type":"Question","name":"Does this tool convert scans into searchable, editable text?","acceptedAnswer":{"@type":"Answer","text":"No, this creates image-based PDF pages without OCR text recognition."}},
+{"@type":"Question","name":"Is the document scanner completely free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes, with no hidden fees, watermarks, or page limits."}},
+{"@type":"Question","name":"Can I choose the PDF page size and quality?","acceptedAnswer":{"@type":"Answer","text":"Yes, choose Original, A4, or Letter page size, and Small, Balanced, or High quality."}}
+]}
+]}
+</script>
+<script>/* ===== Document Scanner & PDF Maker engine ===== */
+const dsEl = id => document.getElementById(id);
+
+let dsPages = []; // {id, sourceImg, corners:[{x,y}x4] in source-image pixel coords, warpedCanvas, filter, brightness, contrast, threshold, rotation, resultCanvas}
+let dsIdCounter = 1;
+let dsActiveId = null;
+
+function dsDefaultCorners(w, h){
+  const insetX = w*0.06, insetY = h*0.06;
+  return [
+    {x:insetX, y:insetY},
+    {x:w-insetX, y:insetY},
+    {x:w-insetX, y:h-insetY},
+    {x:insetX, y:h-insetY}
+  ];
+}
+function dsAddPageFromFile(file){
+  return new Promise(resolve=>{
+    const img = new Image();
+    img.onload = ()=>{
+      const page = {
+        id:'pg'+(dsIdCounter++), sourceImg:img, corners: dsDefaultCorners(img.width, img.height),
+        warpedCanvas:null, filter:'original', brightness:0, contrast:0, threshold:128, rotation:0, resultCanvas:null
+      };
+      dsPages.push(page);
+      dsRenderPageStrip();
+      resolve(page);
+    };
+    img.onerror = ()=>resolve(null);
+    img.src = URL.createObjectURL(file);
+  });
+}
+async function dsAddFiles(fileList){
+  for(const file of Array.from(fileList)){
+    if(!file.type.startsWith('image/')) continue;
+    const page = await dsAddPageFromFile(file);
+    if(page && !dsActiveId) dsSelectPage(page.id);
+  }
+}
+dsEl('dsCameraInput').addEventListener('change', e=>{ dsAddFiles(e.target.files); e.target.value=''; });
+dsEl('dsUploadInput').addEventListener('change', e=>{ dsAddFiles(e.target.files); e.target.value=''; });
+
+/* ---------- page strip ---------- */
+function dsRenderPageStrip(){
+  const strip = dsEl('dsPageStrip');
+  strip.innerHTML = '';
+  dsEl('dsPageHint').style.display = dsPages.length ? 'none' : 'block';
+  dsPages.forEach((page, idx)=>{
+    const card = document.createElement('div');
+    card.style.cssText = `width:80px; text-align:center; cursor:pointer; border:2px solid ${page.id===dsActiveId?'var(--kinno)':'var(--line)'}; border-radius:6px; padding:4px; background:#fffdf6;`;
+    const thumbCanvas = document.createElement('canvas');
+    thumbCanvas.width=70; thumbCanvas.height=90;
+    const tctx = thumbCanvas.getContext('2d');
+    const srcCanvas = page.resultCanvas || page.warpedCanvas;
+    if(srcCanvas){
+      const scale = Math.min(70/srcCanvas.width, 90/srcCanvas.height);
+      const dw=srcCanvas.width*scale, dh=srcCanvas.height*scale;
+      tctx.fillStyle='#f2ecd8'; tctx.fillRect(0,0,70,90);
+      tctx.drawImage(srcCanvas, (70-dw)/2, (90-dh)/2, dw, dh);
+    }else{
+      const scale = Math.min(70/page.sourceImg.width, 90/page.sourceImg.height);
+      const dw=page.sourceImg.width*scale, dh=page.sourceImg.height*scale;
+      tctx.fillStyle='#f2ecd8'; tctx.fillRect(0,0,70,90);
+      tctx.drawImage(page.sourceImg, (70-dw)/2, (90-dh)/2, dw, dh);
+    }
+    card.appendChild(thumbCanvas);
+    const label = document.createElement('p');
+    label.style.cssText='margin:4px 0 0; font-size:.7rem;';
+    label.textContent = `Page ${idx+1}`;
+    card.appendChild(label);
+    card.addEventListener('click', ()=>dsSelectPage(page.id));
+    strip.appendChild(card);
+  });
+}
+
+/* ---------- corner editor (touch + mouse via Pointer Events) ---------- */
+const dsCropCanvas = dsEl('dsCropCanvas');
+const dscctx = dsCropCanvas.getContext('2d');
+let dsCropDisplayScale = 1;
+let dsDraggingCornerIdx = -1;
+
+function dsSelectPage(id){
+  dsActiveId = id;
+  dsEl('dsEditor').style.display = 'block';
+  dsRenderPageStrip();
+  dsRenderCropCanvas();
+  const page = dsGetActivePage();
+  dsEl('dsFilter').value = page.filter;
+  dsEl('dsBrightness').value = page.brightness; dsEl('dsBrightnessVal').textContent = page.brightness;
+  dsEl('dsContrast').value = page.contrast; dsEl('dsContrastVal').textContent = page.contrast;
+  dsEl('dsThreshold').value = page.threshold; dsEl('dsThresholdVal').textContent = page.threshold;
+  dsEl('dsThresholdRow').style.display = page.filter==='bw' ? 'flex' : 'none';
+  if(page.warpedCanvas) dsRenderResult();
+}
+function dsGetActivePage(){ return dsPages.find(p=>p.id===dsActiveId); }
+
+function dsRenderCropCanvas(){
+  const page = dsGetActivePage();
+  if(!page) return;
+  const maxW = 500;
+  dsCropDisplayScale = Math.min(1, maxW/page.sourceImg.width);
+  dsCropCanvas.width = page.sourceImg.width*dsCropDisplayScale;
+  dsCropCanvas.height = page.sourceImg.height*dsCropDisplayScale;
+  dscctx.drawImage(page.sourceImg, 0, 0, dsCropCanvas.width, dsCropCanvas.height);
+  dscctx.strokeStyle = '#e07a2c';
+  dscctx.lineWidth = 2;
+  dscctx.beginPath();
+  page.corners.forEach((c,i)=>{
+    const px=c.x*dsCropDisplayScale, py=c.y*dsCropDisplayScale;
+    if(i===0) dscctx.moveTo(px,py); else dscctx.lineTo(px,py);
+  });
+  dscctx.closePath();
+  dscctx.stroke();
+  page.corners.forEach(c=>{
+    const px=c.x*dsCropDisplayScale, py=c.y*dsCropDisplayScale;
+    dscctx.fillStyle = '#e07a2c';
+    dscctx.beginPath();
+    dscctx.arc(px,py,9,0,Math.PI*2);
+    dscctx.fill();
+    dscctx.fillStyle = '#ffffff';
+    dscctx.beginPath();
+    dscctx.arc(px,py,4,0,Math.PI*2);
+    dscctx.fill();
+  });
+}
+function dsGetCanvasPoint(e){
+  const rect = dsCropCanvas.getBoundingClientRect();
+  const scaleX = dsCropCanvas.width/rect.width, scaleY = dsCropCanvas.height/rect.height;
+  return { x:(e.clientX-rect.left)*scaleX, y:(e.clientY-rect.top)*scaleY };
+}
+dsCropCanvas.addEventListener('pointerdown', e=>{
+  const page = dsGetActivePage(); if(!page) return;
+  const pt = dsGetCanvasPoint(e);
+  let closestIdx=-1, closestDist=Infinity;
+  page.corners.forEach((c,i)=>{
+    const px=c.x*dsCropDisplayScale, py=c.y*dsCropDisplayScale;
+    const dist = Math.hypot(pt.x-px, pt.y-py);
+    if(dist<closestDist){ closestDist=dist; closestIdx=i; }
+  });
+  if(closestDist < 30){ dsDraggingCornerIdx = closestIdx; dsCropCanvas.setPointerCapture(e.pointerId); }
+});
+dsCropCanvas.addEventListener('pointermove', e=>{
+  if(dsDraggingCornerIdx===-1) return;
+  const page = dsGetActivePage(); if(!page) return;
+  const pt = dsGetCanvasPoint(e);
+  const sx = Math.max(0, Math.min(page.sourceImg.width, pt.x/dsCropDisplayScale));
+  const sy = Math.max(0, Math.min(page.sourceImg.height, pt.y/dsCropDisplayScale));
+  page.corners[dsDraggingCornerIdx] = {x:sx, y:sy};
+  dsRenderCropCanvas();
+});
+['pointerup','pointercancel'].forEach(evt=>dsCropCanvas.addEventListener(evt, ()=>{ dsDraggingCornerIdx=-1; }));
+
+dsEl('dsResetCornersBtn').addEventListener('click', ()=>{
+  const page = dsGetActivePage(); if(!page) return;
+  page.corners = dsDefaultCorners(page.sourceImg.width, page.sourceImg.height);
+  dsRenderCropCanvas();
+});
+
+/* ---------- verified perspective transform (homography) ---------- */
+function dsSolveLinearSystem(A, b){
+  const n = A.length;
+  const M = A.map((row,i)=>[...row, b[i]]);
+  for(let col=0; col<n; col++){
+    let maxRow = col;
+    for(let r=col+1; r<n; r++) if(Math.abs(M[r][col]) > Math.abs(M[maxRow][col])) maxRow = r;
+    [M[col], M[maxRow]] = [M[maxRow], M[col]];
+    if(Math.abs(M[col][col]) < 1e-10) return null;
+    for(let r=0; r<n; r++){
+      if(r===col) continue;
+      const factor = M[r][col]/M[col][col];
+      for(let c=col; c<=n; c++) M[r][c] -= factor*M[col][c];
+    }
+  }
+  return M.map((row,i)=>row[n]/row[i]);
+}
+function dsComputeHomography(src, dst){
+  const A = [], b = [];
+  for(let i=0;i<4;i++){
+    const x=src[i].x, y=src[i].y, u=dst[i].x, v=dst[i].y;
+    A.push([x,y,1,0,0,0,-x*u,-y*u]); b.push(u);
+    A.push([0,0,0,x,y,1,-x*v,-y*v]); b.push(v);
+  }
+  const sol = dsSolveLinearSystem(A,b);
+  if(!sol) return null;
+  const [a,bb,c,d,e,f,g,h] = sol;
+  return {a,b:bb,c,d,e,f,g,h};
+}
+function dsApplyHomography(H, x, y){
+  const denom = H.g*x + H.h*y + 1;
+  return { x:(H.a*x+H.b*y+H.c)/denom, y:(H.d*x+H.e*y+H.f)/denom };
+}
+
+/* ---------- warp the source image into a flat rectangle using inverse-mapped sampling ---------- */
+function dsWarpPerspective(page){
+  const corners = page.corners;
+  const widthTop = Math.hypot(corners[1].x-corners[0].x, corners[1].y-corners[0].y);
+  const widthBottom = Math.hypot(corners[2].x-corners[3].x, corners[2].y-corners[3].y);
+  const heightLeft = Math.hypot(corners[3].x-corners[0].x, corners[3].y-corners[0].y);
+  const heightRight = Math.hypot(corners[2].x-corners[1].x, corners[2].y-corners[1].y);
+  let outW = Math.round(Math.max(widthTop, widthBottom));
+  let outH = Math.round(Math.max(heightLeft, heightRight));
+  const MAX_DIM = 2000;
+  if(outW>MAX_DIM || outH>MAX_DIM){
+    const s = MAX_DIM/Math.max(outW,outH);
+    outW = Math.round(outW*s); outH = Math.round(outH*s);
+  }
+  outW = Math.max(20, outW); outH = Math.max(20, outH);
+
+  const dstRect = [{x:0,y:0},{x:outW,y:0},{x:outW,y:outH},{x:0,y:outH}];
+  const Hinv = dsComputeHomography(dstRect, corners);
+  if(!Hinv) return null;
+
+  const srcCanvas = document.createElement('canvas');
+  srcCanvas.width = page.sourceImg.width; srcCanvas.height = page.sourceImg.height;
+  const sctx = srcCanvas.getContext('2d');
+  sctx.drawImage(page.sourceImg, 0, 0);
+  const srcData = sctx.getImageData(0,0,srcCanvas.width,srcCanvas.height).data;
+  const srcW = srcCanvas.width, srcH = srcCanvas.height;
+
+  const outCanvas = document.createElement('canvas');
+  outCanvas.width = outW; outCanvas.height = outH;
+  const octx = outCanvas.getContext('2d');
+  const outImgData = octx.createImageData(outW, outH);
+  const outData = outImgData.data;
+
+  for(let oy=0; oy<outH; oy++){
+    for(let ox=0; ox<outW; ox++){
+      const {x:sx, y:sy} = dsApplyHomography(Hinv, ox, oy);
+      const outIdx = (oy*outW+ox)*4;
+      if(sx>=0 && sx<srcW-1 && sy>=0 && sy<srcH-1){
+        const x0=Math.floor(sx), y0=Math.floor(sy);
+        const fx=sx-x0, fy=sy-y0;
+        for(let ch=0; ch<3; ch++){
+          const p00 = srcData[(y0*srcW+x0)*4+ch];
+          const p10 = srcData[(y0*srcW+x0+1)*4+ch];
+          const p01 = srcData[((y0+1)*srcW+x0)*4+ch];
+          const p11 = srcData[((y0+1)*srcW+x0+1)*4+ch];
+          const val = p00*(1-fx)*(1-fy) + p10*fx*(1-fy) + p01*(1-fx)*fy + p11*fx*fy;
+          outData[outIdx+ch] = val;
+        }
+        outData[outIdx+3] = 255;
+      }else{
+        outData[outIdx]=255; outData[outIdx+1]=255; outData[outIdx+2]=255; outData[outIdx+3]=255;
+      }
+    }
+  }
+  octx.putImageData(outImgData, 0, 0);
+  return outCanvas;
+}
+
+dsEl('dsApplyCropBtn').addEventListener('click', ()=>{
+  const page = dsGetActivePage(); if(!page) return;
+  dsEl('dsStatus').textContent = 'Applying perspective correction...';
+  setTimeout(()=>{
+    const warped = dsWarpPerspective(page);
+    if(!warped){
+      dsEl('dsStatus').textContent = 'Could not apply correction with these corner positions. Try adjusting them again.';
+      return;
+    }
+    page.warpedCanvas = warped;
+    page.rotation = 0;
+    dsRenderResult();
+    dsRenderPageStrip();
+    dsEl('dsStatus').textContent = 'Perspective correction applied.';
+  }, 20);
+});
+
+/* ---------- enhancement filters + brightness/contrast + rotation -> final result ---------- */
+function dsApplySharpen(imageData){
+  const {data, width, height} = imageData;
+  const src = new Uint8ClampedArray(data);
+  const kernel = [0,-1,0,-1,5,-1,0,-1,0];
+  for(let y=1; y<height-1; y++){
+    for(let x=1; x<width-1; x++){
+      for(let ch=0; ch<3; ch++){
+        let sum=0, k=0;
+        for(let ky=-1; ky<=1; ky++){
+          for(let kx=-1; kx<=1; kx++){
+            const idx = ((y+ky)*width+(x+kx))*4+ch;
+            sum += src[idx]*kernel[k++];
+          }
+        }
+        data[(y*width+x)*4+ch] = sum;
+      }
+    }
+  }
+  return imageData;
+}
+function dsApplyBrightnessContrast(imageData, brightness, contrast){
+  const d = imageData.data;
+  const cFactor = (259*(contrast+255))/(255*(259-contrast));
+  for(let i=0;i<d.length;i+=4){
+    for(let ch=0; ch<3; ch++){
+      let v = d[i+ch] + brightness;
+      v = cFactor*(v-128)+128;
+      d[i+ch] = Math.max(0, Math.min(255, v));
+    }
+  }
+  return imageData;
+}
+function dsApplyGrayscaleFilter(imageData){
+  const d = imageData.data;
+  for(let i=0;i<d.length;i+=4){
+    const g = 0.299*d[i]+0.587*d[i+1]+0.114*d[i+2];
+    d[i]=d[i+1]=d[i+2]=g;
+  }
+  return imageData;
+}
+function dsApplyThresholdFilter(imageData, threshold){
+  const d = imageData.data;
+  for(let i=0;i<d.length;i+=4){
+    const g = 0.299*d[i]+0.587*d[i+1]+0.114*d[i+2];
+    const v = g>=threshold ? 255 : 0;
+    d[i]=d[i+1]=d[i+2]=v;
+  }
+  return imageData;
+}
+
+function dsRenderResult(){
+  const page = dsGetActivePage();
+  if(!page || !page.warpedCanvas) return;
+  page.filter = dsEl('dsFilter').value;
+  page.brightness = +dsEl('dsBrightness').value;
+  page.contrast = +dsEl('dsContrast').value;
+  page.threshold = +dsEl('dsThreshold').value;
+
+  const src = page.warpedCanvas;
+  const rotated = document.createElement('canvas');
+  const swapped = (page.rotation===90 || page.rotation===270);
+  rotated.width = swapped ? src.height : src.width;
+  rotated.height = swapped ? src.width : src.height;
+  const rctx = rotated.getContext('2d');
+  rctx.save();
+  rctx.translate(rotated.width/2, rotated.height/2);
+  rctx.rotate(page.rotation*Math.PI/180);
+  rctx.drawImage(src, -src.width/2, -src.height/2);
+  rctx.restore();
+
+  const ctx = rotated.getContext('2d');
+  let imageData = ctx.getImageData(0,0,rotated.width,rotated.height);
+  if(page.filter==='grayscale') imageData = dsApplyGrayscaleFilter(imageData);
+  else if(page.filter==='bw') imageData = dsApplyThresholdFilter(imageData, page.threshold);
+  else if(page.filter==='enhanced'){ imageData = dsApplyGrayscaleFilter(imageData); imageData = dsApplySharpen(imageData); }
+  if(page.brightness!==0 || page.contrast!==0) imageData = dsApplyBrightnessContrast(imageData, page.brightness, page.contrast);
+  ctx.putImageData(imageData,0,0);
+
+  page.resultCanvas = rotated;
+  const preview = dsEl('dsResultCanvas');
+  const maxDim=400;
+  const scale = Math.min(1, maxDim/Math.max(rotated.width,rotated.height));
+  preview.width = rotated.width*scale; preview.height = rotated.height*scale;
+  preview.getContext('2d').drawImage(rotated,0,0,preview.width,preview.height);
+  dsRenderPageStrip();
+}
+['dsFilter','dsBrightness','dsContrast','dsThreshold'].forEach(id=>{
+  dsEl(id).addEventListener('input', ()=>{
+    if(id==='dsBrightness') dsEl('dsBrightnessVal').textContent = dsEl(id).value;
+    if(id==='dsContrast') dsEl('dsContrastVal').textContent = dsEl(id).value;
+    if(id==='dsThreshold') dsEl('dsThresholdVal').textContent = dsEl(id).value;
+    if(id==='dsFilter') dsEl('dsThresholdRow').style.display = dsEl(id).value==='bw' ? 'flex' : 'none';
+    dsRenderResult();
+  });
+});
+
+/* ---------- page actions ---------- */
+dsEl('dsRotateLeftBtn').addEventListener('click', ()=>{ const p=dsGetActivePage(); if(!p)return; p.rotation=((p.rotation-90)+360)%360; dsRenderResult(); });
+dsEl('dsRotateRightBtn').addEventListener('click', ()=>{ const p=dsGetActivePage(); if(!p)return; p.rotation=(p.rotation+90)%360; dsRenderResult(); });
+dsEl('dsDuplicateBtn').addEventListener('click', ()=>{
+  const p = dsGetActivePage(); if(!p) return;
+  const copy = Object.assign({}, p, {id:'pg'+(dsIdCounter++), corners: p.corners.map(c=>({...c}))});
+  const idx = dsPages.findIndex(x=>x.id===p.id);
+  dsPages.splice(idx+1, 0, copy);
+  dsRenderPageStrip();
+});
+dsEl('dsDeleteBtn').addEventListener('click', ()=>{
+  const p = dsGetActivePage(); if(!p) return;
+  dsPages = dsPages.filter(x=>x.id!==p.id);
+  dsActiveId = dsPages.length ? dsPages[0].id : null;
+  if(dsActiveId) dsSelectPage(dsActiveId);
+  else dsEl('dsEditor').style.display='none';
+  dsRenderPageStrip();
+});
+dsEl('dsClearAllBtn').addEventListener('click', ()=>{
+  if(dsPages.length && !confirm('Remove all pages? This cannot be undone.')) return;
+  dsPages = []; dsActiveId = null;
+  dsEl('dsEditor').style.display='none';
+  dsEl('dsStatus').textContent='';
+  dsRenderPageStrip();
+});
+
+/* ---------- PDF export (pdf-lib loaded dynamically only when requested) ---------- */
+function dsLoadScript(src){
+  return new Promise((resolve,reject)=>{
+    const script=document.createElement('script');
+    script.src=src;
+    script.onload=resolve;
+    script.onerror=()=>reject(new Error('Could not load a required library'));
+    document.head.appendChild(script);
+  });
+}
+async function dsEnsurePdfLib(){
+  if(!window.PDFLib) await dsLoadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js');
+}
+const DS_PAGE_SIZES = { a4:[595.28,841.89], letter:[612,792] };
+
+dsEl('dsExportBtn').addEventListener('click', async ()=>{
+  if(!dsPages.length) return alert('Add at least one page first.');
+  const unfinished = dsPages.filter(p=>!p.warpedCanvas);
+  if(unfinished.length){
+    if(!confirm(`${unfinished.length} page(s) have not had perspective correction applied yet. Export anyway using the original image for those pages?`)) return;
+  }
+  const statusEl = dsEl('dsStatus');
+  const track = dsEl('dsProgressTrack'), fill = dsEl('dsProgressFill');
+  track.style.display='block'; fill.style.width='0%';
+  statusEl.textContent = 'Loading PDF library...';
+  dsEl('dsExportBtn').disabled = true;
+  try{
+    await dsEnsurePdfLib();
+    const {PDFDocument} = window.PDFLib;
+    const outDoc = await PDFDocument.create();
+    const pageSizeMode = dsEl('dsPageSize').value;
+    const orientation = dsEl('dsOrientation').value;
+    const quality = dsEl('dsQuality').value==='small'?0.6:dsEl('dsQuality').value==='high'?0.95:0.82;
+
+    for(let i=0;i<dsPages.length;i++){
+      statusEl.textContent = `Adding page ${i+1} of ${dsPages.length}...`;
+      const page = dsPages[i];
+      const sourceCanvas = page.resultCanvas || page.warpedCanvas || (()=>{
+        const c=document.createElement('canvas'); c.width=page.sourceImg.width; c.height=page.sourceImg.height;
+        c.getContext('2d').drawImage(page.sourceImg,0,0); return c;
+      })();
+      const jpegDataUrl = sourceCanvas.toDataURL('image/jpeg', quality);
+      const jpegBytes = await (await fetch(jpegDataUrl)).arrayBuffer();
+      const embeddedImg = await outDoc.embedJpg(jpegBytes);
+
+      let pageW, pageH;
+      if(pageSizeMode==='original'){
+        pageW = sourceCanvas.width * 0.5; // assume ~144dpi equivalent for a reasonably-sized physical page
+        pageH = sourceCanvas.height * 0.5;
+      }else{
+        [pageW, pageH] = DS_PAGE_SIZES[pageSizeMode];
+        const wantLandscape = orientation==='landscape' || (orientation==='auto' && sourceCanvas.width>sourceCanvas.height);
+        if(wantLandscape && pageH>pageW){ [pageW,pageH]=[pageH,pageW]; }
+        if(!wantLandscape && pageW>pageH){ [pageW,pageH]=[pageH,pageW]; }
+      }
+      const newPage = outDoc.addPage([pageW, pageH]);
+      const imgAspect = sourceCanvas.width/sourceCanvas.height;
+      const pageAspect = pageW/pageH;
+      let drawW, drawH;
+      if(imgAspect>pageAspect){ drawW=pageW; drawH=pageW/imgAspect; }
+      else{ drawH=pageH; drawW=pageH*imgAspect; }
+      newPage.drawImage(embeddedImg, {x:(pageW-drawW)/2, y:(pageH-drawH)/2, width:drawW, height:drawH});
+      fill.style.width = Math.round(((i+1)/dsPages.length)*100)+'%';
+    }
+
+    statusEl.textContent = 'Finalizing PDF...';
+    const outBytes = await outDoc.save();
+    const blob = new Blob([outBytes], {type:'application/pdf'});
+    const filename = (dsEl('dsFilename').value.trim()||'scanned-document') + '.pdf';
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+    statusEl.textContent = `Done! Exported ${dsPages.length} page(s) as ${filename} (${(blob.size/1024).toFixed(0)} KB).`;
+    track.style.display='none';
+  }catch(err){
+    statusEl.textContent = 'Could not generate the PDF. Please try again, or try with fewer/smaller pages if your device is running low on memory.';
+    track.style.display='none';
+  }
+  dsEl('dsExportBtn').disabled = false;
+});
+</script><script src="script.js"></script></body></html>
