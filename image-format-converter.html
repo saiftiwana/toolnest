@@ -1,0 +1,327 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>JPG PNG WebP Image Converter Online Free | ToolNest</title><meta name="description" content="Convert images between JPG, PNG and WebP online free, with quality, resize, batch conversion and ZIP download, 100% private in your browser."><link rel="canonical" href="https://toolnest.link/image-format-converter.html"><meta property="og:title" content="JPG / PNG / WebP Image Converter | ToolNest"><meta property="og:description" content="Convert images between JPG, PNG and WebP online free, with quality, resize and batch options, 100% private."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/image-format-converter.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>JPG / PNG / WebP Image Converter</h1><p>Convert images between JPG, PNG and WebP with quality, resize, transform and batch ZIP download — free, private, all in your browser.</p></header><main>
+<div class="card" id="ic"><h2>JPG / PNG / WebP Image Converter</h2><p class="desc">Convert images between JPG, PNG and WebP with quality, resize and batch options — free, private, all in your browser.</p>
+
+<div class="field"><label class="field-label" for="icInput">Choose images (any number)</label><div class="dropzone" id="icDropzone"><input type="file" id="icInput" accept="image/jpeg,image/png,image/webp" multiple><p>Drag &amp; drop JPG, PNG or WebP images here, or click to browse</p></div></div>
+<p class="stat" id="icFileSummary"></p>
+<div id="icFileList" style="margin-top:8px;"></div>
+
+<h3>Output Settings</h3>
+<div class="row"><div class="field"><label class="field-label" for="icFormat">Output format</label><select id="icFormat"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WebP</option></select></div><div class="field" id="icQualityField"><label class="field-label" for="icQuality">Quality (<span id="icQualityVal">85</span>%)</label><input type="range" id="icQuality" min="10" max="100" value="85"></div></div>
+<div class="row" style="margin-top:12px; display:none;" id="icBgField"><div class="field"><label class="field-label" for="icBgMode">Transparent areas become</label><select id="icBgMode"><option value="white">White</option><option value="black">Black</option><option value="custom">Custom color</option></select></div><div class="field" id="icBgColorField" style="display:none;"><label class="field-label" for="icBgColor">Custom color</label><input type="color" id="icBgColor" value="#ffffff"></div></div>
+<p class="stat" style="font-size:.78rem; color:#8a8a75; margin-top:8px;">Image metadata (EXIF/location data) is automatically removed during conversion for your privacy.</p>
+
+<h3>Resize (optional)</h3>
+<div class="row"><div class="field"><label class="field-label" for="icResizeMode">Resize mode</label><select id="icResizeMode"><option value="none">No resize (keep original size)</option><option value="percent">Scale by percentage</option><option value="fit">Fit within dimensions</option><option value="exact">Exact dimensions</option></select></div></div>
+<div class="row" style="margin-top:12px; display:none;" id="icPercentField"><div class="field"><label class="field-label" for="icPercent">Scale (<span id="icPercentVal">100</span>%)</label><input type="range" id="icPercent" min="5" max="200" value="100"></div></div>
+<div class="row" style="margin-top:12px; display:none;" id="icDimsField"><div class="field"><label class="field-label" for="icWidth">Width (px)</label><input type="number" id="icWidth" placeholder="Width"></div><div class="field"><label class="field-label" for="icHeight">Height (px)</label><input type="number" id="icHeight" placeholder="Height"></div><label style="display:flex;align-items:center;gap:6px; align-self:center;"><input type="checkbox" id="icLockAspect" checked> Lock aspect ratio</label></div>
+
+<h3>Transform (applies to all images)</h3>
+<div class="row"><button class="secondary" id="icRotateLeft">&#8634; Rotate Left</button><button class="secondary" id="icRotateRight">&#8635; Rotate Right</button><button class="secondary" id="icFlipH">&#8596; Flip Horizontal</button><button class="secondary" id="icFlipV">&#8597; Flip Vertical</button><button class="secondary" id="icTransformReset">Reset Transform</button></div>
+<p class="stat" id="icTransformStatus" style="font-size:.8rem; color:#8a8a75;"></p>
+
+<div class="row" style="margin-top:14px;"><button id="icConvertBtn">Convert Images</button><button class="secondary" id="icDownloadAllBtn" style="display:none;">Download All (ZIP)</button><button class="secondary" id="icClearAllBtn" style="display:none;">Clear All</button></div>
+<div class="progress-track" id="icProgressTrack" style="display:none;"><div class="progress-fill" id="icProgressFill"></div></div>
+<p class="stat" id="icStatus" style="font-size:.85rem;"></p>
+</div>
+<div class="seo-content">
+<h3>How to Use JPG / PNG / WebP Image Converter</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Upload Images:</strong> Drag and drop any number of JPG, PNG, or WebP images.</li><li><strong>Choose Output Format:</strong> Select JPG, PNG, or WebP as the target format.</li><li><strong>Set Quality:</strong> Adjust the quality slider for JPG and WebP output.</li><li><strong>Optional Resize:</strong> Scale by percentage, fit within dimensions, or set exact size.</li><li><strong>Optional Transform:</strong> Rotate or flip all images the same way if needed.</li><li><strong>Convert:</strong> Click Convert Images to process the whole batch.</li><li><strong>Download:</strong> Save each image individually, or all of them together as a ZIP.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>A JPG PNG WebP converter online tool means not needing a different converter for every direction — JPG to WebP, PNG to JPG, WebP to PNG, and every other combination all work from the same upload. This convert image format without upload tool processes every image locally using your browser's own image engine, so nothing is sent anywhere just to change a file extension.</p>
+<h3>How It Works</h3>
+<p>This batch image converter tool loads each image, draws it onto an in-memory canvas at your chosen size and orientation, and re-encodes it as JPG, PNG, or WebP using your browser's native image encoding — the same technology used by browser screenshots and canvas exports, so results are reliable and fast. Because every image is redrawn from scratch during conversion, EXIF metadata like camera details and location data is automatically stripped from the output, which doubles as a simple privacy benefit.</p>
+<h3>Key Features</h3>
+<p>As a convert JPG to WebP online tool (and every other format pair), quality control applies to JPG and WebP output, while PNG stays lossless as expected. Resize options cover percentage scaling, fitting within maximum dimensions while preserving aspect ratio, or forcing an exact size, and a shared rotate/flip transform applies consistently across an entire batch in one click. Converting a transparent PNG or WebP to JPG prompts a background color choice, since JPG has no transparency support, avoiding an unexpected black or white fill. Each file in the list shows its own status and can be downloaded individually, or the whole finished batch can be downloaded together as a single ZIP file, and one failed image never blocks the rest of the batch from completing.</p>
+<h3>Common Use Cases</h3>
+<p>A web developer converts a folder of PNG screenshots to WebP to shrink page weight before uploading them to a site. Someone preparing product photos for an online store converts a batch of WebP images to JPG for a marketplace that doesn't accept WebP, choosing a white background to replace the original transparency. A photographer resizes and converts a batch of large PNG exports down to a smaller percentage size before sharing them online, keeping the originals untouched on their device.</p>
+<h3>Tips</h3>
+<p>WebP with quality around 75-85% often produces noticeably smaller files than an equivalent-quality JPG, making it a good default when the destination supports it. When converting many images with different original sizes, percentage scaling keeps each image's proportions consistent relative to its own size, while Fit or Exact dimensions are better when every output needs to match a specific size, like a required upload dimension.</p>
+<h3>Frequently Asked Questions</h3>
+<div class=faq-block><details><summary>Can I convert between JPG, PNG, and WebP in any direction?</summary><p>Yes, all combinations are supported — JPG to PNG, JPG to WebP, PNG to JPG, PNG to WebP, WebP to JPG, and WebP to PNG.</p></details><details><summary>Are my images uploaded to a server during conversion?</summary><p>No, every image is processed locally in your browser using canvas-based re-encoding; nothing is uploaded anywhere.</p></details><details><summary>What happens to transparency when converting to JPG?</summary><p>Since JPG doesn't support transparency, you choose a background color (white, black, or custom) to fill in behind transparent areas before conversion.</p></details><details><summary>Can I convert multiple images at once?</summary><p>Yes, upload as many images as you like and click Convert Images to process the whole batch, then download everything together as a ZIP.</p></details><details><summary>Does converting an image remove its metadata?</summary><p>Yes, because each image is redrawn on a canvas during conversion, EXIF metadata like camera model and location data is automatically stripped from the output.</p></details><details><summary>Will converting to WebP reduce file size?</summary><p>Often yes, especially compared to PNG, but the actual result depends on the image content and quality setting — the file list shows original and converted size for each image so you can confirm.</p></details><details><summary>Can I resize images while converting them?</summary><p>Yes, choose to scale by percentage, fit within maximum dimensions while keeping proportions, or set an exact width and height.</p></details><details><summary>What happens if one image in my batch fails to convert?</summary><p>That single image is marked as failed with an explanation, while the rest of the batch continues converting normally.</p></details></div>
+</div>
+<div class="seo-content"><h3>Related Image Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="image-compressor.html">Image Compressor</a></li>
+<li><a href="photo-enhancer.html">Photo Enhancer</a></li>
+<li><a href="document-photo-maker.html">Document Photo Maker</a></li>
+<li><a href="collage-maker.html">Collage Maker</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"JPG / PNG / WebP Image Converter","applicationCategory":"MultimediaApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/image-format-converter.html"},
+{"@type":"HowTo","name":"How to Convert Images Between JPG, PNG, and WebP","step":[
+{"@type":"HowToStep","text":"Upload one or more images."},
+{"@type":"HowToStep","text":"Choose the output format."},
+{"@type":"HowToStep","text":"Set quality if converting to JPG or WebP."},
+{"@type":"HowToStep","text":"Optionally resize or transform the images."},
+{"@type":"HowToStep","text":"Click Convert Images."},
+{"@type":"HowToStep","text":"Download individually or as a ZIP."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Can I convert between JPG, PNG, and WebP in any direction?","acceptedAnswer":{"@type":"Answer","text":"Yes, all combinations are supported between JPG, PNG, and WebP."}},
+{"@type":"Question","name":"Are my images uploaded to a server during conversion?","acceptedAnswer":{"@type":"Answer","text":"No, every image is processed locally in your browser; nothing is uploaded anywhere."}},
+{"@type":"Question","name":"What happens to transparency when converting to JPG?","acceptedAnswer":{"@type":"Answer","text":"You choose a background color to fill in behind transparent areas, since JPG doesn't support transparency."}},
+{"@type":"Question","name":"Can I convert multiple images at once?","acceptedAnswer":{"@type":"Answer","text":"Yes, upload any number of images and download the finished batch together as a ZIP."}},
+{"@type":"Question","name":"Does converting an image remove its metadata?","acceptedAnswer":{"@type":"Answer","text":"Yes, EXIF metadata is automatically stripped during the canvas-based conversion process."}},
+{"@type":"Question","name":"Will converting to WebP reduce file size?","acceptedAnswer":{"@type":"Answer","text":"Often yes, especially versus PNG, though results depend on image content and quality setting."}},
+{"@type":"Question","name":"Can I resize images while converting them?","acceptedAnswer":{"@type":"Answer","text":"Yes, scale by percentage, fit within dimensions, or set an exact width and height."}},
+{"@type":"Question","name":"What happens if one image in my batch fails to convert?","acceptedAnswer":{"@type":"Answer","text":"That image is marked failed with an explanation while the rest of the batch continues."}}
+]}
+]}
+</script>
+<script>/* ===== JPG/PNG/WebP Image Converter engine ===== */
+const icEl = id => document.getElementById(id);
+
+let icFiles = []; // {id, file, img, status, outputBlob, outputName, origSize, outputSize, errorMsg}
+let icIdCounter = 1;
+let icTransform = { rotate: 0, flipH: false, flipV: false }; // rotate in degrees, multiples of 90
+
+/* ---------- upload (no limit) ---------- */
+const icInput = icEl('icInput'), icDropzone = icEl('icDropzone');
+function icAddFiles(fileList){
+  const valid = Array.from(fileList).filter(f=>['image/jpeg','image/png','image/webp'].includes(f.type));
+  if(!valid.length) return;
+  let pending = valid.length;
+  valid.forEach(file=>{
+    const entry = {id:'img'+(icIdCounter++), file, img:null, status:'loading', outputBlob:null, outputName:'', origSize:file.size, outputSize:0, errorMsg:''};
+    icFiles.push(entry);
+    const img = new Image();
+    img.onload = ()=>{ entry.img=img; entry.status='ready'; icRenderFileList(); };
+    img.onerror = ()=>{ entry.status='error'; entry.errorMsg='Could not read this image (it may be corrupted or an unsupported format).'; icRenderFileList(); };
+    img.src = URL.createObjectURL(file);
+  });
+  icRenderFileList();
+  icEl('icClearAllBtn').style.display = 'inline-block';
+}
+icInput.addEventListener('change', e=>{ icAddFiles(e.target.files); e.target.value=''; });
+['dragover','dragenter'].forEach(evt=>icDropzone.addEventListener(evt,e=>{e.preventDefault();icDropzone.classList.add('dragover');}));
+['dragleave','drop'].forEach(evt=>icDropzone.addEventListener(evt,e=>{e.preventDefault();icDropzone.classList.remove('dragover');}));
+icDropzone.addEventListener('drop', e=>{ if(e.dataTransfer.files.length) icAddFiles(e.dataTransfer.files); });
+
+/* ---------- file list rendering ---------- */
+const IC_FORMAT_LABEL = {'image/jpeg':'JPG','image/png':'PNG','image/webp':'WebP'};
+function icRenderFileList(){
+  const list = icEl('icFileList');
+  list.innerHTML = '';
+  icFiles.forEach(entry=>{
+    const row = document.createElement('div');
+    row.className='row'; row.style.cssText='margin-top:6px; align-items:center; flex-wrap:wrap;';
+
+    const thumbWrap = document.createElement('div');
+    thumbWrap.style.cssText='width:44px;height:44px;border-radius:4px;border:1px solid var(--line);overflow:hidden;flex-shrink:0;background:#f2ecd8;display:flex;align-items:center;justify-content:center;';
+    if(entry.img){
+      const thumbImg = document.createElement('img');
+      thumbImg.src = entry.img.src;
+      thumbImg.style.cssText='max-width:100%;max-height:100%;';
+      thumbWrap.appendChild(thumbImg);
+    }
+    row.appendChild(thumbWrap);
+
+    const info = document.createElement('span');
+    info.style.cssText='flex:1; min-width:140px; font-size:.82rem;';
+    const origFmt = IC_FORMAT_LABEL[entry.file.type] || entry.file.type;
+    const outFmt = IC_FORMAT_LABEL[icEl('icFormat').value];
+    let statusText = '';
+    if(entry.status==='loading') statusText = 'Reading...';
+    else if(entry.status==='ready') statusText = `${origFmt} \u2192 ${outFmt}, ready`;
+    else if(entry.status==='converting') statusText = 'Converting...';
+    else if(entry.status==='done') statusText = `Done: ${(entry.origSize/1024).toFixed(0)} KB \u2192 ${(entry.outputSize/1024).toFixed(0)} KB`;
+    else if(entry.status==='error') statusText = entry.errorMsg || 'Error';
+    const dims = entry.img ? `${entry.img.width}\u00d7${entry.img.height}` : '';
+    info.textContent = `${entry.file.name} ${dims?'('+dims+') ':''}\u2014 ${statusText}`;
+    row.appendChild(info);
+
+    if(entry.status==='done' && entry.outputBlob){
+      const dlBtn = document.createElement('button');
+      dlBtn.className='secondary'; dlBtn.textContent='Download'; dlBtn.style.cssText='padding:2px 10px; font-size:.78rem;';
+      dlBtn.addEventListener('click', ()=>{
+        const a=document.createElement('a'); a.href=URL.createObjectURL(entry.outputBlob); a.download=entry.outputName; a.click();
+      });
+      row.appendChild(dlBtn);
+    }
+
+    const rmBtn = document.createElement('button');
+    rmBtn.className='fl-remove'; rmBtn.textContent='\u2715';
+    rmBtn.addEventListener('click', ()=>{
+      icFiles = icFiles.filter(e=>e.id!==entry.id);
+      icRenderFileList();
+      if(!icFiles.length){ icEl('icClearAllBtn').style.display='none'; icEl('icDownloadAllBtn').style.display='none'; }
+    });
+    row.appendChild(rmBtn);
+
+    list.appendChild(row);
+  });
+  const totalKb = icFiles.reduce((s,e)=>s+e.origSize,0)/1024;
+  icEl('icFileSummary').textContent = icFiles.length ? `${icFiles.length} image(s) selected, ${totalKb.toFixed(0)} KB total` : '';
+}
+icEl('icFormat').addEventListener('change', ()=>{
+  const isJpg = icEl('icFormat').value==='image/jpeg';
+  icEl('icQualityField').style.display = (isJpg || icEl('icFormat').value==='image/webp') ? 'block' : 'none';
+  icEl('icBgField').style.display = isJpg ? 'flex' : 'none';
+  icRenderFileList();
+});
+icEl('icQuality').addEventListener('input', function(){ icEl('icQualityVal').textContent=this.value; });
+icEl('icBgMode').addEventListener('change', function(){ icEl('icBgColorField').style.display = this.value==='custom' ? 'flex' : 'none'; });
+
+icEl('icClearAllBtn').addEventListener('click', ()=>{
+  icFiles = [];
+  icInput.value='';
+  icRenderFileList();
+  icEl('icClearAllBtn').style.display='none';
+  icEl('icDownloadAllBtn').style.display='none';
+  icEl('icStatus').textContent='';
+});
+
+/* ---------- resize panel toggling ---------- */
+icEl('icResizeMode').addEventListener('change', function(){
+  icEl('icPercentField').style.display = this.value==='percent' ? 'flex' : 'none';
+  icEl('icDimsField').style.display = (this.value==='fit'||this.value==='exact') ? 'flex' : 'none';
+});
+icEl('icPercent').addEventListener('input', function(){ icEl('icPercentVal').textContent=this.value; });
+let icLastEditedDim = 'width';
+icEl('icWidth').addEventListener('input', ()=>{ icLastEditedDim='width'; icSyncAspect(); });
+icEl('icHeight').addEventListener('input', ()=>{ icLastEditedDim='height'; icSyncAspect(); });
+function icSyncAspect(){
+  if(!icEl('icLockAspect').checked || icEl('icResizeMode').value!=='fit') return;
+  if(!icFiles.length || !icFiles[0].img) return;
+  const ratio = icFiles[0].img.height / icFiles[0].img.width;
+  if(icLastEditedDim==='width'){
+    const w=+icEl('icWidth').value; if(w) icEl('icHeight').value = Math.round(w*ratio);
+  }else{
+    const h=+icEl('icHeight').value; if(h) icEl('icWidth').value = Math.round(h/ratio);
+  }
+}
+
+/* ---------- transform controls (global, applied to all images at conversion time) ---------- */
+function icUpdateTransformStatus(){
+  const parts=[];
+  if(icTransform.rotate) parts.push(`Rotated ${icTransform.rotate}\u00b0`);
+  if(icTransform.flipH) parts.push('Flipped horizontally');
+  if(icTransform.flipV) parts.push('Flipped vertically');
+  icEl('icTransformStatus').textContent = parts.length ? parts.join(', ') : 'No transform applied.';
+}
+icEl('icRotateLeft').addEventListener('click', ()=>{ icTransform.rotate=((icTransform.rotate-90)+360)%360; icUpdateTransformStatus(); });
+icEl('icRotateRight').addEventListener('click', ()=>{ icTransform.rotate=(icTransform.rotate+90)%360; icUpdateTransformStatus(); });
+icEl('icFlipH').addEventListener('click', ()=>{ icTransform.flipH=!icTransform.flipH; icUpdateTransformStatus(); });
+icEl('icFlipV').addEventListener('click', ()=>{ icTransform.flipV=!icTransform.flipV; icUpdateTransformStatus(); });
+icEl('icTransformReset').addEventListener('click', ()=>{ icTransform={rotate:0,flipH:false,flipV:false}; icUpdateTransformStatus(); });
+icUpdateTransformStatus();
+
+/* ---------- resize dimension calculator (verified math) ---------- */
+function icCalcResize(origW, origH){
+  const mode = icEl('icResizeMode').value;
+  if(mode==='none') return {w:origW, h:origH};
+  if(mode==='percent'){
+    const pct = +icEl('icPercent').value;
+    return {w:Math.max(1,Math.round(origW*pct/100)), h:Math.max(1,Math.round(origH*pct/100))};
+  }
+  const targetW = +icEl('icWidth').value || origW;
+  const targetH = +icEl('icHeight').value || origH;
+  if(mode==='exact') return {w:Math.max(1,targetW), h:Math.max(1,targetH)};
+  // fit
+  const scale = Math.min(targetW/origW, targetH/origH);
+  return {w:Math.max(1,Math.round(origW*scale)), h:Math.max(1,Math.round(origH*scale))};
+}
+
+/* ---------- single image conversion ---------- */
+function icConvertSingle(entry){
+  return new Promise((resolve)=>{
+    try{
+      const img = entry.img;
+      const {w:resizedW, h:resizedH} = icCalcResize(img.width, img.height);
+      const swapped = (icTransform.rotate===90 || icTransform.rotate===270);
+      const finalW = swapped ? resizedH : resizedW;
+      const finalH = swapped ? resizedW : resizedH;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = finalW; canvas.height = finalH;
+      const ctx = canvas.getContext('2d');
+
+      const outFormat = icEl('icFormat').value;
+      if(outFormat==='image/jpeg'){
+        const bgMode = icEl('icBgMode').value;
+        ctx.fillStyle = bgMode==='white' ? '#ffffff' : bgMode==='black' ? '#000000' : icEl('icBgColor').value;
+        ctx.fillRect(0,0,finalW,finalH);
+      }
+
+      ctx.save();
+      ctx.translate(finalW/2, finalH/2);
+      ctx.rotate(icTransform.rotate*Math.PI/180);
+      ctx.scale(icTransform.flipH?-1:1, icTransform.flipV?-1:1);
+      ctx.drawImage(img, -resizedW/2, -resizedH/2, resizedW, resizedH);
+      ctx.restore();
+
+      const quality = outFormat==='image/png' ? undefined : (+icEl('icQuality').value/100);
+      canvas.toBlob(blob=>{
+        if(!blob){ entry.status='error'; entry.errorMsg='Conversion failed for this image (the format may not be supported by your browser).'; resolve(); return; }
+        entry.outputBlob = blob;
+        entry.outputSize = blob.size;
+        const ext = outFormat==='image/jpeg'?'jpg':outFormat==='image/png'?'png':'webp';
+        const baseName = entry.file.name.replace(/\.[^.]+$/,'');
+        entry.outputName = `${baseName}.${ext}`;
+        entry.status='done';
+        resolve();
+      }, outFormat, quality);
+    }catch(err){
+      entry.status='error';
+      entry.errorMsg='Could not convert this image.';
+      resolve();
+    }
+  });
+}
+
+/* ---------- Convert All (one failure does not stop the others) ---------- */
+icEl('icConvertBtn').addEventListener('click', async ()=>{
+  const readyFiles = icFiles.filter(e=>e.status==='ready'||e.status==='done'||e.status==='error');
+  if(!readyFiles.length) return alert('Add at least one image first.');
+  const statusEl = icEl('icStatus');
+  const track = icEl('icProgressTrack'), fill = icEl('icProgressFill');
+  track.style.display='block'; fill.style.width='0%';
+  icEl('icConvertBtn').disabled = true;
+  let done=0, failed=0;
+  for(let i=0;i<readyFiles.length;i++){
+    const entry = readyFiles[i];
+    if(!entry.img){ failed++; continue; }
+    entry.status='converting';
+    icRenderFileList();
+    await icConvertSingle(entry);
+    if(entry.status==='done') done++; else failed++;
+    fill.style.width = Math.round(((i+1)/readyFiles.length)*100)+'%';
+    icRenderFileList();
+  }
+  track.style.display='none';
+  statusEl.textContent = `Converted ${done} of ${readyFiles.length} image(s).${failed?` ${failed} failed — see the file list for details.`:''}`;
+  if(done>0) icEl('icDownloadAllBtn').style.display='inline-block';
+  icEl('icConvertBtn').disabled = false;
+});
+
+/* ---------- Download All (ZIP, JSZip loaded dynamically only when requested) ---------- */
+function icLoadJsZip(){
+  return new Promise((resolve,reject)=>{
+    if(window.JSZip){resolve(window.JSZip);return;}
+    const script=document.createElement('script');
+    script.src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+    script.onload=()=>window.JSZip?resolve(window.JSZip):reject(new Error('JSZip failed to initialize'));
+    script.onerror=()=>reject(new Error('Could not load the ZIP library'));
+    document.head.appendChild(script);
+  });
+}
+icEl('icDownloadAllBtn').addEventListener('click', async ()=>{
+  const doneFiles = icFiles.filter(e=>e.status==='done' && e.outputBlob);
+  if(!doneFiles.length) return alert('Convert at least one image first.');
+  const statusEl = icEl('icStatus');
+  statusEl.textContent = 'Preparing ZIP...';
+  try{
+    const JSZipLib = await icLoadJsZip();
+    const zip = new JSZipLib();
+    doneFiles.forEach(e=>zip.file(e.outputName, e.outputBlob));
+    const zipBlob = await zip.generateAsync({type:'blob'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(zipBlob);
+    a.download = 'converted-images.zip';
+    a.click();
+    statusEl.textContent = `Downloaded ${doneFiles.length} image(s) as converted-images.zip.`;
+  }catch(err){
+    statusEl.textContent = 'Could not create the ZIP file. Please check your internet connection and try again.';
+  }
+});
+</script><script src="script.js"></script></body></html>
