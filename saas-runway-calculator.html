@@ -1,0 +1,388 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>SaaS Runway & Cash Burn Rate Calculator Free | ToolNest</title><meta name="description" content="Calculate SaaS startup runway, burn rate, cash forecast and break-even free, with scenario planning and a downloadable report, 100% private."><link rel="canonical" href="https://toolnest.link/saas-runway-calculator.html"><meta property="og:title" content="SaaS Runway & Cash Burn Rate Calculator | ToolNest"><meta property="og:description" content="Calculate SaaS startup runway, burn rate and cash forecast free, with scenario planning, 100% private."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/saas-runway-calculator.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>SaaS Runway & Cash Burn Rate Calculator</h1><p>Calculate burn rate, runway, cash forecast, break-even, and scenario comparisons — free, private, with a downloadable report.</p></header><main>
+<div class="card" id="sr"><h2>SaaS Runway &amp; Cash Burn Rate Calculator</h2><p class="desc">Calculate burn rate, runway, cash forecast and break-even for your startup — free, private, with scenario planning.</p>
+<p class="stat" style="font-size:.78rem; color:#8a8a75;">This calculator provides estimates based on your inputs and assumptions. It is not accounting software, tax advice, investment advice, or financial advice.</p>
+
+<h3 style="margin-top:4px;">1. Cash Position &amp; Currency</h3>
+<div class="row"><div class="field"><label class="field-label" for="srCash">Current cash balance</label><input type="number" id="srCash" value="100000"></div><div class="field"><label class="field-label" for="srCurrency">Currency</label><select id="srCurrency"><option value="$">USD ($)</option><option value="Rs">PKR (Rs)</option><option value="&euro;">EUR (&euro;)</option><option value="&pound;">GBP (&pound;)</option><option value="&#8377;">INR (&#8377;)</option></select></div></div>
+
+<h3>2. Revenue &amp; Expenses</h3>
+<div class="row"><div class="field"><label class="field-label" for="srMode">Expense mode</label><select id="srMode"><option value="simple">Simple (one total)</option><option value="detailed">Detailed (by category)</option></select></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="srRevenue">Monthly revenue</label><input type="number" id="srRevenue" value="10000"></div><div class="field" id="srSimpleExpenseField"><label class="field-label" for="srExpensesSimple">Monthly operating expenses</label><input type="number" id="srExpensesSimple" value="18000"></div></div>
+<div id="srDetailedExpenses" style="display:none; margin-top:12px;">
+<div class="row"><div class="field"><label class="field-label" for="srPayroll">Payroll</label><input type="number" id="srPayroll" value="0"></div><div class="field"><label class="field-label" for="srMarketing">Marketing</label><input type="number" id="srMarketing" value="0"></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="srInfra">Infrastructure/Hosting</label><input type="number" id="srInfra" value="0"></div><div class="field"><label class="field-label" for="srSoftware">Software/SaaS Costs</label><input type="number" id="srSoftware" value="0"></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="srRent">Rent/Office</label><input type="number" id="srRent" value="0"></div><div class="field"><label class="field-label" for="srContractors">Contractors</label><input type="number" id="srContractors" value="0"></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="srOtherExpense">Other expenses</label><input type="number" id="srOtherExpense" value="0"></div></div>
+</div>
+
+<h3>3. Growth Assumptions (optional)</h3>
+<div class="row"><div class="field"><label class="field-label" for="srRevGrowth">Monthly revenue growth (%)</label><input type="number" id="srRevGrowth" value="3" step="0.1"></div><div class="field"><label class="field-label" for="srExpGrowth">Monthly expense growth (%)</label><input type="number" id="srExpGrowth" value="2" step="0.1"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="srOneTime">One-time expense (optional)</label><input type="number" id="srOneTime" value="0"></div><div class="field"><label class="field-label" for="srReserve">Minimum cash reserve</label><input type="number" id="srReserve" value="0"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="srHorizon">Forecast horizon</label><select id="srHorizon"><option value="6">6 months</option><option value="12" selected>12 months</option><option value="18">18 months</option><option value="24">24 months</option><option value="36">36 months</option></select></div></div>
+
+<div class="row" style="margin-top:14px;"><button id="srCalcBtn">Calculate Runway</button><button class="secondary" id="srResetBtn">Reset</button></div>
+
+<div id="srResults" style="display:none; margin-top:16px;">
+<h3>4. Results</h3>
+<p class="stat" id="srMetrics" style="white-space:pre-line; font-weight:600;"></p>
+
+<h3>5. Cash Balance Chart</h3>
+<canvas id="srChart" width="600" height="240" style="max-width:100%; border:1px solid var(--line); border-radius:6px;"></canvas>
+
+<h3>6. Cash Forecast Table</h3>
+<div style="overflow-x:auto;"><div id="srForecastTable"></div></div>
+
+<h3>7. Scenario Comparison</h3>
+<div class="row"><button class="secondary" id="srScenarioBtn">Compare Base / Best / Worst Case</button></div>
+<div id="srScenarioTable" style="margin-top:10px; overflow-x:auto;"></div>
+
+<h3>8. Formula Transparency</h3>
+<p class="stat" style="font-size:.8rem; white-space:pre-line;">Gross Burn = Total Monthly Cash Expenses
+Net Burn = Monthly Cash Expenses \u2212 Monthly Cash Revenue
+Simple Runway = Current Cash \u00f7 Net Monthly Burn
+Projected Runway applies monthly revenue/expense growth instead of a flat rate.</p>
+</div>
+
+<h3>9. Save / Load Scenario</h3>
+<div class="row"><button class="secondary" id="srSaveBtn">Save Scenario</button><button class="secondary" id="srLoadBtn">Load Scenario</button></div>
+<p class="stat" id="srSaveStatus" style="font-size:.8rem;"></p>
+
+<h3>10. Report</h3>
+<div class="row"><button id="srDownloadPdfBtn">Download Runway Report PDF</button></div>
+<p class="stat" id="srPdfStatus" style="font-size:.8rem;"></p>
+</div>
+<div class="seo-content">
+<h3>How to Use SaaS Runway & Cash Burn Rate Calculator</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Enter Cash Position:</strong> Current cash balance and currency.</li><li><strong>Add Revenue &amp; Expenses:</strong> Simple total or a detailed category breakdown.</li><li><strong>Set Growth Assumptions:</strong> Optional monthly revenue and expense growth rates.</li><li><strong>Calculate:</strong> Get burn rate, runway, a cash forecast, and break-even.</li><li><strong>Review the Chart &amp; Table:</strong> See cash balance over time month by month.</li><li><strong>Compare Scenarios:</strong> Check Base, Best, and Worst case side by side.</li><li><strong>Export:</strong> Download a full Runway Report PDF.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>A SaaS runway calculator answers the question every founder eventually has to face precisely: how many months until the cash runs out at the current pace of spending. This startup runway calculator tool goes beyond a single number, projecting cash forward month by month using your own revenue and expense growth assumptions instead of a flat, unrealistic burn rate.</p>
+<h3>How It Works</h3>
+<p>This SaaS cash burn calculator tool separates Gross Burn (total monthly cash expenses) from Net Burn (expenses minus revenue), since confusing the two leads to a misleading runway estimate. A Simple Runway is calculated as current cash divided by net monthly burn, while a Projected Runway applies your monthly revenue and expense growth rates across a monthly cash forecast, since a growing SaaS business rarely burns cash at a perfectly flat rate.</p>
+<h3>Key Features</h3>
+<p>As a SaaS runway calculator with revenue growth tool, Simple and Detailed expense modes let you start with one total operating expense figure or break spending down by Payroll, Marketing, Infrastructure, Software, Rent, and Contractors. A monthly cash forecast table and chart run out to your chosen horizon (6 to 36 months), an approximate break-even month shows when revenue growth catches up to expense growth under your assumptions, and a minimum cash reserve setting flags exactly when your balance would drop below your comfort threshold along with the estimated funding gap to prevent it. A Base/Best/Worst case scenario comparison table shows runway, ending cash, and break-even side by side under different growth assumptions, and every core formula is shown in plain language for full transparency.</p>
+<h3>Common Use Cases</h3>
+<p>A founder preparing for a board meeting calculates their current runway, then compares Best and Worst case scenarios to show investors how sensitive their cash position is to revenue growth assumptions. Someone deciding whether to hire adds the new payroll cost to the Detailed expense breakdown and recalculates to see the immediate effect on runway before committing. A startup setting a fundraising target uses the minimum cash reserve field to see exactly how much additional funding is needed to maintain a 6-month safety buffer through their planning horizon.</p>
+<h3>Tips</h3>
+<p>Growth assumptions compound monthly, so even a small difference between a 2% and a 4% monthly revenue growth rate can shift your projected runway by several months over a year — it's worth testing a couple of realistic growth rates rather than relying on just one. The Simple Runway figure is useful as a quick, conservative gut-check, but the Projected Runway with your actual growth trajectory built in is generally the more useful number for real planning and investor conversations.</p>
+<h3>Frequently Asked Questions</h3>
+<div class=faq-block><details><summary>How is runway calculated for SaaS startups?</summary><p>Simple Runway divides current cash by net monthly burn; Projected Runway instead runs a month-by-month cash forecast using your revenue and expense growth assumptions.</p></details><details><summary>What is a healthy monthly burn rate for startups?</summary><p>There's no universal number — a healthy burn rate depends on your runway relative to your growth stage and fundraising plans; this calculator focuses on giving you the numbers to make that judgment yourself rather than a fixed benchmark.</p></details><details><summary>How does revenue impact runway calculations?</summary><p>Revenue directly offsets expenses in the Net Burn calculation, and revenue growth (if set) compounds forward in the cash forecast, which can significantly extend projected runway versus a flat assumption.</p></details><details><summary>What monthly operating costs should I include in runway?</summary><p>Include every recurring cash expense — payroll, marketing, infrastructure, software subscriptions, rent, and contractors are common categories in Detailed mode, or enter one combined total in Simple mode.</p></details><details><summary>How much runway do investors typically expect?</summary><p>Expectations vary by stage and market conditions; this tool doesn't provide investment advice, but the scenario comparison can help you present a range of outcomes rather than a single optimistic number.</p></details><details><summary>How to model growth scenarios in runway planning?</summary><p>Use the Base/Best/Worst case comparison to see how different revenue and expense growth combinations change your runway, ending cash, and break-even month side by side.</p></details><details><summary>When should I focus on revenue vs. cost cutting?</summary><p>The break-even month calculation shows when revenue growth alone would close the gap to expenses under your current assumptions — if that's too far out, the scenario comparison can help evaluate whether faster revenue growth or expense reduction has more impact.</p></details><details><summary>What is a safe minimum runway to maintain?</summary><p>This varies by company and fundraising environment; set your own target in the Minimum Cash Reserve field to see when your forecast would breach it and how much additional funding would be needed to avoid that.</p></details></div>
+</div>
+<div class="seo-content"><h3>Related Business Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="invoice-generator.html">Invoice Generator</a></li>
+<li><a href="discount-scholarship-calculator.html">Discount &amp; Scholarship Calculator</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"SaaS Runway & Cash Burn Rate Calculator","applicationCategory":"BusinessApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/saas-runway-calculator.html"},
+{"@type":"HowTo","name":"How to Calculate SaaS Runway and Burn Rate","step":[
+{"@type":"HowToStep","text":"Enter your current cash position."},
+{"@type":"HowToStep","text":"Add monthly revenue and expenses."},
+{"@type":"HowToStep","text":"Set optional growth assumptions."},
+{"@type":"HowToStep","text":"Calculate burn rate and runway."},
+{"@type":"HowToStep","text":"Review the cash forecast chart and table."},
+{"@type":"HowToStep","text":"Compare Base, Best, and Worst case scenarios."},
+{"@type":"HowToStep","text":"Download a Runway Report PDF."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How is runway calculated for SaaS startups?","acceptedAnswer":{"@type":"Answer","text":"Simple Runway divides current cash by net monthly burn; Projected Runway uses a month-by-month forecast with growth assumptions."}},
+{"@type":"Question","name":"What is a healthy monthly burn rate for startups?","acceptedAnswer":{"@type":"Answer","text":"There is no universal number; it depends on your runway relative to growth stage and fundraising plans."}},
+{"@type":"Question","name":"How does revenue impact runway calculations?","acceptedAnswer":{"@type":"Answer","text":"Revenue offsets expenses in Net Burn, and revenue growth compounds forward in the cash forecast."}},
+{"@type":"Question","name":"What monthly operating costs should I include in runway?","acceptedAnswer":{"@type":"Answer","text":"Payroll, marketing, infrastructure, software, rent, and contractors are common categories."}},
+{"@type":"Question","name":"How much runway do investors typically expect?","acceptedAnswer":{"@type":"Answer","text":"Expectations vary by stage; this tool doesn't provide investment advice."}},
+{"@type":"Question","name":"How to model growth scenarios in runway planning?","acceptedAnswer":{"@type":"Answer","text":"Use the Base/Best/Worst case comparison to see different growth combinations side by side."}},
+{"@type":"Question","name":"When should I focus on revenue vs. cost cutting?","acceptedAnswer":{"@type":"Answer","text":"The break-even month shows when revenue growth alone closes the gap under current assumptions."}},
+{"@type":"Question","name":"What is a safe minimum runway to maintain?","acceptedAnswer":{"@type":"Answer","text":"This varies by company; set your own target in the Minimum Cash Reserve field."}}
+]}
+]}
+</script>
+<script>/* ===== SaaS Runway & Cash Burn Rate Calculator engine ===== */
+const srEl = id => document.getElementById(id);
+
+let srLastResult = null;
+
+/* ---------- mode toggle ---------- */
+srEl('srMode').addEventListener('change', function(){
+  const detailed = this.value==='detailed';
+  srEl('srSimpleExpenseField').style.display = detailed ? 'none' : 'block';
+  srEl('srDetailedExpenses').style.display = detailed ? 'block' : 'none';
+});
+
+/* ---------- verified core functions ---------- */
+function srGetMonthlyExpenses(){
+  if(srEl('srMode').value==='simple') return +srEl('srExpensesSimple').value || 0;
+  const ids = ['srPayroll','srMarketing','srInfra','srSoftware','srRent','srContractors','srOtherExpense'];
+  return ids.reduce((sum,id)=>sum+(+srEl(id).value||0), 0);
+}
+function srCalcBurn(revenue, expenses){
+  const grossBurn = expenses;
+  const netBurn = expenses - revenue;
+  return {grossBurn, netBurn};
+}
+function srSimpleRunwayMonths(cash, netBurn){
+  if(netBurn<=0) return Infinity;
+  return cash/netBurn;
+}
+function srProjectForecast(startCash, monthlyRevenue, monthlyExpenses, revGrowthPct, expGrowthPct, horizonMonths, oneTimeExpense){
+  const forecast = [];
+  let cash = startCash - (oneTimeExpense||0);
+  let revenue = monthlyRevenue, expenses = monthlyExpenses;
+  for(let m=1; m<=horizonMonths; m++){
+    const startingCash = cash;
+    const netFlow = revenue - expenses;
+    cash = cash + netFlow;
+    forecast.push({month:m, startingCash, revenue, expenses, netFlow, endingCash:cash});
+    if(cash<=0) break;
+    revenue = revenue*(1+revGrowthPct/100);
+    expenses = expenses*(1+expGrowthPct/100);
+  }
+  return forecast;
+}
+function srFindBreakEvenMonth(monthlyRevenue, monthlyExpenses, revGrowthPct, expGrowthPct, maxMonths){
+  let revenue=monthlyRevenue, expenses=monthlyExpenses;
+  if(revenue>=expenses) return 0;
+  for(let m=1; m<=maxMonths; m++){
+    revenue*=(1+revGrowthPct/100);
+    expenses*=(1+expGrowthPct/100);
+    if(revenue>=expenses) return m;
+  }
+  return null;
+}
+function srFindReserveBreachMonth(forecast, reserveAmount){
+  for(const f of forecast){ if(f.endingCash < reserveAmount) return f.month; }
+  return null;
+}
+function srCalcFundingGap(forecast, reserveAmount){
+  const lowestPoint = Math.min(...forecast.map(f=>f.endingCash));
+  const gap = reserveAmount - lowestPoint;
+  return gap>0 ? gap : 0;
+}
+function srFormatMoney(n, currency){
+  const sign = n<0 ? '-' : '';
+  return sign + currency + Math.abs(n).toLocaleString(undefined,{maximumFractionDigits:0});
+}
+
+/* ---------- chart (lightweight canvas line chart, no external library) ---------- */
+function srDrawChart(forecast, currency){
+  const canvas = srEl('srChart');
+  const ctx = canvas.getContext('2d');
+  const w=canvas.width, h=canvas.height;
+  ctx.clearRect(0,0,w,h);
+  if(!forecast.length) return;
+  const pad = {l:60,r:20,t:20,b:30};
+  const values = forecast.map(f=>f.endingCash);
+  const maxV = Math.max(...values, 0), minV = Math.min(...values, 0);
+  const range = (maxV-minV)||1;
+  const chartW = w-pad.l-pad.r, chartH = h-pad.t-pad.b;
+  const xFor = i => pad.l + (i/(forecast.length-1||1))*chartW;
+  const yFor = v => pad.t + chartH - ((v-minV)/range)*chartH;
+
+  ctx.strokeStyle='#ccc'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,h-pad.b); ctx.lineTo(w-pad.r,h-pad.b); ctx.stroke();
+  if(minV<0 && maxV>0){
+    const zeroY = yFor(0);
+    ctx.strokeStyle='#e07a2c'; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(pad.l,zeroY); ctx.lineTo(w-pad.r,zeroY); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+  ctx.fillStyle='#4a4a3d'; ctx.font='10px Arial'; ctx.textAlign='right';
+  ctx.fillText(srFormatMoney(maxV,currency), pad.l-6, pad.t+8);
+  ctx.fillText(srFormatMoney(minV,currency), pad.l-6, h-pad.b);
+
+  ctx.strokeStyle='#1f3d2b'; ctx.lineWidth=2;
+  ctx.beginPath();
+  forecast.forEach((f,i)=>{
+    const x=xFor(i), y=yFor(f.endingCash);
+    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  ctx.fillStyle='#1f3d2b';
+  forecast.forEach((f,i)=>{
+    if(i%Math.ceil(forecast.length/8||1)===0 || i===forecast.length-1){
+      ctx.beginPath(); ctx.arc(xFor(i),yFor(f.endingCash),2.5,0,Math.PI*2); ctx.fill();
+    }
+  });
+  ctx.fillStyle='#8a8a75'; ctx.font='9px Arial'; ctx.textAlign='center';
+  forecast.forEach((f,i)=>{
+    if(i%Math.ceil(forecast.length/6||1)===0 || i===forecast.length-1){
+      ctx.fillText('M'+f.month, xFor(i), h-pad.b+14);
+    }
+  });
+}
+
+/* ---------- forecast table ---------- */
+function srRenderForecastTable(forecast, currency){
+  let html = '<table style="width:100%; border-collapse:collapse; font-size:.8rem;"><tr style="text-align:left; border-bottom:1px solid var(--line);"><th style="padding:5px;">Month</th><th style="padding:5px;">Starting Cash</th><th style="padding:5px;">Revenue</th><th style="padding:5px;">Expenses</th><th style="padding:5px;">Net Flow</th><th style="padding:5px;">Ending Cash</th></tr>';
+  forecast.forEach(f=>{
+    const color = f.endingCash<0 ? 'color:#c0392b;' : '';
+    html += `<tr style="border-bottom:1px solid var(--line); ${color}"><td style="padding:5px;">${f.month}</td><td style="padding:5px;">${srFormatMoney(f.startingCash,currency)}</td><td style="padding:5px;">${srFormatMoney(f.revenue,currency)}</td><td style="padding:5px;">${srFormatMoney(f.expenses,currency)}</td><td style="padding:5px;">${srFormatMoney(f.netFlow,currency)}</td><td style="padding:5px;">${srFormatMoney(f.endingCash,currency)}</td></tr>`;
+  });
+  html += '</table>';
+  srEl('srForecastTable').innerHTML = html;
+}
+
+/* ---------- main calculate ---------- */
+srEl('srCalcBtn').addEventListener('click', ()=>{
+  const cash = +srEl('srCash').value;
+  const currency = srEl('srCurrency').value;
+  const revenue = +srEl('srRevenue').value || 0;
+  const expenses = srGetMonthlyExpenses();
+  if(!cash || cash<0) return alert('Enter a valid current cash balance.');
+  const revGrowth = +srEl('srRevGrowth').value || 0;
+  const expGrowth = +srEl('srExpGrowth').value || 0;
+  const oneTime = +srEl('srOneTime').value || 0;
+  const reserve = +srEl('srReserve').value || 0;
+  const horizon = +srEl('srHorizon').value;
+
+  const {grossBurn, netBurn} = srCalcBurn(revenue, expenses);
+  const simpleRunway = srSimpleRunwayMonths(cash, netBurn);
+  const forecast = srProjectForecast(cash, revenue, expenses, revGrowth, expGrowth, horizon, oneTime);
+  const exhaustionEntry = forecast.find(f=>f.endingCash<=0);
+  const projectedRunwayMonths = exhaustionEntry ? exhaustionEntry.month : null;
+  const breakEvenMonth = srFindBreakEvenMonth(revenue, expenses, revGrowth, expGrowth, 60);
+  const reserveBreachMonth = reserve>0 ? srFindReserveBreachMonth(forecast, reserve) : null;
+  const fundingGap = reserve>0 ? srCalcFundingGap(forecast, reserve) : 0;
+
+  let lines = [];
+  lines.push(`Gross Burn: ${srFormatMoney(grossBurn,currency)}/month`);
+  lines.push(`Net Burn: ${srFormatMoney(netBurn,currency)}/month`);
+  if(netBurn<=0) lines.push('Net burn is zero or negative \u2014 runway is not limited by burn in the usual sense at current revenue and expense levels.');
+  lines.push(`Simple Runway: ${simpleRunway===Infinity ? 'Not burn-limited' : simpleRunway.toFixed(1)+' months'}`);
+  lines.push(`Projected Runway (with growth assumptions): ${projectedRunwayMonths ? projectedRunwayMonths+' months' : 'Cash does not run out within the '+horizon+'-month horizon'}`);
+  if(breakEvenMonth!==null) lines.push(`Approximate Break-Even: Month ${breakEvenMonth}${breakEvenMonth===0?' (already at or above break-even)':''}`);
+  else lines.push('Break-Even: Not reached within a 60-month projection at current growth assumptions.');
+  if(reserve>0){
+    lines.push(`Minimum Reserve (${srFormatMoney(reserve,currency)}) reached: ${reserveBreachMonth ? 'Month '+reserveBreachMonth : 'Not breached within horizon'}`);
+    if(fundingGap>0) lines.push(`Estimated Funding Gap to maintain reserve: ${srFormatMoney(fundingGap,currency)}`);
+  }
+  srEl('srMetrics').textContent = lines.join('\n');
+  srDrawChart(forecast, currency);
+  srRenderForecastTable(forecast, currency);
+  srEl('srResults').style.display = 'block';
+
+  srLastResult = {cash, currency, revenue, expenses, revGrowth, expGrowth, oneTime, reserve, horizon, grossBurn, netBurn, simpleRunway, projectedRunwayMonths, breakEvenMonth, forecast};
+});
+
+/* ---------- scenario comparison (Base / Best / Worst) ---------- */
+srEl('srScenarioBtn').addEventListener('click', ()=>{
+  if(!srLastResult) return alert('Calculate the runway first.');
+  const {cash, currency, revenue, expenses, revGrowth, expGrowth, oneTime, horizon} = srLastResult;
+  const scenarios = {
+    'Base Case': {revGrowth, expGrowth},
+    'Best Case': {revGrowth: revGrowth+5, expGrowth: Math.max(0,expGrowth-1)},
+    'Worst Case': {revGrowth: Math.max(0,revGrowth-2), expGrowth: expGrowth+2}
+  };
+  let html = '<table style="width:100%; border-collapse:collapse; font-size:.82rem;"><tr style="text-align:left; border-bottom:1px solid var(--line);"><th style="padding:6px;">Scenario</th><th style="padding:6px;">Runway</th><th style="padding:6px;">Ending Cash</th><th style="padding:6px;">Break-Even</th></tr>';
+  Object.keys(scenarios).forEach(name=>{
+    const s = scenarios[name];
+    const fc = srProjectForecast(cash, revenue, expenses, s.revGrowth, s.expGrowth, horizon, oneTime);
+    const exhaustion = fc.find(f=>f.endingCash<=0);
+    const runwayText = exhaustion ? `Month ${exhaustion.month}` : `Beyond ${horizon}mo`;
+    const endingCash = fc[fc.length-1].endingCash;
+    const be = srFindBreakEvenMonth(revenue, expenses, s.revGrowth, s.expGrowth, 60);
+    const beText = be===null ? 'Not within 60mo' : (be===0 ? 'Already' : 'Month '+be);
+    html += `<tr style="border-bottom:1px solid var(--line);"><td style="padding:6px;">${name}</td><td style="padding:6px;">${runwayText}</td><td style="padding:6px;">${srFormatMoney(endingCash,currency)}</td><td style="padding:6px;">${beText}</td></tr>`;
+  });
+  html += '</table>';
+  srEl('srScenarioTable').innerHTML = html;
+});
+
+/* ---------- Save / Load scenario (localStorage) ---------- */
+const SR_STORAGE_KEY = 'toolnest_saas_runway_scenario';
+srEl('srSaveBtn').addEventListener('click', ()=>{
+  const data = {
+    cash: srEl('srCash').value, currency: srEl('srCurrency').value, mode: srEl('srMode').value,
+    revenue: srEl('srRevenue').value, expensesSimple: srEl('srExpensesSimple').value,
+    payroll: srEl('srPayroll').value, marketing: srEl('srMarketing').value, infra: srEl('srInfra').value,
+    software: srEl('srSoftware').value, rent: srEl('srRent').value, contractors: srEl('srContractors').value, otherExpense: srEl('srOtherExpense').value,
+    revGrowth: srEl('srRevGrowth').value, expGrowth: srEl('srExpGrowth').value,
+    oneTime: srEl('srOneTime').value, reserve: srEl('srReserve').value, horizon: srEl('srHorizon').value
+  };
+  try{
+    localStorage.setItem(SR_STORAGE_KEY, JSON.stringify(data));
+    srEl('srSaveStatus').textContent = 'Scenario saved to this browser.';
+  }catch(e){
+    srEl('srSaveStatus').textContent = 'Could not save (storage may be full or blocked).';
+  }
+});
+srEl('srLoadBtn').addEventListener('click', ()=>{
+  let data;
+  try{ data = JSON.parse(localStorage.getItem(SR_STORAGE_KEY)); }catch(e){}
+  if(!data) return srEl('srSaveStatus').textContent = 'No saved scenario found on this browser.';
+  Object.keys(data).forEach(key=>{
+    const idMap = {cash:'srCash',currency:'srCurrency',mode:'srMode',revenue:'srRevenue',expensesSimple:'srExpensesSimple',
+      payroll:'srPayroll',marketing:'srMarketing',infra:'srInfra',software:'srSoftware',rent:'srRent',contractors:'srContractors',otherExpense:'srOtherExpense',
+      revGrowth:'srRevGrowth',expGrowth:'srExpGrowth',oneTime:'srOneTime',reserve:'srReserve',horizon:'srHorizon'};
+    const el = srEl(idMap[key]);
+    if(el) el.value = data[key];
+  });
+  srEl('srMode').dispatchEvent(new Event('change'));
+  srEl('srSaveStatus').textContent = 'Scenario loaded.';
+});
+
+/* ---------- Reset ---------- */
+srEl('srResetBtn').addEventListener('click', ()=>{
+  srEl('srCash').value=100000; srEl('srCurrency').value='$'; srEl('srMode').value='simple';
+  srEl('srMode').dispatchEvent(new Event('change'));
+  srEl('srRevenue').value=10000; srEl('srExpensesSimple').value=18000;
+  ['srPayroll','srMarketing','srInfra','srSoftware','srRent','srContractors','srOtherExpense'].forEach(id=>srEl(id).value=0);
+  srEl('srRevGrowth').value=3; srEl('srExpGrowth').value=2;
+  srEl('srOneTime').value=0; srEl('srReserve').value=0; srEl('srHorizon').value=12;
+  srEl('srResults').style.display='none';
+  srEl('srScenarioTable').innerHTML='';
+  srEl('srSaveStatus').textContent=''; srEl('srPdfStatus').textContent='';
+  srLastResult = null;
+});
+
+/* ---------- Runway Report PDF (jsPDF loaded dynamically only when requested) ---------- */
+function srLoadJsPdf(){
+  return new Promise((resolve,reject)=>{
+    if(window.jspdf){ resolve(window.jspdf); return; }
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    script.onload = ()=> window.jspdf ? resolve(window.jspdf) : reject(new Error('jsPDF failed to initialize'));
+    script.onerror = ()=> reject(new Error('Could not load the PDF library'));
+    document.head.appendChild(script);
+  });
+}
+srEl('srDownloadPdfBtn').addEventListener('click', async ()=>{
+  if(!srLastResult) return alert('Calculate the runway first.');
+  const statusEl = srEl('srPdfStatus');
+  statusEl.textContent = 'Preparing report...';
+  try{
+    const {jsPDF} = await srLoadJsPdf();
+    const doc = new jsPDF();
+    const r = srLastResult;
+    let y=18;
+    doc.setFontSize(18); doc.setFont(undefined,'bold');
+    doc.text('SaaS Runway & Cash Burn Report', 15, y); y+=10;
+    doc.setFontSize(10); doc.setFont(undefined,'normal');
+    doc.text(`Current Cash: ${srFormatMoney(r.cash,r.currency)}   Monthly Revenue: ${srFormatMoney(r.revenue,r.currency)}   Monthly Expenses: ${srFormatMoney(r.expenses,r.currency)}`, 15, y); y+=10;
+
+    doc.setFontSize(13); doc.setFont(undefined,'bold'); doc.setTextColor(31,61,43);
+    doc.text('Key Metrics', 15, y); doc.setTextColor(0,0,0); y+=7;
+    doc.setFontSize(10); doc.setFont(undefined,'normal');
+    doc.text(`Gross Burn: ${srFormatMoney(r.grossBurn,r.currency)}/mo   Net Burn: ${srFormatMoney(r.netBurn,r.currency)}/mo`, 15, y); y+=6;
+    doc.text(`Simple Runway: ${r.simpleRunway===Infinity?'Not burn-limited':r.simpleRunway.toFixed(1)+' months'}`, 15, y); y+=6;
+    doc.text(`Projected Runway: ${r.projectedRunwayMonths ? r.projectedRunwayMonths+' months' : 'Beyond '+r.horizon+'-month horizon'}`, 15, y); y+=6;
+    doc.text(`Break-Even: ${r.breakEvenMonth!==null ? 'Month '+r.breakEvenMonth : 'Not within 60 months'}`, 15, y); y+=10;
+
+    doc.setFontSize(13); doc.setFont(undefined,'bold'); doc.setTextColor(31,61,43);
+    doc.text('Cash Forecast', 15, y); doc.setTextColor(0,0,0); y+=7;
+    doc.setFontSize(9); doc.setFont(undefined,'normal');
+    r.forecast.slice(0,20).forEach(f=>{
+      if(y>270){ doc.addPage(); y=20; }
+      doc.text(`M${f.month}: Start ${srFormatMoney(f.startingCash,r.currency)} | Rev ${srFormatMoney(f.revenue,r.currency)} | Exp ${srFormatMoney(f.expenses,r.currency)} | End ${srFormatMoney(f.endingCash,r.currency)}`, 15, y); y+=5;
+    });
+    y+=6;
+
+    if(y>250){ doc.addPage(); y=20; }
+    doc.setFontSize(8); doc.setTextColor(120,120,120);
+    doc.text('Estimates based on user-provided assumptions. Not accounting, tax, investment, or financial advice.', 15, y);
+
+    doc.save('saas-runway-report.pdf');
+    statusEl.textContent = 'Report downloaded.';
+  }catch(err){
+    statusEl.textContent = 'Could not generate the PDF. Please check your internet connection and try again.';
+  }
+});
+</script><script src="script.js"></script></body></html>
