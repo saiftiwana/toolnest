@@ -1,0 +1,583 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Instant Contract & Agreement Draft Generator Free | ToolNest</title><meta name="description" content="Create a business contract or agreement draft free from guided questions, PDF and DOCX export, not legal advice, 100% private in your browser."><link rel="canonical" href="https://toolnest.link/contract-agreement-generator.html"><meta property="og:title" content="Instant Contract / Agreement Draft Generator | ToolNest"><meta property="og:description" content="Create a business contract or agreement draft free from guided questions, PDF and DOCX export."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/contract-agreement-generator.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"><style>@media print{header,.search-wrap,footer,nav,.seo-content{display:none !important}}</style></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Instant Contract / Agreement Draft Generator</h1><p>Create a structured business agreement draft from guided questions — free, private, PDF/DOCX export. Not legal advice.</p></header><main>
+<div class="card" id="ct"><h2>Instant Contract / Agreement Draft Generator</h2><p class="desc">Create a structured business agreement draft from guided questions — free, private, exportable as PDF or DOCX.</p>
+<p class="stat" style="font-size:.8rem; background:#fff3e0; border:1px solid #e0a72c; border-radius:6px; padding:10px;"><strong>Important:</strong> This tool creates general-purpose contract and agreement drafts for informational purposes. It is not legal advice. Review the draft and consult a qualified legal professional when appropriate.</p>
+
+<h3 style="margin-top:4px;">1. Agreement Type</h3>
+<div class="row"><div class="field"><label class="field-label" for="ctType">Type of agreement</label><select id="ctType">
+<option value="freelance">Freelance Service Agreement</option>
+<option value="webdev">Website Development Agreement</option>
+<option value="consulting">Consulting Agreement</option>
+<option value="contractor">Independent Contractor Agreement</option>
+<option value="vendor">Vendor / Business Agreement</option>
+<option value="nda">NDA / Confidentiality Agreement</option>
+</select></div></div>
+
+<div id="ctStandardFields">
+<h3>2. Parties</h3>
+<div class="row"><div class="field"><label class="field-label" for="ctParty1Name" id="ctParty1Label">Service Provider name</label><input type="text" id="ctParty1Name" placeholder="Full name or business name"></div><div class="field"><label class="field-label" for="ctParty1Address">Address</label><input type="text" id="ctParty1Address" placeholder="Address"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="ctParty2Name" id="ctParty2Label">Client name</label><input type="text" id="ctParty2Name" placeholder="Full name or business name"></div><div class="field"><label class="field-label" for="ctParty2Address">Address</label><input type="text" id="ctParty2Address" placeholder="Address"></div></div>
+
+<h3>3. Effective Date &amp; Term</h3>
+<div class="row"><div class="field"><label class="field-label" for="ctStartDate">Effective date</label><input type="date" id="ctStartDate"></div><div class="field"><label class="field-label" for="ctEndDate">End date</label><input type="date" id="ctEndDate"></div></div>
+<div class="row" style="margin-top:10px;"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="ctOpenEnded"> Open-ended agreement (no fixed end date)</label></div>
+
+<h3>4. Scope of Work</h3>
+<div class="row"><div class="field"><label class="field-label" for="ctScope">Describe the services, project, or work covered</label><textarea id="ctScope" placeholder="Describe the services, project, or work covered by this agreement."></textarea></div></div>
+<label class="field-label-block" for="ctDeliverableList" style="margin-top:10px;">Deliverables</label>
+<div id="ctDeliverableList" style="margin-top:6px;"></div>
+<div class="row" style="margin-top:8px;"><button class="secondary" id="ctAddDeliverableBtn">+ Add Deliverable</button></div>
+
+<h3>5. Payment</h3>
+<div class="row"><div class="field"><label class="field-label" for="ctPaymentType">Payment type</label><select id="ctPaymentType"><option value="fixed">Fixed Fee</option><option value="hourly">Hourly</option><option value="milestone">Milestone-Based</option></select></div><div class="field"><label class="field-label" for="ctCurrency">Currency</label><select id="ctCurrency"><option value="$">USD ($)</option><option value="Rs">PKR (Rs)</option><option value="&euro;">EUR (&euro;)</option><option value="&pound;">GBP (&pound;)</option></select></div></div>
+<div class="row" style="margin-top:10px;" id="ctFixedRow"><div class="field"><label class="field-label" for="ctFixedAmount">Total amount</label><input type="number" id="ctFixedAmount" value="0"></div></div>
+<div class="row" style="margin-top:10px; display:none;" id="ctHourlyRow"><div class="field"><label class="field-label" for="ctHourlyRate">Hourly rate</label><input type="number" id="ctHourlyRate" value="0"></div><div class="field"><label class="field-label" for="ctEstHours">Estimated hours</label><input type="number" id="ctEstHours" value="0"></div></div>
+<div id="ctMilestoneList" style="margin-top:10px; display:none;"></div>
+<div class="row" style="margin-top:8px; display:none;" id="ctAddMilestoneRow"><button class="secondary" id="ctAddMilestoneBtn">+ Add Milestone Payment</button></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="ctPaymentSchedule">Payment schedule</label><select id="ctPaymentSchedule"><option value="Full payment upfront">Full payment upfront</option><option value="50% upfront, 50% on completion">50/50 (deposit + final)</option><option value="Monthly">Monthly</option><option value="Milestone payments">Milestone payments</option><option value="Custom">Custom (see notes)</option></select></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="ctLatePayment">Late payment terms (optional)</label><input type="text" id="ctLatePayment" placeholder="e.g. 2% late fee per month overdue"></div></div>
+
+<h3>6. Revisions</h3>
+<div class="row"><div class="field"><label class="field-label" for="ctRevisionType">Revision terms</label><select id="ctRevisionType"><option value="unlimited">Unlimited revisions</option><option value="fixed">Fixed number of revisions</option><option value="none">No revisions included</option></select></div><div class="field" id="ctRevisionCountField"><label class="field-label" for="ctRevisionCount">Number of revisions</label><input type="number" id="ctRevisionCount" value="2"></div></div>
+<div class="row" style="margin-top:8px;"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="ctExtraRevisionsBilled"> Additional revisions beyond this are billed separately</label></div>
+
+<h3>7. Intellectual Property &amp; Confidentiality</h3>
+<div class="row"><div class="field"><label class="field-label" for="ctIpOption">Ownership of final deliverables</label><select id="ctIpOption"><option value="client_after_payment">Client owns deliverables after full payment</option><option value="provider_retains">Service Provider retains ownership</option><option value="license">License granted to Client</option></select></div></div>
+<div class="row" style="margin-top:8px;"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="ctPortfolioRights"> Service Provider may display completed work in their portfolio</label></div>
+<div class="row" style="margin-top:8px;"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="ctConfidentiality" checked> Include confidentiality clause</label></div>
+
+<h3>8. Termination &amp; Dispute Resolution</h3>
+<div class="row"><div class="field"><label class="field-label" for="ctNoticePeriod">Termination notice period</label><select id="ctNoticePeriod"><option value="7 days">7 days</option><option value="14 days">14 days</option><option value="30 days">30 days</option><option value="Immediate (for cause)">Immediate (for cause)</option></select></div><div class="field"><label class="field-label" for="ctDisputeMethod">Dispute resolution</label><select id="ctDisputeMethod"><option value="Negotiation">Negotiation</option><option value="Mediation">Mediation</option><option value="Arbitration">Arbitration</option><option value="Court / litigation">Court / litigation</option></select></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="ctJurisdiction">Governing law / jurisdiction</label><input type="text" id="ctJurisdiction" placeholder="e.g. Punjab, Pakistan"></div></div>
+
+<h3>9. Responsibilities</h3>
+<div class="row" id="ctClientRespRow" style="flex-wrap:wrap;">
+<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="ctRespContent" checked> Client provides content</label>
+<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="ctRespAccess" checked> Client provides access/credentials</label>
+<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="ctRespFeedback" checked> Client provides timely feedback</label>
+</div>
+
+<h3>10. Custom Clauses</h3>
+<div id="ctCustomClauseList"></div>
+<div class="row" style="margin-top:8px;"><button class="secondary" id="ctAddClauseBtn">+ Add Custom Clause</button></div>
+</div>
+
+<div id="ctNdaFields" style="display:none;">
+<h3>2. Parties</h3>
+<div class="row"><div class="field"><label class="field-label" for="ctNdaDisclosing">Disclosing party</label><input type="text" id="ctNdaDisclosing" placeholder="Name of party sharing information"></div><div class="field"><label class="field-label" for="ctNdaReceiving">Receiving party</label><input type="text" id="ctNdaReceiving" placeholder="Name of party receiving information"></div></div>
+<h3>3. Purpose</h3>
+<div class="row"><div class="field"><label class="field-label" for="ctNdaPurpose">Purpose of disclosure</label><textarea id="ctNdaPurpose" placeholder="Why confidential information is being shared"></textarea></div></div>
+<h3>4. Confidential Information</h3>
+<div class="row"><div class="field"><label class="field-label" for="ctNdaDefinition">What counts as confidential information</label><textarea id="ctNdaDefinition" placeholder="Describe the information covered"></textarea></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="ctNdaExclusions">Exclusions (optional)</label><input type="text" id="ctNdaExclusions" placeholder="e.g. Publicly available information"></div></div>
+<h3>5. Duration &amp; Governing Law</h3>
+<div class="row"><div class="field"><label class="field-label" for="ctNdaDuration">Duration of confidentiality obligation</label><input type="text" id="ctNdaDuration" placeholder="e.g. 2 years from the effective date"></div><div class="field"><label class="field-label" for="ctNdaJurisdiction">Governing law / jurisdiction</label><input type="text" id="ctNdaJurisdiction" placeholder="e.g. Punjab, Pakistan"></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="ctNdaStartDate">Effective date</label><input type="date" id="ctNdaStartDate"></div></div>
+</div>
+
+<div class="row" style="margin-top:14px;"><button id="ctBuildBtn">Build Document Preview</button></div>
+<h3>11. Document Preview</h3>
+<div id="ctPreview" style="border:1px solid var(--line); border-radius:8px; padding:24px; background:#fff; max-height:600px; overflow-y:auto; display:none;"></div>
+
+<h3>12. Save / Load</h3>
+<div class="row"><button class="secondary" id="ctSaveDraftBtn">Save Draft</button><button class="secondary" id="ctLoadDraftBtn">Load Draft</button><button class="secondary" id="ctResetBtn">Reset</button></div>
+<p class="stat" id="ctDraftStatus" style="font-size:.8rem;"></p>
+
+<h3>13. Export</h3>
+<div class="row" style="flex-wrap:wrap;"><button id="ctDownloadPdfBtn">Download PDF</button><button class="secondary" id="ctDownloadDocxBtn">Download DOCX</button><button class="secondary" id="ctPrintBtn">Print</button><button class="secondary" data-copy="ctCopyHolder" data-copy-mode="text">\U0001F4CB Copy Text</button></div>
+<p class="stat" id="ctExportStatus" style="font-size:.8rem;"></p>
+<div id="ctCopyHolder" style="display:none;"></div>
+</div>
+<div class="seo-content">
+<h3>How to Use Instant Contract / Agreement Draft Generator</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Choose an Agreement Type:</strong> Freelance, Web Development, Consulting, Contractor, Vendor, or NDA.</li><li><strong>Enter the Parties:</strong> Names and addresses for both sides of the agreement.</li><li><strong>Define the Scope:</strong> Describe the work and list deliverables.</li><li><strong>Set Payment Terms:</strong> Fixed, hourly, or milestone-based, with a payment schedule.</li><li><strong>Choose Additional Terms:</strong> Revisions, IP ownership, confidentiality, termination, and dispute resolution.</li><li><strong>Build the Preview:</strong> Review the generated draft.</li><li><strong>Export:</strong> Download as PDF or DOCX, print, or copy the text.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>A free contract generator online tool turns a guided set of questions into a structured business agreement draft, instead of starting from a blank page or reusing an old contract that doesn't quite fit the new situation. This simple contract agreement generator online tool covers six common agreement types, each with fields tailored to that specific kind of relationship, and clearly states throughout that it produces a draft for informational purposes rather than legal advice.</p>
+<h3>How It Works</h3>
+<p>This freelance contract generator online tool builds each agreement from a reusable clause structure — parties, term, scope, payment, revisions, intellectual property, confidentiality, termination, and dispute resolution — with fields and defaults adjusted for the agreement type you select. An NDA / Confidentiality Agreement uses a genuinely different structure focused on disclosing and receiving parties, confidential information, and duration, rather than reusing the general service-agreement layout. Every clause is generated only when relevant information is provided, so optional sections are cleanly omitted rather than left with empty placeholder text.</p>
+<h3>Key Features</h3>
+<p>As a service agreement generator tool, six agreement types are supported — Freelance Service Agreement, Website Development Agreement, Consulting Agreement, Independent Contractor Agreement, Vendor/Business Agreement, and NDA/Confidentiality Agreement — each generating a properly structured draft rather than one generic template stretched across every use case. Payment supports fixed fee, hourly, or milestone-based structures with a configurable schedule, revision terms can be unlimited, a fixed number, or none, and intellectual property ownership, confidentiality, termination notice, and dispute resolution method are all independently configurable. A repeatable custom clause builder covers anything not already included, and the finished draft exports as PDF, DOCX, plain text, or a print-ready page.</p>
+<h3>Common Use Cases</h3>
+<p>A freelance web designer starts a new project by generating a Website Development Agreement, listing specific deliverables like homepage design and a contact form, and setting milestone-based payments tied to project phases. A consultant sharing sensitive business information with a new client first sends an NDA generated from the dedicated NDA fields, clearly defining what counts as confidential and for how long. A small agency taking on a new vendor relationship uses the Vendor/Business Agreement type, adds a custom clause about delivery timelines specific to their industry, and exports a PDF ready for both parties to review.</p>
+<h3>Tips</h3>
+<p>Because this tool creates a draft rather than a finished legal document, review it against your specific situation and jurisdiction before use, and consult a qualified legal professional for anything with significant financial or legal stakes. The custom clause builder is useful for anything specific to your industry or relationship that the standard sections don't cover — a delivery timeline penalty, a specific software license, or an unusual payment condition can all be added as their own clause.</p>
+<h3>Frequently Asked Questions</h3>
+<div class=faq-block><details><summary>How do I create a simple contract online?</summary><p>Choose an agreement type, fill in the parties, scope, and payment terms, then click Build Document Preview to generate a structured draft you can export.</p></details><details><summary>Can I generate a freelance service agreement?</summary><p>Yes, Freelance Service Agreement is one of six supported types, with fields for scope, deliverables, payment, and revisions tailored to freelance work.</p></details><details><summary>Can I create a website development agreement?</summary><p>Yes, Website Development Agreement is a dedicated type covering scope, deliverables, payment, revisions, and intellectual property specific to web projects.</p></details><details><summary>Can I customize the contract terms?</summary><p>Yes, every section is editable, optional sections can be included or left out based on what you fill in, and a custom clause builder covers anything not already included.</p></details><details><summary>Can I download the agreement as PDF?</summary><p>Yes, along with DOCX, plain text copy, and a print-ready version.</p></details><details><summary>Is this contract legally binding?</summary><p>This tool generates a draft for informational purposes; it does not guarantee legal enforceability in any jurisdiction and is not a substitute for legal advice.</p></details><details><summary>Should I have a lawyer review the agreement?</summary><p>Yes, especially for agreements with significant financial or legal stakes — this tool provides a structured starting draft, not a substitute for professional legal review.</p></details><details><summary>Can I create an NDA draft?</summary><p>Yes, NDA / Confidentiality Agreement uses a dedicated structure with disclosing/receiving parties, confidential information definitions, and duration, distinct from the general service agreement types.</p></details></div>
+</div>
+<div class="seo-content"><h3>Related Business Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="client-proposal-generator.html">Client Proposal &amp; Scope Generator</a></li>
+<li><a href="invoice-generator.html">Invoice Generator</a></li>
+<li><a href="whatsapp-direct-chat.html">WhatsApp Direct Chat</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Instant Contract / Agreement Draft Generator","applicationCategory":"BusinessApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/contract-agreement-generator.html"},
+{"@type":"HowTo","name":"How to Create a Contract or Agreement Draft","step":[
+{"@type":"HowToStep","text":"Choose an agreement type."},
+{"@type":"HowToStep","text":"Enter the parties."},
+{"@type":"HowToStep","text":"Define the scope of work."},
+{"@type":"HowToStep","text":"Set payment terms."},
+{"@type":"HowToStep","text":"Choose additional terms."},
+{"@type":"HowToStep","text":"Build the document preview."},
+{"@type":"HowToStep","text":"Export as PDF or DOCX."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I create a simple contract online?","acceptedAnswer":{"@type":"Answer","text":"Choose an agreement type, fill in the parties, scope, and payment terms, then build the preview."}},
+{"@type":"Question","name":"Can I generate a freelance service agreement?","acceptedAnswer":{"@type":"Answer","text":"Yes, Freelance Service Agreement is one of six supported types."}},
+{"@type":"Question","name":"Can I create a website development agreement?","acceptedAnswer":{"@type":"Answer","text":"Yes, a dedicated Website Development Agreement type is available."}},
+{"@type":"Question","name":"Can I customize the contract terms?","acceptedAnswer":{"@type":"Answer","text":"Yes, every section is editable and a custom clause builder is included."}},
+{"@type":"Question","name":"Can I download the agreement as PDF?","acceptedAnswer":{"@type":"Answer","text":"Yes, along with DOCX, plain text, and print."}},
+{"@type":"Question","name":"Is this contract legally binding?","acceptedAnswer":{"@type":"Answer","text":"This tool generates a draft for informational purposes and is not a substitute for legal advice."}},
+{"@type":"Question","name":"Should I have a lawyer review the agreement?","acceptedAnswer":{"@type":"Answer","text":"Yes, especially for agreements with significant financial or legal stakes."}},
+{"@type":"Question","name":"Can I create an NDA draft?","acceptedAnswer":{"@type":"Answer","text":"Yes, using a dedicated NDA structure distinct from the general agreement types."}}
+]}
+]}
+</script>
+<script>/* ===== Instant Contract / Agreement Draft Generator engine ===== */
+const ctEl = id => document.getElementById(id);
+
+/* ---------- agreement type switching (NDA uses a genuinely different field set, per spec) ---------- */
+const CT_PARTY_LABELS = {
+  freelance: {p1:'Service Provider name', p2:'Client name'},
+  webdev: {p1:'Service Provider name', p2:'Client name'},
+  consulting: {p1:'Consultant name', p2:'Client name'},
+  contractor: {p1:'Contractor name', p2:'Client name'},
+  vendor: {p1:'Vendor / Business name', p2:'Client name'}
+};
+ctEl('ctType').addEventListener('change', function(){
+  const type = this.value;
+  if(type==='nda'){
+    ctEl('ctStandardFields').style.display = 'none';
+    ctEl('ctNdaFields').style.display = 'block';
+  }else{
+    ctEl('ctStandardFields').style.display = 'block';
+    ctEl('ctNdaFields').style.display = 'none';
+    const labels = CT_PARTY_LABELS[type];
+    ctEl('ctParty1Label').textContent = labels.p1;
+    ctEl('ctParty2Label').textContent = labels.p2;
+  }
+});
+
+/* ---------- Deliverables list ---------- */
+function ctAddDeliverableRow(prefill){
+  const row = document.createElement('div');
+  row.className='row'; row.style.marginTop='6px';
+  const input = document.createElement('input');
+  input.type='text'; input.className='ct-deliverable-input'; input.placeholder='e.g. Responsive homepage design'; input.style.flex='1';
+  if(prefill) input.value=prefill;
+  const rm = document.createElement('button');
+  rm.type='button'; rm.className='fl-remove'; rm.textContent='\u2715';
+  rm.addEventListener('click', ()=>row.remove());
+  row.appendChild(input); row.appendChild(rm);
+  ctEl('ctDeliverableList').appendChild(row);
+}
+ctEl('ctAddDeliverableBtn').addEventListener('click', ()=>ctAddDeliverableRow());
+ctAddDeliverableRow('');
+
+/* ---------- Payment type toggle ---------- */
+ctEl('ctPaymentType').addEventListener('change', function(){
+  ctEl('ctFixedRow').style.display = this.value==='fixed' ? 'flex' : 'none';
+  ctEl('ctHourlyRow').style.display = this.value==='hourly' ? 'flex' : 'none';
+  ctEl('ctMilestoneList').style.display = this.value==='milestone' ? 'block' : 'none';
+  ctEl('ctAddMilestoneRow').style.display = this.value==='milestone' ? 'flex' : 'none';
+});
+function ctAddMilestoneRow(prefill){
+  const row = document.createElement('div');
+  row.className='row'; row.style.marginTop='6px';
+  row.innerHTML = `<input type="text" class="ct-milestone-desc" placeholder="Milestone" style="flex:1;"><input type="number" class="ct-milestone-amount" placeholder="Amount" value="0" style="width:110px;">`;
+  const rm = document.createElement('button'); rm.type='button'; rm.className='fl-remove'; rm.textContent='\u2715';
+  rm.addEventListener('click', ()=>row.remove());
+  row.appendChild(rm);
+  ctEl('ctMilestoneList').appendChild(row);
+  if(prefill){ row.querySelector('.ct-milestone-desc').value=prefill.desc||''; row.querySelector('.ct-milestone-amount').value=prefill.amount||0; }
+}
+ctEl('ctAddMilestoneBtn').addEventListener('click', ()=>ctAddMilestoneRow());
+ctAddMilestoneRow({desc:'Milestone 1'});
+
+/* ---------- Revision type toggle ---------- */
+ctEl('ctRevisionType').addEventListener('change', function(){
+  ctEl('ctRevisionCountField').style.display = this.value==='fixed' ? 'block' : 'none';
+});
+
+/* ---------- Custom clauses list ---------- */
+function ctAddClauseRow(prefill){
+  const wrap = document.createElement('div');
+  wrap.style.cssText='border:1px solid var(--line); border-radius:6px; padding:8px; margin-top:8px;';
+  wrap.innerHTML = `<input type="text" class="ct-clause-title" placeholder="Clause title" style="width:100%; margin-bottom:6px;"><textarea class="ct-clause-text" placeholder="Clause text" style="min-height:60px;"></textarea>`;
+  const rm = document.createElement('button'); rm.type='button'; rm.className='fl-remove'; rm.textContent='Remove Clause'; rm.style.cssText='margin-top:6px;';
+  rm.addEventListener('click', ()=>wrap.remove());
+  wrap.appendChild(rm);
+  ctEl('ctCustomClauseList').appendChild(wrap);
+  if(prefill){ wrap.querySelector('.ct-clause-title').value=prefill.title||''; wrap.querySelector('.ct-clause-text').value=prefill.text||''; }
+}
+ctEl('ctAddClauseBtn').addEventListener('click', ()=>ctAddClauseRow());
+
+/* ---------- collect all state ---------- */
+function ctCollectData(){
+  const type = ctEl('ctType').value;
+  if(type==='nda'){
+    return {
+      type, isNda:true,
+      disclosing: ctEl('ctNdaDisclosing').value, receiving: ctEl('ctNdaReceiving').value,
+      purpose: ctEl('ctNdaPurpose').value, definition: ctEl('ctNdaDefinition').value,
+      exclusions: ctEl('ctNdaExclusions').value, duration: ctEl('ctNdaDuration').value,
+      jurisdiction: ctEl('ctNdaJurisdiction').value, startDate: ctEl('ctNdaStartDate').value
+    };
+  }
+  const deliverables = Array.from(document.querySelectorAll('.ct-deliverable-input')).map(i=>i.value).filter(Boolean);
+  const milestones = Array.from(document.querySelectorAll('#ctMilestoneList > div')).map(w=>({
+    desc: w.querySelector('.ct-milestone-desc').value, amount: w.querySelector('.ct-milestone-amount').value
+  })).filter(m=>m.desc.trim());
+  const customClauses = Array.from(document.querySelectorAll('#ctCustomClauseList > div')).map(w=>({
+    title: w.querySelector('.ct-clause-title').value, text: w.querySelector('.ct-clause-text').value
+  })).filter(c=>c.title.trim()||c.text.trim());
+  const responsibilities = [];
+  if(ctEl('ctRespContent').checked) responsibilities.push('Provide necessary content and materials');
+  if(ctEl('ctRespAccess').checked) responsibilities.push('Provide access and credentials required to complete the work');
+  if(ctEl('ctRespFeedback').checked) responsibilities.push('Provide timely feedback and approvals');
+
+  return {
+    type, isNda:false,
+    party1Label: CT_PARTY_LABELS[type].p1.replace(' name',''), party2Label: CT_PARTY_LABELS[type].p2.replace(' name',''),
+    party1Name: ctEl('ctParty1Name').value, party1Address: ctEl('ctParty1Address').value,
+    party2Name: ctEl('ctParty2Name').value, party2Address: ctEl('ctParty2Address').value,
+    startDate: ctEl('ctStartDate').value, endDate: ctEl('ctEndDate').value, openEnded: ctEl('ctOpenEnded').checked,
+    scope: ctEl('ctScope').value, deliverables,
+    paymentType: ctEl('ctPaymentType').value, currency: ctEl('ctCurrency').value,
+    fixedAmount: ctEl('ctFixedAmount').value, hourlyRate: ctEl('ctHourlyRate').value, estHours: ctEl('ctEstHours').value,
+    milestones, paymentSchedule: ctEl('ctPaymentSchedule').value, latePayment: ctEl('ctLatePayment').value,
+    revisionType: ctEl('ctRevisionType').value, revisionCount: ctEl('ctRevisionCount').value, extraRevisionsBilled: ctEl('ctExtraRevisionsBilled').checked,
+    ipOption: ctEl('ctIpOption').value, portfolioRights: ctEl('ctPortfolioRights').checked, confidentiality: ctEl('ctConfidentiality').checked,
+    noticePeriod: ctEl('ctNoticePeriod').value, disputeMethod: ctEl('ctDisputeMethod').value, jurisdiction: ctEl('ctJurisdiction').value,
+    responsibilities, customClauses
+  };
+}
+
+/* ---------- agreement titles ---------- */
+const CT_TITLES = {
+  freelance:'Freelance Service Agreement', webdev:'Website Development Agreement', consulting:'Consulting Agreement',
+  contractor:'Independent Contractor Agreement', vendor:'Vendor / Business Agreement', nda:'Non-Disclosure Agreement'
+};
+
+/* ---------- build clause list (conditional \u2014 only included clauses are generated) ---------- */
+function ctBuildClauses(data){
+  const clauses = [];
+  if(data.isNda){
+    clauses.push(['Parties', `This Non-Disclosure Agreement is entered into between ${data.disclosing||'the Disclosing Party'} ("Disclosing Party") and ${data.receiving||'the Receiving Party'} ("Receiving Party").`]);
+    clauses.push(['Effective Date', data.startDate ? `This Agreement is effective as of ${data.startDate}.` : 'Effective date not specified.']);
+    if(data.purpose) clauses.push(['Purpose', data.purpose]);
+    if(data.definition) clauses.push(['Confidential Information', data.definition]);
+    if(data.exclusions) clauses.push(['Exclusions', data.exclusions]);
+    if(data.duration) clauses.push(['Duration', `The confidentiality obligations in this Agreement remain in effect for ${data.duration}.`]);
+    clauses.push(['Return or Destruction of Information', 'Upon request or termination of this Agreement, the Receiving Party agrees to return or destroy all confidential materials received from the Disclosing Party.']);
+    if(data.jurisdiction) clauses.push(['Governing Law', `This Agreement shall be governed by the laws of ${data.jurisdiction}.`]);
+    return clauses;
+  }
+
+  clauses.push(['Parties', `This Agreement is entered into between ${data.party1Name||'the '+data.party1Label} ("${data.party1Label}") and ${data.party2Name||'the '+data.party2Label} ("${data.party2Label}").`]);
+  let dateLine = data.startDate ? `This Agreement is effective as of ${data.startDate}.` : 'Effective date not specified.';
+  if(!data.openEnded && data.endDate) dateLine += ` The Agreement is expected to conclude on ${data.endDate}.`;
+  else if(data.openEnded) dateLine += ' This is an open-ended agreement with no fixed end date.';
+  clauses.push(['Effective Date & Term', dateLine]);
+
+  if(data.scope || data.deliverables.length){
+    let scopeText = data.scope || '';
+    if(data.deliverables.length) scopeText += (scopeText?'\n\n':'') + 'Deliverables:\n' + data.deliverables.map(d=>'- '+d).join('\n');
+    clauses.push(['Scope of Work', scopeText]);
+  }
+
+  let paymentText = '';
+  if(data.paymentType==='fixed') paymentText = `Total fee: ${data.currency}${data.fixedAmount}.`;
+  else if(data.paymentType==='hourly') paymentText = `Hourly rate: ${data.currency}${data.hourlyRate}/hour, estimated at approximately ${data.estHours} hours.`;
+  else if(data.paymentType==='milestone' && data.milestones.length) paymentText = 'Milestone payments:\n' + data.milestones.map(m=>`- ${m.desc}: ${data.currency}${m.amount}`).join('\n');
+  paymentText += `\nPayment schedule: ${data.paymentSchedule}.`;
+  if(data.latePayment) paymentText += `\nLate payment: ${data.latePayment}.`;
+  clauses.push(['Payment', paymentText]);
+
+  if(data.revisionType==='unlimited') clauses.push(['Revisions', 'Unlimited revisions are included as part of this engagement.' + (data.extraRevisionsBilled?' Any work beyond the agreed scope may be billed separately.':'')]);
+  else if(data.revisionType==='fixed') clauses.push(['Revisions', `${data.revisionCount} revision round(s) are included.` + (data.extraRevisionsBilled?' Additional revisions beyond this will be billed separately.':'')]);
+  else clauses.push(['Revisions', 'No revisions are included as part of this engagement.']);
+
+  let ipText = '';
+  if(data.ipOption==='client_after_payment') ipText = `${data.party2Label} shall own all rights to the final deliverables upon receipt of full payment.`;
+  else if(data.ipOption==='provider_retains') ipText = `${data.party1Label} retains ownership of the work product; ${data.party2Label} receives a right to use the deliverables as agreed.`;
+  else ipText = `${data.party1Label} grants ${data.party2Label} a license to use the deliverables as described in this Agreement.`;
+  if(data.portfolioRights) ipText += ` ${data.party1Label} may display the completed work in their portfolio for promotional purposes.`;
+  clauses.push(['Intellectual Property', ipText]);
+
+  if(data.confidentiality) clauses.push(['Confidentiality', `Both parties agree to keep confidential any non-public information shared during the course of this engagement, and not to disclose it to third parties without consent.`]);
+
+  clauses.push(['Termination', `This Agreement may be terminated by either party with ${data.noticePeriod} written notice.`]);
+  clauses.push(['Dispute Resolution', `Any disputes arising from this Agreement shall first be addressed through ${data.disputeMethod}.`]);
+  if(data.jurisdiction) clauses.push(['Governing Law', `This Agreement shall be governed by the laws of ${data.jurisdiction}.`]);
+  if(data.responsibilities.length) clauses.push([`${data.party2Label} Responsibilities`, data.responsibilities.map(r=>'- '+r).join('\n')]);
+  data.customClauses.forEach(c=>{ if(c.title||c.text) clauses.push([c.title||'Additional Term', c.text]); });
+
+  return clauses;
+}
+
+/* ---------- live HTML preview ---------- */
+function ctEscapeHtml(text){ return (text||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+let ctLastData = null;
+function ctBuildPreview(){
+  ctLastData = ctCollectData();
+  const data = ctLastData;
+  const title = CT_TITLES[data.type];
+  const clauses = ctBuildClauses(data);
+  let html = `<div style="font-family:Georgia,serif; color:#222; line-height:1.7;">`;
+  html += `<h1 style="text-align:center; font-size:1.6rem; margin-bottom:6px;">${title}</h1>`;
+  html += `<p style="text-align:center; font-size:.8rem; color:#888; margin-bottom:24px;">Draft \u2014 Not Legal Advice \u2014 Review Before Use</p>`;
+  clauses.forEach(([heading, text], i)=>{
+    html += `<h3 style="margin:18px 0 6px; font-size:1.05rem;">${i+1}. ${ctEscapeHtml(heading)}</h3>`;
+    html += `<p style="white-space:pre-line; margin:0;">${ctEscapeHtml(text)}</p>`;
+  });
+  html += `<h3 style="margin:24px 0 10px;">Signatures</h3>`;
+  if(data.isNda){
+    html += `<div style="display:flex; gap:40px; margin-top:16px;"><div style="flex:1; border-top:1px solid #333; padding-top:6px;">${ctEscapeHtml(data.disclosing)||'Disclosing Party'} / Date</div><div style="flex:1; border-top:1px solid #333; padding-top:6px;">${ctEscapeHtml(data.receiving)||'Receiving Party'} / Date</div></div>`;
+  }else{
+    html += `<div style="display:flex; gap:40px; margin-top:16px;"><div style="flex:1; border-top:1px solid #333; padding-top:6px;">${ctEscapeHtml(data.party1Name)||data.party1Label} / Date</div><div style="flex:1; border-top:1px solid #333; padding-top:6px;">${ctEscapeHtml(data.party2Name)||data.party2Label} / Date</div></div>`;
+  }
+  html += `<p style="font-size:.78rem; color:#888; margin-top:24px;">This draft is a general template and may need modification for your jurisdiction and circumstances. It is not legal advice.</p>`;
+  html += `</div>`;
+  ctEl('ctPreview').innerHTML = html;
+  ctEl('ctPreview').style.display = 'block';
+  ctBuildCopyText(data, title, clauses);
+}
+ctEl('ctBuildBtn').addEventListener('click', ctBuildPreview);
+
+/* ---------- plain text version ---------- */
+function ctBuildCopyText(data, title, clauses){
+  let lines = [title.toUpperCase(), 'Draft - Not Legal Advice - Review Before Use', ''];
+  clauses.forEach(([heading, text], i)=>{
+    lines.push(`${i+1}. ${heading.toUpperCase()}`);
+    lines.push(text);
+    lines.push('');
+  });
+  lines.push('SIGNATURES');
+  if(data.isNda) lines.push(`${data.disclosing||'Disclosing Party'} / Date        ${data.receiving||'Receiving Party'} / Date`);
+  else lines.push(`${data.party1Name||data.party1Label} / Date        ${data.party2Name||data.party2Label} / Date`);
+  lines.push('');
+  lines.push('This draft is a general template and may need modification for your jurisdiction and circumstances. It is not legal advice.');
+  ctEl('ctCopyHolder').textContent = lines.join('\n');
+}
+document.querySelectorAll('[data-copy]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.getAttribute('data-copy'));
+    if(!target) return;
+    const text = btn.getAttribute('data-copy-mode')==='text' ? target.textContent : target.value;
+    if(!text) return alert('Build the document preview first.');
+    const done = ()=>{ const old=btn.textContent; btn.textContent='\u2705 Copied'; setTimeout(()=>btn.textContent=old,1200); };
+    if(window.toolnestCopyText){ window.toolnestCopyText(text, done); } else { navigator.clipboard.writeText(text).then(done); }
+  });
+});
+
+/* ---------- Print ---------- */
+ctEl('ctPrintBtn').addEventListener('click', ()=>{
+  if(!ctLastData) ctBuildPreview();
+  window.print();
+});
+
+/* ---------- PDF export (reuses the same verified pagination pattern as Client Proposal Generator) ---------- */
+function ctLoadScript(src){
+  return new Promise((resolve,reject)=>{
+    const script=document.createElement('script'); script.src=src;
+    script.onload=resolve; script.onerror=()=>reject(new Error('Could not load a required library'));
+    document.head.appendChild(script);
+  });
+}
+async function ctEnsurePdfLib(){ if(!window.PDFLib) await ctLoadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js'); }
+
+ctEl('ctDownloadPdfBtn').addEventListener('click', async ()=>{
+  if(!ctLastData) ctBuildPreview();
+  const data = ctLastData;
+  const title = CT_TITLES[data.type];
+  const clauses = ctBuildClauses(data);
+  const statusEl = ctEl('ctExportStatus');
+  statusEl.textContent = 'Loading PDF library...';
+  try{
+    await ctEnsurePdfLib();
+    const {PDFDocument, rgb} = window.PDFLib;
+    const doc = await PDFDocument.create();
+    let page = doc.addPage([612,792]);
+    let y = 750;
+    const marginL = 50, marginR = 562;
+
+    function newPageIfNeeded(minSpace){ if(y < minSpace){ page = doc.addPage([612,792]); y = 750; } }
+    function drawWrapped(text, size, opts){
+      opts = opts||{};
+      const maxW = marginR-marginL;
+      const paragraphs = text.split('\n');
+      paragraphs.forEach(para=>{
+        const words = para.split(' ');
+        let line='';
+        const lineHeight = size*1.4;
+        words.forEach(word=>{
+          const test = line?line+' '+word:word;
+          if(test.length*size*0.5 > maxW && line){
+            newPageIfNeeded(60);
+            page.drawText(line, {x:marginL, y, size, color: opts.color||rgb(0.1,0.1,0.1)});
+            y -= lineHeight; line = word;
+          }else line = test;
+        });
+        if(line){ newPageIfNeeded(60); page.drawText(line, {x:marginL, y, size, color: opts.color||rgb(0.1,0.1,0.1)}); y -= lineHeight; }
+      });
+    }
+
+    page.drawText(title, {x:marginL, y, size:18, color:rgb(0.12,0.24,0.17)}); y-=20;
+    page.drawText('Draft - Not Legal Advice - Review Before Use', {x:marginL, y, size:9, color:rgb(0.5,0.5,0.5)}); y-=24;
+
+    clauses.forEach(([heading,text], i)=>{
+      newPageIfNeeded(80);
+      page.drawText(`${i+1}. ${heading}`, {x:marginL, y, size:12, color:rgb(0.12,0.24,0.17)});
+      y -= 16;
+      drawWrapped(text, 10);
+      y -= 8;
+    });
+
+    newPageIfNeeded(100);
+    y-=10;
+    page.drawText('Signatures', {x:marginL, y, size:12, color:rgb(0.12,0.24,0.17)}); y-=24;
+    page.drawLine({start:{x:marginL,y}, end:{x:280,y}, thickness:1, color:rgb(0.2,0.2,0.2)});
+    page.drawLine({start:{x:320,y}, end:{x:marginR,y}, thickness:1, color:rgb(0.2,0.2,0.2)});
+    y-=12;
+    const label1 = data.isNda ? (data.disclosing||'Disclosing Party') : (data.party1Name||data.party1Label);
+    const label2 = data.isNda ? (data.receiving||'Receiving Party') : (data.party2Name||data.party2Label);
+    page.drawText(`${label1} / Date`, {x:marginL, y, size:9, color:rgb(0.4,0.4,0.4)});
+    page.drawText(`${label2} / Date`, {x:320, y, size:9, color:rgb(0.4,0.4,0.4)});
+    y-=20;
+    drawWrapped('This draft is a general template and may need modification for your jurisdiction and circumstances. It is not legal advice.', 8, {color:rgb(0.5,0.5,0.5)});
+
+    const outBytes = await doc.save();
+    const blob = new Blob([outBytes], {type:'application/pdf'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=title.replace(/[^a-z0-9]+/gi,'-').toLowerCase()+'.pdf'; a.click();
+    statusEl.textContent = 'PDF downloaded.';
+  }catch(err){
+    statusEl.textContent = 'Could not generate the PDF. Please try again.';
+  }
+});
+
+/* ---------- DOCX export (reuses the same verified DOCX-building approach as Client Proposal Generator) ---------- */
+function ctEscapeXml(text){
+  return (text||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+}
+function ctBuildParagraphXml(text, opts){
+  opts = opts||{};
+  const runProps = [];
+  if(opts.bold) runProps.push('<w:b/>');
+  if(opts.size) runProps.push(`<w:sz w:val="${opts.size}"/>`);
+  const rPr = runProps.length ? `<w:rPr>${runProps.join('')}</w:rPr>` : '';
+  return `<w:p><w:r>${rPr}<w:t xml:space="preserve">${ctEscapeXml(text)}</w:t></w:r></w:p>`;
+}
+async function ctEnsureJsZip(){ if(!window.JSZip) await ctLoadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'); }
+
+ctEl('ctDownloadDocxBtn').addEventListener('click', async ()=>{
+  if(!ctLastData) ctBuildPreview();
+  const data = ctLastData;
+  const title = CT_TITLES[data.type];
+  const clauses = ctBuildClauses(data);
+  const statusEl = ctEl('ctExportStatus');
+  statusEl.textContent = 'Loading library...';
+  try{
+    await ctEnsureJsZip();
+    const {JSZip} = window;
+    const zip = new JSZip();
+    const contentTypesXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>';
+    const relsXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>';
+
+    let body = '';
+    body += ctBuildParagraphXml(title, {bold:true, size:36});
+    body += ctBuildParagraphXml('Draft - Not Legal Advice - Review Before Use', {});
+    clauses.forEach(([heading, text], i)=>{
+      body += ctBuildParagraphXml(`${i+1}. ${heading}`, {bold:true, size:26});
+      text.split('\n').forEach(line=>body += ctBuildParagraphXml(line, {}));
+    });
+    body += ctBuildParagraphXml('Signatures', {bold:true, size:26});
+    const label1 = data.isNda ? (data.disclosing||'Disclosing Party') : (data.party1Name||data.party1Label);
+    const label2 = data.isNda ? (data.receiving||'Receiving Party') : (data.party2Name||data.party2Label);
+    body += ctBuildParagraphXml(`${label1} / Date`, {});
+    body += ctBuildParagraphXml(`${label2} / Date`, {});
+    body += ctBuildParagraphXml('This draft is a general template and may need modification for your jurisdiction and circumstances. It is not legal advice.', {});
+
+    const documentXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${body}<w:sectPr/></w:body></w:document>`;
+    zip.file('[Content_Types].xml', contentTypesXml);
+    zip.folder('_rels').file('.rels', relsXml);
+    zip.folder('word').file('document.xml', documentXml);
+    const blob = await zip.generateAsync({type:'blob', mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=title.replace(/[^a-z0-9]+/gi,'-').toLowerCase()+'.docx'; a.click();
+    statusEl.textContent = 'DOCX downloaded.';
+  }catch(err){
+    statusEl.textContent = 'Could not generate the DOCX file. Please try again.';
+  }
+});
+
+/* ---------- Save / Load / Reset draft (localStorage) ---------- */
+const CT_DRAFT_KEY = 'toolnest_contract_draft';
+ctEl('ctSaveDraftBtn').addEventListener('click', ()=>{
+  const data = ctCollectData();
+  try{
+    localStorage.setItem(CT_DRAFT_KEY, JSON.stringify(data));
+    ctEl('ctDraftStatus').textContent = 'Draft saved to this browser.';
+  }catch(e){
+    ctEl('ctDraftStatus').textContent = 'Could not save (storage may be full or blocked).';
+  }
+});
+ctEl('ctLoadDraftBtn').addEventListener('click', ()=>{
+  let data;
+  try{ data = JSON.parse(localStorage.getItem(CT_DRAFT_KEY)); }catch(e){}
+  if(!data) return ctEl('ctDraftStatus').textContent = 'No saved draft found on this browser.';
+  ctEl('ctType').value = data.type;
+  ctEl('ctType').dispatchEvent(new Event('change'));
+  if(data.isNda){
+    ctEl('ctNdaDisclosing').value=data.disclosing||''; ctEl('ctNdaReceiving').value=data.receiving||'';
+    ctEl('ctNdaPurpose').value=data.purpose||''; ctEl('ctNdaDefinition').value=data.definition||'';
+    ctEl('ctNdaExclusions').value=data.exclusions||''; ctEl('ctNdaDuration').value=data.duration||'';
+    ctEl('ctNdaJurisdiction').value=data.jurisdiction||''; ctEl('ctNdaStartDate').value=data.startDate||'';
+  }else{
+    ctEl('ctParty1Name').value=data.party1Name||''; ctEl('ctParty1Address').value=data.party1Address||'';
+    ctEl('ctParty2Name').value=data.party2Name||''; ctEl('ctParty2Address').value=data.party2Address||'';
+    ctEl('ctStartDate').value=data.startDate||''; ctEl('ctEndDate').value=data.endDate||''; ctEl('ctOpenEnded').checked=data.openEnded||false;
+    ctEl('ctScope').value=data.scope||'';
+    ctEl('ctDeliverableList').innerHTML=''; (data.deliverables||['']).forEach(d=>ctAddDeliverableRow(d));
+    ctEl('ctPaymentType').value=data.paymentType||'fixed'; ctEl('ctPaymentType').dispatchEvent(new Event('change'));
+    ctEl('ctCurrency').value=data.currency||'$'; ctEl('ctFixedAmount').value=data.fixedAmount||0;
+    ctEl('ctHourlyRate').value=data.hourlyRate||0; ctEl('ctEstHours').value=data.estHours||0;
+    ctEl('ctMilestoneList').innerHTML=''; (data.milestones||[]).forEach(m=>ctAddMilestoneRow(m));
+    if(!data.milestones || !data.milestones.length) ctAddMilestoneRow({desc:'Milestone 1'});
+    ctEl('ctPaymentSchedule').value=data.paymentSchedule||'Full payment upfront'; ctEl('ctLatePayment').value=data.latePayment||'';
+    ctEl('ctRevisionType').value=data.revisionType||'unlimited'; ctEl('ctRevisionType').dispatchEvent(new Event('change'));
+    ctEl('ctRevisionCount').value=data.revisionCount||2; ctEl('ctExtraRevisionsBilled').checked=data.extraRevisionsBilled||false;
+    ctEl('ctIpOption').value=data.ipOption||'client_after_payment'; ctEl('ctPortfolioRights').checked=data.portfolioRights||false;
+    ctEl('ctConfidentiality').checked=data.confidentiality!==false;
+    ctEl('ctNoticePeriod').value=data.noticePeriod||'14 days'; ctEl('ctDisputeMethod').value=data.disputeMethod||'Negotiation';
+    ctEl('ctJurisdiction').value=data.jurisdiction||'';
+    ctEl('ctRespContent').checked = (data.responsibilities||[]).some(r=>r.includes('content'));
+    ctEl('ctRespAccess').checked = (data.responsibilities||[]).some(r=>r.includes('access'));
+    ctEl('ctRespFeedback').checked = (data.responsibilities||[]).some(r=>r.includes('feedback'));
+    ctEl('ctCustomClauseList').innerHTML=''; (data.customClauses||[]).forEach(c=>ctAddClauseRow(c));
+  }
+  ctEl('ctDraftStatus').textContent = 'Draft loaded.';
+});
+ctEl('ctResetBtn').addEventListener('click', ()=>{
+  if(!confirm('Reset the whole document? Unsaved changes will be lost.')) return;
+  ['ctParty1Name','ctParty1Address','ctParty2Name','ctParty2Address','ctStartDate','ctEndDate','ctScope','ctLatePayment','ctJurisdiction',
+   'ctNdaDisclosing','ctNdaReceiving','ctNdaPurpose','ctNdaDefinition','ctNdaExclusions','ctNdaDuration','ctNdaJurisdiction','ctNdaStartDate'].forEach(id=>ctEl(id).value='');
+  ctEl('ctOpenEnded').checked=false;
+  ctEl('ctDeliverableList').innerHTML=''; ctAddDeliverableRow('');
+  ctEl('ctPaymentType').value='fixed'; ctEl('ctPaymentType').dispatchEvent(new Event('change'));
+  ctEl('ctFixedAmount').value=0; ctEl('ctHourlyRate').value=0; ctEl('ctEstHours').value=0;
+  ctEl('ctMilestoneList').innerHTML=''; ctAddMilestoneRow({desc:'Milestone 1'});
+  ctEl('ctPaymentSchedule').value='Full payment upfront';
+  ctEl('ctRevisionType').value='unlimited'; ctEl('ctRevisionType').dispatchEvent(new Event('change'));
+  ctEl('ctRevisionCount').value=2; ctEl('ctExtraRevisionsBilled').checked=false;
+  ctEl('ctIpOption').value='client_after_payment'; ctEl('ctPortfolioRights').checked=false; ctEl('ctConfidentiality').checked=true;
+  ctEl('ctNoticePeriod').value='14 days'; ctEl('ctDisputeMethod').value='Negotiation';
+  ctEl('ctRespContent').checked=true; ctEl('ctRespAccess').checked=true; ctEl('ctRespFeedback').checked=true;
+  ctEl('ctCustomClauseList').innerHTML='';
+  ctEl('ctType').value='freelance'; ctEl('ctType').dispatchEvent(new Event('change'));
+  ctEl('ctPreview').style.display='none'; ctEl('ctPreview').innerHTML='';
+  ctEl('ctDraftStatus').textContent=''; ctEl('ctExportStatus').textContent='';
+  ctLastData = null;
+});
+
+/* ---------- init ---------- */
+ctEl('ctType').dispatchEvent(new Event('change'));
+</script><script src="script.js"></script></body></html>
