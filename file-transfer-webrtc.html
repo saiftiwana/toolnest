@@ -1,0 +1,490 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Peer to Peer File Transfer Online - WebRTC | ToolNest</title><meta name="description" content="Send files directly between devices with peer-to-peer WebRTC transfer, free, no account, no cloud storage for your file data."><link rel="canonical" href="https://toolnest.link/file-transfer-webrtc.html"><meta property="og:title" content="File Transfer / Quick Share | ToolNest"><meta property="og:description" content="Send files directly between devices with peer-to-peer WebRTC transfer, free, no cloud storage."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/file-transfer-webrtc.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Peer-to-Peer File Transfer Online</h1><p>Send files directly between devices using WebRTC — free, no account, no cloud storage for your file data.</p></header><main>
+<div class="card" id="ft"><h2>File Transfer / Quick Share</h2><p class="desc">Send files directly between two devices using peer-to-peer WebRTC — no cloud storage for your files.</p>
+<p class="stat" id="ftBrowserWarning" style="display:none; font-size:.85rem; background:#fff3e0; border:1px solid #e0a72c; border-radius:6px; padding:10px;">Your browser does not support the peer-to-peer transfer features this tool needs. Please use a modern browser such as Chrome, Edge, Firefox, or Safari.</p>
+
+<div id="ftLanding">
+<div class="row"><button id="ftSendModeBtn">Send Files</button><button class="secondary" id="ftReceiveModeBtn">Receive Files</button></div>
+</div>
+
+<div id="ftSenderPanel" style="display:none; margin-top:16px;">
+<h3 style="margin-top:0;">1. Select Files</h3>
+<div class="field"><label class="field-label" for="ftFileInput">Choose files to send</label><div class="dropzone" id="ftDropzone"><input type="file" id="ftFileInput" multiple><p>Drag &amp; drop files here, or click to browse</p></div></div>
+<p class="stat" id="ftFileSummary"></p>
+<div id="ftFileList" style="margin-top:8px;"></div>
+
+<div class="row" style="margin-top:14px;"><button id="ftCreateTransferBtn">Create Transfer</button><button class="secondary" id="ftBackFromSenderBtn">Back</button></div>
+
+<div id="ftSenderPairing" style="display:none; margin-top:16px;">
+<h3>2. Share This With the Receiver</h3>
+<p class="stat" id="ftPairingCodeDisplay" style="font-size:1.6rem; font-weight:700; text-align:center; letter-spacing:2px;"></p>
+<div class="row"><button class="secondary" id="ftCopyCodeBtn">\U0001F4CB Copy Code</button><button class="secondary" id="ftCopyLinkBtn">\U0001F4CB Copy Link</button><button class="secondary" id="ftShareBtn" style="display:none;">Share</button></div>
+<canvas id="ftQrCanvas" style="margin-top:12px; display:none;"></canvas>
+<div id="ftQrContainer" style="margin-top:12px;"></div>
+<p class="stat" id="ftSenderStatus" style="margin-top:12px; font-weight:600;">Waiting for another device...</p>
+</div>
+
+<div id="ftSenderTransfer" style="display:none; margin-top:16px;">
+<h3>3. Transfer Progress</h3>
+<div id="ftSenderProgressList"></div>
+</div>
+</div>
+
+<div id="ftReceiverPanel" style="display:none; margin-top:16px;">
+<h3 style="margin-top:0;">Join a Transfer</h3>
+<div class="row"><div class="field"><label class="field-label" for="ftJoinCode">Pairing code</label><input type="text" id="ftJoinCode" placeholder="e.g. AB7-KP4" style="text-transform:uppercase;"></div><button id="ftJoinBtn">Connect</button></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="ftBackFromReceiverBtn">Back</button></div>
+<p class="stat" id="ftReceiverStatus" style="margin-top:12px; font-weight:600;"></p>
+
+<div id="ftIncomingOffer" style="display:none; margin-top:16px; border:1px solid var(--line); border-radius:8px; padding:14px;">
+<h3 style="margin-top:0;">Incoming Transfer</h3>
+<div id="ftIncomingFileList"></div>
+<p class="stat" id="ftIncomingTotal" style="font-weight:600;"></p>
+<div class="row" style="margin-top:10px;"><button id="ftAcceptBtn">Accept Transfer</button><button class="secondary" id="ftDeclineBtn">Decline</button></div>
+</div>
+
+<div id="ftReceiverTransfer" style="display:none; margin-top:16px;">
+<h3>Receiving Files</h3>
+<div id="ftReceiverProgressList"></div>
+<div class="row" style="margin-top:10px; display:none;" id="ftDownloadAllRow"><button id="ftDownloadAllBtn">Download All</button></div>
+</div>
+</div>
+
+<h3 style="margin-top:20px;">About Peer-to-Peer Transfer</h3>
+<p class="stat" style="font-size:.82rem; line-height:1.6;">Files are transferred directly between your two devices using WebRTC \u2014 your file contents are not stored on ToolNest's servers. A small free public signaling service is used only to help the two devices find each other before the direct connection is made (this exchanges connection details only, not your files). On some strict corporate networks or firewalls, a direct connection may not be possible.</p>
+</div>
+<div class="seo-content">
+<h3>How to Use File Transfer / Quick Share</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Choose Send or Receive:</strong> Pick your role on each device.</li><li><strong>Sender — Select Files:</strong> Choose the files to send and click Create Transfer.</li><li><strong>Share the Code:</strong> Share the pairing code, link, or QR code with the other device.</li><li><strong>Receiver — Connect:</strong> Enter the code (or scan the QR) and connect.</li><li><strong>Accept &amp; Receive:</strong> Review the incoming files and accept the transfer.</li><li><strong>Download:</strong> Save each file individually, or all at once.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>A peer to peer file transfer online tool sends files directly between two devices instead of uploading to a cloud service, waiting for processing, then downloading again on the other end. This WebRTC file transfer tool connects your sender and receiver directly using your browser's built-in peer-to-peer technology, so file data travels straight from one device to the other rather than sitting on a server in between.</p>
+<h3>How It Works</h3>
+<p>This tool transfers files directly between devices using WebRTC, the peer-to-peer technology built into modern browsers, chunking each file into small pieces so even large files transfer without loading the whole thing into memory at once. A small free public signaling service is used only to help the two devices find each other and agree on how to connect — that initial handshake exchanges connection details, not your file data, which flows through the direct peer-to-peer connection once established.</p>
+<h3>Key Features</h3>
+<p>As a browser to browser file transfer tool, connecting is as simple as sharing a short pairing code, a link, or a QR code — particularly convenient for sending files from a phone to a laptop nearby. The receiving device always sees exactly what's being sent (file names and sizes) and must explicitly accept before any data transfers, so nothing arrives without confirmation. Large files are sent in small chunks with flow control to avoid overwhelming the connection, and downloaded files are never automatically opened or executed — you stay in control of what happens with them on your device.</p>
+<h3>Common Use Cases</h3>
+<p>Someone wants to move a folder of photos from their phone to their laptop without emailing them to themselves or plugging in a cable — they create a transfer on the laptop, scan the QR code with their phone, and send directly. A developer sharing a large project file with a colleague on the same call sends it directly instead of uploading to a shared drive first. Someone transferring a sensitive document to a colleague prefers a direct connection over uploading to a third-party cloud service, even temporarily.</p>
+<h3>Tips</h3>
+<p>This works most reliably when both devices have a stable internet connection; very strict corporate firewalls or certain restrictive networks can occasionally prevent a direct peer-to-peer connection from being established. For a phone-to-laptop transfer, the QR code is usually the fastest way to connect — open the sender on your laptop, scan with your phone's camera, and the connection starts automatically once both sides are ready.</p>
+<h3>Frequently Asked Questions</h3>
+<div class=faq-block><details><summary>How can I transfer files directly between two devices?</summary><p>Create a transfer on the sending device, share the pairing code, link, or QR code with the receiving device, and accept the transfer once it's reviewed on the receiving side.</p></details><details><summary>Can I send files without uploading them to cloud storage?</summary><p>Yes, files transfer directly between the two connected devices over a peer-to-peer WebRTC connection rather than being uploaded to a server.</p></details><details><summary>What is WebRTC file transfer?</summary><p>WebRTC is a browser technology that lets two devices establish a direct connection to exchange data, including files, without a server relaying the actual content.</p></details><details><summary>Can I transfer files from my phone to my laptop?</summary><p>Yes, this is one of the most common uses — create a transfer on one device and scan the QR code or enter the pairing code on the other.</p></details><details><summary>Does the receiver need to install an app?</summary><p>No, both sender and receiver just need a modern web browser — no app or account is required.</p></details><details><summary>Can I send multiple files at once?</summary><p>Yes, select as many files as needed before creating the transfer; each is sent and tracked with its own progress.</p></details><details><summary>Is peer-to-peer file transfer secure?</summary><p>WebRTC connections are designed for encrypted peer-to-peer communication; a small signaling service helps establish the connection but does not see your file contents.</p></details><details><summary>Does the file pass through a server?</summary><p>File data travels directly between the two devices once connected; only the initial connection setup uses a small signaling service, and on some restrictive networks a relay may be used to establish connectivity.</p></details><details><summary>Can I transfer large files in the browser?</summary><p>Yes, files are sent in small chunks rather than loaded entirely into memory, though very large files will naturally take longer depending on your connection speed.</p></details><details><summary>What happens if the connection is interrupted?</summary><p>The transfer stops and shows a clear message; you can start a new transfer to try again.</p></details></div>
+</div>
+<div class="seo-content"><h3>Related Digital &amp; Web Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="qr-code-generator.html">QR Code Generator</a></li>
+<li><a href="internet-speed-test.html">Internet Speed Test</a></li>
+<li><a href="dns-lookup-tool.html">DNS Lookup Tool</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"File Transfer / Quick Share","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/file-transfer-webrtc.html"},
+{"@type":"HowTo","name":"How to Transfer Files Between Two Devices","step":[
+{"@type":"HowToStep","text":"Choose Send or Receive on each device."},
+{"@type":"HowToStep","text":"Sender selects files and creates a transfer."},
+{"@type":"HowToStep","text":"Share the pairing code, link, or QR code."},
+{"@type":"HowToStep","text":"Receiver enters the code and connects."},
+{"@type":"HowToStep","text":"Review and accept the incoming transfer."},
+{"@type":"HowToStep","text":"Download the received files."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How can I transfer files directly between two devices?","acceptedAnswer":{"@type":"Answer","text":"Create a transfer, share the pairing code or QR code, and accept it on the receiving device."}},
+{"@type":"Question","name":"Can I send files without uploading them to cloud storage?","acceptedAnswer":{"@type":"Answer","text":"Yes, files transfer directly over a peer-to-peer WebRTC connection rather than being uploaded to a server."}},
+{"@type":"Question","name":"What is WebRTC file transfer?","acceptedAnswer":{"@type":"Answer","text":"A browser technology that lets two devices establish a direct connection to exchange data without a server relaying the content."}},
+{"@type":"Question","name":"Can I transfer files from my phone to my laptop?","acceptedAnswer":{"@type":"Answer","text":"Yes, scan the QR code or enter the pairing code on the other device."}},
+{"@type":"Question","name":"Does the receiver need to install an app?","acceptedAnswer":{"@type":"Answer","text":"No, just a modern web browser is required."}},
+{"@type":"Question","name":"Can I send multiple files at once?","acceptedAnswer":{"@type":"Answer","text":"Yes, select as many files as needed before creating the transfer."}},
+{"@type":"Question","name":"Is peer-to-peer file transfer secure?","acceptedAnswer":{"@type":"Answer","text":"WebRTC connections are designed for encrypted peer-to-peer communication."}},
+{"@type":"Question","name":"Does the file pass through a server?","acceptedAnswer":{"@type":"Answer","text":"File data travels directly between devices; only initial connection setup uses a small signaling service."}},
+{"@type":"Question","name":"Can I transfer large files in the browser?","acceptedAnswer":{"@type":"Answer","text":"Yes, files are sent in small chunks rather than loaded entirely into memory."}},
+{"@type":"Question","name":"What happens if the connection is interrupted?","acceptedAnswer":{"@type":"Answer","text":"The transfer stops with a clear message; start a new transfer to try again."}}
+]}
+]}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script>/* ===== File Transfer / Quick Share via WebRTC engine ===== */
+const ftEl = id => document.getElementById(id);
+
+/* ---------- browser support check ---------- */
+const ftWebRtcSupported = !!(window.RTCPeerConnection);
+if(!ftWebRtcSupported){
+  ftEl('ftBrowserWarning').style.display = 'block';
+  ftEl('ftSendModeBtn').disabled = true;
+  ftEl('ftReceiveModeBtn').disabled = true;
+}
+
+/* ---------- lazy-load PeerJS (only when the user actually starts a send/receive session) ---------- */
+function ftLoadScript(src){
+  return new Promise((resolve,reject)=>{
+    const script=document.createElement('script'); script.src=src;
+    script.onload=resolve; script.onerror=()=>reject(new Error('Could not load the peer-to-peer transfer library'));
+    document.head.appendChild(script);
+  });
+}
+let ftPeerJsLoaded = false;
+async function ftEnsurePeerJs(){
+  if(ftPeerJsLoaded && window.Peer) return;
+  await ftLoadScript('https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.2/peerjs.min.js');
+  ftPeerJsLoaded = true;
+}
+
+/* ---------- pairing code generation (verified: no ambiguous characters) ---------- */
+function ftGeneratePairingCode(){
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let part1='', part2='';
+  for(let i=0;i<3;i++) part1 += chars[Math.floor(Math.random()*chars.length)];
+  for(let i=0;i<3;i++) part2 += chars[Math.floor(Math.random()*chars.length)];
+  return part1+'-'+part2;
+}
+
+/* ---------- mode selection ---------- */
+ftEl('ftSendModeBtn').addEventListener('click', ()=>{
+  ftEl('ftLanding').style.display = 'none';
+  ftEl('ftSenderPanel').style.display = 'block';
+});
+ftEl('ftReceiveModeBtn').addEventListener('click', ()=>{
+  ftEl('ftLanding').style.display = 'none';
+  ftEl('ftReceiverPanel').style.display = 'block';
+});
+ftEl('ftBackFromSenderBtn').addEventListener('click', ()=>{ ftResetSender(); ftEl('ftSenderPanel').style.display='none'; ftEl('ftLanding').style.display='block'; });
+ftEl('ftBackFromReceiverBtn').addEventListener('click', ()=>{ ftResetReceiver(); ftEl('ftReceiverPanel').style.display='none'; ftEl('ftLanding').style.display='block'; });
+
+/* ---------- sender: file selection ---------- */
+let ftSenderFiles = []; // {id, file}
+let ftFileIdCounter = 1;
+const ftDropzone = ftEl('ftDropzone'), ftFileInput = ftEl('ftFileInput');
+function ftAddSenderFiles(fileList){
+  Array.from(fileList).forEach(file=>{
+    ftSenderFiles.push({id:'f'+(ftFileIdCounter++), file});
+  });
+  ftRenderSenderFileList();
+}
+ftFileInput.addEventListener('change', e=>{ ftAddSenderFiles(e.target.files); e.target.value=''; });
+['dragover','dragenter'].forEach(evt=>ftDropzone.addEventListener(evt,e=>{e.preventDefault();ftDropzone.classList.add('dragover');}));
+['dragleave','drop'].forEach(evt=>ftDropzone.addEventListener(evt,e=>{e.preventDefault();ftDropzone.classList.remove('dragover');}));
+ftDropzone.addEventListener('drop', e=>{ if(e.dataTransfer.files.length) ftAddSenderFiles(e.dataTransfer.files); });
+
+function ftFormatBytes(bytes){
+  if(bytes<1024) return bytes+' B';
+  if(bytes<1024*1024) return (bytes/1024).toFixed(1)+' KB';
+  if(bytes<1024*1024*1024) return (bytes/(1024*1024)).toFixed(1)+' MB';
+  return (bytes/(1024*1024*1024)).toFixed(2)+' GB';
+}
+function ftRenderSenderFileList(){
+  const list = ftEl('ftFileList');
+  list.innerHTML = '';
+  ftSenderFiles.forEach(entry=>{
+    const row = document.createElement('div');
+    row.className='row'; row.style.cssText='margin-top:6px; align-items:center;';
+    const span = document.createElement('span');
+    span.style.cssText='flex:1; font-size:.85rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;';
+    span.textContent = `${entry.file.name} (${ftFormatBytes(entry.file.size)})`;
+    const rm = document.createElement('button');
+    rm.className='fl-remove'; rm.textContent='\u2715';
+    rm.addEventListener('click', ()=>{ ftSenderFiles = ftSenderFiles.filter(e=>e.id!==entry.id); ftRenderSenderFileList(); });
+    row.appendChild(span); row.appendChild(rm);
+    list.appendChild(row);
+  });
+  const totalSize = ftSenderFiles.reduce((s,e)=>s+e.file.size,0);
+  ftEl('ftFileSummary').textContent = ftSenderFiles.length ? `${ftSenderFiles.length} file(s) \u2022 ${ftFormatBytes(totalSize)} total` : 'No files selected.';
+}
+
+/* ---------- sender: create transfer & connection handling ---------- */
+const FT_CHUNK_SIZE = 16384; // 16KB, a safe WebRTC DataChannel chunk size
+const FT_BUFFER_THRESHOLD = 1024*1024; // 1MB backpressure threshold
+
+let ftSenderPeer = null;
+let ftSenderConn = null;
+let ftSenderPairingCode = null;
+
+function ftResetSender(){
+  if(ftSenderConn){ try{ ftSenderConn.close(); }catch(e){} }
+  if(ftSenderPeer){ try{ ftSenderPeer.destroy(); }catch(e){} }
+  ftSenderPeer = null; ftSenderConn = null; ftSenderPairingCode = null;
+  ftSenderFiles = [];
+  ftRenderSenderFileList();
+  ftEl('ftSenderPairing').style.display='none';
+  ftEl('ftSenderTransfer').style.display='none';
+  ftEl('ftSenderProgressList').innerHTML='';
+}
+
+ftEl('ftCreateTransferBtn').addEventListener('click', async ()=>{
+  if(!ftSenderFiles.length) return alert('Select at least one file first.');
+  ftEl('ftCreateTransferBtn').disabled = true;
+  ftEl('ftSenderStatus').textContent = 'Setting up...';
+  try{
+    await ftEnsurePeerJs();
+    ftSenderPairingCode = ftGeneratePairingCode();
+    ftSenderPeer = new Peer(ftSenderPairingCode, { debug: 0 });
+
+    ftSenderPeer.on('open', ()=>{
+      ftEl('ftSenderPairing').style.display = 'block';
+      ftEl('ftPairingCodeDisplay').textContent = ftSenderPairingCode;
+      ftEl('ftSenderStatus').textContent = 'Waiting for another device to connect...';
+      ftRenderSenderQr();
+    });
+
+    ftSenderPeer.on('connection', (conn)=>{
+      ftSenderConn = conn;
+      ftEl('ftSenderStatus').textContent = 'Device found \u2014 connecting...';
+      conn.on('open', ()=>{
+        ftEl('ftSenderStatus').textContent = 'Connected. Sending transfer offer...';
+        const offer = { type:'transfer-offer', files: ftSenderFiles.map(e=>({fileId:e.id, name:e.file.name, size:e.file.size, mimeType:e.file.type||'application/octet-stream'})) };
+        conn.send(offer);
+      });
+      conn.on('data', (data)=>{
+        if(data && data.type==='transfer-accept'){
+          ftEl('ftSenderStatus').textContent = 'Transfer accepted \u2014 sending files...';
+          ftEl('ftSenderTransfer').style.display = 'block';
+          ftSendAllFiles(conn);
+        }else if(data && data.type==='transfer-decline'){
+          ftEl('ftSenderStatus').textContent = 'The other device declined this transfer.';
+        }else if(data && data.type==='transfer-complete'){
+          ftEl('ftSenderStatus').textContent = 'Transfer completed successfully.';
+        }
+      });
+      conn.on('close', ()=>{ ftEl('ftSenderStatus').textContent = 'The other device disconnected.'; });
+      conn.on('error', ()=>{ ftEl('ftSenderStatus').textContent = 'Connection error. Please try creating a new transfer.'; });
+    });
+
+    ftSenderPeer.on('error', (err)=>{
+      let msg = 'Connection could not be established. Please make sure both devices are online and try again.';
+      if(err && err.type==='unavailable-id') msg = 'This pairing code is already in use \u2014 please try creating the transfer again.';
+      ftEl('ftSenderStatus').textContent = msg;
+      ftEl('ftSenderPairing').style.display = 'block';
+    });
+  }catch(err){
+    ftEl('ftSenderStatus').textContent = 'Could not start peer-to-peer transfer. Please check your connection and try again.';
+    ftEl('ftSenderPairing').style.display = 'block';
+  }
+  ftEl('ftCreateTransferBtn').disabled = false;
+});
+
+/* ---------- sender: QR code for pairing (reuses the same qrcodejs library used site-wide) ---------- */
+function ftRenderSenderQr(){
+  const container = ftEl('ftQrContainer');
+  container.innerHTML = '';
+  if(typeof QRCode==='undefined') return;
+  const shareUrl = `${location.origin}${location.pathname}?join=${ftSenderPairingCode}`;
+  new QRCode(container, {text:shareUrl, width:180, height:180, correctLevel:QRCode.CorrectLevel.M});
+}
+ftEl('ftCopyCodeBtn').addEventListener('click', function(){
+  if(!ftSenderPairingCode) return;
+  const done=()=>{ const old=this.textContent; this.textContent='\u2705 Copied'; setTimeout(()=>this.textContent=old,1200); };
+  if(window.toolnestCopyText) window.toolnestCopyText(ftSenderPairingCode, done); else navigator.clipboard.writeText(ftSenderPairingCode).then(done);
+});
+ftEl('ftCopyLinkBtn').addEventListener('click', function(){
+  if(!ftSenderPairingCode) return;
+  const shareUrl = `${location.origin}${location.pathname}?join=${ftSenderPairingCode}`;
+  const done=()=>{ const old=this.textContent; this.textContent='\u2705 Copied'; setTimeout(()=>this.textContent=old,1200); };
+  if(window.toolnestCopyText) window.toolnestCopyText(shareUrl, done); else navigator.clipboard.writeText(shareUrl).then(done);
+});
+if(navigator.share){
+  ftEl('ftShareBtn').style.display = 'inline-block';
+  ftEl('ftShareBtn').addEventListener('click', async ()=>{
+    if(!ftSenderPairingCode) return;
+    const shareUrl = `${location.origin}${location.pathname}?join=${ftSenderPairingCode}`;
+    try{ await navigator.share({title:'ToolNest File Transfer', text:`Join my file transfer with code ${ftSenderPairingCode}`, url:shareUrl}); }catch(e){}
+  });
+}
+
+/* ---------- chunked file sending with backpressure (verified chunk-count math + flow control) ---------- */
+function ftRenderSenderProgressRow(fileId, name, size){
+  const row = document.createElement('div');
+  row.id = 'ftSendProgress_'+fileId;
+  row.style.cssText = 'margin-top:10px;';
+  row.innerHTML = `<p class="field-label-block">${name} (${ftFormatBytes(size)})</p><div class="progress-track"><div class="progress-fill" id="ftSendFill_${fileId}" style="width:0%;"></div></div><p class="stat" id="ftSendStatus_${fileId}" style="font-size:.78rem;">Waiting...</p>`;
+  ftEl('ftSenderProgressList').appendChild(row);
+}
+async function ftWaitForBufferLow(conn){
+  while(conn.dataChannel && conn.dataChannel.bufferedAmount > FT_BUFFER_THRESHOLD){
+    await new Promise(resolve=>setTimeout(resolve, 50));
+  }
+}
+async function ftSendSingleFile(conn, entry){
+  const file = entry.file;
+  const totalChunks = Math.ceil(file.size / FT_CHUNK_SIZE) || 1;
+  conn.send({ type:'file-start', fileId:entry.id, name:file.name, size:file.size, mimeType:file.type||'application/octet-stream', totalChunks });
+  const fillEl = ftEl('ftSendFill_'+entry.id), statusEl = ftEl('ftSendStatus_'+entry.id);
+  for(let i=0;i<totalChunks;i++){
+    if(!conn.open) throw new Error('Connection lost during transfer.');
+    const start = i*FT_CHUNK_SIZE, end = Math.min(file.size, start+FT_CHUNK_SIZE);
+    const blobSlice = file.slice(start, end);
+    const arrayBuffer = await blobSlice.arrayBuffer();
+    await ftWaitForBufferLow(conn);
+    conn.send({ type:'file-chunk', fileId:entry.id, chunkIndex:i, data:arrayBuffer });
+    const pct = Math.round(((i+1)/totalChunks)*100);
+    if(fillEl) fillEl.style.width = pct+'%';
+    if(statusEl) statusEl.textContent = `${pct}%`;
+  }
+  conn.send({ type:'file-end', fileId:entry.id });
+  if(statusEl) statusEl.textContent = 'Complete';
+}
+async function ftSendAllFiles(conn){
+  ftEl('ftSenderProgressList').innerHTML = '';
+  ftSenderFiles.forEach(e=>ftRenderSenderProgressRow(e.id, e.file.name, e.file.size));
+  try{
+    for(const entry of ftSenderFiles){
+      await ftSendSingleFile(conn, entry);
+    }
+    ftEl('ftSenderStatus').textContent = 'All files sent. Waiting for the receiver to finish downloading...';
+  }catch(err){
+    ftEl('ftSenderStatus').textContent = 'Transfer interrupted \u2014 the connection may have been lost. Please try again.';
+  }
+}
+
+/* ---------- receiver: connect ---------- */
+let ftReceiverPeer = null;
+let ftReceiverConn = null;
+let ftIncomingFilesMeta = [];
+let ftReceivingFiles = {}; // fileId -> {name, size, mimeType, totalChunks, chunks:[], receivedCount, blob}
+
+function ftResetReceiver(){
+  if(ftReceiverConn){ try{ ftReceiverConn.close(); }catch(e){} }
+  if(ftReceiverPeer){ try{ ftReceiverPeer.destroy(); }catch(e){} }
+  ftReceiverPeer=null; ftReceiverConn=null; ftIncomingFilesMeta=[]; ftReceivingFiles={};
+  ftEl('ftJoinCode').value='';
+  ftEl('ftReceiverStatus').textContent='';
+  ftEl('ftIncomingOffer').style.display='none';
+  ftEl('ftReceiverTransfer').style.display='none';
+  ftEl('ftReceiverProgressList').innerHTML='';
+  ftEl('ftDownloadAllRow').style.display='none';
+}
+
+ftEl('ftJoinBtn').addEventListener('click', async ()=>{
+  const code = ftEl('ftJoinCode').value.trim().toUpperCase();
+  if(!code) return alert('Enter the pairing code shared by the sender.');
+  ftEl('ftJoinBtn').disabled = true;
+  ftEl('ftReceiverStatus').textContent = 'Connecting...';
+  try{
+    await ftEnsurePeerJs();
+    ftReceiverPeer = new Peer({ debug: 0 });
+    ftReceiverPeer.on('open', ()=>{
+      ftReceiverConn = ftReceiverPeer.connect(code, { reliable:true });
+      ftReceiverConn.on('open', ()=>{
+        ftEl('ftReceiverStatus').textContent = 'Connected. Waiting for the sender to prepare the transfer...';
+      });
+      ftReceiverConn.on('data', (data)=>ftHandleReceiverData(data));
+      ftReceiverConn.on('close', ()=>{ ftEl('ftReceiverStatus').textContent = 'The sender disconnected.'; });
+      ftReceiverConn.on('error', ()=>{ ftEl('ftReceiverStatus').textContent = 'Connection error. Please check the code and try again.'; });
+    });
+    ftReceiverPeer.on('error', (err)=>{
+      let msg = 'Connection could not be established. Please make sure both devices are online and try again.';
+      if(err && err.type==='peer-unavailable') msg = 'No active transfer was found with that code. Double-check the code and that the sender\u2019s session is still open.';
+      ftEl('ftReceiverStatus').textContent = msg;
+    });
+  }catch(err){
+    ftEl('ftReceiverStatus').textContent = 'Could not start peer-to-peer transfer. Please check your connection and try again.';
+  }
+  ftEl('ftJoinBtn').disabled = false;
+});
+
+/* ---------- receiver: handle incoming protocol messages ---------- */
+function ftHandleReceiverData(data){
+  if(!data || !data.type) return;
+  if(data.type==='transfer-offer'){
+    ftIncomingFilesMeta = data.files;
+    ftRenderIncomingOffer();
+  }else if(data.type==='file-start'){
+    ftReceivingFiles[data.fileId] = { name:data.name, size:data.size, mimeType:data.mimeType, totalChunks:data.totalChunks, chunks:new Array(data.totalChunks), receivedCount:0 };
+    ftRenderReceiverProgressRow(data.fileId, data.name, data.size);
+  }else if(data.type==='file-chunk'){
+    const f = ftReceivingFiles[data.fileId];
+    if(!f) return;
+    f.chunks[data.chunkIndex] = data.data;
+    f.receivedCount++;
+    const pct = Math.round((f.receivedCount/f.totalChunks)*100);
+    const fillEl = ftEl('ftRecvFill_'+data.fileId), statusEl = ftEl('ftRecvStatus_'+data.fileId);
+    if(fillEl) fillEl.style.width = pct+'%';
+    if(statusEl) statusEl.textContent = pct+'%';
+  }else if(data.type==='file-end'){
+    const f = ftReceivingFiles[data.fileId];
+    if(!f) return;
+    const missingChunks = f.chunks.some(c=>c===undefined);
+    if(missingChunks){
+      const statusEl = ftEl('ftRecvStatus_'+data.fileId);
+      if(statusEl) statusEl.textContent = 'Error: some data did not arrive. Please try the transfer again.';
+      return;
+    }
+    const blob = new Blob(f.chunks, {type:f.mimeType});
+    f.blob = blob;
+    const statusEl = ftEl('ftRecvStatus_'+data.fileId);
+    if(statusEl) statusEl.textContent = 'Complete';
+    const dlBtn = ftEl('ftRecvDownload_'+data.fileId);
+    if(dlBtn) dlBtn.style.display = 'inline-block';
+    if(Object.values(ftReceivingFiles).every(rf=>rf.blob)){
+      ftEl('ftReceiverStatus').textContent = 'Transfer completed successfully.';
+      ftEl('ftDownloadAllRow').style.display = 'block';
+      if(ftReceiverConn && ftReceiverConn.open) ftReceiverConn.send({type:'transfer-complete'});
+    }
+  }
+}
+
+/* ---------- receiver: incoming offer UI ---------- */
+function ftRenderIncomingOffer(){
+  ftEl('ftIncomingOffer').style.display = 'block';
+  const list = ftEl('ftIncomingFileList');
+  list.innerHTML = '';
+  let totalSize = 0;
+  ftIncomingFilesMeta.forEach(f=>{
+    totalSize += f.size;
+    const row = document.createElement('div');
+    row.style.cssText = 'font-size:.85rem; margin-top:4px;';
+    row.textContent = `${f.name} (${ftFormatBytes(f.size)})`;
+    list.appendChild(row);
+  });
+  ftEl('ftIncomingTotal').textContent = `Total: ${ftIncomingFilesMeta.length} file(s), ${ftFormatBytes(totalSize)}`;
+  ftEl('ftReceiverStatus').textContent = 'Incoming transfer \u2014 review the files below.';
+}
+ftEl('ftAcceptBtn').addEventListener('click', ()=>{
+  if(!ftReceiverConn || !ftReceiverConn.open) return;
+  ftReceiverConn.send({type:'transfer-accept'});
+  ftEl('ftIncomingOffer').style.display = 'none';
+  ftEl('ftReceiverTransfer').style.display = 'block';
+  ftEl('ftReceiverProgressList').innerHTML = '';
+  ftEl('ftReceiverStatus').textContent = 'Receiving files...';
+});
+ftEl('ftDeclineBtn').addEventListener('click', ()=>{
+  if(!ftReceiverConn || !ftReceiverConn.open) return;
+  ftReceiverConn.send({type:'transfer-decline'});
+  ftEl('ftIncomingOffer').style.display = 'none';
+  ftEl('ftReceiverStatus').textContent = 'Transfer declined.';
+});
+
+/* ---------- receiver: progress rows + download ---------- */
+function ftRenderReceiverProgressRow(fileId, name, size){
+  const row = document.createElement('div');
+  row.style.cssText = 'margin-top:10px;';
+  row.innerHTML = `<p class="field-label-block">${name} (${ftFormatBytes(size)})</p><div class="progress-track"><div class="progress-fill" id="ftRecvFill_${fileId}" style="width:0%;"></div></div><p class="stat" id="ftRecvStatus_${fileId}" style="font-size:.78rem;">0%</p><button class="secondary" id="ftRecvDownload_${fileId}" style="display:none; margin-top:4px;">Download</button>`;
+  ftEl('ftReceiverProgressList').appendChild(row);
+  row.querySelector(`#ftRecvDownload_${fileId}`).addEventListener('click', ()=>ftDownloadReceivedFile(fileId));
+}
+function ftDownloadReceivedFile(fileId){
+  const f = ftReceivingFiles[fileId];
+  if(!f || !f.blob) return;
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(f.blob);
+  a.download = f.name; // filename used only for the browser's save dialog, not executed
+  a.click();
+}
+ftEl('ftDownloadAllBtn').addEventListener('click', ()=>{
+  Object.keys(ftReceivingFiles).forEach(fileId=>{
+    if(ftReceivingFiles[fileId].blob) ftDownloadReceivedFile(fileId);
+  });
+});
+
+/* ---------- auto-fill join code from shared link (?join=CODE) ---------- */
+(function ftCheckJoinParam(){
+  const params = new URLSearchParams(location.search);
+  const joinCode = params.get('join');
+  if(joinCode && ftWebRtcSupported){
+    ftEl('ftLanding').style.display = 'none';
+    ftEl('ftReceiverPanel').style.display = 'block';
+    ftEl('ftJoinCode').value = joinCode.toUpperCase();
+  }
+})();
+
+/* ---------- cleanup on page unload (release peer connections/resources) ---------- */
+window.addEventListener('beforeunload', ()=>{
+  if(ftSenderConn){ try{ ftSenderConn.close(); }catch(e){} }
+  if(ftSenderPeer){ try{ ftSenderPeer.destroy(); }catch(e){} }
+  if(ftReceiverConn){ try{ ftReceiverConn.close(); }catch(e){} }
+  if(ftReceiverPeer){ try{ ftReceiverPeer.destroy(); }catch(e){} }
+});
+</script><script src="script.js"></script></body></html>
