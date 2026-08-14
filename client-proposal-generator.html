@@ -1,0 +1,823 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Client Proposal & Scope of Work Generator Free | ToolNest</title><meta name="description" content="Create a professional client proposal with a clear scope of work free, PDF and DOCX export, 100% private in your browser."><link rel="canonical" href="https://toolnest.link/client-proposal-generator.html"><meta property="og:title" content="Client Proposal & Scope Generator | ToolNest"><meta property="og:description" content="Create a professional client proposal with a clear scope of work free, PDF and DOCX export."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/client-proposal-generator.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"><style>@media print{header,.search-wrap,footer,nav,.seo-content{display:none !important}}
+.pg-tpl-modern{background:#fffdf6}</style></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Client Proposal & Scope Generator</h1><p>Build a client-ready proposal with included scope, exclusions, timeline, and pricing — free, private, PDF/DOCX export.</p></header><main>
+<div class="card" id="pg2"><h2>Client Proposal &amp; Scope Generator</h2><p class="desc">Build a professional client-ready proposal with a clear Scope of Work — free, private, exportable as PDF.</p>
+
+<h3 style="margin-top:4px;">1. Business Profile</h3>
+<div class="row"><div class="field"><label class="field-label" for="pgBizName">Business / agency name</label><input type="text" id="pgBizName" placeholder="Your business name"></div><div class="field"><label class="field-label" for="pgBizContact">Contact person</label><input type="text" id="pgBizContact" placeholder="Contact person"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="pgBizEmail">Email</label><input type="text" id="pgBizEmail" placeholder="you@agency.com"></div><div class="field"><label class="field-label" for="pgBizPhone">Phone</label><input type="text" id="pgBizPhone" placeholder="Phone"></div><div class="field"><label class="field-label" for="pgBizWebsite">Website</label><input type="text" id="pgBizWebsite" placeholder="www.agency.com"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="pgLogoInput">Logo (optional)</label><input type="file" id="pgLogoInput" accept="image/*"></div><div class="field"><label class="field-label" for="pgTemplate">Template</label><select id="pgTemplate"><option value="classic">Classic</option><option value="modern">Modern</option><option value="minimal">Minimal</option><option value="corporate">Corporate</option><option value="creative">Creative</option></select></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="pgBrandColor">Brand color</label><input type="color" id="pgBrandColor" value="#1f3d2b"></div><div class="field"><label class="field-label" for="pgAccentColor">Accent color</label><input type="color" id="pgAccentColor" value="#e07a2c"></div></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="pgSaveProfileBtn">Save Business Profile</button></div>
+
+<h3>2. Client Information</h3>
+<div class="row"><div class="field"><label class="field-label" for="pgClientName">Client name</label><input type="text" id="pgClientName" placeholder="Client name"></div><div class="field"><label class="field-label" for="pgClientCompany">Client company</label><input type="text" id="pgClientCompany" placeholder="Client company"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="pgClientEmail">Client email</label><input type="text" id="pgClientEmail" placeholder="client@company.com"></div><div class="field"><label class="field-label" for="pgClientAddress">Client address (optional)</label><input type="text" id="pgClientAddress" placeholder="Optional"></div></div>
+
+<h3>3. Project Details</h3>
+<div class="row"><div class="field"><label class="field-label" for="pgProjectTitle">Project title</label><input type="text" id="pgProjectTitle" placeholder="Project title"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="pgSummary">Project summary</label><textarea id="pgSummary" placeholder="Brief project summary"></textarea></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="pgGoals">Client goals</label><textarea id="pgGoals" placeholder="What the client wants to achieve"></textarea></div><div class="field"><label class="field-label" for="pgSolution">Proposed solution</label><textarea id="pgSolution" placeholder="How you'll solve it"></textarea></div></div>
+
+<h3>4. Scope of Work (Included)</h3>
+<div id="pgScopeList"></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="pgAddScopeBtn">+ Add Scope Item</button></div>
+
+<h3>5. Out of Scope (Not Included)</h3>
+<div id="pgExclusionList"></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="pgAddExclusionBtn">+ Add Exclusion</button></div>
+
+<h3>6. Timeline</h3>
+<div class="row"><div class="field"><label class="field-label" for="pgStartDate">Start date</label><input type="date" id="pgStartDate"></div><div class="field"><label class="field-label" for="pgCompletionDate">Estimated completion</label><input type="date" id="pgCompletionDate"></div></div>
+<div id="pgMilestoneList" style="margin-top:10px;"></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="pgAddMilestoneBtn">+ Add Milestone</button></div>
+
+<h3>7. Pricing</h3>
+<div id="pgPricingList"></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="pgAddPricingBtn">+ Add Line Item</button><div class="field" style="max-width:140px;"><label class="field-label" for="pgCurrency">Currency</label><select id="pgCurrency"><option value="$">USD ($)</option><option value="Rs">PKR (Rs)</option><option value="&euro;">EUR (&euro;)</option><option value="&pound;">GBP (&pound;)</option></select></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="pgDiscountType">Discount</label><select id="pgDiscountType"><option value="none">None</option><option value="flat">Flat amount</option><option value="percent">Percentage</option></select></div><div class="field"><label class="field-label" for="pgDiscountValue">Discount value</label><input type="number" id="pgDiscountValue" value="0"></div></div>
+<div id="pgTaxList" style="margin-top:10px;"></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="pgAddTaxBtn">+ Add Tax Line</button></div>
+<p class="stat" id="pgPricingTotals" style="font-weight:600; white-space:pre-line;"></p>
+
+<h3>8. Payment Terms</h3>
+<div class="row"><div class="field"><label class="field-label" for="pgDeposit">Deposit (%)</label><input type="number" id="pgDeposit" value="0"></div><div class="field"><label class="field-label" for="pgPaymentSchedule">Payment schedule</label><input type="text" id="pgPaymentSchedule" placeholder="e.g. 50% upfront, 50% on delivery"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="pgDueDate">Payment due</label><input type="text" id="pgDueDate" placeholder="e.g. Net 15 days"></div><div class="field"><label class="field-label" for="pgPaymentMethods">Accepted methods</label><input type="text" id="pgPaymentMethods" placeholder="e.g. Bank transfer, PayPal"></div></div>
+
+<h3>9. Revisions</h3>
+<div class="row"><div class="field"><label class="field-label" for="pgRevisionsIncluded">Included revisions</label><input type="number" id="pgRevisionsIncluded" value="2"></div><div class="field"><label class="field-label" for="pgRevisionPrice">Additional revision price</label><input type="text" id="pgRevisionPrice" placeholder="e.g. $50 per round"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="pgRevisionNotes">Revision notes (optional)</label><input type="text" id="pgRevisionNotes" placeholder="Optional notes"></div></div>
+
+<h3>10. Client Responsibilities</h3>
+<div id="pgResponsibilityList"></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" id="pgAddResponsibilityBtn">+ Add Responsibility</button></div>
+
+<h3>11. Terms &amp; Notes</h3>
+<div class="row"><div class="field"><label class="field-label" for="pgTerms">Additional terms (optional)</label><textarea id="pgTerms" placeholder="Any additional terms"></textarea></div></div>
+
+<h3>12. Optional Sections</h3>
+<div class="row" style="flex-wrap:wrap;">
+<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="pgSecIntro" checked> Introduction</label>
+<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="pgSecSolution" checked> Proposed Solution</label>
+<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="pgSecScope" checked> Scope of Work</label>
+<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="pgSecExclusions" checked> Out of Scope</label>
+<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="pgSecTimeline" checked> Timeline</label>
+<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="pgSecPricing" checked> Pricing</label>
+<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="pgSecPayment" checked> Payment Terms</label>
+<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="pgSecRevisions" checked> Revisions</label>
+<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="pgSecResponsibilities" checked> Client Responsibilities</label>
+<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="pgSecTerms" checked> Terms &amp; Notes</label>
+<label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="pgSecAcceptance" checked> Acceptance Section</label>
+</div>
+
+<div class="row" style="margin-top:14px;"><button id="pgBuildBtn">Build Proposal Preview</button></div>
+<h3>13. Live Preview</h3>
+<p class="stat" id="pgPageCount" style="font-size:.8rem; color:#8a8a75;"></p>
+<div id="pgPreview" style="border:1px solid var(--line); border-radius:8px; padding:24px; background:#fff; max-height:600px; overflow-y:auto; display:none;"></div>
+
+<h3>14. Save / Load</h3>
+<div class="row" style="flex-wrap:wrap;"><button class="secondary" id="pgSaveDraftBtn">Save Draft</button><button class="secondary" id="pgLoadDraftBtn">Load Draft</button><button class="secondary" id="pgDuplicateBtn">Duplicate as New</button><button class="secondary" id="pgResetBtn">Reset</button></div>
+<p class="stat" id="pgDraftStatus" style="font-size:.8rem;"></p>
+
+<h3>15. Export</h3>
+<div class="row" style="flex-wrap:wrap;"><button id="pgDownloadPdfBtn">Download PDF</button><button class="secondary" id="pgDownloadDocxBtn">Download DOCX</button><button class="secondary" id="pgPrintBtn">Print</button><button class="secondary" data-copy="pgCopyTextHolder" data-copy-mode="text">\U0001F4CB Copy Text</button></div>
+<p class="stat" id="pgExportStatus" style="font-size:.8rem;"></p>
+<div id="pgCopyTextHolder" style="display:none;"></div>
+</div>
+<div class="seo-content">
+<h3>How to Use Client Proposal & Scope Generator</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Set Up Your Business Profile:</strong> Name, contact info, logo, template, and brand colors.</li><li><strong>Add Client &amp; Project Details:</strong> Client info, project title, goals, and your proposed solution.</li><li><strong>Build the Scope of Work:</strong> Add included items and out-of-scope exclusions.</li><li><strong>Set the Timeline &amp; Pricing:</strong> Milestones, line items, discount, and tax.</li><li><strong>Fill in Terms:</strong> Payment terms, revision policy, and client responsibilities.</li><li><strong>Toggle Optional Sections:</strong> Enable only the sections relevant to this proposal.</li><li><strong>Preview &amp; Export:</strong> Build the preview, then download as PDF or DOCX.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>A client proposal generator online tool turns scattered project details into a polished, client-ready document without starting from a blank page every time. This scope of work generator tool specifically separates what's included from what isn't, which is exactly the kind of clarity that prevents scope disputes down the line.</p>
+<h3>How It Works</h3>
+<p>This proposal and scope of work generator tool organizes your project into distinct sections — introduction, proposed solution, included scope, exclusions, timeline, pricing, payment terms, revisions, and client responsibilities — each of which can be turned on or off depending on what a given proposal actually needs. Once built, the same structured content flows into a live preview, a paginated PDF, an editable DOCX file, or a plain-text version you can paste into an email, all generated locally without ever leaving your browser.</p>
+<h3>Key Features</h3>
+<p>As a freelance proposal generator tool, the Scope of Work builder lets you add, duplicate, and remove individual line items with a title, duration, and description, while a dedicated Out of Scope section keeps exclusions just as visible as inclusions — both important for avoiding the ambiguity that leads to scope creep. Pricing supports multiple line items with quantity and rate, an optional flat or percentage discount, and any number of named tax lines, matching the same reliable calculation approach used throughout this site's other billing tools. Five templates (Classic, Modern, Minimal, Corporate, Creative) change the document's structure and hierarchy, not just its color scheme, and a saved Business Profile means your logo, contact details, and brand colors carry over to your next proposal automatically.</p>
+<h3>Common Use Cases</h3>
+<p>A freelance web designer builds a proposal for a new client, lists exact deliverables in the Scope of Work, explicitly excludes ongoing maintenance in Out of Scope, and exports a PDF that leaves no ambiguity about what's covered. An agency preparing a statement of work for a returning client loads their saved Business Profile, duplicates last quarter's proposal as a starting point, and updates the pricing and timeline for the new engagement. A consultant sending a quick proposal by email skips the PDF entirely and uses Copy Text to paste a clean, formatted summary directly into their message.</p>
+<h3>Tips</h3>
+<p>A clearly written Out of Scope section is one of the most valuable parts of a proposal — being explicit about what isn't included (like ongoing support, extra revisions, or third-party costs) protects both you and the client from misunderstandings later. Since generated content stays fully editable in each field, treat the tool as a fast starting structure rather than a finished draft — read through the built preview once before exporting to make sure the wording sounds like you.</p>
+<h3>Frequently Asked Questions</h3>
+<div class=faq-block><details><summary>How to write a scope of work that protects both parties?</summary><p>List specific, concrete deliverables in the Scope of Work section, then use the dedicated Out of Scope section to explicitly name what's excluded — ambiguity is usually where disputes start.</p></details><details><summary>What pricing model should I use in project proposals?</summary><p>This tool supports fixed fees, hourly rates, or milestone-based pricing equally well since each pricing line item just needs a description, quantity, and rate — choose whichever matches how you actually bill.</p></details><details><summary>How to estimate project timeline accurately?</summary><p>Break the project into milestones with target dates rather than a single end date, which makes delays in one phase easier to track without derailing the whole timeline.</p></details><details><summary>Should I include revisions and change requests in scope?</summary><p>Yes, the Revisions section lets you specify how many rounds are included and what additional revisions cost, which prevents unlimited free changes from eating into your margin.</p></details><details><summary>What payment terms are standard in service proposals?</summary><p>Common patterns include a deposit before starting (often 25-50%) with the remainder due on delivery or milestones — the Payment Terms section supports whichever structure fits your business.</p></details><details><summary>Can I reuse proposal templates for similar projects?</summary><p>Yes, use Duplicate as New to start a fresh proposal from your current one's content, and Save Draft to store a proposal you want to return to.</p></details><details><summary>How to handle scope creep after proposal approval?</summary><p>A detailed, signed Scope of Work with explicit exclusions is the best defense — when a client requests something not listed, it's clearly a change request rather than an included item.</p></details><details><summary>What information should I gather before writing proposal?</summary><p>Client goals, the problem you're solving, your proposed approach, concrete deliverables, a realistic timeline, and your pricing structure are the essentials this tool is built around.</p></details></div>
+</div>
+<div class="seo-content"><h3>Related Business Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="saas-runway-calculator.html">SaaS Runway &amp; Cash Burn Rate Calculator</a></li>
+<li><a href="invoice-generator.html">Invoice Generator</a></li>
+<li><a href="business-card-maker.html">Business Card Maker</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Client Proposal & Scope Generator","applicationCategory":"BusinessApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/client-proposal-generator.html"},
+{"@type":"HowTo","name":"How to Create a Client Proposal and Scope of Work","step":[
+{"@type":"HowToStep","text":"Set up your business profile."},
+{"@type":"HowToStep","text":"Add client and project details."},
+{"@type":"HowToStep","text":"Build the scope of work and exclusions."},
+{"@type":"HowToStep","text":"Set the timeline and pricing."},
+{"@type":"HowToStep","text":"Fill in payment terms and policies."},
+{"@type":"HowToStep","text":"Toggle optional sections."},
+{"@type":"HowToStep","text":"Preview and export as PDF or DOCX."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How to write a scope of work that protects both parties?","acceptedAnswer":{"@type":"Answer","text":"List specific deliverables as included, and use Out of Scope to explicitly name what's excluded."}},
+{"@type":"Question","name":"What pricing model should I use in project proposals?","acceptedAnswer":{"@type":"Answer","text":"Fixed, hourly, or milestone-based pricing all work since each line item just needs a description, quantity, and rate."}},
+{"@type":"Question","name":"How to estimate project timeline accurately?","acceptedAnswer":{"@type":"Answer","text":"Break the project into milestones with target dates rather than a single end date."}},
+{"@type":"Question","name":"Should I include revisions and change requests in scope?","acceptedAnswer":{"@type":"Answer","text":"Yes, specify included revision rounds and additional revision pricing."}},
+{"@type":"Question","name":"What payment terms are standard in service proposals?","acceptedAnswer":{"@type":"Answer","text":"A deposit before starting with the remainder on delivery or milestones is common."}},
+{"@type":"Question","name":"Can I reuse proposal templates for similar projects?","acceptedAnswer":{"@type":"Answer","text":"Yes, use Duplicate as New and Save Draft to reuse and store proposals."}},
+{"@type":"Question","name":"How to handle scope creep after proposal approval?","acceptedAnswer":{"@type":"Answer","text":"A detailed scope with explicit exclusions makes unlisted requests clearly a change request."}},
+{"@type":"Question","name":"What information should I gather before writing proposal?","acceptedAnswer":{"@type":"Answer","text":"Client goals, the problem, your approach, deliverables, timeline, and pricing."}}
+]}
+]}
+</script>
+<script>/* ===== Client Proposal & Scope Generator engine ===== */
+const pgEl = id => document.getElementById(id);
+
+/* ---------- Business Profile (save/load, reused pattern) ---------- */
+const PG_PROFILE_KEY = 'toolnest_proposal_business_profile';
+let pgLogoDataUrl = null;
+pgEl('pgLogoInput').addEventListener('change', e=>{
+  const file=e.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{ pgLogoDataUrl=reader.result; };
+  reader.readAsDataURL(file);
+});
+pgEl('pgSaveProfileBtn').addEventListener('click', ()=>{
+  const profile = {
+    name: pgEl('pgBizName').value, contact: pgEl('pgBizContact').value,
+    email: pgEl('pgBizEmail').value, phone: pgEl('pgBizPhone').value, website: pgEl('pgBizWebsite').value,
+    template: pgEl('pgTemplate').value, brandColor: pgEl('pgBrandColor').value, accentColor: pgEl('pgAccentColor').value,
+    logo: pgLogoDataUrl
+  };
+  try{
+    localStorage.setItem(PG_PROFILE_KEY, JSON.stringify(profile));
+    pgEl('pgDraftStatus').textContent = 'Business profile saved to this browser.';
+  }catch(e){}
+});
+function pgLoadProfile(){
+  let profile;
+  try{ profile = JSON.parse(localStorage.getItem(PG_PROFILE_KEY)); }catch(e){}
+  if(!profile) return;
+  pgEl('pgBizName').value = profile.name||''; pgEl('pgBizContact').value = profile.contact||'';
+  pgEl('pgBizEmail').value = profile.email||''; pgEl('pgBizPhone').value = profile.phone||''; pgEl('pgBizWebsite').value = profile.website||'';
+  pgEl('pgTemplate').value = profile.template||'classic';
+  pgEl('pgBrandColor').value = profile.brandColor||'#1f3d2b'; pgEl('pgAccentColor').value = profile.accentColor||'#e07a2c';
+  if(profile.logo) pgLogoDataUrl = profile.logo;
+}
+
+/* ---------- generic list-row builder (reused for scope/exclusions/milestones/pricing/tax/responsibilities) ---------- */
+function pgAddSimpleTextRow(containerId, className, placeholder, prefill){
+  const container = pgEl(containerId);
+  const row = document.createElement('div');
+  row.className='row'; row.style.marginTop='6px';
+  const input = document.createElement('input');
+  input.type='text'; input.className=className; input.placeholder=placeholder; input.style.flex='1';
+  if(prefill) input.value=prefill;
+  const rm = document.createElement('button');
+  rm.type='button'; rm.className='fl-remove'; rm.textContent='\u2715';
+  rm.addEventListener('click', ()=>row.remove());
+  row.appendChild(input); row.appendChild(rm);
+  container.appendChild(row);
+  return input;
+}
+pgEl('pgAddExclusionBtn').addEventListener('click', ()=>pgAddSimpleTextRow('pgExclusionList','pg-exclusion-input','e.g. Ongoing hosting/maintenance after launch'));
+pgEl('pgAddResponsibilityBtn').addEventListener('click', ()=>pgAddSimpleTextRow('pgResponsibilityList','pg-resp-input','e.g. Provide brand assets within 5 business days'));
+pgAddSimpleTextRow('pgExclusionList','pg-exclusion-input','e.g. Ongoing hosting/maintenance after launch');
+pgAddSimpleTextRow('pgResponsibilityList','pg-resp-input','e.g. Provide brand assets within 5 business days');
+
+/* ---------- Scope of Work items (title, description, quantity, notes, duration) ---------- */
+function pgAddScopeRow(prefill){
+  const container = pgEl('pgScopeList');
+  const wrap = document.createElement('div');
+  wrap.style.cssText='border:1px solid var(--line); border-radius:6px; padding:10px; margin-top:8px;';
+  wrap.innerHTML = `<div class="row"><input type="text" class="pg-scope-title" placeholder="Item title" style="flex:1;"><input type="text" class="pg-scope-duration" placeholder="Duration (e.g. 2 weeks)" style="width:150px;"></div><div class="row" style="margin-top:6px;"><input type="text" class="pg-scope-desc" placeholder="Description" style="flex:1;"></div>`;
+  const btnRow = document.createElement('div');
+  btnRow.className='row'; btnRow.style.marginTop='6px';
+  const dupBtn = document.createElement('button'); dupBtn.type='button'; dupBtn.className='secondary'; dupBtn.textContent='Duplicate'; dupBtn.style.cssText='padding:2px 10px;font-size:.78rem;';
+  const rmBtn = document.createElement('button'); rmBtn.type='button'; rmBtn.className='fl-remove'; rmBtn.textContent='\u2715';
+  dupBtn.addEventListener('click', ()=>{
+    pgAddScopeRow({
+      title: wrap.querySelector('.pg-scope-title').value, duration: wrap.querySelector('.pg-scope-duration').value,
+      desc: wrap.querySelector('.pg-scope-desc').value
+    });
+  });
+  rmBtn.addEventListener('click', ()=>wrap.remove());
+  btnRow.appendChild(dupBtn); btnRow.appendChild(rmBtn);
+  wrap.appendChild(btnRow);
+  container.appendChild(wrap);
+  if(prefill){
+    wrap.querySelector('.pg-scope-title').value = prefill.title||'';
+    wrap.querySelector('.pg-scope-duration').value = prefill.duration||'';
+    wrap.querySelector('.pg-scope-desc').value = prefill.desc||'';
+  }
+}
+pgEl('pgAddScopeBtn').addEventListener('click', ()=>pgAddScopeRow());
+pgAddScopeRow({title:'Discovery & Planning', duration:'1 week', desc:'Requirements gathering and project planning'});
+pgAddScopeRow({title:'Design & Development', duration:'3 weeks', desc:'Core implementation of agreed deliverables'});
+
+/* ---------- Milestones ---------- */
+function pgAddMilestoneRow(prefill){
+  const container = pgEl('pgMilestoneList');
+  const row = document.createElement('div');
+  row.className='row'; row.style.marginTop='6px';
+  row.innerHTML = `<input type="text" class="pg-milestone-title" placeholder="Milestone" style="flex:1;"><input type="date" class="pg-milestone-date">`;
+  const rm = document.createElement('button'); rm.type='button'; rm.className='fl-remove'; rm.textContent='\u2715';
+  rm.addEventListener('click', ()=>row.remove());
+  row.appendChild(rm);
+  container.appendChild(row);
+  if(prefill){ row.querySelector('.pg-milestone-title').value=prefill.title||''; row.querySelector('.pg-milestone-date').value=prefill.date||''; }
+}
+pgEl('pgAddMilestoneBtn').addEventListener('click', ()=>pgAddMilestoneRow());
+pgAddMilestoneRow({title:'Project kickoff'});
+
+/* ---------- Pricing line items ---------- */
+function pgAddPricingRow(prefill){
+  const row = document.createElement('div');
+  row.className='row'; row.style.marginTop='6px';
+  row.innerHTML = `<input type="text" class="pg-price-desc" placeholder="Description" style="flex:2;"><input type="number" class="pg-price-qty" placeholder="Qty" value="1" style="width:70px;"><input type="number" class="pg-price-rate" placeholder="Rate" value="0" style="width:100px;">`;
+  const rm = document.createElement('button'); rm.type='button'; rm.className='fl-remove'; rm.textContent='\u2715';
+  rm.addEventListener('click', ()=>{ row.remove(); pgCalcPricing(); });
+  row.appendChild(rm);
+  pgEl('pgPricingList').appendChild(row);
+  if(prefill){ row.querySelector('.pg-price-desc').value=prefill.desc||''; row.querySelector('.pg-price-qty').value=prefill.qty||1; row.querySelector('.pg-price-rate').value=prefill.rate||0; }
+  row.querySelectorAll('input').forEach(inp=>inp.addEventListener('input', pgCalcPricing));
+}
+pgEl('pgAddPricingBtn').addEventListener('click', ()=>pgAddPricingRow());
+pgAddPricingRow({desc:'Project fee', qty:1, rate:0});
+
+/* ---------- Tax lines ---------- */
+function pgAddTaxRow(prefill){
+  const row = document.createElement('div');
+  row.className='row'; row.style.marginTop='6px';
+  row.innerHTML = `<input type="text" class="pg-tax-label" placeholder="Tax name" style="flex:1;"><input type="number" class="pg-tax-rate" placeholder="Rate %" value="0" style="width:90px;">`;
+  const rm = document.createElement('button'); rm.type='button'; rm.className='fl-remove'; rm.textContent='\u2715';
+  rm.addEventListener('click', ()=>{ row.remove(); pgCalcPricing(); });
+  row.appendChild(rm);
+  pgEl('pgTaxList').appendChild(row);
+  if(prefill){ row.querySelector('.pg-tax-label').value=prefill.label||''; row.querySelector('.pg-tax-rate').value=prefill.rate||0; }
+  row.querySelectorAll('input').forEach(inp=>inp.addEventListener('input', pgCalcPricing));
+}
+pgEl('pgAddTaxBtn').addEventListener('click', ()=>pgAddTaxRow());
+pgAddTaxRow({label:'Tax', rate:0});
+
+/* ---------- pricing calculation (same verified subtotal->discount->tax formula as Invoice Generator) ---------- */
+let pgLastPricing = null;
+function pgCalcPricing(){
+  const descs = document.querySelectorAll('.pg-price-desc');
+  const qtys = document.querySelectorAll('.pg-price-qty');
+  const rates = document.querySelectorAll('.pg-price-rate');
+  let subtotal = 0;
+  const items = [];
+  for(let i=0;i<descs.length;i++){
+    const q = +qtys[i].value||0, r = +rates[i].value||0;
+    subtotal += q*r;
+    if(descs[i].value.trim()) items.push({desc:descs[i].value, qty:q, rate:r, amount:q*r});
+  }
+  const discountType = pgEl('pgDiscountType').value;
+  const discountValue = +pgEl('pgDiscountValue').value||0;
+  let discountAmount = 0;
+  if(discountType==='flat') discountAmount = discountValue;
+  else if(discountType==='percent') discountAmount = subtotal*(discountValue/100);
+  discountAmount = Math.min(discountAmount, subtotal);
+  const afterDiscount = subtotal-discountAmount;
+
+  const taxLabels = document.querySelectorAll('.pg-tax-label');
+  const taxRates = document.querySelectorAll('.pg-tax-rate');
+  let totalTax = 0;
+  const taxBreakdown = [];
+  for(let i=0;i<taxRates.length;i++){
+    const rate = +taxRates[i].value||0;
+    const amount = afterDiscount*(rate/100);
+    totalTax += amount;
+    if(rate>0) taxBreakdown.push({label:taxLabels[i].value||'Tax', rate, amount});
+  }
+  const total = afterDiscount+totalTax;
+  const currency = pgEl('pgCurrency').value;
+  let lines = [`Subtotal: ${currency}${subtotal.toFixed(2)}`];
+  if(discountAmount>0) lines.push(`Discount: -${currency}${discountAmount.toFixed(2)}`);
+  taxBreakdown.forEach(t=>lines.push(`${t.label} (${t.rate}%): ${currency}${t.amount.toFixed(2)}`));
+  lines.push(`Total: ${currency}${total.toFixed(2)}`);
+  pgEl('pgPricingTotals').textContent = lines.join('\n');
+  pgLastPricing = {items, subtotal, discountAmount, taxBreakdown, total, currency};
+  return pgLastPricing;
+}
+['pgDiscountType','pgDiscountValue','pgCurrency'].forEach(id=>pgEl(id).addEventListener('input', pgCalcPricing));
+pgEl('pgDiscountType').addEventListener('change', pgCalcPricing);
+pgEl('pgCurrency').addEventListener('change', pgCalcPricing);
+pgCalcPricing();
+
+/* ---------- collect all state into one structured object ---------- */
+function pgCollectData(){
+  const scopeItems = Array.from(document.querySelectorAll('#pgScopeList > div')).map(w=>({
+    title: w.querySelector('.pg-scope-title').value, duration: w.querySelector('.pg-scope-duration').value, desc: w.querySelector('.pg-scope-desc').value
+  })).filter(i=>i.title.trim());
+  const exclusions = Array.from(document.querySelectorAll('.pg-exclusion-input')).map(i=>i.value).filter(Boolean);
+  const milestones = Array.from(document.querySelectorAll('#pgMilestoneList > div')).map(w=>({
+    title: w.querySelector('.pg-milestone-title').value, date: w.querySelector('.pg-milestone-date').value
+  })).filter(m=>m.title.trim());
+  const responsibilities = Array.from(document.querySelectorAll('.pg-resp-input')).map(i=>i.value).filter(Boolean);
+  const pricing = pgCalcPricing();
+
+  return {
+    biz: { name:pgEl('pgBizName').value, contact:pgEl('pgBizContact').value, email:pgEl('pgBizEmail').value, phone:pgEl('pgBizPhone').value, website:pgEl('pgBizWebsite').value, logo:pgLogoDataUrl },
+    template: pgEl('pgTemplate').value, brandColor: pgEl('pgBrandColor').value, accentColor: pgEl('pgAccentColor').value,
+    client: { name:pgEl('pgClientName').value, company:pgEl('pgClientCompany').value, email:pgEl('pgClientEmail').value, address:pgEl('pgClientAddress').value },
+    project: { title:pgEl('pgProjectTitle').value, summary:pgEl('pgSummary').value, goals:pgEl('pgGoals').value, solution:pgEl('pgSolution').value },
+    scopeItems, exclusions,
+    timeline: { start:pgEl('pgStartDate').value, completion:pgEl('pgCompletionDate').value, milestones },
+    pricing,
+    payment: { deposit:pgEl('pgDeposit').value, schedule:pgEl('pgPaymentSchedule').value, due:pgEl('pgDueDate').value, methods:pgEl('pgPaymentMethods').value },
+    revisions: { included:pgEl('pgRevisionsIncluded').value, price:pgEl('pgRevisionPrice').value, notes:pgEl('pgRevisionNotes').value },
+    responsibilities,
+    terms: pgEl('pgTerms').value,
+    sections: {
+      intro: pgEl('pgSecIntro').checked, solution: pgEl('pgSecSolution').checked, scope: pgEl('pgSecScope').checked,
+      exclusions: pgEl('pgSecExclusions').checked, timeline: pgEl('pgSecTimeline').checked, pricing: pgEl('pgSecPricing').checked,
+      payment: pgEl('pgSecPayment').checked, revisions: pgEl('pgSecRevisions').checked, responsibilities: pgEl('pgSecResponsibilities').checked,
+      terms: pgEl('pgSecTerms').checked, acceptance: pgEl('pgSecAcceptance').checked
+    }
+  };
+}
+
+/* ---------- live HTML preview (5 templates, structural differences via CSS) ---------- */
+function pgEscapeHtml(text){
+  return (text||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function pgBuildPreviewHtml(data){
+  const t = data.template;
+  const headerStyles = {
+    classic: `text-align:center; border-bottom:3px double ${data.brandColor}; padding-bottom:16px;`,
+    modern: `background:${data.brandColor}; color:#fff; padding:20px; margin:-24px -24px 20px -24px;`,
+    minimal: `border-bottom:1px solid #ddd; padding-bottom:14px;`,
+    corporate: `border-top:4px solid ${data.brandColor}; padding-top:12px;`,
+    creative: `border-left:6px solid ${data.accentColor}; padding-left:16px;`
+  };
+  const sectionHeadColor = t==='modern' ? data.brandColor : data.brandColor;
+  let html = `<div style="font-family:Arial,sans-serif; color:#222; line-height:1.6;">`;
+  html += `<div style="${headerStyles[t]}">`;
+  if(data.biz.logo) html += `<img src="${data.biz.logo}" style="max-height:50px; margin-bottom:10px;">`;
+  html += `<h1 style="margin:0 0 4px; font-size:1.8rem;">${pgEscapeHtml(data.project.title)||'Project Proposal'}</h1>`;
+  html += `<p style="margin:0; opacity:.85;">Prepared for ${pgEscapeHtml(data.client.name)||'Client'}${data.client.company?' at '+pgEscapeHtml(data.client.company):''}</p>`;
+  html += `<p style="margin:4px 0 0; font-size:.85rem; opacity:.7;">By ${pgEscapeHtml(data.biz.name)||'Your Business'}</p>`;
+  html += `</div>`;
+
+  const sectionHead = label => `<h2 style="color:${sectionHeadColor}; font-size:1.2rem; margin:22px 0 8px; ${t==='minimal'?'border-bottom:1px solid #eee; padding-bottom:4px;':''}">${label}</h2>`;
+
+  if(data.sections.intro && (data.project.summary||data.project.goals)){
+    html += sectionHead('Introduction & Client Goals');
+    if(data.project.summary) html += `<p>${pgEscapeHtml(data.project.summary)}</p>`;
+    if(data.project.goals) html += `<p><strong>Goals:</strong> ${pgEscapeHtml(data.project.goals)}</p>`;
+  }
+  if(data.sections.solution && data.project.solution){
+    html += sectionHead('Proposed Solution');
+    html += `<p>${pgEscapeHtml(data.project.solution)}</p>`;
+  }
+  if(data.sections.scope && data.scopeItems.length){
+    html += sectionHead('Scope of Work (Included)');
+    html += '<ul>' + data.scopeItems.map(i=>`<li><strong>${pgEscapeHtml(i.title)}</strong>${i.duration?' ('+pgEscapeHtml(i.duration)+')':''}${i.desc?' \u2014 '+pgEscapeHtml(i.desc):''}</li>`).join('') + '</ul>';
+  }
+  if(data.sections.exclusions && data.exclusions.length){
+    html += sectionHead('Out of Scope (Not Included)');
+    html += '<ul>' + data.exclusions.map(e=>`<li>${pgEscapeHtml(e)}</li>`).join('') + '</ul>';
+  }
+  if(data.sections.timeline && (data.timeline.start||data.timeline.completion||data.timeline.milestones.length)){
+    html += sectionHead('Timeline');
+    if(data.timeline.start) html += `<p>Start: ${data.timeline.start}</p>`;
+    if(data.timeline.completion) html += `<p>Estimated Completion: ${data.timeline.completion}</p>`;
+    if(data.timeline.milestones.length) html += '<ul>' + data.timeline.milestones.map(m=>`<li>${pgEscapeHtml(m.title)}${m.date?' \u2014 '+m.date:''}</li>`).join('') + '</ul>';
+  }
+  if(data.sections.pricing && data.pricing.items.length){
+    html += sectionHead('Pricing');
+    html += '<table style="width:100%; border-collapse:collapse;">' + data.pricing.items.map(i=>`<tr><td style="padding:4px 0;">${pgEscapeHtml(i.desc)}</td><td style="text-align:right;">${i.qty} &times; ${data.pricing.currency}${i.rate}</td><td style="text-align:right;">${data.pricing.currency}${i.amount.toFixed(2)}</td></tr>`).join('') + '</table>';
+    html += `<p style="white-space:pre-line; margin-top:8px; font-weight:600;">${pgEl('pgPricingTotals').textContent}</p>`;
+  }
+  if(data.sections.payment && (data.payment.schedule||data.payment.due)){
+    html += sectionHead('Payment Terms');
+    if(data.payment.deposit>0) html += `<p>Deposit: ${data.payment.deposit}%</p>`;
+    if(data.payment.schedule) html += `<p>${pgEscapeHtml(data.payment.schedule)}</p>`;
+    if(data.payment.due) html += `<p>Due: ${pgEscapeHtml(data.payment.due)}</p>`;
+    if(data.payment.methods) html += `<p>Accepted methods: ${pgEscapeHtml(data.payment.methods)}</p>`;
+  }
+  if(data.sections.revisions){
+    html += sectionHead('Revision Policy');
+    html += `<p>${data.revisions.included} revision round(s) included.${data.revisions.price?' Additional revisions: '+pgEscapeHtml(data.revisions.price)+'.':''}</p>`;
+    if(data.revisions.notes) html += `<p>${pgEscapeHtml(data.revisions.notes)}</p>`;
+  }
+  if(data.sections.responsibilities && data.responsibilities.length){
+    html += sectionHead('Client Responsibilities');
+    html += '<ul>' + data.responsibilities.map(r=>`<li>${pgEscapeHtml(r)}</li>`).join('') + '</ul>';
+  }
+  if(data.sections.terms && data.terms){
+    html += sectionHead('Additional Terms');
+    html += `<p>${pgEscapeHtml(data.terms)}</p>`;
+  }
+  if(data.sections.acceptance){
+    html += sectionHead('Acceptance');
+    html += `<p>By signing below, both parties agree to the terms outlined in this proposal.</p>`;
+    html += `<div style="display:flex; gap:40px; margin-top:20px;"><div style="flex:1; border-top:1px solid #333; padding-top:6px;">Client Signature / Date</div><div style="flex:1; border-top:1px solid #333; padding-top:6px;">${pgEscapeHtml(data.biz.name)} / Date</div></div>`;
+  }
+  html += `<hr style="margin-top:24px; border:none; border-top:1px solid #eee;"><p style="font-size:.8rem; color:#888;">${pgEscapeHtml(data.biz.name)} &middot; ${pgEscapeHtml(data.biz.email)} ${data.biz.phone?'&middot; '+pgEscapeHtml(data.biz.phone):''} ${data.biz.website?'&middot; '+pgEscapeHtml(data.biz.website):''}</p>`;
+  html += `</div>`;
+  return html;
+}
+
+/* ---------- build preview + estimate page count ---------- */
+let pgLastData = null;
+function pgBuildPreview(){
+  pgLastData = pgCollectData();
+  const html = pgBuildPreviewHtml(pgLastData);
+  pgEl('pgPreview').innerHTML = html;
+  pgEl('pgPreview').style.display = 'block';
+  const wordCount = pgEl('pgPreview').textContent.split(/\s+/).filter(Boolean).length;
+  const estPages = Math.max(1, Math.ceil(wordCount/450));
+  pgEl('pgPageCount').textContent = `Approximate PDF pages: ${estPages} (${wordCount} words)`;
+  pgBuildCopyText(pgLastData);
+}
+pgEl('pgBuildBtn').addEventListener('click', pgBuildPreview);
+
+/* ---------- plain text version (for Copy Text) ---------- */
+function pgBuildCopyText(data){
+  let lines = [];
+  lines.push((data.project.title||'Project Proposal').toUpperCase());
+  lines.push(`Prepared for ${data.client.name||'Client'}${data.client.company?' at '+data.client.company:''}`);
+  lines.push(`By ${data.biz.name||'Your Business'}`);
+  lines.push('');
+  if(data.sections.intro && (data.project.summary||data.project.goals)){
+    lines.push('INTRODUCTION & CLIENT GOALS'); lines.push('-'.repeat(30));
+    if(data.project.summary) lines.push(data.project.summary);
+    if(data.project.goals) lines.push('Goals: '+data.project.goals);
+    lines.push('');
+  }
+  if(data.sections.solution && data.project.solution){
+    lines.push('PROPOSED SOLUTION'); lines.push('-'.repeat(20));
+    lines.push(data.project.solution); lines.push('');
+  }
+  if(data.sections.scope && data.scopeItems.length){
+    lines.push('SCOPE OF WORK (INCLUDED)'); lines.push('-'.repeat(26));
+    data.scopeItems.forEach(i=>lines.push(`- ${i.title}${i.duration?' ('+i.duration+')':''}${i.desc?': '+i.desc:''}`));
+    lines.push('');
+  }
+  if(data.sections.exclusions && data.exclusions.length){
+    lines.push('OUT OF SCOPE (NOT INCLUDED)'); lines.push('-'.repeat(28));
+    data.exclusions.forEach(e=>lines.push('- '+e));
+    lines.push('');
+  }
+  if(data.sections.timeline && (data.timeline.start||data.timeline.completion||data.timeline.milestones.length)){
+    lines.push('TIMELINE'); lines.push('-'.repeat(10));
+    if(data.timeline.start) lines.push('Start: '+data.timeline.start);
+    if(data.timeline.completion) lines.push('Estimated Completion: '+data.timeline.completion);
+    data.timeline.milestones.forEach(m=>lines.push(`- ${m.title}${m.date?' ('+m.date+')':''}`));
+    lines.push('');
+  }
+  if(data.sections.pricing && data.pricing.items.length){
+    lines.push('PRICING'); lines.push('-'.repeat(9));
+    data.pricing.items.forEach(i=>lines.push(`${i.desc}: ${i.qty} x ${data.pricing.currency}${i.rate} = ${data.pricing.currency}${i.amount.toFixed(2)}`));
+    lines.push(pgEl('pgPricingTotals').textContent);
+    lines.push('');
+  }
+  if(data.sections.payment && (data.payment.schedule||data.payment.due)){
+    lines.push('PAYMENT TERMS'); lines.push('-'.repeat(15));
+    if(data.payment.deposit>0) lines.push('Deposit: '+data.payment.deposit+'%');
+    if(data.payment.schedule) lines.push(data.payment.schedule);
+    if(data.payment.due) lines.push('Due: '+data.payment.due);
+    if(data.payment.methods) lines.push('Accepted methods: '+data.payment.methods);
+    lines.push('');
+  }
+  if(data.sections.revisions){
+    lines.push('REVISION POLICY'); lines.push('-'.repeat(17));
+    lines.push(`${data.revisions.included} revision round(s) included.${data.revisions.price?' Additional revisions: '+data.revisions.price+'.':''}`);
+    if(data.revisions.notes) lines.push(data.revisions.notes);
+    lines.push('');
+  }
+  if(data.sections.responsibilities && data.responsibilities.length){
+    lines.push('CLIENT RESPONSIBILITIES'); lines.push('-'.repeat(25));
+    data.responsibilities.forEach(r=>lines.push('- '+r));
+    lines.push('');
+  }
+  if(data.sections.terms && data.terms){
+    lines.push('ADDITIONAL TERMS'); lines.push('-'.repeat(18));
+    lines.push(data.terms); lines.push('');
+  }
+  if(data.sections.acceptance){
+    lines.push('ACCEPTANCE');
+    lines.push('By signing, both parties agree to the terms outlined in this proposal.');
+    lines.push('');
+  }
+  lines.push(`${data.biz.name} | ${data.biz.email} | ${data.biz.phone} | ${data.biz.website}`);
+  pgEl('pgCopyTextHolder').textContent = lines.join('\n');
+}
+document.querySelectorAll('[data-copy]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.getAttribute('data-copy'));
+    if(!target) return;
+    const text = btn.getAttribute('data-copy-mode')==='text' ? target.textContent : target.value;
+    if(!text) return alert('Build the proposal preview first.');
+    const done = ()=>{ const old=btn.textContent; btn.textContent='\u2705 Copied'; setTimeout(()=>btn.textContent=old,1200); };
+    if(window.toolnestCopyText){ window.toolnestCopyText(text, done); } else { navigator.clipboard.writeText(text).then(done); }
+  });
+});
+
+/* ---------- PDF export (paginated, pdf-lib loaded dynamically only when requested) ---------- */
+function pgLoadScript(src){
+  return new Promise((resolve,reject)=>{
+    const script=document.createElement('script'); script.src=src;
+    script.onload=resolve; script.onerror=()=>reject(new Error('Could not load a required library'));
+    document.head.appendChild(script);
+  });
+}
+async function pgEnsurePdfLib(){ if(!window.PDFLib) await pgLoadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js'); }
+
+pgEl('pgDownloadPdfBtn').addEventListener('click', async ()=>{
+  if(!pgLastData) pgBuildPreview();
+  const data = pgLastData;
+  const statusEl = pgEl('pgExportStatus');
+  statusEl.textContent = 'Loading PDF library...';
+  try{
+    await pgEnsurePdfLib();
+    const {PDFDocument, rgb} = window.PDFLib;
+    const doc = await PDFDocument.create();
+    let page = doc.addPage([612,792]);
+    let y = 750;
+    const marginL = 50, marginR = 562;
+    const brandRgb = pgHexToRgbLib(data.brandColor);
+
+    function newPageIfNeeded(minSpace){
+      if(y < minSpace){ page = doc.addPage([612,792]); y = 750; }
+    }
+    function drawWrapped(text, size, opts){
+      opts = opts||{};
+      const maxW = marginR-marginL;
+      const words = text.split(' ');
+      let line='';
+      const lineHeight = size*1.4;
+      for(const word of words){
+        const test = line?line+' '+word:word;
+        if(test.length*size*0.55 > maxW && line){
+          newPageIfNeeded(60);
+          page.drawText(line, {x:marginL, y, size, color: opts.color||rgb(0.1,0.1,0.1)});
+          y -= lineHeight;
+          line = word;
+        }else line = test;
+      }
+      if(line){ newPageIfNeeded(60); page.drawText(line, {x:marginL, y, size, color: opts.color||rgb(0.1,0.1,0.1)}); y -= lineHeight; }
+    }
+    function sectionHeading(label){
+      newPageIfNeeded(80);
+      y -= 8;
+      page.drawText(label, {x:marginL, y, size:14, color: rgb(brandRgb.r,brandRgb.g,brandRgb.b)});
+      y -= 20;
+    }
+
+    page.drawText(data.project.title||'Project Proposal', {x:marginL, y, size:20, color:rgb(brandRgb.r,brandRgb.g,brandRgb.b)}); y-=24;
+    page.drawText(`Prepared for ${data.client.name||'Client'}${data.client.company?' at '+data.client.company:''}`, {x:marginL, y, size:11}); y-=16;
+    page.drawText(`By ${data.biz.name||'Your Business'}`, {x:marginL, y, size:10, color:rgb(0.4,0.4,0.4)}); y-=26;
+
+    if(data.sections.intro && (data.project.summary||data.project.goals)){
+      sectionHeading('Introduction & Client Goals');
+      if(data.project.summary) drawWrapped(data.project.summary, 10);
+      if(data.project.goals) drawWrapped('Goals: '+data.project.goals, 10);
+      y-=10;
+    }
+    if(data.sections.solution && data.project.solution){
+      sectionHeading('Proposed Solution');
+      drawWrapped(data.project.solution, 10); y-=10;
+    }
+    if(data.sections.scope && data.scopeItems.length){
+      sectionHeading('Scope of Work (Included)');
+      data.scopeItems.forEach(i=>{ drawWrapped(`\u2022 ${i.title}${i.duration?' ('+i.duration+')':''}${i.desc?': '+i.desc:''}`, 10); });
+      y-=10;
+    }
+    if(data.sections.exclusions && data.exclusions.length){
+      sectionHeading('Out of Scope (Not Included)');
+      data.exclusions.forEach(e=>drawWrapped('\u2022 '+e, 10));
+      y-=10;
+    }
+    if(data.sections.timeline && (data.timeline.start||data.timeline.completion||data.timeline.milestones.length)){
+      sectionHeading('Timeline');
+      if(data.timeline.start) drawWrapped('Start: '+data.timeline.start, 10);
+      if(data.timeline.completion) drawWrapped('Estimated Completion: '+data.timeline.completion, 10);
+      data.timeline.milestones.forEach(m=>drawWrapped(`\u2022 ${m.title}${m.date?' ('+m.date+')':''}`, 10));
+      y-=10;
+    }
+    if(data.sections.pricing && data.pricing.items.length){
+      sectionHeading('Pricing');
+      data.pricing.items.forEach(i=>drawWrapped(`${i.desc}: ${i.qty} \u00d7 ${data.pricing.currency}${i.rate} = ${data.pricing.currency}${i.amount.toFixed(2)}`, 10));
+      pgEl('pgPricingTotals').textContent.split('\n').forEach(l=>drawWrapped(l, 10));
+      y-=10;
+    }
+    if(data.sections.payment && (data.payment.schedule||data.payment.due)){
+      sectionHeading('Payment Terms');
+      if(data.payment.deposit>0) drawWrapped('Deposit: '+data.payment.deposit+'%', 10);
+      if(data.payment.schedule) drawWrapped(data.payment.schedule, 10);
+      if(data.payment.due) drawWrapped('Due: '+data.payment.due, 10);
+      if(data.payment.methods) drawWrapped('Accepted methods: '+data.payment.methods, 10);
+      y-=10;
+    }
+    if(data.sections.revisions){
+      sectionHeading('Revision Policy');
+      drawWrapped(`${data.revisions.included} revision round(s) included.${data.revisions.price?' Additional revisions: '+data.revisions.price+'.':''}`, 10);
+      if(data.revisions.notes) drawWrapped(data.revisions.notes, 10);
+      y-=10;
+    }
+    if(data.sections.responsibilities && data.responsibilities.length){
+      sectionHeading('Client Responsibilities');
+      data.responsibilities.forEach(r=>drawWrapped('\u2022 '+r, 10));
+      y-=10;
+    }
+    if(data.sections.terms && data.terms){
+      sectionHeading('Additional Terms');
+      drawWrapped(data.terms, 10); y-=10;
+    }
+    if(data.sections.acceptance){
+      sectionHeading('Acceptance');
+      drawWrapped('By signing below, both parties agree to the terms outlined in this proposal.', 10);
+      newPageIfNeeded(80);
+      y-=20;
+      page.drawLine({start:{x:marginL,y}, end:{x:280,y}, thickness:1, color:rgb(0.2,0.2,0.2)});
+      page.drawLine({start:{x:320,y}, end:{x:marginR,y}, thickness:1, color:rgb(0.2,0.2,0.2)});
+      y-=12;
+      page.drawText('Client Signature / Date', {x:marginL, y, size:9, color:rgb(0.4,0.4,0.4)});
+      page.drawText(`${data.biz.name} / Date`, {x:320, y, size:9, color:rgb(0.4,0.4,0.4)});
+    }
+
+    const outBytes = await doc.save();
+    const blob = new Blob([outBytes], {type:'application/pdf'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=(data.project.title||'proposal').replace(/[^a-z0-9]+/gi,'-').toLowerCase()+'.pdf'; a.click();
+    statusEl.textContent = 'PDF downloaded.';
+  }catch(err){
+    statusEl.textContent = 'Could not generate the PDF. Please try again.';
+  }
+});
+function pgHexToRgbLib(hex){
+  hex=(hex||'#1f3d2b').replace('#','');
+  return {r:parseInt(hex.slice(0,2),16)/255, g:parseInt(hex.slice(2,4),16)/255, b:parseInt(hex.slice(4,6),16)/255};
+}
+
+/* ---------- Print ---------- */
+pgEl('pgPrintBtn').addEventListener('click', ()=>{
+  if(!pgLastData) pgBuildPreview();
+  window.print();
+});
+
+/* ---------- DOCX export (reuses the same verified DOCX-building approach as PDF to Word Converter) ---------- */
+function pgEscapeXml(text){
+  return (text||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+}
+function pgBuildParagraphXml(text, opts){
+  opts = opts||{};
+  const runProps = [];
+  if(opts.bold) runProps.push('<w:b/>');
+  if(opts.size) runProps.push(`<w:sz w:val="${opts.size}"/>`);
+  const rPr = runProps.length ? `<w:rPr>${runProps.join('')}</w:rPr>` : '';
+  const pPr = opts.listItem ? '<w:pPr><w:ind w:left="720"/></w:pPr>' : '';
+  return `<w:p>${pPr}<w:r>${rPr}<w:t xml:space="preserve">${pgEscapeXml(text)}</w:t></w:r></w:p>`;
+}
+async function pgEnsureJsZip(){ if(!window.JSZip) await pgLoadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'); }
+
+pgEl('pgDownloadDocxBtn').addEventListener('click', async ()=>{
+  if(!pgLastData) pgBuildPreview();
+  const data = pgLastData;
+  const statusEl = pgEl('pgExportStatus');
+  statusEl.textContent = 'Loading library...';
+  try{
+    await pgEnsureJsZip();
+    const {JSZip} = window;
+    const zip = new JSZip();
+    const contentTypesXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>';
+    const relsXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>';
+
+    let body = '';
+    body += pgBuildParagraphXml(data.project.title||'Project Proposal', {bold:true, size:36});
+    body += pgBuildParagraphXml(`Prepared for ${data.client.name||'Client'}${data.client.company?' at '+data.client.company:''}`, {});
+    body += pgBuildParagraphXml(`By ${data.biz.name||'Your Business'}`, {});
+
+    const addSection = (label, lines)=>{
+      body += pgBuildParagraphXml(label, {bold:true, size:28});
+      lines.forEach(l=>body += pgBuildParagraphXml(l, {}));
+    };
+    if(data.sections.intro && (data.project.summary||data.project.goals)){
+      const lines=[]; if(data.project.summary) lines.push(data.project.summary); if(data.project.goals) lines.push('Goals: '+data.project.goals);
+      addSection('Introduction & Client Goals', lines);
+    }
+    if(data.sections.solution && data.project.solution) addSection('Proposed Solution', [data.project.solution]);
+    if(data.sections.scope && data.scopeItems.length) addSection('Scope of Work (Included)', data.scopeItems.map(i=>`${i.title}${i.duration?' ('+i.duration+')':''}${i.desc?': '+i.desc:''}`));
+    if(data.sections.exclusions && data.exclusions.length) addSection('Out of Scope (Not Included)', data.exclusions);
+    if(data.sections.timeline && (data.timeline.start||data.timeline.completion||data.timeline.milestones.length)){
+      const lines=[]; if(data.timeline.start) lines.push('Start: '+data.timeline.start); if(data.timeline.completion) lines.push('Estimated Completion: '+data.timeline.completion);
+      data.timeline.milestones.forEach(m=>lines.push(`${m.title}${m.date?' ('+m.date+')':''}`));
+      addSection('Timeline', lines);
+    }
+    if(data.sections.pricing && data.pricing.items.length){
+      const lines = data.pricing.items.map(i=>`${i.desc}: ${i.qty} x ${data.pricing.currency}${i.rate} = ${data.pricing.currency}${i.amount.toFixed(2)}`);
+      lines.push(...pgEl('pgPricingTotals').textContent.split('\n'));
+      addSection('Pricing', lines);
+    }
+    if(data.sections.payment && (data.payment.schedule||data.payment.due)){
+      const lines=[]; if(data.payment.deposit>0) lines.push('Deposit: '+data.payment.deposit+'%');
+      if(data.payment.schedule) lines.push(data.payment.schedule); if(data.payment.due) lines.push('Due: '+data.payment.due); if(data.payment.methods) lines.push('Accepted methods: '+data.payment.methods);
+      addSection('Payment Terms', lines);
+    }
+    if(data.sections.revisions){
+      const lines=[`${data.revisions.included} revision round(s) included.${data.revisions.price?' Additional revisions: '+data.revisions.price+'.':''}`];
+      if(data.revisions.notes) lines.push(data.revisions.notes);
+      addSection('Revision Policy', lines);
+    }
+    if(data.sections.responsibilities && data.responsibilities.length) addSection('Client Responsibilities', data.responsibilities);
+    if(data.sections.terms && data.terms) addSection('Additional Terms', [data.terms]);
+    if(data.sections.acceptance) addSection('Acceptance', ['By signing below, both parties agree to the terms outlined in this proposal.']);
+
+    const documentXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${body}<w:sectPr/></w:body></w:document>`;
+    zip.file('[Content_Types].xml', contentTypesXml);
+    zip.folder('_rels').file('.rels', relsXml);
+    zip.folder('word').file('document.xml', documentXml);
+    const blob = await zip.generateAsync({type:'blob', mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=(data.project.title||'proposal').replace(/[^a-z0-9]+/gi,'-').toLowerCase()+'.docx'; a.click();
+    statusEl.textContent = 'DOCX downloaded.';
+  }catch(err){
+    statusEl.textContent = 'Could not generate the DOCX file. Please try again.';
+  }
+});
+
+/* ---------- Save / Load / Duplicate / Reset draft (localStorage) ---------- */
+const PG_DRAFT_KEY = 'toolnest_proposal_draft';
+function pgCollectFullDraft(){
+  return {
+    fields: {
+      pgBizName:pgEl('pgBizName').value, pgBizContact:pgEl('pgBizContact').value, pgBizEmail:pgEl('pgBizEmail').value, pgBizPhone:pgEl('pgBizPhone').value, pgBizWebsite:pgEl('pgBizWebsite').value,
+      pgTemplate:pgEl('pgTemplate').value, pgBrandColor:pgEl('pgBrandColor').value, pgAccentColor:pgEl('pgAccentColor').value,
+      pgClientName:pgEl('pgClientName').value, pgClientCompany:pgEl('pgClientCompany').value, pgClientEmail:pgEl('pgClientEmail').value, pgClientAddress:pgEl('pgClientAddress').value,
+      pgProjectTitle:pgEl('pgProjectTitle').value, pgSummary:pgEl('pgSummary').value, pgGoals:pgEl('pgGoals').value, pgSolution:pgEl('pgSolution').value,
+      pgStartDate:pgEl('pgStartDate').value, pgCompletionDate:pgEl('pgCompletionDate').value,
+      pgCurrency:pgEl('pgCurrency').value, pgDiscountType:pgEl('pgDiscountType').value, pgDiscountValue:pgEl('pgDiscountValue').value,
+      pgDeposit:pgEl('pgDeposit').value, pgPaymentSchedule:pgEl('pgPaymentSchedule').value, pgDueDate:pgEl('pgDueDate').value, pgPaymentMethods:pgEl('pgPaymentMethods').value,
+      pgRevisionsIncluded:pgEl('pgRevisionsIncluded').value, pgRevisionPrice:pgEl('pgRevisionPrice').value, pgRevisionNotes:pgEl('pgRevisionNotes').value,
+      pgTerms:pgEl('pgTerms').value
+    },
+    scopeItems: Array.from(document.querySelectorAll('#pgScopeList > div')).map(w=>({title:w.querySelector('.pg-scope-title').value, duration:w.querySelector('.pg-scope-duration').value, desc:w.querySelector('.pg-scope-desc').value})),
+    exclusions: Array.from(document.querySelectorAll('.pg-exclusion-input')).map(i=>i.value),
+    milestones: Array.from(document.querySelectorAll('#pgMilestoneList > div')).map(w=>({title:w.querySelector('.pg-milestone-title').value, date:w.querySelector('.pg-milestone-date').value})),
+    pricingItems: Array.from(document.querySelectorAll('#pgPricingList > div')).map(w=>({desc:w.querySelector('.pg-price-desc').value, qty:w.querySelector('.pg-price-qty').value, rate:w.querySelector('.pg-price-rate').value})),
+    taxItems: Array.from(document.querySelectorAll('#pgTaxList > div')).map(w=>({label:w.querySelector('.pg-tax-label').value, rate:w.querySelector('.pg-tax-rate').value})),
+    responsibilities: Array.from(document.querySelectorAll('.pg-resp-input')).map(i=>i.value),
+    logo: pgLogoDataUrl,
+    sections: {
+      intro:pgEl('pgSecIntro').checked, solution:pgEl('pgSecSolution').checked, scope:pgEl('pgSecScope').checked, exclusions:pgEl('pgSecExclusions').checked,
+      timeline:pgEl('pgSecTimeline').checked, pricing:pgEl('pgSecPricing').checked, payment:pgEl('pgSecPayment').checked, revisions:pgEl('pgSecRevisions').checked,
+      responsibilities:pgEl('pgSecResponsibilities').checked, terms:pgEl('pgSecTerms').checked, acceptance:pgEl('pgSecAcceptance').checked
+    }
+  };
+}
+function pgApplyDraft(draft){
+  Object.keys(draft.fields||{}).forEach(id=>{ const el=pgEl(id); if(el) el.value = draft.fields[id]; });
+  pgEl('pgScopeList').innerHTML=''; (draft.scopeItems||[]).forEach(i=>pgAddScopeRow(i));
+  pgEl('pgExclusionList').innerHTML=''; (draft.exclusions||[]).forEach(v=>pgAddSimpleTextRow('pgExclusionList','pg-exclusion-input','',v));
+  pgEl('pgMilestoneList').innerHTML=''; (draft.milestones||[]).forEach(m=>pgAddMilestoneRow(m));
+  pgEl('pgPricingList').innerHTML=''; (draft.pricingItems||[]).forEach(p=>pgAddPricingRow(p));
+  pgEl('pgTaxList').innerHTML=''; (draft.taxItems||[]).forEach(t=>pgAddTaxRow(t));
+  pgEl('pgResponsibilityList').innerHTML=''; (draft.responsibilities||[]).forEach(v=>pgAddSimpleTextRow('pgResponsibilityList','pg-resp-input','',v));
+  if(draft.logo) pgLogoDataUrl = draft.logo;
+  Object.keys(draft.sections||{}).forEach(key=>{
+    const idMap = {intro:'pgSecIntro',solution:'pgSecSolution',scope:'pgSecScope',exclusions:'pgSecExclusions',timeline:'pgSecTimeline',pricing:'pgSecPricing',payment:'pgSecPayment',revisions:'pgSecRevisions',responsibilities:'pgSecResponsibilities',terms:'pgSecTerms',acceptance:'pgSecAcceptance'};
+    const el = pgEl(idMap[key]); if(el) el.checked = draft.sections[key];
+  });
+  pgCalcPricing();
+}
+pgEl('pgSaveDraftBtn').addEventListener('click', ()=>{
+  try{
+    localStorage.setItem(PG_DRAFT_KEY, JSON.stringify(pgCollectFullDraft()));
+    pgEl('pgDraftStatus').textContent = 'Draft saved to this browser.';
+  }catch(e){
+    pgEl('pgDraftStatus').textContent = 'Could not save (storage may be full or blocked).';
+  }
+});
+pgEl('pgLoadDraftBtn').addEventListener('click', ()=>{
+  let draft;
+  try{ draft = JSON.parse(localStorage.getItem(PG_DRAFT_KEY)); }catch(e){}
+  if(!draft) return pgEl('pgDraftStatus').textContent = 'No saved draft found on this browser.';
+  pgApplyDraft(draft);
+  pgEl('pgDraftStatus').textContent = 'Draft loaded.';
+});
+pgEl('pgDuplicateBtn').addEventListener('click', ()=>{
+  const draft = pgCollectFullDraft();
+  draft.fields.pgProjectTitle = (draft.fields.pgProjectTitle||'Proposal') + ' (Copy)';
+  pgApplyDraft(draft);
+  pgEl('pgDraftStatus').textContent = 'Duplicated as a new proposal \u2014 remember to Save Draft if you want to keep it.';
+});
+pgEl('pgResetBtn').addEventListener('click', ()=>{
+  if(!confirm('Reset the whole proposal? Unsaved changes will be lost.')) return;
+  ['pgClientName','pgClientCompany','pgClientEmail','pgClientAddress','pgProjectTitle','pgSummary','pgGoals','pgSolution','pgStartDate','pgCompletionDate','pgPaymentSchedule','pgDueDate','pgPaymentMethods','pgRevisionPrice','pgRevisionNotes','pgTerms'].forEach(id=>pgEl(id).value='');
+  pgEl('pgDeposit').value=0; pgEl('pgRevisionsIncluded').value=2;
+  pgEl('pgDiscountType').value='none'; pgEl('pgDiscountValue').value=0;
+  pgEl('pgScopeList').innerHTML=''; pgAddScopeRow({title:'Discovery & Planning', duration:'1 week', desc:'Requirements gathering and project planning'});
+  pgEl('pgExclusionList').innerHTML=''; pgAddSimpleTextRow('pgExclusionList','pg-exclusion-input','e.g. Ongoing hosting/maintenance after launch');
+  pgEl('pgMilestoneList').innerHTML=''; pgAddMilestoneRow({title:'Project kickoff'});
+  pgEl('pgPricingList').innerHTML=''; pgAddPricingRow({desc:'Project fee', qty:1, rate:0});
+  pgEl('pgTaxList').innerHTML=''; pgAddTaxRow({label:'Tax', rate:0});
+  pgEl('pgResponsibilityList').innerHTML=''; pgAddSimpleTextRow('pgResponsibilityList','pg-resp-input','e.g. Provide brand assets within 5 business days');
+  pgEl('pgPreview').style.display='none'; pgEl('pgPreview').innerHTML='';
+  pgEl('pgPageCount').textContent=''; pgEl('pgDraftStatus').textContent=''; pgEl('pgExportStatus').textContent='';
+  pgLastData = null;
+  pgCalcPricing();
+});
+
+/* ---------- init ---------- */
+pgLoadProfile();
+</script><script src="script.js"></script></body></html>
