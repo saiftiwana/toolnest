@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>WhatsApp Direct Chat Without Saving Number | ToolNest</title><meta name="description" content="Start a WhatsApp chat without saving a contact. Enter a number, add an optional pre-filled message, and open the chat instantly, free and private."><link rel="canonical" href="https://toolnest.link/whatsapp-direct-chat.html"><meta property="og:title" content="WhatsApp Direct Chat | ToolNest"><meta property="og:description" content="Start a WhatsApp chat without saving a contact, free and private."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/whatsapp-direct-chat.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>WhatsApp Direct Chat Without Saving Number</h1><p>Start a WhatsApp conversation without saving the number to your contacts — free, private, no account required.</p></header><main>
+<div class="card" id="wa"><h2>WhatsApp Direct Chat</h2><p class="desc">Start a WhatsApp conversation without saving the number to your contacts — free, private.</p>
+
+<h3 style="margin-top:4px;">1. Phone Number</h3>
+<div class="row"><div class="field"><label class="field-label" for="waCountry">Country</label><select id="waCountry"></select></div><div class="field"><label class="field-label" for="waNumber">WhatsApp phone number</label><input type="text" id="waNumber" placeholder="e.g. 03001234567"></div></div>
+<p class="stat" id="waNumberPreview" style="font-size:.8rem; color:#8a8a75;"></p>
+
+<h3>2. Message (optional)</h3>
+<div class="row"><div class="field"><label class="field-label" for="waTemplate">Message template</label><select id="waTemplate"><option value="">Custom (write your own)</option><optgroup label="Sales"><option value="Hi, I'm interested in your {{product}}. Could you share more details and pricing?">Product inquiry</option><option value="Hello, could you share the price for {{product}}?">Price request</option><option value="Hi, is {{product}} currently available?">Availability request</option></optgroup><optgroup label="Customer Support"><option value="Hello, I need help regarding {{service}}.">Support request</option><option value="Hi, I'd like to follow up on my previous message about {{service}}.">Follow-up</option></optgroup><optgroup label="Services"><option value="Hi, I'd like to book an appointment for {{service}}.">Appointment request</option><option value="Hello, could I get a quote for {{service}}?">Quote request</option></optgroup><optgroup label="Real Estate"><option value="Hi, I'm interested in the property: {{product}}. Could you share more details?">Property inquiry</option><option value="Hello, could I schedule a site visit for {{product}}?">Site visit request</option></optgroup><optgroup label="Freelancers/Agencies"><option value="Hi, I'd like to discuss a project: {{product}}.">Project inquiry</option><option value="Hello, could you share a quote for {{service}}?">Website/design quote</option></optgroup></select></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="waVarProduct">Product / Project name (optional)</label><input type="text" id="waVarProduct" placeholder="e.g. Website Redesign"></div><div class="field"><label class="field-label" for="waVarService">Service name (optional)</label><input type="text" id="waVarService" placeholder="e.g. Web Development"></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="waMessage">Message text</label><textarea id="waMessage" placeholder="Hello, I would like to know more about your services."></textarea></div></div>
+<p class="stat" id="waCharCount" style="font-size:.78rem; color:#8a8a75;"></p>
+<div class="row" style="margin-top:8px; flex-wrap:wrap;"><button class="secondary" data-quick="Hello">Hello</button><button class="secondary" data-quick="I need more information">More info</button><button class="secondary" data-quick="What is the price?">Price?</button><button class="secondary" data-quick="Is this available?">Available?</button><button class="secondary" data-quick="I want to place an order">Place order</button><button class="secondary" data-quick="I want to book an appointment">Book appointment</button></div>
+
+<h3>3. Business Mode (optional)</h3>
+<div class="row"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="waBusinessMode"> Enable Business Mode</label></div>
+<div id="waBusinessFields" style="display:none; margin-top:10px;"><div class="row"><div class="field"><label class="field-label" for="waBizName">Company name</label><input type="text" id="waBizName" placeholder="Your company"></div><div class="field"><label class="field-label" for="waBizGreeting">Default greeting</label><input type="text" id="waBizGreeting" placeholder="e.g. Thank you for contacting us!"></div></div></div>
+
+<div class="row" style="margin-top:14px;"><button id="waOpenBtn">Open WhatsApp Chat</button><button class="secondary" id="waCopyLinkBtn">\U0001F4CB Copy Chat Link</button><button class="secondary" id="waShareBtn" style="display:none;">Share</button><button class="secondary" id="waResetBtn">Reset</button></div>
+
+<h3>4. Generated Chat Link</h3>
+<input type="text" id="waGeneratedLink" readonly style="width:100%; margin-top:6px;">
+<div class="row" style="margin-top:8px;"><button class="secondary" data-copy="waNumberDisplay" data-copy-mode="text">\U0001F4CB Copy Number</button><button class="secondary" data-copy="waMessage" data-copy-mode="value">\U0001F4CB Copy Message</button></div>
+<p class="stat" id="waNumberDisplay" style="display:none;"></p>
+
+<h3>5. QR Code (optional)</h3>
+<div class="row"><button class="secondary" id="waGenQrBtn">Generate QR Code</button><button class="secondary" id="waDownloadQrBtn" style="display:none;">Download PNG</button></div>
+<div id="waQrResult" style="margin-top:10px;"></div>
+</div>
+<div class="seo-content">
+<h3>How to Use WhatsApp Direct Chat</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Select a Country:</strong> Choose the country calling code for the number.</li><li><strong>Enter the Number:</strong> Type the WhatsApp number, with or without the country code.</li><li><strong>Add a Message (Optional):</strong> Pick a template, use a quick message, or write your own.</li><li><strong>Generate:</strong> Click Open WhatsApp Chat, or Copy Chat Link to share it elsewhere.</li><li><strong>Optional QR Code:</strong> Generate a scannable code for print materials or in-person use.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>A WhatsApp chat without saving number tool solves a specific everyday problem: messaging someone on WhatsApp without permanently adding them to your phone's contact list. This WhatsApp direct message link generator builds a standard wa.me link from a phone number and an optional pre-filled message, then opens WhatsApp directly — no contact saved, no account required.</p>
+<h3>How It Works</h3>
+<p>This WhatsApp link generator with prefilled message tool normalizes whatever format you type a number in — with or without a leading zero, with or without the country code already included — into the correct international format WhatsApp expects, then builds a standard click-to-chat URL. Selecting a country sets the calling code automatically, and any message you add is properly encoded so Urdu, Arabic, other Unicode scripts, and emoji all come through correctly when WhatsApp opens.</p>
+<h3>Key Features</h3>
+<p>As a WhatsApp chat link generator for business tool, message templates cover common categories — Sales, Customer Support, Services, Real Estate, and Freelancers/Agencies — each with simple {{product}} and {{service}} placeholders that fill in automatically from two optional fields. Business Mode adds a company name and default greeting for repeat use, quick message buttons cover the most common one-line messages, and an optional QR code turns the chat link into something that can be printed on a business card, poster, or counter display. The tool never sends anything automatically — it only prepares the chat and message, opening WhatsApp so you stay in control of hitting send.</p>
+<h3>Common Use Cases</h3>
+<p>A small business owner adds a WhatsApp chat button to their website using a generated link, so customers can start a conversation without needing to save the business's number first. A real estate agent shares a QR code on a property listing sign, prefilled with an inquiry message about that specific property, so interested buyers can scan and message instantly. A freelancer sends a client a customized chat link with a project inquiry template already filled in with the project name, saving the client from typing an opening message themselves.</p>
+<h3>Tips</h3>
+<p>Even without a country's calling code memorized, typing a number in a familiar local format (like a leading 0) and selecting the country from the list produces a correctly formatted international number automatically. For business cards or printed materials, the QR code option turns your WhatsApp link into something people can act on with their phone camera instead of typing a number in — useful anywhere a clickable link isn't practical.</p>
+<h3>Frequently Asked Questions</h3>
+<div class=faq-block><details><summary>How can I WhatsApp someone without saving their number?</summary><p>Select their country, enter the number, and click Open WhatsApp Chat — the conversation opens directly without adding the number to your contacts.</p></details><details><summary>Can I send a WhatsApp message without saving a contact?</summary><p>The tool prepares a chat with an optional pre-filled message and opens WhatsApp for you to send — no contact is saved and no message is sent automatically.</p></details><details><summary>How do I create a WhatsApp direct chat link?</summary><p>Enter a country and phone number, optionally add a message, then use Copy Chat Link to get a shareable wa.me link.</p></details><details><summary>Can I add a pre-filled WhatsApp message?</summary><p>Yes, write your own message, choose a template, or use a quick message button — it will appear pre-filled in WhatsApp, ready to review before sending.</p></details><details><summary>Does the other person need to save my number?</summary><p>No, WhatsApp's click-to-chat links work in both directions without either party needing to save the other's number.</p></details><details><summary>Can I use WhatsApp direct chat on desktop?</summary><p>Yes, the generated link opens WhatsApp Web or the desktop app depending on your device and how WhatsApp is set up.</p></details><details><summary>Is my phone number stored by this tool?</summary><p>No, phone numbers and messages are used only to build the chat link in your browser and are never stored or sent to a server.</p></details><details><summary>Can I generate a QR code for my WhatsApp chat link?</summary><p>Yes, the optional QR code section turns your generated chat link into a scannable code you can download as a PNG.</p></details></div>
+</div>
+<div class="seo-content"><h3>Related Business Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="qr-code-generator.html">QR Code Generator</a></li>
+<li><a href="invoice-generator.html">Invoice Generator</a></li>
+<li><a href="client-proposal-generator.html">Client Proposal &amp; Scope Generator</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"WhatsApp Direct Chat","applicationCategory":"BusinessApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/whatsapp-direct-chat.html"},
+{"@type":"HowTo","name":"How to Start a WhatsApp Chat Without Saving a Number","step":[
+{"@type":"HowToStep","text":"Select the country."},
+{"@type":"HowToStep","text":"Enter the WhatsApp number."},
+{"@type":"HowToStep","text":"Optionally add a pre-filled message."},
+{"@type":"HowToStep","text":"Open WhatsApp or copy the chat link."},
+{"@type":"HowToStep","text":"Optionally generate a QR code."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How can I WhatsApp someone without saving their number?","acceptedAnswer":{"@type":"Answer","text":"Select their country, enter the number, and click Open WhatsApp Chat."}},
+{"@type":"Question","name":"Can I send a WhatsApp message without saving a contact?","acceptedAnswer":{"@type":"Answer","text":"The tool prepares a chat with an optional message and opens WhatsApp; no contact is saved and nothing sends automatically."}},
+{"@type":"Question","name":"How do I create a WhatsApp direct chat link?","acceptedAnswer":{"@type":"Answer","text":"Enter a country and number, optionally add a message, then use Copy Chat Link."}},
+{"@type":"Question","name":"Can I add a pre-filled WhatsApp message?","acceptedAnswer":{"@type":"Answer","text":"Yes, it appears pre-filled in WhatsApp, ready to review before sending."}},
+{"@type":"Question","name":"Does the other person need to save my number?","acceptedAnswer":{"@type":"Answer","text":"No, WhatsApp click-to-chat links work without either party saving the other's number."}},
+{"@type":"Question","name":"Can I use WhatsApp direct chat on desktop?","acceptedAnswer":{"@type":"Answer","text":"Yes, the link opens WhatsApp Web or the desktop app depending on your setup."}},
+{"@type":"Question","name":"Is my phone number stored by this tool?","acceptedAnswer":{"@type":"Answer","text":"No, numbers and messages are used only in your browser and never stored or sent to a server."}},
+{"@type":"Question","name":"Can I generate a QR code for my WhatsApp chat link?","acceptedAnswer":{"@type":"Answer","text":"Yes, an optional QR code can be generated and downloaded as PNG."}}
+]}
+]}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script>/* ===== WhatsApp Direct Chat engine ===== */
+const waEl = id => document.getElementById(id);
+
+/* ---------- country list (name, calling code, flag emoji) ---------- */
+const WA_COUNTRIES = [
+  {name:'Pakistan', code:'92', flag:'\u{1F1F5}\u{1F1F0}'},
+  {name:'India', code:'91', flag:'\u{1F1EE}\u{1F1F3}'},
+  {name:'United States', code:'1', flag:'\u{1F1FA}\u{1F1F8}'},
+  {name:'United Kingdom', code:'44', flag:'\u{1F1EC}\u{1F1E7}'},
+  {name:'Canada', code:'1', flag:'\u{1F1E8}\u{1F1E6}'},
+  {name:'Australia', code:'61', flag:'\u{1F1E6}\u{1F1FA}'},
+  {name:'United Arab Emirates', code:'971', flag:'\u{1F1E6}\u{1F1EA}'},
+  {name:'Saudi Arabia', code:'966', flag:'\u{1F1F8}\u{1F1E6}'},
+  {name:'Qatar', code:'974', flag:'\u{1F1F6}\u{1F1E6}'},
+  {name:'Kuwait', code:'965', flag:'\u{1F1F0}\u{1F1FC}'},
+  {name:'Bahrain', code:'973', flag:'\u{1F1E7}\u{1F1ED}'},
+  {name:'Oman', code:'968', flag:'\u{1F1F4}\u{1F1F2}'},
+  {name:'Bangladesh', code:'880', flag:'\u{1F1E7}\u{1F1E9}'},
+  {name:'Sri Lanka', code:'94', flag:'\u{1F1F1}\u{1F1F0}'},
+  {name:'Nepal', code:'977', flag:'\u{1F1F3}\u{1F1F5}'},
+  {name:'China', code:'86', flag:'\u{1F1E8}\u{1F1F3}'},
+  {name:'Japan', code:'81', flag:'\u{1F1EF}\u{1F1F5}'},
+  {name:'South Korea', code:'82', flag:'\u{1F1F0}\u{1F1F7}'},
+  {name:'Singapore', code:'65', flag:'\u{1F1F8}\u{1F1EC}'},
+  {name:'Malaysia', code:'60', flag:'\u{1F1F2}\u{1F1FE}'},
+  {name:'Indonesia', code:'62', flag:'\u{1F1EE}\u{1F1E9}'},
+  {name:'Thailand', code:'66', flag:'\u{1F1F9}\u{1F1ED}'},
+  {name:'Philippines', code:'63', flag:'\u{1F1F5}\u{1F1ED}'},
+  {name:'Vietnam', code:'84', flag:'\u{1F1FB}\u{1F1F3}'},
+  {name:'Turkey', code:'90', flag:'\u{1F1F9}\u{1F1F7}'},
+  {name:'Germany', code:'49', flag:'\u{1F1E9}\u{1F1EA}'},
+  {name:'France', code:'33', flag:'\u{1F1EB}\u{1F1F7}'},
+  {name:'Italy', code:'39', flag:'\u{1F1EE}\u{1F1F9}'},
+  {name:'Spain', code:'34', flag:'\u{1F1EA}\u{1F1F8}'},
+  {name:'Portugal', code:'351', flag:'\u{1F1F5}\u{1F1F9}'},
+  {name:'Netherlands', code:'31', flag:'\u{1F1F3}\u{1F1F1}'},
+  {name:'Belgium', code:'32', flag:'\u{1F1E7}\u{1F1EA}'},
+  {name:'Switzerland', code:'41', flag:'\u{1F1E8}\u{1F1ED}'},
+  {name:'Sweden', code:'46', flag:'\u{1F1F8}\u{1F1EA}'},
+  {name:'Norway', code:'47', flag:'\u{1F1F3}\u{1F1F4}'},
+  {name:'Denmark', code:'45', flag:'\u{1F1E9}\u{1F1F0}'},
+  {name:'Finland', code:'358', flag:'\u{1F1EB}\u{1F1EE}'},
+  {name:'Poland', code:'48', flag:'\u{1F1F5}\u{1F1F1}'},
+  {name:'Russia', code:'7', flag:'\u{1F1F7}\u{1F1FA}'},
+  {name:'Ireland', code:'353', flag:'\u{1F1EE}\u{1F1EA}'},
+  {name:'Greece', code:'30', flag:'\u{1F1EC}\u{1F1F7}'},
+  {name:'Austria', code:'43', flag:'\u{1F1E6}\u{1F1F9}'},
+  {name:'Egypt', code:'20', flag:'\u{1F1EA}\u{1F1EC}'},
+  {name:'South Africa', code:'27', flag:'\u{1F1FF}\u{1F1E6}'},
+  {name:'Nigeria', code:'234', flag:'\u{1F1F3}\u{1F1EC}'},
+  {name:'Kenya', code:'254', flag:'\u{1F1F0}\u{1F1EA}'},
+  {name:'Morocco', code:'212', flag:'\u{1F1F2}\u{1F1E6}'},
+  {name:'Brazil', code:'55', flag:'\u{1F1E7}\u{1F1F7}'},
+  {name:'Mexico', code:'52', flag:'\u{1F1F2}\u{1F1FD}'},
+  {name:'Argentina', code:'54', flag:'\u{1F1E6}\u{1F1F7}'},
+  {name:'Colombia', code:'57', flag:'\u{1F1E8}\u{1F1F4}'},
+  {name:'Chile', code:'56', flag:'\u{1F1E8}\u{1F1F1}'},
+  {name:'New Zealand', code:'64', flag:'\u{1F1F3}\u{1F1FF}'},
+  {name:'Afghanistan', code:'93', flag:'\u{1F1E6}\u{1F1EB}'},
+  {name:'Iran', code:'98', flag:'\u{1F1EE}\u{1F1F7}'},
+  {name:'Iraq', code:'964', flag:'\u{1F1EE}\u{1F1F6}'},
+  {name:'Jordan', code:'962', flag:'\u{1F1EF}\u{1F1F4}'},
+  {name:'Lebanon', code:'961', flag:'\u{1F1F1}\u{1F1E7}'},
+  {name:'Israel', code:'972', flag:'\u{1F1EE}\u{1F1F1}'}
+];
+
+/* ---------- populate country select ---------- */
+function waPopulateCountries(){
+  const sel = waEl('waCountry');
+  sel.innerHTML = '';
+  WA_COUNTRIES.forEach(c=>{
+    const opt = document.createElement('option');
+    opt.value = c.code;
+    opt.textContent = `${c.flag} ${c.name} (+${c.code})`;
+    sel.appendChild(opt);
+  });
+  sel.value = '92'; // default Pakistan
+}
+waPopulateCountries();
+
+/* ---------- verified phone normalization ---------- */
+function waNormalizePhone(countryCode, rawNumber){
+  let num = (rawNumber||'').replace(/[^\d]/g,'');
+  if(num.startsWith('0')) num = num.substring(1);
+  const ccDigits = countryCode.replace('+','');
+  if(num.startsWith(ccDigits)) num = num.substring(ccDigits.length);
+  return ccDigits + num;
+}
+
+/* ---------- template + variable substitution (verified logic) ---------- */
+function waApplyVariables(template, vars){
+  return template.replace(/\{\{(\w+)\}\}/g, (match,key)=> vars[key]!==undefined && vars[key]!=='' ? vars[key] : match);
+}
+waEl('waTemplate').addEventListener('change', function(){
+  if(this.value){
+    const vars = { product: waEl('waVarProduct').value, service: waEl('waVarService').value };
+    waEl('waMessage').value = waApplyVariables(this.value, vars);
+    waUpdateCharCount();
+  }
+});
+['waVarProduct','waVarService'].forEach(id=>waEl(id).addEventListener('input', ()=>{
+  const tplVal = waEl('waTemplate').value;
+  if(tplVal){
+    const vars = { product: waEl('waVarProduct').value, service: waEl('waVarService').value };
+    waEl('waMessage').value = waApplyVariables(tplVal, vars);
+    waUpdateCharCount();
+  }
+}));
+
+/* ---------- quick message buttons ---------- */
+document.querySelectorAll('[data-quick]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    waEl('waMessage').value = btn.dataset.quick;
+    waEl('waTemplate').value = '';
+    waUpdateCharCount();
+  });
+});
+
+/* ---------- character count ---------- */
+function waUpdateCharCount(){
+  const len = waEl('waMessage').value.length;
+  waEl('waCharCount').textContent = len ? `${len} character(s)` : 'Optional \u2014 you can leave this field empty.';
+}
+waEl('waMessage').addEventListener('input', waUpdateCharCount);
+waUpdateCharCount();
+
+/* ---------- Business Mode ---------- */
+waEl('waBusinessMode').addEventListener('change', function(){
+  waEl('waBusinessFields').style.display = this.checked ? 'block' : 'none';
+  if(this.checked && waEl('waBizGreeting').value && !waEl('waMessage').value){
+    waEl('waMessage').value = waEl('waBizGreeting').value;
+    waUpdateCharCount();
+  }
+});
+waEl('waBizGreeting').addEventListener('input', function(){
+  if(waEl('waBusinessMode').checked) { waEl('waMessage').value = this.value; waUpdateCharCount(); }
+});
+
+/* ---------- build chat URL ---------- */
+function waBuildChatUrl(){
+  const countryCode = waEl('waCountry').value;
+  const rawNumber = waEl('waNumber').value.trim();
+  if(!rawNumber) return {error:'Please enter a WhatsApp phone number.'};
+  const fullNumber = waNormalizePhone(countryCode, rawNumber);
+  if(fullNumber.length < 8 || fullNumber.length > 15) return {error:'Please enter a valid phone number with the correct country code.'};
+  const message = waEl('waMessage').value.trim();
+  const base = `https://wa.me/${fullNumber}`;
+  const url = message ? `${base}?text=${encodeURIComponent(message)}` : base;
+  return {url, fullNumber, message};
+}
+waEl('waNumber').addEventListener('input', ()=>{
+  const result = waBuildChatUrl();
+  waEl('waNumberPreview').textContent = result.error ? '' : `Will message: +${result.fullNumber}`;
+});
+
+/* ---------- Open WhatsApp / Copy Link ---------- */
+waEl('waOpenBtn').addEventListener('click', ()=>{
+  const result = waBuildChatUrl();
+  if(result.error) return alert(result.error);
+  waEl('waGeneratedLink').value = result.url;
+  waEl('waNumberDisplay').textContent = '+'+result.fullNumber;
+  waEl('waShareBtn').style.display = navigator.share ? 'inline-block' : 'none';
+  window.open(result.url, '_blank');
+});
+waEl('waCopyLinkBtn').addEventListener('click', ()=>{
+  const result = waBuildChatUrl();
+  if(result.error) return alert(result.error);
+  waEl('waGeneratedLink').value = result.url;
+  waEl('waNumberDisplay').textContent = '+'+result.fullNumber;
+  const btn = waEl('waCopyLinkBtn');
+  const done = ()=>{ const old=btn.textContent; btn.textContent='\u2705 Copied'; setTimeout(()=>btn.textContent=old,1200); };
+  if(window.toolnestCopyText) window.toolnestCopyText(result.url, done); else navigator.clipboard.writeText(result.url).then(done);
+});
+
+/* ---------- Copy Number / Message (generic handler) ---------- */
+document.querySelectorAll('[data-copy]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.getAttribute('data-copy'));
+    if(!target) return;
+    const text = btn.getAttribute('data-copy-mode')==='text' ? target.textContent : target.value;
+    if(!text) return alert('Generate the chat link first.');
+    const done = ()=>{ const old=btn.textContent; btn.textContent='\u2705 Copied'; setTimeout(()=>btn.textContent=old,1200); };
+    if(window.toolnestCopyText){ window.toolnestCopyText(text, done); } else { navigator.clipboard.writeText(text).then(done); }
+  });
+});
+
+/* ---------- Share (Web Share API, gracefully hidden if unsupported) ---------- */
+waEl('waShareBtn').addEventListener('click', async ()=>{
+  const result = waBuildChatUrl();
+  if(result.error) return alert(result.error);
+  try{
+    await navigator.share({title:'WhatsApp Chat', url: result.url});
+  }catch(e){}
+});
+if(!navigator.share) waEl('waShareBtn').style.display = 'none';
+
+/* ---------- QR code (reuses the same qrcodejs library used site-wide) ---------- */
+waEl('waGenQrBtn').addEventListener('click', ()=>{
+  const result = waBuildChatUrl();
+  if(result.error) return alert(result.error);
+  const container = waEl('waQrResult');
+  container.innerHTML = '';
+  if(typeof QRCode === 'undefined') return alert('QR library still loading, please try again in a moment.');
+  new QRCode(container, {text: result.url, width:200, height:200, correctLevel: QRCode.CorrectLevel.M});
+  setTimeout(()=>{ waEl('waDownloadQrBtn').style.display = container.querySelector('canvas') ? 'inline-block' : 'none'; }, 100);
+});
+waEl('waDownloadQrBtn').addEventListener('click', ()=>{
+  const canvas = waEl('waQrResult').querySelector('canvas');
+  if(!canvas) return;
+  canvas.toBlob(blob=>{
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='whatsapp-chat-qr.png'; a.click();
+  });
+});
+
+/* ---------- Reset ---------- */
+waEl('waResetBtn').addEventListener('click', ()=>{
+  waEl('waCountry').value='92';
+  waEl('waNumber').value=''; waEl('waNumberPreview').textContent='';
+  waEl('waTemplate').value='';
+  waEl('waVarProduct').value=''; waEl('waVarService').value='';
+  waEl('waMessage').value=''; waUpdateCharCount();
+  waEl('waBusinessMode').checked=false; waEl('waBusinessFields').style.display='none';
+  waEl('waBizName').value=''; waEl('waBizGreeting').value='';
+  waEl('waGeneratedLink').value=''; waEl('waNumberDisplay').textContent='';
+  waEl('waQrResult').innerHTML=''; waEl('waDownloadQrBtn').style.display='none';
+});
+</script><script src="script.js"></script></body></html>
