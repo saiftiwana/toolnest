@@ -1,0 +1,532 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Logo Maker - Free Online Logo Design Tool | ToolNest</title><meta name="description" content="Create a professional logo free, no design experience needed, with 9 styles, icons, typography and color controls, SVG/PNG/JPG export."><link rel="canonical" href="https://toolnest.link/logo-maker.html"><meta property="og:title" content="Logo Maker | ToolNest"><meta property="og:description" content="Create a professional logo free, no design experience needed, with SVG/PNG/JPG export."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/logo-maker.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Logo Maker</h1><p>Design a clean logo with 9 styles, geometric icons, typography and color controls — free, private, true vector SVG export.</p></header><main>
+<div class="card" id="lm"><h2>Logo Maker</h2><p class="desc">Create a clean, professional logo with icon and typography options — free, private, vector export.</p>
+
+<h3 style="margin-top:4px;">1. Brand Information</h3>
+<div class="row"><div class="field"><label class="field-label" for="lmBrandName">Brand / Company name</label><input type="text" id="lmBrandName" placeholder="Brand name"></div><div class="field"><label class="field-label" for="lmTagline">Tagline (optional)</label><input type="text" id="lmTagline" placeholder="Optional tagline"></div></div>
+
+<h3>2. Logo Style</h3>
+<div class="row" id="lmStyleRow" style="flex-wrap:wrap;"></div>
+
+<h3>3. Symbol / Icon</h3>
+<div class="row" id="lmIconRow" style="flex-wrap:wrap;"></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="lmIconSize">Icon size (<span id="lmIconSizeVal">50</span>)</label><input type="range" id="lmIconSize" min="20" max="80" value="50"></div><div class="field"><label class="field-label" for="lmIconRotation">Icon rotation (<span id="lmIconRotationVal">0</span>&deg;)</label><input type="range" id="lmIconRotation" min="0" max="360" value="0"></div><div class="field"><label class="field-label" for="lmIconSpacing">Icon/text spacing (<span id="lmIconSpacingVal">20</span>)</label><input type="range" id="lmIconSpacing" min="0" max="60" value="20"></div></div>
+
+<h3>4. Layout</h3>
+<div class="row" style="flex-wrap:wrap;"><button class="secondary lm-layout-tab active" data-layout="icon-text">Icon + Text</button><button class="secondary lm-layout-tab" data-layout="text-icon">Text + Icon</button><button class="secondary lm-layout-tab" data-layout="stacked">Stacked</button><button class="secondary lm-layout-tab" data-layout="icon-only">Icon Only</button><button class="secondary lm-layout-tab" data-layout="text-only">Text Only</button></div>
+
+<h3>5. Typography</h3>
+<div class="row"><div class="field"><label class="field-label" for="lmFont">Font</label><select id="lmFont"><option value="Arial, sans-serif">Arial</option><option value="Georgia, serif">Georgia</option><option value="'Trebuchet MS', sans-serif">Trebuchet MS</option><option value="Verdana, sans-serif">Verdana</option><option value="'Courier New', monospace">Courier New</option></select></div><div class="field"><label class="field-label" for="lmFontWeight">Weight</label><select id="lmFontWeight"><option value="normal">Normal</option><option value="bold" selected>Bold</option></select></div><div class="field"><label class="field-label" for="lmTextCase">Case</label><select id="lmTextCase"><option value="normal">Normal</option><option value="upper">UPPERCASE</option></select></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="lmFontSize">Font size (<span id="lmFontSizeVal">42</span>)</label><input type="range" id="lmFontSize" min="18" max="70" value="42"></div><div class="field"><label class="field-label" for="lmLetterSpacing">Letter spacing (<span id="lmLetterSpacingVal">0</span>)</label><input type="range" id="lmLetterSpacing" min="0" max="20" value="0"></div></div>
+
+<h3>6. Colors</h3>
+<div class="row"><div class="field"><label class="field-label" for="lmPrimaryColor">Primary</label><input type="color" id="lmPrimaryColor" value="#1f3d2b"></div><div class="field"><label class="field-label" for="lmSecondaryColor">Secondary</label><input type="color" id="lmSecondaryColor" value="#e07a2c"></div><div class="field"><label class="field-label" for="lmAccentColor">Accent</label><input type="color" id="lmAccentColor" value="#5b9bd5"></div></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" data-palette="monochrome">Monochrome</button><button class="secondary" data-palette="dark">Dark</button><button class="secondary" data-palette="light">Light</button><button class="secondary" data-palette="corporate">Corporate</button><button class="secondary" data-palette="creative">Creative</button><button class="secondary" data-palette="luxury">Luxury</button></div>
+
+<h3>7. Live Preview</h3>
+<div class="row"><div class="field"><label class="field-label" for="lmPreviewBg">Preview background</label><select id="lmPreviewBg"><option value="light">Light</option><option value="dark">Dark</option><option value="transparent">Transparent (checkered)</option></select></div></div>
+<canvas id="lmCanvas" class="preview" style="max-width:100%; border:1px solid var(--line); border-radius:6px; display:block; margin-top:8px;"></canvas>
+
+<h3>8. Variations</h3>
+<div class="row" style="flex-wrap:wrap;" id="lmVariationsRow"></div>
+
+<h3>9. Save / Load</h3>
+<div class="row"><button class="secondary" id="lmSaveDraftBtn">Save Draft</button><button class="secondary" id="lmLoadDraftBtn">Load Draft</button><button class="secondary" id="lmResetBtn">Reset</button></div>
+<p class="stat" id="lmDraftStatus" style="font-size:.8rem;"></p>
+
+<h3>10. Export</h3>
+<div class="row"><div class="field"><label class="field-label" for="lmExportBg">Background for export</label><select id="lmExportBg"><option value="transparent">Transparent</option><option value="white">White</option><option value="custom">Custom color</option></select></div><div class="field" id="lmExportBgColorField" style="display:none;"><label class="field-label" for="lmExportBgColor">Custom color</label><input type="color" id="lmExportBgColor" value="#ffffff"></div></div>
+<div class="row" style="margin-top:10px; flex-wrap:wrap;"><button id="lmDownloadSvgBtn">Download SVG</button><button class="secondary" id="lmDownloadPngBtn">Download PNG</button><button class="secondary" id="lmDownloadJpgBtn">Download JPG</button></div>
+<p class="stat" id="lmExportStatus" style="font-size:.8rem;"></p>
+</div>
+<div class="seo-content">
+<h3>How to Use Logo Maker</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Enter Brand Details:</strong> Your brand name and an optional tagline.</li><li><strong>Choose a Style:</strong> Pick from 9 styles like Minimal, Modern, Bold, or Luxury.</li><li><strong>Pick a Symbol:</strong> Select from 14 generic geometric icons, then adjust size and rotation.</li><li><strong>Choose a Layout:</strong> Icon + Text, Text + Icon, Stacked, Icon Only, or Text Only.</li><li><strong>Customize Typography &amp; Colors:</strong> Font, weight, spacing, and a full color palette.</li><li><strong>Check Variations:</strong> Review Full Color, Black, White, Icon Only, and layout variants at a glance.</li><li><strong>Export:</strong> Download as SVG, PNG (transparent), or JPG.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>A free logo maker online no design experience required tool means getting a clean, usable logo without hiring a designer or learning design software just to try out an idea. This simple logo maker online tool builds a genuine vector logo directly in your browser, ready to use on a website, business card, or social profile the moment you're happy with it.</p>
+<h3>How It Works</h3>
+<p>This minimalist logo maker tool represents your logo as an icon and typography combination, letting you switch between 9 distinct styles that change composition and typography together — not just color — plus 5 layout arrangements and 14 simple geometric icons. Because the icon shapes and the exported SVG are generated from the exact same underlying vector path data, what you see in the live preview is exactly what exports, whether that's a scalable SVG file or a raster PNG or JPG.</p>
+<h3>Key Features</h3>
+<p>As a business logo maker online tool, colors apply through Primary, Secondary, and Accent fields plus six curated palettes (Monochrome, Dark, Light, Corporate, Creative, Luxury) that set all three at once. Typography controls cover font family, weight, size, letter spacing, and uppercase/lowercase, and the icon can be resized, rotated, and spaced independently from the text. A live variations gallery shows Full Color, Black, White, Icon Only, Horizontal, and Stacked versions of your current design side by side, and export supports an SVG logo maker workflow (true vector, infinitely scalable) alongside a logo maker with transparent background PNG option and a flattened JPG.</p>
+<h3>Common Use Cases</h3>
+<p>A startup founder without a design budget builds a first logo using the Bold style and their brand colors, checks how it looks stacked for a square social profile picture versus horizontal for a website header, then exports both. Someone rebranding an existing small business tries several of the 9 styles with the same brand name to compare a Minimal wordmark against a Geometric icon-forward version before choosing a direction. A freelancer preparing brand assets for a client exports the SVG for their website, a transparent PNG for use over photos, and the Black/White variations for single-color printing contexts like an invoice letterhead.</p>
+<h3>Tips</h3>
+<p>An SVG export is the most flexible format to keep as your primary logo file, since it scales to any size — from a favicon to a banner — without losing quality, while PNG with a transparent background works best for placing your logo over photos or colored backgrounds. If your brand name is long, the Stacked or Text Only layouts often read more clearly at small sizes than a wide horizontal Icon + Text arrangement, which can start to feel cramped once scaled down.</p>
+<h3>Frequently Asked Questions</h3>
+<div class=faq-block><details><summary>Can I create a professional logo for free without hiring a designer?</summary><p>Yes, choosing a style, icon, and color palette produces a complete, usable logo with no design experience required.</p></details><details><summary>What logo file formats should I download for different use cases?</summary><p>SVG is best for anything requiring scalability (like large printing or a website header), transparent PNG works well for overlaying on photos or backgrounds, and JPG suits places that don't accept transparency.</p></details><details><summary>How do I ensure my logo looks good on business cards and websites?</summary><p>Check the Full Color, Black, and White variations in the gallery, since a logo that needs to print in a single color or appear on a dark background should still read clearly.</p></details><details><summary>Can I edit my logo after downloading and make changes?</summary><p>The downloaded files are final exports; to make changes, return to this tool, use Load Draft if you saved one, and re-export after adjusting.</p></details><details><summary>Does the logo maker provide copyright and commercial use rights?</summary><p>The icons are simple generic geometric shapes (not trademarked symbols), and the design you create by combining them with your own text and colors is yours to use commercially.</p></details><details><summary>What's the difference between raster (PNG) and vector (SVG) logo files?</summary><p>A vector SVG file scales to any size without losing sharpness, while a raster PNG is a fixed-resolution image that can look blurry or pixelated if enlarged significantly beyond its original size.</p></details><details><summary>Can I use my brand colors in the logo maker?</summary><p>Yes, set Primary, Secondary, and Accent colors individually using the color pickers to match your exact brand palette.</p></details><details><summary>Can I download my logo in high resolution for print?</summary><p>Yes, PNG and JPG exports render at a high fixed resolution suitable for most print uses, and SVG scales to any size without quality loss.</p></details></div>
+</div>
+<div class="seo-content"><h3>Related Design Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="business-card-maker.html">Business Card Maker</a></li>
+<li><a href="color-toolkit.html">Color Toolkit</a></li>
+<li><a href="mesh-gradient-generator.html">UI/UX Mesh Gradient Generator</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Logo Maker","applicationCategory":"DesignApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/logo-maker.html"},
+{"@type":"HowTo","name":"How to Create a Logo","step":[
+{"@type":"HowToStep","text":"Enter your brand name and optional tagline."},
+{"@type":"HowToStep","text":"Choose a logo style."},
+{"@type":"HowToStep","text":"Pick a symbol and adjust it."},
+{"@type":"HowToStep","text":"Choose a layout."},
+{"@type":"HowToStep","text":"Customize typography and colors."},
+{"@type":"HowToStep","text":"Review variations."},
+{"@type":"HowToStep","text":"Export as SVG, PNG, or JPG."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Can I create a professional logo for free without hiring a designer?","acceptedAnswer":{"@type":"Answer","text":"Yes, choosing a style, icon, and color palette produces a complete, usable logo with no design experience required."}},
+{"@type":"Question","name":"What logo file formats should I download for different use cases?","acceptedAnswer":{"@type":"Answer","text":"SVG for scalability, transparent PNG for overlaying on backgrounds, and JPG for places that don't accept transparency."}},
+{"@type":"Question","name":"How do I ensure my logo looks good on business cards and websites?","acceptedAnswer":{"@type":"Answer","text":"Check the Full Color, Black, and White variations to confirm it reads clearly in different contexts."}},
+{"@type":"Question","name":"Can I edit my logo after downloading and make changes?","acceptedAnswer":{"@type":"Answer","text":"Return to the tool, use Load Draft if saved, adjust, and re-export."}},
+{"@type":"Question","name":"Does the logo maker provide copyright and commercial use rights?","acceptedAnswer":{"@type":"Answer","text":"The icons are generic geometric shapes, and your combined design is yours to use commercially."}},
+{"@type":"Question","name":"What's the difference between raster (PNG) and vector (SVG) logo files?","acceptedAnswer":{"@type":"Answer","text":"SVG scales to any size without losing sharpness; PNG is a fixed-resolution raster image."}},
+{"@type":"Question","name":"Can I use my brand colors in the logo maker?","acceptedAnswer":{"@type":"Answer","text":"Yes, set Primary, Secondary, and Accent colors individually."}},
+{"@type":"Question","name":"Can I download my logo in high resolution for print?","acceptedAnswer":{"@type":"Answer","text":"Yes, PNG and JPG render at high resolution, and SVG scales to any size."}}
+]}
+]}
+</script>
+<script>/* ===== Logo Maker engine ===== */
+const lmEl = id => document.getElementById(id);
+
+/* ---------- icon library: generic geometric shapes only, defined once as SVG path data (0-100 viewBox) ---------- */
+/* Each path is used for BOTH canvas rendering (via Path2D) and SVG export (same string), so there is one source of truth. */
+const LM_ICONS = {
+  circle: 'M50,10 A40,40 0 1,1 50,90 A40,40 0 1,1 50,10 Z',
+  square: 'M20,20 L80,20 L80,80 L20,80 Z',
+  triangle: 'M50,15 L85,80 L15,80 Z',
+  diamond: 'M50,10 L85,50 L50,90 L15,50 Z',
+  hexagon: 'M50,10 L85,30 L85,70 L50,90 L15,70 L15,30 Z',
+  star: 'M50.00,10.00 L59.40,37.06 L88.04,37.64 L65.22,54.94 L73.51,82.36 L50.00,66.00 L26.49,82.36 L34.78,54.94 L11.96,37.64 L40.60,37.06 Z',
+  leaf: 'M50,10 C75,25 80,55 60,75 C50,85 40,85 30,75 C15,60 20,30 50,10 Z',
+  wave: 'M10,50 C25,30 40,30 50,50 C60,70 75,70 90,50 L90,70 L10,70 Z',
+  bolt: 'M55,10 L25,55 L45,55 L40,90 L78,45 L55,45 Z',
+  shield: 'M50,10 L80,25 L80,55 C80,75 65,88 50,92 C35,88 20,75 20,55 L20,25 Z',
+  arrow: 'M50,10 L80,45 L62,45 L62,90 L38,90 L38,45 L20,45 Z',
+  plus: 'M40,15 L60,15 L60,40 L85,40 L85,60 L60,60 L60,85 L40,85 L40,60 L15,60 L15,40 L40,40 Z',
+  crescent: 'M65,20 A35,35 0 1,0 65,80 A25,25 0 1,1 65,20 Z',
+  mountain: 'M10,80 L35,35 L50,60 L65,25 L90,80 Z'
+};
+
+/* ---------- logo styles (presets that set default typography/spacing, per requirement that styles differ in composition, not only color) ---------- */
+const LM_STYLES = {
+  minimal: { font:"Arial, sans-serif", weight:'normal', case:'normal', letterSpacing:0, fontSize:38, iconSpacing:16 },
+  modern: { font:"'Trebuchet MS', sans-serif", weight:'bold', case:'normal', letterSpacing:2, fontSize:44, iconSpacing:22 },
+  corporate: { font:"Arial, sans-serif", weight:'bold', case:'normal', letterSpacing:0, fontSize:40, iconSpacing:24 },
+  elegant: { font:"Georgia, serif", weight:'normal', case:'normal', letterSpacing:3, fontSize:40, iconSpacing:26 },
+  creative: { font:"'Trebuchet MS', sans-serif", weight:'bold', case:'normal', letterSpacing:0, fontSize:46, iconSpacing:14 },
+  bold: { font:"Arial, sans-serif", weight:'bold', case:'upper', letterSpacing:1, fontSize:48, iconSpacing:18 },
+  geometric: { font:"Verdana, sans-serif", weight:'bold', case:'upper', letterSpacing:4, fontSize:36, iconSpacing:20 },
+  tech: { font:"'Courier New', monospace", weight:'bold', case:'upper', letterSpacing:2, fontSize:36, iconSpacing:22 },
+  luxury: { font:"Georgia, serif", weight:'normal', case:'upper', letterSpacing:6, fontSize:34, iconSpacing:28 }
+};
+
+/* ---------- color palettes ---------- */
+const LM_PALETTES = {
+  monochrome: {primary:'#1a1a1a', secondary:'#4a4a4a', accent:'#808080'},
+  dark: {primary:'#0d1b14', secondary:'#1f3d2b', accent:'#e07a2c'},
+  light: {primary:'#f2ecd8', secondary:'#e0d5c0', accent:'#1f3d2b'},
+  corporate: {primary:'#0d3b66', secondary:'#1f6fb2', accent:'#f0a458'},
+  creative: {primary:'#e0446b', secondary:'#f7b32b', accent:'#2ec4b6'},
+  luxury: {primary:'#1a1a1a', secondary:'#c9a45c', accent:'#f2ecd8'}
+};
+
+let lmState = {
+  style: 'minimal', icon: 'circle', layout: 'icon-text',
+  iconSize: 50, iconRotation: 0, iconSpacing: 16,
+  font: "Arial, sans-serif", weight: 'normal', textCase: 'normal', fontSize: 38, letterSpacing: 0,
+  primary: '#1f3d2b', secondary: '#e07a2c', accent: '#5b9bd5'
+};
+
+/* ---------- gallery renderers ---------- */
+function lmRenderStyleGallery(){
+  const row = lmEl('lmStyleRow');
+  row.innerHTML = '';
+  Object.keys(LM_STYLES).forEach(key=>{
+    const btn = document.createElement('button');
+    btn.className = 'secondary' + (key===lmState.style?' active':'');
+    btn.textContent = key.charAt(0).toUpperCase()+key.slice(1);
+    btn.addEventListener('click', ()=>lmApplyStyle(key));
+    row.appendChild(btn);
+  });
+}
+function lmApplyStyle(key){
+  const s = LM_STYLES[key];
+  lmState.style = key;
+  lmState.font = s.font; lmState.weight = s.weight; lmState.textCase = s.case;
+  lmState.letterSpacing = s.letterSpacing; lmState.fontSize = s.fontSize; lmState.iconSpacing = s.iconSpacing;
+  lmEl('lmFont').value = s.font; lmEl('lmFontWeight').value = s.weight; lmEl('lmTextCase').value = s.case;
+  lmEl('lmLetterSpacing').value = s.letterSpacing; lmEl('lmLetterSpacingVal').textContent = s.letterSpacing;
+  lmEl('lmFontSize').value = s.fontSize; lmEl('lmFontSizeVal').textContent = s.fontSize;
+  lmEl('lmIconSpacing').value = s.iconSpacing; lmEl('lmIconSpacingVal').textContent = s.iconSpacing;
+  lmRenderStyleGallery();
+  lmRender();
+}
+function lmRenderIconGallery(){
+  const row = lmEl('lmIconRow');
+  row.innerHTML = '';
+  Object.keys(LM_ICONS).forEach(key=>{
+    const btn = document.createElement('button');
+    btn.type='button';
+    btn.className = 'secondary' + (key===lmState.icon?' active':'');
+    btn.style.cssText = 'width:44px;height:44px;padding:4px;';
+    btn.title = key;
+    const svgMini = `<svg width="30" height="30" viewBox="0 0 100 100"><path d="${LM_ICONS[key]}" fill="${lmState.primary}"/></svg>`;
+    btn.innerHTML = svgMini;
+    btn.addEventListener('click', ()=>{ lmState.icon=key; lmRenderIconGallery(); lmRender(); });
+    row.appendChild(btn);
+  });
+}
+
+/* ---------- layout tabs ---------- */
+document.querySelectorAll('.lm-layout-tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.lm-layout-tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    lmState.layout = btn.dataset.layout;
+    lmRender();
+  });
+});
+
+/* ---------- icon controls ---------- */
+lmEl('lmIconSize').addEventListener('input', function(){ lmState.iconSize=+this.value; lmEl('lmIconSizeVal').textContent=this.value; lmRender(); });
+lmEl('lmIconRotation').addEventListener('input', function(){ lmState.iconRotation=+this.value; lmEl('lmIconRotationVal').textContent=this.value; lmRender(); });
+lmEl('lmIconSpacing').addEventListener('input', function(){ lmState.iconSpacing=+this.value; lmEl('lmIconSpacingVal').textContent=this.value; lmRender(); });
+
+/* ---------- typography controls ---------- */
+lmEl('lmFont').addEventListener('change', function(){ lmState.font=this.value; lmRender(); });
+lmEl('lmFontWeight').addEventListener('change', function(){ lmState.weight=this.value; lmRender(); });
+lmEl('lmTextCase').addEventListener('change', function(){ lmState.textCase=this.value; lmRender(); });
+lmEl('lmFontSize').addEventListener('input', function(){ lmState.fontSize=+this.value; lmEl('lmFontSizeVal').textContent=this.value; lmRender(); });
+lmEl('lmLetterSpacing').addEventListener('input', function(){ lmState.letterSpacing=+this.value; lmEl('lmLetterSpacingVal').textContent=this.value; lmRender(); });
+
+/* ---------- colors ---------- */
+lmEl('lmPrimaryColor').addEventListener('input', function(){ lmState.primary=this.value; lmRenderIconGallery(); lmRender(); });
+lmEl('lmSecondaryColor').addEventListener('input', function(){ lmState.secondary=this.value; lmRender(); });
+lmEl('lmAccentColor').addEventListener('input', function(){ lmState.accent=this.value; lmRender(); });
+document.querySelectorAll('[data-palette]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const p = LM_PALETTES[btn.dataset.palette];
+    lmState.primary=p.primary; lmState.secondary=p.secondary; lmState.accent=p.accent;
+    lmEl('lmPrimaryColor').value=p.primary; lmEl('lmSecondaryColor').value=p.secondary; lmEl('lmAccentColor').value=p.accent;
+    lmRenderIconGallery();
+    lmRender();
+  });
+});
+
+/* ---------- brand fields ---------- */
+['lmBrandName','lmTagline'].forEach(id=>lmEl(id).addEventListener('input', lmRender));
+lmEl('lmPreviewBg').addEventListener('change', lmRender);
+
+/* ---------- manual letter-spacing text drawing (works consistently across browsers) ---------- */
+function lmMeasureSpacedText(ctx, text, spacing){
+  let width = 0;
+  for(const ch of text) width += ctx.measureText(ch).width + spacing;
+  return text.length ? width - spacing : 0;
+}
+function lmDrawSpacedText(ctx, text, x, y, spacing, align){
+  const totalWidth = lmMeasureSpacedText(ctx, text, spacing);
+  let startX = x;
+  if(align==='center') startX = x - totalWidth/2;
+  else if(align==='right') startX = x - totalWidth;
+  ctx.textAlign = 'left';
+  let cx = startX;
+  for(const ch of text){
+    ctx.fillText(ch, cx, y);
+    cx += ctx.measureText(ch).width + spacing;
+  }
+  return totalWidth;
+}
+
+/* ---------- core render function (used for live preview AND export, at any resolution) ---------- */
+function lmGetDisplayText(){
+  const name = lmEl('lmBrandName').value || 'Brand Name';
+  return lmState.textCase==='upper' ? name.toUpperCase() : name;
+}
+function lmDrawLogo(ctx, w, h, opts){
+  opts = opts||{};
+  const s = lmState;
+  const forceLayout = opts.forceLayout || s.layout;
+  const forceMonoColor = opts.monoColor || null;
+  const iconColor = forceMonoColor || s.primary;
+  const textColor = forceMonoColor || s.secondary;
+  const taglineColor = forceMonoColor || s.accent;
+
+  const name = lmGetDisplayText();
+  const tagline = lmEl('lmTagline').value;
+
+  ctx.clearRect(0,0,w,h);
+  if(opts.bgFill){ ctx.fillStyle = opts.bgFill; ctx.fillRect(0,0,w,h); }
+
+  const cx = w/2, cy = h/2;
+  const iconPxSize = (s.iconSize/100) * Math.min(w,h) * 0.7;
+  const fontPx = (s.fontSize/100) * Math.min(w,h) * 0.9;
+  ctx.font = `${s.weight} ${fontPx}px ${s.font}`;
+
+  function drawIcon(px, py){
+    if(forceLayout==='text-only') return;
+    ctx.save();
+    ctx.translate(px, py);
+    ctx.rotate(s.iconRotation*Math.PI/180);
+    const scale = iconPxSize/100;
+    ctx.scale(scale, scale);
+    ctx.translate(-50,-50);
+    const path = new Path2D(LM_ICONS[s.icon]);
+    ctx.fillStyle = iconColor;
+    ctx.fill(path);
+    ctx.restore();
+  }
+  function drawText(px, py, align){
+    ctx.font = `${s.weight} ${fontPx}px ${s.font}`;
+    ctx.fillStyle = textColor;
+    ctx.textBaseline = 'middle';
+    lmDrawSpacedText(ctx, name, px, py, s.letterSpacing*(w/400), align);
+    if(tagline){
+      ctx.font = `${s.weight} ${fontPx*0.35}px ${s.font}`;
+      ctx.fillStyle = taglineColor;
+      lmDrawSpacedText(ctx, tagline, px, py+fontPx*0.55, s.letterSpacing*0.5*(w/400), align);
+    }
+  }
+
+  ctx.save();
+  const spacing = (s.iconSpacing/100)*w*0.4;
+  if(forceLayout==='icon-only'){
+    drawIcon(cx, cy);
+  }else if(forceLayout==='text-only'){
+    ctx.font = `${s.weight} ${fontPx}px ${s.font}`;
+    const nameWidth = lmMeasureSpacedText(ctx, name, s.letterSpacing*(w/400));
+    const startY = tagline ? cy - fontPx*0.25 : cy;
+    drawText(cx, startY, 'center');
+  }else if(forceLayout==='stacked'){
+    const totalH = iconPxSize + fontPx*1.3;
+    const iconY = cy - totalH/2 + iconPxSize/2;
+    const textY = iconY + iconPxSize/2 + spacing*0.5 + fontPx*0.4;
+    drawIcon(cx, iconY);
+    drawText(cx, textY, 'center');
+  }else if(forceLayout==='text-icon'){
+    ctx.font = `${s.weight} ${fontPx}px ${s.font}`;
+    const nameWidth = lmMeasureSpacedText(ctx, name, s.letterSpacing*(w/400));
+    const totalWidth = nameWidth + spacing + iconPxSize;
+    const startX = cx - totalWidth/2;
+    drawText(startX, cy, 'left');
+    drawIcon(startX + nameWidth + spacing + iconPxSize/2, cy);
+  }else{ // icon-text (default)
+    ctx.font = `${s.weight} ${fontPx}px ${s.font}`;
+    const nameWidth = lmMeasureSpacedText(ctx, name, s.letterSpacing*(w/400));
+    const totalWidth = iconPxSize + spacing + nameWidth;
+    const startX = cx - totalWidth/2;
+    drawIcon(startX + iconPxSize/2, cy);
+    drawText(startX + iconPxSize + spacing, cy, 'left');
+  }
+  ctx.restore();
+}
+
+/* ---------- live preview ---------- */
+const lmCanvas = lmEl('lmCanvas');
+const lmctx = lmCanvas.getContext('2d');
+function lmDrawCheckerboard(ctx, w, h){
+  const size=10;
+  for(let y=0;y<h;y+=size){
+    for(let x=0;x<w;x+=size){
+      ctx.fillStyle = ((x/size + y/size)%2===0) ? '#e8e8e8' : '#ffffff';
+      ctx.fillRect(x,y,size,size);
+    }
+  }
+}
+function lmRender(){
+  const w = 500, h = 300;
+  lmCanvas.width = w; lmCanvas.height = h;
+  const bgMode = lmEl('lmPreviewBg').value;
+  if(bgMode==='transparent') lmDrawCheckerboard(lmctx, w, h);
+  else { lmctx.fillStyle = bgMode==='dark' ? '#1a1a1a' : '#ffffff'; lmctx.fillRect(0,0,w,h); }
+  lmDrawLogo(lmctx, w, h);
+  lmRenderVariations();
+}
+
+/* ---------- variations gallery ---------- */
+function lmRenderVariations(){
+  const row = lmEl('lmVariationsRow');
+  row.innerHTML = '';
+  const variants = [
+    {label:'Full Color', opts:{}},
+    {label:'Black', opts:{monoColor:'#000000'}},
+    {label:'White', opts:{monoColor:'#ffffff', bgFill:'#1a1a1a'}},
+    {label:'Icon Only', opts:{forceLayout:'icon-only'}},
+    {label:'Horizontal', opts:{forceLayout:'icon-text'}},
+    {label:'Stacked', opts:{forceLayout:'stacked'}}
+  ];
+  variants.forEach(v=>{
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'text-align:center;';
+    const c = document.createElement('canvas');
+    c.width=100; c.height=70;
+    c.style.cssText = 'border:1px solid var(--line); border-radius:4px; background:#fff;';
+    const cctx = c.getContext('2d');
+    if(v.opts.bgFill){ cctx.fillStyle=v.opts.bgFill; cctx.fillRect(0,0,100,70); }
+    lmDrawLogo(cctx, 100, 70, v.opts);
+    wrap.appendChild(c);
+    const label = document.createElement('p');
+    label.style.cssText='margin:4px 0 0; font-size:.68rem;';
+    label.textContent = v.label;
+    wrap.appendChild(label);
+    row.appendChild(wrap);
+  });
+}
+
+/* ---------- export background selector ---------- */
+lmEl('lmExportBg').addEventListener('change', function(){
+  lmEl('lmExportBgColorField').style.display = this.value==='custom' ? 'flex' : 'none';
+});
+function lmGetExportBgFill(){
+  const mode = lmEl('lmExportBg').value;
+  if(mode==='white') return '#ffffff';
+  if(mode==='custom') return lmEl('lmExportBgColor').value;
+  return null; // transparent
+}
+
+/* ---------- true vector SVG export (uses the SAME icon path strings as canvas, via Path2D source of truth) ---------- */
+function lmBuildSvgMarkup(){
+  const s = lmState;
+  const w=800, h=480;
+  const name = lmGetDisplayText();
+  const tagline = lmEl('lmTagline').value;
+  const bgFill = lmGetExportBgFill();
+  let bgRect = bgFill ? `<rect width="100%" height="100%" fill="${bgFill}"/>` : '';
+
+  const iconPxSize = (s.iconSize/100)*Math.min(w,h)*0.7;
+  const fontPx = (s.fontSize/100)*Math.min(w,h)*0.9;
+  const spacing = (s.iconSpacing/100)*w*0.4;
+  const cx=w/2, cy=h/2;
+
+  function iconSvg(px,py){
+    if(s.layout==='text-only') return '';
+    const scale = iconPxSize/100;
+    return `<g transform="translate(${px},${py}) rotate(${s.iconRotation}) scale(${scale}) translate(-50,-50)"><path d="${LM_ICONS[s.icon]}" fill="${s.primary}"/></g>`;
+  }
+  function textSvg(px,py,anchor){
+    let out = `<text x="${px}" y="${py}" font-family="${s.font.replace(/"/g,"'")}" font-weight="${s.weight}" font-size="${fontPx}" fill="${s.secondary}" text-anchor="${anchor}" dominant-baseline="middle" letter-spacing="${s.letterSpacing*(w/400)}">${lmEscapeXml(name)}</text>`;
+    if(tagline){
+      out += `<text x="${px}" y="${py+fontPx*0.55}" font-family="${s.font.replace(/"/g,"'")}" font-weight="${s.weight}" font-size="${fontPx*0.35}" fill="${s.accent}" text-anchor="${anchor}" dominant-baseline="middle" letter-spacing="${s.letterSpacing*0.5*(w/400)}">${lmEscapeXml(tagline)}</text>`;
+    }
+    return out;
+  }
+  let content = '';
+  if(s.layout==='icon-only'){
+    content = iconSvg(cx,cy);
+  }else if(s.layout==='text-only'){
+    content = textSvg(cx,cy,'middle');
+  }else if(s.layout==='stacked'){
+    const totalH = iconPxSize+fontPx*1.3;
+    const iconY = cy-totalH/2+iconPxSize/2;
+    const textY = iconY+iconPxSize/2+spacing*0.5+fontPx*0.4;
+    content = iconSvg(cx,iconY) + textSvg(cx,textY,'middle');
+  }else if(s.layout==='text-icon'){
+    const tmpCanvas=document.createElement('canvas'); const tctx=tmpCanvas.getContext('2d');
+    tctx.font = `${s.weight} ${fontPx}px ${s.font}`;
+    const nameWidth = lmMeasureSpacedText(tctx, name, s.letterSpacing*(w/400));
+    const totalWidth = nameWidth+spacing+iconPxSize;
+    const startX = cx-totalWidth/2;
+    content = textSvg(startX,cy,'start') + iconSvg(startX+nameWidth+spacing+iconPxSize/2, cy);
+  }else{
+    const tmpCanvas=document.createElement('canvas'); const tctx=tmpCanvas.getContext('2d');
+    tctx.font = `${s.weight} ${fontPx}px ${s.font}`;
+    const nameWidth = lmMeasureSpacedText(tctx, name, s.letterSpacing*(w/400));
+    const totalWidth = iconPxSize+spacing+nameWidth;
+    const startX = cx-totalWidth/2;
+    content = iconSvg(startX+iconPxSize/2,cy) + textSvg(startX+iconPxSize+spacing,cy,'start');
+  }
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${bgRect}${content}</svg>`;
+}
+function lmEscapeXml(text){
+  return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+}
+lmEl('lmDownloadSvgBtn').addEventListener('click', ()=>{
+  const svg = lmBuildSvgMarkup();
+  const blob = new Blob([svg], {type:'image/svg+xml'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='logo.svg'; a.click();
+  lmEl('lmExportStatus').textContent = 'SVG downloaded.';
+});
+
+/* ---------- PNG / JPG export (true resolution, transparent background support for PNG) ---------- */
+function lmRenderExportCanvas(){
+  const w=1600, h=960;
+  const canvas = document.createElement('canvas');
+  canvas.width=w; canvas.height=h;
+  const ctx = canvas.getContext('2d');
+  const bgFill = lmGetExportBgFill();
+  lmDrawLogo(ctx, w, h, {bgFill});
+  return canvas;
+}
+lmEl('lmDownloadPngBtn').addEventListener('click', ()=>{
+  const canvas = lmRenderExportCanvas();
+  canvas.toBlob(blob=>{
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='logo.png'; a.click();
+    lmEl('lmExportStatus').textContent = 'PNG downloaded.';
+  });
+});
+lmEl('lmDownloadJpgBtn').addEventListener('click', ()=>{
+  const canvas = lmRenderExportCanvas();
+  if(lmGetExportBgFill()===null){
+    const flat = document.createElement('canvas');
+    flat.width=canvas.width; flat.height=canvas.height;
+    const fctx = flat.getContext('2d');
+    fctx.fillStyle='#ffffff'; fctx.fillRect(0,0,flat.width,flat.height);
+    fctx.drawImage(canvas,0,0);
+    flat.toBlob(blob=>{
+      const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='logo.jpg'; a.click();
+      lmEl('lmExportStatus').textContent = 'JPG downloaded (transparent areas filled white, since JPG has no transparency).';
+    }, 'image/jpeg', 0.95);
+  }else{
+    canvas.toBlob(blob=>{
+      const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='logo.jpg'; a.click();
+      lmEl('lmExportStatus').textContent = 'JPG downloaded.';
+    }, 'image/jpeg', 0.95);
+  }
+});
+
+/* ---------- Save / Load draft (localStorage) ---------- */
+const LM_DRAFT_KEY = 'toolnest_logo_maker_draft';
+lmEl('lmSaveDraftBtn').addEventListener('click', ()=>{
+  const draft = { state: lmState, brandName: lmEl('lmBrandName').value, tagline: lmEl('lmTagline').value };
+  try{
+    localStorage.setItem(LM_DRAFT_KEY, JSON.stringify(draft));
+    lmEl('lmDraftStatus').textContent = 'Draft saved to this browser.';
+  }catch(e){
+    lmEl('lmDraftStatus').textContent = 'Could not save (storage may be full or blocked).';
+  }
+});
+lmEl('lmLoadDraftBtn').addEventListener('click', ()=>{
+  let draft;
+  try{ draft = JSON.parse(localStorage.getItem(LM_DRAFT_KEY)); }catch(e){}
+  if(!draft) return lmEl('lmDraftStatus').textContent = 'No saved draft found on this browser.';
+  lmState = Object.assign(lmState, draft.state);
+  lmEl('lmBrandName').value = draft.brandName||'';
+  lmEl('lmTagline').value = draft.tagline||'';
+  lmEl('lmIconSize').value = lmState.iconSize; lmEl('lmIconSizeVal').textContent = lmState.iconSize;
+  lmEl('lmIconRotation').value = lmState.iconRotation; lmEl('lmIconRotationVal').textContent = lmState.iconRotation;
+  lmEl('lmIconSpacing').value = lmState.iconSpacing; lmEl('lmIconSpacingVal').textContent = lmState.iconSpacing;
+  lmEl('lmFont').value = lmState.font; lmEl('lmFontWeight').value = lmState.weight; lmEl('lmTextCase').value = lmState.textCase;
+  lmEl('lmFontSize').value = lmState.fontSize; lmEl('lmFontSizeVal').textContent = lmState.fontSize;
+  lmEl('lmLetterSpacing').value = lmState.letterSpacing; lmEl('lmLetterSpacingVal').textContent = lmState.letterSpacing;
+  lmEl('lmPrimaryColor').value = lmState.primary; lmEl('lmSecondaryColor').value = lmState.secondary; lmEl('lmAccentColor').value = lmState.accent;
+  document.querySelectorAll('.lm-layout-tab').forEach(b=>b.classList.toggle('active', b.dataset.layout===lmState.layout));
+  lmRenderStyleGallery(); lmRenderIconGallery();
+  lmRender();
+  lmEl('lmDraftStatus').textContent = 'Draft loaded.';
+});
+lmEl('lmResetBtn').addEventListener('click', ()=>{
+  if(!confirm('Reset the logo design? Unsaved changes will be lost.')) return;
+  lmEl('lmBrandName').value=''; lmEl('lmTagline').value='';
+  lmApplyStyle('minimal');
+  lmState.icon='circle'; lmState.layout='icon-text'; lmState.iconRotation=0;
+  lmEl('lmIconRotation').value=0; lmEl('lmIconRotationVal').textContent=0;
+  document.querySelectorAll('.lm-layout-tab').forEach(b=>b.classList.toggle('active', b.dataset.layout==='icon-text'));
+  lmState.primary='#1f3d2b'; lmState.secondary='#e07a2c'; lmState.accent='#5b9bd5';
+  lmEl('lmPrimaryColor').value=lmState.primary; lmEl('lmSecondaryColor').value=lmState.secondary; lmEl('lmAccentColor').value=lmState.accent;
+  lmRenderIconGallery();
+  lmEl('lmDraftStatus').textContent=''; lmEl('lmExportStatus').textContent='';
+  lmRender();
+});
+
+/* ---------- init ---------- */
+lmRenderStyleGallery();
+lmRenderIconGallery();
+lmRender();
+</script><script src="script.js"></script></body></html>
