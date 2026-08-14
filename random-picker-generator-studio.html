@@ -1,0 +1,371 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Random Picker & Generator Studio - Free Online | ToolNest</title><meta name="description" content="Random number generator, name/team picker, decision wheel, dice roller, coin flip and secure password generator, free, private, all in one tool."><link rel="canonical" href="https://toolnest.link/random-picker-generator-studio.html"><meta property="og:title" content="Random Picker & Generator Studio | ToolNest"><meta property="og:description" content="Random numbers, name/team picker, decision wheel, dice, coin flip and secure password generator, free and private."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/random-picker-generator-studio.html"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Random Picker & Generator Studio</h1><p>Random numbers, a name/team picker, a spinning decision wheel, dice, coin flip, and a secure password generator — all free, private, in one place.</p></header><main>
+<div class="card" id="rs"><h2>Random Picker &amp; Generator Studio</h2><p class="desc">Random numbers, name/team picker, a spinning decision wheel, dice, coin flip, and a secure password generator — all free, private, in one place.</p>
+
+<div class="row" id="rsTabs" style="flex-wrap:wrap;">
+<button class="secondary rs-tab active" data-tab="number">Random Number</button>
+<button class="secondary rs-tab" data-tab="picker">Name / Team Picker</button>
+<button class="secondary rs-tab" data-tab="wheel">Decision Wheel</button>
+<button class="secondary rs-tab" data-tab="dice">Dice Roller</button>
+<button class="secondary rs-tab" data-tab="coin">Coin Flip</button>
+<button class="secondary rs-tab" data-tab="password">Password Generator</button>
+</div>
+
+<div id="rsNumberPanel" style="margin-top:16px;">
+<h3 style="margin-top:0;">Random Number Generator</h3>
+<div class="row"><div class="field"><label class="field-label" for="rsNumMin">Minimum</label><input type="number" id="rsNumMin" value="1"></div><div class="field"><label class="field-label" for="rsNumMax">Maximum</label><input type="number" id="rsNumMax" value="100"></div><div class="field"><label class="field-label" for="rsNumCount">How many numbers</label><input type="number" id="rsNumCount" value="1" min="1" max="100"></div></div>
+<div class="row" style="margin-top:10px;"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="rsNumDecimal"> Allow decimals</label><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="rsNumNoRepeat"> No repeated numbers</label></div>
+<div class="row" style="margin-top:12px;"><button id="rsNumGenerateBtn">Generate</button><button class="secondary" data-copy="rsNumResult" data-copy-mode="text">\U0001F4CB Copy</button></div>
+<p class="stat" id="rsNumResult" style="font-size:1.3rem; font-weight:700; margin-top:10px; word-break:break-word;"></p>
+</div>
+
+<div id="rsPickerPanel" style="margin-top:16px; display:none;">
+<h3 style="margin-top:0;">Name / Team Picker</h3>
+<div class="row"><div class="field" style="width:100%;"><label class="field-label" for="rsPickerList">Enter names or items, one per line</label><textarea id="rsPickerList" placeholder="Alice&#10;Bob&#10;Charlie&#10;Diana"></textarea></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="rsPickerMode">Mode</label><select id="rsPickerMode"><option value="winner">Pick winner(s)</option><option value="teams">Split into teams</option><option value="shuffle">Shuffle order</option></select></div><div class="field" id="rsPickerCountField"><label class="field-label" for="rsPickerCount">How many winners</label><input type="number" id="rsPickerCount" value="1" min="1"></div></div>
+<div class="row" style="margin-top:12px;"><button id="rsPickerGoBtn">Pick</button></div>
+<p class="stat" id="rsPickerResult" style="white-space:pre-line; font-weight:600; margin-top:10px;"></p>
+</div>
+
+<div id="rsWheelPanel" style="margin-top:16px; display:none;">
+<h3 style="margin-top:0;">Decision Wheel</h3>
+<div id="rsWheelOptionList"></div>
+<div class="row" style="margin-top:8px;"><button class="secondary" id="rsAddWheelOptionBtn">+ Add Option</button></div>
+<div style="text-align:center; margin-top:16px; position:relative;">
+<div style="position:absolute; left:50%; top:-4px; transform:translateX(-50%); font-size:1.6rem; z-index:2;">\U0001F53B</div>
+<canvas id="rsWheelCanvas" width="320" height="320" style="max-width:100%; transition:transform 4s cubic-bezier(0.17,0.67,0.21,1);"></canvas>
+</div>
+<div class="row" style="margin-top:12px; justify-content:center;"><button id="rsSpinBtn">Spin the Wheel</button></div>
+<p class="stat" id="rsWheelResult" style="text-align:center; font-size:1.2rem; font-weight:700; margin-top:10px;"></p>
+</div>
+
+<div id="rsDicePanel" style="margin-top:16px; display:none;">
+<h3 style="margin-top:0;">Dice Roller</h3>
+<div class="row"><div class="field"><label class="field-label" for="rsDiceCount">Number of dice</label><input type="number" id="rsDiceCount" value="2" min="1" max="10"></div><div class="field"><label class="field-label" for="rsDiceSides">Sides per die</label><select id="rsDiceSides"><option value="4">d4</option><option value="6" selected>d6</option><option value="8">d8</option><option value="10">d10</option><option value="12">d12</option><option value="20">d20</option></select></div></div>
+<div class="row" style="margin-top:12px;"><button id="rsRollBtn">Roll</button></div>
+<div id="rsDiceResult" style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;"></div>
+<p class="stat" id="rsDiceSum" style="text-align:center; font-weight:700; margin-top:8px;"></p>
+</div>
+
+<div id="rsCoinPanel" style="margin-top:16px; display:none;">
+<h3 style="margin-top:0;">Coin Flip</h3>
+<div style="text-align:center;"><div id="rsCoinDisplay" style="width:100px; height:100px; border-radius:50%; background:#e0a72c; margin:0 auto; display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:700; color:#fff; border:3px solid #a3781f; transition:transform .6s;">?</div></div>
+<div class="row" style="margin-top:14px; justify-content:center;"><button id="rsFlipBtn">Flip Coin</button><button class="secondary" id="rsFlipMultiBtn">Flip 10 Times</button></div>
+<p class="stat" id="rsCoinResult" style="text-align:center; font-weight:600; margin-top:10px; white-space:pre-line;"></p>
+</div>
+
+<div id="rsPasswordPanel" style="margin-top:16px; display:none;">
+<h3 style="margin-top:0;">Secure Password Generator</h3>
+<p class="stat" style="font-size:.78rem; color:#8a8a75;">Uses your browser's cryptographically secure random number source, not a simple pseudo-random generator.</p>
+<div class="row" style="margin-top:8px;"><div class="field"><label class="field-label" for="rsPwLength">Length (<span id="rsPwLengthVal">16</span>)</label><input type="range" id="rsPwLength" min="6" max="64" value="16"></div></div>
+<div class="row" style="margin-top:10px; flex-wrap:wrap;"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="rsPwUpper" checked> Uppercase (A-Z)</label><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="rsPwLower" checked> Lowercase (a-z)</label><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="rsPwNumbers" checked> Numbers (0-9)</label><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="rsPwSymbols" checked> Symbols (!@#...)</label></div>
+<div class="row" style="margin-top:8px;"><label style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="rsPwExcludeAmbiguous"> Exclude ambiguous characters (0, O, 1, l, I)</label></div>
+<div class="row" style="margin-top:12px;"><button id="rsPwGenerateBtn">Generate Password</button><button class="secondary" data-copy="rsPwResult" data-copy-mode="text">\U0001F4CB Copy</button></div>
+<p class="stat" id="rsPwResult" style="font-family:monospace; font-size:1.15rem; font-weight:700; margin-top:10px; word-break:break-all;"></p>
+<p class="stat" id="rsPwStrength" style="font-size:.85rem; margin-top:4px;"></p>
+</div>
+</div>
+<div class="seo-content">
+<h3>How to Use Random Picker & Generator Studio</h3>
+<ol style="line-height:1.9;padding-left:20px;"><li><strong>Pick a Mode:</strong> Random Number, Name/Team Picker, Decision Wheel, Dice, Coin Flip, or Password Generator.</li><li><strong>Set Your Options:</strong> Enter a range, paste a list of names, or add wheel options.</li><li><strong>Generate:</strong> Click the action button for that mode.</li><li><strong>Use the Result:</strong> Copy it, screen-share it, or just enjoy the spin.</li></ol>
+<h3>Why Use This Tool</h3>
+<p>A free random generator online tool covers six everyday "pick something for me" needs in one place, instead of six separate single-purpose sites. This random picker and generator tool means a teacher choosing a volunteer, a friend group deciding where to eat, and a developer needing a quick secure password can all get what they need from the same simple page.</p>
+<h3>How It Works</h3>
+<p>This online random number and name picker tool draws every result from your browser's cryptographically secure random source rather than a simple pseudo-random formula, using rejection sampling to keep every outcome genuinely evenly distributed across the range you choose — no subtle bias toward certain numbers or names. The Decision Wheel calculates an exact landing angle for a randomly chosen segment before it ever starts spinning, so the multi-second spin animation is just a satisfying reveal of an already-fair result, not a rigged one.</p>
+<h3>Key Features</h3>
+<p>As a random team generator and decision wheel tool, the Name/Team Picker handles three related jobs from one pasted list: picking one or more winners, splitting everyone evenly into teams, or simply shuffling the order. The Decision Wheel accepts up to 10 custom options with a real spinning animation and a fixed pointer, dice rolling supports up to ten dice from d4 to d20 at once, and the password generator draws from a true cryptographic random source with adjustable length, character types, and an option to exclude visually ambiguous characters like 0/O and 1/l/I.</p>
+<h3>Common Use Cases</h3>
+<p>A teacher pastes a class list into the Name Picker to choose who presents first, completely removing any appearance of favoritism. A group of friends adds their dinner options to the Decision Wheel and lets the spin settle an argument that could otherwise go in circles. A developer setting up a new account needs a strong, random password on the spot and generates one with symbols and 16+ characters in a couple of clicks, right alongside rolling some dice for a tabletop game later that evening.</p>
+<h3>Tips</h3>
+<p>For raffles or giveaways, paste every entry once (duplicates count as extra chances, so repeat a name if they should have better odds) and use Pick Winner(s) rather than manually scrolling through a list. For passwords meant to be remembered rather than saved in a manager, a longer length with fewer symbol characters is often easier to type accurately than a short one packed with symbols — the strength indicator updates either way so you can see the real trade-off.</p>
+<h3>Frequently Asked Questions</h3>
+<div class=faq-block><details><summary>How random is the random number generator?</summary><p>It uses your browser's cryptographically secure random number source with rejection sampling to avoid the subtle bias that simple random formulas can introduce, so every number in your chosen range has an equal chance of appearing.</p></details><details><summary>Can I use the name picker for a classroom or raffle?</summary><p>Yes, paste one name or entry per line and choose how many winners to pick — useful for calling on students, drawing raffle winners, or picking a volunteer fairly.</p></details><details><summary>How does the decision wheel work?</summary><p>Add your own options, and the wheel calculates a fair random result before spinning, then animates to land exactly on that outcome.</p></details><details><summary>Can I split a list into random teams?</summary><p>Yes, choose "Split into teams," set how many teams you need, and the list is shuffled and divided as evenly as possible.</p></details><details><summary>Is the password generator actually secure?</summary><p>Yes, it uses your browser's built-in cryptographic random number generator (the same type of secure randomness used for encryption keys), not a simple non-secure random function.</p></details><details><summary>How many dice can I roll at once?</summary><p>Up to 10 dice per roll, with your choice of d4, d6, d8, d10, d12, or d20.</p></details><details><summary>Can I exclude confusing characters from a generated password?</summary><p>Yes, enable "Exclude ambiguous characters" to remove characters that look similar, like 0/O and 1/l/I, which is useful for passwords you'll need to type from memory or read aloud.</p></details><details><summary>Does this tool store or see my names, numbers, or passwords?</summary><p>No, everything runs locally in your browser — nothing you enter or generate is sent to or stored on a server.</p></details></div>
+</div>
+<div class="seo-content"><h3>Related Tools</h3><ul style="line-height:2;padding-left:20px;">
+<li><a href="password-strength-tester.html">Password Strength Tester</a></li>
+<li><a href="qr-code-generator.html">QR Code Generator</a></li>
+<li><a href="hash-generator.html">Hash Generator</a></li>
+</ul></div></main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M18 52 Q50 28 82 52" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M24 64 Q50 44 76 64" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M30 76 Q50 60 70 76" stroke="#f2ecd8" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="76" cy="26" r="21" fill="#e07a2c"/><text x="76" y="32" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Random Picker & Generator Studio","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/random-picker-generator-studio.html"},
+{"@type":"HowTo","name":"How to Use the Random Picker & Generator Studio","step":[
+{"@type":"HowToStep","text":"Choose a mode: number, name/team picker, wheel, dice, coin, or password."},
+{"@type":"HowToStep","text":"Set your range, list, or options."},
+{"@type":"HowToStep","text":"Generate the result."},
+{"@type":"HowToStep","text":"Copy or use the result."}
+]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How random is the random number generator?","acceptedAnswer":{"@type":"Answer","text":"It uses a cryptographically secure random source with rejection sampling to avoid bias, so every number has an equal chance."}},
+{"@type":"Question","name":"Can I use the name picker for a classroom or raffle?","acceptedAnswer":{"@type":"Answer","text":"Yes, paste one entry per line and choose how many winners to pick."}},
+{"@type":"Question","name":"How does the decision wheel work?","acceptedAnswer":{"@type":"Answer","text":"A fair random result is calculated before spinning, then the wheel animates to land exactly on that outcome."}},
+{"@type":"Question","name":"Can I split a list into random teams?","acceptedAnswer":{"@type":"Answer","text":"Yes, choose Split into teams and set how many teams you need."}},
+{"@type":"Question","name":"Is the password generator actually secure?","acceptedAnswer":{"@type":"Answer","text":"Yes, it uses your browser's built-in cryptographic random number generator."}},
+{"@type":"Question","name":"How many dice can I roll at once?","acceptedAnswer":{"@type":"Answer","text":"Up to 10 dice, with d4 through d20 options."}},
+{"@type":"Question","name":"Can I exclude confusing characters from a generated password?","acceptedAnswer":{"@type":"Answer","text":"Yes, an option removes characters like 0/O and 1/l/I."}},
+{"@type":"Question","name":"Does this tool store or see my names, numbers, or passwords?","acceptedAnswer":{"@type":"Answer","text":"No, everything runs locally in your browser and nothing is sent to a server."}}
+]}
+]}
+</script>
+<script>/* ===== Random Picker & Generator Studio engine ===== */
+const rsEl = id => document.getElementById(id);
+
+/* ---------- verified unbiased random integer generator (uses crypto.getRandomValues, rejection sampling to avoid modulo bias) ---------- */
+function rsRandomInt(min, max){
+  const range = max-min+1;
+  if(range<=0) return min;
+  const bitsNeeded = Math.ceil(Math.log2(range));
+  const bytesNeeded = Math.max(1, Math.ceil(bitsNeeded/8));
+  const maxValid = Math.floor(256**bytesNeeded / range) * range - 1;
+  let val;
+  const arr = new Uint8Array(bytesNeeded);
+  do{
+    crypto.getRandomValues(arr);
+    val = 0;
+    for(let i=0;i<bytesNeeded;i++) val = val*256 + arr[i];
+  } while(val > maxValid);
+  return min + (val % range);
+}
+function rsRandomFloat(min, max, decimals){
+  const scale = Math.pow(10, decimals);
+  const val = rsRandomInt(Math.round(min*scale), Math.round(max*scale));
+  return val/scale;
+}
+
+/* ---------- tab switching ---------- */
+const RS_PANELS = { number:'rsNumberPanel', picker:'rsPickerPanel', wheel:'rsWheelPanel', dice:'rsDicePanel', coin:'rsCoinPanel', password:'rsPasswordPanel' };
+document.querySelectorAll('.rs-tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.rs-tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    Object.values(RS_PANELS).forEach(id=>rsEl(id).style.display='none');
+    rsEl(RS_PANELS[btn.dataset.tab]).style.display = 'block';
+    if(btn.dataset.tab==='wheel') rsDrawWheel();
+  });
+});
+
+/* ---------- shared copy handler ---------- */
+document.querySelectorAll('[data-copy]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target = document.getElementById(btn.getAttribute('data-copy'));
+    if(!target) return;
+    const text = btn.getAttribute('data-copy-mode')==='text' ? target.textContent : target.value;
+    if(!text) return;
+    const done = ()=>{ const old=btn.textContent; btn.textContent='\u2705 Copied'; setTimeout(()=>btn.textContent=old,1200); };
+    if(window.toolnestCopyText){ window.toolnestCopyText(text, done); } else { navigator.clipboard.writeText(text).then(done); }
+  });
+});
+
+/* ---------- Random Number Generator ---------- */
+rsEl('rsNumGenerateBtn').addEventListener('click', ()=>{
+  const min = +rsEl('rsNumMin').value, max = +rsEl('rsNumMax').value;
+  const count = Math.max(1, Math.min(100, +rsEl('rsNumCount').value||1));
+  const allowDecimal = rsEl('rsNumDecimal').checked;
+  const noRepeat = rsEl('rsNumNoRepeat').checked;
+  if(min>=max) return rsEl('rsNumResult').textContent = 'Minimum must be less than maximum.';
+  if(noRepeat && !allowDecimal){
+    const rangeSize = Math.floor(max)-Math.ceil(min)+1;
+    if(count>rangeSize) return rsEl('rsNumResult').textContent = `Cannot generate ${count} non-repeating whole numbers from a range of only ${rangeSize}.`;
+  }
+  const results = [];
+  const used = new Set();
+  let attempts = 0;
+  while(results.length<count && attempts<count*50){
+    attempts++;
+    const val = allowDecimal ? rsRandomFloat(min,max,2) : rsRandomInt(Math.ceil(min), Math.floor(max));
+    if(noRepeat){
+      if(used.has(val)) continue;
+      used.add(val);
+    }
+    results.push(val);
+  }
+  rsEl('rsNumResult').textContent = results.join(', ');
+});
+
+/* ---------- Name / Team Picker ---------- */
+function rsShuffleArray(arr){
+  const copy = arr.slice();
+  for(let i=copy.length-1;i>0;i--){
+    const j = rsRandomInt(0,i);
+    [copy[i],copy[j]] = [copy[j],copy[i]];
+  }
+  return copy;
+}
+rsEl('rsPickerMode').addEventListener('change', function(){
+  rsEl('rsPickerCountField').style.display = this.value==='winner' ? 'block' : 'none';
+  const label = rsEl('rsPickerCountField').querySelector('label');
+  if(this.value==='teams'){ rsEl('rsPickerCountField').style.display='block'; label.textContent='Number of teams'; }
+  else if(this.value==='winner'){ label.textContent='How many winners'; }
+});
+rsEl('rsPickerGoBtn').addEventListener('click', ()=>{
+  const items = rsEl('rsPickerList').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  if(items.length<2) return rsEl('rsPickerResult').textContent = 'Enter at least 2 names or items, one per line.';
+  const mode = rsEl('rsPickerMode').value;
+  if(mode==='winner'){
+    const count = Math.max(1, Math.min(items.length, +rsEl('rsPickerCount').value||1));
+    const shuffled = rsShuffleArray(items);
+    const winners = shuffled.slice(0,count);
+    rsEl('rsPickerResult').textContent = (count===1?'Winner: ':'Winners:\n') + winners.join('\n');
+  }else if(mode==='teams'){
+    const numTeams = Math.max(2, Math.min(items.length, +rsEl('rsPickerCount').value||2));
+    const shuffled = rsShuffleArray(items);
+    const teams = Array.from({length:numTeams},()=>[]);
+    shuffled.forEach((item,i)=>teams[i%numTeams].push(item));
+    rsEl('rsPickerResult').textContent = teams.map((t,i)=>`Team ${i+1}: ${t.join(', ')}`).join('\n');
+  }else{
+    const shuffled = rsShuffleArray(items);
+    rsEl('rsPickerResult').textContent = 'Shuffled order:\n' + shuffled.join('\n');
+  }
+});
+
+/* ---------- Decision Wheel ---------- */
+const RS_WHEEL_COLORS = ['#1f3d2b','#e07a2c','#5b9bd5','#a35c20','#7a9e6b','#c2622e','#3f6b8a','#d1a15a','#8a4fbf','#2e9e6b'];
+let rsWheelOptions = ['Option 1','Option 2','Option 3','Option 4'];
+let rsWheelCurrentRotation = 0;
+function rsRenderWheelOptionList(){
+  const container = rsEl('rsWheelOptionList');
+  container.innerHTML = '';
+  rsWheelOptions.forEach((opt,i)=>{
+    const row = document.createElement('div');
+    row.className='row'; row.style.marginTop='6px';
+    const input = document.createElement('input');
+    input.type='text'; input.value=opt; input.style.flex='1';
+    input.addEventListener('input', ()=>{ rsWheelOptions[i]=input.value; rsDrawWheel(); });
+    const rm = document.createElement('button');
+    rm.className='fl-remove'; rm.textContent='\u2715';
+    rm.addEventListener('click', ()=>{ if(rsWheelOptions.length>2){ rsWheelOptions.splice(i,1); rsRenderWheelOptionList(); rsDrawWheel(); } else alert('At least 2 options are needed.'); });
+    row.appendChild(input); row.appendChild(rm);
+    container.appendChild(row);
+  });
+}
+rsEl('rsAddWheelOptionBtn').addEventListener('click', ()=>{
+  if(rsWheelOptions.length>=10) return alert('Maximum 10 options for readability.');
+  rsWheelOptions.push('Option '+(rsWheelOptions.length+1));
+  rsRenderWheelOptionList();
+  rsDrawWheel();
+});
+rsRenderWheelOptionList();
+
+function rsDrawWheel(){
+  const canvas = rsEl('rsWheelCanvas');
+  const ctx = canvas.getContext('2d');
+  const w=canvas.width, h=canvas.height, cx=w/2, cy=h/2, radius=w/2-6;
+  ctx.clearRect(0,0,w,h);
+  const n = rsWheelOptions.length;
+  const segAngle = (2*Math.PI)/n;
+  rsWheelOptions.forEach((opt,i)=>{
+    const start = -Math.PI/2 + i*segAngle; // -90deg offset so segment 0 starts at top, matches our rotation math (0deg = top)
+    const end = start+segAngle;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,radius,start,end);
+    ctx.closePath();
+    ctx.fillStyle = RS_WHEEL_COLORS[i%RS_WHEEL_COLORS.length];
+    ctx.fill();
+    ctx.strokeStyle = '#fff'; ctx.lineWidth=2; ctx.stroke();
+    ctx.save();
+    ctx.translate(cx,cy);
+    ctx.rotate(start+segAngle/2);
+    ctx.textAlign='right';
+    ctx.fillStyle='#fff';
+    ctx.font='bold 13px Arial';
+    const label = opt.length>14 ? opt.slice(0,13)+'\u2026' : opt;
+    ctx.fillText(label, radius-10, 5);
+    ctx.restore();
+  });
+}
+rsDrawWheel();
+
+/* ---------- verified spin-landing math ---------- */
+function rsCalcWheelRotation(numSegments, winningIndex, fullSpins){
+  const segmentAngle = 360/numSegments;
+  const targetMidAngle = winningIndex*segmentAngle + segmentAngle/2;
+  return fullSpins*360 + (360 - targetMidAngle);
+}
+let rsSpinning = false;
+rsEl('rsSpinBtn').addEventListener('click', ()=>{
+  if(rsSpinning) return;
+  rsSpinning = true;
+  rsEl('rsWheelResult').textContent = '';
+  const n = rsWheelOptions.length;
+  const winningIndex = rsRandomInt(0, n-1);
+  const fullSpins = 6+rsRandomInt(0,3);
+  const targetRotation = rsWheelCurrentRotation + rsCalcWheelRotation(n, winningIndex, fullSpins) - (rsWheelCurrentRotation%360);
+  const canvas = rsEl('rsWheelCanvas');
+  canvas.style.transform = `rotate(${targetRotation}deg)`;
+  rsWheelCurrentRotation = targetRotation;
+  setTimeout(()=>{
+    rsEl('rsWheelResult').textContent = 'Result: ' + rsWheelOptions[winningIndex];
+    rsSpinning = false;
+  }, 4100);
+});
+
+/* ---------- Dice Roller ---------- */
+rsEl('rsRollBtn').addEventListener('click', ()=>{
+  const count = Math.max(1, Math.min(10, +rsEl('rsDiceCount').value||1));
+  const sides = +rsEl('rsDiceSides').value;
+  const container = rsEl('rsDiceResult');
+  container.innerHTML = '';
+  let sum = 0;
+  for(let i=0;i<count;i++){
+    const val = rsRandomInt(1, sides);
+    sum += val;
+    const die = document.createElement('div');
+    die.style.cssText = 'width:56px;height:56px;border-radius:8px;background:#1f3d2b;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:700;border:2px solid #142a1c;';
+    die.textContent = val;
+    container.appendChild(die);
+  }
+  rsEl('rsDiceSum').textContent = `Total: ${sum} (${count} \u00d7 d${sides})`;
+});
+
+/* ---------- Coin Flip ---------- */
+function rsFlipOnce(){
+  return rsRandomInt(0,1)===0 ? 'Heads' : 'Tails';
+}
+rsEl('rsFlipBtn').addEventListener('click', ()=>{
+  const result = rsFlipOnce();
+  const display = rsEl('rsCoinDisplay');
+  display.style.transform = 'rotateY(360deg)';
+  setTimeout(()=>{ display.textContent = result==='Heads'?'H':'T'; display.style.transform='rotateY(0deg)'; }, 300);
+  rsEl('rsCoinResult').textContent = 'Result: '+result;
+});
+rsEl('rsFlipMultiBtn').addEventListener('click', ()=>{
+  const results = Array.from({length:10}, ()=>rsFlipOnce());
+  const heads = results.filter(r=>r==='Heads').length;
+  rsEl('rsCoinResult').textContent = `${results.join(', ')}\n\nHeads: ${heads} | Tails: ${10-heads}`;
+});
+
+/* ---------- Secure Password Generator (crypto-random, verified unbiased selection) ---------- */
+rsEl('rsPwLength').addEventListener('input', function(){ rsEl('rsPwLengthVal').textContent = this.value; });
+const RS_PW_SETS = {
+  upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', lower: 'abcdefghijklmnopqrstuvwxyz',
+  numbers: '0123456789', symbols: '!@#$%^&*()_-+=[]{}|;:,.<>?'
+};
+const RS_PW_AMBIGUOUS = '0O1lI';
+rsEl('rsPwGenerateBtn').addEventListener('click', ()=>{
+  const length = +rsEl('rsPwLength').value;
+  let pool = '';
+  if(rsEl('rsPwUpper').checked) pool += RS_PW_SETS.upper;
+  if(rsEl('rsPwLower').checked) pool += RS_PW_SETS.lower;
+  if(rsEl('rsPwNumbers').checked) pool += RS_PW_SETS.numbers;
+  if(rsEl('rsPwSymbols').checked) pool += RS_PW_SETS.symbols;
+  if(!pool) return alert('Select at least one character type.');
+  if(rsEl('rsPwExcludeAmbiguous').checked){
+    pool = pool.split('').filter(c=>!RS_PW_AMBIGUOUS.includes(c)).join('');
+  }
+  let password = '';
+  for(let i=0;i<length;i++){
+    password += pool[rsRandomInt(0, pool.length-1)];
+  }
+  rsEl('rsPwResult').textContent = password;
+
+  let strength = 0;
+  if(rsEl('rsPwUpper').checked) strength++;
+  if(rsEl('rsPwLower').checked) strength++;
+  if(rsEl('rsPwNumbers').checked) strength++;
+  if(rsEl('rsPwSymbols').checked) strength++;
+  let strengthLabel = 'Weak';
+  if(length>=12 && strength>=3) strengthLabel = 'Strong';
+  else if(length>=8 && strength>=2) strengthLabel = 'Moderate';
+  rsEl('rsPwStrength').textContent = `Strength: ${strengthLabel} (${length} characters, ${strength} character type${strength!==1?'s':''})`;
+});
+</script><script src="script.js"></script></body></html>
