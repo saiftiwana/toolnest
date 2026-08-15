@@ -353,7 +353,7 @@ function pgBuildPreviewHtml(data){
   const sectionHeadColor = t==='modern' ? data.brandColor : data.brandColor;
   let html = `<div style="font-family:Arial,sans-serif; color:#222; line-height:1.6;">`;
   html += `<div style="${headerStyles[t]}">`;
-  if(data.biz.logo) html += `<img src="${data.biz.logo}" style="max-height:50px; margin-bottom:10px;">`;
+  if(data.biz.logo) html += `<img src="${data.biz.logo}" alt="Business logo" style="max-height:50px; margin-bottom:10px;">`;
   html += `<h1 style="margin:0 0 4px; font-size:1.8rem;">${pgEscapeHtml(data.project.title)||'Project Proposal'}</h1>`;
   html += `<p style="margin:0; opacity:.85;">Prepared for ${pgEscapeHtml(data.client.name)||'Client'}${data.client.company?' at '+pgEscapeHtml(data.client.company):''}</p>`;
   html += `<p style="margin:4px 0 0; font-size:.85rem; opacity:.7;">By ${pgEscapeHtml(data.biz.name)||'Your Business'}</p>`;

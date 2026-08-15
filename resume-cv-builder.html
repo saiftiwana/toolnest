@@ -88,7 +88,7 @@ function buildResumeHTML(){
   else if(f.template==='compact'){headerStyle=`border-bottom:1px solid ${accent}; padding-bottom:6px; margin-bottom:10px;`;}
   else{headerStyle=`border-bottom:2px solid ${accent}; padding-bottom:12px; margin-bottom:18px;`;}
   const headColor=accent;
-  const photoHtml = rPhotoDataUrl ? `<img src="${rPhotoDataUrl}" style="width:70px;height:70px;border-radius:50%;object-fit:cover;float:right;">` : '';
+  const photoHtml = rPhotoDataUrl ? `<img src="${rPhotoDataUrl}" alt="Profile photo" style="width:70px;height:70px;border-radius:50%;object-fit:cover;float:right;">` : '';
   let html=`<div style="font-family:${f.font};">${photoHtml}<div style="${headerStyle}"><h1 style="margin:0 0 4px; color:${nameColor}; font-family:${f.font};">${f.name}</h1>`;
   if(f.title)html+=`<p style="margin:0; color:${subColor};">${f.title}</p>`;
   html+=`</div>`;
