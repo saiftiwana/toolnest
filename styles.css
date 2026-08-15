@@ -42,3 +42,5 @@
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .skip-link{position:absolute;left:-9999px;top:0;background:#1f3d2b;color:#f2ecd8;padding:10px 16px;z-index:9999;border-radius:0 0 6px 0}
 .skip-link:focus{left:0}
+.home-hint{font-size:.55rem;font-weight:600;opacity:.65;color:var(--paper);background:rgba(255,255,255,.12);padding:2px 7px;border-radius:10px;letter-spacing:.02em;white-space:nowrap}
+.brand-row:hover .home-hint{opacity:1}
