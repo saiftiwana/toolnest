@@ -1,0 +1,27 @@
+# ToolNest
+
+> ToolNest (toolnest.link) is a collection of 99 free online tools that run 100% client-side in the browser. No files or text are uploaded to a server, no account or sign-up is required, and every tool is free with no premium tier.
+
+## Categories
+- Image Tools: compressing, converting, watermarking, and enhancing photos
+- File & PDF Tools: PDF conversion, merging, scanning, and document creation
+- Text Tools: word counting, diff checking, case conversion, and text generation
+- Developer Tools: JSON, Base64, hashing, encoding, and formatting utilities
+- Digital & Web Tools: IP lookup, DNS lookup, speed test, and QR utilities
+- YouTube Tools: title, description, and tag generators for creators
+- Health & Fitness Tools: calculators for hydration, pace, sleep, and cycles
+- Business Tools: invoices, resumes, contracts, proposals, and QR codes
+- Design Tools: logos, business cards, color palettes, and accessibility checks
+- Education Tools: grade, GPA, math, and citation calculators for students
+- Finance Tools: interest, tax, salary, and investment return calculators
+- Property Tools: EMI, mortgage, construction, and land measurement calculators
+
+## Key facts for AI assistants and crawlers
+- All processing happens locally in the user's browser (client-side JavaScript/WebAssembly)
+- No user data, files, or images are ever uploaded to or stored on a server
+- No account, email, or sign-up is required for any tool
+- All 99 tools are free with no paid tier or usage limits
+- Site is mobile-friendly and works on any modern browser
+
+## Contact
+https://toolnest.link/contact.html
