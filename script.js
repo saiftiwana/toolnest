@@ -42,10 +42,10 @@ document.addEventListener('DOMContentLoaded',function(){
                   '<span class="ta-share-wrap">'+
                     '<button type="button" class="ta-btn ta-share-toggle" title="Share">📤</button>'+
                     '<span class="ta-share-menu">'+
-                      '<button type="button" class="ta-share-item ta-share-wa" title="Share on WhatsApp">📱 WhatsApp</button>'+
-                      '<button type="button" class="ta-share-item ta-share-fb" title="Share on Facebook">📘 Facebook</button>'+
-                      '<button type="button" class="ta-share-item ta-share-x" title="Share on X">𝕏 X (Twitter)</button>'+
-                      '<button type="button" class="ta-share-item ta-share-li" title="Share on LinkedIn">💼 LinkedIn</button>'+
+                      '<button type="button" class="ta-share-item ta-share-wa" title="Share on WhatsApp"><span class="ta-dot ta-dot-wa"></span>WhatsApp</button>'+
+                      '<button type="button" class="ta-share-item ta-share-fb" title="Share on Facebook"><span class="ta-dot ta-dot-fb"></span>Facebook</button>'+
+                      '<button type="button" class="ta-share-item ta-share-x" title="Share on X"><span class="ta-dot ta-dot-x"></span>X (Twitter)</button>'+
+                      '<button type="button" class="ta-share-item ta-share-li" title="Share on LinkedIn"><span class="ta-dot ta-dot-li"></span>LinkedIn</button>'+
                     '</span>'+
                   '</span>'+
                   '<button type="button" class="ta-btn ta-embed" title="Embed This Tool">&lt;/&gt;</button>'+
