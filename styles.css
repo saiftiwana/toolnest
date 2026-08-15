@@ -39,3 +39,6 @@
 .embed-modal{max-width:520px}
 .embed-hint{font-size:13px;color:#555;margin:0 0 10px}
 .embed-code{width:100%;box-sizing:border-box;font-family:monospace;font-size:12px;padding:10px;border:1px solid #ccc;border-radius:6px;resize:vertical;margin-bottom:10px}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:absolute;left:-9999px;top:0;background:#1f3d2b;color:#f2ecd8;padding:10px 16px;z-index:9999;border-radius:0 0 6px 0}
+.skip-link:focus{left:0}
