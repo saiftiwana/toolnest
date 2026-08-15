@@ -39,24 +39,61 @@ document.addEventListener('DOMContentLoaded',function(){
     var bar=document.createElement('div');
     bar.className='tool-actions';
     bar.innerHTML='<button type="button" class="ta-btn ta-copy" title="Copy Link">🔗</button>'+
-                  '<button type="button" class="ta-btn ta-share" title="Share on WhatsApp">📱</button>'+
+                  '<span class="ta-share-wrap">'+
+                    '<button type="button" class="ta-btn ta-share-toggle" title="Share">📤</button>'+
+                    '<span class="ta-share-menu">'+
+                      '<button type="button" class="ta-share-item ta-share-wa" title="Share on WhatsApp">📱 WhatsApp</button>'+
+                      '<button type="button" class="ta-share-item ta-share-fb" title="Share on Facebook">📘 Facebook</button>'+
+                      '<button type="button" class="ta-share-item ta-share-x" title="Share on X">𝕏 X (Twitter)</button>'+
+                      '<button type="button" class="ta-share-item ta-share-li" title="Share on LinkedIn">💼 LinkedIn</button>'+
+                    '</span>'+
+                  '</span>'+
+                  '<button type="button" class="ta-btn ta-embed" title="Embed This Tool">&lt;/&gt;</button>'+
                   '<button type="button" class="ta-btn ta-reset" title="Reset">↺</button>';
     card.insertBefore(bar,card.firstChild);
     var copyBtn=bar.querySelector('.ta-copy');
-    var shareBtn=bar.querySelector('.ta-share');
     var resetBtn=bar.querySelector('.ta-reset');
+    var shareToggle=bar.querySelector('.ta-share-toggle');
+    var shareMenu=bar.querySelector('.ta-share-menu');
+    var embedBtn=bar.querySelector('.ta-embed');
+
+    function cardUrl(){return location.origin+location.pathname+'#'+card.id;}
+
     copyBtn.addEventListener('click',function(){
-      var url=location.origin+location.pathname+'#'+card.id;
-      copyText(url,function(){
+      copyText(cardUrl(),function(){
         var old=copyBtn.textContent;copyBtn.textContent='✅';
         setTimeout(function(){copyBtn.textContent=old;},1200);
       });
     });
-    shareBtn.addEventListener('click',function(){
-      var url=location.origin+location.pathname+'#'+card.id;
-      var text='Check out this free tool — '+title+' on ToolNest: '+url;
-      window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
+
+    shareToggle.addEventListener('click',function(e){
+      e.stopPropagation();
+      document.querySelectorAll('.ta-share-menu.open').forEach(function(m){if(m!==shareMenu)m.classList.remove('open');});
+      shareMenu.classList.toggle('open');
     });
+    document.addEventListener('click',function(){shareMenu.classList.remove('open');});
+    shareMenu.addEventListener('click',function(e){e.stopPropagation();});
+
+    bar.querySelector('.ta-share-wa').addEventListener('click',function(){
+      var text='Check out this free tool — '+title+' on ToolNest: '+cardUrl();
+      window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
+      shareMenu.classList.remove('open');
+    });
+    bar.querySelector('.ta-share-fb').addEventListener('click',function(){
+      window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(cardUrl()),'_blank');
+      shareMenu.classList.remove('open');
+    });
+    bar.querySelector('.ta-share-x').addEventListener('click',function(){
+      var text='Check out this free tool — '+title+' on ToolNest';
+      window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(cardUrl()),'_blank');
+      shareMenu.classList.remove('open');
+    });
+    bar.querySelector('.ta-share-li').addEventListener('click',function(){
+      window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(cardUrl()),'_blank');
+      shareMenu.classList.remove('open');
+    });
+
+    embedBtn.addEventListener('click',function(){openEmbedModal(title,cardUrl());});
     resetBtn.addEventListener('click',function(){resetCard(card);});
   });
   if(location.hash){
@@ -64,6 +101,33 @@ document.addEventListener('DOMContentLoaded',function(){
     if(target){setTimeout(function(){target.scrollIntoView({behavior:'smooth',block:'start'});},50);}
   }
 });
+
+function openEmbedModal(title,url){
+  var pageUrl=location.origin+location.pathname;
+  var code='<iframe src="'+pageUrl+'" width="100%" height="600" style="border:1px solid #ddd;border-radius:8px;" title="'+title.replace(/"/g,'&quot;')+' - ToolNest"></iframe>\n'+
+           '<p style="font-size:12px;text-align:center;margin-top:6px;">Powered by <a href="https://toolnest.link" target="_blank" rel="noopener">ToolNest Free Online Tools</a></p>';
+  var overlay=document.createElement('div');
+  overlay.className='share-card-overlay';
+  overlay.innerHTML='<div class="share-card-modal embed-modal">'+
+    '<button type="button" class="share-card-close" aria-label="Close">✕</button>'+
+    '<h3>Embed This Tool</h3>'+
+    '<p class="embed-hint">Paste this code into your website or blog to embed "'+title+'". A backlink to ToolNest is included automatically.</p>'+
+    '<textarea class="embed-code" readonly rows="5"></textarea>'+
+    '<button type="button" class="ta-btn embed-copy-btn">📋 Copy Embed Code</button>'+
+  '</div>';
+  document.body.appendChild(overlay);
+  var ta=overlay.querySelector('.embed-code');
+  ta.value=code;
+  overlay.querySelector('.share-card-close').addEventListener('click',function(){overlay.remove();});
+  overlay.addEventListener('click',function(e){if(e.target===overlay)overlay.remove();});
+  overlay.querySelector('.embed-copy-btn').addEventListener('click',function(btnE){
+    var btn=btnE.currentTarget;
+    copyText(code,function(){
+      var old=btn.textContent;btn.textContent='✅ Copied';
+      setTimeout(function(){btn.textContent=old;},1200);
+    });
+  });
+}
 })();
 
 /* ---------- ToolNest Share Result Card Engine (Phase 8, Batch 8.2) ---------- */
