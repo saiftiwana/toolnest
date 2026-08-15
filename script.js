@@ -168,6 +168,34 @@ function openEmbedModal(title,url){
     return overlay;
   }
 
+  function drawToolNestLogoMark(ctx,x,y,r){
+    var scale=r/48;
+    function mx(px){return x+(px-50)*scale;}
+    function my(py){return y+(py-50)*scale;}
+    ctx.save();
+    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle='#16301f';ctx.fill();
+    ctx.save();
+    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.clip();
+    ctx.strokeStyle='#f2ecd8';ctx.lineCap='round';ctx.lineJoin='round';
+    ctx.lineWidth=7*scale;
+    var arcs=[[16,54,50,26,84,54],[22,67,50,42,78,67],[29,79,50,58,71,79]];
+    arcs.forEach(function(a){
+      ctx.beginPath();
+      ctx.moveTo(mx(a[0]),my(a[1]));
+      ctx.quadraticCurveTo(mx(a[2]),my(a[3]),mx(a[4]),my(a[5]));
+      ctx.stroke();
+    });
+    ctx.restore();
+    var bx=mx(79),by=my(23),bR=20*scale;
+    ctx.beginPath();ctx.arc(bx,by,bR,0,Math.PI*2);
+    ctx.fillStyle=BRAND_ORANGE;ctx.fill();
+    ctx.lineWidth=3*scale;ctx.strokeStyle=BRAND_BG;ctx.stroke();
+    ctx.font='bold '+(16*scale)+'px Arial';ctx.fillStyle=BRAND_BG;
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('99',bx,by+1*scale);
+    ctx.restore();
+  }
+
   function drawCard(canvas,size,title,highlight,qrImg){
     var W=size==='square'?1080:1200, H=size==='square'?1080:630;
     canvas.width=W;canvas.height=H;
@@ -175,9 +203,7 @@ function openEmbedModal(title,url){
     ctx.fillStyle=BRAND_BG;ctx.fillRect(0,0,W,H);
 
     var cx=size==='square'?W/2:150, cy=size==='square'?140:130, r=size==='square'?80:70;
-    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=BRAND_ORANGE;ctx.fill();
-    ctx.fillStyle=BRAND_BG;ctx.font='bold '+(r*0.75)+'px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText('99',cx,cy+2);
+    drawToolNestLogoMark(ctx,cx,cy,r);
 
     var textX=size==='square'?W/2:280, align=size==='square'?'center':'left';
     ctx.textAlign=align;
