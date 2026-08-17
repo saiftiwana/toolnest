@@ -20,7 +20,7 @@
 </style></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html" title="Go to ToolNest homepage" aria-label="ToolNest — go to homepage"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M16 54 Q50 26 84 54" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 67 Q50 42 78 67" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M29 79 Q50 58 71 79" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="79" cy="23" r="20" fill="#e07a2c" stroke="#1f3d2b" stroke-width="3"/><text x="79" y="28.5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span><span class="home-hint" aria-hidden="true">🏠 Home</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Zakat &amp; Ushr Assessment Studio</h1><p>Calculate Zakat, Assess Nisab, Review Wealth &amp; Estimate Agricultural Ushr — Sunni &amp; Jafri fiqh, Pakistan &amp; India.</p></header>
 
 <nav class="zs-stepnav" id="zsStepNav" aria-label="Assessment steps">
-<a href="#step01" class="zs-step-btn">01 Fiqh</a><a href="#step02" class="zs-step-btn">02 Wealth</a><a href="#step03" class="zs-step-btn">03 Gold &amp; Silver</a><a href="#step04" class="zs-step-btn">04 Business</a><a href="#step05" class="zs-step-btn">05 Agriculture</a><a href="#step06" class="zs-step-btn">06 Liabilities</a><a href="#step07" class="zs-step-btn">07 Nisab &amp; Hawl</a><a href="#step08" class="zs-step-btn">08 Review</a><a href="#step09" class="zs-step-btn">09 Summary</a><a href="#step10" class="zs-step-btn">10 Report</a><a href="#step11" class="zs-step-btn">11 Guide &amp; FAQ</a>
+<a href="#step01" class="zs-step-btn">01 Fiqh</a><a href="#dataEntryCard" class="zs-step-btn zs-panel-link" data-panel="panel02">02 Wealth</a><a href="#dataEntryCard" class="zs-step-btn zs-panel-link" data-panel="panel03">03 Gold &amp; Silver</a><a href="#dataEntryCard" class="zs-step-btn zs-panel-link" data-panel="panel04">04 Business</a><a href="#dataEntryCard" class="zs-step-btn zs-panel-link" data-panel="panel05">05 Agriculture</a><a href="#dataEntryCard" class="zs-step-btn zs-panel-link" data-panel="panel06">06 Liabilities</a><a href="#dataEntryCard" class="zs-step-btn zs-panel-link" data-panel="panel07">07 Nisab &amp; Hawl</a><a href="#step08" class="zs-step-btn">08 Review</a><a href="#step09" class="zs-step-btn">09 Summary</a><a href="#step10" class="zs-step-btn">10 Report</a><a href="#step11" class="zs-step-btn">11 Guide, Features &amp; FAQ</a>
 </nav>
 <div class="zs-summary-bar" id="zsSummaryBar">Method: <span id="zsMethodLabel">Not selected</span> <span class="amt" id="zsRunningTotal">—</span></div>
 
@@ -33,9 +33,12 @@
 <p class="zs-note" id="zsFiqhNote">Calculation Method: <strong>Sunni Fiqh (Hanafi)</strong> — Zakat applies to cash, gold, silver, and business assets at 2.5%.</p>
 </div>
 
-<div class="card" id="step02">
+<div class="card" id="dataEntryCard">
 <span class="zs-method-badge" data-method-badge>Sunni Fiqh</span>
-<h2>02 — Financial Wealth</h2>
+<h2>02–07 — Enter Your Assessment Details</h2>
+<p class="desc">Fill in each section below — switch tabs anytime, your entries are kept.</p>
+<div class="row" id="zsEntryTabs" style="flex-wrap:wrap;gap:8px;margin-bottom:16px;"><button type="button" class="secondary zs-entry-tab active" data-panel="panel02">💰 Financial Wealth</button><button type="button" class="secondary zs-entry-tab" data-panel="panel03">🪙 Gold & Silver</button><button type="button" class="secondary zs-entry-tab" data-panel="panel04">🏪 Business & Trade</button><button type="button" class="secondary zs-entry-tab" data-panel="panel05">🌾 Agriculture & Ushr</button><button type="button" class="secondary zs-entry-tab" data-panel="panel06">📋 Liabilities</button><button type="button" class="secondary zs-entry-tab" data-panel="panel07">📅 Nisab & Hawl</button></div>
+<div id="panel02">
 <p class="desc">Enter your cash, bank, digital, and investment balances.</p>
 <div class="row"><div class="field"><label class="field-label" for="zCurrency">Currency</label><select id="zCurrency"><option value="PKR">PKR — Pakistani Rupee</option><option value="INR">INR — Indian Rupee</option><option value="USD">USD — US Dollar</option><option value="OTHER">Custom Currency</option></select></div><div class="field hidden" id="zCustomCurWrap"><label class="field-label" for="zCustomCur">Currency Symbol/Code</label><input type="text" id="zCustomCur" placeholder="e.g. AED"></div></div>
 
@@ -54,10 +57,7 @@
 <p class="zs-note" id="zsFinWealthNote">In Sunni fiqh, this total is Zakatable wealth at 2.5% if it reaches Nisab.</p>
 <p class="stat">Financial Wealth Total: <strong id="fwTotal">0</strong></p>
 </div>
-
-<div class="card" id="step03">
-<span class="zs-method-badge" data-method-badge>Sunni Fiqh</span>
-<h2>03 — Gold &amp; Silver</h2>
+<div id="panel03" class="hidden">
 <p class="desc">Enter your own current market price — no price is assumed or hard-coded.</p>
 
 <h3>Gold</h3>
@@ -72,19 +72,13 @@
 
 <button type="button" class="secondary" id="gsCalcBtn">Update Gold &amp; Silver Values</button>
 </div>
-
-<div class="card" id="step04">
-<span class="zs-method-badge" data-method-badge>Sunni Fiqh</span>
-<h2>04 — Business &amp; Trade</h2>
+<div id="panel04" class="hidden">
 <p class="desc">Enter the value of eligible business/trade assets according to your selected methodology.</p>
 <div class="row"><div class="field"><label class="field-label" for="bizInventory">Business Inventory</label><input type="number" id="bizInventory" value="0"></div><div class="field"><label class="field-label" for="bizGoods">Goods Held for Sale</label><input type="number" id="bizGoods" value="0"></div><div class="field"><label class="field-label" for="bizCash">Business Cash</label><input type="number" id="bizCash" value="0"></div><div class="field"><label class="field-label" for="bizReceivables">Eligible Receivables</label><input type="number" id="bizReceivables" value="0"></div><div class="field"><label class="field-label" for="bizOther">Other Trade Assets</label><input type="number" id="bizOther" value="0"></div></div>
 <p class="zs-note" id="zsBizNote">Sunni fiqh: business assets are Zakatable at 2.5%.</p>
 <p class="stat">Business Asset Total: <strong id="bizTotal">0</strong></p>
 </div>
-
-<div class="card" id="step05">
-<span class="zs-method-badge" data-method-badge>Sunni Fiqh</span>
-<h2>05 — 🌾 Agriculture &amp; Ushr</h2>
+<div id="panel05" class="hidden">
 <p class="desc"><strong>Ushr is assessed separately from Zakat</strong> — it applies to storable agricultural produce, at harvest, with its own rate.</p>
 <div class="row"><div class="field"><label class="field-label" for="agCropType">Produce / Crop Type</label><input type="text" id="agCropType" placeholder="e.g. Wheat, Rice"></div><div class="field"><label class="field-label" for="agQty">Total Harvest Quantity</label><input type="number" id="agQty" value="0"></div><div class="field"><label class="field-label" for="agUnit">Unit</label><select id="agUnit"><option value="kg">kg</option><option value="maund">Maund</option><option value="ton">Ton</option><option value="other">Other / Custom</option></select></div></div>
 <div class="row"><div class="field"><label class="field-label" for="agValue">Produce Value</label><input type="number" id="agValue" value="0"></div><div class="field"><label class="field-label" for="agHarvestDate">Harvest Date</label><input type="date" id="agHarvestDate"></div><div class="field"><label class="field-label" for="agIrrigation">Irrigation Method</label><select id="agIrrigation"><option value="0.10">Natural / Rain-fed (10%)</option><option value="0.05">Artificial / Paid Irrigation (5%)</option><option value="0.075">Mixed Irrigation (~7.5%, estimate — confirm with a scholar)</option><option value="manual">Other / Manual Assessment</option></select></div></div>
@@ -92,18 +86,12 @@
 <button type="button" class="secondary" id="agCalcBtn">Calculate Ushr</button>
 <p class="stat" id="agResult"></p>
 </div>
-
-<div class="card" id="step06">
-<span class="zs-method-badge" data-method-badge>Sunni Fiqh</span>
-<h2>06 — Debts &amp; Eligible Deductions</h2>
+<div id="panel06" class="hidden">
 <p class="desc">Eligibility depends on the selected methodology and individual circumstances — not every liability is automatically deducted.</p>
 <div class="row"><div class="field"><label class="field-label" for="liDebts">Immediate Debts</label><input type="number" id="liDebts" value="0"></div><div class="field"><label class="field-label" for="liDue">Due Payments</label><input type="number" id="liDue" value="0"></div><div class="field"><label class="field-label" for="liBiz">Eligible Business Liabilities</label><input type="number" id="liBiz" value="0"></div><div class="field"><label class="field-label" for="liOther">Other Eligible Deductions</label><input type="number" id="liOther" value="0"></div></div>
 <p class="stat">Total Eligible Deductions: <strong id="liTotal">0</strong></p>
 </div>
-
-<div class="card" id="step07">
-<span class="zs-method-badge" data-method-badge>Sunni Fiqh</span>
-<h2>07 — Nisab &amp; Hawl</h2>
+<div id="panel07" class="hidden">
 <h3>Nisab Assessment</h3>
 <div class="row"><div class="field"><label class="field-label" for="nisabBasis">Nisab Basis</label><select id="nisabBasis"><option value="silver">Silver (lower threshold — more inclusive)</option><option value="gold">Gold</option><option value="manual">Manual Entry</option></select></div><div class="field hidden" id="nisabManualWrap"><label class="field-label" for="nisabManualValue">Manual Nisab Value</label><input type="number" id="nisabManualValue" value="0"></div></div>
 <p class="stat" id="nisabValueDisplay">Nisab value used for this calculation: —</p>
@@ -114,16 +102,17 @@
 <p class="stat" id="hawlResult"></p>
 <p class="zs-note">This date calculation is a mathematical helper only — whether a full lunar year (Hawl) has genuinely passed, and its ruling implications, should be confirmed according to your selected methodology and your own scholar.</p>
 </div>
+</div>
 
 <div class="card" id="step08">
 <h2>08 — Review Your Assessment</h2>
 <p class="desc">Check every section before calculating. Click Edit to jump back and change anything.</p>
-<div class="zs-review-card"><span>Financial Wealth: <strong id="revFw">0</strong></span><a href="#step02">Edit</a></div>
-<div class="zs-review-card"><span>Gold &amp; Silver: <strong id="revGs">0</strong></span><a href="#step03">Edit</a></div>
-<div class="zs-review-card"><span>Business: <strong id="revBiz">0</strong></span><a href="#step04">Edit</a></div>
-<div class="zs-review-card"><span>Agriculture / Ushr: <strong id="revAg">0</strong></span><a href="#step05">Edit</a></div>
-<div class="zs-review-card"><span>Liabilities: <strong id="revLi">0</strong></span><a href="#step06">Edit</a></div>
-<div class="zs-review-card"><span>Nisab Basis: <strong id="revNisab">—</strong></span><a href="#step07">Edit</a></div>
+<div class="zs-review-card"><span>Financial Wealth: <strong id="revFw">0</strong></span><a href="#dataEntryCard" class="zs-panel-link" data-panel="panel02">Edit</a></div>
+<div class="zs-review-card"><span>Gold &amp; Silver: <strong id="revGs">0</strong></span><a href="#dataEntryCard" class="zs-panel-link" data-panel="panel03">Edit</a></div>
+<div class="zs-review-card"><span>Business: <strong id="revBiz">0</strong></span><a href="#dataEntryCard" class="zs-panel-link" data-panel="panel04">Edit</a></div>
+<div class="zs-review-card"><span>Agriculture / Ushr: <strong id="revAg">0</strong></span><a href="#dataEntryCard" class="zs-panel-link" data-panel="panel05">Edit</a></div>
+<div class="zs-review-card"><span>Liabilities: <strong id="revLi">0</strong></span><a href="#dataEntryCard" class="zs-panel-link" data-panel="panel06">Edit</a></div>
+<div class="zs-review-card"><span>Nisab Basis: <strong id="revNisab">—</strong></span><a href="#dataEntryCard" class="zs-panel-link" data-panel="panel07">Edit</a></div>
 <ul class="zs-checklist" id="zsChecklist">
 <li id="chk-fiqh">☐ Fiqh selected</li>
 <li id="chk-fw">☐ Financial wealth entered</li>
@@ -181,9 +170,30 @@
 </div>
 
 <div class="card" id="step11">
-<h2>11 — Understanding Zakat</h2>
+<h2>11 — Guide, Features &amp; FAQ</h2>
+
 <div class="seo-content">
-<h3>What is Zakat?</h3>
+<h3>How to Use This Tool</h3>
+<ol><li><strong>Select Your Fiqh:</strong> Choose Sunni or Jafri in Step 01, since the categories of Zakatable wealth differ between them.</li><li><strong>Fill In Your Details:</strong> Use the tabs in Steps 02–07 to enter your financial wealth, gold, silver, business assets, agricultural produce, liabilities, and Nisab basis.</li><li><strong>Review:</strong> Check every section in Step 08, with quick Edit links back to any tab.</li><li><strong>Calculate:</strong> Get your full Zakat, Khums (if applicable), and Ushr assessment, then print or save your report.</li></ol>
+
+<h3>Why Use This Tool</h3>
+<p>Most Zakat calculators online assume one set of rules fits everyone, but Sunni and Jafri fiqh genuinely differ in which categories of wealth are Zakatable, not just in rate. This tool keeps that distinction structurally clear throughout — from Nisab thresholds to whether cash is Zakatable at all — instead of quietly merging two different jurisprudential traditions into one generic result. Built for Pakistan and India, it supports PKR and INR alongside a custom currency option.</p>
+
+<h3>How It Works</h3>
+<p>Every figure you enter — cash, gold weight, business assets, crop value — is combined using deterministic formulas defined for your selected fiqh. Gold and silver prices, and the Nisab basis, are entered manually rather than assumed, so your assessment always reflects your own current market rate. All calculations run entirely in your browser.</p>
+
+<h3>Key Features</h3>
+<p>A structured, step-by-step Zakat and Ushr assessment workspace covering financial wealth, gold and silver, business assets, agricultural produce, liabilities, and Nisab — all in tabs so you only see one section at a time. Separate Sunni and Jafri calculation logic, including a dedicated Khums calculator for Jafri users. Ushr is always kept separate from Zakat, both in terminology and in the results dashboard. A full review step with editable summary cards, a printable report, and a detailed breakdown of your assessment.</p>
+
+<h3>Common Use Cases</h3>
+<p>A Pakistani family completing their full annual Zakat assessment before Ramadan, entering gold, bank savings, and a small family business in one workspace. An Indian Muslim household checking whether their combined wealth has reached Nisab. A Jafri household calculating Khums on their annual savings surplus separately from any Zakat due on gold coins. A landowner assessing Ushr on a wheat harvest, keeping it clearly separate from their household Zakat.</p>
+
+<h3>Tips for Best Results</h3>
+<p>Enter your own current local gold and silver rate rather than relying on an outdated figure, since prices can move significantly. Double check whether your gold or silver is genuinely in transactional coin form before ticking that box under Jafri fiqh — most modern jewelry does not qualify. Keep perishable produce out of the Agriculture step and enter its sale proceeds as cash instead. Revisit your assessment each year on the same Hijri date for consistency.</p>
+</div>
+
+<div class="seo-content">
+<h3>Understanding Zakat</h3>
 <p>Zakat is an obligatory annual payment on qualifying wealth that has reached a minimum threshold (Nisab) and been held for a full lunar year (Hawl). It is one of the five pillars of Islam and applies to categories of wealth defined by Islamic jurisprudence, including cash, gold, silver, and business assets.</p>
 <h3>What is Nisab?</h3>
 <p>Nisab is the minimum amount of wealth a person must own before Zakat becomes obligatory. It is traditionally defined in terms of gold or silver value, and differs between Sunni and Jafri methodology.</p>
@@ -201,7 +211,10 @@
 <p>In Sunni (Hanafi) fiqh, Zakat applies broadly to cash, gold, silver, and business assets at 2.5%, using a Nisab of 87.48 grams of gold or 612.36 grams of silver.</p>
 <h3>Jafri Methodology</h3>
 <p>In Jafri (Shia) fiqh, Zakat applies to specific categories — gold and silver coins, grains, and livestock — with cash and savings instead purified through a separate Khums obligation of 20% on annual surplus.</p>
+</div>
 
+<div class="seo-content">
+<h3>Frequently Asked Questions</h3>
 <div class="faq-block">
 <details><summary>What is a Zakat assessment calculator?</summary><p>It is a tool that helps organize your wealth into the categories relevant to Zakat, checks them against the Nisab threshold, and calculates the amount due according to your selected methodology.</p></details>
 <details><summary>How do I calculate Zakat on cash and bank savings?</summary><p>Enter your cash, bank, digital, and investment balances in the Financial Wealth step — in Sunni fiqh this is compared against Nisab at 2.5%; in Jafri fiqh it is assessed through Khums instead.</p></details>
@@ -295,6 +308,31 @@ function applyFiqhUI(){
 
 document.addEventListener('DOMContentLoaded',function(){
 
+  /* Data-entry tab switcher (Steps 02-07 merged into tabs) */
+  document.getElementById('zsEntryTabs').addEventListener('click',function(e){
+    var btn=e.target.closest('.zs-entry-tab');
+    if(!btn)return;
+    document.querySelectorAll('.zs-entry-tab').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    var target=btn.getAttribute('data-panel');
+    ['panel02','panel03','panel04','panel05','panel06','panel07'].forEach(function(id){
+      document.getElementById(id).classList.toggle('hidden', id!==target);
+    });
+  });
+
+  /* Links elsewhere (top nav, Review Edit buttons) that jump to a specific panel */
+  document.querySelectorAll('.zs-panel-link').forEach(function(link){
+    link.addEventListener('click',function(){
+      var target=this.getAttribute('data-panel');
+      document.querySelectorAll('.zs-entry-tab').forEach(function(b){
+        b.classList.toggle('active', b.getAttribute('data-panel')===target);
+      });
+      ['panel02','panel03','panel04','panel05','panel06','panel07'].forEach(function(id){
+        document.getElementById(id).classList.toggle('hidden', id!==target);
+      });
+    });
+  });
+
   document.getElementById('fiqhTabs').addEventListener('click',function(e){
     var btn=e.target.closest('.fiqh-tab');
     if(!btn)return;
@@ -315,7 +353,7 @@ document.addEventListener('DOMContentLoaded',function(){
     document.getElementById('chk-fw').textContent = '☑ Financial wealth entered — '+fmt(total);
     return total;
   }
-  document.querySelectorAll('#step02 input').forEach(function(el){el.addEventListener('input',calcFw);});
+  document.querySelectorAll('#panel02 input').forEach(function(el){el.addEventListener('input',calcFw);});
   calcFw();
 
   /* Gold & Silver */
@@ -341,7 +379,7 @@ document.addEventListener('DOMContentLoaded',function(){
     document.getElementById('chk-biz').textContent = '☑ Business assets reviewed — '+fmt(total);
     return total;
   }
-  document.querySelectorAll('#step04 input').forEach(function(el){el.addEventListener('input',calcBiz);});
+  document.querySelectorAll('#panel04 input').forEach(function(el){el.addEventListener('input',calcBiz);});
   calcBiz();
 
   /* Agriculture & Ushr */
@@ -371,7 +409,7 @@ document.addEventListener('DOMContentLoaded',function(){
     document.getElementById('chk-li').textContent = '☑ Liabilities reviewed — '+fmt(total);
     return total;
   }
-  document.querySelectorAll('#step06 input').forEach(function(el){el.addEventListener('input',calcLi);});
+  document.querySelectorAll('#panel06 input').forEach(function(el){el.addEventListener('input',calcLi);});
   calcLi();
 
   /* Nisab */
@@ -425,7 +463,7 @@ document.addEventListener('DOMContentLoaded',function(){
     document.getElementById('revLi').textContent = fmt(li);
     document.getElementById('revNisab').textContent = document.getElementById('nisabBasis').selectedOptions[0].textContent;
   }
-  document.querySelectorAll('#step02 input,#step04 input,#step06 input').forEach(function(el){el.addEventListener('input',refreshReview);});
+  document.querySelectorAll('#panel02 input,#panel04 input,#panel06 input').forEach(function(el){el.addEventListener('input',refreshReview);});
   document.getElementById('gsCalcBtn').addEventListener('click',refreshReview);
   refreshReview();
 
@@ -535,7 +573,7 @@ document.addEventListener('DOMContentLoaded',function(){
   });
 
   /* Step nav active highlight on scroll */
-  var sections = ['step01','step02','step03','step04','step05','step06','step07','step08','step09','step10','step11'];
+  var sections = ['step01','dataEntryCard','step08','step09','step10','step11'];
   window.addEventListener('scroll',function(){
     var scrollPos = window.scrollY+120;
     var current = sections[0];
