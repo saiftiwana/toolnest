@@ -51,7 +51,9 @@
 
 <div class="card" id="bstep01">
 <h2>01 — Basic Information</h2>
-<div class="row"><div class="field"><label class="field-label" for="bsCountry">Country</label><select id="bsCountry"><option value="Pakistan">Pakistan</option><option value="India">India</option></select></div><div class="field"><label class="field-label" for="bsLanguage">Biodata Language</label><select id="bsLanguage"><option value="en">English</option><option value="ur">اردو (Urdu)</option><option value="both">English + اردو</option></select></div></div>
+<div class="row"><div class="field"><label class="field-label" for="bsCountry">Country</label><select id="bsCountry"><option value="Pakistan">Pakistan</option><option value="India">India</option><option value="Other">Custom / Other Country</option></select></div><div class="field hidden" id="bsCustomCountryWrap"><label class="field-label" for="bsCustomCountry">Country Name</label><input type="text" id="bsCustomCountry" placeholder="Enter your country"></div><div class="field"><label class="field-label" for="bsLanguage">Biodata Language</label><select id="bsLanguage"><option value="en">English</option><option value="ur">اردو (Urdu)</option><option value="hi">हिन्दी (Hindi)</option><option value="en_ur">English + اردو</option><option value="en_hi">English + हिन्दी</option><option value="custom">Custom / Local Language</option></select></div></div>
+<div class="row"><div class="field hidden" id="bsCustomLangWrap"><label class="field-label" for="bsCustomLang">Language Name</label><input type="text" id="bsCustomLang" placeholder="e.g. Punjabi, Bengali, Sindhi"></div></div>
+<p class="bs-note" id="bsCustomLangNote" style="display:none;">Custom/local language selected — your biodata will be generated in English as a base, with a note reminding you to translate it. Full automatic translation isn't available for every local language.</p>
 <div class="row"><div class="field"><label class="field-label" for="bsTitle">Biodata Title</label><input type="text" id="bsTitle" placeholder="e.g. Biodata for Marriage" value="Biodata for Marriage"></div><div class="field"><label class="field-label" for="bsName">Full Name</label><input type="text" id="bsName"></div><div class="field"><label class="field-label" for="bsGender">Gender</label><select id="bsGender"><option>Male</option><option>Female</option></select></div></div>
 <div class="row"><div class="field"><label class="field-label" for="bsDob">Date of Birth</label><input type="date" id="bsDob"></div><div class="field"><label class="field-label" for="bsCity">City</label><input type="text" id="bsCity"></div><div class="field"><label class="field-label" for="bsNationality">Nationality</label><input type="text" id="bsNationality"></div></div>
 <div class="row"><div class="field"><label class="field-label" for="bsMaritalStatus">Marital Status</label><select id="bsMaritalStatus"><option>Never Married</option><option>Divorced</option><option>Widowed</option></select></div><div class="field"><label class="field-label" for="bsHeight">Height <span style="font-weight:400">(optional)</span></label><input type="text" id="bsHeight" placeholder="e.g. 5'6&quot;"></div><div class="field"><label class="field-label" for="bsBloodGroup">Blood Group <span style="font-weight:400">(optional)</span></label><input type="text" id="bsBloodGroup"></div></div>
@@ -305,6 +307,17 @@ document.addEventListener('DOMContentLoaded',function(){
   });
 
   /* Income custom toggle */
+  /* Custom country/language toggles */
+  document.getElementById('bsCountry').addEventListener('change',function(){
+    document.getElementById('bsCustomCountryWrap').classList.toggle('hidden', this.value!=='Other');
+  });
+  document.getElementById('bsLanguage').addEventListener('change',function(){
+    var isCustom = this.value==='custom';
+    document.getElementById('bsCustomLangWrap').classList.toggle('hidden', !isCustom);
+    document.getElementById('bsCustomLangNote').style.display = isCustom ? '' : 'none';
+    refreshPreview();
+  });
+
   document.getElementById('ecIncome').addEventListener('change',function(){
     document.getElementById('ecIncomeCustomWrap').classList.toggle('hidden', this.value!=='Custom');
   });
@@ -375,6 +388,30 @@ document.addEventListener('DOMContentLoaded',function(){
   });
 
   /* ===== Live Preview builder ===== */
+  var BS_LABELS = {
+    en: {sBasic:'Basic Information', sPersonal:'Personal Details', sEducation:'Education &amp; Career', sFamily:'Family Details', sLifestyle:'Lifestyle &amp; Religious', sPreferences:'Partner Preferences',
+      name:'Name', gender:'Gender', age:'Age', dob:'Date of Birth', city:'City', country:'Country', nationality:'Nationality', maritalStatus:'Marital Status', height:'Height', bloodGroup:'Blood Group',
+      complexion:'Complexion', currentResidence:'Current Residence', nativePlace:'Native Place', languages:'Languages', hobbies:'Hobbies', interests:'Interests',
+      education:'Education', degree:'Degree', institution:'Institution', profession:'Profession', company:'Company', workLocation:'Work Location', income:'Income Range',
+      fatherName:"Father's Name", fatherOcc:"Father's Occupation", motherName:"Mother's Name", motherOcc:"Mother's Occupation", brothers:'Brothers', sisters:'Sisters', siblings:'Siblings', familyBg:'Family Background', familyOrigin:'Family Origin', other:'Other',
+      religion:'Religion', sect:'Sect', practice:'Practice', dietary:'Dietary', smoking:'Smoking',
+      ageRange:'Age Range', prefHeight:'Height', prefMarital:'Marital Status', prefEducation:'Education', prefProfession:'Profession', prefCity:'City/Country', prefReligious:'Religious', prefFamily:'Family', prefLifestyle:'Lifestyle', additional:'Additional', defaultTitle:'Biodata for Marriage'},
+    ur: {sBasic:'بنیادی معلومات', sPersonal:'ذاتی تفصیلات', sEducation:'تعلیم و پیشہ', sFamily:'خاندانی تفصیلات', sLifestyle:'مذہبی و طرز زندگی', sPreferences:'شریک حیات کی ترجیحات',
+      name:'نام', gender:'جنس', age:'عمر', dob:'تاریخ پیدائش', city:'شہر', country:'ملک', nationality:'قومیت', maritalStatus:'ازدواجی حیثیت', height:'قد', bloodGroup:'بلڈ گروپ',
+      complexion:'رنگت', currentResidence:'موجودہ رہائش', nativePlace:'آبائی علاقہ', languages:'زبانیں', hobbies:'مشاغل', interests:'دلچسپیاں',
+      education:'تعلیم', degree:'ڈگری', institution:'ادارہ', profession:'پیشہ', company:'کمپنی', workLocation:'کام کی جگہ', income:'آمدنی',
+      fatherName:'والد کا نام', fatherOcc:'والد کا پیشہ', motherName:'والدہ کا نام', motherOcc:'والدہ کا پیشہ', brothers:'بھائی', sisters:'بہنیں', siblings:'بہن بھائی', familyBg:'خاندانی پس منظر', familyOrigin:'آبائی شہر', other:'دیگر',
+      religion:'مذہب', sect:'مسلک', practice:'مذہبی عمل', dietary:'کھانے کی ترجیح', smoking:'سگریٹ نوشی',
+      ageRange:'عمر کی حد', prefHeight:'قد', prefMarital:'ازدواجی حیثیت', prefEducation:'تعلیم', prefProfession:'پیشہ', prefCity:'شہر/ملک', prefReligious:'مذہبی ترجیح', prefFamily:'خاندانی ترجیح', prefLifestyle:'طرز زندگی', additional:'اضافی توقعات', defaultTitle:'بائیو ڈیٹا برائے شادی'},
+    hi: {sBasic:'बुनियादी जानकारी', sPersonal:'व्यक्तिगत विवरण', sEducation:'शिक्षा और करियर', sFamily:'पारिवारिक विवरण', sLifestyle:'जीवनशैली और धार्मिक विवरण', sPreferences:'साथी वरीयताएं',
+      name:'नाम', gender:'लिंग', age:'उम्र', dob:'जन्म तिथि', city:'शहर', country:'देश', nationality:'राष्ट्रीयता', maritalStatus:'वैवाहिक स्थिति', height:'कद', bloodGroup:'ब्लड ग्रुप',
+      complexion:'रंग', currentResidence:'वर्तमान निवास', nativePlace:'मूल स्थान', languages:'भाषाएं', hobbies:'शौक', interests:'रुचियां',
+      education:'शिक्षा', degree:'डिग्री', institution:'संस्थान', profession:'पेशा', company:'कंपनी', workLocation:'कार्यस्थल', income:'आय सीमा',
+      fatherName:'पिता का नाम', fatherOcc:'पिता का व्यवसाय', motherName:'माता का नाम', motherOcc:'माता का व्यवसाय', brothers:'भाई', sisters:'बहनें', siblings:'भाई-बहन', familyBg:'पारिवारिक पृष्ठभूमि', familyOrigin:'मूल शहर', other:'अन्य',
+      religion:'धर्म', sect:'संप्रदाय', practice:'धार्मिक अभ्यास', dietary:'खान-पान वरीयता', smoking:'धूम्रपान',
+      ageRange:'आयु सीमा', prefHeight:'कद', prefMarital:'वैवाहिक स्थिति', prefEducation:'शिक्षा', prefProfession:'पेशा', prefCity:'शहर/देश', prefReligious:'धार्मिक वरीयता', prefFamily:'पारिवारिक वरीयता', prefLifestyle:'जीवनशैली', additional:'अतिरिक्त अपेक्षाएं', defaultTitle:'विवाह हेतु बायोडाटा'}
+  };
+
   function section(title, rows){
     var filtered = rows.filter(function(r){return r[1];});
     if(!filtered.length)return '';
@@ -384,99 +421,82 @@ document.addEventListener('DOMContentLoaded',function(){
     return html;
   }
 
-  function buildPreviewHTML(){
+  function buildPreviewHTML(langCode){
+    var LB = BS_LABELS[langCode] || BS_LABELS.en;
     var age = calcAge(v('bsDob'));
     var photoHtml = photoDataUrl ? '<img src="'+photoDataUrl+'" class="bs-photo-frame '+val('phFrame')+'" alt="Profile photo">' : '';
     function val(id){return document.getElementById(id).value;}
 
-    var basic = section('Basic Information',[
-      ['Name', v('bsName')],
-      ['Gender', v('bsGender')],
-      ['Age', age],
-      ['Date of Birth', v('bsDob')],
-      ['City', v('bsCity')],
-      ['Country', v('bsCountry')?document.getElementById('bsCountry').value:''],
-      ['Nationality', v('bsNationality')],
-      ['Marital Status', v('bsMaritalStatus')],
-      ['Height', v('bsHeight')],
-      ['Blood Group', v('bsBloodGroup')]
+    var basic = section(LB.sBasic,[
+      [LB.name, v('bsName')], [LB.gender, v('bsGender')], [LB.age, age], [LB.dob, v('bsDob')], [LB.city, v('bsCity')],
+      [LB.country, document.getElementById('bsCountry').value==='Other'?(v('bsCustomCountry')||''):document.getElementById('bsCountry').value],
+      [LB.nationality, v('bsNationality')], [LB.maritalStatus, v('bsMaritalStatus')], [LB.height, v('bsHeight')], [LB.bloodGroup, v('bsBloodGroup')]
     ]);
-    var personal = section('Personal Details',[
-      ['Complexion', v('pdComplexion')],
-      ['Current Residence', v('pdCurrentResidence')],
-      ['Native Place', v('pdNativePlace')],
-      ['Languages', v('pdLanguages')],
-      ['Hobbies', v('pdHobbies')],
-      ['Interests', v('pdInterests')]
+    var personal = section(LB.sPersonal,[
+      [LB.complexion, v('pdComplexion')], [LB.currentResidence, v('pdCurrentResidence')], [LB.nativePlace, v('pdNativePlace')],
+      [LB.languages, v('pdLanguages')], [LB.hobbies, v('pdHobbies')], [LB.interests, v('pdInterests')]
     ]);
     var incomeVal = v('ecIncome')==='Custom' ? v('ecIncomeCustom') : v('ecIncome');
-    var education = section('Education &amp; Career',[
-      ['Education', v('ecEducationLevel')],
-      ['Degree', v('ecDegree')],
-      ['Institution', v('ecInstitution')],
-      ['Profession', v('ecProfession')],
-      ['Company', v('ecCompany')],
-      ['Work Location', v('ecWorkLocation')],
-      ['Income Range', incomeVal]
+    var education = section(LB.sEducation,[
+      [LB.education, v('ecEducationLevel')], [LB.degree, v('ecDegree')], [LB.institution, v('ecInstitution')],
+      [LB.profession, v('ecProfession')], [LB.company, v('ecCompany')], [LB.workLocation, v('ecWorkLocation')], [LB.income, incomeVal]
     ]);
 
     var siblingText = [];
     document.querySelectorAll('.bs-sibling-row').forEach(function(row){
       var inputs = row.querySelectorAll('input');
       var name = inputs[0].value;
-      if(name) siblingText.push(name+(inputs[1].value?' ('+inputs[1].value+' yrs)':''));
+      if(name) siblingText.push(name+(inputs[1].value?' ('+inputs[1].value+')':''));
     });
 
-    var family = section('Family Details',[
-      ["Father's Name", v('famFatherName')],
-      ["Father's Occupation", v('famFatherOccupation')],
-      ["Mother's Name", v('famMotherName')],
-      ["Mother's Occupation", v('famMotherOccupation')],
-      ['Brothers', document.getElementById('famBrothers').value!=='0'?document.getElementById('famBrothers').value:''],
-      ['Sisters', document.getElementById('famSisters').value!=='0'?document.getElementById('famSisters').value:''],
-      ['Siblings', siblingText.join(', ')],
-      ['Family Background', v('famBackground')],
-      ['Family Origin', v('famOrigin')],
-      ['Other', v('famOther')]
+    var family = section(LB.sFamily,[
+      [LB.fatherName, v('famFatherName')], [LB.fatherOcc, v('famFatherOccupation')], [LB.motherName, v('famMotherName')], [LB.motherOcc, v('famMotherOccupation')],
+      [LB.brothers, document.getElementById('famBrothers').value!=='0'?document.getElementById('famBrothers').value:''],
+      [LB.sisters, document.getElementById('famSisters').value!=='0'?document.getElementById('famSisters').value:''],
+      [LB.siblings, siblingText.join(', ')], [LB.familyBg, v('famBackground')], [LB.familyOrigin, v('famOrigin')], [LB.other, v('famOther')]
     ]);
 
     var lifestyle = '';
     if(!document.getElementById('lsHideSection').checked){
-      lifestyle = section('Lifestyle &amp; Religious',[
-        ['Religion', v('lsReligion')],
-        ['Sect', v('lsSect')],
-        ['Practice', v('lsPractice')],
-        ['Dietary', v('lsDietary')],
-        ['Smoking', v('lsSmoking')],
-        ['Other', v('lsOther')]
+      lifestyle = section(LB.sLifestyle,[
+        [LB.religion, v('lsReligion')], [LB.sect, v('lsSect')], [LB.practice, v('lsPractice')],
+        [LB.dietary, v('lsDietary')], [LB.smoking, v('lsSmoking')], [LB.other, v('lsOther')]
       ]);
     }
 
-    var preferences = section('Partner Preferences',[
-      ['Age Range', v('prAgeRange')],
-      ['Height', v('prHeight')],
-      ['Marital Status', v('prMaritalStatus')],
-      ['Education', v('prEducation')],
-      ['Profession', v('prProfession')],
-      ['City/Country', v('prCity')],
-      ['Religious', v('prReligious')],
-      ['Family', v('prFamily')],
-      ['Lifestyle', v('prLifestyle')],
-      ['Additional', v('prAdditional')]
+    var preferences = section(LB.sPreferences,[
+      [LB.ageRange, v('prAgeRange')], [LB.prefHeight, v('prHeight')], [LB.prefMarital, v('prMaritalStatus')],
+      [LB.prefEducation, v('prEducation')], [LB.prefProfession, v('prProfession')], [LB.prefCity, v('prCity')],
+      [LB.prefReligious, v('prReligious')], [LB.prefFamily, v('prFamily')], [LB.prefLifestyle, v('prLifestyle')], [LB.additional, v('prAdditional')]
     ]);
 
-    return '<h2 class="bs-title">'+(v('bsTitle')||'Biodata for Marriage')+'</h2>'+photoHtml+basic+personal+education+family+lifestyle+preferences;
+    return '<h2 class="bs-title">'+(v('bsTitle')||LB.defaultTitle)+'</h2>'+photoHtml+basic+personal+education+family+lifestyle+preferences;
   }
 
   function refreshPreview(){
     var lang = document.getElementById('bsLanguage').value;
     var preview = document.getElementById('bsPreview');
-    preview.className = 'bs-preview tpl-'+currentTemplate + (lang==='ur' ? ' rtl' : '');
-    if(lang==='both'){
-      preview.innerHTML = '<div>'+buildPreviewHTML()+'</div><hr style="margin:20px 0"><div class="rtl" style="direction:rtl;text-align:right;font-family:\'Noto Nastaliq Urdu\',serif;">'+buildPreviewHTML()+'</div>';
+    var rtlClass = '';
+    var content = '';
+    if(lang==='en'){
+      content = buildPreviewHTML('en');
+    }else if(lang==='ur'){
+      content = buildPreviewHTML('ur');
+      rtlClass = ' rtl';
+    }else if(lang==='hi'){
+      content = buildPreviewHTML('hi');
+    }else if(lang==='en_ur'){
+      content = '<div>'+buildPreviewHTML('en')+'</div><hr style="margin:20px 0"><div class="rtl" style="direction:rtl;text-align:right;font-family:\'Noto Nastaliq Urdu\',serif;">'+buildPreviewHTML('ur')+'</div>';
+    }else if(lang==='en_hi'){
+      content = '<div>'+buildPreviewHTML('en')+'</div><hr style="margin:20px 0"><div>'+buildPreviewHTML('hi')+'</div>';
+    }else if(lang==='custom'){
+      var customLangName = v('psCustomLang') || document.getElementById('bsCustomLang').value || 'your selected language';
+      content = '<p style="font-size:.78rem;font-style:italic;">Note: Generated in English — please translate into '+customLangName+' as needed.</p>'+buildPreviewHTML('en');
     }else{
-      preview.innerHTML = buildPreviewHTML();
+      content = buildPreviewHTML('en');
     }
+    preview.className = 'bs-preview tpl-'+currentTemplate + rtlClass;
+    preview.innerHTML = content;
     updateChecklist();
   }
   document.getElementById('bsRefreshPreviewBtn').addEventListener('click',refreshPreview);
