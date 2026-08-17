@@ -4,7 +4,9 @@
     { "source": "/base64-encoder-decoder.html", "destination": "/universal-encoder-decoder.html#base64", "permanent": true },
     { "source": "/image-to-base64.html", "destination": "/universal-encoder-decoder.html#image", "permanent": true },
     { "source": "/url-encoder-decoder.html", "destination": "/universal-encoder-decoder.html#url", "permanent": true },
-    { "source": "/html-entity-encoder-decoder.html", "destination": "/universal-encoder-decoder.html#entity", "permanent": true }
+    { "source": "/html-entity-encoder-decoder.html", "destination": "/universal-encoder-decoder.html#entity", "permanent": true },
+    { "source": "/qr-code-generator.html", "destination": "/qr-code-generator-scanner.html", "permanent": true },
+    { "source": "/qr-code-scanner.html", "destination": "/qr-code-generator-scanner.html", "permanent": true }
   ],
   "headers": [
     {
