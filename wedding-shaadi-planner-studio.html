@@ -1,0 +1,913 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta name="google-adsense-account" content="ca-pub-7690733672429028"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Wedding Budget Planner Pakistan &amp; India | Shaadi Guest List &amp; Planner | ToolNest</title><meta name="description" content="Plan your Shaadi budget, guest list, catering, venue, vendors, payments and wedding invitations in one free Wedding Planning Studio for Pakistan and India."><link rel="canonical" href="https://toolnest.link/wedding-shaadi-planner-studio.html"><meta property="og:title" content="Wedding &amp; Shaadi Budget Planner | ToolNest"><meta property="og:description" content="Plan your complete Shaadi — budget, guests, events, vendors, invitations — free, private, Pakistan &amp; India."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/wedding-shaadi-planner-studio.html"><meta property="og:image" content="https://toolnest.link/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Wedding &amp; Shaadi Budget Planner | ToolNest"><meta name="twitter:description" content="Plan your complete Shaadi — budget, guests, events, vendors, invitations — free, private, Pakistan &amp; India."><meta name="twitter:image" content="https://toolnest.link/og-image.png"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"><style>
+.hidden{display:none !important}
+.ws-stepnav{display:flex;gap:8px;overflow-x:auto;padding:14px 16px;background:var(--card, #fffdf6);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;-webkit-overflow-scrolling:touch}
+.ws-step-btn{flex-shrink:0;padding:8px 14px;border-radius:20px;border:1px solid var(--line);background:transparent;color:var(--grove);font-size:.78rem;font-weight:600;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block}
+[data-theme=dark] .ws-step-btn{color:var(--kinno-bright)}
+.ws-summary-bar{position:sticky;top:56px;z-index:40;background:#1f3d2b;color:#f2ecd8;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;font-weight:700;gap:10px;flex-wrap:wrap}
+.ws-summary-bar span.amt{color:#f5942f;font-size:.85rem}
+.ws-note{background:rgba(224,122,44,.08);border-radius:8px;padding:10px 12px;font-size:.8rem;margin:10px 0}
+.ws-progress-outer{background:var(--line);border-radius:10px;height:10px;overflow:hidden;margin:8px 0}
+.ws-progress-inner{background:#2e7d4f;height:100%;transition:width .3s}
+.ws-progress-inner.over{background:#c0392b}
+.ws-row-card{border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px}
+.ws-row-card .row{margin-bottom:6px}
+.ws-row-remove{background:transparent;border:1px solid var(--bad,#c0392b);color:#c0392b;padding:5px 12px;border-radius:6px;font-size:.75rem;cursor:pointer}
+.ws-event-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(224,122,44,.08);border:1px solid var(--line);border-radius:16px;padding:5px 10px;font-size:.75rem;margin:3px 4px 3px 0}
+.ws-metric-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin:10px 0}
+.ws-metric-box{background:rgba(224,122,44,.08);border-radius:8px;padding:12px;text-align:center}
+.ws-metric-value{font-size:1.2rem;font-weight:800;color:var(--kinno,#e07a2c)}
+.ws-metric-label{font-size:.7rem;color:#8a8a75;margin-top:2px}
+.ws-alert{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;font-size:.8rem;margin-bottom:6px}
+.ws-alert.warn{background:rgba(184,134,11,.1);color:#8a6300}
+.ws-alert.good{background:rgba(46,125,79,.1);color:#1e5c3a}
+.ws-invite-preview{border:2px solid var(--kinno,#e07a2c);border-radius:14px;padding:28px;text-align:center;background:#fffdf6;max-width:520px;margin:0 auto}
+.ws-invite-preview.rtl{direction:rtl;text-align:center;font-family:'Noto Nastaliq Urdu',serif;line-height:2.2}
+.ws-invite-preview.tpl-classic{font-family:Georgia,serif;border-color:#1f3d2b}
+.ws-invite-preview.tpl-elegant{font-family:'Times New Roman',serif;background:#fffaf0;border-color:#7a5a1e}
+.ws-invite-preview.tpl-minimal{font-family:Arial,sans-serif;border:1px solid var(--line)}
+.ws-invite-preview.tpl-floral{background:linear-gradient(180deg,#fffdf6,#fdf3e7);border-color:#c0392b}
+.ws-invite-preview.tpl-traditional{border:5px double #7a5a1e}
+.ws-invite-preview.tpl-modern{background:#1f3d2b;color:#f2ecd8;border-color:#e07a2c}
+.ws-invite-preview.tpl-premium{background:#16301f;color:#f5942f;border:3px solid #f5942f}
+.ws-invite-preview.tpl-desi{background:#fff8ec;border:6px solid #c0392b;box-shadow:0 0 0 3px #f5942f inset}
+.ws-invite-title{font-size:1.5rem;font-weight:800;margin-bottom:10px}
+.ws-checklist-cat h4{margin:16px 0 6px}
+.ws-task-item{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:.85rem}
+@media print{.ws-stepnav,.ws-summary-bar,.theme-toggle,header .site-header-bar,.tool-actions,footer nav,#wsPrintHide{display:none !important}}
+</style></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html" title="Go to ToolNest homepage" aria-label="ToolNest — go to homepage"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M16 54 Q50 26 84 54" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 67 Q50 42 78 67" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M29 79 Q50 58 71 79" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="79" cy="23" r="20" fill="#e07a2c" stroke="#1f3d2b" stroke-width="3"/><text x="79" y="28.5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span><span class="home-hint" aria-hidden="true">🏠 Home</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Wedding &amp; Shaadi Budget Planner</h1><p>Plan Your Budget, Guests, Events, Vendors &amp; Wedding Invitations — Pakistan &amp; India.</p></header>
+
+<nav class="ws-stepnav" id="wsStepNav" aria-label="Planner sections">
+<a href="#wstep01" class="ws-step-btn">01 Setup</a><a href="#wsWorkCard" class="ws-step-btn" data-panel="panelEvents">Events</a><a href="#wsWorkCard" class="ws-step-btn" data-panel="panelBudget">Budget</a><a href="#wsWorkCard" class="ws-step-btn" data-panel="panelGuests">Guests</a><a href="#wsWorkCard" class="ws-step-btn" data-panel="panelCatering">Catering</a><a href="#wsWorkCard" class="ws-step-btn" data-panel="panelVenue">Venue</a><a href="#wsWorkCard" class="ws-step-btn" data-panel="panelVendors">Vendors</a><a href="#wsWorkCard" class="ws-step-btn" data-panel="panelInvite">Invitations</a><a href="#wsWorkCard" class="ws-step-btn" data-panel="panelChecklist">Checklist</a><a href="#wsWorkCard" class="ws-step-btn" data-panel="panelTimeline">Timeline</a><a href="#wstepDashboard" class="ws-step-btn">Dashboard</a><a href="#wstepReport" class="ws-step-btn">Report</a><a href="#wstepGuide" class="ws-step-btn">Guide &amp; FAQ</a>
+</nav>
+<div class="ws-summary-bar" id="wsSummaryBar">Budget: <span class="amt" id="wsBudgetSummary">—</span> Guests: <span class="amt" id="wsGuestSummary">—</span></div>
+
+<main>
+
+<div class="card" id="wstep01">
+<h2>01 — Wedding Setup</h2>
+<div class="row"><div class="field"><label class="field-label" for="wsCountry">Country</label><select id="wsCountry"><option value="Pakistan">Pakistan</option><option value="India">India</option><option value="Other">Custom / Other Country</option></select></div><div class="field hidden" id="wsCustomCountryWrap"><label class="field-label" for="wsCustomCountry">Country Name</label><input type="text" id="wsCustomCountry"></div><div class="field"><label class="field-label" for="wsLanguage">Interface Language</label><select id="wsLanguage"><option value="en">English</option><option value="ur">اردو</option><option value="en_ur">English + اردو</option></select></div><div class="field"><label class="field-label" for="wsCurrency">Currency</label><select id="wsCurrency"><option value="PKR">PKR</option><option value="INR">INR</option><option value="OTHER">Custom</option></select></div></div>
+<div class="row"><div class="field"><label class="field-label" for="wsBrideName">Bride Name</label><input type="text" id="wsBrideName"></div><div class="field"><label class="field-label" for="wsGroomName">Groom Name</label><input type="text" id="wsGroomName"></div><div class="field"><label class="field-label" for="wsWeddingDate">Wedding Date</label><input type="date" id="wsWeddingDate"></div><div class="field"><label class="field-label" for="wsCity">City</label><input type="text" id="wsCity"></div></div>
+<div class="row"><div class="field"><label class="field-label" for="wsBrideFamily">Bride Family <span style="font-weight:400">(optional)</span></label><input type="text" id="wsBrideFamily"></div><div class="field"><label class="field-label" for="wsGroomFamily">Groom Family <span style="font-weight:400">(optional)</span></label><input type="text" id="wsGroomFamily"></div><div class="field"><label class="field-label" for="wsTheme">Wedding Theme <span style="font-weight:400">(optional)</span></label><input type="text" id="wsTheme"></div><div class="field"><label class="field-label" for="wsColors">Wedding Colors <span style="font-weight:400">(optional)</span></label><input type="text" id="wsColors"></div></div>
+<div class="field"><label class="field-label" for="wsNotes">Wedding Notes <span style="font-weight:400">(optional)</span></label><textarea id="wsNotes" rows="2" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;"></textarea></div>
+<p class="ws-note">🔒 Everything you enter stays in your browser. Nothing is uploaded to a server unless you explicitly export or share it.</p>
+</div>
+
+<div class="card" id="wsWorkCard">
+<h2>Planning Workspace</h2>
+<p class="desc">Switch tabs anytime — your entries in each are kept.</p>
+<div class="row" id="wsWorkTabs" style="flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+<button type="button" class="secondary ws-work-tab active" data-panel="panelEvents">📅 Events</button>
+<button type="button" class="secondary ws-work-tab" data-panel="panelBudget">💰 Budget</button>
+<button type="button" class="secondary ws-work-tab" data-panel="panelGuests">👥 Guests</button>
+<button type="button" class="secondary ws-work-tab" data-panel="panelCatering">🍽️ Catering</button>
+<button type="button" class="secondary ws-work-tab" data-panel="panelVenue">🏛️ Venue</button>
+<button type="button" class="secondary ws-work-tab" data-panel="panelVendors">🧑‍💼 Vendors &amp; Expenses</button>
+<button type="button" class="secondary ws-work-tab" data-panel="panelInvite">💌 Invitations</button>
+<button type="button" class="secondary ws-work-tab" data-panel="panelChecklist">✅ Checklist</button>
+<button type="button" class="secondary ws-work-tab" data-panel="panelTimeline">🕒 Timeline</button>
+</div>
+
+<div id="panelEvents">
+<h3>Wedding Events</h3>
+<p class="desc">Add the events that apply to your wedding — not every wedding has every event.</p>
+<div class="row" style="flex-wrap:wrap;gap:8px;">
+<button type="button" class="secondary ws-quick-event" data-name="Engagement">+ Engagement</button>
+<button type="button" class="secondary ws-quick-event" data-name="Dholki">+ Dholki</button>
+<button type="button" class="secondary ws-quick-event" data-name="Mayun">+ Mayun</button>
+<button type="button" class="secondary ws-quick-event" data-name="Mehndi">+ Mehndi</button>
+<button type="button" class="secondary ws-quick-event" data-name="Nikah">+ Nikah</button>
+<button type="button" class="secondary ws-quick-event" data-name="Baraat">+ Baraat</button>
+<button type="button" class="secondary ws-quick-event" data-name="Wedding">+ Wedding</button>
+<button type="button" class="secondary ws-quick-event" data-name="Walima">+ Walima</button>
+<button type="button" class="secondary ws-quick-event" data-name="Reception">+ Reception</button>
+<button type="button" class="secondary ws-quick-event" data-name="Rukhsati">+ Rukhsati</button>
+</div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="wsCustomEventName">Custom Event Name</label><input type="text" id="wsCustomEventName" placeholder="e.g. Haldi"></div><div class="field"><button type="button" class="secondary" id="wsAddCustomEvent" style="margin-top:22px;">+ Add Custom Event</button></div></div>
+<div id="wsEventList" style="margin-top:14px;"></div>
+</div>
+
+<div id="panelBudget" class="hidden">
+<h3>Master Wedding Budget</h3>
+<div class="row"><div class="field"><label class="field-label" for="wsTotalBudget">Total Wedding Budget</label><input type="number" id="wsTotalBudget" value="0"></div></div>
+<h4>Budget Categories</h4>
+<p class="desc" style="margin-top:-4px;">Enter your planned amount for whichever categories apply — leave others at 0.</p>
+<div id="wsBudgetCategoryList"></div>
+<div class="row"><div class="field"><label class="field-label" for="wsCustomCategoryName">Custom Category</label><input type="text" id="wsCustomCategoryName"></div><div class="field"><button type="button" class="secondary" id="wsAddCustomCategory" style="margin-top:22px;">+ Add Custom Category</button></div></div>
+
+<h4>Contingency</h4>
+<div class="row"><div class="field"><label class="field-label" for="wsContingencyPct">Contingency %</label><input type="number" id="wsContingencyPct" value="10"></div></div>
+<button type="button" class="secondary" id="wsCalcBudgetBtn">Calculate Budget Summary</button>
+<div class="ws-metric-grid" id="wsBudgetMetrics"></div>
+<div class="ws-progress-outer"><div class="ws-progress-inner" id="wsBudgetBar" style="width:0%"></div></div>
+<p class="stat" id="wsBudgetStatus"></p>
+</div>
+
+<div id="panelGuests" class="hidden">
+<h3>Guest List</h3>
+<p class="ws-note">Phone number is optional and never required. Guest data stays private in your browser.</p>
+<div class="row"><div class="field"><label class="field-label" for="wsGuestName">Guest / Family Name</label><input type="text" id="wsGuestName"></div><div class="field"><label class="field-label" for="wsGuestSide">Side</label><select id="wsGuestSide"><option>Bride</option><option>Groom</option><option>Both</option><option>Other</option></select></div><div class="field"><label class="field-label" for="wsGuestAdults">Adults</label><input type="number" id="wsGuestAdults" value="1"></div><div class="field"><label class="field-label" for="wsGuestChildren">Children</label><input type="number" id="wsGuestChildren" value="0"></div></div>
+<div class="row"><div class="field"><label class="field-label" for="wsGuestPhone">Phone <span style="font-weight:400">(optional)</span></label><input type="text" id="wsGuestPhone"></div><div class="field"><label class="field-label" for="wsGuestRsvp">RSVP Status</label><select id="wsGuestRsvp"><option>Pending</option><option>Invited</option><option>Confirmed</option><option>Declined</option><option>Maybe</option></select></div><div class="field"><label class="field-label" for="wsGuestNotes">Notes</label><input type="text" id="wsGuestNotes"></div></div>
+<label class="field-label">Attending Events</label>
+<div id="wsGuestEventChecks" class="row" style="flex-wrap:wrap;"></div>
+<button type="button" class="secondary" id="wsAddGuestBtn" style="margin-top:10px;">+ Add Guest / Family</button>
+
+<h4 style="margin-top:18px;">Guest List</h4>
+<div class="row"><div class="field"><label class="field-label" for="wsGuestFilterSide">Filter: Side</label><select id="wsGuestFilterSide"><option value="">All</option><option>Bride</option><option>Groom</option><option>Both</option><option>Other</option></select></div><div class="field"><label class="field-label" for="wsGuestFilterRsvp">Filter: RSVP</label><select id="wsGuestFilterRsvp"><option value="">All</option><option>Pending</option><option>Invited</option><option>Confirmed</option><option>Declined</option><option>Maybe</option></select></div></div>
+<div id="wsGuestList"></div>
+
+<h4 style="margin-top:18px;">Guest Summary</h4>
+<div class="ws-metric-grid" id="wsGuestMetrics"></div>
+</div>
+
+<div id="panelCatering" class="hidden">
+<h3>Catering &amp; Food Planner</h3>
+<div class="row"><div class="field"><label class="field-label" for="catEvent">Event</label><select id="catEvent"></select></div><div class="field"><label class="field-label" for="catAdults">Adults</label><input type="number" id="catAdults" value="0"></div><div class="field"><label class="field-label" for="catChildren">Children</label><input type="number" id="catChildren" value="0"></div></div>
+<div class="row"><div class="field"><label class="field-label" for="catAdultPrice">Price Per Adult</label><input type="number" id="catAdultPrice" value="0"></div><div class="field"><label class="field-label" for="catChildPrice">Price Per Child</label><input type="number" id="catChildPrice" value="0"></div><div class="field"><label class="field-label" for="catMealType">Meal Type</label><input type="text" id="catMealType" placeholder="e.g. Buffet, Sit-down"></div></div>
+<button type="button" class="secondary" id="catCalcBtn">Calculate Catering Cost</button>
+<p class="stat" id="catResult"></p>
+
+<h4 style="margin-top:18px;">Menu Planner</h4>
+<div class="row"><div class="field"><label class="field-label" for="menuDish">Dish Name</label><input type="text" id="menuDish"></div><div class="field"><label class="field-label" for="menuCategory">Category</label><select id="menuCategory"><option>Main Course</option><option>Rice</option><option>BBQ</option><option>Curry</option><option>Bread</option><option>Salad</option><option>Dessert</option><option>Drinks</option><option>Tea</option><option>Other</option></select></div><div class="field"><label class="field-label" for="menuCost">Estimated Cost</label><input type="number" id="menuCost" value="0"></div></div>
+<button type="button" class="secondary" id="menuAddBtn">+ Add Dish</button>
+<div id="menuList" style="margin-top:10px;"></div>
+</div>
+
+<div id="panelVenue" class="hidden">
+<h3>Venue Planner</h3>
+<div class="row"><div class="field"><label class="field-label" for="venName">Venue Name</label><input type="text" id="venName"></div><div class="field"><label class="field-label" for="venEvent">Event</label><select id="venEvent"></select></div><div class="field"><label class="field-label" for="venLocation">Location</label><input type="text" id="venLocation"></div><div class="field"><label class="field-label" for="venCapacity">Capacity</label><input type="number" id="venCapacity" value="0"></div></div>
+<div class="row"><div class="field"><label class="field-label" for="venCost">Rental Cost</label><input type="number" id="venCost" value="0"></div><div class="field"><label class="field-label" for="venAdvance">Advance Paid</label><input type="number" id="venAdvance" value="0"></div><div class="field"><label class="field-label" for="venContact">Contact</label><input type="text" id="venContact"></div></div>
+<button type="button" class="secondary" id="venAddBtn">+ Add / Compare Venue</button>
+<div id="venList" style="margin-top:10px;"></div>
+</div>
+
+<div id="panelVendors" class="hidden">
+<h3>Vendors &amp; Expenses</h3>
+<p class="desc">Covers dresses, jewelry, décor, photography, videography, makeup, transport, accommodation, gifts, and any other vendor or expense — pick a category per entry.</p>
+<div class="row"><div class="field"><label class="field-label" for="venCategory">Category</label><select id="venCategory"><option>Venue</option><option>Catering</option><option>Decoration</option><option>Bride Dress</option><option>Groom Dress</option><option>Jewelry</option><option>Photography</option><option>Videography</option><option>Makeup &amp; Beauty</option><option>Mehndi Artist</option><option>Transport</option><option>Accommodation</option><option>Gifts &amp; Favors</option><option>Invitations</option><option>Music / DJ</option><option>Lighting</option><option>Stage</option><option>Flowers</option><option>Other</option></select></div><div class="field"><label class="field-label" for="venVendorName">Vendor Name</label><input type="text" id="venVendorName"></div><div class="field"><label class="field-label" for="venVendorEvent">Event</label><select id="venVendorEvent"></select></div></div>
+<div class="row"><div class="field"><label class="field-label" for="venQuoted">Quoted / Planned Cost</label><input type="number" id="venQuoted" value="0"></div><div class="field"><label class="field-label" for="venFinal">Final / Actual Cost</label><input type="number" id="venFinal" value="0"></div><div class="field"><label class="field-label" for="venPaid">Advance / Amount Paid</label><input type="number" id="venPaid" value="0"></div></div>
+<div class="row"><div class="field"><label class="field-label" for="venStatus">Status</label><select id="venStatus"><option>Contacted</option><option>Quoted</option><option>Booked</option><option>Paid</option><option>Cancelled</option></select></div><div class="field"><label class="field-label" for="venVendorPhone">Phone <span style="font-weight:400">(optional)</span></label><input type="text" id="venVendorPhone"></div><div class="field"><label class="field-label" for="venVendorNotes">Notes</label><input type="text" id="venVendorNotes"></div></div>
+<button type="button" class="secondary" id="venVendorAddBtn">+ Add Vendor / Expense</button>
+
+<h4 style="margin-top:16px;">Payment Tracker</h4>
+<div class="ws-metric-grid" id="wsPaymentMetrics"></div>
+<div id="vendorList" style="margin-top:10px;"></div>
+</div>
+
+<div id="panelInvite" class="hidden">
+<h3>Wedding Invitation Studio</h3>
+<div class="row"><div class="field"><label class="field-label" for="invLanguage">Language</label><select id="invLanguage"><option value="en">English</option><option value="ur">اردو (Urdu)</option><option value="en_ur">Bilingual (English + اردو)</option></select></div><div class="field"><label class="field-label" for="invEvent">Event</label><select id="invEvent"></select></div></div>
+<div class="row"><div class="field"><label class="field-label" for="invParents">Parents / Family Names <span style="font-weight:400">(optional)</span></label><input type="text" id="invParents"></div><div class="field"><label class="field-label" for="invTime">Time</label><input type="time" id="invTime"></div></div>
+<div class="row"><div class="field"><label class="field-label" for="invVenue">Venue</label><input type="text" id="invVenue"></div><div class="field"><label class="field-label" for="invAddress">Address</label><input type="text" id="invAddress"></div></div>
+<div class="row"><div class="field"><label class="field-label" for="invRsvpContact">RSVP Contact</label><input type="text" id="invRsvpContact"></div><div class="field"><label class="field-label" for="invMessage">Custom Message <span style="font-weight:400">(optional)</span></label><input type="text" id="invMessage"></div></div>
+
+<h4>Template</h4>
+<div class="ws-metric-grid" id="invTplGrid" style="grid-template-columns:repeat(auto-fill,minmax(110px,1fr));">
+<div class="secondary" style="text-align:center;cursor:pointer;padding:10px;border-radius:8px;" data-tpl="classic">Classic</div>
+<div class="secondary" style="text-align:center;cursor:pointer;padding:10px;border-radius:8px;" data-tpl="elegant">Elegant</div>
+<div class="secondary" style="text-align:center;cursor:pointer;padding:10px;border-radius:8px;" data-tpl="minimal">Minimal</div>
+<div class="secondary" style="text-align:center;cursor:pointer;padding:10px;border-radius:8px;" data-tpl="floral">Floral</div>
+<div class="secondary" style="text-align:center;cursor:pointer;padding:10px;border-radius:8px;" data-tpl="traditional">Traditional</div>
+<div class="secondary" style="text-align:center;cursor:pointer;padding:10px;border-radius:8px;" data-tpl="modern">Modern</div>
+<div class="secondary" style="text-align:center;cursor:pointer;padding:10px;border-radius:8px;" data-tpl="premium">Premium</div>
+<div class="secondary" style="text-align:center;cursor:pointer;padding:10px;border-radius:8px;" data-tpl="desi">Pakistani/Indian</div>
+</div>
+
+<button type="button" class="secondary" id="invGenerateBtn" style="margin-top:12px;">✨ Generate Card</button>
+<div id="invPreviewBox" class="hidden" style="margin-top:14px;">
+<div class="ws-invite-preview tpl-classic" id="invPreview"></div>
+<div class="row" style="margin-top:12px;flex-wrap:wrap;" id="wsPrintHide"><button type="button" class="secondary" id="invPrintBtn">🖨️ Print</button><button type="button" class="secondary" id="invSaveImgBtn">🖼️ Save as Image</button></div>
+</div>
+
+<h4 style="margin-top:18px;">WhatsApp Invitation</h4>
+<button type="button" class="secondary" id="invWaGenerateBtn">📝 Generate WhatsApp Text</button>
+<textarea id="invWaText" class="hidden" rows="10" readonly style="width:100%;margin-top:10px;padding:10px;border:1px solid var(--line);border-radius:8px;font-family:monospace;font-size:.82rem;"></textarea>
+<div class="row hidden" id="invWaActions" style="margin-top:10px;"><button type="button" class="secondary" id="invWaCopyBtn">📋 Copy Text</button><a href="#" target="_blank" class="secondary hidden" id="invWaShareLink" style="text-decoration:none;display:inline-block;padding:10px 18px;border-radius:8px;">📤 Share on WhatsApp</a></div>
+</div>
+
+<div id="panelChecklist" class="hidden">
+<h3>Wedding Checklist</h3>
+<div class="ws-progress-outer"><div class="ws-progress-inner" id="checklistBar" style="width:0%"></div></div>
+<p class="stat" id="checklistProgressText">Completed: 0 / 0</p>
+<div id="checklistContainer"></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="checklistCustomTask">Custom Task</label><input type="text" id="checklistCustomTask"></div><div class="field"><label class="field-label" for="checklistCustomCat">Add To</label><select id="checklistCustomCat"><option>Before Wedding</option><option>Event Preparation</option><option>Final Week</option></select></div><div class="field"><button type="button" class="secondary" id="checklistAddCustomBtn" style="margin-top:22px;">+ Add Task</button></div></div>
+</div>
+
+<div id="panelTimeline" class="hidden">
+<h3>Wedding Timeline</h3>
+<div class="row"><div class="field"><label class="field-label" for="tlTask">Task</label><input type="text" id="tlTask"></div><div class="field"><label class="field-label" for="tlDate">Date</label><input type="date" id="tlDate"></div><div class="field"><label class="field-label" for="tlEvent">Event</label><select id="tlEvent"></select></div></div>
+<div class="row"><div class="field"><label class="field-label" for="tlPriority">Priority</label><select id="tlPriority"><option>High</option><option>Medium</option><option>Low</option></select></div><div class="field"><label class="field-label" for="tlStatus">Status</label><select id="tlStatus"><option>Pending</option><option>In Progress</option><option>Done</option></select></div><div class="field"><label class="field-label" for="tlNotes">Notes</label><input type="text" id="tlNotes"></div></div>
+<button type="button" class="secondary" id="tlAddBtn">+ Add Timeline Task</button>
+
+<div class="ws-metric-grid" id="tlMetrics" style="margin-top:14px;"></div>
+<div id="tlList" style="margin-top:10px;"></div>
+</div>
+</div>
+
+<div class="card" id="wstepDashboard">
+<h2>Master Wedding Dashboard</h2>
+<button type="button" class="secondary" id="wsRefreshDashboardBtn" style="margin-bottom:12px;">🔄 Refresh Dashboard</button>
+<div class="ws-metric-grid" id="dashMetrics"></div>
+
+<h3 style="margin-top:16px;">Budget Breakdown</h3>
+<div class="row"><div class="field"><label class="field-label" for="dashSortBy">Sort By</label><select id="dashSortBy"><option value="cost-desc">Highest Cost</option><option value="cost-asc">Lowest Cost</option><option value="over">Over Budget First</option><option value="remaining">Remaining</option></select></div></div>
+<div id="dashBreakdown"></div>
+
+<h3 style="margin-top:16px;">Budget Alerts</h3>
+<div id="dashAlerts"></div>
+</div>
+
+<div class="card" id="wstepReport">
+<h2>Wedding Planning Report</h2>
+<p class="desc">A printable summary of your entire wedding plan.</p>
+<div id="wsReportPreview" class="ws-note" style="font-size:.85rem;line-height:1.8;"><p>Click "Refresh Dashboard" first, then your report will appear here.</p></div>
+<div class="row" style="margin-top:14px;" id="wsPrintHideReport"><button type="button" class="secondary" id="wsPrintReportBtn">🖨️ Print Report</button><button type="button" class="secondary" id="wsDownloadReportBtn">⬇ Save as Text</button></div>
+
+<h3 style="margin-top:18px;">Save Locally</h3>
+<div class="row"><button type="button" class="secondary" id="wsSaveDraftBtn">💾 Save Draft (this device only)</button><button type="button" class="secondary" id="wsClearDraftBtn">🗑️ Clear All Data</button></div>
+<p class="stat" id="wsSaveStatus"></p>
+</div>
+
+<div class="card" id="wstepGuide">
+<h2>Wedding Planning Guide, Features &amp; FAQ</h2>
+
+<div class="seo-content">
+<h3>How to Use This Tool</h3>
+<ol><li><strong>Wedding Setup:</strong> Enter the bride, groom, date, country, and currency in Step 01.</li><li><strong>Add Events:</strong> Add whichever events apply — Mehndi, Nikah, Baraat, Walima, or a custom event — each gets its own budget and guest count.</li><li><strong>Plan Everything:</strong> Use the workspace tabs for Budget, Guests, Catering, Venue, Vendors &amp; Expenses, Invitations, Checklist, and Timeline — fill in only what's relevant to your wedding.</li><li><strong>Review &amp; Share:</strong> Check your Dashboard for a complete overview, generate your invitation, and print or save your full report.</li></ol>
+
+<h3>Why Use This Tool</h3>
+<p>Planning a Shaadi usually means juggling a budget spreadsheet, a guest list in one app, vendor contacts in another, and a separate invitation maker — this Studio brings budget planning, guest and RSVP management, catering estimates, vendor and payment tracking, a checklist, a timeline, and a bilingual Urdu/English invitation generator into one workspace, built around Pakistani and Indian wedding events like Mehndi, Nikah, Baraat, and Walima specifically.</p>
+
+<h3>How It Works</h3>
+<p>Every event, guest, expense, and task you add is calculated with simple, transparent deterministic formulas — total budget versus planned cost, remaining balance, guest counts per event, catering cost per head. Nothing is looked up automatically and no price is ever assumed on your behalf; your invitation and WhatsApp text are generated entirely from what you type, right in your browser.</p>
+
+<h3>Key Features</h3>
+<p>Unlimited custom wedding events with their own date, venue, guest count and budget. A full budget planner with 20 categories, custom categories, and a contingency calculator. A guest list manager with family grouping, Bride/Groom side, per-event attendance, and an RSVP tracker with filters. A catering cost calculator with separate adult/child pricing, plus a menu planner. A venue comparison tool. A unified vendor and expense tracker covering décor, dresses, jewelry, photography, makeup, transport, accommodation, and gifts, with quoted/final cost, advance paid, and status. An 8-template wedding invitation generator supporting English, Urdu (right-to-left), or bilingual output, with WhatsApp-ready text and a one-tap share link. A wedding checklist with three phases, a timeline with overdue/today/upcoming grouping, and a master dashboard with budget alerts.</p>
+
+<h3>Common Use Cases</h3>
+<p>A family in Lahore planning four separate events — Mehndi, Baraat, Walima, and Nikah — each with its own guest list and budget, tracked in one place. A couple in Delhi generating a bilingual Hindi-friendly-format English/Urdu invitation and sharing it directly on WhatsApp. A family tracking advance payments to five different vendors and seeing at a glance who's still owed money. A bride comparing three venue options side by side before booking.</p>
+
+<h3>Tips for Best Results</h3>
+<p>Add your events first, since guest lists, catering, venue, and vendor entries all reference them. Set your contingency percentage early — most experienced planners recommend keeping 10-15% of your budget unallocated for last-minute costs. Use the Vendor &amp; Expenses category dropdown consistently so your Dashboard's budget breakdown stays accurate. Generate your invitation only after your event details are finalized, since the date, time, and venue pull directly from what you've entered.</p>
+</div>
+
+<div class="seo-content">
+<h3>Wedding Planning Guide</h3>
+<h4>How to make a wedding budget</h4>
+<p>Start with a realistic total budget, then break it down across categories like venue, catering, décor, and outfits — leaving a contingency percentage unallocated for unexpected costs is a common practice among experienced planners.</p>
+<h4>How to divide wedding expenses</h4>
+<p>Many families split costs by category or by side (bride's family vs groom's family) according to their own tradition and agreement — this tool lets you track costs by category and by event without assuming any particular division.</p>
+<h4>How to estimate catering costs</h4>
+<p>Multiply your confirmed guest count by your price-per-guest, with separate rates for adults and children if your caterer offers them — always confirm final headcount close to the event date since catering is usually one of the largest expenses.</p>
+<h4>How to organize a wedding guest list</h4>
+<p>Group guests by family where possible to speed up counting, tag each guest's side (bride, groom, or both), and assign them to specific events since not every guest attends every function.</p>
+<h4>How to track RSVP</h4>
+<p>Update each guest's RSVP status as responses come in — Pending, Invited, Confirmed, Declined, or Maybe — and use the filters to quickly see who's still unconfirmed close to your event date.</p>
+<h4>How to plan multiple wedding events</h4>
+<p>Give each event — Mehndi, Nikah, Baraat, Walima, or any other — its own budget, guest count, and venue, since expenses and headcounts often vary significantly between functions.</p>
+<h4>How to control wedding expenses</h4>
+<p>Track planned versus actual cost for every vendor and category, and check your Dashboard regularly for over-budget alerts before costs get out of hand.</p>
+<h4>How to track vendor payments</h4>
+<p>Record the quoted cost, final cost, and advance paid for every vendor as you book them, so your remaining balance is always visible before final payments come due.</p>
+<h4>How to prepare a wedding checklist</h4>
+<p>Work through tasks in three phases — before the wedding, event preparation, and final week — and add any custom tasks specific to your own family's traditions.</p>
+<h4>How to create a WhatsApp wedding invitation</h4>
+<p>Fill in your event and venue details in the Invitations tab, generate the WhatsApp text, and either copy it or tap Share on WhatsApp to send it yourself — nothing is sent automatically.</p>
+</div>
+
+<div class="seo-content">
+<h3>Frequently Asked Questions</h3>
+<div class="faq-block">
+<details><summary>Can I plan multiple wedding events like Mehndi, Baraat, and Walima separately?</summary><p>Yes, add each event you're having in the Events tab, and every other module — budget, guests, catering, venue — can be linked to a specific event.</p></details>
+<details><summary>Can I create a wedding invitation in Urdu?</summary><p>Yes, select Urdu or Bilingual as your invitation language — the Urdu output uses proper right-to-left layout.</p></details>
+<details><summary>Can I share my invitation on WhatsApp?</summary><p>Yes, generate the WhatsApp text and either copy it or tap Share on WhatsApp — nothing is sent automatically, you're always in control.</p></details>
+<details><summary>How do I track guest RSVPs?</summary><p>Update each guest's RSVP status as they respond, and use the Bride/Groom side and RSVP filters in the Guests tab to see who's confirmed, pending, or declined.</p></details>
+<details><summary>Can I calculate my catering cost based on guest count?</summary><p>Yes, the Catering tab multiplies your adult and child guest counts by your own entered per-guest price for each event.</p></details>
+<details><summary>Can I track payments to multiple vendors?</summary><p>Yes, the Vendors &amp; Expenses tab covers every vendor category and tracks quoted cost, final cost, advance paid, and remaining balance for each.</p></details>
+<details><summary>Does this tool store my guest or family information?</summary><p>No, everything is processed and kept in your browser. If you choose to save a draft, it's stored only in your browser's local storage, and you can clear it anytime.</p></details>
+<details><summary>Can I use this for a wedding in both Pakistan and India?</summary><p>Yes, select your country in Step 01 to set the relevant currency and terminology — the tool works for weddings in either country.</p></details>
+<details><summary>Can I print a full wedding planning report?</summary><p>Yes, the Report section generates a complete summary of your budget, guests, vendors, and checklist progress that you can print or save.</p></details>
+<details><summary>Does this tool provide fixed prices for vendors or venues?</summary><p>No, all prices, rates, and vendor costs are entered by you — this tool never invents or predicts costs on your behalf.</p></details>
+</div>
+</div>
+
+<div class="seo-content"><h3>Related Business &amp; Design Tools</h3><ul style="line-height:2;padding-left:20px;"><li><a href="rishta-biodata-studio.html">Rishta Biodata Studio</a></li><li><a href="invoice-generator.html">Invoice Generator</a></li><li><a href="business-card-maker.html">Business Card Maker</a></li><li><a href="signature-maker.html">Signature Maker</a></li><li><a href="qr-code-generator-scanner.html">QR Code Generator &amp; Scanner</a></li><li><a href="whatsapp-direct-chat.html">WhatsApp Direct Chat</a></li><li><a href="savings-goal-calculator.html">Savings Goal Calculator</a></li></ul></div>
+</div>
+
+</main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M16 54 Q50 26 84 54" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 67 Q50 42 78 67" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M29 79 Q50 58 71 79" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="79" cy="23" r="20" fill="#e07a2c" stroke="#1f3d2b" stroke-width="3"/><text x="79" y="28.5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://toolnest.link/"},{"@type":"ListItem","position":2,"name":"Business","item":"https://toolnest.link/business-tools.html"},{"@type":"ListItem","position":3,"name":"Wedding & Shaadi Budget Planner","item":"https://toolnest.link/wedding-shaadi-planner-studio.html"}]},
+{"@type":"SoftwareApplication","name":"Wedding & Shaadi Budget Planner","applicationCategory":"BusinessApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/wedding-shaadi-planner-studio.html"},
+{"@type":"HowTo","name":"How to Plan a Wedding Budget and Guest List Online","step":[{"@type":"HowToStep","text":"Enter your wedding setup details and add your events."},{"@type":"HowToStep","text":"Plan your budget, guests, catering, venue, and vendors."},{"@type":"HowToStep","text":"Generate your invitation, complete your checklist, and review your dashboard."}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Can I plan multiple wedding events like Mehndi, Baraat, and Walima separately?","acceptedAnswer":{"@type":"Answer","text":"Yes, add each event you're having in the Events tab, and every other module — budget, guests, catering, venue — can be linked to a specific event."}},
+{"@type":"Question","name":"Can I create a wedding invitation in Urdu?","acceptedAnswer":{"@type":"Answer","text":"Yes, select Urdu or Bilingual as your invitation language — the Urdu output uses proper right-to-left layout."}},
+{"@type":"Question","name":"Can I share my invitation on WhatsApp?","acceptedAnswer":{"@type":"Answer","text":"Yes, generate the WhatsApp text and either copy it or tap Share on WhatsApp — nothing is sent automatically."}},
+{"@type":"Question","name":"Can I track payments to multiple vendors?","acceptedAnswer":{"@type":"Answer","text":"Yes, the Vendors & Expenses tab covers every vendor category and tracks quoted cost, final cost, advance paid, and remaining balance for each."}},
+{"@type":"Question","name":"Does this tool store my guest or family information?","acceptedAnswer":{"@type":"Answer","text":"No, everything is processed and kept in your browser. If you choose to save a draft, it's stored only in your browser's local storage."}},
+{"@type":"Question","name":"Does this tool provide fixed prices for vendors or venues?","acceptedAnswer":{"@type":"Answer","text":"No, all prices, rates, and vendor costs are entered by you — this tool never invents or predicts costs on your behalf."}}
+]}
+]}
+</script>
+<script>
+(function(){try{var s=localStorage.getItem('toolnest-theme');var t=s||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}document.addEventListener('DOMContentLoaded',function(){var b=document.getElementById('themeToggle');if(!b)return;function u(){var c=document.documentElement.getAttribute('data-theme');b.textContent=c==='dark'?'☀️':'🌙';}u();b.addEventListener('click',function(){var c=document.documentElement.getAttribute('data-theme');var n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('toolnest-theme',n);}catch(e){}u();});});})();
+
+(function(){
+
+var events = [];
+var guests = [];
+var vendors = [];
+var menuItems = [];
+var venues = [];
+var timelineTasks = [];
+var currentTemplate = 'classic';
+var eventIdCounter = 1, guestIdCounter = 1, vendorIdCounter = 1;
+
+var BUDGET_CATEGORIES = ['Venue','Catering','Decoration','Dresses','Jewelry','Photography','Videography','Makeup','Mehndi','Invitations','Transport','Accommodation','Music / DJ','Lighting','Stage','Flowers','Gifts','Favors','Miscellaneous'];
+var customCategories = [];
+
+var CHECKLIST_DEFAULT = {
+  'Before Wedding': ['Set budget','Select dates','Book venue','Prepare guest list','Book catering','Book photographer','Book decorator','Order dresses','Arrange jewelry','Prepare invitations','Send invitations'],
+  'Event Preparation': ['Confirm guests','Confirm vendors','Confirm menu','Confirm venue','Confirm décor','Confirm transport','Prepare payments','Prepare emergency kit'],
+  'Final Week': ['Confirm all vendors','Confirm guest count','Confirm timings','Prepare outfits','Prepare documents','Confirm transportation','Final payments']
+};
+var checklistState = {};
+
+var INV_LABELS = {
+  en: {title:'Wedding Invitation', invite:'You are warmly invited to celebrate the wedding of', event:'Event', date:'Date', time:'Time', venue:'Venue', address:'Address', rsvp:'RSVP', contact:'Contact'},
+  ur: {title:'دعوت ولیمہ', invite:'آپ کو خوش آمدید کہا جاتا ہے کہ اس شادی کی تقریب میں شریک ہوں', event:'تقریب', date:'تاریخ', time:'وقت', venue:'مقام', address:'پتہ', rsvp:'آر ایس وی پی', contact:'رابطہ'}
+};
+
+function num(id){var el=document.getElementById(id);if(!el)return 0;var v=parseFloat(el.value);return isNaN(v)?0:v;}
+function val(id){var el=document.getElementById(id);return el?el.value:'';}
+function currency(){var c=document.getElementById('wsCurrency').value;return c==='OTHER'?'—':c;}
+function fmt(n){if(isNaN(n)||n===null)n=0;return currency()+' '+n.toLocaleString(undefined,{maximumFractionDigits:2});}
+
+document.addEventListener('DOMContentLoaded',function(){
+
+  /* Custom country toggle */
+  document.getElementById('wsCountry').addEventListener('change',function(){
+    document.getElementById('wsCustomCountryWrap').classList.toggle('hidden', this.value!=='Other');
+  });
+
+  /* Work-tab switcher */
+  var PANELS = ['panelEvents','panelBudget','panelGuests','panelCatering','panelVenue','panelVendors','panelInvite','panelChecklist','panelTimeline'];
+  function showPanel(target){
+    document.querySelectorAll('.ws-work-tab').forEach(function(b){b.classList.toggle('active', b.getAttribute('data-panel')===target);});
+    PANELS.forEach(function(id){document.getElementById(id).classList.toggle('hidden', id!==target);});
+  }
+  document.getElementById('wsWorkTabs').addEventListener('click',function(e){
+    var btn=e.target.closest('.ws-work-tab');
+    if(!btn)return;
+    showPanel(btn.getAttribute('data-panel'));
+  });
+  document.querySelectorAll('.ws-step-btn[data-panel]').forEach(function(link){
+    link.addEventListener('click',function(){showPanel(this.getAttribute('data-panel'));});
+  });
+
+  /* ===== EVENTS ===== */
+  function addEvent(name){
+    events.push({id:eventIdCounter++, name:name, date:'', venue:'', guests:0, budget:0, notes:''});
+    renderEvents();
+    refreshEventDropdowns();
+  }
+  document.querySelectorAll('.ws-quick-event').forEach(function(btn){
+    btn.addEventListener('click',function(){ addEvent(this.getAttribute('data-name')); });
+  });
+  document.getElementById('wsAddCustomEvent').addEventListener('click',function(){
+    var name = val('wsCustomEventName').trim();
+    if(!name)return;
+    addEvent(name);
+    document.getElementById('wsCustomEventName').value='';
+  });
+
+  function renderEvents(){
+    var list = document.getElementById('wsEventList');
+    list.innerHTML='';
+    events.forEach(function(ev){
+      var card = document.createElement('div');
+      card.className='ws-row-card';
+      card.innerHTML = '<div class="row"><div class="field"><label class="field-label">Event Name</label><input type="text" value="'+ev.name+'" data-ef="name" data-id="'+ev.id+'"></div><div class="field"><label class="field-label">Date</label><input type="date" value="'+ev.date+'" data-ef="date" data-id="'+ev.id+'"></div><div class="field"><label class="field-label">Venue</label><input type="text" value="'+ev.venue+'" data-ef="venue" data-id="'+ev.id+'"></div></div>'+
+        '<div class="row"><div class="field"><label class="field-label">Expected Guests</label><input type="number" value="'+ev.guests+'" data-ef="guests" data-id="'+ev.id+'"></div><div class="field"><label class="field-label">Budget</label><input type="number" value="'+ev.budget+'" data-ef="budget" data-id="'+ev.id+'"></div><div class="field"><label class="field-label">Notes</label><input type="text" value="'+ev.notes+'" data-ef="notes" data-id="'+ev.id+'"></div></div>'+
+        '<button type="button" class="ws-row-remove" data-remove-event="'+ev.id+'">Remove Event</button>';
+      list.appendChild(card);
+    });
+    list.querySelectorAll('[data-ef]').forEach(function(inp){
+      inp.addEventListener('input',function(){
+        var id=parseInt(this.getAttribute('data-id')), field=this.getAttribute('data-ef');
+        var ev=events.find(function(e){return e.id===id;});
+        if(ev){ ev[field] = (field==='guests'||field==='budget') ? (parseFloat(this.value)||0) : this.value; if(field==='name')refreshEventDropdowns(); }
+      });
+    });
+    list.querySelectorAll('[data-remove-event]').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var id=parseInt(this.getAttribute('data-remove-event'));
+        events = events.filter(function(e){return e.id!==id;});
+        renderEvents(); refreshEventDropdowns();
+      });
+    });
+  }
+
+  function refreshEventDropdowns(){
+    var selects = ['catEvent','venEvent','venVendorEvent','invEvent','tlEvent'];
+    selects.forEach(function(id){
+      var sel=document.getElementById(id);
+      var current=sel.value;
+      sel.innerHTML='';
+      events.forEach(function(ev){
+        var opt=document.createElement('option');
+        opt.value=ev.name; opt.textContent=ev.name;
+        sel.appendChild(opt);
+      });
+      if(events.some(function(e){return e.name===current;})) sel.value=current;
+    });
+    renderGuestEventChecks();
+  }
+
+  /* ===== BUDGET ===== */
+  function renderBudgetCategories(){
+    var list = document.getElementById('wsBudgetCategoryList');
+    list.innerHTML='';
+    var all = BUDGET_CATEGORIES.concat(customCategories);
+    all.forEach(function(cat){
+      var row=document.createElement('div');
+      row.className='row';
+      row.innerHTML='<div class="field" style="flex:2"><label class="field-label">'+cat+'</label><input type="number" value="0" data-budget-cat="'+cat+'"></div>';
+      list.appendChild(row);
+    });
+  }
+  document.getElementById('wsAddCustomCategory').addEventListener('click',function(){
+    var name=val('wsCustomCategoryName').trim();
+    if(!name)return;
+    customCategories.push(name);
+    renderBudgetCategories();
+    document.getElementById('wsCustomCategoryName').value='';
+  });
+  document.getElementById('wsCalcBudgetBtn').addEventListener('click',function(){
+    var total = num('wsTotalBudget');
+    var planned = 0;
+    document.querySelectorAll('[data-budget-cat]').forEach(function(inp){ planned += parseFloat(inp.value)||0; });
+    var remaining = total - planned;
+    var pct = total>0 ? Math.min(100, Math.round(planned/total*100)) : 0;
+    var contingencyPct = num('wsContingencyPct');
+    var contingencyAmt = total * (contingencyPct/100);
+    var totalWithContingency = total + contingencyAmt;
+
+    document.getElementById('wsBudgetMetrics').innerHTML =
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+fmt(total)+'</div><div class="ws-metric-label">Total Budget</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+fmt(planned)+'</div><div class="ws-metric-label">Planned Cost</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+fmt(remaining)+'</div><div class="ws-metric-label">Remaining</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+fmt(contingencyAmt)+'</div><div class="ws-metric-label">Contingency ('+contingencyPct+'%)</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+fmt(totalWithContingency)+'</div><div class="ws-metric-label">Total incl. Contingency</div></div>';
+
+    var bar=document.getElementById('wsBudgetBar');
+    bar.style.width=Math.min(100,pct)+'%';
+    bar.classList.toggle('over', remaining<0);
+    document.getElementById('wsBudgetStatus').innerHTML = remaining<0
+      ? '⚠️ <strong>OVER BUDGET</strong> by '+fmt(Math.abs(remaining))
+      : '✅ On track — '+pct+'% of budget planned';
+    document.getElementById('wsBudgetSummary').textContent = fmt(total);
+  });
+
+  /* ===== GUESTS ===== */
+  function renderGuestEventChecks(){
+    var wrap = document.getElementById('wsGuestEventChecks');
+    wrap.innerHTML='';
+    events.forEach(function(ev){
+      var lbl=document.createElement('label');
+      lbl.style.cssText='display:flex;align-items:center;gap:5px;font-size:.8rem;background:rgba(224,122,44,.06);padding:6px 10px;border-radius:8px;';
+      lbl.innerHTML='<input type="checkbox" value="'+ev.name+'" class="guest-event-check"> '+ev.name;
+      wrap.appendChild(lbl);
+    });
+  }
+  document.getElementById('wsAddGuestBtn').addEventListener('click',function(){
+    var name=val('wsGuestName').trim();
+    if(!name)return;
+    var attendingEvents=Array.from(document.querySelectorAll('.guest-event-check:checked')).map(function(c){return c.value;});
+    guests.push({id:guestIdCounter++, name:name, side:val('wsGuestSide'), adults:num('wsGuestAdults'), children:num('wsGuestChildren'), phone:val('wsGuestPhone'), rsvp:val('wsGuestRsvp'), notes:val('wsGuestNotes'), events:attendingEvents});
+    document.getElementById('wsGuestName').value='';
+    document.getElementById('wsGuestPhone').value='';
+    document.querySelectorAll('.guest-event-check').forEach(function(c){c.checked=false;});
+    renderGuests();
+  });
+  function renderGuests(){
+    var list=document.getElementById('wsGuestList');
+    var filterSide=val('wsGuestFilterSide'), filterRsvp=val('wsGuestFilterRsvp');
+    var filtered = guests.filter(function(g){
+      return (!filterSide||g.side===filterSide) && (!filterRsvp||g.rsvp===filterRsvp);
+    });
+    list.innerHTML='';
+    filtered.forEach(function(g){
+      var row=document.createElement('div');
+      row.className='ws-row-card';
+      row.innerHTML='<strong>'+g.name+'</strong> ('+g.side+') — '+g.adults+' adults, '+g.children+' children — RSVP: '+g.rsvp+'<br><span style="font-size:.75rem;color:#8a8a75">Events: '+(g.events.join(', ')||'—')+'</span><br><button type="button" class="ws-row-remove" data-remove-guest="'+g.id+'" style="margin-top:6px;">Remove</button>';
+      list.appendChild(row);
+    });
+    list.querySelectorAll('[data-remove-guest]').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var id=parseInt(this.getAttribute('data-remove-guest'));
+        guests = guests.filter(function(g){return g.id!==id;});
+        renderGuests(); updateGuestMetrics();
+      });
+    });
+    updateGuestMetrics();
+  }
+  document.getElementById('wsGuestFilterSide').addEventListener('change',renderGuests);
+  document.getElementById('wsGuestFilterRsvp').addEventListener('change',renderGuests);
+
+  function updateGuestMetrics(){
+    var totalGuests=0, confirmed=0, pending=0, declined=0, adults=0, children=0, brideSide=0, groomSide=0;
+    guests.forEach(function(g){
+      var count=g.adults+g.children;
+      totalGuests+=count; adults+=g.adults; children+=g.children;
+      if(g.rsvp==='Confirmed')confirmed+=count;
+      if(g.rsvp==='Pending'||g.rsvp==='Invited')pending+=count;
+      if(g.rsvp==='Declined')declined+=count;
+      if(g.side==='Bride')brideSide+=count;
+      if(g.side==='Groom')groomSide+=count;
+    });
+    document.getElementById('wsGuestMetrics').innerHTML=
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+totalGuests+'</div><div class="ws-metric-label">Total Guests</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+confirmed+'</div><div class="ws-metric-label">Confirmed</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+pending+'</div><div class="ws-metric-label">Pending</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+declined+'</div><div class="ws-metric-label">Declined</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+brideSide+'</div><div class="ws-metric-label">Bride Side</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+groomSide+'</div><div class="ws-metric-label">Groom Side</div></div>';
+    document.getElementById('wsGuestSummary').textContent = totalGuests+' guests';
+  }
+
+  /* ===== CATERING & MENU ===== */
+  document.getElementById('catCalcBtn').addEventListener('click',function(){
+    var adultCost=num('catAdults')*num('catAdultPrice');
+    var childCost=num('catChildren')*num('catChildPrice');
+    document.getElementById('catResult').innerHTML='Adult Cost: '+fmt(adultCost)+' | Child Cost: '+fmt(childCost)+'<br><strong>Total Catering Cost: '+fmt(adultCost+childCost)+'</strong>';
+  });
+  document.getElementById('menuAddBtn').addEventListener('click',function(){
+    var dish=val('menuDish').trim();
+    if(!dish)return;
+    menuItems.push({dish:dish, category:val('menuCategory'), cost:num('menuCost')});
+    document.getElementById('menuDish').value='';
+    renderMenu();
+  });
+  function renderMenu(){
+    var list=document.getElementById('menuList');
+    list.innerHTML='';
+    menuItems.forEach(function(m,i){
+      var row=document.createElement('div');
+      row.className='ws-checklist-item ws-task-item';
+      row.innerHTML='<span>'+m.dish+' ('+m.category+') — '+fmt(m.cost)+'</span>';
+      list.appendChild(row);
+    });
+  }
+
+  /* ===== VENUE ===== */
+  document.getElementById('venAddBtn').addEventListener('click',function(){
+    var name=val('venName').trim();
+    if(!name)return;
+    venues.push({name:name, event:val('venEvent'), location:val('venLocation'), capacity:num('venCapacity'), cost:num('venCost'), advance:num('venAdvance'), contact:val('venContact')});
+    document.getElementById('venName').value='';
+    renderVenues();
+  });
+  function renderVenues(){
+    var list=document.getElementById('venList');
+    list.innerHTML='';
+    venues.forEach(function(v){
+      var remaining=v.cost-v.advance;
+      var row=document.createElement('div');
+      row.className='ws-row-card';
+      row.innerHTML='<strong>'+v.name+'</strong> ('+v.event+') — '+v.location+', Capacity: '+v.capacity+'<br>Cost: '+fmt(v.cost)+' | Advance: '+fmt(v.advance)+' | Remaining: '+fmt(remaining);
+      list.appendChild(row);
+    });
+  }
+
+  /* ===== VENDORS & EXPENSES ===== */
+  document.getElementById('venVendorAddBtn').addEventListener('click',function(){
+    var name=val('venVendorName').trim();
+    if(!name)return;
+    vendors.push({id:vendorIdCounter++, category:val('venCategory'), name:name, event:val('venVendorEvent'), quoted:num('venQuoted'), final:num('venFinal'), paid:num('venPaid'), status:val('venStatus'), phone:val('venVendorPhone'), notes:val('venVendorNotes')});
+    document.getElementById('venVendorName').value='';
+    renderVendors();
+  });
+  function renderVendors(){
+    var list=document.getElementById('vendorList');
+    list.innerHTML='';
+    var totalPlanned=0,totalActual=0,totalPaid=0,totalRemaining=0;
+    vendors.forEach(function(v){
+      var remaining=v.final-v.paid;
+      totalPlanned+=v.quoted; totalActual+=v.final; totalPaid+=v.paid; totalRemaining+=remaining;
+      var row=document.createElement('div');
+      row.className='ws-row-card';
+      row.innerHTML='<strong>'+v.name+'</strong> ('+v.category+(v.event?' — '+v.event:'')+') — '+v.status+'<br>Quoted: '+fmt(v.quoted)+' | Final: '+fmt(v.final)+' | Paid: '+fmt(v.paid)+' | Remaining: '+fmt(remaining)+
+        '<br><button type="button" class="ws-row-remove" data-remove-vendor="'+v.id+'" style="margin-top:6px;">Remove</button>';
+      list.appendChild(row);
+    });
+    list.querySelectorAll('[data-remove-vendor]').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var id=parseInt(this.getAttribute('data-remove-vendor'));
+        vendors = vendors.filter(function(v){return v.id!==id;});
+        renderVendors();
+      });
+    });
+    document.getElementById('wsPaymentMetrics').innerHTML=
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+fmt(totalPlanned)+'</div><div class="ws-metric-label">Total Planned</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+fmt(totalActual)+'</div><div class="ws-metric-label">Total Actual</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+fmt(totalPaid)+'</div><div class="ws-metric-label">Total Paid</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+fmt(totalRemaining)+'</div><div class="ws-metric-label">Total Remaining</div></div>';
+  }
+
+  /* ===== INVITATIONS ===== */
+  document.getElementById('invTplGrid').addEventListener('click',function(e){
+    var sw=e.target.closest('[data-tpl]');
+    if(!sw)return;
+    document.querySelectorAll('#invTplGrid [data-tpl]').forEach(function(s){s.classList.remove('active');});
+    sw.classList.add('active');
+    currentTemplate = sw.getAttribute('data-tpl');
+  });
+  function buildInviteHTML(langCode){
+    var L = INV_LABELS[langCode] || INV_LABELS.en;
+    var bride = val('wsBrideName')||'—', groom = val('wsGroomName')||'—';
+    var ev = val('invEvent')||'—';
+    var evObj = events.find(function(e){return e.name===ev;});
+    var date = evObj ? evObj.date : val('wsWeddingDate');
+    return '<div class="ws-invite-title">✨ '+L.title+' ✨</div>'+
+      '<p>'+L.invite+'</p>'+
+      '<p style="font-size:1.3rem;font-weight:700;margin:14px 0;">'+bride+' &amp; '+groom+'</p>'+
+      (val('invParents')?'<p style="font-size:.85rem;">'+val('invParents')+'</p>':'')+
+      '<p>'+L.event+': '+ev+'<br>'+L.date+': '+(date||'—')+' '+L.time+': '+(val('invTime')||'—')+'</p>'+
+      '<p>'+L.venue+': '+(val('invVenue')||'—')+'<br>'+L.address+': '+(val('invAddress')||'—')+'</p>'+
+      (val('invMessage')?'<p style="font-style:italic;">'+val('invMessage')+'</p>':'')+
+      '<p style="font-size:.8rem;margin-top:14px;">'+L.rsvp+': '+L.contact+' — '+(val('invRsvpContact')||'—')+'</p>';
+  }
+  document.getElementById('invGenerateBtn').addEventListener('click',function(){
+    var lang = val('invLanguage');
+    var preview = document.getElementById('invPreview');
+    var isRtl = lang==='ur';
+    var html = lang==='en_ur'
+      ? '<div>'+buildInviteHTML('en')+'</div><hr style="margin:16px 0"><div dir="rtl" style="direction:rtl;text-align:center;font-family:\'Noto Nastaliq Urdu\',serif;">'+buildInviteHTML('ur')+'</div>'
+      : buildInviteHTML(lang==='ur'?'ur':'en');
+    preview.innerHTML = html;
+    preview.className = 'ws-invite-preview tpl-'+currentTemplate + (isRtl?' rtl':'');
+    document.getElementById('invPreviewBox').classList.remove('hidden');
+  });
+  document.getElementById('invPrintBtn').addEventListener('click',function(){window.print();});
+  document.getElementById('invSaveImgBtn').addEventListener('click',function(){
+    alert('Use your browser\'s screenshot tool, or Print to Save as PDF, to save the invitation as an image.');
+  });
+
+  document.getElementById('invWaGenerateBtn').addEventListener('click',function(){
+    var bride=val('wsBrideName')||'—', groom=val('wsGroomName')||'—';
+    var ev=val('invEvent')||'—';
+    var evObj = events.find(function(e){return e.name===ev;});
+    var date = evObj ? evObj.date : val('wsWeddingDate');
+    var lines=[];
+    lines.push('✨ Wedding Invitation ✨');
+    lines.push('');
+    lines.push('You are warmly invited to celebrate the wedding of');
+    lines.push('');
+    lines.push(bride+' & '+groom);
+    lines.push('');
+    lines.push('Event: '+ev);
+    lines.push('Date: '+(date||'—'));
+    lines.push('Time: '+(val('invTime')||'—'));
+    lines.push('Venue: '+(val('invVenue')||'—'));
+    if(val('invAddress'))lines.push('Address: '+val('invAddress'));
+    lines.push('');
+    lines.push('RSVP: '+(val('invRsvpContact')||'—'));
+    var text=lines.join('\n');
+    document.getElementById('invWaText').value=text;
+    document.getElementById('invWaText').classList.remove('hidden');
+    document.getElementById('invWaActions').classList.remove('hidden');
+    var link=document.getElementById('invWaShareLink');
+    link.href='https://wa.me/?text='+encodeURIComponent(text);
+    link.classList.remove('hidden');
+  });
+  document.getElementById('invWaCopyBtn').addEventListener('click',function(){
+    var text=document.getElementById('invWaText').value;
+    if(window.toolnestCopyText){window.toolnestCopyText(text,function(){});}
+    else if(navigator.clipboard){navigator.clipboard.writeText(text);}
+  });
+
+  /* ===== CHECKLIST ===== */
+  function renderChecklist(){
+    var container=document.getElementById('checklistContainer');
+    container.innerHTML='';
+    var total=0, done=0;
+    Object.keys(checklistState).forEach(function(cat){
+      var catDiv=document.createElement('div');
+      catDiv.className='ws-checklist-cat';
+      catDiv.innerHTML='<h4>'+cat+'</h4>';
+      checklistState[cat].forEach(function(item,i){
+        total++; if(item.done)done++;
+        var row=document.createElement('div');
+        row.className='ws-task-item';
+        row.innerHTML='<input type="checkbox" '+(item.done?'checked':'')+' data-cat="'+cat+'" data-idx="'+i+'"><span>'+item.text+'</span>';
+        catDiv.appendChild(row);
+      });
+      container.appendChild(catDiv);
+    });
+    container.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+      cb.addEventListener('change',function(){
+        var cat=this.getAttribute('data-cat'), idx=parseInt(this.getAttribute('data-idx'));
+        checklistState[cat][idx].done=this.checked;
+        renderChecklist();
+      });
+    });
+    var pct = total?Math.round(done/total*100):0;
+    document.getElementById('checklistBar').style.width=pct+'%';
+    document.getElementById('checklistProgressText').textContent='Completed: '+done+' / '+total;
+  }
+  Object.keys(CHECKLIST_DEFAULT).forEach(function(cat){
+    checklistState[cat] = CHECKLIST_DEFAULT[cat].map(function(t){return {text:t, done:false};});
+  });
+  document.getElementById('checklistAddCustomBtn').addEventListener('click',function(){
+    var text=val('checklistCustomTask').trim();
+    if(!text)return;
+    var cat=val('checklistCustomCat');
+    checklistState[cat].push({text:text, done:false});
+    document.getElementById('checklistCustomTask').value='';
+    renderChecklist();
+  });
+
+  /* ===== TIMELINE ===== */
+  document.getElementById('tlAddBtn').addEventListener('click',function(){
+    var task=val('tlTask').trim();
+    if(!task)return;
+    timelineTasks.push({task:task, date:val('tlDate'), event:val('tlEvent'), priority:val('tlPriority'), status:val('tlStatus'), notes:val('tlNotes')});
+    document.getElementById('tlTask').value='';
+    renderTimeline();
+  });
+  function renderTimeline(){
+    var list=document.getElementById('tlList');
+    list.innerHTML='';
+    var today=new Date(); today.setHours(0,0,0,0);
+    var overdue=0, dueToday=0, upcoming=0, completedCount=0;
+    timelineTasks.forEach(function(t,i){
+      var taskDate = t.date ? new Date(t.date) : null;
+      var bucket='Upcoming';
+      if(t.status==='Done'){bucket='Completed';completedCount++;}
+      else if(taskDate){
+        taskDate.setHours(0,0,0,0);
+        if(taskDate<today){bucket='Overdue';overdue++;}
+        else if(taskDate.getTime()===today.getTime()){bucket='Today';dueToday++;}
+        else{upcoming++;}
+      } else {upcoming++;}
+      var row=document.createElement('div');
+      row.className='ws-row-card';
+      row.innerHTML='<strong>['+bucket+'] '+t.task+'</strong> ('+t.priority+', '+t.status+')<br>'+(t.date||'No date')+' — '+(t.event||'—');
+      list.appendChild(row);
+    });
+    document.getElementById('tlMetrics').innerHTML=
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+overdue+'</div><div class="ws-metric-label">Overdue</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+dueToday+'</div><div class="ws-metric-label">Today</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+upcoming+'</div><div class="ws-metric-label">Upcoming</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+completedCount+'</div><div class="ws-metric-label">Completed</div></div>';
+  }
+
+  /* ===== DASHBOARD ===== */
+  document.getElementById('wsRefreshDashboardBtn').addEventListener('click',function(){
+    var totalBudget=num('wsTotalBudget');
+    var plannedTotal=0;
+    document.querySelectorAll('[data-budget-cat]').forEach(function(inp){ plannedTotal += parseFloat(inp.value)||0; });
+    var totalGuests=0, confirmed=0, pending=0, declined=0;
+    guests.forEach(function(g){
+      var c=g.adults+g.children; totalGuests+=c;
+      if(g.rsvp==='Confirmed')confirmed+=c;
+      if(g.rsvp==='Pending'||g.rsvp==='Invited')pending+=c;
+      if(g.rsvp==='Declined')declined+=c;
+    });
+    var totalPaid=0, totalActual=0;
+    vendors.forEach(function(v){totalPaid+=v.paid; totalActual+=v.final;});
+    var outstanding=totalActual-totalPaid;
+    var checklistTotal=0, checklistDone=0;
+    Object.keys(checklistState).forEach(function(cat){checklistState[cat].forEach(function(i){checklistTotal++; if(i.done)checklistDone++;});});
+
+    document.getElementById('dashMetrics').innerHTML=
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+(val('wsBrideName')||'—')+'</div><div class="ws-metric-label">Bride</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+(val('wsGroomName')||'—')+'</div><div class="ws-metric-label">Groom</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+events.length+'</div><div class="ws-metric-label">Events</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+totalGuests+'</div><div class="ws-metric-label">Total Guests</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+fmt(totalBudget)+'</div><div class="ws-metric-label">Total Budget</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+fmt(plannedTotal)+'</div><div class="ws-metric-label">Planned</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+fmt(totalBudget-plannedTotal)+'</div><div class="ws-metric-label">Remaining</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+fmt(totalPaid)+'</div><div class="ws-metric-label">Paid</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+fmt(outstanding)+'</div><div class="ws-metric-label">Outstanding</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+checklistDone+' / '+checklistTotal+'</div><div class="ws-metric-label">Checklist</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+confirmed+'</div><div class="ws-metric-label">RSVP Confirmed</div></div>'+
+      '<div class="ws-metric-box"><div class="ws-metric-value">'+pending+'</div><div class="ws-metric-label">RSVP Pending</div></div>';
+
+    /* Budget breakdown */
+    var all = BUDGET_CATEGORIES.concat(customCategories);
+    var breakdown = all.map(function(cat){
+      var inp=document.querySelector('[data-budget-cat="'+cat+'"]');
+      var planned = inp?parseFloat(inp.value)||0:0;
+      var actual = vendors.filter(function(v){return v.category===cat;}).reduce(function(s,v){return s+v.final;},0);
+      var paid = vendors.filter(function(v){return v.category===cat;}).reduce(function(s,v){return s+v.paid;},0);
+      return {cat:cat, planned:planned, actual:actual, paid:paid, remaining:actual-paid};
+    }).filter(function(b){return b.planned>0||b.actual>0;});
+
+    var sortBy = val('dashSortBy');
+    if(sortBy==='cost-desc')breakdown.sort(function(a,b){return b.actual-a.actual;});
+    if(sortBy==='cost-asc')breakdown.sort(function(a,b){return a.actual-b.actual;});
+    if(sortBy==='over')breakdown.sort(function(a,b){return (b.actual-b.planned)-(a.actual-a.planned);});
+    if(sortBy==='remaining')breakdown.sort(function(a,b){return b.remaining-a.remaining;});
+
+    var bdHtml='';
+    breakdown.forEach(function(b){
+      var over = b.actual>b.planned && b.planned>0;
+      bdHtml+='<div class="ws-row-card"><strong>'+b.cat+'</strong>'+(over?' ⚠️ over':'')+'<br>Planned: '+fmt(b.planned)+' | Actual: '+fmt(b.actual)+' | Paid: '+fmt(b.paid)+' | Remaining: '+fmt(b.remaining)+'</div>';
+    });
+    document.getElementById('dashBreakdown').innerHTML = bdHtml || '<p class="stat">No budget entries yet.</p>';
+
+    /* Alerts */
+    var alerts=[];
+    breakdown.forEach(function(b){ if(b.actual>b.planned && b.planned>0) alerts.push({type:'warn',text:'⚠ '+b.cat+' is over budget'}); });
+    if(pending>0) alerts.push({type:'warn',text:'⚠ '+pending+' guest(s) RSVP pending'});
+    vendors.forEach(function(v){ if(v.status!=='Paid' && v.status!=='Cancelled' && (v.final-v.paid)>0) alerts.push({type:'warn',text:'⚠ Payment due to '+v.name}); });
+    if(alerts.length===0) alerts.push({type:'good',text:'✓ Budget and payments look on track'});
+    document.getElementById('dashAlerts').innerHTML = alerts.map(function(a){return '<div class="ws-alert '+a.type+'">'+a.text+'</div>';}).join('');
+
+    buildReport();
+  });
+  document.getElementById('dashSortBy').addEventListener('change',function(){
+    document.getElementById('wsRefreshDashboardBtn').click();
+  });
+
+  function buildReport(){
+    var lines=[];
+    lines.push('<strong>ToolNest — Wedding Planning Report</strong>');
+    lines.push('Bride: '+(val('wsBrideName')||'—')+' | Groom: '+(val('wsGroomName')||'—'));
+    lines.push('Wedding Date: '+(val('wsWeddingDate')||'—')+' | City: '+(val('wsCity')||'—'));
+    lines.push('<br><strong>Events</strong>: '+events.length);
+    events.forEach(function(ev){lines.push(ev.name+' — '+(ev.date||'no date')+', Guests: '+ev.guests+', Budget: '+fmt(ev.budget));});
+    lines.push('<br>'+document.getElementById('dashMetrics').innerText.replace(/\n/g,' | '));
+    lines.push('<br><em>Generated by ToolNest Wedding & Shaadi Budget Planner.</em>');
+    document.getElementById('wsReportPreview').innerHTML = lines.join('<br>');
+  }
+  document.getElementById('wsPrintReportBtn').addEventListener('click',function(){window.print();});
+  document.getElementById('wsDownloadReportBtn').addEventListener('click',function(){
+    var text=document.getElementById('wsReportPreview').innerText;
+    if(!text || text.indexOf('Refresh Dashboard')!==-1){alert('Please refresh your dashboard first.');return;}
+    var blob=new Blob([text],{type:'text/plain'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='wedding-plan-report.txt';
+    a.click();
+  });
+
+  /* ===== SAVE / CLEAR ===== */
+  document.getElementById('wsSaveDraftBtn').addEventListener('click',function(){
+    try{
+      var data={
+        wsBrideName:val('wsBrideName'), wsGroomName:val('wsGroomName'), wsWeddingDate:val('wsWeddingDate'), wsCity:val('wsCity'),
+        events:events, guests:guests, vendors:vendors, venues:venues, menuItems:menuItems, timelineTasks:timelineTasks, checklistState:checklistState
+      };
+      localStorage.setItem('toolnest-wedding-draft', JSON.stringify(data));
+      document.getElementById('wsSaveStatus').textContent='✅ Draft saved to this browser.';
+    }catch(e){document.getElementById('wsSaveStatus').textContent='Could not save draft.';}
+  });
+  document.getElementById('wsClearDraftBtn').addEventListener('click',function(){
+    if(!confirm('Your local wedding planning data will be removed from this browser. Continue?'))return;
+    try{localStorage.removeItem('toolnest-wedding-draft');}catch(e){}
+    document.getElementById('wsSaveStatus').textContent='Local data cleared.';
+  });
+  (function loadDraft(){
+    try{
+      var raw=localStorage.getItem('toolnest-wedding-draft');
+      if(!raw)return;
+      var data=JSON.parse(raw);
+      ['wsBrideName','wsGroomName','wsWeddingDate','wsCity'].forEach(function(id){if(data[id])document.getElementById(id).value=data[id];});
+      if(data.events){events=data.events; eventIdCounter=Math.max(1,...events.map(function(e){return e.id+1;}),1); renderEvents(); refreshEventDropdowns();}
+      if(data.guests){guests=data.guests; guestIdCounter=Math.max(1,...guests.map(function(g){return g.id+1;}),1); renderGuests();}
+      if(data.vendors){vendors=data.vendors; vendorIdCounter=Math.max(1,...vendors.map(function(v){return v.id+1;}),1); renderVendors();}
+      if(data.venues){venues=data.venues; renderVenues();}
+      if(data.menuItems){menuItems=data.menuItems; renderMenu();}
+      if(data.timelineTasks){timelineTasks=data.timelineTasks; renderTimeline();}
+      if(data.checklistState){checklistState=data.checklistState; renderChecklist();}
+    }catch(e){}
+  })();
+
+  /* Initial renders */
+  renderEvents();
+  renderBudgetCategories();
+  renderGuestEventChecks();
+  renderGuests();
+  renderMenu();
+  renderVenues();
+  renderVendors();
+  renderChecklist();
+  renderTimeline();
+
+  /* Step nav active highlight on scroll */
+  var sections = ['wstep01','wsWorkCard','wstepDashboard','wstepReport','wstepGuide'];
+  window.addEventListener('scroll',function(){
+    var scrollPos = window.scrollY+120;
+    var current = sections[0];
+    sections.forEach(function(id){
+      var el = document.getElementById(id);
+      if(el && el.offsetTop<=scrollPos) current=id;
+    });
+  });
+
+});
+})();
+</script><script src="script.js"></script></body></html>
