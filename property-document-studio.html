@@ -33,8 +33,9 @@
 <div class="card" id="pstep01">
 <h2>01 — Country &amp; Location</h2>
 <p class="desc">This sets the terminology, currency, and checklist structure used throughout. Legal/tax rates are never assumed — you'll enter your own current local rate wherever one is needed.</p>
-<div class="row"><div class="field"><label class="field-label" for="psCountry">Country</label><select id="psCountry"><option value="pakistan">Pakistan</option><option value="india">India</option></select></div><div class="field"><label class="field-label" for="psRegion">Province / State</label><select id="psRegion"></select></div><div class="field"><label class="field-label" for="psCity">City / District</label><input type="text" id="psCity" placeholder="e.g. Lahore, Mumbai"></div></div>
-<div class="row"><div class="field"><label class="field-label" for="psLanguage">Document Language</label><select id="psLanguage"><option value="en">English</option><option value="ur">اردو (Urdu)</option><option value="both">English + اردو</option></select></div><div class="field"><label class="field-label" for="psCurrency">Currency</label><select id="psCurrency"><option value="PKR">PKR</option><option value="INR">INR</option><option value="OTHER">Custom</option></select></div></div>
+<div class="row"><div class="field"><label class="field-label" for="psCountry">Country</label><select id="psCountry"><option value="pakistan">Pakistan</option><option value="india">India</option><option value="other">Custom / Other Country</option></select></div><div class="field"><label class="field-label" for="psRegion">Province / State</label><select id="psRegion"></select></div><div class="field hidden" id="psCustomCountryWrap"><label class="field-label" for="psCustomCountry">Country Name</label><input type="text" id="psCustomCountry" placeholder="Enter your country"></div><div class="field"><label class="field-label" for="psCity">City / District</label><input type="text" id="psCity" placeholder="e.g. Lahore, Mumbai"></div></div>
+<div class="row"><div class="field"><label class="field-label" for="psLanguage">Document Language</label><select id="psLanguage"><option value="en">English</option><option value="ur">اردو (Urdu)</option><option value="hi">हिन्दी (Hindi)</option><option value="en_ur">English + اردو</option><option value="en_hi">English + हिन्दी</option><option value="custom">Custom / Local Language</option></select></div><div class="field hidden" id="psCustomLangWrap"><label class="field-label" for="psCustomLang">Language Name</label><input type="text" id="psCustomLang" placeholder="e.g. Punjabi, Bengali, Sindhi"></div><div class="field"><label class="field-label" for="psCurrency">Currency</label><select id="psCurrency"><option value="PKR">PKR</option><option value="INR">INR</option><option value="OTHER">Custom</option></select></div></div>
+<p class="ps-note" id="psCustomLangNote" style="display:none;">Custom/local language selected — the document will be generated in English as a base, with a note reminding you to translate it into your selected language. Full automatic translation isn't available for every local language.</p>
 <p class="ps-note">Requirements, document lists, and tax/stamp duty rules vary by province, state, city, and property type. Always verify current requirements with the relevant local authority before relying on this for a real transaction.</p>
 </div>
 
@@ -296,7 +297,8 @@
 
 var REGIONS = {
   pakistan: ['Punjab','Sindh','Khyber Pakhtunkhwa','Balochistan','Islamabad Capital Territory'],
-  india: ['Punjab','Delhi','Haryana','Uttar Pradesh','Maharashtra','Rajasthan','Gujarat','Other State']
+  india: ['Punjab','Delhi','Haryana','Uttar Pradesh','Maharashtra','Rajasthan','Gujarat','Other State'],
+  other: ['Custom / Enter Below']
 };
 
 var SELLER_DOCS = ["Seller's identity document","Ownership / title document","Previous sale deed (if any)","Property tax / dues clearance","No-objection certificate (if applicable)","Other jurisdiction-specific documents"];
@@ -341,10 +343,11 @@ document.addEventListener('DOMContentLoaded',function(){
       opt.value = r; opt.textContent = r;
       sel.appendChild(opt);
     });
+    document.getElementById('psCustomCountryWrap').classList.toggle('hidden', country!=='other');
     updateLocationDisplay();
   }
   function updateLocationDisplay(){
-    var country = document.getElementById('psCountry').selectedOptions[0].textContent;
+    var country = document.getElementById('psCountry').value==='other' ? (val('psCustomCountry')||'Custom Country') : document.getElementById('psCountry').selectedOptions[0].textContent;
     var region = document.getElementById('psRegion').value;
     var city = val('psCity');
     var label = country + (region ? ', '+region : '') + (city ? ', '+city : '');
@@ -354,8 +357,16 @@ document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('psCountry').addEventListener('change',populateRegions);
   document.getElementById('psRegion').addEventListener('change',updateLocationDisplay);
   document.getElementById('psCity').addEventListener('input',updateLocationDisplay);
+  document.getElementById('psCustomCountry').addEventListener('input',updateLocationDisplay);
   document.getElementById('psCurrency').addEventListener('change',updateLocationDisplay);
   populateRegions();
+
+  /* Language custom toggle */
+  document.getElementById('psLanguage').addEventListener('change',function(){
+    var isCustom = this.value==='custom';
+    document.getElementById('psCustomLangWrap').classList.toggle('hidden', !isCustom);
+    document.getElementById('psCustomLangNote').style.display = isCustom ? '' : 'none';
+  });
 
   /* Work-tabs switcher */
   var PANELS = ['panelRentAgreement','panelDeed','panelDocChecklist','panelTax','panelRent','panelCosts','panelReview'];
@@ -374,13 +385,49 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   });
 
-  /* ===== Rent Agreement Generator ===== */
-  function buildClause(id,en,ur){
-    var lang = val('psLanguage');
-    if(lang==='ur')return ur;
-    if(lang==='both')return en+'<br>'+ur;
-    return en;
+  /* ===== Rent Agreement Generator: real translations ===== */
+  var RA_LABELS = {
+    en: {title:'DRAFT RENT AGREEMENT', disclaimer:'This template is provided for informational and drafting assistance and may need to be adapted to local legal requirements.', parties:'Parties', landlord:'Landlord', tenant:'Tenant', fatherHusband:'Father/Husband', cnicId:'CNIC/ID', property:'Property', address:'Address', type:'Type', rooms:'Rooms', floor:'Floor', unit:'Unit', rentSection:'Rent', monthlyRent:'Monthly Rent', securityDeposit:'Security Deposit', advanceRent:'Advance Rent', dueDate:'Due Date', paymentMethod:'Payment Method', tenancyDuration:'Tenancy Duration', from:'From', to:'to', renewal:'Renewal', noticePeriod:'Notice Period', responsibilities:'Responsibilities', maintenance:'Maintenance', utilities:'Utilities', permittedUse:'Permitted Use', additionalTerms:'Additional Terms', signatures:'Signatures', date:'Date', witness:'Witness'},
+    ur: {title:'مسودہ کرایہ نامہ', disclaimer:'یہ نمونہ صرف معلوماتی اور مسودہ سازی میں مدد کے لیے فراہم کیا گیا ہے اور اسے مقامی قانونی تقاضوں کے مطابق ڈھالنے کی ضرورت ہو سکتی ہے۔', parties:'فریقین', landlord:'مالک مکان', tenant:'کرایہ دار', fatherHusband:'والد/شوہر کا نام', cnicId:'شناختی کارڈ نمبر', property:'جائیداد', address:'پتہ', type:'قسم', rooms:'کمرے', floor:'منزل', unit:'یونٹ', rentSection:'کرایہ', monthlyRent:'ماہانہ کرایہ', securityDeposit:'ضمانتی رقم', advanceRent:'ایڈوانس کرایہ', dueDate:'ادائیگی کی تاریخ', paymentMethod:'ادائیگی کا طریقہ', tenancyDuration:'مدت کرایہ داری', from:'تاریخ آغاز', to:'تاریخ اختتام', renewal:'تجدید', noticePeriod:'نوٹس کی مدت', responsibilities:'ذمہ داریاں', maintenance:'دیکھ بھال', utilities:'بجلی، گیس، پانی', permittedUse:'استعمال کی اجازت', additionalTerms:'اضافی شرائط', signatures:'دستخط', date:'تاریخ', witness:'گواہ'},
+    hi: {title:'मसौदा किराया समझौता', disclaimer:'यह टेम्पलेट केवल जानकारी और मसौदा तैयार करने में सहायता के लिए प्रदान किया गया है और इसे स्थानीय कानूनी आवश्यकताओं के अनुसार अनुकूलित करने की आवश्यकता हो सकती है।', parties:'पक्षकार', landlord:'मकान मालिक', tenant:'किरायेदार', fatherHusband:'पिता/पति का नाम', cnicId:'पहचान पत्र संख्या', property:'संपत्ति', address:'पता', type:'प्रकार', rooms:'कमरे', floor:'मंज़िल', unit:'यूनिट', rentSection:'किराया', monthlyRent:'मासिक किराया', securityDeposit:'सुरक्षा जमा राशि', advanceRent:'अग्रिम किराया', dueDate:'भुगतान की तारीख', paymentMethod:'भुगतान का तरीका', tenancyDuration:'किरायेदारी अवधि', from:'से', to:'तक', renewal:'नवीनीकरण', noticePeriod:'सूचना अवधि', responsibilities:'ज़िम्मेदारियाँ', maintenance:'रखरखाव', utilities:'बिजली, गैस, पानी', permittedUse:'उपयोग की अनुमति', additionalTerms:'अतिरिक्त शर्तें', signatures:'हस्ताक्षर', date:'तारीख', witness:'गवाह'}
+  };
+  var RA_CLAUSES = {
+    en: {maintenance:'The Landlord/Tenant (as specified above) shall be responsible for routine maintenance of the property.', utility:'Utility bills (electricity, gas, water) shall be the responsibility of the party specified above.', deposit:'The Security Deposit shall be refundable at the end of the tenancy, subject to deduction for damages beyond normal wear and tear.', increase:'Rent may be increased upon renewal by mutual written agreement between the parties.', sublet:'The Tenant shall not sublet the property without prior written consent of the Landlord.', guest:'Long-term guests staying beyond a reasonable period require prior notice to the Landlord.', inspection:'The Landlord may inspect the property with reasonable prior notice to the Tenant.', earlyterm:'Either party may terminate this agreement early subject to the notice period and any applicable penalty.', renewal:'This agreement may be renewed upon mutual written agreement of both parties before expiry.', notice:'Either party must provide the notice period specified above before termination or non-renewal.', parking:'Parking facilities, if any, are as described in the Property section above.', furnishing:'Furnishings, if any, are as described in the Property section and shall be maintained in good condition by the Tenant.', pet:'Keeping of pets on the property requires prior written consent of the Landlord.', commercial:'The property shall not be used for commercial purposes without prior written consent of the Landlord.'},
+    ur: {maintenance:'مالک مکان/کرایہ دار (جیسا کہ اوپر بتایا گیا ہے) جائیداد کی معمول کی دیکھ بھال کا ذمہ دار ہوگا۔', utility:'بجلی، گیس اور پانی کے بل اوپر بتائے گئے فریق کی ذمہ داری ہوں گے۔', deposit:'ضمانتی رقم کرایہ داری کے اختتام پر واپس کی جائے گی، سوائے عام استعمال سے زیادہ نقصان کی صورت میں کٹوتی کے۔', increase:'تجدید کے وقت فریقین کی باہمی تحریری رضامندی سے کرایہ بڑھایا جا سکتا ہے۔', sublet:'کرایہ دار مالک مکان کی پیشگی تحریری اجازت کے بغیر جائیداد کرائے پر آگے نہیں دے سکتا۔', guest:'طویل مدتی مہمانوں کے قیام کے لیے مالک مکان کو پیشگی اطلاع درکار ہوگی۔', inspection:'مالک مکان مناسب پیشگی اطلاع کے ساتھ جائیداد کا معائنہ کر سکتا ہے۔', earlyterm:'کوئی بھی فریق نوٹس کی مدت اور قابل اطلاق جرمانے کے تابع معاہدہ قبل از وقت ختم کر سکتا ہے۔', renewal:'میعاد ختم ہونے سے پہلے دونوں فریقین کی باہمی تحریری رضامندی سے یہ معاہدہ تجدید ہو سکتا ہے۔', notice:'ختم کرنے یا تجدید نہ کرنے سے پہلے دونوں فریقین کو مذکورہ بالا نوٹس کی مدت دینا لازم ہے۔', parking:'پارکنگ کی سہولت، اگر کوئی ہو، جائیداد کے سیکشن میں بیان کی گئی ہے۔', furnishing:'فرنیچر، اگر کوئی ہو، جائیداد کے سیکشن میں بیان کیا گیا ہے اور کرایہ دار اسے اچھی حالت میں رکھے گا۔', pet:'جائیداد میں پالتو جانور رکھنے کے لیے مالک مکان کی پیشگی تحریری اجازت درکار ہے۔', commercial:'مالک مکان کی پیشگی تحریری اجازت کے بغیر جائیداد کاروباری مقاصد کے لیے استعمال نہیں کی جائے گی۔'},
+    hi: {maintenance:'मकान मालिक/किरायेदार (जैसा ऊपर बताया गया है) संपत्ति के नियमित रखरखाव के लिए ज़िम्मेदार होगा।', utility:'बिजली, गैस और पानी के बिल ऊपर बताए गए पक्ष की ज़िम्मेदारी होंगे।', deposit:'सुरक्षा जमा राशि किरायेदारी समाप्त होने पर वापस की जाएगी, सामान्य टूट-फूट से अधिक नुकसान की स्थिति में कटौती के अधीन।', increase:'नवीनीकरण पर पक्षकारों की आपसी लिखित सहमति से किराया बढ़ाया जा सकता है।', sublet:'किरायेदार मकान मालिक की पूर्व लिखित सहमति के बिना संपत्ति को उप-किराए पर नहीं देगा।', guest:'उचित अवधि से अधिक समय तक ठहरने वाले मेहमानों के लिए मकान मालिक को पूर्व सूचना आवश्यक है।', inspection:'मकान मालिक उचित पूर्व सूचना के साथ संपत्ति का निरीक्षण कर सकता है।', earlyterm:'कोई भी पक्ष सूचना अवधि और लागू दंड के अधीन इस समझौते को जल्दी समाप्त कर सकता है।', renewal:'समाप्ति से पहले दोनों पक्षों की आपसी लिखित सहमति से यह समझौता नवीनीकृत किया जा सकता है।', notice:'समाप्ति या गैर-नवीनीकरण से पहले दोनों पक्षों को ऊपर बताई गई सूचना अवधि देनी होगी।', parking:'पार्किंग सुविधा, यदि कोई हो, संपत्ति अनुभाग में वर्णित है।', furnishing:'फर्नीचर, यदि कोई हो, संपत्ति अनुभाग में वर्णित है और किरायेदार इसे अच्छी स्थिति में बनाए रखेगा।', pet:'संपत्ति में पालतू जानवर रखने के लिए मकान मालिक की पूर्व लिखित सहमति आवश्यक है।', commercial:'मकान मालिक की पूर्व लिखित सहमति के बिना संपत्ति का उपयोग व्यावसायिक उद्देश्यों के लिए नहीं किया जाएगा।'}
+  };
+
+  function raBuildBlock(langCode, clauses, landlord, tenant, propAddr, rent, deposit){
+    var L = RA_LABELS[langCode] || RA_LABELS.en;
+    var C = RA_CLAUSES[langCode] || RA_CLAUSES.en;
+    var lines = [];
+    lines.push('<strong>'+L.title+'</strong>');
+    lines.push('<em>'+L.disclaimer+'</em>');
+    lines.push('<br><strong>'+L.parties+'</strong>');
+    lines.push(L.landlord+': '+landlord+' ('+L.fatherHusband+': '+(val('raLandlordFather')||'—')+', '+L.cnicId+': '+(val('raLandlordCnic')||'—')+')');
+    lines.push(L.tenant+': '+tenant+' ('+L.fatherHusband+': '+(val('raTenantFather')||'—')+', '+L.cnicId+': '+(val('raTenantCnic')||'—')+')');
+    lines.push('<br><strong>'+L.property+'</strong>');
+    lines.push(L.address+': '+propAddr);
+    lines.push(L.type+': '+val('raPropType')+', '+L.rooms+': '+num('raRooms')+', '+L.floor+': '+(val('raFloor')||'—')+', '+L.unit+': '+(val('raUnit')||'—')+', '+val('raFurnished'));
+    lines.push('<br><strong>'+L.rentSection+'</strong>');
+    lines.push(L.monthlyRent+': '+fmt(rent)+' | '+L.securityDeposit+': '+fmt(deposit)+' | '+L.advanceRent+': '+fmt(num('raAdvance')));
+    lines.push(L.dueDate+': '+(val('raDueDate')||'—')+' | '+L.paymentMethod+': '+(val('raPaymentMethod')||'—'));
+    lines.push('<br><strong>'+L.tenancyDuration+'</strong>');
+    lines.push(L.from+' '+(val('raStartDate')||'—')+' '+L.to+' '+(val('raEndDate')||'—')+' | '+L.renewal+': '+val('raRenewal')+' | '+L.noticePeriod+': '+(val('raNotice')||'—'));
+    lines.push('<br><strong>'+L.responsibilities+'</strong>');
+    lines.push(L.maintenance+': '+val('raMaintenance')+' | '+L.utilities+': '+val('raUtilResp')+' | '+L.permittedUse+': '+val('raPropUse'));
+    if(clauses.length){
+      lines.push('<br><strong>'+L.additionalTerms+'</strong>');
+      clauses.forEach(function(c){ if(C[c]) lines.push('• '+C[c]); });
+    }
+    lines.push('<br><strong>'+L.signatures+'</strong>');
+    lines.push(L.landlord+': ______________________  '+L.date+': __________');
+    lines.push(L.tenant+': ______________________  '+L.date+': __________');
+    lines.push(L.witness+' 1: ______________________');
+    lines.push(L.witness+' 2: ______________________');
+    return lines.join('<br>');
   }
+
   document.getElementById('raGenerateBtn').addEventListener('click',function(){
     var lang = val('psLanguage');
     var clauses = Array.from(document.querySelectorAll('.ra-clause:checked')).map(function(c){return c.value;});
@@ -390,52 +437,29 @@ document.addEventListener('DOMContentLoaded',function(){
     var rent = num('raRent');
     var deposit = num('raDeposit');
 
-    var lines = [];
-    lines.push('<strong>DRAFT RENT AGREEMENT</strong>');
-    lines.push('<em>This template is provided for informational and drafting assistance and may need to be adapted to local legal requirements.</em>');
-    lines.push('<br><strong>Parties</strong>');
-    lines.push('Landlord: '+landlord+' (Father/Husband: '+(val('raLandlordFather')||'—')+', CNIC/ID: '+(val('raLandlordCnic')||'—')+')');
-    lines.push('Tenant: '+tenant+' (Father/Husband: '+(val('raTenantFather')||'—')+', CNIC/ID: '+(val('raTenantCnic')||'—')+')');
-    lines.push('<br><strong>Property</strong>');
-    lines.push('Address: '+propAddr);
-    lines.push('Type: '+val('raPropType')+', Rooms: '+num('raRooms')+', Floor: '+(val('raFloor')||'—')+', Unit: '+(val('raUnit')||'—')+', '+val('raFurnished'));
-    lines.push('<br><strong>Rent</strong>');
-    lines.push('Monthly Rent: '+fmt(rent)+' | Security Deposit: '+fmt(deposit)+' | Advance Rent: '+fmt(num('raAdvance')));
-    lines.push('Due Date: '+(val('raDueDate')||'—')+' | Payment Method: '+(val('raPaymentMethod')||'—'));
-    lines.push('<br><strong>Tenancy Duration</strong>');
-    lines.push('From '+(val('raStartDate')||'—')+' to '+(val('raEndDate')||'—')+' | Renewal: '+val('raRenewal')+' | Notice Period: '+(val('raNotice')||'—'));
-    lines.push('<br><strong>Responsibilities</strong>');
-    lines.push('Maintenance: '+val('raMaintenance')+' | Utilities: '+val('raUtilResp')+' | Permitted Use: '+val('raPropUse'));
-
-    var clauseText = {
-      maintenance: 'The Landlord/Tenant (as specified above) shall be responsible for routine maintenance of the property.',
-      utility: 'Utility bills (electricity, gas, water) shall be the responsibility of the party specified above.',
-      deposit: 'The Security Deposit shall be refundable at the end of the tenancy, subject to deduction for damages beyond normal wear and tear.',
-      increase: 'Rent may be increased upon renewal by mutual written agreement between the parties.',
-      sublet: 'The Tenant shall not sublet the property without prior written consent of the Landlord.',
-      guest: 'Long-term guests staying beyond a reasonable period require prior notice to the Landlord.',
-      inspection: 'The Landlord may inspect the property with reasonable prior notice to the Tenant.',
-      earlyterm: 'Either party may terminate this agreement early subject to the notice period and any applicable penalty.',
-      renewal: 'This agreement may be renewed upon mutual written agreement of both parties before expiry.',
-      notice: 'Either party must provide the notice period specified above before termination or non-renewal.',
-      parking: 'Parking facilities, if any, are as described in the Property section above.',
-      furnishing: 'Furnishings, if any, are as described in the Property section and shall be maintained in good condition by the Tenant.',
-      pet: 'Keeping of pets on the property requires prior written consent of the Landlord.',
-      commercial: 'The property shall not be used for commercial purposes without prior written consent of the Landlord.'
-    };
-    if(clauses.length){
-      lines.push('<br><strong>Additional Terms</strong>');
-      clauses.forEach(function(c){ if(clauseText[c]) lines.push('• '+clauseText[c]); });
+    var html = '';
+    var isRtl = false;
+    if(lang==='en'){
+      html = raBuildBlock('en', clauses, landlord, tenant, propAddr, rent, deposit);
+    }else if(lang==='ur'){
+      html = raBuildBlock('ur', clauses, landlord, tenant, propAddr, rent, deposit);
+      isRtl = true;
+    }else if(lang==='hi'){
+      html = raBuildBlock('hi', clauses, landlord, tenant, propAddr, rent, deposit);
+    }else if(lang==='en_ur'){
+      html = raBuildBlock('en', clauses, landlord, tenant, propAddr, rent, deposit)+'<br><br>— — —<br><br><div dir="rtl" style="text-align:right;font-family:\'Noto Nastaliq Urdu\',serif;">'+raBuildBlock('ur', clauses, landlord, tenant, propAddr, rent, deposit)+'</div>';
+    }else if(lang==='en_hi'){
+      html = raBuildBlock('en', clauses, landlord, tenant, propAddr, rent, deposit)+'<br><br>— — —<br><br>'+raBuildBlock('hi', clauses, landlord, tenant, propAddr, rent, deposit);
+    }else if(lang==='custom'){
+      var customLangName = val('psCustomLang')||'your selected language';
+      html = '<em>Note: This draft is generated in English. Please translate it into '+customLangName+' as needed — automatic translation is not available for every local language.</em><br><br>'+raBuildBlock('en', clauses, landlord, tenant, propAddr, rent, deposit);
+    }else{
+      html = raBuildBlock('en', clauses, landlord, tenant, propAddr, rent, deposit);
     }
-    lines.push('<br><strong>Signatures</strong>');
-    lines.push('Landlord: ______________________  Date: __________');
-    lines.push('Tenant: ______________________  Date: __________');
-    lines.push('Witness 1: ______________________');
-    lines.push('Witness 2: ______________________');
 
     var preview = document.getElementById('raDraftPreview');
-    preview.innerHTML = lines.join('<br>');
-    preview.classList.toggle('rtl', lang==='ur');
+    preview.innerHTML = html;
+    preview.classList.toggle('rtl', isRtl);
     document.getElementById('raDraftBox').classList.remove('hidden');
     document.getElementById('sumAgreementStatus').textContent = '✓ Draft Generated';
   });
