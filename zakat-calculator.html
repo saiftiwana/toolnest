@@ -1,0 +1,296 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta name="google-adsense-account" content="ca-pub-7690733672429028"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Free Zakat Calculator Online – Sunni &amp; Shia, Live Gold/Silver Rate (PKR/INR) | ToolNest</title><meta name="description" content="Free Zakat calculator for Sunni and Shia fiqh with live gold and silver rates. Calculate Zakat on gold, cash, business, crops (Ushr), plus Khums — private, no sign up."><link rel="canonical" href="https://toolnest.link/zakat-calculator.html"><meta property="og:title" content="Free Zakat Calculator | ToolNest"><meta property="og:description" content="Calculate Zakat (Sunni &amp; Shia) and Khums with live gold/silver rates, free and private."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/zakat-calculator.html"><meta property="og:image" content="https://toolnest.link/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Free Zakat Calculator | ToolNest"><meta name="twitter:description" content="Calculate Zakat (Sunni &amp; Shia) and Khums with live gold/silver rates, free and private."><meta name="twitter:image" content="https://toolnest.link/og-image.png"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html" title="Go to ToolNest homepage" aria-label="ToolNest — go to homepage"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M16 54 Q50 26 84 54" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 67 Q50 42 78 67" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M29 79 Q50 58 71 79" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="79" cy="23" r="20" fill="#e07a2c" stroke="#1f3d2b" stroke-width="3"/><text x="79" y="28.5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span><span class="home-hint" aria-hidden="true">🏠 Home</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Zakat Calculator — Sunni &amp; Shia</h1><p>Calculate Zakat and Khums with live gold and silver rates. Free, private, all in your browser.</p></header><main>
+
+<div class="card">
+<h2>1. Choose Your Fiqh</h2>
+<p class="desc">Sunni and Shia Zakat rules differ in scope, not just rate — pick the one that matches your fiqh.</p>
+<div class="row" id="fiqhTabs"><button type="button" class="secondary fiqh-tab active" data-fiqh="sunni">Sunni Fiqh (Hanafi)</button><button type="button" class="secondary fiqh-tab" data-fiqh="shia">Shia Fiqh (Jafari)</button></div>
+</div>
+
+<div class="card">
+<h2>2. Live Gold, Silver &amp; Currency Rates</h2>
+<p class="desc">Fetched automatically. You can also enter your own local Sarafa Bazaar rate if it differs.</p>
+<div class="row"><div class="field"><label class="field-label" for="zCurrency">Currency</label><select id="zCurrency"><option value="PKR">PKR — Pakistani Rupee</option><option value="INR">INR — Indian Rupee</option><option value="USD">USD — US Dollar</option><option value="SAR">SAR — Saudi Riyal</option><option value="AED">AED — UAE Dirham</option></select></div><div class="field"><button type="button" class="secondary" id="zFetchRates" style="margin-top:22px;">🔄 Fetch Live Rates</button></div></div>
+<div class="row"><div class="field"><label class="field-label" for="zGoldRate">Gold Rate (per gram, 24k)</label><input type="number" id="zGoldRate" placeholder="Auto or enter manually"></div><div class="field"><label class="field-label" for="zSilverRate">Silver Rate (per gram)</label><input type="number" id="zSilverRate" placeholder="Auto or enter manually"></div></div>
+<p class="stat" id="zRateStatus" style="font-size:.82rem;color:#8a8a75;">Rates not fetched yet — click "Fetch Live Rates" or enter manually.</p>
+</div>
+
+<div class="card" id="sunniPanel">
+<h2>Sunni Zakat Calculators (Hanafi)</h2>
+<p class="desc">Nisab: 87.48g gold or 612.36g silver (2.5% Zakat rate on qualifying wealth held one lunar year).</p>
+
+<h3>1. Gold &amp; Silver Zakat</h3>
+<div class="row"><div class="field"><label class="field-label" for="sGold">Gold You Own (grams)</label><input type="number" id="sGold" value="0"></div><div class="field"><label class="field-label" for="sSilver">Silver You Own (grams)</label><input type="number" id="sSilver" value="0"></div></div>
+<button type="button" class="secondary" id="sGoldCalc">Calculate</button>
+<p class="stat" id="sGoldResult"></p>
+
+<h3>2. Cash &amp; Bank Savings Zakat</h3>
+<div class="row"><div class="field"><label class="field-label" for="sCash">Total Cash + Bank Savings</label><input type="number" id="sCash" value="0"></div></div>
+<button type="button" class="secondary" id="sCashCalc">Calculate</button>
+<p class="stat" id="sCashResult"></p>
+
+<h3>3. Business Assets Zakat</h3>
+<div class="row"><div class="field"><label class="field-label" for="sBizAssets">Inventory + Cash in Business</label><input type="number" id="sBizAssets" value="0"></div><div class="field"><label class="field-label" for="sBizLiabilities">Liabilities Due (subtract)</label><input type="number" id="sBizLiabilities" value="0"></div></div>
+<button type="button" class="secondary" id="sBizCalc">Calculate</button>
+<p class="stat" id="sBizResult"></p>
+
+<h3>4. Ushr Calculator (Crop Zakat)</h3>
+<p class="desc" style="margin-top:-4px;">Only for storable produce like wheat, rice, and grains. Perishable fruit you sell should go through the Cash Zakat calculator above instead, using the sale proceeds.</p>
+<div class="row"><div class="field"><label class="field-label" for="sCropValue">Value of Harvested Crop</label><input type="number" id="sCropValue" value="0"></div><div class="field"><label class="field-label" for="sIrrigation">Irrigation Method</label><select id="sIrrigation"><option value="0.10">Rain-fed / River / Natural (10%)</option><option value="0.05">Well / Motor / Paid Irrigation (5%)</option></select></div></div>
+<button type="button" class="secondary" id="sCropCalc">Calculate</button>
+<p class="stat" id="sCropResult"></p>
+</div>
+
+<div class="card hidden" id="shiaPanel">
+<h2>Shia Zakat &amp; Khums Calculators (Jafari — per Sistani rulings)</h2>
+<p class="desc">Zakat applies only to specific items in Shia fiqh — gold/silver coins, four grains, and livestock. Cash and savings are purified through Khums, not Zakat.</p>
+
+<h3>1. Gold &amp; Silver Coins Zakat</h3>
+<p class="desc" style="margin-top:-4px;">Only gold/silver used as coins in transactions — modern jewelry and bullion are generally not zakatable in Shia fiqh unless used as currency.</p>
+<div class="row"><div class="field"><label class="field-label" for="hGold">Gold Coins You Own (grams)</label><input type="number" id="hGold" value="0"></div><div class="field"><label class="field-label" for="hSilver">Silver Coins You Own (grams)</label><input type="number" id="hSilver" value="0"></div></div>
+<button type="button" class="secondary" id="hGoldCalc">Calculate</button>
+<p class="stat" id="hGoldResult"></p>
+
+<h3>2. Grains Zakat (Wheat, Barley, Dates, Raisins)</h3>
+<div class="row"><div class="field"><label class="field-label" for="hGrainType">Grain Type</label><select id="hGrainType"><option value="wheat">Wheat</option><option value="barley">Barley</option><option value="dates">Dates</option><option value="raisins">Raisins</option></select></div><div class="field"><label class="field-label" for="hGrainWeight">Harvested Weight (kg)</label><input type="number" id="hGrainWeight" value="0"></div></div>
+<div class="row"><div class="field"><label class="field-label" for="hGrainValue">Value of Total Harvest</label><input type="number" id="hGrainValue" value="0"></div><div class="field"><label class="field-label" for="hIrrigation">Irrigation Method</label><select id="hIrrigation"><option value="0.10">Rain-fed / River / Natural (10%)</option><option value="0.05">Well / Motor / Paid Irrigation (5%)</option></select></div></div>
+<button type="button" class="secondary" id="hGrainCalc">Calculate</button>
+<p class="stat" id="hGrainResult"></p>
+
+<h3>3. Business Goods Zakat (Obligatory Precaution)</h3>
+<div class="row"><div class="field"><label class="field-label" for="hBiz">Value of Business Trade Goods</label><input type="number" id="hBiz" value="0"></div></div>
+<button type="button" class="secondary" id="hBizCalc">Calculate</button>
+<p class="stat" id="hBizResult"></p>
+
+<h3>4. Khums Calculator (Annual Savings Surplus)</h3>
+<p class="desc" style="margin-top:-4px;">Khums is how Shia fiqh purifies cash and savings — 20% of what remains from your yearly income after necessary annual expenses, on your Khums due date.</p>
+<div class="row"><div class="field"><label class="field-label" for="hIncome">Total Annual Income</label><input type="number" id="hIncome" value="0"></div><div class="field"><label class="field-label" for="hExpenses">Necessary Annual Expenses</label><input type="number" id="hExpenses" value="0"></div></div>
+<button type="button" class="secondary" id="hKhumsCalc">Calculate</button>
+<p class="stat" id="hKhumsResult"></p>
+</div>
+
+<div class="card" style="background:rgba(224,122,44,.08);border-color:#e07a2c;">
+<p style="margin:0;font-size:.85rem;"><strong>⚠️ Important:</strong> This calculator uses commonly published rulings and standard nisab figures for general guidance only. Zakat and Khums are religious obligations — please confirm your specific situation with your own scholar or marja, especially for jewelry, loans, mixed assets, or unusual cases.</p>
+</div>
+
+<div class="seo-content">
+<h3>How to Use This Zakat Calculator</h3>
+<ol><li><strong>Choose Your Fiqh:</strong> Select Sunni (Hanafi) or Shia (Jafari), since the categories of zakatable wealth differ between them.</li><li><strong>Set Your Rates:</strong> Click "Fetch Live Rates" for today's gold and silver price, or enter your own local Sarafa Bazaar rate.</li><li><strong>Fill In Your Numbers:</strong> Enter the values for whichever calculator applies to you — gold, cash, business, crops, or savings.</li><li><strong>Get Your Result:</strong> See whether you've reached nisab and exactly how much Zakat or Khums is due.</li></ol>
+
+<h3>Why Sunni and Shia Zakat Calculations Are Different</h3>
+<p>Zakat calculators often assume one set of rules fits everyone, but Sunni (Hanafi) and Shia (Jafari) fiqh genuinely differ in scope, not just in rate. In Hanafi fiqh, Zakat is due on gold, silver, cash, bank savings, and business assets at 2.5%, using a nisab of 87.48 grams of gold or 612.36 grams of silver. In Jafari fiqh as commonly explained per Grand Ayatollah Sistani's rulings, Zakat is obligatory on nine specific categories — gold and silver only in coin form, four grains (wheat, barley, dates, raisins), and livestock — using separate, lower nisab thresholds (69.12 grams for gold, 483.88 grams for silver). Ordinary cash and bank savings are not directly zakatable in Shia fiqh; instead, they are purified through Khums, a distinct 20% obligation on annual net savings. A calculator built for Pakistani and Indian Muslims following either fiqh needs to reflect this properly rather than forcing both traditions into the same categories.</p>
+
+<h3>How It Works</h3>
+<p>Live gold and silver spot prices are fetched from a public precious-metals price feed, and currency conversion uses published exchange rate data — both entirely from your browser, with no data sent to ToolNest's servers. Because local Sarafa Bazaar rates in Pakistan and India often differ slightly from the international spot price, every rate field can be manually overridden with your own figure before calculating.</p>
+
+<h3>Key Features</h3>
+<p>Separate Sunni and Shia calculator sets, each using the correct nisab and category rules for that fiqh. Live gold and silver rate fetching in PKR, INR, USD, SAR, or AED, with manual override always available. A dedicated Ushr calculator for storable crops, with perishable fruit sale proceeds correctly routed through the cash Zakat calculator instead of a fixed crop rate. A Khums calculator for Shia users to purify annual savings surplus, separate from Zakat entirely. Every result shows your nisab status clearly, and every calculator includes a reminder to confirm with your own scholar.</p>
+
+<h3>Common Use Cases</h3>
+<p>A Pakistani family checking their annual Zakat before Ramadan using today's tola gold rate in PKR. An Indian Muslim household with a mix of gold jewelry, bank FDs, and a small family business calculating each category separately. A Shia household calculating Khums on their yearly savings surplus ahead of their Khums due date. A landowner calculating Ushr on a wheat harvest irrigated by tube well versus one relying on rainfall.</p>
+
+<h3>Privacy &amp; Security</h3>
+<p>All calculations happen entirely in your browser. Your financial figures are never uploaded, stored, or seen by ToolNest — only the gold, silver, and currency rate lookups leave your device, and those contain no personal or financial information at all.</p>
+
+<div class="faq-block">
+<details><summary>What is the difference between Sunni and Shia Zakat calculation?</summary><p>Sunni (Hanafi) Zakat applies broadly to gold, silver, cash, and business assets at 2.5%. Shia (Jafari) Zakat applies only to specific categories — gold/silver coins, four grains, and livestock — with cash and savings instead purified through a separate 20% Khums obligation.</p></details>
+<details><summary>What is the Zakat Nisab for gold and silver in grams?</summary><p>In Sunni (Hanafi) fiqh, nisab is 87.48 grams of gold or 612.36 grams of silver. In Shia (Jafari) fiqh per Sistani rulings, nisab is lower — 69.12 grams for gold coins and 483.88 grams for silver coins.</p></details>
+<details><summary>Do I pay Zakat on gold jewelry I wear regularly?</summary><p>In Hanafi fiqh, most scholars hold that Zakat is due on all gold and silver you own, including worn jewelry. In Shia fiqh, jewelry is generally not zakatable unless it is in coin form used as currency.</p></details>
+<details><summary>What is Khums and how is it different from Zakat?</summary><p>Khums is a distinct Shia obligation of 20% on the surplus remaining from your annual income after necessary expenses, calculated on your personal Khums due date — it is separate from, and in addition to, any Zakat that may be due.</p></details>
+<details><summary>How is Zakat calculated on agricultural produce (Ushr)?</summary><p>Ushr is 10% of the harvest if the land was watered by rain, rivers, or natural moisture, or 5% if it was irrigated using paid means like a tube well or motor — and in Hanafi fiqh there is no nisab threshold for Ushr.</p></details>
+<details><summary>Does Zakat apply to fruit that spoils and can't be stored?</summary><p>Perishable fruit that can't be stored is typically sold quickly; the cash received from that sale is then included in your regular Zakat calculation on cash and savings, rather than being taxed at a fixed Ushr rate.</p></details>
+<details><summary>Is this calculator accurate enough to rely on for my Zakat obligation?</summary><p>It uses commonly published nisab figures and standard rulings for general guidance, but Zakat and Khums are religious obligations — please confirm your specific situation, especially unusual cases like loans, mixed assets, or jewelry, with your own scholar or marja.</p></details>
+<details><summary>Where do the live gold and silver rates come from?</summary><p>Rates are fetched from a public precious-metals price feed and currency exchange data, entirely from your browser — you can also manually enter your own local Sarafa Bazaar rate if you prefer.</p></details>
+</div>
+</div>
+
+<div class="seo-content"><h3>Related Finance &amp; Business Tools</h3><ul style="line-height:2;padding-left:20px;"><li><a href="sales-tax-gst-calculator.html">Sales Tax / GST Calculator</a></li><li><a href="salary-take-home-pay-calculator.html">Salary / Take-Home Pay Calculator</a></li><li><a href="inflation-calculator.html">Inflation Calculator</a></li><li><a href="simple-compound-interest-calculator.html">Simple &amp; Compound Interest Calculator</a></li><li><a href="savings-goal-calculator.html">Savings Goal Calculator</a></li><li><a href="sip-investment-return-calculator.html">SIP &amp; Investment Return Calculator</a></li><li><a href="invoice-generator.html">Invoice Generator</a></li></ul></div>
+
+</main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M16 54 Q50 26 84 54" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 67 Q50 42 78 67" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M29 79 Q50 58 71 79" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="79" cy="23" r="20" fill="#e07a2c" stroke="#1f3d2b" stroke-width="3"/><text x="79" y="28.5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://toolnest.link/"},{"@type":"ListItem","position":2,"name":"Finance","item":"https://toolnest.link/finance-tools.html"},{"@type":"ListItem","position":3,"name":"Zakat Calculator","item":"https://toolnest.link/zakat-calculator.html"}]},
+{"@type":"SoftwareApplication","name":"Zakat Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/zakat-calculator.html"},
+{"@type":"HowTo","name":"How to Calculate Zakat Online","step":[{"@type":"HowToStep","text":"Choose Sunni or Shia fiqh."},{"@type":"HowToStep","text":"Fetch live gold and silver rates, or enter your own."},{"@type":"HowToStep","text":"Enter your figures in the relevant calculator and get your Zakat or Khums amount."}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the difference between Sunni and Shia Zakat calculation?","acceptedAnswer":{"@type":"Answer","text":"Sunni (Hanafi) Zakat applies broadly to gold, silver, cash, and business assets at 2.5%. Shia (Jafari) Zakat applies only to specific categories — gold/silver coins, four grains, and livestock — with cash and savings instead purified through a separate 20% Khums obligation."}},
+{"@type":"Question","name":"What is the Zakat Nisab for gold and silver in grams?","acceptedAnswer":{"@type":"Answer","text":"In Sunni (Hanafi) fiqh, nisab is 87.48 grams of gold or 612.36 grams of silver. In Shia (Jafari) fiqh per Sistani rulings, nisab is lower — 69.12 grams for gold coins and 483.88 grams for silver coins."}},
+{"@type":"Question","name":"Do I pay Zakat on gold jewelry I wear regularly?","acceptedAnswer":{"@type":"Answer","text":"In Hanafi fiqh, most scholars hold that Zakat is due on all gold and silver you own, including worn jewelry. In Shia fiqh, jewelry is generally not zakatable unless it is in coin form used as currency."}},
+{"@type":"Question","name":"What is Khums and how is it different from Zakat?","acceptedAnswer":{"@type":"Answer","text":"Khums is a distinct Shia obligation of 20% on the surplus remaining from your annual income after necessary expenses — it is separate from, and in addition to, any Zakat that may be due."}},
+{"@type":"Question","name":"How is Zakat calculated on agricultural produce (Ushr)?","acceptedAnswer":{"@type":"Answer","text":"Ushr is 10% of the harvest if rain-fed, or 5% if irrigated using paid means like a tube well — in Hanafi fiqh there is no nisab threshold for Ushr."}},
+{"@type":"Question","name":"Does Zakat apply to fruit that spoils and can't be stored?","acceptedAnswer":{"@type":"Answer","text":"Perishable fruit is typically sold quickly; the cash received is then included in your regular cash Zakat calculation, rather than being taxed at a fixed Ushr rate."}}
+]}
+]}
+</script>
+<script>
+(function(){try{var s=localStorage.getItem('toolnest-theme');var t=s||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}document.addEventListener('DOMContentLoaded',function(){var b=document.getElementById('themeToggle');if(!b)return;function u(){var c=document.documentElement.getAttribute('data-theme');b.textContent=c==='dark'?'☀️':'🌙';}u();b.addEventListener('click',function(){var c=document.documentElement.getAttribute('data-theme');var n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('toolnest-theme',n);}catch(e){}u();});});})();
+
+(function(){
+function fmt(n,cur){
+  if(isNaN(n))n=0;
+  return cur+' '+n.toLocaleString(undefined,{maximumFractionDigits:2});
+}
+function num(id){var v=parseFloat(document.getElementById(id).value);return isNaN(v)?0:v;}
+function cur(){return document.getElementById('zCurrency').value;}
+function goldRate(){return parseFloat(document.getElementById('zGoldRate').value)||0;}
+function silverRate(){return parseFloat(document.getElementById('zSilverRate').value)||0;}
+
+document.addEventListener('DOMContentLoaded',function(){
+
+  /* Fiqh tab switcher */
+  document.getElementById('fiqhTabs').addEventListener('click',function(e){
+    var btn=e.target.closest('.fiqh-tab');
+    if(!btn)return;
+    document.querySelectorAll('.fiqh-tab').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    var fiqh=btn.getAttribute('data-fiqh');
+    document.getElementById('sunniPanel').classList.toggle('hidden', fiqh!=='sunni');
+    document.getElementById('shiaPanel').classList.toggle('hidden', fiqh!=='shia');
+  });
+
+  /* Live rate fetching */
+  document.getElementById('zFetchRates').addEventListener('click', async function(){
+    var statusEl=document.getElementById('zRateStatus');
+    statusEl.textContent='Fetching…';
+    var targetCur=cur();
+    try{
+      var goldRes = await fetch('https://goldprice.dev/v1/prices?symbol=XAU-USD-SPOT',{cache:'no-store'});
+      var goldData = await goldRes.json();
+      var silverRes = await fetch('https://goldprice.dev/v1/prices?symbol=XAG-USD-SPOT',{cache:'no-store'});
+      var silverData = await silverRes.json();
+      var goldUsdPerOz = goldData.price || (goldData.data && goldData.data.price);
+      var silverUsdPerOz = silverData.price || (silverData.data && silverData.data.price);
+      if(!goldUsdPerOz || !silverUsdPerOz || isNaN(goldUsdPerOz) || isNaN(silverUsdPerOz)){
+        throw new Error('Unexpected rate response');
+      }
+      var goldUsdPerGram = goldUsdPerOz/31.1035;
+      var silverUsdPerGram = silverUsdPerOz/31.1035;
+
+      var fxRate = 1;
+      if(targetCur!=='USD'){
+        var fxRes = await fetch('https://api.frankfurter.app/latest?from=USD&to='+targetCur,{cache:'no-store'});
+        var fxData = await fxRes.json();
+        if(fxData && fxData.rates && fxData.rates[targetCur]){
+          fxRate = fxData.rates[targetCur];
+        } else {
+          statusEl.textContent='⚠️ '+targetCur+' rate not available from currency feed — gold/silver still fetched in USD terms. Please enter your local rate manually.';
+          document.getElementById('zGoldRate').value = goldUsdPerGram.toFixed(2);
+          document.getElementById('zSilverRate').value = silverUsdPerGram.toFixed(2);
+          return;
+        }
+      }
+      document.getElementById('zGoldRate').value = (goldUsdPerGram*fxRate).toFixed(2);
+      document.getElementById('zSilverRate').value = (silverUsdPerGram*fxRate).toFixed(2);
+      statusEl.textContent='✅ Rates fetched at '+new Date().toLocaleTimeString()+'. Local Sarafa Bazaar rate may differ slightly — edit manually if needed.';
+    }catch(err){
+      statusEl.textContent='⚠️ Could not fetch live rates (network issue). Please enter your gold and silver rate manually below.';
+    }
+  });
+
+  /* ===== SUNNI CALCULATORS ===== */
+  var SUNNI_GOLD_NISAB_G = 87.48, SUNNI_SILVER_NISAB_G = 612.36;
+
+  document.getElementById('sGoldCalc').addEventListener('click',function(){
+    var g=num('sGold'), s=num('sSilver');
+    var value = g*goldRate() + s*silverRate();
+    var nisabValue = SUNNI_SILVER_NISAB_G*silverRate(); // lower/more inclusive threshold
+    var el=document.getElementById('sGoldResult');
+    if(value<=0){el.textContent='Enter your gold/silver amount and rates first.';return;}
+    if(value>=nisabValue && nisabValue>0){
+      el.innerHTML='Total value: '+fmt(value,cur())+'<br>✅ Above nisab. Zakat due (2.5%): <strong>'+fmt(value*0.025,cur())+'</strong>';
+    }else{
+      el.innerHTML='Total value: '+fmt(value,cur())+'<br>Below nisab ('+fmt(nisabValue,cur())+') — no Zakat due, unless combined with other zakatable wealth.';
+    }
+  });
+
+  document.getElementById('sCashCalc').addEventListener('click',function(){
+    var cash=num('sCash');
+    var nisabValue = SUNNI_SILVER_NISAB_G*silverRate();
+    var el=document.getElementById('sCashResult');
+    if(cash<=0){el.textContent='Enter your cash/savings amount first.';return;}
+    if(cash>=nisabValue && nisabValue>0){
+      el.innerHTML='✅ Above nisab. Zakat due (2.5%): <strong>'+fmt(cash*0.025,cur())+'</strong>';
+    }else{
+      el.innerHTML='Below nisab ('+fmt(nisabValue,cur())+') — no Zakat due on this alone, unless combined with other zakatable wealth.';
+    }
+  });
+
+  document.getElementById('sBizCalc').addEventListener('click',function(){
+    var net=num('sBizAssets')-num('sBizLiabilities');
+    var nisabValue = SUNNI_SILVER_NISAB_G*silverRate();
+    var el=document.getElementById('sBizResult');
+    if(net<=0){el.textContent='Net business assets are zero or negative — no Zakat due.';return;}
+    if(net>=nisabValue && nisabValue>0){
+      el.innerHTML='Net assets: '+fmt(net,cur())+'<br>✅ Above nisab. Zakat due (2.5%): <strong>'+fmt(net*0.025,cur())+'</strong>';
+    }else{
+      el.innerHTML='Net assets: '+fmt(net,cur())+'<br>Below nisab ('+fmt(nisabValue,cur())+') — no Zakat due on this alone.';
+    }
+  });
+
+  document.getElementById('sCropCalc').addEventListener('click',function(){
+    var val=num('sCropValue');
+    var rate=parseFloat(document.getElementById('sIrrigation').value);
+    var el=document.getElementById('sCropResult');
+    if(val<=0){el.textContent='Enter your crop value first.';return;}
+    el.innerHTML='Ushr due ('+(rate*100)+'%): <strong>'+fmt(val*rate,cur())+'</strong><br><span style="font-size:.78rem;color:#8a8a75">No nisab threshold applies to Ushr in Hanafi fiqh.</span>';
+  });
+
+  /* ===== SHIA CALCULATORS ===== */
+  var SHIA_GOLD_NISAB_G = 69.12, SHIA_SILVER_NISAB_G = 483.88;
+
+  document.getElementById('hGoldCalc').addEventListener('click',function(){
+    var g=num('hGold'), s=num('hSilver');
+    var goldValue=g*goldRate(), silverValue=s*silverRate();
+    var goldNisabValue=SHIA_GOLD_NISAB_G*goldRate(), silverNisabValue=SHIA_SILVER_NISAB_G*silverRate();
+    var el=document.getElementById('hGoldResult');
+    var lines=[];
+    var total=0;
+    if(g>0){
+      if(goldValue>=goldNisabValue && goldNisabValue>0){lines.push('Gold: ✅ above nisab, Zakat due: '+fmt(goldValue*0.025,cur()));total+=goldValue*0.025;}
+      else{lines.push('Gold: below nisab ('+fmt(goldNisabValue,cur())+')');}
+    }
+    if(s>0){
+      if(silverValue>=silverNisabValue && silverNisabValue>0){lines.push('Silver: ✅ above nisab, Zakat due: '+fmt(silverValue*0.025,cur()));total+=silverValue*0.025;}
+      else{lines.push('Silver: below nisab ('+fmt(silverNisabValue,cur())+')');}
+    }
+    if(!lines.length){el.textContent='Enter your gold/silver coin amount first.';return;}
+    lines.push('<strong>Total Zakat due: '+fmt(total,cur())+'</strong>');
+    el.innerHTML=lines.join('<br>');
+  });
+
+  document.getElementById('hGrainCalc').addEventListener('click',function(){
+    var val=num('hGrainValue');
+    var weight=num('hGrainWeight');
+    var rate=parseFloat(document.getElementById('hIrrigation').value);
+    var NISAB_KG=847;
+    var el=document.getElementById('hGrainResult');
+    if(val<=0){el.textContent='Enter the value of your harvest first.';return;}
+    if(weight>0 && weight<NISAB_KG){
+      el.innerHTML='Weight ('+weight+'kg) is below the nisab of ~847kg — no Zakat due on this grain.';
+      return;
+    }
+    el.innerHTML='Zakat due ('+(rate*100)+'%): <strong>'+fmt(val*rate,cur())+'</strong>';
+  });
+
+  document.getElementById('hBizCalc').addEventListener('click',function(){
+    var val=num('hBiz');
+    var nisabValue=SHIA_SILVER_NISAB_G*silverRate();
+    var el=document.getElementById('hBizResult');
+    if(val<=0){el.textContent='Enter your business goods value first.';return;}
+    if(val>=nisabValue && nisabValue>0){
+      el.innerHTML='✅ Above nisab. Zakat due (2.5%, obligatory precaution): <strong>'+fmt(val*0.025,cur())+'</strong>';
+    }else{
+      el.innerHTML='Below nisab ('+fmt(nisabValue,cur())+').';
+    }
+  });
+
+  document.getElementById('hKhumsCalc').addEventListener('click',function(){
+    var surplus=num('hIncome')-num('hExpenses');
+    var el=document.getElementById('hKhumsResult');
+    if(surplus<=0){el.textContent='No surplus after expenses — no Khums due this year.';return;}
+    el.innerHTML='Annual surplus: '+fmt(surplus,cur())+'<br>Khums due (20%): <strong>'+fmt(surplus*0.20,cur())+'</strong>';
+  });
+
+});
+})();
+</script><script src="script.js"></script></body></html>
+
