@@ -1,4 +1,5 @@
 {
+  "cleanUrls": false,
   "redirects": [
     { "source": "/base64-encoder-decoder.html", "destination": "/universal-encoder-decoder.html#base64", "permanent": true },
     { "source": "/image-to-base64.html", "destination": "/universal-encoder-decoder.html#image", "permanent": true },
