@@ -16,7 +16,7 @@
 .zs-breakdown-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:.85rem}
 .zs-breakdown-row.total{font-weight:800;border-bottom:none;border-top:2px solid var(--line);padding-top:10px;margin-top:4px}
 .zs-note{background:rgba(224,122,44,.08);border-radius:8px;padding:10px 12px;font-size:.8rem;margin:10px 0}
-@media print{.zs-stepnav,.zs-summary-bar,.theme-toggle,header .site-header-bar,.tool-actions,footer nav,#zsPrintHide{display:none !important}}
+@media print{.zs-stepnav,.zs-summary-bar,.theme-toggle,header .site-header-bar,.tool-actions,footer nav,#zsPrintHide{display:none !important}[data-print-hidden]{display:none !important}}
 .hidden{display:none !important}
 .card-section{background:#fffdf6;border:1px solid var(--line);border-radius:16px;padding:26px 24px;margin-bottom:26px;box-shadow:0 2px 10px rgba(31,61,43,.06)}
 [data-theme=dark] .card-section{background:#1f2a22;border-color:var(--line)}
@@ -263,6 +263,27 @@
 </script>
 <script>
 (function(){try{var s=localStorage.getItem('toolnest-theme');var t=s||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}document.addEventListener('DOMContentLoaded',function(){var b=document.getElementById('themeToggle');if(!b)return;function u(){var c=document.documentElement.getAttribute('data-theme');b.textContent=c==='dark'?'☀️':'🌙';}u();b.addEventListener('click',function(){var c=document.documentElement.getAttribute('data-theme');var n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('toolnest-theme',n);}catch(e){}u();});});})();
+
+function toolnestPrintOnly(targetEl){
+  if(!targetEl){window.print();return;}
+  var main = document.querySelector('main');
+  if(!main){window.print();return;}
+  var hidden = [];
+  var node = targetEl;
+  while(node && node!==main && node.parentElement){
+    var parent = node.parentElement;
+    Array.from(parent.children).forEach(function(sib){
+      if(sib===node)return;
+      sib.setAttribute('data-print-hidden','1');
+      hidden.push(sib);
+    });
+    node = parent;
+  }
+  window.print();
+  setTimeout(function(){
+    hidden.forEach(function(el){el.removeAttribute('data-print-hidden');});
+  }, 500);
+}
 
 (function(){
 
@@ -565,7 +586,7 @@ document.addEventListener('DOMContentLoaded',function(){
     document.getElementById('zsReportPreview').innerHTML = lines.join('<br>');
   }
 
-  document.getElementById('zsPrintBtn').addEventListener('click',function(){window.print();});
+  document.getElementById('zsPrintBtn').addEventListener('click',function(){toolnestPrintOnly(document.getElementById('zsReportPreview'));});
   document.getElementById('zsDownloadBtn').addEventListener('click',function(){
     if(!lastCalc){alert('Please calculate your assessment first (Step 08).');return;}
     var text = document.getElementById('zsReportPreview').innerText;

@@ -43,7 +43,7 @@
 .bs-tpl-swatch{border:2px solid var(--line);border-radius:8px;padding:10px;text-align:center;cursor:pointer;font-size:.78rem;font-weight:600}
 .bs-tpl-swatch.active{border-color:#e07a2c;background:rgba(224,122,44,.08)}
 .bs-tpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin:10px 0}
-@media print{.bs-stepnav,.theme-toggle,header .site-header-bar,.tool-actions,footer nav,#bsPrintHide{display:none !important}}
+@media print{.bs-stepnav,.theme-toggle,header .site-header-bar,.tool-actions,footer nav,#bsPrintHide{display:none !important}[data-print-hidden]{display:none !important}}
 </style></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html" title="Go to ToolNest homepage" aria-label="ToolNest — go to homepage"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M16 54 Q50 26 84 54" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 67 Q50 42 78 67" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M29 79 Q50 58 71 79" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="79" cy="23" r="20" fill="#e07a2c" stroke="#1f3d2b" stroke-width="3"/><text x="79" y="28.5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span><span class="home-hint" aria-hidden="true">🏠 Home</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Rishta Biodata Studio</h1><p>Create, Design, Export &amp; Share Your Marriage Biodata — Pakistan &amp; India.</p></header>
 
 <nav class="bs-stepnav" id="bsStepNav" aria-label="Studio steps">
@@ -268,6 +268,27 @@
 </script>
 <script>
 (function(){try{var s=localStorage.getItem('toolnest-theme');var t=s||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}document.addEventListener('DOMContentLoaded',function(){var b=document.getElementById('themeToggle');if(!b)return;function u(){var c=document.documentElement.getAttribute('data-theme');b.textContent=c==='dark'?'☀️':'🌙';}u();b.addEventListener('click',function(){var c=document.documentElement.getAttribute('data-theme');var n=c==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('toolnest-theme',n);}catch(e){}u();});});})();
+
+function toolnestPrintOnly(targetEl){
+  if(!targetEl){window.print();return;}
+  var main = document.querySelector('main');
+  if(!main){window.print();return;}
+  var hidden = [];
+  var node = targetEl;
+  while(node && node!==main && node.parentElement){
+    var parent = node.parentElement;
+    Array.from(parent.children).forEach(function(sib){
+      if(sib===node)return;
+      sib.setAttribute('data-print-hidden','1');
+      hidden.push(sib);
+    });
+    node = parent;
+  }
+  window.print();
+  setTimeout(function(){
+    hidden.forEach(function(el){el.removeAttribute('data-print-hidden');});
+  }, 500);
+}
 
 (function(){
 
@@ -545,7 +566,7 @@ document.addEventListener('DOMContentLoaded',function(){
   });
 
   /* Print / Download */
-  document.getElementById('bsPrintBtn').addEventListener('click',function(){window.print();});
+  document.getElementById('bsPrintBtn').addEventListener('click',function(){toolnestPrintOnly(document.getElementById('bsPreview'));});
   document.getElementById('bsDownloadTextBtn').addEventListener('click',function(){
     var text = document.getElementById('bsPreview').innerText;
     var blob = new Blob([text],{type:'text/plain'});
