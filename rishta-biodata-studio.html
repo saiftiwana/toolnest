@@ -503,7 +503,6 @@ document.addEventListener('DOMContentLoaded',function(){
     updateChecklist();
   }
   document.getElementById('bsRefreshPreviewBtn').addEventListener('click',refreshPreview);
-  refreshPreview();
 
   /* ===== WhatsApp text ===== */
   function buildWhatsappText(){
@@ -629,6 +628,8 @@ document.addEventListener('DOMContentLoaded',function(){
   /* auto-refresh preview on any input change (lightweight, event delegation) */
   document.getElementById('bsFormCard').addEventListener('input', function(){ /* live update deferred to manual refresh + checklist only for performance */ updateChecklist(); });
   document.getElementById('bstep01').addEventListener('input', function(){ updateChecklist(); });
+
+  refreshPreview();
 
 });
 })();
