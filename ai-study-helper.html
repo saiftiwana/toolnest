@@ -49,7 +49,7 @@
 <div class="field"><label class="field-label" for="shApiKey">Gemini API Key</label><input type="password" id="shApiKey" placeholder="AIza..."></div>
 <div class="field"><label class="field-label" for="shModel">Model Name</label><input type="text" id="shModel" value="gemini-3.6-flash"></div>
 </div>
-<div class="row" style="margin-top:12px;"><button id="shSaveSettings">💾 Save AI Settings</button><span class="sh-note" id="shSettingsStatus"></span></div>
+<div class="row" style="margin-top:12px;flex-wrap:wrap;gap:10px;align-items:center;"><button id="shSaveSettings">💾 Save AI Settings</button><button class="secondary" id="shRemoveKey" type="button">🗑️ Remove Key</button><span class="sh-note" id="shSettingsStatus"></span></div>
 <p class="sh-note" style="margin-top:10px;">Current key: <strong id="shCurrentKey">(not set)</strong> · Current model: <strong id="shCurrentModel">gemini-3.6-flash</strong></p>
 <details style="margin-top:14px;"><summary>🆓 Free Gemini API key kaise banayein?</summary><ol style="line-height:1.9;font-size:.9rem;"><li><strong>aistudio.google.com</strong> kholein aur apne Gmail se sign in karein.</li><li>Left menu mein <strong>"Get API Key"</strong> par tap karein.</li><li><strong>"Create API Key"</strong> dabayein — koi bhi naya project select kar lein jab pooche.</li><li>Key copy karein (<code>AIza...</code> se shuru hogi) aur upar wale box mein paste karein.</li><li><strong>Bilkul free hai</strong> — koi credit card nahi maangi jayegi.</li></ol></details>
 </div>
@@ -246,6 +246,16 @@ document.getElementById('shSaveSettings').addEventListener('click',function(){
   setTimeout(function(){document.getElementById('shSettingsStatus').textContent='';},3000);
 });
 renderSettingsStatus();
+
+document.getElementById('shRemoveKey').addEventListener('click',function(){
+  localStorage.removeItem('sh_gemini_key');
+  localStorage.removeItem('sh_gemini_model');
+  document.getElementById('shApiKey').value='';
+  document.getElementById('shModel').value='gemini-3.6-flash';
+  document.getElementById('shSettingsStatus').textContent='✅ Key removed from this browser.';
+  renderSettingsStatus();
+  setTimeout(function(){document.getElementById('shSettingsStatus').textContent='';},3000);
+});
 
 /* ---------- Core Gemini caller ---------- */
 async function callGemini(promptText,systemText,jsonMode){
