@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta name="google-adsense-account" content="ca-pub-7690733672429028"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Free Marks &amp; Final Grade Calculator | ToolNest</title><meta name="description" content="Free marks percentage and weighted final grade calculator in one tool. Find your grade, marks lost, and exactly what score you need next. No sign up."><link rel="canonical" href="https://toolnest.link/marks-grade-calculator.html"><meta property="og:title" content="Free Marks & Final Grade Calculator | ToolNest"><meta property="og:description" content="Marks percentage and weighted final grade calculator, free and instant."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/marks-grade-calculator.html"><meta property="og:image" content="https://toolnest.link/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Free Marks & Final Grade Calculator | ToolNest"><meta name="twitter:description" content="Marks percentage and weighted final grade calculator, free and instant."><meta name="twitter:image" content="https://toolnest.link/og-image.png"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html" title="Go to ToolNest homepage" aria-label="ToolNest — go to homepage"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M16 54 Q50 26 84 54" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 67 Q50 42 78 67" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M29 79 Q50 58 71 79" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="79" cy="23" r="20" fill="#e07a2c" stroke="#1f3d2b" stroke-width="3"/><text x="79" y="28.5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span><span class="home-hint" aria-hidden="true">🏠 Home</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Marks &amp; Final Grade Calculator</h1><p>Percentage from marks, or a weighted final grade — free, instant.</p></header><main>
+
+<div class="card" id="mgc"><h2>Marks &amp; Final Grade Calculator</h2><p class="desc">Two calculators in one: exam marks to percentage, or a full weighted final grade — free, private, all in your browser.</p>
+
+<div class="row" id="mgcTabs">
+<button class="secondary mgc-tab active" data-tab="marks">Marks Percentage</button>
+<button class="secondary mgc-tab" data-tab="final">Weighted Final Grade</button>
+</div>
+
+<div id="mgcMarksPanel" style="margin-top:16px;">
+<h3 style="margin-top:0;">Marks Percentage</h3>
+<div class="row"><div class="field"><label class="field-label" for="markObtained">Marks obtained</label><input type="number" id="markObtained" value="0"></div><div class="field"><label class="field-label" for="markTotal">Total marks</label><input type="number" id="markTotal" value="100"></div><button id="markBtn">Calculate</button></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="markTargetPct">Target percentage (optional)</label><input type="number" id="markTargetPct" placeholder="e.g. 80"></div><button class="secondary" id="markTargetBtn">Marks Needed for Target</button></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" data-copy="markResult" data-copy-mode="text">📋 Copy Result</button><button class="secondary" id="markReset">Reset</button></div>
+<p class="stat" id="markResult" style="white-space:pre-line;"></p>
+</div>
+
+<div id="mgcFinalPanel" style="margin-top:16px;display:none;">
+<h3 style="margin-top:0;">Weighted Final Grade</h3>
+<div class="row"><div class="field"><label class="field-label" for="fgAssign">Assignment %</label><input type="number" id="fgAssign" value="0"></div><div class="field"><label class="field-label" for="fgAssignW">Weight %</label><input type="number" id="fgAssignW" value="20"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="fgMid">Midterm %</label><input type="number" id="fgMid" value="0"></div><div class="field"><label class="field-label" for="fgMidW">Weight %</label><input type="number" id="fgMidW" value="30"></div></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="fgFinal">Final %</label><input type="number" id="fgFinal" value="0"></div><div class="field"><label class="field-label" for="fgFinalW">Weight %</label><input type="number" id="fgFinalW" value="50"></div><button id="fgBtn">Calculate</button></div>
+<div class="row" style="margin-top:12px;"><div class="field"><label class="field-label" for="fgTargetGrade">Target overall grade % (optional)</label><input type="number" id="fgTargetGrade" placeholder="e.g. 80"></div><button class="secondary" id="fgTargetBtn">Score Needed on Final</button></div>
+<div class="row" style="margin-top:10px;"><button class="secondary" data-copy="fgResult" data-copy-mode="text">📋 Copy Result</button><button class="secondary" id="fgReset">Reset</button></div>
+<p class="stat" id="fgResult" style="white-space:pre-line;"></p>
+</div>
+
+<div class="seo-content">
+
+<h3>How to Use the Marks &amp; Final Grade Calculator</h3>
+<ol>
+<li><strong>Pick a Mode:</strong> Choose Marks Percentage for a single test/assignment, or Weighted Final Grade for a full course breakdown.</li>
+<li><strong>Enter Your Numbers:</strong> Marks Percentage needs obtained and total marks; Weighted Final Grade needs each component's score and weight.</li>
+<li><strong>Calculate:</strong> Tap Calculate to see your percentage, letter grade, or final weighted score instantly.</li>
+<li><strong>Plan Ahead:</strong> Use "Marks Needed for Target" or "Score Needed on Final" to see exactly what you need next.</li>
+<li><strong>Export:</strong> Copy the result or reset to start a new calculation.</li>
+</ol>
+
+<h3>Why Use This Tool</h3>
+<p>A free marks percentage and weighted final grade calculator online means not switching between two separate apps to answer two related questions: "what did I score on this test?" and "what do I need on the final to pass the course?" This tool combines both into one connected calculator, so a student checking a single exam's percentage and a student planning a full semester's weighted grade both find what they need in the same place.</p>
+
+<h3>How It Works</h3>
+<p>The Marks Percentage mode divides obtained marks by total marks and multiplies by 100, then maps the result against a standard grade boundary scale (A+, A, B, C, D, F) to estimate a letter grade, while also showing exactly how many marks were lost. The Weighted Final Grade mode multiplies each component's score by its weight, sums the contributions, and normalizes automatically if weights don't add up to exactly 100%. Both modes include a reverse calculation: enter a target percentage or target overall grade, and the tool works backward to tell you the exact marks or final-exam score required to reach it.</p>
+
+<h3>Key Features</h3>
+<p>As a free grade calculator with no signup and zero server uploads, every calculation happens instantly and privately in your browser. The Marks Percentage calculator doubles as a marks-lost tracker, showing not just your score but precisely how many marks separated you from a perfect one. The Weighted Final Grade calculator handles any weight split (not just the common 20/30/50 default) and automatically normalizes results if your course's weights don't sum to exactly 100%, so it stays accurate for any syllabus structure.</p>
+
+<h3>Common Use Cases</h3>
+<p>A student who just got back a quiz uses Marks Percentage to instantly see their score and letter grade instead of doing the division by hand. Someone aiming for a scholarship cutoff enters their target percentage to see exactly how many marks they need on the next assessment. A university student partway through a semester uses Weighted Final Grade to combine assignment, midterm, and coursework percentages into a running grade, then uses "Score Needed on Final" the week before finals to calculate the minimum score required to hit their target overall grade.</p>
+
+<h3>Tips</h3>
+<p>Letter grade boundaries shown here follow a standard A+/A/B/C/D/F scale — check your own institution's grading policy, since exact cutoffs vary between schools and boards. When weights in the Weighted Final Grade calculator don't total 100%, the tool automatically normalizes the result proportionally rather than showing an error, so double-check your entered weights match your actual course syllabus for the most accurate final grade estimate.</p>
+
+<h3>Frequently Asked Questions</h3>
+<div class="faq-block">
+<details><summary>Is this calculator really free to use?</summary><p>Yes. Both the Marks Percentage and Weighted Final Grade calculators are completely free with no signup, no limits, and no hidden charges.</p></details>
+<details><summary>Is my data uploaded or stored anywhere?</summary><p>No. Every calculation runs locally in your browser using client-side JavaScript — nothing is ever sent to or stored on a server.</p></details>
+<details><summary>How is the letter grade calculated?</summary><p>The tool maps your percentage against a standard scale: 90%+ is A+, 80-89% is A, 70-79% is B, 60-69% is C, 50-59% is D, and below 50% is F.</p></details>
+<details><summary>What if my course weights don't add up to 100%?</summary><p>The Weighted Final Grade calculator automatically normalizes your result proportionally, so it still gives an accurate final grade even if your entered weights sum to something other than 100%.</p></details>
+<details><summary>Can I find out how many marks I need for a target percentage?</summary><p>Yes. In Marks Percentage mode, enter your target percentage and tap "Marks Needed for Target" to see the exact score required.</p></details>
+<details><summary>Can I find out what score I need on my final exam?</summary><p>Yes. In Weighted Final Grade mode, enter your target overall grade and tap "Score Needed on Final" to calculate the minimum final-exam percentage required.</p></details>
+<details><summary>Does this work for any grading weight split?</summary><p>Yes, you can enter any weight combination for assignments, midterm, and final — not just the common 20/30/50 default.</p></details>
+<details><summary>Can I copy or save my result?</summary><p>Yes, use the Copy Result button on either calculator to copy the full breakdown to your clipboard.</p></details>
+</div>
+
+<h3>Related Tools</h3>
+<ul>
+<li><a href="student-academic-toolkit.html">Student Academic Toolkit</a></li>
+<li><a href="standard-deviation-calculator.html">Standard Deviation Calculator</a></li>
+<li><a href="discount-scholarship-calculator.html">Discount &amp; Scholarship Calculator</a></li>
+<li><a href="ai-study-helper.html">AI Study Helper</a></li>
+</ul>
+
+</div>
+</div>
+</main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M16 54 Q50 26 84 54" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 67 Q50 42 78 67" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M29 79 Q50 58 71 79" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="79" cy="23" r="20" fill="#e07a2c" stroke="#1f3d2b" stroke-width="3"/><text x="79" y="28.5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://toolnest.link/"},{"@type":"ListItem","position":2,"name":"Education","item":"https://toolnest.link/education-tools.html"},{"@type":"ListItem","position":3,"name":"Marks & Final Grade Calculator","item":"https://toolnest.link/marks-grade-calculator.html"}]},
+{"@type":"SoftwareApplication","name":"Marks & Final Grade Calculator","applicationCategory":"EducationApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/marks-grade-calculator.html"},
+{"@type":"HowTo","name":"How to Calculate Marks Percentage or Weighted Final Grade","step":[{"@type":"HowToStep","text":"Choose Marks Percentage or Weighted Final Grade mode."},{"@type":"HowToStep","text":"Enter your marks or component scores and weights."},{"@type":"HowToStep","text":"Tap Calculate to see your result instantly."}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is this calculator really free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes. Both the Marks Percentage and Weighted Final Grade calculators are completely free with no signup, no limits, and no hidden charges."}},
+{"@type":"Question","name":"Is my data uploaded or stored anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Every calculation runs locally in your browser using client-side JavaScript — nothing is ever sent to or stored on a server."}},
+{"@type":"Question","name":"How is the letter grade calculated?","acceptedAnswer":{"@type":"Answer","text":"The tool maps your percentage against a standard scale: 90%+ is A+, 80-89% is A, 70-79% is B, 60-69% is C, 50-59% is D, and below 50% is F."}},
+{"@type":"Question","name":"What if my course weights don't add up to 100%?","acceptedAnswer":{"@type":"Answer","text":"The Weighted Final Grade calculator automatically normalizes your result proportionally, so it still gives an accurate final grade."}},
+{"@type":"Question","name":"Can I find out how many marks I need for a target percentage?","acceptedAnswer":{"@type":"Answer","text":"Yes, enter your target percentage and tap Marks Needed for Target to see the exact score required."}},
+{"@type":"Question","name":"Can I find out what score I need on my final exam?","acceptedAnswer":{"@type":"Answer","text":"Yes, enter your target overall grade and tap Score Needed on Final to calculate the minimum score required."}}
+]}
+]}
+</script>
+
+<script>document.querySelectorAll('[data-copy]').forEach(btn=>{btn.addEventListener('click',()=>{const target=document.getElementById(btn.getAttribute('data-copy'));if(!target)return;const text=btn.getAttribute('data-copy-mode')==='text'?target.textContent:target.value;if(!text)return;const done=()=>{const old=btn.textContent;btn.textContent='✅ Copied';setTimeout(()=>btn.textContent=old,1200);};if(window.toolnestCopyText){window.toolnestCopyText(text,done);}else{navigator.clipboard.writeText(text).then(done);}});});
+
+document.querySelectorAll('.mgc-tab').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.mgc-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const tab=btn.getAttribute('data-tab');document.getElementById('mgcMarksPanel').style.display=tab==='marks'?'block':'none';document.getElementById('mgcFinalPanel').style.display=tab==='final'?'block':'none';});});
+
+document.getElementById('markBtn').addEventListener('click',()=>{const obt=+document.getElementById('markObtained').value;const tot=+document.getElementById('markTotal').value;if(!tot)return document.getElementById('markResult').textContent='Enter total marks';const lost=tot-obt;const pct=(obt/tot)*100;let grade='F';if(pct>=90)grade='A+';else if(pct>=80)grade='A';else if(pct>=70)grade='B';else if(pct>=60)grade='C';else if(pct>=50)grade='D';document.getElementById('markResult').textContent=`Marks Obtained: ${obt} / ${tot}\nMarks Lost: ${lost}\nPercentage: ${pct.toFixed(2)}%\nGrade: ${grade}`;});
+document.getElementById('markTargetBtn').addEventListener('click',()=>{const tot=+document.getElementById('markTotal').value;const targetPct=+document.getElementById('markTargetPct').value;if(!tot||!targetPct)return document.getElementById('markResult').textContent='Enter total marks and a target percentage';const neededMarks=Math.ceil((targetPct/100)*tot);document.getElementById('markResult').textContent=`To reach ${targetPct}%, you need at least ${neededMarks} out of ${tot} marks.`;});
+document.getElementById('markReset').addEventListener('click',()=>{document.getElementById('markObtained').value=0;document.getElementById('markTotal').value=100;document.getElementById('markTargetPct').value='';document.getElementById('markResult').textContent='';});
+
+document.getElementById('fgBtn').addEventListener('click',()=>{const a=+document.getElementById('fgAssign').value,aw=+document.getElementById('fgAssignW').value;const m=+document.getElementById('fgMid').value,mw=+document.getElementById('fgMidW').value;const f=+document.getElementById('fgFinal').value,fw=+document.getElementById('fgFinalW').value;const totalW=aw+mw+fw;if(!totalW)return document.getElementById('fgResult').textContent='Enter weights';const aContribution=(a*aw)/100;const mContribution=(m*mw)/100;const fContribution=(f*fw)/100;const score=(a*aw+m*mw+f*fw)/totalW;document.getElementById('fgResult').textContent=`Weight Total: ${totalW}%${totalW!==100?' (does not equal 100%, result is proportionally normalized)':''}\n\nAssignment Contribution: ${aContribution.toFixed(2)} points (${aw}% weight)\nMidterm Contribution: ${mContribution.toFixed(2)} points (${mw}% weight)\nFinal Contribution: ${fContribution.toFixed(2)} points (${fw}% weight)\n\nFinal Grade: ${score.toFixed(2)}%`;});
+document.getElementById('fgTargetBtn').addEventListener('click',()=>{const a=+document.getElementById('fgAssign').value,aw=+document.getElementById('fgAssignW').value;const m=+document.getElementById('fgMid').value,mw=+document.getElementById('fgMidW').value;const fw=+document.getElementById('fgFinalW').value;const targetGrade=+document.getElementById('fgTargetGrade').value;const totalW=aw+mw+fw;if(!totalW||!targetGrade||!fw)return document.getElementById('fgResult').textContent='Enter weights and a target grade';const neededFinal=((targetGrade*totalW/100)-((a*aw+m*mw)/100))/(fw/100);document.getElementById('fgResult').textContent=neededFinal>100?`You need ${neededFinal.toFixed(2)}% on the final — that's above 100%, so this target may not be reachable.`:neededFinal<0?`You've already secured this target grade based on your current scores.`:`To reach ${targetGrade}% overall, you need at least ${neededFinal.toFixed(2)}% on the final.`;});
+document.getElementById('fgReset').addEventListener('click',()=>{document.getElementById('fgAssign').value=0;document.getElementById('fgAssignW').value=20;document.getElementById('fgMid').value=0;document.getElementById('fgMidW').value=30;document.getElementById('fgFinal').value=0;document.getElementById('fgFinalW').value=50;document.getElementById('fgTargetGrade').value='';document.getElementById('fgResult').textContent='';});
+
+if(location.hash==='#final'){document.querySelectorAll('.mgc-tab').forEach(b=>b.classList.remove('active'));document.querySelector('.mgc-tab[data-tab="final"]').classList.add('active');document.getElementById('mgcMarksPanel').style.display='none';document.getElementById('mgcFinalPanel').style.display='block';}
+</script>
+<script src="script.js"></script>
+</body></html>

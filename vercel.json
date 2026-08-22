@@ -1,22 +1,71 @@
 {
   "cleanUrls": false,
   "redirects": [
-    { "source": "/base64-encoder-decoder.html", "destination": "/universal-encoder-decoder.html#base64", "permanent": true },
-    { "source": "/image-to-base64.html", "destination": "/universal-encoder-decoder.html#image", "permanent": true },
-    { "source": "/url-encoder-decoder.html", "destination": "/universal-encoder-decoder.html#url", "permanent": true },
-    { "source": "/html-entity-encoder-decoder.html", "destination": "/universal-encoder-decoder.html#entity", "permanent": true },
-    { "source": "/qr-code-generator.html", "destination": "/qr-code-generator-scanner.html", "permanent": true },
-    { "source": "/qr-code-scanner.html", "destination": "/qr-code-generator-scanner.html", "permanent": true }
+    {
+      "source": "/base64-encoder-decoder.html",
+      "destination": "/universal-encoder-decoder.html#base64",
+      "permanent": true
+    },
+    {
+      "source": "/image-to-base64.html",
+      "destination": "/universal-encoder-decoder.html#image",
+      "permanent": true
+    },
+    {
+      "source": "/url-encoder-decoder.html",
+      "destination": "/universal-encoder-decoder.html#url",
+      "permanent": true
+    },
+    {
+      "source": "/html-entity-encoder-decoder.html",
+      "destination": "/universal-encoder-decoder.html#entity",
+      "permanent": true
+    },
+    {
+      "source": "/qr-code-generator.html",
+      "destination": "/qr-code-generator-scanner.html",
+      "permanent": true
+    },
+    {
+      "source": "/qr-code-scanner.html",
+      "destination": "/qr-code-generator-scanner.html",
+      "permanent": true
+    },
+    {
+      "source": "/marks-percentage-calculator.html",
+      "destination": "/marks-grade-calculator.html#marks",
+      "permanent": true
+    },
+    {
+      "source": "/final-grade-calculator.html",
+      "destination": "/marks-grade-calculator.html#final",
+      "permanent": true
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), payment=()" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), payment=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
       ]
     }
   ]
