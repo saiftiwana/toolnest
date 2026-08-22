@@ -40,6 +40,16 @@
       "source": "/final-grade-calculator.html",
       "destination": "/marks-grade-calculator.html#final",
       "permanent": true
+    },
+    {
+      "source": "/property-loan-emi-calculator.html",
+      "destination": "/property-loan-mortgage-calculator.html#emi",
+      "permanent": true
+    },
+    {
+      "source": "/mortgage-calculator.html",
+      "destination": "/property-loan-mortgage-calculator.html#mortgage",
+      "permanent": true
     }
   ],
   "headers": [
