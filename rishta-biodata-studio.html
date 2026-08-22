@@ -54,6 +54,7 @@
 
 <div class="card" id="bstep01">
 <h2>01 — Basic Information</h2>
+<details style="margin:14px 0;border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:#fffdf6;"><summary style="cursor:pointer;font-weight:700;color:var(--grove);">✨ AI Boost (Optional) — use your own free Gemini key</summary><p style="font-size:.8rem;color:#8a8a75;margin:8px 0;">Paste your own free Google Gemini API key once — it works across all AI-enabled ToolNest tools, stays only in this browser, never uploaded. Used later to help polish your "Additional Expectations" text.</p><div class="row"><div class="field"><label class="field-label" for="tnAiKey">Gemini API Key</label><input type="password" id="tnAiKey" placeholder="AIza..."></div><div class="field"><label class="field-label" for="tnAiModel">Model</label><input type="text" id="tnAiModel" value="gemini-3.6-flash"></div></div><div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:4px;"><button class="secondary" id="tnAiSaveBtn" type="button">Save Key</button><button class="secondary" id="tnAiRemoveBtn" type="button">🗑️ Remove Key</button><span id="tnAiStatus" style="font-size:.8rem;color:#8a8a75;"></span></div></details>
 <div class="row"><div class="field"><label class="field-label" for="bsCountry">Country</label><select id="bsCountry"><option value="Pakistan">Pakistan</option><option value="India">India</option><option value="Other">Custom / Other Country</option></select></div><div class="field hidden" id="bsCustomCountryWrap"><label class="field-label" for="bsCustomCountry">Country Name</label><input type="text" id="bsCustomCountry" placeholder="Enter your country"></div><div class="field"><label class="field-label" for="bsLanguage">Biodata Language</label><select id="bsLanguage"><option value="en">English</option><option value="ur">اردو (Urdu)</option><option value="hi">हिन्दी (Hindi)</option><option value="en_ur">English + اردو</option><option value="en_hi">English + हिन्दी</option><option value="custom">Custom / Local Language</option></select></div></div>
 <div class="row"><div class="field hidden" id="bsCustomLangWrap"><label class="field-label" for="bsCustomLang">Language Name</label><input type="text" id="bsCustomLang" placeholder="e.g. Punjabi, Bengali, Sindhi"></div></div>
 <p class="bs-note" id="bsCustomLangNote" style="display:none;">Custom/local language selected — your biodata will be generated in English as a base, with a note reminding you to translate it. Full automatic translation isn't available for every local language.</p>
@@ -121,7 +122,7 @@
 <div class="row"><div class="field"><label class="field-label" for="prAgeRange">Preferred Age Range</label><input type="text" id="prAgeRange" placeholder="e.g. 25-30"></div><div class="field"><label class="field-label" for="prHeight">Preferred Height</label><input type="text" id="prHeight"></div><div class="field"><label class="field-label" for="prMaritalStatus">Marital Status Preference</label><input type="text" id="prMaritalStatus"></div></div>
 <div class="row"><div class="field"><label class="field-label" for="prEducation">Education Preference</label><input type="text" id="prEducation"></div><div class="field"><label class="field-label" for="prProfession">Profession Preference</label><input type="text" id="prProfession"></div><div class="field"><label class="field-label" for="prCity">City / Country Preference</label><input type="text" id="prCity"></div></div>
 <div class="row"><div class="field"><label class="field-label" for="prReligious">Religious Preference</label><input type="text" id="prReligious"></div><div class="field"><label class="field-label" for="prFamily">Family Preference</label><input type="text" id="prFamily"></div><div class="field"><label class="field-label" for="prLifestyle">Lifestyle Preference</label><input type="text" id="prLifestyle"></div></div>
-<div class="field"><label class="field-label" for="prAdditional">Additional Expectations</label><textarea id="prAdditional" rows="3" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;"></textarea></div>
+<div class="field"><label class="field-label" for="prAdditional">Additional Expectations</label><textarea id="prAdditional" rows="3" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;"></textarea><button type="button" class="secondary" id="prAdditionalAiBtn" style="margin-top:6px;font-size:.78rem;padding:6px 10px;">✨ Polish with AI</button></div>
 </div>
 
 <div id="panelPhoto" class="hidden">
@@ -654,4 +655,22 @@ document.addEventListener('DOMContentLoaded',function(){
 
 });
 })();
-</script><script src="script.js"></script></body></html>
+</script><script>
+function tnGetAiSettings(){return {apiKey:localStorage.getItem('toolnest_gemini_key')||'',model:localStorage.getItem('toolnest_gemini_model')||'gemini-3.6-flash'};}
+(function(){var s=tnGetAiSettings();document.getElementById('tnAiModel').value=s.model;document.getElementById('tnAiKey').placeholder=s.apiKey?(s.apiKey.slice(0,4)+'\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'+s.apiKey.slice(-4)):'AIza...';})();
+document.getElementById('tnAiSaveBtn').addEventListener('click',function(){var key=document.getElementById('tnAiKey').value.trim();var model=document.getElementById('tnAiModel').value.trim()||'gemini-3.6-flash';if(key)localStorage.setItem('toolnest_gemini_key',key);localStorage.setItem('toolnest_gemini_model',model);document.getElementById('tnAiStatus').textContent='\u2705 Saved to this browser.';document.getElementById('tnAiKey').value='';var s=tnGetAiSettings();document.getElementById('tnAiKey').placeholder=s.apiKey?(s.apiKey.slice(0,4)+'\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'+s.apiKey.slice(-4)):'AIza...';});
+document.getElementById('tnAiRemoveBtn').addEventListener('click',function(){localStorage.removeItem('toolnest_gemini_key');localStorage.removeItem('toolnest_gemini_model');document.getElementById('tnAiKey').value='';document.getElementById('tnAiKey').placeholder='AIza...';document.getElementById('tnAiModel').value='gemini-3.6-flash';document.getElementById('tnAiStatus').textContent='\u2705 Key removed from this browser.';});
+async function tnCallGemini(promptText,jsonMode){var s=tnGetAiSettings();if(!s.apiKey)throw new Error('Pehle upar "AI Boost" mein apni free Gemini API key daalein.');var body={contents:[{role:'user',parts:[{text:promptText}]}]};if(jsonMode)body.generationConfig={responseMimeType:'application/json'};var res=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+s.model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':s.apiKey},body:JSON.stringify(body)});if(!res.ok){var t=await res.text();throw new Error('AI error ('+res.status+'): '+t.slice(0,200));}var data=await res.json();var parts=(data.candidates&&data.candidates[0]&&data.candidates[0].content&&data.candidates[0].content.parts)||[];var text=parts.map(function(p){return p.text||'';}).join('');if(!text)throw new Error('AI ne khaali jawab diya.');return text;}
+document.getElementById('prAdditionalAiBtn').addEventListener('click', async function(){
+  var current=document.getElementById('prAdditional').value.trim();
+  if(!current){alert('Write a few rough notes first, then let AI polish them into a paragraph.');return;}
+  var btn=this; var old=btn.textContent; btn.disabled=true; btn.textContent='Polishing...';
+  try{
+    var prompt='Rewrite these rough notes about partner/family expectations into a warm, respectful, well-written paragraph suitable for a marriage biodata. Keep it truthful to the original notes, do not invent details not mentioned.\n\nRough notes: "'+current+'"\n\nOutput ONLY the polished paragraph, nothing else.';
+    var answer=await tnCallGemini(prompt,false);
+    document.getElementById('prAdditional').value=answer.trim();
+  }catch(e){ alert(e.message); }
+  btn.disabled=false; btn.textContent=old;
+});
+</script>
+<script src="script.js"></script></body></html>
