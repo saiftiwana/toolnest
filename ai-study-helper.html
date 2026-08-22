@@ -549,7 +549,7 @@ async function shDailyPractice(){
     d.grammarQuestions.forEach(function(g,i){h+='<div class="sh-mcq">'+(i+1)+'. '+g.question+'<div class="sh-note" style="color:#2f9e52;margin-top:6px;">'+g.answer+'</div></div>';});
     h+='<h3 style="color:var(--grove);margin-top:16px;">3. Sentence Correction</h3>';
     d.sentenceCorrections.forEach(function(c,i){h+='<div class="sh-mcq">'+(i+1)+'. '+c.incorrect+'<div class="sh-note" style="color:#2f9e52;margin-top:6px;">'+c.correct+'</div></div>';});
-    h+='<h3 style="color:var(--grove);margin-top:16px;">4. Writing Task</h3><div class="sh-mcq">'+d.writingTask+'<textarea style="margin-top:10px;" placeholder="Apna jawab yahan likhein..."></textarea></div>';
+    h+='<h3 style="color:var(--grove);margin-top:16px;">4. Writing Task</h3><div class="sh-mcq">'+d.writingTask+'<textarea style="margin-top:10px;" placeholder="Apna jawab yahan likhein..." aria-label="Apna jawab yahan likhein"></textarea></div>';
     h+='<h3 style="color:var(--grove);margin-top:16px;">5. Mini Quiz</h3><div id="dailyQuiz"></div>';
     document.getElementById('dailyPractice').innerHTML=h;
     renderQuiz(d.quiz,'dailyQuiz',false);

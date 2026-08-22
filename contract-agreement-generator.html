@@ -184,7 +184,7 @@ ctEl('ctPaymentType').addEventListener('change', function(){
 function ctAddMilestoneRow(prefill){
   const row = document.createElement('div');
   row.className='row'; row.style.marginTop='6px';
-  row.innerHTML = `<input type="text" class="ct-milestone-desc" placeholder="Milestone" style="flex:1;"><input type="number" class="ct-milestone-amount" placeholder="Amount" value="0" style="width:110px;">`;
+  row.innerHTML = `<input type="text" class="ct-milestone-desc" placeholder="Milestone" style="flex:1;" aria-label="Milestone"><input type="number" class="ct-milestone-amount" placeholder="Amount" value="0" style="width:110px;" aria-label="Amount">`;
   const rm = document.createElement('button'); rm.type='button'; rm.className='fl-remove'; rm.textContent='\u2715';
   rm.addEventListener('click', ()=>row.remove());
   row.appendChild(rm);
@@ -203,7 +203,7 @@ ctEl('ctRevisionType').addEventListener('change', function(){
 function ctAddClauseRow(prefill){
   const wrap = document.createElement('div');
   wrap.style.cssText='border:1px solid var(--line); border-radius:6px; padding:8px; margin-top:8px;';
-  wrap.innerHTML = `<input type="text" class="ct-clause-title" placeholder="Clause title" style="width:100%; margin-bottom:6px;"><textarea class="ct-clause-text" placeholder="Clause text" style="min-height:60px;"></textarea>`;
+  wrap.innerHTML = `<input type="text" class="ct-clause-title" placeholder="Clause title" style="width:100%; margin-bottom:6px;" aria-label="Clause title"><textarea class="ct-clause-text" placeholder="Clause text" style="min-height:60px;" aria-label="Clause text"></textarea>`;
   const rm = document.createElement('button'); rm.type='button'; rm.className='fl-remove'; rm.textContent='Remove Clause'; rm.style.cssText='margin-top:6px;';
   rm.addEventListener('click', ()=>wrap.remove());
   wrap.appendChild(rm);

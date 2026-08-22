@@ -882,10 +882,10 @@ function openReview(id){
   const tags=t.mistakeTags||[];
   panel.innerHTML=`<div class="ctcc-card" style="margin-top:10px;">
     <h3>Trade Review</h3>
-    <div class="ctcc-field"><label>Why did I enter?</label><textarea data-rf="whyEnter" rows="2">${r.whyEnter||''}</textarea></div>
-    <div class="ctcc-field"><label>What was the invalidation?</label><textarea data-rf="invalidation" rows="2">${r.invalidation||''}</textarea></div>
-    <div class="ctcc-field"><label>What was expected?</label><textarea data-rf="expected" rows="2">${r.expected||''}</textarea></div>
-    <div class="ctcc-field"><label>What did I learn?</label><textarea data-rf="learned" rows="2">${r.learned||''}</textarea></div>
+    <div class="ctcc-field"><label>Why did I enter?</label><textarea data-rf="whyEnter" rows="2" aria-label="Why enter this trade">${r.whyEnter||''}</textarea></div>
+    <div class="ctcc-field"><label>What was the invalidation?</label><textarea data-rf="invalidation" rows="2" aria-label="Invalidation level">${r.invalidation||''}</textarea></div>
+    <div class="ctcc-field"><label>What was expected?</label><textarea data-rf="expected" rows="2" aria-label="Expected outcome">${r.expected||''}</textarea></div>
+    <div class="ctcc-field"><label>What did I learn?</label><textarea data-rf="learned" rows="2" aria-label="What I learned">${r.learned||''}</textarea></div>
     <p style="font-size:.8rem;font-weight:700;margin:10px 0 4px;color:var(--ctcc-sub);">Checklist</p>
     <div class="ctcc-checklist">${CHECKLIST_ITEMS.map(c=>`<label><input type="checkbox" data-check="${c}" ${checklist.includes(c)?'checked':''}> ${c}</label>`).join('')}</div>
     <p style="font-size:.8rem;font-weight:700;margin:10px 0 4px;color:var(--ctcc-sub);">Mistake Tags</p>
