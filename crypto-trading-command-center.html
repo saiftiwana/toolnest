@@ -1,0 +1,1436 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta name="google-adsense-account" content="ca-pub-7690733672429028"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Free Crypto Trading Journal & Performance Tracker | ToolNest</title><meta name="description" content="Track crypto trades, setups, screenshots, mistakes, R multiples and performance with a free local-first journal. No account, no upload required."><link rel="canonical" href="https://toolnest.link/crypto-trading-command-center.html"><meta property="og:title" content="Crypto Trading Command Center — Free Trading Journal + Optional AI Coach"><meta property="og:description" content="Track crypto trades, setups, screenshots, mistakes, R multiples and trading performance with a free local-first journal."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/crypto-trading-command-center.html"><meta property="og:image" content="https://toolnest.link/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Crypto Trading Command Center | ToolNest"><meta name="twitter:description" content="Free local-first crypto trading journal with performance analytics and optional AI coach."><meta name="twitter:image" content="https://toolnest.link/og-image.png"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css">
+<style>
+:root{--ctcc-bg:#0b1220;--ctcc-panel:#131c2e;--ctcc-panel2:#1a2438;--ctcc-line:#263250;--ctcc-text:#e7ecf5;--ctcc-sub:#93a0bd;--ctcc-green:#22c55e;--ctcc-red:#ef4444;--ctcc-amber:#f59e0b;--ctcc-blue:#3b82f6}
+.ctcc-wrap{background:var(--ctcc-bg);color:var(--ctcc-text);border-radius:16px;padding:16px;margin:18px 0;border:1px solid var(--ctcc-line)}
+.ctcc-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.ctcc-navbtn{background:var(--ctcc-panel);border:1px solid var(--ctcc-line);color:var(--ctcc-sub);padding:8px 12px;border-radius:8px;font-size:.78rem;cursor:pointer;font-weight:600}
+.ctcc-navbtn.active{background:var(--ctcc-blue);color:#fff;border-color:var(--ctcc-blue)}
+.ctcc-section{display:none}
+.ctcc-section.active{display:block}
+.ctcc-card{background:var(--ctcc-panel);border:1px solid var(--ctcc-line);border-radius:12px;padding:16px;margin-bottom:14px}
+.ctcc-card h3{margin:0 0 10px;font-size:1rem;color:#fff}
+.ctcc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.ctcc-stat{background:var(--ctcc-panel2);border:1px solid var(--ctcc-line);border-radius:10px;padding:12px;text-align:center}
+.ctcc-stat .v{font-size:1.3rem;font-weight:800;color:#fff}
+.ctcc-stat .l{font-size:.7rem;color:var(--ctcc-sub);margin-top:2px;text-transform:uppercase;letter-spacing:.03em}
+.ctcc-pos{color:var(--ctcc-green)!important}
+.ctcc-neg{color:var(--ctcc-red)!important}
+.ctcc-field{display:flex;flex-direction:column;gap:5px;flex:1;min-width:130px;margin-bottom:10px}
+.ctcc-field label{font-size:.78rem;font-weight:600;color:var(--ctcc-sub)}
+.ctcc-field input,.ctcc-field select,.ctcc-field textarea{background:var(--ctcc-panel2);border:1px solid var(--ctcc-line);color:var(--ctcc-text);border-radius:8px;padding:9px 10px;font-size:.9rem;font-family:inherit}
+.ctcc-row{display:flex;flex-wrap:wrap;gap:10px}
+.ctcc-btn{background:var(--ctcc-blue);color:#fff;border:none;padding:10px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-size:.85rem}
+.ctcc-btn.secondary{background:var(--ctcc-panel2);border:1px solid var(--ctcc-line);color:var(--ctcc-text)}
+.ctcc-btn.danger{background:var(--ctcc-red)}
+.ctcc-btn.ghost{background:transparent;border:1px solid var(--ctcc-line);color:var(--ctcc-sub);padding:6px 10px;font-size:.75rem}
+.ctcc-table{width:100%;border-collapse:collapse;font-size:.8rem}
+.ctcc-table th{text-align:left;color:var(--ctcc-sub);font-weight:600;padding:8px 6px;border-bottom:1px solid var(--ctcc-line);white-space:nowrap}
+.ctcc-table td{padding:8px 6px;border-bottom:1px solid var(--ctcc-line);white-space:nowrap}
+.ctcc-tablewrap{overflow-x:auto}
+.ctcc-badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.68rem;font-weight:700}
+.ctcc-badge.win{background:rgba(34,197,94,.15);color:var(--ctcc-green)}
+.ctcc-badge.loss{background:rgba(239,68,68,.15);color:var(--ctcc-red)}
+.ctcc-badge.be{background:rgba(245,158,11,.15);color:var(--ctcc-amber)}
+.ctcc-tradecard{background:var(--ctcc-panel2);border:1px solid var(--ctcc-line);border-radius:10px;padding:12px;margin-bottom:8px}
+.ctcc-tradecard .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.ctcc-empty{text-align:center;color:var(--ctcc-sub);padding:30px 10px;font-size:.9rem}
+.ctcc-subtabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.ctcc-subtab{background:transparent;border:1px solid var(--ctcc-line);color:var(--ctcc-sub);padding:5px 10px;border-radius:6px;font-size:.72rem;cursor:pointer}
+.ctcc-subtab.active{background:var(--ctcc-amber);color:#1a1200;border-color:var(--ctcc-amber);font-weight:700}
+.ctcc-subpanel{display:none}
+.ctcc-subpanel.active{display:block}
+.ctcc-checklist label{display:flex;align-items:center;gap:8px;font-size:.85rem;padding:6px 0;color:var(--ctcc-text)}
+.ctcc-mistagbtn{background:var(--ctcc-panel2);border:1px solid var(--ctcc-line);color:var(--ctcc-sub);padding:6px 10px;border-radius:999px;font-size:.72rem;cursor:pointer;margin:3px}
+.ctcc-mistagbtn.active{background:var(--ctcc-red);color:#fff;border-color:var(--ctcc-red)}
+.ctcc-calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-size:.7rem}
+.ctcc-calcell{background:var(--ctcc-panel2);border:1px solid var(--ctcc-line);border-radius:6px;padding:4px;min-height:44px;text-align:center;cursor:pointer}
+.ctcc-calcell.pos{background:rgba(34,197,94,.18);border-color:var(--ctcc-green)}
+.ctcc-calcell.neg{background:rgba(239,68,68,.18);border-color:var(--ctcc-red)}
+.ctcc-calcell.empty{background:transparent;border-color:transparent;cursor:default}
+.ctcc-screens{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.ctcc-screens img{width:70px;height:70px;object-fit:cover;border-radius:6px;border:1px solid var(--ctcc-line)}
+.ctcc-note{font-size:.75rem;color:var(--ctcc-sub);margin-top:6px;line-height:1.5}
+.ctcc-privacy{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.35);border-radius:10px;padding:10px 14px;font-size:.8rem;color:var(--ctcc-green);margin-bottom:14px}
+.ctcc-limitwarn{background:rgba(239,68,68,.15);border:1px solid var(--ctcc-red);border-radius:10px;padding:10px 14px;font-size:.82rem;color:#ffb4b4;margin-bottom:10px;font-weight:700}
+.ctcc-copilotpanel{display:none}
+.ctcc-copilotpanel.active{display:block}
+.ctcc-result{white-space:pre-wrap;line-height:1.7;font-size:.88rem;background:var(--ctcc-panel2);border:1px solid var(--ctcc-line);border-radius:10px;padding:14px;margin-top:12px}
+.ctcc-err{background:rgba(239,68,68,.15);border:1px solid var(--ctcc-red);border-radius:8px;padding:10px 12px;margin-top:10px;font-size:.82rem;color:#ffb4b4}
+</style>
+</head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html" title="Go to ToolNest homepage" aria-label="ToolNest — go to homepage"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M16 54 Q50 26 84 54" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 67 Q50 42 78 67" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M29 79 Q50 58 71 79" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="79" cy="23" r="20" fill="#e07a2c" stroke="#1f3d2b" stroke-width="3"/><text x="79" y="28.5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span><span class="home-hint" aria-hidden="true">🏠 Home</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Crypto Trading Command Center</h1><p>Free crypto trading journal — local, private, no account. Optional AI coach coming soon.</p></header><main>
+
+<div class="card"><h2>Crypto Trading Command Center</h2><p class="desc">Free Crypto Trading Journal — plan trades, log trades, review mistakes, and track real performance, 100% in your browser.</p>
+
+<div class="ctcc-privacy">🔒 100% Private • Local Data • No Upload — your trading journal stays on this device.</div>
+
+<div class="ctcc-wrap">
+<div class="ctcc-nav" id="ctccNav">
+<button class="ctcc-navbtn active" data-tab="dashboard">📊 Dashboard</button>
+<button class="ctcc-navbtn" data-tab="plan">📅 Today's Plan</button>
+<button class="ctcc-navbtn" data-tab="newtrade">➕ New Trade</button>
+<button class="ctcc-navbtn" data-tab="journal">📓 Trade Journal</button>
+<button class="ctcc-navbtn" data-tab="setups">🧩 Setup Library</button>
+<button class="ctcc-navbtn" data-tab="mistakes">⚠️ Mistake Tracker</button>
+<button class="ctcc-navbtn" data-tab="calendar">🗓️ Calendar</button>
+<button class="ctcc-navbtn" data-tab="performance">📈 Performance</button>
+<button class="ctcc-navbtn" data-tab="risk">🛡️ Risk Limits</button>
+<button class="ctcc-navbtn" data-tab="watchlist">👁️ Watchlist</button>
+<button class="ctcc-navbtn" data-tab="copilot">🤖 AI Copilot</button>
+<button class="ctcc-navbtn" data-tab="backup">💾 Backup &amp; Restore</button>
+<button class="ctcc-navbtn" data-tab="settings">⚙️ Settings</button>
+</div>
+
+<!-- DASHBOARD -->
+<div class="ctcc-section active" id="ctcc-dashboard">
+<div id="dashLimitWarn"></div>
+<div class="ctcc-grid" id="dashStats"></div>
+<div class="ctcc-card"><h3>Best Performers</h3><div class="ctcc-grid" id="dashBest"></div></div>
+</div>
+
+<!-- TODAY'S PLAN -->
+<div class="ctcc-section" id="ctcc-plan">
+<div class="ctcc-card"><h3>Today's Plan</h3>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="planDate">Date</label><input type="date" id="planDate"></div>
+<div class="ctcc-field"><label for="planBias">Market Bias</label><select id="planBias"><option>Bullish</option><option>Bearish</option><option>Neutral</option><option>Uncertain</option></select></div>
+<div class="ctcc-field"><label for="planSession">Trading Session</label><select id="planSession"><option>Asia</option><option>London</option><option>New York</option><option>London/NY Overlap</option><option>Custom</option></select></div>
+</div>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="planWatchlist">Watchlist (assets)</label><input type="text" id="planWatchlist" placeholder="BTC, ETH, SOL"></div>
+<div class="ctcc-field"><label for="planPreferredSetup">Preferred Setup</label><input type="text" id="planPreferredSetup" placeholder="e.g. Breakout Retest"></div>
+</div>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="planKeySupport">Key Support</label><input type="text" id="planKeySupport" placeholder="e.g. 58,200"></div>
+<div class="ctcc-field"><label for="planKeyResistance">Key Resistance</label><input type="text" id="planKeyResistance" placeholder="e.g. 61,500"></div>
+<div class="ctcc-field"><label for="planInvalidation">Invalidation Level</label><input type="text" id="planInvalidation" placeholder="e.g. below 57,800"></div>
+</div>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="planMaxTrades">Maximum Trades Today</label><input type="number" id="planMaxTrades" value="3"></div>
+<div class="ctcc-field"><label for="planMaxLoss">Maximum Daily Loss ($)</label><input type="number" id="planMaxLoss" value="100"></div>
+</div>
+<div class="ctcc-field"><label for="planNotes">Notes</label><textarea id="planNotes" rows="3"></textarea></div>
+<button class="ctcc-btn" id="planSaveBtn">Save Today's Plan</button>
+<p class="ctcc-note" id="planStatus"></p>
+</div>
+<div class="ctcc-card"><h3>Recent Plans</h3><div class="ctcc-tablewrap"><table class="ctcc-table" id="planHistoryTable"></table></div></div>
+</div>
+
+<!-- NEW TRADE -->
+<div class="ctcc-section" id="ctcc-newtrade">
+<div class="ctcc-card"><h3 id="ntFormTitle">New Trade</h3>
+<input type="hidden" id="ntEditId">
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="ntAsset">Asset / Pair</label><input type="text" id="ntAsset" placeholder="e.g. BTC/USDT"></div>
+<div class="ctcc-field"><label for="ntDirection">Direction</label><select id="ntDirection"><option>Long</option><option>Short</option></select></div>
+<div class="ctcc-field"><label for="ntSetup">Setup</label><select id="ntSetup"></select></div>
+</div>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="ntEntryPrice">Entry Price</label><input type="number" step="any" id="ntEntryPrice"></div>
+<div class="ctcc-field"><label for="ntStopLoss">Stop Loss</label><input type="number" step="any" id="ntStopLoss"></div>
+<div class="ctcc-field"><label for="ntTakeProfit">Take Profit</label><input type="number" step="any" id="ntTakeProfit"></div>
+</div>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="ntPositionSize">Position Size (units)</label><input type="number" step="any" id="ntPositionSize"></div>
+<div class="ctcc-field"><label for="ntLeverage">Leverage (x)</label><input type="number" step="any" id="ntLeverage" value="1"></div>
+<div class="ctcc-field"><label for="ntFees">Fees</label><input type="number" step="any" id="ntFees" value="0"></div>
+</div>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="ntRiskAmount">Risk Amount ($)</label><input type="number" step="any" id="ntRiskAmount"></div>
+<div class="ctcc-field"><label for="ntRiskPercent">Risk % of Account</label><input type="number" step="any" id="ntRiskPercent"></div>
+<div class="ctcc-field"><label for="ntSession">Session</label><select id="ntSession"><option>Asia</option><option>London</option><option>New York</option><option>London/NY Overlap</option><option>Custom</option></select></div>
+</div>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="ntEntryDateTime">Entry Date/Time</label><input type="datetime-local" id="ntEntryDateTime"></div>
+<div class="ctcc-field"><label for="ntExitPrice">Exit Price (optional)</label><input type="number" step="any" id="ntExitPrice"></div>
+<div class="ctcc-field"><label for="ntExitDateTime">Exit Date/Time (optional)</label><input type="datetime-local" id="ntExitDateTime"></div>
+</div>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="ntMarketCondition">Market Condition</label><input type="text" id="ntMarketCondition" placeholder="e.g. Trending, Ranging, Volatile"></div>
+</div>
+<div class="ctcc-field"><label for="ntReason">Trade Reason</label><textarea id="ntReason" rows="2"></textarea></div>
+<div class="ctcc-field"><label for="ntNotes">Notes</label><textarea id="ntNotes" rows="2"></textarea></div>
+<div class="ctcc-field"><label for="ntScreenshotBefore">Chart Screenshot — Before Entry</label><input type="file" id="ntScreenshotBefore" accept="image/*"></div>
+<div class="ctcc-field"><label for="ntScreenshotAfter">Chart Screenshot — After Exit</label><input type="file" id="ntScreenshotAfter" accept="image/*"></div>
+<div class="ctcc-row" style="margin-top:8px;">
+<button class="ctcc-btn" id="ntSaveBtn">Save Trade</button>
+<button class="ctcc-btn secondary" id="ntSaveReviewBtn">Save &amp; Review</button>
+<button class="ctcc-btn secondary" id="ntCancelBtn">Cancel</button>
+</div>
+<p class="ctcc-note" id="ntStatus"></p>
+<p class="ctcc-note">Screenshots are stored only in this browser (IndexedDB) — never uploaded.</p>
+</div>
+</div>
+
+<!-- TRADE JOURNAL -->
+<div class="ctcc-section" id="ctcc-journal">
+<div class="ctcc-card"><h3>Filters</h3>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="jfAsset">Asset</label><input type="text" id="jfAsset" placeholder="e.g. BTC"></div>
+<div class="ctcc-field"><label for="jfDirection">Direction</label><select id="jfDirection"><option value="">All</option><option>Long</option><option>Short</option></select></div>
+<div class="ctcc-field"><label for="jfResult">Result</label><select id="jfResult"><option value="">All</option><option value="win">Win</option><option value="loss">Loss</option></select></div>
+<div class="ctcc-field"><label for="jfSort">Sort</label><select id="jfSort"><option value="newest">Newest</option><option value="oldest">Oldest</option><option value="largestProfit">Largest Profit</option><option value="largestLoss">Largest Loss</option><option value="highestR">Highest R</option><option value="lowestR">Lowest R</option></select></div>
+</div>
+</div>
+<div id="journalList"></div>
+</div>
+
+<!-- SETUP LIBRARY -->
+<div class="ctcc-section" id="ctcc-setups">
+<div class="ctcc-card"><h3>Add / Edit Setup</h3>
+<input type="hidden" id="setupEditId">
+<div class="ctcc-field"><label for="setupName">Setup Name</label><input type="text" id="setupName" placeholder="e.g. Breakout Retest"></div>
+<div class="ctcc-field"><label for="setupRules">Rules (one per line)</label><textarea id="setupRules" rows="4" placeholder="HTF trend aligned&#10;Level broken&#10;Retest confirmed&#10;Entry confirmation&#10;Risk defined"></textarea></div>
+<div class="ctcc-row">
+<button class="ctcc-btn" id="setupSaveBtn">Save Setup</button>
+<button class="ctcc-btn secondary" id="setupCancelBtn">Cancel</button>
+</div>
+</div>
+<div class="ctcc-card"><h3>Setup Performance</h3><div class="ctcc-tablewrap"><table class="ctcc-table" id="setupPerfTable"></table></div></div>
+<div id="setupList"></div>
+</div>
+
+<!-- MISTAKE TRACKER -->
+<div class="ctcc-section" id="ctcc-mistakes">
+<div class="ctcc-card"><h3>Mistake Frequency</h3><div class="ctcc-tablewrap"><table class="ctcc-table" id="mistakeTable"></table></div>
+<p class="ctcc-note" id="topMistakeNote"></p>
+</div>
+</div>
+
+<!-- CALENDAR -->
+<div class="ctcc-section" id="ctcc-calendar">
+<div class="ctcc-card">
+<div class="ctcc-row" style="align-items:center;justify-content:space-between;">
+<button class="ctcc-btn secondary" id="calPrevBtn">← Prev</button>
+<h3 id="calLabel" style="margin:0;"></h3>
+<button class="ctcc-btn secondary" id="calNextBtn">Next →</button>
+</div>
+<div class="ctcc-calgrid" id="calGrid" style="margin-top:12px;"></div>
+</div>
+<div class="ctcc-card" id="calDayDetail" style="display:none;"><h3 id="calDayTitle"></h3><div id="calDayContent"></div></div>
+</div>
+
+<!-- PERFORMANCE -->
+<div class="ctcc-section" id="ctcc-performance">
+<div class="ctcc-subtabs" id="perfSubtabs">
+<button class="ctcc-subtab active" data-sub="overview">Overview</button>
+<button class="ctcc-subtab" data-sub="equity">Equity Curve</button>
+<button class="ctcc-subtab" data-sub="coin">Coin Analysis</button>
+<button class="ctcc-subtab" data-sub="session">Session Analysis</button>
+<button class="ctcc-subtab" data-sub="direction">Long/Short</button>
+<button class="ctcc-subtab" data-sub="dow">Day of Week</button>
+<button class="ctcc-subtab" data-sub="holding">Holding Time</button>
+<button class="ctcc-subtab" data-sub="dna">Trading DNA</button>
+</div>
+
+<div class="ctcc-subpanel active" id="perf-overview"><div class="ctcc-card"><h3>Performance Analytics</h3><div class="ctcc-grid" id="perfOverviewStats"></div>
+<p class="ctcc-note">Expectancy = (Win Rate × Average Win) − (Loss Rate × Average Loss), calculated in R multiples.</p></div></div>
+
+<div class="ctcc-subpanel" id="perf-equity"><div class="ctcc-card"><h3>Equity Curve (Cumulative R)</h3>
+<div class="ctcc-row" style="margin-bottom:8px;">
+<button class="ctcc-btn ghost" data-eqfilter="all">All Time</button>
+<button class="ctcc-btn ghost" data-eqfilter="monthly">This Month</button>
+<button class="ctcc-btn ghost" data-eqfilter="weekly">This Week</button>
+</div>
+<svg id="equitySvg" width="100%" height="220" viewBox="0 0 600 220" preserveAspectRatio="none"></svg>
+</div></div>
+
+<div class="ctcc-subpanel" id="perf-coin"><div class="ctcc-card"><h3>Coin Analysis</h3><div class="ctcc-tablewrap"><table class="ctcc-table" id="coinTable"></table></div></div></div>
+<div class="ctcc-subpanel" id="perf-session"><div class="ctcc-card"><h3>Session Analysis</h3><div class="ctcc-tablewrap"><table class="ctcc-table" id="sessionTable"></table></div></div></div>
+<div class="ctcc-subpanel" id="perf-direction"><div class="ctcc-card"><h3>Long vs Short</h3><div class="ctcc-tablewrap"><table class="ctcc-table" id="directionTable"></table></div></div></div>
+<div class="ctcc-subpanel" id="perf-dow"><div class="ctcc-card"><h3>Day of Week</h3><div class="ctcc-tablewrap"><table class="ctcc-table" id="dowTable"></table></div></div></div>
+<div class="ctcc-subpanel" id="perf-holding"><div class="ctcc-card"><h3>Holding Time</h3><div class="ctcc-tablewrap"><table class="ctcc-table" id="holdingTable"></table></div></div></div>
+<div class="ctcc-subpanel" id="perf-dna"><div class="ctcc-card"><h3>Trading DNA</h3><div class="ctcc-grid" id="dnaStats"></div><p class="ctcc-note">Trading DNA is statistical analysis only, not a prediction or trading signal.</p></div></div>
+</div>
+
+<!-- RISK LIMITS -->
+<div class="ctcc-section" id="ctcc-risk">
+<div class="ctcc-card"><h3>Risk Limits</h3>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="riskMaxDailyLoss">Maximum Daily Loss ($)</label><input type="number" id="riskMaxDailyLoss"></div>
+<div class="ctcc-field"><label for="riskMaxTradesDay">Maximum Trades Per Day</label><input type="number" id="riskMaxTradesDay"></div>
+</div>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="riskMaxConsecLoss">Maximum Consecutive Losses</label><input type="number" id="riskMaxConsecLoss"></div>
+<div class="ctcc-field"><label for="riskMaxPerTrade">Maximum Risk Per Trade (%)</label><input type="number" id="riskMaxPerTrade"></div>
+</div>
+<button class="ctcc-btn" id="riskSaveBtn">Save Risk Limits</button>
+<p class="ctcc-note" id="riskStatus"></p>
+</div>
+<div class="ctcc-card"><h3>Current Status</h3><div class="ctcc-grid" id="riskStatusGrid"></div></div>
+</div>
+
+<!-- WATCHLIST -->
+<div class="ctcc-section" id="ctcc-watchlist">
+<div class="ctcc-card"><h3>Add to Watchlist</h3>
+<input type="hidden" id="wlEditId">
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="wlAsset">Asset / Pair</label><input type="text" id="wlAsset" placeholder="e.g. SOL/USDT"></div>
+<div class="ctcc-field"><label for="wlBias">Bias</label><select id="wlBias"><option>Bullish</option><option>Bearish</option><option>Neutral</option></select></div>
+<div class="ctcc-field"><label for="wlStatus">Status</label><select id="wlStatus"><option>Watch</option><option>Active</option><option>Invalidated</option><option>Completed</option></select></div>
+</div>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="wlKeyLevel">Key Level</label><input type="text" id="wlKeyLevel"></div>
+<div class="ctcc-field"><label for="wlSetup">Setup</label><input type="text" id="wlSetup"></div>
+</div>
+<div class="ctcc-field"><label for="wlNotes">Notes</label><textarea id="wlNotes" rows="2"></textarea></div>
+<button class="ctcc-btn" id="wlSaveBtn">Save to Watchlist</button>
+</div>
+<div id="watchlistList"></div>
+</div>
+
+<!-- BACKUP -->
+<div class="ctcc-section" id="ctcc-backup">
+<div class="ctcc-card"><h3>Backup &amp; Restore</h3>
+<p class="ctcc-note">Your journal lives only in this browser. Export regularly so you never lose it.</p>
+<div class="ctcc-row">
+<button class="ctcc-btn" id="exportJsonBtn">⬇️ Export JSON</button>
+<button class="ctcc-btn secondary" id="exportCsvBtn">⬇️ Export Trades CSV</button>
+</div>
+<div class="ctcc-field" style="margin-top:12px;"><label for="importFile">Import JSON Backup</label><input type="file" id="importFile" accept="application/json"></div>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="importMode">Import Mode</label><select id="importMode"><option value="merge">Merge (keep existing + add)</option><option value="replace">Replace (clear then import)</option></select></div>
+</div>
+<button class="ctcc-btn secondary" id="importBtn">Import Backup</button>
+<p class="ctcc-note" id="backupStatus"></p>
+<hr style="border-color:var(--ctcc-line);margin:16px 0;">
+<button class="ctcc-btn danger" id="clearAllBtn">🗑️ Clear All Data</button>
+</div>
+</div>
+
+<!-- SETTINGS -->
+<div class="ctcc-section" id="ctcc-settings">
+<div class="ctcc-card"><h3>Settings</h3>
+<div class="ctcc-field"><label for="setAccountSize">Account Size ($) — used for risk % suggestions</label><input type="number" id="setAccountSize" value="1000"></div>
+<button class="ctcc-btn" id="setSaveBtn">Save Settings</button>
+<p class="ctcc-note" id="setStatus"></p>
+</div>
+<div class="ctcc-card"><h3>AI Trading Copilot — Gemini Settings</h3>
+<p class="ctcc-note">Your API key is used only directly from this browser to Google's Gemini API. It is never sent to ToolNest's servers or stored in any database. Browser-stored keys are not equivalent to server-side secrets — consider using Google's API key restrictions for extra safety.</p>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="aiApiKey">Gemini API Key</label><input type="password" id="aiApiKey" placeholder="AIza..."></div>
+<div class="ctcc-field"><label for="aiModel">Model</label><input type="text" id="aiModel" placeholder="gemini-3.6-flash"></div>
+</div>
+<div class="ctcc-row">
+<button class="ctcc-btn secondary" id="aiTestBtn">Test Connection</button>
+<button class="ctcc-btn" id="aiSaveBtn">Save Locally</button>
+<button class="ctcc-btn secondary" id="aiRefreshModelsBtn">Refresh Available Models</button>
+</div>
+<div class="ctcc-row" style="margin-top:8px;">
+<button class="ctcc-btn danger" id="aiRemoveKeyBtn">Remove API Key</button>
+<button class="ctcc-btn secondary" id="aiResetBtn">Reset AI Settings</button>
+</div>
+<div id="aiModelListWrap" style="display:none;margin-top:10px;">
+<div class="ctcc-field"><label for="aiModelSelect">Available Models (tap to select)</label><select id="aiModelSelect"></select></div>
+</div>
+<p class="ctcc-note" id="aiSettingsStatus"></p>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- AI COPILOT -->
+<div class="ctcc-section" id="ctcc-copilot">
+<div id="copilotNoKey" class="ctcc-card" style="display:none;">
+<h3>No AI Key Configured</h3>
+<p class="ctcc-note">Your journal is fully usable without AI. Add your own Gemini API key if you want optional AI analysis.</p>
+<button class="ctcc-btn" onclick="document.querySelector('.ctcc-navbtn[data-tab=settings]').click()">Configure Gemini →</button>
+</div>
+
+<div id="copilotBody" style="display:none;">
+<div class="ctcc-subtabs" id="copilotSubtabs">
+<button class="ctcc-subtab active" data-csub="review">Trade Review</button>
+<button class="ctcc-subtab" data-csub="ask">Ask My Journal</button>
+<button class="ctcc-subtab" data-csub="dna">DNA Coach</button>
+<button class="ctcc-subtab" data-csub="mistake">Mistake Analysis</button>
+<button class="ctcc-subtab" data-csub="daily">Daily Review</button>
+<button class="ctcc-subtab" data-csub="weekly">Weekly Review</button>
+<button class="ctcc-subtab" data-csub="rulecheck">Setup Rule Checker</button>
+<button class="ctcc-subtab" data-csub="hypothesis">Hypothesis Lab</button>
+</div>
+
+<div class="ctcc-copilotpanel active" id="cp-review"><div class="ctcc-card"><h3>AI Trade Review</h3>
+<div class="ctcc-field"><label for="cpReviewTrade">Select Trade</label><select id="cpReviewTrade"></select></div>
+<button class="ctcc-btn" id="cpReviewBtn">Analyze This Trade</button>
+<button class="ctcc-btn secondary" id="cpScreenshotBtn" style="display:none;">📷 Also Analyze Screenshot</button>
+<div id="cpReviewErr"></div><div class="ctcc-result" id="cpReviewResult" style="display:none;"></div>
+</div></div>
+
+<div class="ctcc-copilotpanel" id="cp-ask"><div class="ctcc-card"><h3>Ask My Journal</h3>
+<p class="ctcc-note">Examples: What is my biggest recurring mistake? Which setup performed best? How does London compare with New York?</p>
+<div class="ctcc-field"><label for="cpAskInput">Your Question</label><textarea id="cpAskInput" rows="2"></textarea></div>
+<button class="ctcc-btn" id="cpAskBtn">Ask</button>
+<div id="cpAskErr"></div><div class="ctcc-result" id="cpAskResult" style="display:none;"></div>
+</div></div>
+
+<div class="ctcc-copilotpanel" id="cp-dna"><div class="ctcc-card"><h3>AI Trading DNA Coach</h3>
+<button class="ctcc-btn" id="cpDnaBtn">Get DNA Coaching</button>
+<div id="cpDnaErr"></div><div class="ctcc-result" id="cpDnaResult" style="display:none;"></div>
+</div></div>
+
+<div class="ctcc-copilotpanel" id="cp-mistake"><div class="ctcc-card"><h3>AI Mistake Analysis</h3>
+<button class="ctcc-btn" id="cpMistakeBtn">🔍 Find My Biggest Trading Leak</button>
+<div id="cpMistakeErr"></div><div class="ctcc-result" id="cpMistakeResult" style="display:none;"></div>
+</div></div>
+
+<div class="ctcc-copilotpanel" id="cp-daily"><div class="ctcc-card"><h3>AI Daily Review</h3>
+<div class="ctcc-field"><label for="cpDailyDate">Date</label><input type="date" id="cpDailyDate"></div>
+<div class="ctcc-field"><label for="cpDailyReflection">Reflection (optional)</label><textarea id="cpDailyReflection" rows="2"></textarea></div>
+<button class="ctcc-btn" id="cpDailyBtn">Generate Daily Review</button>
+<div id="cpDailyErr"></div><div class="ctcc-result" id="cpDailyResult" style="display:none;"></div>
+</div></div>
+
+<div class="ctcc-copilotpanel" id="cp-weekly"><div class="ctcc-card"><h3>AI Weekly Review</h3>
+<div class="ctcc-field"><label for="cpWeeklyReflection">Reflection (optional)</label><textarea id="cpWeeklyReflection" rows="2"></textarea></div>
+<button class="ctcc-btn" id="cpWeeklyBtn">Generate This Week's Review</button>
+<div id="cpWeeklyErr"></div><div class="ctcc-result" id="cpWeeklyResult" style="display:none;"></div>
+</div></div>
+
+<div class="ctcc-copilotpanel" id="cp-rulecheck"><div class="ctcc-card"><h3>AI Setup Rule Checker</h3>
+<div class="ctcc-field"><label for="cpRuleTrade">Select Trade</label><select id="cpRuleTrade"></select></div>
+<button class="ctcc-btn" id="cpRuleBtn">Check Against Setup Rules</button>
+<div id="cpRuleErr"></div><div class="ctcc-result" id="cpRuleResult" style="display:none;"></div>
+</div></div>
+
+<div class="ctcc-copilotpanel" id="cp-hypothesis"><div class="ctcc-card"><h3>Trading Hypothesis Lab</h3>
+<p class="ctcc-note">Build a hypothesis by filtering your trades, e.g. "BTC breakout trades during London."</p>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="hypAsset">Asset (optional)</label><input type="text" id="hypAsset" placeholder="e.g. BTC"></div>
+<div class="ctcc-field"><label for="hypSession">Session (optional)</label><select id="hypSession"><option value="">Any</option><option>Asia</option><option>London</option><option>New York</option><option>London/NY Overlap</option><option>Custom</option></select></div>
+</div>
+<div class="ctcc-row">
+<div class="ctcc-field"><label for="hypSetup">Setup (optional)</label><select id="hypSetup"><option value="">Any</option></select></div>
+<div class="ctcc-field"><label for="hypDirection">Direction (optional)</label><select id="hypDirection"><option value="">Any</option><option>Long</option><option>Short</option></select></div>
+</div>
+<button class="ctcc-btn secondary" id="hypCalcBtn">Calculate Locally</button>
+<div id="hypLocalResult"></div>
+<button class="ctcc-btn" id="hypAiBtn" style="display:none;">Ask AI to Interpret</button>
+<div id="cpHypErr"></div><div class="ctcc-result" id="cpHypResult" style="display:none;"></div>
+</div></div>
+</div>
+</div>
+
+<div class="seo-content">
+<h3>Free Crypto Trading Journal</h3>
+<p>A crypto trading journal is a structured record of every trade you take — entry, exit, size, risk, and the reasoning behind it — kept so patterns in your own behavior become visible over time. Serious traders keep one because memory is unreliable and emotions distort recall: a journal shows what actually happened, not what you remember happening. This tool is a completely free, local-first crypto trading journal — no account, no upload, and no subscription required for the full feature set.</p>
+
+<h3>Track Your Crypto Trades</h3>
+<p>After every trade, record the asset, direction, entry and exit price, position size, stop loss, take profit, fees, and the setup you used. The journal automatically calculates your gross and net P/L, P/L percentage, initial risk, R multiple, and trade duration — deterministic math, not AI guesswork — so your numbers are consistent and auditable.</p>
+
+<h3>Build Your Trading Setup Library</h3>
+<p>Define your own repeatable setups (for example, a breakout-retest with specific confirmation rules), attach each trade to a setup, and see win rate, average R, total R, and profit factor per setup. This turns "I feel like my breakout trades work well" into an actual, checkable number.</p>
+
+<h3>Review Trades &amp; Track Mistakes</h3>
+<p>The Trade Review workflow prompts you before and after every trade: why you entered, whether you followed your plan, whether you moved your stop, exited early, or chased price. Mistakes are tagged (FOMO, revenge trading, overtrading, and more) and aggregated so your single biggest recurring leak becomes visible instead of buried across dozens of individual trades.</p>
+
+<h3>Analyze Crypto Trading Performance</h3>
+<p>Win rate, average win/loss, profit factor, expectancy, max drawdown, and streaks are calculated from your real trade history — never estimated. Expectancy in particular (win rate × average win, minus loss rate × average loss) tells you what you can expect to make per trade on average, which matters more long-term than any single win or loss.</p>
+
+<h3>Trading Calendar &amp; Equity Curve</h3>
+<p>A monthly calendar colors each trading day green, red, or neutral so you can spot clusters of losing days at a glance, while the equity curve (cumulative R) shows your trajectory over time using lightweight SVG rendering — no heavy charting library required.</p>
+
+<h3>Analyze Coins, Sessions &amp; Setups</h3>
+<p>Break performance down by asset, trading session (Asia, London, New York, overlap), long vs short, day of week, and holding time. This is where genuinely useful patterns tend to hide — for example, a trader might discover their London-session breakout trades outperform every other combination by a wide margin.</p>
+
+<h3>Build Your Trading DNA</h3>
+<p>Trading DNA combines your best setup, best asset, best session, best day, top recurring mistake, and average R into one profile — purely statistical analysis of your own historical data, never a prediction or trading signal.</p>
+
+<h3>Optional AI Trading Coach</h3>
+<p>An optional AI Trading Copilot (coming soon) will let you connect your own free Google Gemini API key to get plain-language analysis of your journal — your key, your cost, never shared with or stored by ToolNest. The full journal above is already completely usable without it.</p>
+
+<h3>Private Local Trading Journal</h3>
+<p>Every trade, setup, screenshot, and note is stored using your browser's IndexedDB — never uploaded to any server. This tool never asks for your exchange password, API secret, seed phrase, or private key, and it never places trades on your behalf.</p>
+
+<h3>Crypto Trading Journal FAQ</h3>
+<div class="faq-block">
+<details><summary>Is the crypto trading journal free?</summary><p>Yes, the entire journal and analytics system is free with no account or subscription required.</p></details>
+<details><summary>Do I need an account?</summary><p>No. There is no sign-up — your data is tied to this browser only.</p></details>
+<details><summary>Does the journal work offline?</summary><p>Yes. Adding, editing, and reviewing trades, setups, and analytics all work without an internet connection.</p></details>
+<details><summary>Does the tool upload my trading data?</summary><p>No. All data is stored locally in your browser using IndexedDB and is never sent to any server.</p></details>
+<details><summary>Can I save chart screenshots?</summary><p>Yes, before-entry and after-exit screenshots can be attached to each trade and are stored locally in your browser.</p></details>
+<details><summary>Can I create custom trading setups?</summary><p>Yes, the Setup Library lets you define your own setups with custom rules and track performance per setup.</p></details>
+<details><summary>Can I track trading mistakes?</summary><p>Yes, the Mistake Tracker lets you tag recurring mistakes like FOMO, revenge trading, and overtrading, then see their frequency and R impact.</p></details>
+<details><summary>Can I analyze my crypto trading performance?</summary><p>Yes, the Performance section covers win rate, profit factor, expectancy, drawdown, equity curve, and breakdowns by coin, session, direction, day, and holding time.</p></details>
+<details><summary>Can I export my trading data?</summary><p>Yes, you can export a full JSON backup or a CSV of your trades at any time.</p></details>
+<details><summary>Does the tool connect to my exchange?</summary><p>No. This tool never connects to any exchange, wallet, or brokerage account.</p></details>
+<details><summary>Does the tool place trades?</summary><p>No. This is a record-keeping and analysis tool only — it never executes trades.</p></details>
+<details><summary>Does the tool ask for my private key?</summary><p>No, and it never will. This tool never requests seed phrases, private keys, passwords, or exchange API secrets.</p></details>
+<details><summary>Is this tool financial advice?</summary><p>No. This tool is designed for personal record-keeping, education, and historical performance analysis. It does not provide financial advice, trading signals, or guaranteed returns.</p></details>
+</div>
+</div>
+
+</main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M16 54 Q50 26 84 54" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 67 Q50 42 78 67" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M29 79 Q50 58 71 79" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="79" cy="23" r="20" fill="#e07a2c" stroke="#1f3d2b" stroke-width="3"/><text x="79" y="28.5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p><p style="text-align:center;font-size:.75rem;color:#8a8a75;max-width:600px;margin:14px auto 0;">This tool is designed for personal record-keeping, education and historical performance analysis. It does not provide financial advice, trading signals, guaranteed returns, or execute trades.</p></div></footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://toolnest.link/"},{"@type":"ListItem","position":2,"name":"Crypto Trading Command Center","item":"https://toolnest.link/crypto-trading-command-center.html"}]},
+{"@type":"SoftwareApplication","name":"Crypto Trading Command Center","applicationCategory":"FinanceApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/crypto-trading-command-center.html"},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is the crypto trading journal free?","acceptedAnswer":{"@type":"Answer","text":"Yes, the entire journal and analytics system is free with no account or subscription required."}},
+{"@type":"Question","name":"Do I need an account?","acceptedAnswer":{"@type":"Answer","text":"No. There is no sign-up — your data is tied to this browser only."}},
+{"@type":"Question","name":"Does the journal work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes. Adding, editing, and reviewing trades, setups, and analytics all work without an internet connection."}},
+{"@type":"Question","name":"Does the tool upload my trading data?","acceptedAnswer":{"@type":"Answer","text":"No. All data is stored locally in your browser using IndexedDB and is never sent to any server."}},
+{"@type":"Question","name":"Can I save chart screenshots?","acceptedAnswer":{"@type":"Answer","text":"Yes, before-entry and after-exit screenshots can be attached to each trade and are stored locally."}},
+{"@type":"Question","name":"Can I create custom trading setups?","acceptedAnswer":{"@type":"Answer","text":"Yes, the Setup Library lets you define your own setups with custom rules and track performance per setup."}},
+{"@type":"Question","name":"Can I export my trading data?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can export a full JSON backup or a CSV of your trades at any time."}},
+{"@type":"Question","name":"Does the tool connect to my exchange?","acceptedAnswer":{"@type":"Answer","text":"No. This tool never connects to any exchange, wallet, or brokerage account."}},
+{"@type":"Question","name":"Does the tool ask for my private key?","acceptedAnswer":{"@type":"Answer","text":"No, and it never will. This tool never requests seed phrases, private keys, passwords, or exchange API secrets."}},
+{"@type":"Question","name":"Is this tool financial advice?","acceptedAnswer":{"@type":"Answer","text":"No. This tool is for personal record-keeping, education, and historical performance analysis only."}}
+]}
+]}
+</script>
+
+<script>
+/* ============ IndexedDB Layer ============ */
+const DB_NAME='ctccDB', DB_VERSION=1;
+let db;
+function openDB(){
+  return new Promise((resolve,reject)=>{
+    const req=indexedDB.open(DB_NAME,DB_VERSION);
+    req.onupgradeneeded=(e)=>{
+      const d=e.target.result;
+      if(!d.objectStoreNames.contains('trades'))d.createObjectStore('trades',{keyPath:'id'});
+      if(!d.objectStoreNames.contains('setups'))d.createObjectStore('setups',{keyPath:'id'});
+      if(!d.objectStoreNames.contains('watchlist'))d.createObjectStore('watchlist',{keyPath:'id'});
+      if(!d.objectStoreNames.contains('plans'))d.createObjectStore('plans',{keyPath:'id'});
+      if(!d.objectStoreNames.contains('meta'))d.createObjectStore('meta',{keyPath:'key'});
+    };
+    req.onsuccess=(e)=>{db=e.target.result;resolve(db);};
+    req.onerror=(e)=>reject(e.target.error);
+  });
+}
+function store(name,mode='readonly'){return db.transaction(name,mode).objectStore(name);}
+function dbGetAll(name){return new Promise((res,rej)=>{const r=store(name).getAll();r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
+function dbPut(name,val){return new Promise((res,rej)=>{const r=store(name,'readwrite').put(val);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
+function dbGet(name,id){return new Promise((res,rej)=>{const r=store(name).get(id);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
+function dbDelete(name,id){return new Promise((res,rej)=>{const r=store(name,'readwrite').delete(id);r.onsuccess=()=>res();r.onerror=()=>rej(r.error);});}
+function dbClear(name){return new Promise((res,rej)=>{const r=store(name,'readwrite').clear();r.onsuccess=()=>res();r.onerror=()=>rej(r.error);});}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8);}
+
+let TRADES=[],SETUPS=[],WATCHLIST=[],PLANS=[],RISK_LIMITS={maxDailyLoss:0,maxTradesDay:0,maxConsecLoss:0,maxPerTrade:0},SETTINGS={accountSize:1000};
+
+async function loadAll(){
+  TRADES=await dbGetAll('trades');
+  SETUPS=await dbGetAll('setups');
+  WATCHLIST=await dbGetAll('watchlist');
+  PLANS=await dbGetAll('plans');
+  const rl=await dbGet('meta','riskLimits'); if(rl)RISK_LIMITS=rl.value;
+  const st=await dbGet('meta','settings'); if(st)SETTINGS=st.value;
+}
+
+/* ============ Metrics ============ */
+function fileToDataUrl(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file);});}
+
+function tradeMetrics(t){
+  const entry=+t.entryPrice||0, exit=+t.exitPrice||0, size=+t.positionSize||0, fees=+t.fees||0;
+  const hasExit = t.exitPrice!==undefined && t.exitPrice!==null && t.exitPrice!=='';
+  let grossPL=0;
+  if(hasExit){
+    grossPL = t.direction==='Short' ? (entry-exit)*size : (exit-entry)*size;
+  }
+  const netPL = grossPL - fees;
+  const initialRisk = Math.abs(entry-(+t.stopLoss||0))*size;
+  const rMultiple = hasExit && initialRisk>0 ? netPL/initialRisk : null;
+  const plPercent = hasExit && entry*size!==0 ? (netPL/(entry*size))*100 : null;
+  const riskReward = (t.takeProfit && t.stopLoss) ? Math.abs((+t.takeProfit-entry))/Math.max(Math.abs(entry-(+t.stopLoss)),0.0000001) : null;
+  let durationMs=null, durationLabel='—';
+  if(hasExit && t.entryDateTime && t.exitDateTime){
+    durationMs = new Date(t.exitDateTime)-new Date(t.entryDateTime);
+    durationLabel = formatDuration(durationMs);
+  }
+  let result = 'open';
+  if(hasExit){ result = netPL>0?'win':(netPL<0?'loss':'be'); }
+  return {grossPL,netPL,plPercent,initialRisk,rMultiple,riskReward,durationMs,durationLabel,hasExit,result};
+}
+function formatDuration(ms){
+  if(ms==null||isNaN(ms))return '—';
+  const mins=Math.round(ms/60000);
+  if(mins<60)return mins+'m';
+  const hrs=mins/60;
+  if(hrs<24)return hrs.toFixed(1)+'h';
+  const days=hrs/24;
+  return days.toFixed(1)+'d';
+}
+function holdingBucket(ms){
+  if(ms==null)return null;
+  const mins=ms/60000;
+  if(mins<15)return 'Under 15m';
+  if(mins<60)return '15–60m';
+  if(mins<240)return '1–4h';
+  if(mins<720)return '4–12h';
+  if(mins<1440)return '12–24h';
+  if(mins<4320)return '1–3d';
+  return '3+d';
+}
+function fmt2(n){return (n==null||isNaN(n))?'—':n.toFixed(2);}
+function fmtMoney(n){return (n==null||isNaN(n))?'—':(n<0?'-$':'$')+Math.abs(n).toFixed(2);}
+function cls(n){return n>0?'ctcc-pos':(n<0?'ctcc-neg':'');}
+
+function aggregate(trades){
+  const closed = trades.filter(t=>tradeMetrics(t).hasExit);
+  const m = closed.map(t=>({t,...tradeMetrics(t)}));
+  const wins = m.filter(x=>x.result==='win');
+  const losses = m.filter(x=>x.result==='loss');
+  const totalTrades = m.length;
+  const winRate = totalTrades? (wins.length/totalTrades*100) : null;
+  const lossRate = totalTrades? (losses.length/totalTrades*100) : null;
+  const avgR = totalTrades? avg(m.map(x=>x.rMultiple).filter(v=>v!=null)) : null;
+  const totalR = totalTrades? sum(m.map(x=>x.rMultiple).filter(v=>v!=null)) : null;
+  const avgWinR = wins.length? avg(wins.map(x=>x.rMultiple)) : null;
+  const avgLossR = losses.length? Math.abs(avg(losses.map(x=>x.rMultiple))) : null;
+  const grossProfit = sum(wins.map(x=>x.netPL));
+  const grossLoss = Math.abs(sum(losses.map(x=>x.netPL)));
+  const profitFactor = grossLoss>0? grossProfit/grossLoss : (grossProfit>0? Infinity : null);
+  const expectancy = (winRate!=null && avgWinR!=null && avgLossR!=null)? ((winRate/100)*avgWinR)-((lossRate/100)*avgLossR) : null;
+  const bestTrade = m.length? m.reduce((a,b)=>(b.netPL>a.netPL?b:a)) : null;
+  const worstTrade = m.length? m.reduce((a,b)=>(b.netPL<a.netPL?b:a)) : null;
+  // Drawdown (on cumulative R)
+  let cum=0,peak=0,maxDD=0;
+  const sorted=[...m].sort((a,b)=>new Date(a.t.entryDateTime)-new Date(b.t.entryDateTime));
+  sorted.forEach(x=>{ if(x.rMultiple!=null){ cum+=x.rMultiple; if(cum>peak)peak=cum; const dd=peak-cum; if(dd>maxDD)maxDD=dd; }});
+  // Streak
+  let curStreak=0,curType=null,bestWinStreak=0,worstLossStreak=0,tempWin=0,tempLoss=0;
+  sorted.forEach(x=>{
+    if(x.result==='win'){tempWin++;tempLoss=0;if(tempWin>bestWinStreak)bestWinStreak=tempWin;}
+    else if(x.result==='loss'){tempLoss++;tempWin=0;if(tempLoss>worstLossStreak)worstLossStreak=tempLoss;}
+  });
+  for(let i=sorted.length-1;i>=0;i--){
+    const r=sorted[i].result;
+    if(r==='be')continue;
+    if(curType===null){curType=r;curStreak=1;}
+    else if(r===curType){curStreak++;}
+    else break;
+  }
+  return {totalTrades,winRate,lossRate,avgR,totalR,avgWinR,avgLossR,profitFactor,expectancy,bestTrade,worstTrade,maxDD,curStreak,curType,bestWinStreak,worstLossStreak,grossProfit,grossLoss,sortedM:sorted};
+}
+function avg(arr){return arr.length? sum(arr)/arr.length : null;}
+function sum(arr){return arr.reduce((a,b)=>a+b,0);}
+
+function groupBy(trades,keyFn){
+  const map={};
+  trades.forEach(t=>{
+    const k=keyFn(t)||'—';
+    if(!map[k])map[k]=[];
+    map[k].push(t);
+  });
+  return map;
+}
+function renderGroupTable(tableEl,groups,extra){
+  const rows=Object.entries(groups).map(([k,list])=>{
+    const a=aggregate(list);
+    return {k,a,n:list.length};
+  }).filter(r=>r.a.totalTrades>0).sort((x,y)=>(y.a.totalR||0)-(x.a.totalR||0));
+  let html='<tr><th>'+(extra||'Group')+'</th><th>Trades</th><th>Win Rate</th><th>Avg R</th><th>Total R</th><th>Profit Factor</th></tr>';
+  if(!rows.length){tableEl.innerHTML=html+'<tr><td colspan="6" style="text-align:center;color:var(--ctcc-sub);padding:16px;">No closed trades yet.</td></tr>';return;}
+  rows.forEach(r=>{
+    html+='<tr><td>'+r.k+'</td><td>'+r.a.totalTrades+'</td><td>'+fmt2(r.a.winRate)+'%</td><td class="'+cls(r.a.avgR)+'">'+fmt2(r.a.avgR)+'</td><td class="'+cls(r.a.totalR)+'">'+fmt2(r.a.totalR)+'</td><td>'+(r.a.profitFactor==Infinity?'∞':fmt2(r.a.profitFactor))+'</td></tr>';
+  });
+  tableEl.innerHTML=html;
+}
+
+/* ============ Nav ============ */
+document.querySelectorAll('.ctcc-navbtn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.ctcc-navbtn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.ctcc-section').forEach(s=>s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('ctcc-'+btn.dataset.tab).classList.add('active');
+    renderAll();
+  });
+});
+document.querySelectorAll('.ctcc-subtab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.ctcc-subtab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.ctcc-subpanel').forEach(s=>s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('perf-'+btn.dataset.sub).classList.add('active');
+    renderPerformance();
+  });
+});
+
+/* ============ Dashboard ============ */
+function renderDashboard(){
+  const a=aggregate(TRADES);
+  const stats=[
+    ['Total Trades',a.totalTrades,''],
+    ['Win Rate',a.winRate!=null?fmt2(a.winRate)+'%':'—',''],
+    ['Average R',fmt2(a.avgR),cls(a.avgR)],
+    ['Total R',fmt2(a.totalR),cls(a.totalR)],
+    ['Profit Factor',a.profitFactor==Infinity?'∞':fmt2(a.profitFactor),''],
+    ['Expectancy',fmt2(a.expectancy),cls(a.expectancy)],
+    ['Max Drawdown',fmt2(a.maxDD)+'R',''],
+    ['Current Streak',a.curType?a.curStreak+' '+a.curType:'—',a.curType==='win'?'ctcc-pos':(a.curType==='loss'?'ctcc-neg':'')],
+  ];
+  document.getElementById('dashStats').innerHTML = a.totalTrades===0
+    ? '<div class="ctcc-empty">No trades yet. Create your first trade to start building your Trading DNA.</div>'
+    : stats.map(s=>`<div class="ctcc-stat"><div class="v ${s[2]}">${s[1]}</div><div class="l">${s[0]}</div></div>`).join('');
+
+  const byAsset=groupBy(TRADES.filter(t=>tradeMetrics(t).hasExit),t=>t.asset);
+  const bySetup=groupBy(TRADES.filter(t=>tradeMetrics(t).hasExit),t=>SETUPS.find(s=>s.id===t.setupId)?.name);
+  const bySession=groupBy(TRADES.filter(t=>tradeMetrics(t).hasExit),t=>t.session);
+  function bestOf(groups){
+    const rows=Object.entries(groups).map(([k,list])=>({k,tR:aggregate(list).totalR||0}));
+    if(!rows.length)return '—';
+    return rows.sort((a,b)=>b.tR-a.tR)[0].k;
+  }
+  const bestStats=[['Best Setup',bestOf(bySetup)],['Best Asset',bestOf(byAsset)],['Best Session',bestOf(bySession)]];
+  document.getElementById('dashBest').innerHTML = a.totalTrades===0 ? '' : bestStats.map(s=>`<div class="ctcc-stat"><div class="v" style="font-size:.95rem;">${s[1]}</div><div class="l">${s[0]}</div></div>`).join('');
+
+  // risk limit warning
+  const today=new Date().toISOString().slice(0,10);
+  const todaysTrades=TRADES.filter(t=>t.entryDateTime && t.entryDateTime.slice(0,10)===today);
+  const todaysClosed=todaysTrades.filter(t=>tradeMetrics(t).hasExit);
+  const todaysLoss = -sum(todaysClosed.map(t=>tradeMetrics(t).netPL).filter(v=>v<0));
+  let warn='';
+  if(RISK_LIMITS.maxTradesDay && todaysTrades.length>=RISK_LIMITS.maxTradesDay) warn+='<div class="ctcc-limitwarn">⚠️ TRADING LIMIT REACHED — Max trades per day ('+RISK_LIMITS.maxTradesDay+') hit today. This is a reminder only.</div>';
+  if(RISK_LIMITS.maxDailyLoss && todaysLoss>=RISK_LIMITS.maxDailyLoss) warn+='<div class="ctcc-limitwarn">⚠️ TRADING LIMIT REACHED — Max daily loss ($'+RISK_LIMITS.maxDailyLoss+') hit today. This is a reminder only.</div>';
+  document.getElementById('dashLimitWarn').innerHTML=warn;
+}
+
+/* ============ Today's Plan ============ */
+document.getElementById('planDate').valueAsDate=new Date();
+document.getElementById('planSaveBtn').addEventListener('click',async()=>{
+  const date=document.getElementById('planDate').value;
+  if(!date){document.getElementById('planStatus').textContent='Date zaroori hai.';return;}
+  const plan={id:date,date,bias:document.getElementById('planBias').value,session:document.getElementById('planSession').value,
+    watchlist:document.getElementById('planWatchlist').value,preferredSetup:document.getElementById('planPreferredSetup').value,
+    keySupport:document.getElementById('planKeySupport').value,keyResistance:document.getElementById('planKeyResistance').value,
+    invalidation:document.getElementById('planInvalidation').value,maxTrades:+document.getElementById('planMaxTrades').value,
+    maxLoss:+document.getElementById('planMaxLoss').value,notes:document.getElementById('planNotes').value};
+  await dbPut('plans',plan);
+  await loadAll();
+  document.getElementById('planStatus').textContent='✅ Saved for '+date;
+  renderPlanHistory();
+});
+function renderPlanHistory(){
+  const sorted=[...PLANS].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,10);
+  let html='<tr><th>Date</th><th>Bias</th><th>Session</th><th>Preferred Setup</th><th>Max Trades</th></tr>';
+  if(!sorted.length)html+='<tr><td colspan="5" style="text-align:center;color:var(--ctcc-sub);padding:16px;">No plans yet.</td></tr>';
+  sorted.forEach(p=>{html+=`<tr><td>${p.date}</td><td>${p.bias||'—'}</td><td>${p.session||'—'}</td><td>${p.preferredSetup||'—'}</td><td>${p.maxTrades||'—'}</td></tr>`;});
+  document.getElementById('planHistoryTable').innerHTML=html;
+}
+
+/* ============ New Trade ============ */
+function fillSetupSelect(){
+  const sel=document.getElementById('ntSetup');
+  sel.innerHTML='<option value="">— None —</option>'+SETUPS.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
+}
+let ntBeforeData=null, ntAfterData=null;
+document.getElementById('ntScreenshotBefore').addEventListener('change',async(e)=>{if(e.target.files[0])ntBeforeData=await fileToDataUrl(e.target.files[0]);});
+document.getElementById('ntScreenshotAfter').addEventListener('change',async(e)=>{if(e.target.files[0])ntAfterData=await fileToDataUrl(e.target.files[0]);});
+
+function collectTradeForm(){
+  return {
+    asset:document.getElementById('ntAsset').value.trim(),
+    direction:document.getElementById('ntDirection').value,
+    setupId:document.getElementById('ntSetup').value||null,
+    entryPrice:document.getElementById('ntEntryPrice').value,
+    stopLoss:document.getElementById('ntStopLoss').value,
+    takeProfit:document.getElementById('ntTakeProfit').value,
+    positionSize:document.getElementById('ntPositionSize').value,
+    leverage:document.getElementById('ntLeverage').value,
+    fees:document.getElementById('ntFees').value,
+    riskAmount:document.getElementById('ntRiskAmount').value,
+    riskPercent:document.getElementById('ntRiskPercent').value,
+    session:document.getElementById('ntSession').value,
+    entryDateTime:document.getElementById('ntEntryDateTime').value,
+    exitPrice:document.getElementById('ntExitPrice').value,
+    exitDateTime:document.getElementById('ntExitDateTime').value,
+    marketCondition:document.getElementById('ntMarketCondition').value,
+    reason:document.getElementById('ntReason').value,
+    notes:document.getElementById('ntNotes').value,
+  };
+}
+function clearTradeForm(){
+  ['ntAsset','ntEntryPrice','ntStopLoss','ntTakeProfit','ntPositionSize','ntFees','ntRiskAmount','ntRiskPercent','ntExitPrice','ntMarketCondition','ntReason','ntNotes'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('ntLeverage').value=1;
+  document.getElementById('ntEntryDateTime').value='';
+  document.getElementById('ntExitDateTime').value='';
+  document.getElementById('ntEditId').value='';
+  document.getElementById('ntFormTitle').textContent='New Trade';
+  ntBeforeData=null; ntAfterData=null;
+  document.getElementById('ntScreenshotBefore').value='';
+  document.getElementById('ntScreenshotAfter').value='';
+}
+async function saveTrade(andReview){
+  const form=collectTradeForm();
+  if(!form.asset){document.getElementById('ntStatus').textContent='Asset zaroori hai.';return;}
+  const editId=document.getElementById('ntEditId').value;
+  const existing = editId? TRADES.find(t=>t.id===editId) : null;
+  const screenshots = existing?.screenshots || [];
+  if(ntBeforeData)screenshots.push({type:'before',data:ntBeforeData});
+  if(ntAfterData)screenshots.push({type:'after',data:ntAfterData});
+  const trade={
+    id: editId||uid(),
+    ...form,
+    screenshots,
+    review: existing?.review || null,
+    mistakeTags: existing?.mistakeTags || [],
+    createdAt: existing?.createdAt || new Date().toISOString(),
+  };
+  await dbPut('trades',trade);
+  await loadAll();
+  document.getElementById('ntStatus').textContent='✅ Trade saved.';
+  clearTradeForm();
+  fillSetupSelect();
+  renderAll();
+  if(andReview){
+    document.querySelector('.ctcc-navbtn[data-tab="journal"]').click();
+    setTimeout(()=>openReview(trade.id),100);
+  }
+}
+document.getElementById('ntSaveBtn').addEventListener('click',()=>saveTrade(false));
+document.getElementById('ntSaveReviewBtn').addEventListener('click',()=>saveTrade(true));
+document.getElementById('ntCancelBtn').addEventListener('click',clearTradeForm);
+
+function editTrade(id){
+  const t=TRADES.find(x=>x.id===id); if(!t)return;
+  document.querySelector('.ctcc-navbtn[data-tab="newtrade"]').click();
+  document.getElementById('ntEditId').value=t.id;
+  document.getElementById('ntFormTitle').textContent='Edit Trade';
+  document.getElementById('ntAsset').value=t.asset||'';
+  document.getElementById('ntDirection').value=t.direction||'Long';
+  fillSetupSelect();
+  document.getElementById('ntSetup').value=t.setupId||'';
+  document.getElementById('ntEntryPrice').value=t.entryPrice||'';
+  document.getElementById('ntStopLoss').value=t.stopLoss||'';
+  document.getElementById('ntTakeProfit').value=t.takeProfit||'';
+  document.getElementById('ntPositionSize').value=t.positionSize||'';
+  document.getElementById('ntLeverage').value=t.leverage||1;
+  document.getElementById('ntFees').value=t.fees||0;
+  document.getElementById('ntRiskAmount').value=t.riskAmount||'';
+  document.getElementById('ntRiskPercent').value=t.riskPercent||'';
+  document.getElementById('ntSession').value=t.session||'Asia';
+  document.getElementById('ntEntryDateTime').value=t.entryDateTime||'';
+  document.getElementById('ntExitPrice').value=t.exitPrice||'';
+  document.getElementById('ntExitDateTime').value=t.exitDateTime||'';
+  document.getElementById('ntMarketCondition').value=t.marketCondition||'';
+  document.getElementById('ntReason').value=t.reason||'';
+  document.getElementById('ntNotes').value=t.notes||'';
+}
+async function deleteTrade(id){
+  if(!confirm('Delete this trade permanently?'))return;
+  await dbDelete('trades',id);
+  await loadAll();
+  renderAll();
+}
+
+/* ============ Trade Journal ============ */
+['jfAsset','jfDirection','jfResult','jfSort'].forEach(id=>document.getElementById(id).addEventListener('input',renderJournal));
+function renderJournal(){
+  let list=[...TRADES];
+  const fa=document.getElementById('jfAsset').value.toLowerCase();
+  const fd=document.getElementById('jfDirection').value;
+  const fr=document.getElementById('jfResult').value;
+  const fs=document.getElementById('jfSort').value;
+  if(fa)list=list.filter(t=>(t.asset||'').toLowerCase().includes(fa));
+  if(fd)list=list.filter(t=>t.direction===fd);
+  if(fr)list=list.filter(t=>tradeMetrics(t).result===fr);
+  const withM=list.map(t=>({t,m:tradeMetrics(t)}));
+  withM.sort((a,b)=>{
+    if(fs==='newest')return new Date(b.t.entryDateTime||0)-new Date(a.t.entryDateTime||0);
+    if(fs==='oldest')return new Date(a.t.entryDateTime||0)-new Date(b.t.entryDateTime||0);
+    if(fs==='largestProfit')return (b.m.netPL||-Infinity)-(a.m.netPL||-Infinity);
+    if(fs==='largestLoss')return (a.m.netPL||Infinity)-(b.m.netPL||Infinity);
+    if(fs==='highestR')return (b.m.rMultiple||-Infinity)-(a.m.rMultiple||-Infinity);
+    if(fs==='lowestR')return (a.m.rMultiple||Infinity)-(b.m.rMultiple||Infinity);
+    return 0;
+  });
+  const container=document.getElementById('journalList');
+  if(!withM.length){container.innerHTML='<div class="ctcc-empty">No trades yet. Create your first trade to start building your Trading DNA.</div>';return;}
+  container.innerHTML=withM.map(({t,m})=>{
+    const badge = !m.hasExit?'<span class="ctcc-badge" style="background:rgba(59,130,246,.15);color:#60a5fa;">OPEN</span>' : `<span class="ctcc-badge ${m.result}">${m.result==='win'?'WIN':m.result==='loss'?'LOSS':'BE'}</span>`;
+    const setupName = SETUPS.find(s=>s.id===t.setupId)?.name||'—';
+    return `<div class="ctcc-tradecard">
+      <div class="top"><strong>${t.asset} · ${t.direction}</strong> ${badge}</div>
+      <div class="ctcc-note">Setup: ${setupName} · Session: ${t.session||'—'} · Entry: ${t.entryPrice||'—'} → Exit: ${t.exitPrice||'—'}</div>
+      <div class="ctcc-row" style="margin-top:6px;">
+        <div class="ctcc-stat" style="flex:1;min-width:90px;"><div class="v ${cls(m.netPL)}">${fmtMoney(m.netPL)}</div><div class="l">Net P/L</div></div>
+        <div class="ctcc-stat" style="flex:1;min-width:90px;"><div class="v ${cls(m.rMultiple)}">${fmt2(m.rMultiple)}R</div><div class="l">R Multiple</div></div>
+        <div class="ctcc-stat" style="flex:1;min-width:90px;"><div class="v">${m.durationLabel}</div><div class="l">Duration</div></div>
+      </div>
+      ${t.screenshots&&t.screenshots.length?'<div class="ctcc-screens">'+t.screenshots.map(s=>`<img src="${s.data}" title="${s.type}">`).join('')+'</div>':''}
+      <div class="ctcc-row" style="margin-top:8px;">
+        <button class="ctcc-btn ghost" onclick="editTrade('${t.id}')">Edit</button>
+        <button class="ctcc-btn ghost" onclick="openReview('${t.id}')">${t.review?'Edit Review':'Review'}</button>
+        <button class="ctcc-btn ghost" onclick="deleteTrade('${t.id}')">Delete</button>
+      </div>
+      <div id="reviewPanel-${t.id}"></div>
+    </div>`;
+  }).join('');
+}
+
+/* ============ Trade Review ============ */
+const MISTAKE_TAGS=['FOMO','Revenge Trade','Overtrading','Early Entry','Late Entry','Early Take Profit','Moved Stop Loss','Oversized Position','No Confirmation','Chased Price','Ignored Plan','Emotional Trade','Other'];
+const CHECKLIST_ITEMS=['Followed setup rules','Followed risk plan','Planned entry used','Stop respected','Take profit respected','No FOMO','No revenge trade','No oversized position'];
+
+function openReview(id){
+  const t=TRADES.find(x=>x.id===id); if(!t)return;
+  const panel=document.getElementById('reviewPanel-'+id);
+  if(!panel)return;
+  const r=t.review||{};
+  const checklist=r.checklist||[];
+  const tags=t.mistakeTags||[];
+  panel.innerHTML=`<div class="ctcc-card" style="margin-top:10px;">
+    <h3>Trade Review</h3>
+    <div class="ctcc-field"><label>Why did I enter?</label><textarea data-rf="whyEnter" rows="2">${r.whyEnter||''}</textarea></div>
+    <div class="ctcc-field"><label>What was the invalidation?</label><textarea data-rf="invalidation" rows="2">${r.invalidation||''}</textarea></div>
+    <div class="ctcc-field"><label>What was expected?</label><textarea data-rf="expected" rows="2">${r.expected||''}</textarea></div>
+    <div class="ctcc-field"><label>What did I learn?</label><textarea data-rf="learned" rows="2">${r.learned||''}</textarea></div>
+    <p style="font-size:.8rem;font-weight:700;margin:10px 0 4px;color:var(--ctcc-sub);">Checklist</p>
+    <div class="ctcc-checklist">${CHECKLIST_ITEMS.map(c=>`<label><input type="checkbox" data-check="${c}" ${checklist.includes(c)?'checked':''}> ${c}</label>`).join('')}</div>
+    <p style="font-size:.8rem;font-weight:700;margin:10px 0 4px;color:var(--ctcc-sub);">Mistake Tags</p>
+    <div>${MISTAKE_TAGS.map(m=>`<button type="button" class="ctcc-mistagbtn ${tags.includes(m)?'active':''}" data-mistag="${m}">${m}</button>`).join('')}</div>
+    <button class="ctcc-btn" style="margin-top:12px;" onclick="saveReview('${id}')">Save Review</button>
+  </div>`;
+  panel.querySelectorAll('[data-mistag]').forEach(b=>b.addEventListener('click',()=>b.classList.toggle('active')));
+}
+async function saveReview(id){
+  const panel=document.getElementById('reviewPanel-'+id);
+  const t=TRADES.find(x=>x.id===id); if(!t)return;
+  const review={
+    whyEnter:panel.querySelector('[data-rf="whyEnter"]').value,
+    invalidation:panel.querySelector('[data-rf="invalidation"]').value,
+    expected:panel.querySelector('[data-rf="expected"]').value,
+    learned:panel.querySelector('[data-rf="learned"]').value,
+    checklist:[...panel.querySelectorAll('[data-check]:checked')].map(c=>c.dataset.check),
+  };
+  const mistakeTags=[...panel.querySelectorAll('.ctcc-mistagbtn.active')].map(b=>b.dataset.mistag);
+  t.review=review; t.mistakeTags=mistakeTags;
+  await dbPut('trades',t);
+  await loadAll();
+  renderAll();
+}
+
+/* ============ Setup Library ============ */
+document.getElementById('setupSaveBtn').addEventListener('click',async()=>{
+  const name=document.getElementById('setupName').value.trim();
+  if(!name)return;
+  const rules=document.getElementById('setupRules').value.split('\n').map(r=>r.trim()).filter(Boolean);
+  const editId=document.getElementById('setupEditId').value;
+  const setup={id:editId||uid(),name,rules};
+  await dbPut('setups',setup);
+  await loadAll();
+  document.getElementById('setupName').value='';
+  document.getElementById('setupRules').value='';
+  document.getElementById('setupEditId').value='';
+  fillSetupSelect();
+  renderSetups();
+});
+document.getElementById('setupCancelBtn').addEventListener('click',()=>{
+  document.getElementById('setupName').value='';document.getElementById('setupRules').value='';document.getElementById('setupEditId').value='';
+});
+function editSetup(id){
+  const s=SETUPS.find(x=>x.id===id); if(!s)return;
+  document.getElementById('setupEditId').value=s.id;
+  document.getElementById('setupName').value=s.name;
+  document.getElementById('setupRules').value=(s.rules||[]).join('\n');
+}
+async function deleteSetup(id){
+  if(!confirm('Delete this setup?'))return;
+  await dbDelete('setups',id);
+  await loadAll();
+  fillSetupSelect();
+  renderSetups();
+}
+function renderSetups(){
+  const container=document.getElementById('setupList');
+  if(!SETUPS.length){container.innerHTML='';}
+  else{
+    container.innerHTML=SETUPS.map(s=>`<div class="ctcc-card"><h3>${s.name}</h3><ul style="margin:0 0 10px;padding-left:18px;font-size:.85rem;color:var(--ctcc-sub);">${(s.rules||[]).map(r=>`<li>${r}</li>`).join('')}</ul><div class="ctcc-row"><button class="ctcc-btn ghost" onclick="editSetup('${s.id}')">Edit</button><button class="ctcc-btn ghost" onclick="deleteSetup('${s.id}')">Delete</button></div></div>`).join('');
+  }
+  const groups={};
+  SETUPS.forEach(s=>{groups[s.name]=TRADES.filter(t=>t.setupId===s.id);});
+  renderGroupTable(document.getElementById('setupPerfTable'),groups,'Setup');
+}
+
+/* ============ Mistake Tracker ============ */
+function renderMistakes(){
+  const counts={};
+  TRADES.forEach(t=>{ (t.mistakeTags||[]).forEach(tag=>{ if(!counts[tag])counts[tag]={count:0,rSum:0,wins:0,total:0}; const m=tradeMetrics(t); counts[tag].count++; if(m.hasExit){counts[tag].total++; counts[tag].rSum+=(m.rMultiple||0); if(m.result==='win')counts[tag].wins++;} }); });
+  const rows=Object.entries(counts).sort((a,b)=>b[1].count-a[1].count);
+  let html='<tr><th>Mistake</th><th>Count</th><th>Win Rate</th><th>Avg R</th><th>Total R Impact</th></tr>';
+  if(!rows.length){html+='<tr><td colspan="5" style="text-align:center;color:var(--ctcc-sub);padding:16px;">No mistakes tagged yet — review trades to tag them.</td></tr>';}
+  rows.forEach(([tag,d])=>{
+    const wr=d.total?((d.wins/d.total)*100).toFixed(1)+'%':'—';
+    const avgR=d.total?(d.rSum/d.total).toFixed(2):'—';
+    html+=`<tr><td>${tag}</td><td>${d.count}</td><td>${wr}</td><td>${avgR}</td><td class="${cls(d.rSum)}">${fmt2(d.rSum)}</td></tr>`;
+  });
+  document.getElementById('mistakeTable').innerHTML=html;
+  document.getElementById('topMistakeNote').textContent = rows.length>=3 ? `Top recurring mistake: ${rows[0][0]} (${rows[0][1].count} times).` : 'Log more reviewed trades to reveal your top recurring mistake.';
+}
+
+/* ============ Calendar ============ */
+let calYear=new Date().getFullYear(), calMonth=new Date().getMonth();
+document.getElementById('calPrevBtn').addEventListener('click',()=>{calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCalendar();});
+document.getElementById('calNextBtn').addEventListener('click',()=>{calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCalendar();});
+function renderCalendar(){
+  const label=new Date(calYear,calMonth,1).toLocaleString('default',{month:'long',year:'numeric'});
+  document.getElementById('calLabel').textContent=label;
+  const firstDay=new Date(calYear,calMonth,1).getDay();
+  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  const byDay={};
+  TRADES.forEach(t=>{ if(!t.entryDateTime)return; const d=new Date(t.entryDateTime); if(d.getFullYear()===calYear&&d.getMonth()===calMonth){ const day=d.getDate(); if(!byDay[day])byDay[day]=[]; byDay[day].push(t);} });
+  let html='';
+  ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(d=>html+=`<div style="text-align:center;color:var(--ctcc-sub);font-weight:700;">${d}</div>`);
+  for(let i=0;i<firstDay;i++)html+='<div class="ctcc-calcell empty"></div>';
+  for(let day=1;day<=daysInMonth;day++){
+    const trades=byDay[day]||[];
+    const a=aggregate(trades);
+    const dayCls = a.totalR>0?'pos':(a.totalR<0?'neg':'');
+    html+=`<div class="ctcc-calcell ${dayCls}" onclick="showCalDay(${day})"><div>${day}</div>${trades.length?'<div style="font-size:.65rem;">'+trades.length+' tr</div>':''}</div>`;
+  }
+  document.getElementById('calGrid').innerHTML=html;
+  document.getElementById('calDayDetail').style.display='none';
+}
+function showCalDay(day){
+  const trades=TRADES.filter(t=>{ if(!t.entryDateTime)return false; const d=new Date(t.entryDateTime); return d.getFullYear()===calYear&&d.getMonth()===calMonth&&d.getDate()===day; });
+  const a=aggregate(trades);
+  document.getElementById('calDayTitle').textContent=`${calMonth+1}/${day}/${calYear} — ${trades.length} trade(s)`;
+  document.getElementById('calDayContent').innerHTML = trades.length ? `<div class="ctcc-grid"><div class="ctcc-stat"><div class="v">${a.totalTrades}</div><div class="l">Trades</div></div><div class="ctcc-stat"><div class="v ${cls(a.totalR)}">${fmt2(a.totalR)}</div><div class="l">Daily R</div></div><div class="ctcc-stat"><div class="v ${cls(a.grossProfit-a.grossLoss)}">${fmtMoney(a.grossProfit-a.grossLoss)}</div><div class="l">Daily P/L</div></div></div>` : '<div class="ctcc-empty">No trades this day.</div>';
+  document.getElementById('calDayDetail').style.display='block';
+}
+
+/* ============ Performance ============ */
+function renderPerformance(){
+  const active=document.querySelector('.ctcc-subtab.active').dataset.sub;
+  const a=aggregate(TRADES);
+  if(active==='overview'){
+    const stats=[['Total Trades',a.totalTrades],['Win Rate',a.winRate!=null?fmt2(a.winRate)+'%':'—'],['Avg Win (R)',fmt2(a.avgWinR)],['Avg Loss (R)',fmt2(a.avgLossR)],['Profit Factor',a.profitFactor==Infinity?'∞':fmt2(a.profitFactor)],['Expectancy (R)',fmt2(a.expectancy)],['Total R',fmt2(a.totalR)],['Max Drawdown',fmt2(a.maxDD)+'R'],['Best Win Streak',a.bestWinStreak],['Worst Loss Streak',a.worstLossStreak]];
+    document.getElementById('perfOverviewStats').innerHTML=stats.map(s=>`<div class="ctcc-stat"><div class="v">${s[1]}</div><div class="l">${s[0]}</div></div>`).join('');
+  }
+  if(active==='equity')renderEquityCurve('all');
+  if(active==='coin')renderGroupTable(document.getElementById('coinTable'),groupBy(TRADES,t=>t.asset),'Asset');
+  if(active==='session')renderGroupTable(document.getElementById('sessionTable'),groupBy(TRADES,t=>t.session),'Session');
+  if(active==='direction')renderGroupTable(document.getElementById('directionTable'),groupBy(TRADES,t=>t.direction),'Direction');
+  if(active==='dow'){
+    const dowNames=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    renderGroupTable(document.getElementById('dowTable'),groupBy(TRADES,t=>t.entryDateTime?dowNames[new Date(t.entryDateTime).getDay()]:null),'Day');
+  }
+  if(active==='holding')renderGroupTable(document.getElementById('holdingTable'),groupBy(TRADES.filter(t=>tradeMetrics(t).hasExit),t=>holdingBucket(tradeMetrics(t).durationMs)),'Holding Time');
+  if(active==='dna')renderDNA();
+}
+document.querySelectorAll('[data-eqfilter]').forEach(b=>b.addEventListener('click',()=>renderEquityCurve(b.dataset.eqfilter)));
+function renderEquityCurve(filter){
+  let trades=TRADES.filter(t=>tradeMetrics(t).hasExit && t.entryDateTime);
+  const now=new Date();
+  if(filter==='monthly')trades=trades.filter(t=>{const d=new Date(t.entryDateTime);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();});
+  if(filter==='weekly'){const weekAgo=new Date(now-7*86400000);trades=trades.filter(t=>new Date(t.entryDateTime)>=weekAgo);}
+  trades.sort((a,b)=>new Date(a.entryDateTime)-new Date(b.entryDateTime));
+  const svg=document.getElementById('equitySvg');
+  if(!trades.length){svg.innerHTML='<text x="300" y="110" fill="#93a0bd" font-size="13" text-anchor="middle">No closed trades yet</text>';return;}
+  let cum=0; const points=[0];
+  trades.forEach(t=>{cum+=tradeMetrics(t).rMultiple||0;points.push(cum);});
+  const w=600,h=220,pad=20;
+  const maxV=Math.max(...points,0), minV=Math.min(...points,0);
+  const range=(maxV-minV)||1;
+  const stepX=(w-2*pad)/(points.length-1||1);
+  const coords=points.map((v,i)=>{ const x=pad+i*stepX; const y=h-pad-((v-minV)/range)*(h-2*pad); return [x,y]; });
+  const path='M'+coords.map(c=>c[0].toFixed(1)+','+c[1].toFixed(1)).join(' L');
+  const zeroY=h-pad-((0-minV)/range)*(h-2*pad);
+  const lineColor = cum>=0?'#22c55e':'#ef4444';
+  svg.innerHTML=`<line x1="${pad}" y1="${zeroY}" x2="${w-pad}" y2="${zeroY}" stroke="#263250" stroke-dasharray="4"/><path d="${path}" fill="none" stroke="${lineColor}" stroke-width="2"/><text x="${pad}" y="14" fill="#93a0bd" font-size="11">Cumulative R: ${fmt2(cum)}</text>`;
+}
+function renderDNA(){
+  const a=aggregate(TRADES);
+  const closed=TRADES.filter(t=>tradeMetrics(t).hasExit);
+  if(!closed.length){document.getElementById('dnaStats').innerHTML='<div class="ctcc-empty">No trades yet. Insufficient data for Trading DNA.</div>';return;}
+  function bestOf(keyFn){const g=groupBy(closed,keyFn);const rows=Object.entries(g).map(([k,l])=>({k,tR:aggregate(l).totalR||0}));return rows.length?rows.sort((a,b)=>b.tR-a.tR)[0].k:'—';}
+  const dowNames=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const stats=[
+    ['Best Setup',bestOf(t=>SETUPS.find(s=>s.id===t.setupId)?.name)],
+    ['Best Asset',bestOf(t=>t.asset)],
+    ['Best Session',bestOf(t=>t.session)],
+    ['Best Direction',bestOf(t=>t.direction)],
+    ['Best Day',bestOf(t=>t.entryDateTime?dowNames[new Date(t.entryDateTime).getDay()]:null)],
+    ['Average Hold Time',avg(closed.map(t=>tradeMetrics(t).durationMs).filter(v=>v!=null))?formatDuration(avg(closed.map(t=>tradeMetrics(t).durationMs).filter(v=>v!=null))):'—'],
+    ['Average R',fmt2(a.avgR)],
+    ['Win Rate',fmt2(a.winRate)+'%'],
+  ];
+  document.getElementById('dnaStats').innerHTML=stats.map(s=>`<div class="ctcc-stat"><div class="v" style="font-size:1rem;">${s[1]}</div><div class="l">${s[0]}</div></div>`).join('');
+}
+
+/* ============ Risk Limits ============ */
+document.getElementById('riskSaveBtn').addEventListener('click',async()=>{
+  RISK_LIMITS={maxDailyLoss:+document.getElementById('riskMaxDailyLoss').value||0,maxTradesDay:+document.getElementById('riskMaxTradesDay').value||0,maxConsecLoss:+document.getElementById('riskMaxConsecLoss').value||0,maxPerTrade:+document.getElementById('riskMaxPerTrade').value||0};
+  await dbPut('meta',{key:'riskLimits',value:RISK_LIMITS});
+  document.getElementById('riskStatus').textContent='✅ Saved.';
+  renderRisk();
+});
+function renderRisk(){
+  document.getElementById('riskMaxDailyLoss').value=RISK_LIMITS.maxDailyLoss||'';
+  document.getElementById('riskMaxTradesDay').value=RISK_LIMITS.maxTradesDay||'';
+  document.getElementById('riskMaxConsecLoss').value=RISK_LIMITS.maxConsecLoss||'';
+  document.getElementById('riskMaxPerTrade').value=RISK_LIMITS.maxPerTrade||'';
+  const today=new Date().toISOString().slice(0,10);
+  const todaysTrades=TRADES.filter(t=>t.entryDateTime && t.entryDateTime.slice(0,10)===today);
+  const a=aggregate(TRADES);
+  document.getElementById('riskStatusGrid').innerHTML=[
+    ['Trades Today',todaysTrades.length+' / '+(RISK_LIMITS.maxTradesDay||'—')],
+    ['Current Loss Streak',a.curType==='loss'?a.curStreak:0],
+    ['Worst Loss Streak',a.worstLossStreak],
+  ].map(s=>`<div class="ctcc-stat"><div class="v">${s[1]}</div><div class="l">${s[0]}</div></div>`).join('');
+}
+
+/* ============ Watchlist ============ */
+document.getElementById('wlSaveBtn').addEventListener('click',async()=>{
+  const asset=document.getElementById('wlAsset').value.trim();
+  if(!asset)return;
+  const editId=document.getElementById('wlEditId').value;
+  const item={id:editId||uid(),asset,bias:document.getElementById('wlBias').value,status:document.getElementById('wlStatus').value,keyLevel:document.getElementById('wlKeyLevel').value,setup:document.getElementById('wlSetup').value,notes:document.getElementById('wlNotes').value};
+  await dbPut('watchlist',item);
+  await loadAll();
+  ['wlAsset','wlKeyLevel','wlSetup','wlNotes'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('wlEditId').value='';
+  renderWatchlist();
+});
+function editWatch(id){
+  const w=WATCHLIST.find(x=>x.id===id); if(!w)return;
+  document.getElementById('wlEditId').value=w.id;
+  document.getElementById('wlAsset').value=w.asset;
+  document.getElementById('wlBias').value=w.bias;
+  document.getElementById('wlStatus').value=w.status;
+  document.getElementById('wlKeyLevel').value=w.keyLevel||'';
+  document.getElementById('wlSetup').value=w.setup||'';
+  document.getElementById('wlNotes').value=w.notes||'';
+}
+async function deleteWatch(id){await dbDelete('watchlist',id);await loadAll();renderWatchlist();}
+function renderWatchlist(){
+  const container=document.getElementById('watchlistList');
+  if(!WATCHLIST.length){container.innerHTML='<div class="ctcc-empty">Watchlist is empty.</div>';return;}
+  container.innerHTML=WATCHLIST.map(w=>`<div class="ctcc-tradecard"><div class="top"><strong>${w.asset}</strong><span class="ctcc-badge" style="background:rgba(59,130,246,.15);color:#60a5fa;">${w.status}</span></div><div class="ctcc-note">Bias: ${w.bias} · Key Level: ${w.keyLevel||'—'} · Setup: ${w.setup||'—'}</div>${w.notes?'<div class="ctcc-note">'+w.notes+'</div>':''}<div class="ctcc-row" style="margin-top:6px;"><button class="ctcc-btn ghost" onclick="editWatch('${w.id}')">Edit</button><button class="ctcc-btn ghost" onclick="deleteWatch('${w.id}')">Delete</button></div></div>`).join('');
+}
+
+/* ============ Backup & Restore ============ */
+document.getElementById('exportJsonBtn').addEventListener('click',()=>{
+  const backup={trades:TRADES,setups:SETUPS,watchlist:WATCHLIST,plans:PLANS,riskLimits:RISK_LIMITS,settings:SETTINGS,exportedAt:new Date().toISOString()};
+  downloadFile('ctcc-backup-'+Date.now()+'.json',JSON.stringify(backup,null,2),'application/json');
+});
+document.getElementById('exportCsvBtn').addEventListener('click',()=>{
+  const headers=['Date','Asset','Direction','Setup','Session','Entry','Exit','NetPL','R','Result'];
+  const rows=TRADES.map(t=>{const m=tradeMetrics(t);const setupName=SETUPS.find(s=>s.id===t.setupId)?.name||'';return [t.entryDateTime||'',t.asset||'',t.direction||'',setupName,t.session||'',t.entryPrice||'',t.exitPrice||'',fmt2(m.netPL),fmt2(m.rMultiple),m.result];});
+  const csv=[headers.join(','),...rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(','))].join('\n');
+  downloadFile('ctcc-trades-'+Date.now()+'.csv',csv,'text/csv');
+});
+function downloadFile(name,content,type){
+  const blob=new Blob([content],{type});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download=name; a.click(); URL.revokeObjectURL(url);
+}
+document.getElementById('importBtn').addEventListener('click',async()=>{
+  const file=document.getElementById('importFile').files[0];
+  if(!file){document.getElementById('backupStatus').textContent='Pehle file select karein.';return;}
+  try{
+    const text=await file.text();
+    const data=JSON.parse(text);
+    const mode=document.getElementById('importMode').value;
+    if(mode==='replace'){ await dbClear('trades'); await dbClear('setups'); await dbClear('watchlist'); await dbClear('plans'); }
+    for(const t of (data.trades||[]))await dbPut('trades',t);
+    for(const s of (data.setups||[]))await dbPut('setups',s);
+    for(const w of (data.watchlist||[]))await dbPut('watchlist',w);
+    for(const p of (data.plans||[]))await dbPut('plans',p);
+    if(data.riskLimits)await dbPut('meta',{key:'riskLimits',value:data.riskLimits});
+    if(data.settings)await dbPut('meta',{key:'settings',value:data.settings});
+    await loadAll();
+    document.getElementById('backupStatus').textContent='✅ Import successful.';
+    renderAll(); fillSetupSelect();
+  }catch(e){
+    document.getElementById('backupStatus').textContent='❌ Invalid backup file: '+e.message;
+  }
+});
+document.getElementById('clearAllBtn').addEventListener('click',async()=>{
+  if(!confirm('This will permanently delete ALL your trading journal data on this device. Continue?'))return;
+  if(!confirm('Are you absolutely sure? This cannot be undone.'))return;
+  await dbClear('trades'); await dbClear('setups'); await dbClear('watchlist'); await dbClear('plans');
+  await loadAll();
+  renderAll(); fillSetupSelect();
+  document.getElementById('backupStatus').textContent='All data cleared.';
+});
+
+/* ============ Settings ============ */
+document.getElementById('setSaveBtn').addEventListener('click',async()=>{
+  SETTINGS={accountSize:+document.getElementById('setAccountSize').value||1000};
+  await dbPut('meta',{key:'settings',value:SETTINGS});
+  document.getElementById('setStatus').textContent='✅ Saved.';
+});
+
+/* ============ AI Settings (localStorage only — small prefs) ============ */
+function getAiSettings(){return {apiKey:localStorage.getItem('ctcc_gemini_key')||'',model:localStorage.getItem('ctcc_gemini_model')||'gemini-3.6-flash'};}
+function renderAiSettingsUI(){
+  const s=getAiSettings();
+  document.getElementById('aiModel').value=s.model;
+  document.getElementById('aiApiKey').value='';
+  document.getElementById('aiApiKey').placeholder = s.apiKey ? (s.apiKey.slice(0,4)+'••••••••'+s.apiKey.slice(-4)) : 'AIza...';
+  refreshCopilotAvailability();
+}
+function refreshCopilotAvailability(){
+  const s=getAiSettings();
+  const has = !!s.apiKey;
+  document.getElementById('copilotNoKey').style.display = has ? 'none' : 'block';
+  document.getElementById('copilotBody').style.display = has ? 'block' : 'none';
+}
+document.getElementById('aiSaveBtn').addEventListener('click',()=>{
+  const key=document.getElementById('aiApiKey').value.trim();
+  const model=document.getElementById('aiModel').value.trim()||'gemini-3.6-flash';
+  if(key)localStorage.setItem('ctcc_gemini_key',key);
+  localStorage.setItem('ctcc_gemini_model',model);
+  document.getElementById('aiSettingsStatus').textContent='✅ Saved to this browser only.';
+  renderAiSettingsUI();
+});
+document.getElementById('aiRemoveKeyBtn').addEventListener('click',()=>{
+  localStorage.removeItem('ctcc_gemini_key');
+  document.getElementById('aiSettingsStatus').textContent='API key removed from this browser.';
+  renderAiSettingsUI();
+});
+document.getElementById('aiResetBtn').addEventListener('click',()=>{
+  localStorage.removeItem('ctcc_gemini_key');
+  localStorage.removeItem('ctcc_gemini_model');
+  document.getElementById('aiSettingsStatus').textContent='AI settings reset.';
+  renderAiSettingsUI();
+});
+document.getElementById('aiTestBtn').addEventListener('click',async()=>{
+  const key=document.getElementById('aiApiKey').value.trim()||getAiSettings().apiKey;
+  const model=document.getElementById('aiModel').value.trim()||getAiSettings().model;
+  if(!key){document.getElementById('aiSettingsStatus').textContent='❌ Enter an API key first.';return;}
+  document.getElementById('aiSettingsStatus').textContent='Testing...';
+  try{
+    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,{
+      method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},
+      body:JSON.stringify({contents:[{role:'user',parts:[{text:'Reply with OK only.'}]}]})
+    });
+    if(res.ok){document.getElementById('aiSettingsStatus').textContent='✅ Connected successfully.';}
+    else{const t=await res.text();document.getElementById('aiSettingsStatus').textContent='❌ '+res.status+': '+t.slice(0,150);}
+  }catch(e){document.getElementById('aiSettingsStatus').textContent='❌ '+e.message;}
+});
+document.getElementById('aiRefreshModelsBtn').addEventListener('click',async()=>{
+  const key=document.getElementById('aiApiKey').value.trim()||getAiSettings().apiKey;
+  if(!key){document.getElementById('aiSettingsStatus').textContent='❌ Enter an API key first.';return;}
+  document.getElementById('aiSettingsStatus').textContent='Fetching models...';
+  try{
+    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${key}`);
+    const data=await res.json();
+    const models=(data.models||[]).filter(m=>(m.supportedGenerationMethods||[]).includes('generateContent'));
+    const sel=document.getElementById('aiModelSelect');
+    sel.innerHTML=models.map(m=>{const name=m.name.replace('models/','');return `<option value="${name}">${name}</option>`;}).join('');
+    document.getElementById('aiModelListWrap').style.display=models.length?'block':'none';
+    document.getElementById('aiSettingsStatus').textContent=models.length?`✅ ${models.length} models found.`:'No compatible models found.';
+    sel.addEventListener('change',()=>{document.getElementById('aiModel').value=sel.value;});
+  }catch(e){document.getElementById('aiSettingsStatus').textContent='❌ '+e.message;}
+});
+
+/* ============ Gemini caller ============ */
+async function callGemini(promptText,parts){
+  const s=getAiSettings();
+  if(!s.apiKey)throw new Error('Pehle Settings mein apni Gemini API key daalein.');
+  const body={contents:[{role:'user',parts:parts||[{text:promptText}]}]};
+  const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${s.model}:generateContent`,{
+    method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':s.apiKey},body:JSON.stringify(body)
+  });
+  if(!res.ok){const t=await res.text();throw new Error(`AI error (${res.status}): ${t.slice(0,300)}`);}
+  const data=await res.json();
+  const parts2=(data.candidates&&data.candidates[0]&&data.candidates[0].content&&data.candidates[0].content.parts)||[];
+  const text=parts2.map(p=>p.text||'').join('');
+  if(!text)throw new Error('AI ne khaali jawab diya.');
+  return text;
+}
+const AI_SYSTEM_RULES='You are a trading journal analysis assistant. Never give guaranteed predictions, promise profitability, or claim certainty about future price (e.g. never say "next time BUY"). Distinguish observed facts from interpretation — prefer phrases like "Your journal suggests..." over absolute claims. Never fabricate missing data. If sample size is small, say so explicitly. This is for personal record-keeping and education only, not financial advice.';
+
+async function runCopilot(btnId,errId,resultId,promptBuilder,extraParts){
+  const btn=document.getElementById(btnId);
+  const err=document.getElementById(errId);
+  const result=document.getElementById(resultId);
+  err.innerHTML=''; result.style.display='none';
+  const oldLabel=btn.textContent;
+  btn.disabled=true; btn.textContent='Thinking...';
+  try{
+    const prompt=await promptBuilder();
+    const parts=[{text:AI_SYSTEM_RULES+'\n\n'+prompt}];
+    if(extraParts)parts.push(...extraParts);
+    const answer=await callGemini(null,parts);
+    result.textContent=answer;
+    result.style.display='block';
+  }catch(e){
+    err.innerHTML='<div class="ctcc-err">'+e.message+'</div>';
+  }finally{
+    btn.disabled=false; btn.textContent=oldLabel;
+  }
+}
+
+/* ---- Copilot sub-tabs ---- */
+document.querySelectorAll('.ctcc-subtab[data-csub]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#copilotSubtabs .ctcc-subtab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.ctcc-copilotpanel').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById('cp-'+b.dataset.csub).classList.add('active');
+  });
+});
+
+function fillTradeSelects(){
+  const opts='<option value="">— Select a trade —</option>'+TRADES.map(t=>{const m=tradeMetrics(t);return `<option value="${t.id}">${t.asset} · ${t.direction} · ${t.entryDateTime?t.entryDateTime.slice(0,10):'—'} · ${m.hasExit?fmt2(m.rMultiple)+'R':'OPEN'}</option>`;}).join('');
+  document.getElementById('cpReviewTrade').innerHTML=opts;
+  document.getElementById('cpRuleTrade').innerHTML=opts;
+  document.getElementById('hypSetup').innerHTML='<option value="">Any</option>'+SETUPS.map(s=>`<option value="${s.id}">${s.name}</option>`).join('');
+}
+
+/* ---- 1. AI Trade Review ---- */
+document.getElementById('cpReviewTrade').addEventListener('change',function(){
+  const t=TRADES.find(x=>x.id===this.value);
+  document.getElementById('cpScreenshotBtn').style.display = (t && t.screenshots && t.screenshots.length) ? 'inline-block' : 'none';
+});
+document.getElementById('cpReviewBtn').addEventListener('click',()=>{
+  runCopilot('cpReviewBtn','cpReviewErr','cpReviewResult',async()=>{
+    const id=document.getElementById('cpReviewTrade').value;
+    const t=TRADES.find(x=>x.id===id);
+    if(!t)throw new Error('Pehle koi trade select karein.');
+    const m=tradeMetrics(t);
+    const setupName=SETUPS.find(s=>s.id===t.setupId)?.name||'None';
+    const r=t.review||{};
+    return `Analyze this single trade and output four sections: What Went Well, Plan Deviations, Possible Improvements, Questions to Consider.\n\nAsset: ${t.asset}\nDirection: ${t.direction}\nSetup: ${setupName}\nEntry: ${t.entryPrice} Exit: ${t.exitPrice||'open'}\nResult: ${m.result} (${fmt2(m.rMultiple)}R, ${fmtMoney(m.netPL)})\nReason for entry: ${t.reason||'—'}\nNotes: ${t.notes||'—'}\nWhy entered (review): ${r.whyEnter||'—'}\nInvalidation: ${r.invalidation||'—'}\nExpected: ${r.expected||'—'}\nLearned: ${r.learned||'—'}\nChecklist completed: ${(r.checklist||[]).join(', ')||'none'}\nMistake tags: ${(t.mistakeTags||[]).join(', ')||'none'}`;
+  });
+});
+document.getElementById('cpScreenshotBtn').addEventListener('click',()=>{
+  runCopilot('cpScreenshotBtn','cpReviewErr','cpReviewResult',async()=>{
+    return 'Describe the visible chart structure in this trade screenshot in plain terms, compare it briefly with the trade notes/setup if relevant, and state your uncertainty clearly. Never turn this into a buy/sell signal.';
+  },(()=>{
+    const t=TRADES.find(x=>x.id===document.getElementById('cpReviewTrade').value);
+    if(!t||!t.screenshots||!t.screenshots.length)return [];
+    const shot=t.screenshots[0];
+    const base64=shot.data.split(',')[1];
+    const mime=shot.data.split(';')[0].split(':')[1];
+    return [{inline_data:{mime_type:mime,data:base64}}];
+  })());
+});
+
+/* ---- 2. Ask My Journal ---- */
+document.getElementById('cpAskBtn').addEventListener('click',()=>{
+  runCopilot('cpAskBtn','cpAskErr','cpAskResult',async()=>{
+    const q=document.getElementById('cpAskInput').value.trim();
+    if(!q)throw new Error('Pehle apna sawal likhein.');
+    const a=aggregate(TRADES);
+    const mistakeCounts={};
+    TRADES.forEach(t=>(t.mistakeTags||[]).forEach(tag=>mistakeCounts[tag]=(mistakeCounts[tag]||0)+1));
+    const bySetup=groupBy(TRADES.filter(t=>tradeMetrics(t).hasExit),t=>SETUPS.find(s=>s.id===t.setupId)?.name);
+    const bySession=groupBy(TRADES.filter(t=>tradeMetrics(t).hasExit),t=>t.session);
+    const setupSummary=Object.entries(bySetup).map(([k,l])=>{const g=aggregate(l);return `${k}: ${g.totalTrades} trades, ${fmt2(g.winRate)}% WR, ${fmt2(g.totalR)} total R`;}).join('; ');
+    const sessionSummary=Object.entries(bySession).map(([k,l])=>{const g=aggregate(l);return `${k}: ${g.totalTrades} trades, ${fmt2(g.winRate)}% WR, ${fmt2(g.totalR)} total R`;}).join('; ');
+    return `Answer the user's question using ONLY this local journal summary (never invent numbers not shown here).\n\nOverall: ${a.totalTrades} trades, Win Rate ${fmt2(a.winRate)}%, Avg R ${fmt2(a.avgR)}, Total R ${fmt2(a.totalR)}, Profit Factor ${fmt2(a.profitFactor)}, Expectancy ${fmt2(a.expectancy)}R.\nBy setup: ${setupSummary||'no data'}\nBy session: ${sessionSummary||'no data'}\nMistake tag counts: ${JSON.stringify(mistakeCounts)}\n\nUser's question: ${q}`;
+  });
+});
+
+/* ---- 3. Trading DNA Coach ---- */
+document.getElementById('cpDnaBtn').addEventListener('click',()=>{
+  runCopilot('cpDnaBtn','cpDnaErr','cpDnaResult',async()=>{
+    const closed=TRADES.filter(t=>tradeMetrics(t).hasExit);
+    if(closed.length<5)throw new Error('Insufficient data — log at least 5 closed trades for meaningful DNA coaching.');
+    const a=aggregate(TRADES);
+    function bestOf(keyFn){const g=groupBy(closed,keyFn);const rows=Object.entries(g).map(([k,l])=>({k,tR:aggregate(l).totalR||0}));return rows.length?rows.sort((x,y)=>y.tR-x.tR)[0].k:'—';}
+    const mistakeCounts={}; TRADES.forEach(t=>(t.mistakeTags||[]).forEach(tag=>mistakeCounts[tag]=(mistakeCounts[tag]||0)+1));
+    const topMistake=Object.entries(mistakeCounts).sort((a,b)=>b[1]-a[1])[0];
+    return `Using this Trading DNA summary, explain strengths, recurring weaknesses, repeated behaviors, areas to review, and questions to investigate. Never promise profitability or predict returns.\n\nBest Setup: ${bestOf(t=>SETUPS.find(s=>s.id===t.setupId)?.name)}\nBest Asset: ${bestOf(t=>t.asset)}\nBest Session: ${bestOf(t=>t.session)}\nBest Direction: ${bestOf(t=>t.direction)}\nTop Mistake: ${topMistake?topMistake[0]+' ('+topMistake[1]+'x)':'none tagged'}\nWin Rate: ${fmt2(a.winRate)}%\nAverage R: ${fmt2(a.avgR)}\nMax Drawdown: ${fmt2(a.maxDD)}R\nSample size: ${closed.length} closed trades`;
+  });
+});
+
+/* ---- 4. Mistake Analysis ---- */
+document.getElementById('cpMistakeBtn').addEventListener('click',()=>{
+  runCopilot('cpMistakeBtn','cpMistakeErr','cpMistakeResult',async()=>{
+    const counts={};
+    TRADES.forEach(t=>{(t.mistakeTags||[]).forEach(tag=>{if(!counts[tag])counts[tag]={count:0,rSum:0};const m=tradeMetrics(t);counts[tag].count++;if(m.hasExit)counts[tag].rSum+=(m.rMultiple||0);});});
+    if(!Object.keys(counts).length)throw new Error('No mistakes tagged yet — review some trades first.');
+    const summary=Object.entries(counts).map(([k,d])=>`${k}: ${d.count} times, ${fmt2(d.rSum)} total R impact`).join('; ');
+    return `Based on this mistake-tag summary from the user's journal, identify their biggest trading leak. Use "Your journal suggests..." phrasing, distinguish fact from interpretation.\n\n${summary}`;
+  });
+});
+
+/* ---- 5. Daily Review ---- */
+document.getElementById('cpDailyDate').valueAsDate=new Date();
+document.getElementById('cpDailyBtn').addEventListener('click',()=>{
+  runCopilot('cpDailyBtn','cpDailyErr','cpDailyResult',async()=>{
+    const date=document.getElementById('cpDailyDate').value;
+    const dayTrades=TRADES.filter(t=>t.entryDateTime&&t.entryDateTime.slice(0,10)===date);
+    if(!dayTrades.length)throw new Error('No trades logged on this date.');
+    const a=aggregate(dayTrades);
+    const mistakes=[]; dayTrades.forEach(t=>(t.mistakeTags||[]).forEach(m=>mistakes.push(m)));
+    const reflection=document.getElementById('cpDailyReflection').value;
+    return `Give a concise daily review: what worked, what went wrong, recurring mistakes, plan adherence, and one improvement focus for tomorrow.\n\nDate: ${date}\nTrades: ${a.totalTrades}, Win Rate: ${fmt2(a.winRate)}%, Total R: ${fmt2(a.totalR)}\nMistakes today: ${mistakes.join(', ')||'none tagged'}\nUser reflection: ${reflection||'none provided'}`;
+  });
+});
+
+/* ---- 6. Weekly Review ---- */
+document.getElementById('cpWeeklyBtn').addEventListener('click',()=>{
+  runCopilot('cpWeeklyBtn','cpWeeklyErr','cpWeeklyResult',async()=>{
+    const now=new Date(); const weekAgo=new Date(now-7*86400000);
+    const weekTrades=TRADES.filter(t=>t.entryDateTime&&new Date(t.entryDateTime)>=weekAgo);
+    if(!weekTrades.length)throw new Error('No trades logged in the last 7 days.');
+    const a=aggregate(weekTrades);
+    const mistakes=[]; weekTrades.forEach(t=>(t.mistakeTags||[]).forEach(m=>mistakes.push(m)));
+    const reflection=document.getElementById('cpWeeklyReflection').value;
+    return `Give a concise weekly review: what worked, what went wrong, recurring mistakes, plan adherence, and one improvement focus for next week.\n\nTrades this week: ${a.totalTrades}, Win Rate: ${fmt2(a.winRate)}%, Total R: ${fmt2(a.totalR)}, Profit Factor: ${fmt2(a.profitFactor)}\nMistakes this week: ${mistakes.join(', ')||'none tagged'}\nUser reflection: ${reflection||'none provided'}`;
+  });
+});
+
+/* ---- 7. Setup Rule Checker ---- */
+document.getElementById('cpRuleBtn').addEventListener('click',()=>{
+  runCopilot('cpRuleBtn','cpRuleErr','cpRuleResult',async()=>{
+    const id=document.getElementById('cpRuleTrade').value;
+    const t=TRADES.find(x=>x.id===id);
+    if(!t)throw new Error('Pehle koi trade select karein.');
+    const setup=SETUPS.find(s=>s.id===t.setupId);
+    if(!setup)throw new Error('This trade has no setup assigned.');
+    const r=t.review||{};
+    return `Compare this trade's data against the setup's rules. For EACH rule, output a status: Met, Not Met, or Unknown. Never assume missing information — mark Unknown if the data does not clearly say.\n\nSetup rules:\n${setup.rules.map((rule,i)=>(i+1)+'. '+rule).join('\n')}\n\nTrade reason: ${t.reason||'—'}\nTrade notes: ${t.notes||'—'}\nWhy entered: ${r.whyEnter||'—'}\nChecklist completed: ${(r.checklist||[]).join(', ')||'none'}`;
+  });
+});
+
+/* ---- 8. Hypothesis Lab ---- */
+document.getElementById('hypCalcBtn').addEventListener('click',()=>{
+  const asset=document.getElementById('hypAsset').value.trim().toLowerCase();
+  const session=document.getElementById('hypSession').value;
+  const setupId=document.getElementById('hypSetup').value;
+  const direction=document.getElementById('hypDirection').value;
+  let matching=TRADES.filter(t=>tradeMetrics(t).hasExit);
+  if(asset)matching=matching.filter(t=>(t.asset||'').toLowerCase().includes(asset));
+  if(session)matching=matching.filter(t=>t.session===session);
+  if(setupId)matching=matching.filter(t=>t.setupId===setupId);
+  if(direction)matching=matching.filter(t=>t.direction===direction);
+  const a=aggregate(matching);
+  window._hypLastSummary = {asset,session,setupId,direction,a,n:matching.length};
+  document.getElementById('hypLocalResult').innerHTML = matching.length
+    ? `<div class="ctcc-grid" style="margin-top:10px;"><div class="ctcc-stat"><div class="v">${a.totalTrades}</div><div class="l">Sample Size</div></div><div class="ctcc-stat"><div class="v">${fmt2(a.winRate)}%</div><div class="l">Win Rate</div></div><div class="ctcc-stat"><div class="v ${cls(a.avgR)}">${fmt2(a.avgR)}</div><div class="l">Avg R</div></div><div class="ctcc-stat"><div class="v ${cls(a.totalR)}">${fmt2(a.totalR)}</div><div class="l">Total R</div></div><div class="ctcc-stat"><div class="v">${fmt2(a.maxDD)}R</div><div class="l">Max Drawdown</div></div></div>${matching.length<10?'<p class="ctcc-note">⚠️ Small sample size — interpret with caution.</p>':''}`
+    : '<div class="ctcc-empty">No trades match this filter.</div>';
+  document.getElementById('hypAiBtn').style.display = matching.length ? 'inline-block' : 'none';
+});
+document.getElementById('hypAiBtn').addEventListener('click',()=>{
+  runCopilot('hypAiBtn','cpHypErr','cpHypResult',async()=>{
+    const h=window._hypLastSummary;
+    if(!h)throw new Error('Calculate locally first.');
+    const setupName=h.setupId?(SETUPS.find(s=>s.id===h.setupId)?.name||''):'';
+    return `Interpret this local statistical result for a trading hypothesis. Do not claim causation, do not make future predictions — describe only what the historical sample shows, and flag if the sample size is too small to be meaningful.\n\nFilter: Asset contains "${h.asset||'any'}", Session=${h.session||'any'}, Setup=${setupName||'any'}, Direction=${h.direction||'any'}\nSample size: ${h.n}\nWin Rate: ${fmt2(h.a.winRate)}%\nAverage R: ${fmt2(h.a.avgR)}\nTotal R: ${fmt2(h.a.totalR)}\nMax Drawdown: ${fmt2(h.a.maxDD)}R`;
+  });
+});
+
+/* ============ Master Render ============ */
+function renderAll(){
+  renderDashboard();
+  renderPlanHistory();
+  renderJournal();
+  renderSetups();
+  renderMistakes();
+  renderCalendar();
+  renderPerformance();
+  renderRisk();
+  renderWatchlist();
+  document.getElementById('setAccountSize').value=SETTINGS.accountSize;
+  fillTradeSelects();
+}
+
+(async function init(){
+  await openDB();
+  await loadAll();
+  fillSetupSelect();
+  renderAiSettingsUI();
+  renderAll();
+})();
+</script>
+<script src="script.js"></script>
+</body></html>
