@@ -35,6 +35,7 @@
 
 <div class="card" id="pstep01">
 <h2>01 — Country &amp; Location</h2>
+<details style="margin:14px 0;border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:#fffdf6;"><summary style="cursor:pointer;font-weight:700;color:var(--grove);">✨ AI Boost (Optional) — use your own free Gemini key</summary><p style="font-size:.8rem;color:#8a8a75;margin:8px 0;">Paste your own free Google Gemini API key once — it works across all AI-enabled ToolNest tools, stays only in this browser, never uploaded. Used later to review your generated rent agreement draft.</p><div class="row"><div class="field"><label class="field-label" for="tnAiKey">Gemini API Key</label><input type="password" id="tnAiKey" placeholder="AIza..."></div><div class="field"><label class="field-label" for="tnAiModel">Model</label><input type="text" id="tnAiModel" value="gemini-3.6-flash"></div></div><div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:4px;"><button class="secondary" id="tnAiSaveBtn" type="button">Save Key</button><button class="secondary" id="tnAiRemoveBtn" type="button">🗑️ Remove Key</button><span id="tnAiStatus" style="font-size:.8rem;color:#8a8a75;"></span></div></details>
 <p class="desc">This sets the terminology, currency, and checklist structure used throughout. Legal/tax rates are never assumed — you'll enter your own current local rate wherever one is needed.</p>
 <div class="row"><div class="field"><label class="field-label" for="psCountry">Country</label><select id="psCountry"><option value="pakistan">Pakistan</option><option value="india">India</option><option value="other">Custom / Other Country</option></select></div><div class="field"><label class="field-label" for="psRegion">Province / State</label><select id="psRegion"></select></div><div class="field hidden" id="psCustomCountryWrap"><label class="field-label" for="psCustomCountry">Country Name</label><input type="text" id="psCustomCountry" placeholder="Enter your country"></div><div class="field"><label class="field-label" for="psCity">City / District</label><input type="text" id="psCity" placeholder="e.g. Lahore, Mumbai"></div></div>
 <div class="row"><div class="field"><label class="field-label" for="psLanguage">Document Language</label><select id="psLanguage"><option value="en">English</option><option value="ur">اردو (Urdu)</option><option value="hi">हिन्दी (Hindi)</option><option value="en_ur">English + اردو</option><option value="en_hi">English + हिन्दी</option><option value="custom">Custom / Local Language</option></select></div><div class="field hidden" id="psCustomLangWrap"><label class="field-label" for="psCustomLang">Language Name</label><input type="text" id="psCustomLang" placeholder="e.g. Punjabi, Bengali, Sindhi"></div><div class="field"><label class="field-label" for="psCurrency">Currency</label><select id="psCurrency"><option value="PKR">PKR</option><option value="INR">INR</option><option value="OTHER">Custom</option></select></div></div>
@@ -104,7 +105,9 @@
 <button type="button" class="secondary" id="raGenerateBtn" style="margin-top:10px;">✨ Generate Draft</button>
 <div id="raDraftBox" class="hidden" style="margin-top:14px;">
 <div class="ps-doc-preview" id="raDraftPreview"></div>
-<div class="row" style="margin-top:12px;"><button type="button" class="secondary" id="raCopyBtn">📋 Copy</button><button type="button" class="secondary" id="raPrintBtn">🖨️ Print</button><button type="button" class="secondary" id="raDownloadBtn">⬇ Download</button></div>
+<div class="row" style="margin-top:12px;"><button type="button" class="secondary" id="raCopyBtn">📋 Copy</button><button type="button" class="secondary" id="raPrintBtn">🖨️ Print</button><button type="button" class="secondary" id="raDownloadBtn">⬇ Download</button><button type="button" class="secondary" id="raAiReviewBtn">✨ AI Review This Draft</button></div>
+<div id="raAiErr"></div>
+<div id="raAiResult" style="display:none;white-space:pre-wrap;line-height:1.7;font-size:.9rem;background:#fffdf6;border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px;"></div>
 </div>
 </div>
 
@@ -681,4 +684,25 @@ document.addEventListener('DOMContentLoaded',function(){
 
 });
 })();
-</script><script src="script.js"></script></body></html>
+</script><script>
+function tnGetAiSettings(){return {apiKey:localStorage.getItem('toolnest_gemini_key')||'',model:localStorage.getItem('toolnest_gemini_model')||'gemini-3.6-flash'};}
+(function(){var s=tnGetAiSettings();document.getElementById('tnAiModel').value=s.model;document.getElementById('tnAiKey').placeholder=s.apiKey?(s.apiKey.slice(0,4)+'\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'+s.apiKey.slice(-4)):'AIza...';})();
+document.getElementById('tnAiSaveBtn').addEventListener('click',function(){var key=document.getElementById('tnAiKey').value.trim();var model=document.getElementById('tnAiModel').value.trim()||'gemini-3.6-flash';if(key)localStorage.setItem('toolnest_gemini_key',key);localStorage.setItem('toolnest_gemini_model',model);document.getElementById('tnAiStatus').textContent='\u2705 Saved to this browser.';document.getElementById('tnAiKey').value='';var s=tnGetAiSettings();document.getElementById('tnAiKey').placeholder=s.apiKey?(s.apiKey.slice(0,4)+'\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'+s.apiKey.slice(-4)):'AIza...';});
+document.getElementById('tnAiRemoveBtn').addEventListener('click',function(){localStorage.removeItem('toolnest_gemini_key');localStorage.removeItem('toolnest_gemini_model');document.getElementById('tnAiKey').value='';document.getElementById('tnAiKey').placeholder='AIza...';document.getElementById('tnAiModel').value='gemini-3.6-flash';document.getElementById('tnAiStatus').textContent='\u2705 Key removed from this browser.';});
+async function tnCallGemini(promptText,jsonMode){var s=tnGetAiSettings();if(!s.apiKey)throw new Error('Pehle upar "AI Boost" mein apni free Gemini API key daalein.');var body={contents:[{role:'user',parts:[{text:promptText}]}]};if(jsonMode)body.generationConfig={responseMimeType:'application/json'};var res=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+s.model+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':s.apiKey},body:JSON.stringify(body)});if(!res.ok){var t=await res.text();throw new Error('AI error ('+res.status+'): '+t.slice(0,200));}var data=await res.json();var parts=(data.candidates&&data.candidates[0]&&data.candidates[0].content&&data.candidates[0].content.parts)||[];var text=parts.map(function(p){return p.text||'';}).join('');if(!text)throw new Error('AI ne khaali jawab diya.');return text;}
+document.getElementById('raAiReviewBtn').addEventListener('click', async function(){
+  var draftText=document.getElementById('raDraftPreview').innerText.trim();
+  var errBox=document.getElementById('raAiErr'); var resBox=document.getElementById('raAiResult');
+  errBox.innerHTML=''; resBox.style.display='none';
+  if(!draftText){errBox.innerHTML='<div style="color:#c0392b;font-size:.85rem;margin-top:8px;">Generate the draft first.</div>';return;}
+  var btn=this; var old=btn.textContent; btn.disabled=true; btn.textContent='Reviewing...';
+  try{
+    var prompt='Review this rent agreement draft in plain language. Summarize the key terms (rent, deposit, duration, notice period), and list 3-5 things the reader should double check or discuss with the other party before signing. This is not legal advice and does not confirm legal validity — state that clearly.\n\nDraft:\n'+draftText;
+    var answer=await tnCallGemini(prompt,false);
+    resBox.textContent=answer;
+    resBox.style.display='block';
+  }catch(e){ errBox.innerHTML='<div style="color:#c0392b;font-size:.85rem;margin-top:8px;">'+e.message+'</div>'; }
+  btn.disabled=false; btn.textContent=old;
+});
+</script>
+<script src="script.js"></script></body></html>
