@@ -44,3 +44,9 @@
 .skip-link:focus{left:0}
 .home-hint{font-size:.55rem;font-weight:600;opacity:.65;color:#f2ecd8;background:rgba(255,255,255,.12);padding:2px 7px;border-radius:10px;letter-spacing:.02em;white-space:nowrap}
 .brand-row:hover .home-hint{opacity:1}
+
+/* Batch 1 - footer legal nav */
+.foot-legal{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin:10px 0 6px}
+.foot-legal a{font-size:.82rem;opacity:.9;text-decoration:none}
+.foot-legal a:hover,.foot-legal a:focus{text-decoration:underline;opacity:1}
+@media(max-width:480px){.foot-legal{gap:6px 12px}.foot-legal a{font-size:.78rem}}
