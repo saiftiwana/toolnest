@@ -1,0 +1,666 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta name="google-adsense-account" content="ca-pub-7690733672429028"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Free AI Study Helper – Matric, FSc & CSS Prep | ToolNest</title><meta name="description" content="Free AI study assistant for Class 9-12 and CSS prep — mock exams, precis, essay, vocabulary practice. Your own free API key, no sign-up, nothing uploaded."><link rel="canonical" href="https://toolnest.link/ai-study-helper.html"><meta property="og:title" content="Free AI Study Helper for Matric, FSc & CSS Prep | ToolNest"><meta property="og:description" content="Free AI-powered study tool: homework help, mock exam generator, CSS precis & essay practice. Your own free API key — nothing uploaded, no sign-up."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/ai-study-helper.html"><meta property="og:image" content="https://toolnest.link/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Free AI Study Helper for Matric, FSc & CSS Prep | ToolNest"><meta name="twitter:description" content="Free AI study assistant — homework help, mock exams, CSS precis & essay practice. No sign-up, your own free API key."><meta name="twitter:image" content="https://toolnest.link/og-image.png"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css">
+<style>
+.sh-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.sh-tab{background:#fffdf6;border:1px solid var(--line);color:var(--grove);padding:9px 16px;border-radius:999px;cursor:pointer;font-weight:600;font-size:.88rem}
+.sh-tab.active{background:var(--grove);color:#fff;border-color:var(--grove)}
+[data-theme=dark] .sh-tab{background:#1a231c;color:var(--kinno-bright)}
+[data-theme=dark] .sh-tab.active{background:var(--kinno);color:#fff;border-color:var(--kinno)}
+.sh-section{display:none}
+.sh-section.active{display:block}
+.sh-csstabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.sh-csstab{background:transparent;border:1px solid var(--line);color:var(--ink);padding:6px 12px;border-radius:8px;cursor:pointer;font-size:.8rem}
+.sh-csstab.active{background:var(--kinno);color:#fff;border-color:var(--kinno)}
+.sh-csspanel{display:none}
+.sh-csspanel.active{display:block}
+.sh-result{white-space:pre-wrap;line-height:1.7;font-size:.92rem;background:#fffdf6;border:1px solid var(--line);border-radius:10px;padding:16px;margin-top:14px}
+[data-theme=dark] .sh-result{background:#1a231c}
+.result-panel{display:none}
+.sh-resultbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.sh-mcq{border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:8px;background:#fffdf6}
+[data-theme=dark] .sh-mcq{background:#1a231c}
+.sh-opt{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:8px 10px;margin-top:6px;cursor:pointer;font-size:.85rem}
+.sh-opt.correct{background:#dff3e3;border-color:#2f9e52;color:#1f6b36}
+.sh-opt.wrong{background:#fbe1e1;border-color:#c0392b;color:#9c2a20}
+.sh-note{font-size:.8rem;color:#8a8a75;margin-top:4px}
+.sh-error{background:#fbe1e1;color:#9c2a20;border:1px solid #e0a3a3;border-radius:8px;padding:10px 12px;margin-top:10px;font-size:.88rem}
+.sh-settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.sh-settings-grid{grid-template-columns:1fr}}
+.sh-badge{display:inline-block;background:#dff3e3;color:#1f6b36;border-radius:999px;padding:2px 10px;font-size:.75rem;font-weight:700;margin-left:6px}
+.sh-mode{background:#f0dcc4;border:1px solid var(--line);color:var(--grove)}
+.sh-mode.active{background:var(--grove);color:#fff;border-color:var(--grove)}
+[data-theme=dark] .sh-mode{background:#2a3a2e;color:var(--kinno-bright);border-color:var(--line)}
+[data-theme=dark] .sh-mode.active{background:var(--kinno);color:#fff;border-color:var(--kinno)}
+.sh-flashcard{border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:8px;background:#fffdf6;cursor:pointer}
+[data-theme=dark] .sh-flashcard{background:#1a231c}
+.sh-flashcard .fc-label{font-size:.72rem;color:#8a8a75;text-transform:uppercase;margin-bottom:4px}
+.dropzone-mini{border:2px dashed var(--line);border-radius:10px;padding:16px;text-align:center;font-size:.85rem;color:#8a8a75}
+.sh-card{background:#fffdf6;border:1px solid var(--line);border-radius:14px;padding:20px;margin:18px 0;box-shadow:0 1px 6px rgba(31,61,43,.05)}
+[data-theme=dark] .sh-card{background:#1f2a22;border-color:var(--line)}
+.sh-card h2{color:var(--grove);font-size:1.25rem;margin:0 0 6px}
+[data-theme=dark] .sh-card h2{color:var(--kinno-bright)}
+#mainToolCard{padding-bottom:8px}
+</style>
+</head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html" title="Go to ToolNest homepage" aria-label="ToolNest — go to homepage"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M16 54 Q50 26 84 54" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 67 Q50 42 78 67" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M29 79 Q50 58 71 79" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="79" cy="23" r="20" fill="#e07a2c" stroke="#1f3d2b" stroke-width="3"/><text x="79" y="28.5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span><span class="home-hint" aria-hidden="true">🏠 Home</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>AI Study Helper</h1><p>Matric, FSc &amp; CSS foundation prep — free AI, your own key, nothing uploaded.</p></header><main>
+
+<div class="card" id="mainToolCard">
+<h2 style="text-align:center;">AI Study Helper</h2>
+<div class="sh-card" id="settingsCard"><h2>⚙️ AI Settings</h2><p class="desc">Apni free Google Gemini API key daalein — sirf is browser mein save hoti hai, kabhi kisi server par nahi jati.</p>
+<div class="sh-settings-grid">
+<div class="field"><label class="field-label" for="shApiKey">Gemini API Key</label><input type="password" id="shApiKey" placeholder="AIza..."></div>
+<div class="field"><label class="field-label" for="shModel">Model Name</label><input type="text" id="shModel" value="gemini-3.6-flash"></div>
+</div>
+<div class="row" style="margin-top:12px;"><button id="shSaveSettings">💾 Save AI Settings</button><span class="sh-note" id="shSettingsStatus"></span></div>
+<p class="sh-note" style="margin-top:10px;">Current key: <strong id="shCurrentKey">(not set)</strong> · Current model: <strong id="shCurrentModel">gemini-3.6-flash</strong></p>
+<details style="margin-top:14px;"><summary>🆓 Free Gemini API key kaise banayein?</summary><ol style="line-height:1.9;font-size:.9rem;"><li><strong>aistudio.google.com</strong> kholein aur apne Gmail se sign in karein.</li><li>Left menu mein <strong>"Get API Key"</strong> par tap karein.</li><li><strong>"Create API Key"</strong> dabayein — koi bhi naya project select kar lein jab pooche.</li><li>Key copy karein (<code>AIza...</code> se shuru hogi) aur upar wale box mein paste karein.</li><li><strong>Bilkul free hai</strong> — koi credit card nahi maangi jayegi.</li></ol></details>
+</div>
+
+<div class="sh-tabs"><button class="sh-tab active" data-tab="study">📘 Study Helper</button><button class="sh-tab" data-tab="mock">📝 Mock Exam</button><button class="sh-tab" data-tab="css">🎓 CSS Foundation</button><button class="sh-tab" data-tab="english">📖 Improve English</button><button class="sh-tab" data-tab="upload">📄 Upload &amp; Ask</button><button class="sh-tab" data-tab="flash">🗂️ Flashcards</button></div>
+
+<!-- STUDY HELPER -->
+<div class="sh-section active" id="tab-study"><div class="sh-card"><h2>Study Helper</h2><p class="desc">Class 9-12 (Medical, Non-Medical, ICS) — koi bhi sawal poochein.</p>
+<p class="sh-note">⚠️ Board sirf general guidance ke liye hai — exact textbook ke question number ke liye "Upload &amp; Ask" tool use karein (asal kitab se jawab, guess nahi).</p>
+<div class="row"><div class="field"><label class="field-label" for="studyClass">Class</label><select id="studyClass"><option>Class 9</option><option>Class 10</option><option selected>Class 11</option><option>Class 12</option></select></div>
+<div class="field"><label class="field-label" for="studySubject">Subject</label><select id="studySubject"></select></div>
+<div class="field"><label class="field-label" for="studyBoard">Board</label><select id="studyBoard"><option>Punjab Board</option><option>Sindh Board</option><option>KPK Board</option><option>Balochistan Board</option><option>Federal Board (FBISE)</option><option>Cambridge / O-Level</option><option>Other / Not Sure</option></select></div></div>
+<label class="field-label-block" for="studyQuestion">Question</label><textarea id="studyQuestion" placeholder="e.g. Explain Newton's second law with an example"></textarea>
+<div class="row" id="studySymbols" style="gap:6px;flex-wrap:wrap;margin-top:8px;"></div>
+<label class="field-label-block">Answer Mode</label><div class="row" id="studyModes">
+<button type="button" class="secondary sh-mode active" data-mode="Explain">Explain</button>
+<button type="button" class="secondary sh-mode" data-mode="Solve">Solve</button>
+<button type="button" class="secondary sh-mode" data-mode="Summarize">Summarize</button>
+<button type="button" class="secondary sh-mode" data-mode="Practice">Practice</button>
+<button type="button" class="secondary sh-mode" data-mode="Quiz">Quiz</button>
+</div>
+<div class="row" style="margin-top:14px;"><button id="studyAskBtn">Ask AI</button></div>
+<div id="studyErrorBox"></div>
+<div class="result-panel" id="studyResultPanel"><div class="sh-result" id="studyResult"></div>
+<div class="sh-resultbar"><button class="secondary" data-copy="studyResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('studyResult','study-answer.txt')">⬇️ Download</button><button class="secondary" onclick="window.print()">🖨️ Print / Save PDF</button></div></div>
+</div></div>
+
+<!-- MOCK EXAM -->
+<div class="sh-section" id="tab-mock"><div class="sh-card"><h2>Mock Exam Generator</h2><p class="desc">Board-exam-style model paper — MCQs, Short &amp; Long Questions, marking scheme ke sath. Har baar naya paper.</p>
+<div class="row"><div class="field"><label class="field-label" for="mockClass">Class</label><select id="mockClass"><option>Class 9</option><option>Class 10</option><option selected>Class 11</option><option>Class 12</option></select></div>
+<div class="field"><label class="field-label" for="mockSubject">Subject</label><select id="mockSubject"></select></div></div>
+<div class="row" style="margin-top:14px;"><button id="mockBtn">Generate Mock Exam</button></div>
+<div id="mockErrorBox"></div>
+<div id="mockPaper"></div>
+</div></div>
+
+<!-- CSS FOUNDATION -->
+<div class="sh-section" id="tab-css"><div class="sh-card"><h2>CSS Foundation</h2><p class="desc">English, Essay, Precis, Vocabulary, GK, Current Affairs, Pakistan Affairs, Islamiat, Analytical Thinking, Reading Comprehension, Sentence Correction.</p>
+<div class="sh-csstabs" id="cssTabs">
+<button class="sh-csstab active" data-css="english">English</button>
+<button class="sh-csstab" data-css="essay">Essay Writing</button>
+<button class="sh-csstab" data-css="precis">Precis Writing</button>
+<button class="sh-csstab" data-css="vocab">Vocabulary</button>
+<button class="sh-csstab" data-css="gk">General Knowledge</button>
+<button class="sh-csstab" data-css="current">Current Affairs</button>
+<button class="sh-csstab" data-css="pakaffairs">Pakistan Affairs</button>
+<button class="sh-csstab" data-css="islamiat">Islamiat</button>
+<button class="sh-csstab" data-css="analytical">Analytical Thinking</button>
+<button class="sh-csstab" data-css="reading">Reading Comprehension</button>
+<button class="sh-csstab" data-css="sentcorr">Sentence Correction</button>
+</div>
+
+<div class="sh-csspanel active" id="css-english"><label class="field-label-block" for="cssEnglishQ">Sawal likhein</label><textarea id="cssEnglishQ" placeholder="e.g. Explain the difference between affect and effect"></textarea><div class="row" style="margin-top:10px;"><button onclick="shGenericAsk('English grammar and language for CSS Precis and Composition preparation','cssEnglishQ','cssEnglishResult','cssEnglishErr',this)">Ask</button></div><div id="cssEnglishErr"></div><div class="result-panel" id="cssEnglishPanel"><div class="sh-result" id="cssEnglishResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="cssEnglishResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('cssEnglishResult','english-answer.txt')">⬇️ Download</button></div></div></div>
+
+<div class="sh-csspanel" id="css-essay"><label class="field-label-block" for="cssEssayTopic">Essay Topic</label><div class="row"><input type="text" id="cssEssayTopic" placeholder="e.g. Is technology making us less human?" style="flex:1;"><button class="secondary" onclick="shSuggestTopic()">Suggest Topic</button></div><label class="field-label-block" for="cssEssayOutline">Aapki Outline (thesis + main points)</label><textarea id="cssEssayOutline" placeholder="Thesis, phir 4-6 main points..."></textarea><div class="row" style="margin-top:10px;"><button onclick="shEvaluateEssay()">Check My Outline</button></div><div id="cssEssayErr"></div><div class="result-panel" id="cssEssayPanel"><div class="sh-result" id="cssEssayResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="cssEssayResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('cssEssayResult','essay-feedback.txt')">⬇️ Download</button></div></div></div>
+
+<div class="sh-csspanel" id="css-precis"><div class="row"><button onclick="shGeneratePassage()">Generate Passage</button></div><div id="precisPassageBox"></div><div id="precisFormBox" style="display:none;"><label class="field-label-block" for="precisTitle">Title</label><input type="text" id="precisTitle"><label class="field-label-block" for="precisText">Your Precis</label><textarea id="precisText"></textarea><div class="row" style="margin-top:10px;"><button onclick="shCheckPrecis()">Check My Precis</button></div></div><div id="precisErr"></div><div class="result-panel" id="precisPanel"><div class="sh-result" id="precisResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="precisResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('precisResult','precis-feedback.txt')">⬇️ Download</button></div></div></div>
+
+<div class="sh-csspanel" id="css-vocab"><div class="row"><button onclick="shGenerateVocab()">Get Words</button></div><div id="vocabErr"></div><div id="vocabList"></div></div>
+
+<div class="sh-csspanel" id="css-gk"><label class="field-label-block" for="cssGkQ">Sawal likhein</label><textarea id="cssGkQ" placeholder="e.g. What is the difference between GDP and GNP?"></textarea><div class="row" style="margin-top:10px;"><button onclick="shGenericAsk('General Knowledge topics tested in CSS','cssGkQ','cssGkResult','cssGkErr',this)">Ask</button></div><div id="cssGkErr"></div><div class="result-panel" id="cssGkPanel"><div class="sh-result" id="cssGkResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="cssGkResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('cssGkResult','gk-answer.txt')">⬇️ Download</button></div></div></div>
+
+<div class="sh-csspanel" id="css-current"><label class="field-label-block" for="cssCurrentQ">Sawal likhein</label><textarea id="cssCurrentQ" placeholder="e.g. Explain the significance of CPEC for Pakistan's economy"></textarea><div class="row" style="margin-top:10px;"><button onclick="shGenericAsk('Current Affairs (national and international developments) for CSS preparation','cssCurrentQ','cssCurrentResult','cssCurrentErr',this)">Ask</button></div><div id="cssCurrentErr"></div><div class="result-panel" id="cssCurrentPanel"><div class="sh-result" id="cssCurrentResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="cssCurrentResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('cssCurrentResult','current-affairs-answer.txt')">⬇️ Download</button></div></div></div>
+
+<div class="sh-csspanel" id="css-pakaffairs"><label class="field-label-block" for="cssPakQ">Sawal likhein</label><textarea id="cssPakQ" placeholder="e.g. Explain the significance of the 1973 Constitution"></textarea><div class="row" style="margin-top:10px;"><button onclick="shGenericAsk('Pakistan Affairs (history, politics, geography of Pakistan) for CSS preparation','cssPakQ','cssPakResult','cssPakErr',this)">Ask</button></div><div id="cssPakErr"></div><div class="result-panel" id="cssPakPanel"><div class="sh-result" id="cssPakResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="cssPakResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('cssPakResult','pakistan-affairs-answer.txt')">⬇️ Download</button></div></div></div>
+
+<div class="sh-csspanel" id="css-islamiat"><label class="field-label-block" for="cssIslQ">Sawal likhein</label><textarea id="cssIslQ" placeholder="e.g. Explain the concept of Ijma in Islamic jurisprudence"></textarea><div class="row" style="margin-top:10px;"><button onclick="shGenericAsk('Islamiat (Islamic studies) for CSS preparation','cssIslQ','cssIslResult','cssIslErr',this)">Ask</button></div><div id="cssIslErr"></div><div class="result-panel" id="cssIslPanel"><div class="sh-result" id="cssIslResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="cssIslResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('cssIslResult','islamiat-answer.txt')">⬇️ Download</button></div></div></div>
+
+<div class="sh-csspanel" id="css-analytical"><div class="row"><button onclick="shAnalyticalQuiz()">Start Quiz</button></div><div id="analyticalErr"></div><div id="analyticalQuiz"></div></div>
+
+<div class="sh-csspanel" id="css-reading"><div class="row"><button onclick="shReadingQuiz()">Get Passage</button></div><div id="readingErr"></div><div id="readingPassage"></div><div id="readingQuiz"></div></div>
+
+<div class="sh-csspanel" id="css-sentcorr"><div class="row"><button onclick="shNewSentence()">New Sentence</button></div><div id="sentcorrSentenceBox"></div><div id="sentcorrFormBox" style="display:none;"><label class="field-label-block" for="sentcorrInput">Apni Correction Likhein</label><textarea id="sentcorrInput"></textarea><div class="row" style="margin-top:10px;"><button onclick="shCheckSentence()">Check</button></div></div><div id="sentcorrErr"></div><div class="result-panel" id="sentcorrPanel"><div class="sh-result" id="sentcorrResult"></div></div></div>
+
+</div></div>
+
+<!-- IMPROVE ENGLISH -->
+<div class="sh-section" id="tab-english"><div class="sh-card"><h2>Improve My English</h2><p class="desc">Grammar checker aur roz ka practice session — vocabulary, grammar, sentence correction, writing, quiz.</p>
+<h3 style="color:var(--grove);">Check My English</h3><label class="field-label-block" for="engCheckInput">Koi sentence ya paragraph paste karein</label><textarea id="engCheckInput" placeholder="Apna sentence ya paragraph yahan likhein..."></textarea><div class="row" style="margin-top:10px;"><button onclick="shCheckEnglish()">Check My English</button></div><div id="engCheckErr"></div><div class="result-panel" id="engCheckPanel"><div class="sh-result" id="engCheckResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="engCheckResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('engCheckResult','english-check.txt')">⬇️ Download</button></div></div>
+
+<h3 style="color:var(--grove);margin-top:26px;">10 Minute Daily Practice</h3><p class="desc">5 vocabulary + 5 grammar + 5 sentence corrections + 1 writing task + 5-question quiz — har baar naya.</p>
+<div class="row"><button onclick="shDailyPractice()">Start Today's Practice</button></div><div id="dailyErr"></div><div id="dailyPractice"></div>
+</div></div>
+
+<!-- UPLOAD & ASK -->
+<div class="sh-section" id="tab-upload"><div class="sh-card"><h2>Upload &amp; Ask</h2><p class="desc"><strong>Yahi hai asal "exact question" ka tareeqa:</strong> apni kitab/notes ka Chapter PDF upload karein — AI usi asal content se jawab dega, na ke guess se. Ek dafa upload karne ke baad, jab tak file na badlein, isi PDF se jitne marzi sawal poochein.</p>
+<label class="field-label-block" for="uploadFile">PDF ya Screenshots (Chapter/Question ki tasveerein — ek ya zyada select kar sakte hain)</label><input type="file" id="uploadFile" accept="application/pdf,image/*" multiple>
+<div id="uploadFileList" class="sh-note" style="margin-top:6px;"></div>
+<p class="sh-note">Max ~15MB. File sirf is sawal ke liye AI ko bheji jati hai, kahin store nahi hoti.</p>
+<div class="row" style="margin-top:14px;"><div class="field"><label class="field-label" for="uploadChapter">Chapter #</label><input type="text" id="uploadChapter" placeholder="e.g. 1"></div><div class="field"><label class="field-label" for="uploadExercise">Exercise #</label><input type="text" id="uploadExercise" placeholder="e.g. 1.1"></div></div>
+<div class="row" style="margin-top:10px;"><div class="field"><label class="field-label" for="uploadQNo">Question #</label><input type="text" id="uploadQNo" placeholder="e.g. 1"></div><div class="field"><label class="field-label" for="uploadPart">Part (agar ho)</label><input type="text" id="uploadPart" placeholder="e.g. i — khaali chhod dein agar parts nahi"></div></div>
+<div class="row" style="margin-top:10px;"><button type="button" class="secondary" onclick="shBuildUploadQuestion()">⚡ Quick Fill</button></div>
+<p class="sh-note">Tip: Poore Exercise (jaise 1.1) ki ek hi screenshot khainch lein — phir sirf Question # aur (agar ho to) Part likh dein.</p>
+<label class="field-label-block" for="uploadQuestion">Sawal (Quick Fill se apne aap ban jayega, ya khud likhein)</label><textarea id="uploadQuestion" placeholder="e.g. Chapter 3 ka summary de dein"></textarea>
+<div class="row" id="uploadSymbols" style="gap:6px;flex-wrap:wrap;margin-top:8px;"></div>
+<div class="row" style="margin-top:10px;"><button id="uploadAskBtn">Ask AI About These Files</button></div>
+<div id="uploadErr"></div>
+<div class="result-panel" id="uploadPanel"><div class="sh-result" id="uploadResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="uploadResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('uploadResult','pdf-answer.txt')">⬇️ Download</button><button class="secondary" onclick="window.print()">🖨️ Print / Save PDF</button></div></div>
+</div></div>
+
+<!-- FLASHCARDS -->
+<div class="sh-section" id="tab-flash"><div class="sh-card"><h2>Flashcards</h2><p class="desc">Jaldi revision — card par tap kar ke answer dekhein.</p>
+<div class="row"><div class="field"><label class="field-label" for="flashClass">Class</label><select id="flashClass"><option>Class 9</option><option>Class 10</option><option selected>Class 11</option><option>Class 12</option></select></div>
+<div class="field"><label class="field-label" for="flashSubject">Subject</label><select id="flashSubject"></select></div></div>
+<label class="field-label-block" for="flashChapter">Chapter (optional)</label><input type="text" id="flashChapter" placeholder="e.g. Differentiation — khaali chhodein poore syllabus ke liye">
+<div class="row" style="margin-top:10px;"><button id="flashBtn">Generate Flashcards</button></div>
+<div id="flashErr"></div>
+<div id="flashCards"></div>
+</div></div>
+
+</div>
+
+<div class="seo-content">
+
+<h3>How to Use the AI Study Helper</h3>
+<ol>
+<li><strong>Get a Free API Key:</strong> Open the AI Settings section, follow the 5-step guide to create a free Google Gemini key, and paste it in — it saves only in your browser.</li>
+<li><strong>Pick a Tool:</strong> Choose Study Helper for homework, Mock Exam for a full practice paper, CSS Foundation for exam-prep writing skills, Improve English for grammar, Upload &amp; Ask for your own notes, or Flashcards for quick revision.</li>
+<li><strong>Select Class &amp; Subject:</strong> Class 9-10 covers Biology, Physics, Chemistry, Mathematics and Computer Science; Class 11-12 covers Medical, Non-Medical and ICS subjects.</li>
+<li><strong>Ask or Generate:</strong> Type a question or tap Generate — the AI responds in seconds with an exam-focused answer.</li>
+<li><strong>Export Your Result:</strong> Use Copy, Download, or Print/Save as PDF on any result to keep it for later.</li>
+</ol>
+
+<h3>Why Use This Tool</h3>
+<p>A free AI study helper for Class 9 to 12 and CSS foundation preparation online means not juggling five different tutoring apps, tuition academies, or paid CSS coaching platforms to cover one day of studying. This tool combines a homework Q&amp;A assistant, a board-exam-style mock paper generator, a full CSS Foundation suite, an English grammar checker, a PDF-based question answerer, and a flashcard generator into one connected workspace — so switching from a Mathematics problem to a CSS precis exercise takes one tap, not five different websites.</p>
+
+<h3>How It Works</h3>
+<p>This instant AI homework helper and CSS exam prep tool runs entirely on Google's free Gemini API, called directly from your own browser using your own personal API key — the same technology used by paid CSS coaching platforms, now free and private. Study Helper answers are tailored to your selected class and subject with five response modes (Explain, Solve, Summarize, Practice, Quiz). Mock Exam builds a fresh board-format paper with MCQs, short and long questions, and a marking scheme every time you generate one. CSS Foundation runs eleven connected tools — English, Essay Writing, Precis Writing, Vocabulary, General Knowledge, Current Affairs, Pakistan Affairs, Islamiat, Analytical Thinking, Reading Comprehension, and Sentence Correction — each built around real FPSC-style exam patterns.</p>
+
+<h3>Key Features</h3>
+<p>As a free study tool with no signup and zero server uploads, every calculation and every AI call happens using your own key, with nothing saved anywhere except your own browser's local storage. The Mock Exam generator produces board-exam-style papers matching real Pakistani board difficulty and mark distribution, with instant answer keys. The Precis Writing tool generates a fresh 250-word passage, checks your precis like an FPSC examiner, scores it out of 20, and shows a model precis for comparison. The Analytical Thinking and Reading Comprehension tools generate fresh logical-reasoning and passage-based MCQs with instant feedback, while Upload &amp; Ask lets you question your own textbook PDF directly, without it ever being stored.</p>
+
+<h3>Common Use Cases</h3>
+<p>A Class 9 Biology student stuck on a diagram-based question opens Study Helper, selects Explain mode, and gets a clear, exam-focused answer in seconds. An FSc Pre-Medical student preparing for a mid-term uses Mock Exam to generate a full board-format practice paper the night before a test. A CSS aspirant fresh out of Intermediate opens Precis Writing daily to build the single most examiner-weighted skill in the CSS English paper, while another uses Sentence Correction and Vocabulary Builder as a five-minute daily warm-up. A student revising the night before an exam uses Flashcards to flip through key formulas and definitions instead of re-reading an entire chapter.</p>
+
+<h3>Tips</h3>
+<p>Mock Exam and CSS Foundation results are AI-generated practice material, not official past papers — use them to build exam temperament and identify weak areas, not as a substitute for the official FPSC syllabus and past papers. Because nothing is stored on any server, remember to Copy, Download, or Print anything you want to keep before closing the tab. If a tool ever shows an "AI error," double-check that your API key is pasted correctly in AI Settings and that your free Google quota hasn't been used up for the day — it resets every 24 hours.</p>
+
+<h3>Frequently Asked Questions</h3>
+<div class="faq-block">
+<details><summary>Is this tool really free to use?</summary><p>Yes. Google's Gemini API has a genuinely free tier with no credit card required, and this tool itself has no cost, no subscription, and no sign-up.</p></details>
+<details><summary>Do I need to create an account?</summary><p>No sign-up is required. Just paste your own free Gemini API key into the AI Settings section once and start using any tool immediately.</p></details>
+<details><summary>Is my data uploaded or stored anywhere?</summary><p>No. Nothing is saved on any server. Your API key is stored only in your browser's local storage, and your questions, answers, and uploaded PDFs are never stored — they exist only for the single request you make.</p></details>
+<details><summary>What classes and subjects does it cover?</summary><p>Class 9 and 10 (Biology, Physics, Chemistry, Mathematics, Computer Science) and Class 11-12 across Medical, Non-Medical and ICS groups (English, Computer Science, Statistics, Economics, Physics, Chemistry, Biology, Mathematics).</p></details>
+<details><summary>How does the Mock Exam generator work?</summary><p>Select a class and subject and it instantly builds a full board-exam-style paper — 8 MCQs, 7 short questions, and 3 long questions — matching real Pakistani board format, with a complete marking scheme you can reveal any time.</p></details>
+<details><summary>Are these real CSS past papers?</summary><p>No. All CSS Foundation content — essay topics, precis passages, reading comprehension, and mock questions — is freshly generated by AI in the style of real FPSC papers, so you get unlimited fresh practice material instead of memorizing a fixed set of old papers.</p></details>
+<details><summary>Can I upload my own textbook or notes?</summary><p>Yes, under Upload &amp; Ask. Upload any PDF (up to about 15MB) and ask a question directly about its content — the file is sent only to the AI for that single answer and is never saved anywhere.</p></details>
+<details><summary>What if I run out of free AI quota for the day?</summary><p>Google's free tier resets daily. Since you're using your own personal key, your quota is never shared with or used up by other students — only by your own usage.</p></details>
+</div>
+
+<h3>Related Tools</h3>
+<ul>
+<li><a href="student-academic-toolkit.html">Student Academic Toolkit</a></li>
+<li><a href="marks-percentage-calculator.html">Marks Percentage Calculator</a></li>
+<li><a href="final-grade-calculator.html">Final Grade Calculator</a></li>
+<li><a href="citation-generator.html">Citation Generator</a></li>
+<li><a href="quadratic-equation-solver.html">Quadratic Equation Solver</a></li>
+</ul>
+
+</div>
+
+</main><footer id="about"><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M16 54 Q50 26 84 54" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 67 Q50 42 78 67" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M29 79 Q50 58 71 79" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="79" cy="23" r="20" fill="#e07a2c" stroke="#1f3d2b" stroke-width="3"/><text x="79" y="28.5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://toolnest.link/"},{"@type":"ListItem","position":2,"name":"Education","item":"https://toolnest.link/education-tools.html"},{"@type":"ListItem","position":3,"name":"AI Study Helper","item":"https://toolnest.link/ai-study-helper.html"}]},
+{"@type":"SoftwareApplication","name":"AI Study Helper","applicationCategory":"EducationApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/ai-study-helper.html"},
+{"@type":"HowTo","name":"How to Use the AI Study Helper","step":[{"@type":"HowToStep","text":"Get a free Gemini API key from Google AI Studio."},{"@type":"HowToStep","text":"Paste the key into AI Settings."},{"@type":"HowToStep","text":"Pick a tool, select your class and subject, and ask a question."}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is this tool really free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes. Google's Gemini API has a genuinely free tier with no credit card required, and this tool itself has no cost, no subscription, and no sign-up."}},
+{"@type":"Question","name":"Do I need to create an account?","acceptedAnswer":{"@type":"Answer","text":"No. Just paste your own free Gemini API key into the Settings section and start using any tool immediately."}},
+{"@type":"Question","name":"Is my data uploaded or stored anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Nothing is saved on any server. Your API key is stored only in your browser's local storage, and your questions and uploads are never stored."}},
+{"@type":"Question","name":"What classes and subjects does it cover?","acceptedAnswer":{"@type":"Answer","text":"Class 9 and 10 (English, Biology, Physics, Chemistry, Mathematics, Computer Science) and Class 11-12 across Medical, Non-Medical and ICS groups, plus CSS Foundation."}},
+{"@type":"Question","name":"How does the Mock Exam generator work?","acceptedAnswer":{"@type":"Answer","text":"Select a class and subject and it instantly builds a full board-exam-style paper with MCQs, short and long questions, and a complete marking scheme."}},
+{"@type":"Question","name":"Are the CSS Foundation materials real past papers?","acceptedAnswer":{"@type":"Answer","text":"No. All CSS Foundation content is freshly generated by AI in the style of real FPSC papers, giving unlimited fresh practice material."}},
+{"@type":"Question","name":"Can I upload my own textbook or notes?","acceptedAnswer":{"@type":"Answer","text":"Yes, under Upload and Ask. Upload a PDF or photo of a question and ask about it directly — the file is used only for that one answer and never saved."}},
+{"@type":"Question","name":"What if I run out of free AI quota for the day?","acceptedAnswer":{"@type":"Answer","text":"Google's free tier resets daily, and since each student uses their own personal key, quota is never shared with or used up by other students."}}
+]}
+]}
+</script>
+
+
+<script>
+/* ---------- Settings ---------- */
+function getSettings(){return {apiKey: localStorage.getItem('sh_gemini_key')||'', model: localStorage.getItem('sh_gemini_model')||'gemini-3.6-flash'};}
+function renderSettingsStatus(){var s=getSettings();document.getElementById('shCurrentModel').textContent=s.model;document.getElementById('shCurrentKey').textContent=s.apiKey?(s.apiKey.slice(0,4)+'••••••••'+s.apiKey.slice(-4)):'(not set)';document.getElementById('shModel').value=s.model;}
+document.getElementById('shSaveSettings').addEventListener('click',function(){
+  var key=document.getElementById('shApiKey').value.trim();
+  var model=document.getElementById('shModel').value.trim()||'gemini-3.6-flash';
+  if(key)localStorage.setItem('sh_gemini_key',key);
+  localStorage.setItem('sh_gemini_model',model);
+  document.getElementById('shApiKey').value='';
+  document.getElementById('shSettingsStatus').textContent='✅ Saved to this browser.';
+  renderSettingsStatus();
+  setTimeout(function(){document.getElementById('shSettingsStatus').textContent='';},3000);
+});
+renderSettingsStatus();
+
+/* ---------- Core Gemini caller ---------- */
+async function callGemini(promptText,systemText,jsonMode){
+  var s=getSettings();
+  if(!s.apiKey){throw new Error('Pehle upar "AI Settings" mein apni free Gemini API key daalein.');}
+  var body={contents:[{role:'user',parts:[{text:promptText}]}]};
+  if(systemText)body.system_instruction={parts:[{text:systemText}]};
+  if(jsonMode)body.generationConfig={responseMimeType:'application/json'};
+  var res=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+s.model+':generateContent',{
+    method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':s.apiKey},body:JSON.stringify(body)
+  });
+  if(!res.ok){var t=await res.text();throw new Error('AI error ('+res.status+'): '+t.slice(0,250));}
+  var data=await res.json();
+  var parts=(data.candidates&&data.candidates[0]&&data.candidates[0].content&&data.candidates[0].content.parts)||[];
+  var text=parts.map(function(p){return p.text||'';}).join('');
+  if(!text)throw new Error('AI ne khaali jawab diya.');
+  return text;
+}
+function shDownload(elId,filename){
+  var text=document.getElementById(elId).textContent;
+  var blob=new Blob([text],{type:'text/plain'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download=filename;a.click();URL.revokeObjectURL(url);
+}
+function showErr(boxId,msg){document.getElementById(boxId).innerHTML='<div class="sh-error">'+msg+'</div>';}
+function clearErr(boxId){document.getElementById(boxId).innerHTML='';}
+function setBtnLoading(btn,loading,label){btn.disabled=loading;btn.textContent=loading?'Loading...':label;}
+
+/* ---------- Tabs ---------- */
+document.querySelectorAll('.sh-tab').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.sh-tab').forEach(function(b){b.classList.remove('active');});
+    document.querySelectorAll('.sh-section').forEach(function(s){s.classList.remove('active');});
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.getAttribute('data-tab')).classList.add('active');
+  });
+});
+document.querySelectorAll('.sh-csstab').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.sh-csstab').forEach(function(b){b.classList.remove('active');});
+    document.querySelectorAll('.sh-csspanel').forEach(function(s){s.classList.remove('active');});
+    btn.classList.add('active');
+    document.getElementById('css-'+btn.getAttribute('data-css')).classList.add('active');
+  });
+});
+
+/* ---------- Study Helper ---------- */
+var SUBJECTS_MATRIC=['English','Biology','Physics','Chemistry','Mathematics','Computer Science'];
+var SUBJECTS_INTER=['English','Computer Science','Statistics','Economics','Physics','Chemistry','Biology','Mathematics'];
+function fillSubjects(classSelId,subjSelId){
+  var cls=document.getElementById(classSelId).value;
+  var list=(cls==='Class 9'||cls==='Class 10')?SUBJECTS_MATRIC:SUBJECTS_INTER;
+  document.getElementById(subjSelId).innerHTML=list.map(function(s){return '<option>'+s+'</option>';}).join('');
+}
+document.getElementById('studyClass').addEventListener('change',function(){fillSubjects('studyClass','studySubject');});
+document.getElementById('mockClass').addEventListener('change',function(){fillSubjects('mockClass','mockSubject');});
+fillSubjects('studyClass','studySubject');
+fillSubjects('mockClass','mockSubject');
+
+var studyMode='Explain';
+var MATH_SYMBOLS=['+','−','×','÷','=','≠','±','≤','≥','≈','≅','∴','∵','⇒','⊥','∥','∈','∉','↔','√','²','³','^','π','φ','θ','Δ','°','∞','(',')'];
+function buildSymbolBar(containerId,textareaId){
+  var bar=document.getElementById(containerId);
+  MATH_SYMBOLS.forEach(function(sym){
+    var b=document.createElement('button');
+    b.type='button';b.className='secondary';b.textContent=sym;
+    b.style.padding='4px 9px';b.style.fontSize='.85rem';b.style.minWidth='34px';
+    b.addEventListener('click',function(){insertAtCursor(textareaId,sym);});
+    bar.appendChild(b);
+  });
+}
+function insertAtCursor(textareaId,text){
+  var el=document.getElementById(textareaId);
+  var start=el.selectionStart||el.value.length;
+  var end=el.selectionEnd||el.value.length;
+  el.value=el.value.slice(0,start)+text+el.value.slice(end);
+  el.focus();
+  el.selectionStart=el.selectionEnd=start+text.length;
+}
+buildSymbolBar('studySymbols','studyQuestion');
+document.querySelectorAll('.sh-mode').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.sh-mode').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');studyMode=btn.getAttribute('data-mode');
+  });
+});
+document.getElementById('studyAskBtn').addEventListener('click',async function(){
+  var btn=this;var cls=document.getElementById('studyClass').value;var subj=document.getElementById('studySubject').value;
+  var board=document.getElementById('studyBoard').value;
+  var q=document.getElementById('studyQuestion').value.trim();
+  clearErr('studyErrorBox');
+  if(!q){showErr('studyErrorBox','Pehle apna sawal likhein.');return;}
+  setBtnLoading(btn,true,'Ask AI');
+  var sysPrompt='You are a study assistant for a Pakistani student. Class: '+cls+'. Subject: '+subj+'. Board: '+board+'. Mode: '+studyMode+'. Give a clear, exam-focused answer with short headings and bullet points where useful. Show full working for math/numerical questions. If the student refers to a specific chapter/question number without providing the textbook content, answer from general syllabus knowledge but clearly note that exact textbook wording may differ — recommend they use the Upload & Ask tool with their actual book for guaranteed accuracy.';
+  try{
+    var answer=await callGemini(q,sysPrompt,false);
+    document.getElementById('studyResult').textContent=answer;
+    document.getElementById('studyResultPanel').style.display='block';
+  }catch(e){showErr('studyErrorBox',e.message);}
+  setBtnLoading(btn,false,'Ask AI');
+});
+
+/* ---------- Mock Exam ---------- */
+document.getElementById('mockBtn').addEventListener('click',async function(){
+  var btn=this;var cls=document.getElementById('mockClass').value;var subj=document.getElementById('mockSubject').value;
+  clearErr('mockErrorBox');document.getElementById('mockPaper').innerHTML='';
+  setBtnLoading(btn,true,'Generate Mock Exam');
+  var schema='Respond with ONLY valid JSON (no markdown fences): {"title":string,"totalMarks":number,"mcqs":[{"question":string,"options":[string,string,string,string],"correctIndex":number}] (exactly 8 items),"shortQuestions":[string] (exactly 7 items, attempt any 5),"longQuestions":[string] (exactly 3 items, attempt any 2),"modelAnswers":{"shortAnswers":[string] (7 items),"longAnswerHints":[string] (3 items)}}';
+  var prompt='Generate a full board-exam-style model paper for a Pakistani student.\\nClass: '+cls+'\\nSubject: '+subj+'\\nMatch real Pakistani board exam style and difficulty.\\n'+schema;
+  try{
+    var raw=await callGemini(prompt,null,true);
+    var paper=JSON.parse(raw);
+    renderMockPaper(paper);
+  }catch(e){showErr('mockErrorBox',e.message);}
+  setBtnLoading(btn,false,'Generate Mock Exam');
+});
+function renderMockPaper(p){
+  var h='<div class="sh-result"><strong>'+p.title+'</strong><br>Total Marks: '+p.totalMarks+'</div>';
+  h+='<h3 style="margin-top:16px;">Section A — MCQs (1 mark each)</h3>';
+  p.mcqs.forEach(function(q,i){
+    h+='<div class="sh-mcq"><strong>'+(i+1)+'. '+q.question+'</strong>';
+    q.options.forEach(function(o,oi){h+='<div class="sh-note" data-correct="'+(oi===q.correctIndex?'1':'0')+'">'+String.fromCharCode(65+oi)+'. '+o+(oi===q.correctIndex?' <span class="sh-badge">✓ correct</span>':'')+'</div>';});
+    h+='</div>';
+  });
+  h+='<h3 style="margin-top:16px;">Section B — Short Questions (attempt any 5, 3 marks each)</h3>';
+  p.shortQuestions.forEach(function(q,i){h+='<div class="sh-mcq">'+(i+1)+'. '+q+'<div class="sh-note" style="margin-top:6px;color:#2f9e52;">'+p.modelAnswers.shortAnswers[i]+'</div></div>';});
+  h+='<h3 style="margin-top:16px;">Section C — Long Questions (attempt any 2, 12 marks each)</h3>';
+  p.longQuestions.forEach(function(q,i){h+='<div class="sh-mcq">'+(i+1)+'. '+q+'<div class="sh-note" style="margin-top:6px;color:#2f9e52;">'+p.modelAnswers.longAnswerHints[i]+'</div></div>';});
+  h+='<div class="sh-resultbar"><button class="secondary" onclick="window.print()">🖨️ Print / Save PDF</button></div>';
+  document.getElementById('mockPaper').innerHTML=h;
+}
+
+/* ---------- Generic CSS Q&A (English, GK, Current Affairs, Pakistan Affairs, Islamiat) ---------- */
+async function shGenericAsk(topicLabel,qElId,resultElId,errBoxId,btn){
+  var q=document.getElementById(qElId).value.trim();
+  clearErr(errBoxId);
+  if(!q){showErr(errBoxId,'Pehle sawal likhein.');return;}
+  setBtnLoading(btn,true,'Ask');
+  try{
+    var sys='You are a CSS (Pakistan) exam foundation tutor. Topic area: '+topicLabel+'. Keep the answer foundational, clear, and exam-focused with short headings and bullet points.';
+    var answer=await callGemini(q,sys,false);
+    document.getElementById(resultElId).textContent=answer;
+    document.getElementById(resultElId).closest('.result-panel').style.display='block';
+  }catch(e){showErr(errBoxId,e.message);}
+  setBtnLoading(btn,false,'Ask');
+}
+
+/* ---------- Essay ---------- */
+async function shSuggestTopic(){
+  clearErr('cssEssayErr');
+  try{
+    var topic=await callGemini('Give ONE thoughtful, analytical essay topic in the style of CSS (Pakistan) Essay paper topics. Output ONLY the topic.',null,false);
+    document.getElementById('cssEssayTopic').value=topic.trim();
+  }catch(e){showErr('cssEssayErr',e.message);}
+}
+async function shEvaluateEssay(){
+  var topic=document.getElementById('cssEssayTopic').value.trim();
+  var outline=document.getElementById('cssEssayOutline').value.trim();
+  clearErr('cssEssayErr');
+  if(!topic||!outline){showErr('cssEssayErr','Topic aur outline dono likhein.');return;}
+  try{
+    var prompt='Essay topic: '+topic+'\\nStudent outline:\\n'+outline+'\\n\\nEvaluate like a CSS essay examiner: 1) Thesis Strength 2) Structure & Coverage 3) Suggested Improvements 4) A sample expanded outline with 5-6 stronger points.';
+    var fb=await callGemini(prompt,null,false);
+    document.getElementById('cssEssayResult').textContent=fb;
+    document.getElementById('cssEssayPanel').style.display='block';
+  }catch(e){showErr('cssEssayErr',e.message);}
+}
+
+/* ---------- Precis ---------- */
+var precisPassage='';
+async function shGeneratePassage(){
+  clearErr('precisErr');document.getElementById('precisPassageBox').innerHTML='';document.getElementById('precisFormBox').style.display='none';document.getElementById('precisPanel').style.display='none';
+  try{
+    precisPassage=await callGemini('Write an original passage (230-270 words) suitable for CSS precis practice, formal analytical English. Output ONLY the passage.',null,false);
+    document.getElementById('precisPassageBox').innerHTML='<div class="sh-result">'+precisPassage+'</div>';
+    document.getElementById('precisFormBox').style.display='block';
+  }catch(e){showErr('precisErr',e.message);}
+}
+async function shCheckPrecis(){
+  var title=document.getElementById('precisTitle').value.trim();
+  var text=document.getElementById('precisText').value.trim();
+  clearErr('precisErr');
+  if(!text){showErr('precisErr','Pehle apni precis likhein.');return;}
+  try{
+    var wc=precisPassage.trim().split(/\\s+/).length;
+    var target=Math.round(wc/3);
+    var prompt='Original passage ('+wc+' words):\\n'+precisPassage+'\\n\\nStudent title: '+title+'\\nStudent precis:\\n'+text+'\\n\\nGood precis ~1/3 length ('+target+' words). Evaluate like a CSS examiner: 1) Title 2) Compression 3) Language & Style 4) Overall Score /20 5) Model Precis.';
+    var fb=await callGemini(prompt,null,false);
+    document.getElementById('precisResult').textContent=fb;
+    document.getElementById('precisPanel').style.display='block';
+  }catch(e){showErr('precisErr',e.message);}
+}
+
+/* ---------- Vocabulary ---------- */
+async function shGenerateVocab(){
+  clearErr('vocabErr');document.getElementById('vocabList').innerHTML='Loading...';
+  try{
+    var schema='Respond with ONLY valid JSON: {"words":[{"word":string,"meaning":string,"synonym":string,"usage":string}]} (exactly 8 items)';
+    var raw=await callGemini('Generate 8 advanced CSS-level vocabulary words with meaning, synonym, and usage example.\\n'+schema,null,true);
+    var data=JSON.parse(raw);
+    var h='';
+    data.words.forEach(function(w){h+='<div class="sh-mcq"><strong>'+w.word+'</strong><div class="sh-note">'+w.meaning+'</div><div class="sh-note">Synonym: '+w.synonym+'</div><div class="sh-note" style="font-style:italic;">'+w.usage+'</div></div>';});
+    document.getElementById('vocabList').innerHTML=h;
+  }catch(e){document.getElementById('vocabList').innerHTML='';showErr('vocabErr',e.message);}
+}
+
+/* ---------- Analytical Thinking ---------- */
+async function shAnalyticalQuiz(){
+  clearErr('analyticalErr');document.getElementById('analyticalQuiz').innerHTML='Loading...';
+  try{
+    var schema='Respond with ONLY valid JSON: {"questions":[{"question":string,"options":[string,string,string,string],"correctIndex":number,"explanation":string}]} (exactly 5 items)';
+    var raw=await callGemini('Generate 5 analytical/logical reasoning MCQs (CSS/NTS style: sequences, syllogisms, blood relations, coding-decoding).\\n'+schema,null,true);
+    var data=JSON.parse(raw);
+    renderQuiz(data.questions,'analyticalQuiz',true);
+  }catch(e){document.getElementById('analyticalQuiz').innerHTML='';showErr('analyticalErr',e.message);}
+}
+function renderQuiz(questions,containerId,showExplain){
+  var h='';
+  questions.forEach(function(q,qi){
+    h+='<div class="sh-mcq"><strong>'+(qi+1)+'. '+q.question+'</strong>';
+    q.options.forEach(function(o,oi){h+='<button type="button" class="sh-opt" onclick="shAnswerQuiz(this,'+qi+','+oi+','+q.correctIndex+',\''+containerId+'\')">'+o+'</button>';});
+    if(showExplain)h+='<div class="sh-note sh-explain-'+containerId+'-'+qi+'" style="display:none;">'+q.explanation+'</div>';
+    h+='</div>';
+  });
+  document.getElementById(containerId).innerHTML=h;
+}
+function shAnswerQuiz(btn,qi,oi,correctIdx,containerId){
+  var mcq=btn.closest('.sh-mcq');
+  mcq.querySelectorAll('.sh-opt').forEach(function(b,idx){b.disabled=true;if(idx===correctIdx)b.classList.add('correct');});
+  if(oi!==correctIdx)btn.classList.add('wrong');
+  var exp=mcq.querySelector('.sh-explain-'+containerId+'-'+qi);
+  if(exp)exp.style.display='block';
+}
+
+/* ---------- Reading Comprehension ---------- */
+async function shReadingQuiz(){
+  clearErr('readingErr');document.getElementById('readingPassage').innerHTML='Loading...';document.getElementById('readingQuiz').innerHTML='';
+  try{
+    var schema='Respond with ONLY valid JSON: {"passage":string (200-280 words),"questions":[{"question":string,"options":[string,string,string,string],"correctIndex":number}]} (exactly 5 questions)';
+    var raw=await callGemini('Write an original passage + 5 comprehension MCQs for CSS Reading Comprehension practice.\\n'+schema,null,true);
+    var data=JSON.parse(raw);
+    document.getElementById('readingPassage').innerHTML='<div class="sh-result">'+data.passage+'</div>';
+    renderQuiz(data.questions,'readingQuiz',false);
+  }catch(e){document.getElementById('readingPassage').innerHTML='';showErr('readingErr',e.message);}
+}
+
+/* ---------- Sentence Correction ---------- */
+var sentcorrCurrent='';
+async function shNewSentence(){
+  clearErr('sentcorrErr');document.getElementById('sentcorrPanel').style.display='none';document.getElementById('sentcorrFormBox').style.display='none';
+  document.getElementById('sentcorrSentenceBox').innerHTML='Loading...';
+  try{
+    sentcorrCurrent=await callGemini('Write ONE sentence with a single grammatical error, CSS Sentence Correction exam style. Output ONLY the sentence.',null,false);
+    document.getElementById('sentcorrSentenceBox').innerHTML='<div class="sh-result">'+sentcorrCurrent+'</div>';
+    document.getElementById('sentcorrFormBox').style.display='block';
+  }catch(e){document.getElementById('sentcorrSentenceBox').innerHTML='';showErr('sentcorrErr',e.message);}
+}
+async function shCheckSentence(){
+  var userFix=document.getElementById('sentcorrInput').value.trim();
+  clearErr('sentcorrErr');
+  if(!userFix){showErr('sentcorrErr','Pehle apni correction likhein.');return;}
+  try{
+    var prompt='Original: "'+sentcorrCurrent+'"\\nStudent correction: "'+userFix+'"\\nCheck if fixed correctly. Respond: 1) Correct/Incorrect 2) Explain mistake briefly in Roman Urdu if wrong 3) Give fully correct sentence.';
+    var fb=await callGemini(prompt,null,false);
+    document.getElementById('sentcorrResult').textContent=fb;
+    document.getElementById('sentcorrPanel').style.display='block';
+  }catch(e){showErr('sentcorrErr',e.message);}
+}
+
+/* ---------- Improve English ---------- */
+async function shCheckEnglish(){
+  var text=document.getElementById('engCheckInput').value.trim();
+  clearErr('engCheckErr');
+  if(!text){showErr('engCheckErr','Pehle kuch likhein.');return;}
+  try{
+    var prompt='Check this English text for grammar, tense, and sentence-structure errors:\\n"'+text+'"\\n\\nRespond: 1) List each mistake with a brief explanation in simple Roman Urdu 2) Give the fully corrected version. If there are no mistakes, say so and give one tip to improve style.';
+    var fb=await callGemini(prompt,null,false);
+    document.getElementById('engCheckResult').textContent=fb;
+    document.getElementById('engCheckPanel').style.display='block';
+  }catch(e){showErr('engCheckErr',e.message);}
+}
+async function shDailyPractice(){
+  clearErr('dailyErr');document.getElementById('dailyPractice').innerHTML='Loading...';
+  try{
+    var schema='Respond with ONLY valid JSON: {"vocabulary":[{"word":string,"meaning":string,"example":string}] (5 items),"grammarQuestions":[{"question":string,"answer":string}] (5 items),"sentenceCorrections":[{"incorrect":string,"correct":string}] (5 items),"writingTask":string,"quiz":[{"question":string,"options":[string,string,string,string],"correctIndex":number}] (5 items)}';
+    var raw=await callGemini('Generate a fresh 10-minute English practice session for a Pakistani student (vocabulary, grammar, sentence correction, writing task, quiz).\\n'+schema,null,true);
+    var d=JSON.parse(raw);
+    var h='<h3 style="color:var(--grove);">1. Vocabulary</h3>';
+    d.vocabulary.forEach(function(w){h+='<div class="sh-mcq"><strong>'+w.word+'</strong><div class="sh-note">'+w.meaning+'</div><div class="sh-note" style="font-style:italic;">'+w.example+'</div></div>';});
+    h+='<h3 style="color:var(--grove);margin-top:16px;">2. Grammar Questions</h3>';
+    d.grammarQuestions.forEach(function(g,i){h+='<div class="sh-mcq">'+(i+1)+'. '+g.question+'<div class="sh-note" style="color:#2f9e52;margin-top:6px;">'+g.answer+'</div></div>';});
+    h+='<h3 style="color:var(--grove);margin-top:16px;">3. Sentence Correction</h3>';
+    d.sentenceCorrections.forEach(function(c,i){h+='<div class="sh-mcq">'+(i+1)+'. '+c.incorrect+'<div class="sh-note" style="color:#2f9e52;margin-top:6px;">'+c.correct+'</div></div>';});
+    h+='<h3 style="color:var(--grove);margin-top:16px;">4. Writing Task</h3><div class="sh-mcq">'+d.writingTask+'<textarea style="margin-top:10px;" placeholder="Apna jawab yahan likhein..."></textarea></div>';
+    h+='<h3 style="color:var(--grove);margin-top:16px;">5. Mini Quiz</h3><div id="dailyQuiz"></div>';
+    document.getElementById('dailyPractice').innerHTML=h;
+    renderQuiz(d.quiz,'dailyQuiz',false);
+  }catch(e){document.getElementById('dailyPractice').innerHTML='';showErr('dailyErr',e.message);}
+}
+
+/* ---------- Upload & Ask ---------- */
+buildSymbolBar('uploadSymbols','uploadQuestion');
+function shBuildUploadQuestion(){
+  var ch=document.getElementById('uploadChapter').value.trim();
+  var ex=document.getElementById('uploadExercise').value.trim();
+  var qn=document.getElementById('uploadQNo').value.trim();
+  var pt=document.getElementById('uploadPart').value.trim();
+  if(!ch&&!ex&&!qn){return;}
+  var text='Attached screenshot(s)/PDF mein';
+  if(ch)text+=' Chapter '+ch;
+  if(ex)text+=', Exercise '+ex;
+  if(qn){
+    text+=' ka Question '+qn;
+    if(pt)text+=' part ('+pt+')';
+    text+=' solve karein, poora working/steps ke sath.';
+  }else{
+    text+=' ka poora summary aur important points de dein.';
+  }
+  document.getElementById('uploadQuestion').value=text;
+}
+function fileToBase64(file){
+  return new Promise(function(resolve,reject){
+    var reader=new FileReader();
+    reader.onload=function(){resolve(reader.result.split(',')[1]);};
+    reader.onerror=reject;
+    reader.readAsDataURL(file);
+  });
+}
+document.getElementById('uploadFile').addEventListener('change',function(){
+  var files=this.files;
+  var listEl=document.getElementById('uploadFileList');
+  if(!files.length){listEl.textContent='';return;}
+  var names=[];
+  for(var i=0;i<files.length;i++)names.push(files[i].name);
+  listEl.textContent='📎 '+files.length+' file(s) selected: '+names.join(', ');
+});
+document.getElementById('uploadAskBtn').addEventListener('click',async function(){
+  var btn=this;
+  var files=document.getElementById('uploadFile').files;
+  var q=document.getElementById('uploadQuestion').value.trim();
+  clearErr('uploadErr');
+  if(!files.length){showErr('uploadErr','Pehle PDF ya screenshot(s) select karein.');return;}
+  if(!q){showErr('uploadErr','Pehle apna sawal likhein.');return;}
+  var totalSize=0;
+  for(var i=0;i<files.length;i++)totalSize+=files[i].size;
+  if(totalSize>20*1024*1024){showErr('uploadErr','Files ka total size bahut bara hai (max 20MB combined).');return;}
+  var s=getSettings();
+  if(!s.apiKey){showErr('uploadErr','Pehle upar "AI Settings" mein apni free Gemini API key daalein.');return;}
+  setBtnLoading(btn,true,'Ask AI About These Files');
+  try{
+    var parts=[];
+    for(var i=0;i<files.length;i++){
+      var base64=await fileToBase64(files[i]);
+      parts.push({inline_data:{mime_type:files[i].type||'application/pdf',data:base64}});
+    }
+    parts.push({text:q});
+    var body={contents:[{role:'user',parts:parts}]};
+    var res=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+s.model+':generateContent',{
+      method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':s.apiKey},body:JSON.stringify(body)
+    });
+    if(!res.ok){var t=await res.text();throw new Error('AI error ('+res.status+'): '+t.slice(0,250));}
+    var data=await res.json();
+    var resParts=(data.candidates&&data.candidates[0]&&data.candidates[0].content&&data.candidates[0].content.parts)||[];
+    var answer=resParts.map(function(p){return p.text||'';}).join('');
+    if(!answer)throw new Error('AI ne khaali jawab diya.');
+    document.getElementById('uploadResult').textContent=answer;
+    document.getElementById('uploadPanel').style.display='block';
+  }catch(e){showErr('uploadErr',e.message);}
+  setBtnLoading(btn,false,'Ask AI About These Files');
+});
+
+
+/* ---------- Flashcards ---------- */
+document.getElementById('flashClass').addEventListener('change',function(){fillSubjects('flashClass','flashSubject');});
+fillSubjects('flashClass','flashSubject');
+document.getElementById('flashBtn').addEventListener('click',async function(){
+  var btn=this;
+  var cls=document.getElementById('flashClass').value;
+  var subj=document.getElementById('flashSubject').value;
+  var chapter=document.getElementById('flashChapter').value.trim();
+  clearErr('flashErr');document.getElementById('flashCards').innerHTML='';
+  setBtnLoading(btn,true,'Generate Flashcards');
+  try{
+    var schema='Respond with ONLY valid JSON: {"cards":[{"front":string,"back":string}]} (exactly 10 items)';
+    var prompt='Generate 10 quick-revision flashcards.\\nClass: '+cls+'\\nSubject: '+subj+'\\n'+(chapter?('Chapter: '+chapter):'Cover key terms/formulas across the syllabus.')+'\\nFront = term/formula/short question. Back = concise definition/formula/answer.\\n'+schema;
+    var raw=await callGemini(prompt,null,true);
+    var d=JSON.parse(raw);
+    var h='';
+    d.cards.forEach(function(c,i){
+      h+='<div class="sh-flashcard" onclick="shFlipCard(this,'+i+')"><div class="fc-label" id="fcLabel'+i+'">Card '+(i+1)+' — tap to flip</div><div id="fcText'+i+'" data-front="'+c.front.replace(/"/g,'&quot;')+'" data-back="'+c.back.replace(/"/g,'&quot;')+'" style="font-weight:600;">'+c.front+'</div></div>';
+    });
+    document.getElementById('flashCards').innerHTML=h;
+  }catch(e){showErr('flashErr',e.message);}
+  setBtnLoading(btn,false,'Generate Flashcards');
+});
+function shFlipCard(el,i){
+  var textEl=document.getElementById('fcText'+i);
+  var labelEl=document.getElementById('fcLabel'+i);
+  var showingBack=textEl.getAttribute('data-showing')==='back';
+  if(showingBack){textEl.textContent=textEl.getAttribute('data-front');textEl.setAttribute('data-showing','front');labelEl.textContent='Card '+(i+1)+' — tap to flip';}
+  else{textEl.textContent=textEl.getAttribute('data-back');textEl.setAttribute('data-showing','back');labelEl.textContent='Answer';}
+}
+
+/* ---------- Copy buttons (site convention) ---------- */
+document.querySelectorAll('[data-copy]').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var target=document.getElementById(btn.getAttribute('data-copy'));
+    if(!target)return;
+    var text=btn.getAttribute('data-copy-mode')==='text'?target.textContent:target.value;
+    if(!text)return;
+    var done=function(){var old=btn.textContent;btn.textContent='✅ Copied';setTimeout(function(){btn.textContent=old;},1200);};
+    if(window.toolnestCopyText){window.toolnestCopyText(text,done);}else{navigator.clipboard.writeText(text).then(done);}
+  });
+});
+</script>
+<script src="script.js"></script>
+</body></html>
