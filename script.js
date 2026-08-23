@@ -317,3 +317,106 @@ function openEmbedModal(title,url){
     if(btn)btn.addEventListener('click',openShareCard);
   });
 })();
+
+/* ---------- ToolNest Toolbar Extras (Phase 8 completion) ----------
+   Adds a Share Card button and a Citation button to the existing
+   .tool-actions toolbar on the first card of each tool page.
+   Reuses the existing share-card modal styles. No new files, no
+   duplicate share bars, no external requests on page load. ---------- */
+(function () {
+  var SITE = 'https://toolnest.link/';
+
+  function pageTitle() {
+    var h1 = document.querySelector('h1');
+    return ((h1 ? h1.textContent : document.title) || '')
+      .replace(/\s*\|\s*ToolNest\s*$/i, '').trim();
+  }
+  function pageUrl() { return location.origin + location.pathname; }
+
+  function openCiteModal() {
+    var title = pageTitle(), url = pageUrl();
+    var d = new Date(), y = d.getFullYear(), day = d.getDate();
+    var M = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+      'August', 'September', 'October', 'November', 'December'];
+    var mo = M[d.getMonth()], mo3 = mo.slice(0, 3);
+
+    var rows = [
+      ['APA (7th)', 'ToolNest. (' + y + '). ' + title + ' [Online tool]. Retrieved ' + mo + ' ' + day + ', ' + y + ', from ' + url],
+      ['MLA (9th)', '"' + title + '." ToolNest, ' + y + ', ' + url + '. Accessed ' + day + ' ' + mo3 + '. ' + y + '.'],
+      ['Chicago', '"' + title + '." ToolNest. Accessed ' + mo + ' ' + day + ', ' + y + '. ' + url + '.'],
+      ['Harvard', 'ToolNest (' + y + ') ' + title + '. Available at: ' + url + ' (Accessed: ' + day + ' ' + mo + ' ' + y + ').']
+    ];
+
+    var overlay = document.createElement('div');
+    overlay.className = 'share-card-overlay';
+    var html = '<div class="share-card-modal embed-modal" role="dialog" aria-modal="true" aria-label="Cite this tool">' +
+      '<button type="button" class="share-card-close" aria-label="Close">\u2715</button>' +
+      '<h3>Cite This Tool</h3>' +
+      '<p class="embed-hint">Use these references to cite this tool in a research paper, assignment or blog post. Check your institution\u2019s style guide for local variations.</p>';
+    rows.forEach(function (r, i) {
+      html += '<div class="tn-cite-row" data-i="' + i + '" style="border:1px solid rgba(0,0,0,.12);border-radius:10px;padding:11px 12px;margin-bottom:10px">' +
+        '<strong style="display:block;font-size:12px;letter-spacing:.02em;color:#e07a2c;margin-bottom:5px">' + r[0] + '</strong>' +
+        '<p style="margin:0 0 8px;font-size:13px;line-height:1.55;word-break:break-word"></p>' +
+        '<button type="button" class="ta-btn tn-cite-copy" style="font-size:12px;padding:6px 12px">\ud83d\udccb Copy</button>' +
+        '</div>';
+    });
+    html += '</div>';
+    overlay.innerHTML = html;
+    document.body.appendChild(overlay);
+
+    /* set text via textContent so quotes and symbols cannot break markup */
+    overlay.querySelectorAll('.tn-cite-row').forEach(function (row) {
+      var i = parseInt(row.getAttribute('data-i'), 10);
+      row.querySelector('p').textContent = rows[i][1];
+      row.querySelector('.tn-cite-copy').addEventListener('click', function (e) {
+        var btn = e.currentTarget, old = btn.textContent;
+        var done = function () {
+          btn.textContent = '\u2705 Copied';
+          setTimeout(function () { btn.textContent = old; }, 1200);
+        };
+        if (window.toolnestCopyText) window.toolnestCopyText(rows[i][1], done);
+        else if (navigator.clipboard) navigator.clipboard.writeText(rows[i][1]).then(done, function () { });
+      });
+    });
+
+    overlay.querySelector('.share-card-close').addEventListener('click', function () { overlay.remove(); });
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) overlay.remove(); });
+    document.addEventListener('keydown', function esc(e) {
+      if (e.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', esc); }
+    });
+    overlay.querySelector('.share-card-close').focus();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    if (document.body.classList.contains('info-page')) return;
+
+    /* inside an iframe = embedded copy, keep the toolbar minimal */
+    var embedded = false;
+    try { embedded = window.self !== window.top; } catch (e) { embedded = true; }
+    if (embedded) return;
+
+    var bar = document.querySelector('main .card .tool-actions');
+    if (!bar || bar.querySelector('.ta-cite')) return;
+
+    /* Share Card: only if the page does not already have its own button */
+    if (!document.getElementById('tnShareCardBtn') && window.ToolNestShare) {
+      var sc = document.createElement('button');
+      sc.type = 'button';
+      sc.className = 'ta-btn ta-sharecard';
+      sc.title = 'Create a share card image';
+      sc.setAttribute('aria-label', 'Create a share card image');
+      sc.textContent = '\ud83d\uddbc';
+      sc.addEventListener('click', function () { window.ToolNestShare.open(); });
+      bar.appendChild(sc);
+    }
+
+    var ci = document.createElement('button');
+    ci.type = 'button';
+    ci.className = 'ta-btn ta-cite';
+    ci.title = 'Cite this tool (APA, MLA, Chicago, Harvard)';
+    ci.setAttribute('aria-label', 'Cite this tool');
+    ci.textContent = '\ud83d\udcda';
+    ci.addEventListener('click', openCiteModal);
+    bar.appendChild(ci);
+  });
+})();
