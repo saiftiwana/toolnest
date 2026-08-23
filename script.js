@@ -134,6 +134,67 @@ function openEmbedModal(title,url){
 (function(){
   var BRAND_BG='#1f3d2b', BRAND_CREAM='#f2ecd8', BRAND_ORANGE='#e07a2c';
 
+  /* ---- Curated result picker (Batch 5) ----
+     Reads the exact result element for well-known tools so the share
+     card shows a real number instead of whatever text happens to match.
+     Falls back to window.TN_RESULT, then to the generic scan below. */
+  var TN_MAP={
+    'zakat-calculator.html':[['sumZakatDue','My Zakat Due'],['sumTotalWealth','Zakatable Wealth']],
+    'marks-grade-calculator.html':[['markResult',''],['fgResult','']],
+    'property-loan-mortgage-calculator.html':[['emiResult',''],['mortResult','']],
+    'sip-investment-return-calculator.html':[['sipResult','']],
+    'fitness-dashboard.html':[['fdBmiResult',''],['fdCalorieResult',''],['fdBodyFatResult',''],['fdIbwResult','']],
+    'land-plot-toolkit.html':[['lmResultList',''],['lpkMeasureResult',''],['lpkValuationResult','']],
+    'runners-pace-predictor.html':[['paceResult','']],
+    'sales-tax-gst-calculator.html':[['gstResult','']],
+    'construction-cost-estimator.html':[['ccstResult','']],
+    'student-academic-toolkit.html':[['gpaResult',''],['cgpaResult',''],['attResult','']],
+    'age-calculator-for-school.html':[['ageResult','']],
+    'savings-goal-calculator.html':[['sgResult','']],
+    'salary-take-home-pay-calculator.html':[['salResult','']],
+    'inflation-calculator.html':[['infResult','']],
+    'rental-yield-calculator.html':[['ryResult','']],
+    'crypto-stock-profit-loss-calculator.html':[['plResult','']],
+    'construction-bricks-calculator.html':[['brickResult','']],
+    'cement-concrete-volume-calculator.html':[['ccResult','']],
+    'paint-estimator.html':[['peResult','']],
+    'flooring-tile-calculator.html':[['ftResult','']]
+  };
+
+  function tnClean(el){
+    if(!el)return '';
+    var st=window.getComputedStyle(el);
+    if(st.display==='none'||st.visibility==='hidden')return '';
+    if(el.offsetParent===null&&st.position!=='fixed')return '';
+    var raw=(el.innerText||el.textContent||'');
+    var lines=raw.split(/\n+/).map(function(l){return l.replace(/\s+/g,' ').trim();})
+                 .filter(function(l){return l&&l!=='\u2014'&&l!=='-'&&l!=='0';});
+    if(!lines.length)return '';
+    var out=lines.slice(0,2).join(' \u00b7 ');
+    if(out.length<4)return '';
+    return out.length>140?out.slice(0,137).trim()+'\u2026':out;
+  }
+
+  function tnCurated(){
+    var page=(location.pathname.split('/').pop()||'index.html');
+    var rows=TN_MAP[page];
+    if(!rows)return '';
+    for(var i=0;i<rows.length;i++){
+      var t=tnClean(document.getElementById(rows[i][0]));
+      if(t)return rows[i][1]?(rows[i][1]+': '+t):t;
+    }
+    return '';
+  }
+
+  function tnBestResult(){
+    var r=window.TN_RESULT;
+    if(typeof r==='function'){try{r=r();}catch(e){r=null;}}
+    if(typeof r==='string'&&r.trim())return r.trim().slice(0,140);
+    var c=tnCurated();
+    if(c)return c;
+    try{return autoHighlight();}catch(e){return '';}
+  }
+
   function autoHighlight(){
     var nodes=document.querySelectorAll('[id*="esult" i],[class*="result" i],[id*="utput" i],[class*="output" i]');
     for(var i=0;i<nodes.length;i++){
@@ -249,7 +310,7 @@ function openEmbedModal(title,url){
   function openShareCard(){
     var title=(document.querySelector('h1')||{}).textContent||document.title;
     title=title.trim();
-    var highlight=autoHighlight();
+    var highlight=tnBestResult();
     var overlay=buildModal();
     var canvas=overlay.querySelector('#tnShareCanvas');
     var qrHolder=overlay.querySelector('#tnQrHolder');
