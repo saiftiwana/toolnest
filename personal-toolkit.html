@@ -138,7 +138,7 @@ main{max-width:760px;margin:0 auto;padding:18px 16px 60px}
 </header>
 <div class="page-nav">
   <button type="button" class="page-nav-btn active" id="navPostGen">📤 Social Post Generator</button>
-  <button type="button" class="page-nav-btn" id="navMonitor">🩺 Website Health Monitor</button><button type="button" class="page-nav-btn" id="navAds">📢 Ad Deployer</button>
+  <button type="button" class="page-nav-btn" id="navMonitor">🩺 Website Health Monitor</button><button type="button" class="page-nav-btn" id="navAds">📢 Ad Deployer</button><button type="button" class="page-nav-btn" id="navAudit">🔍 Full Audit</button><style data-tn-nav="1">.page-nav{flex-wrap:wrap}.page-nav-btn{flex:1 1 46%;min-width:0;font-size:.78rem}@media(min-width:760px){.page-nav-btn{flex:1 1 0;font-size:.85rem}}</style>
 </div>
 <main style="padding-top:0">
 <div class="card" id="aiSettingsCard" style="border-color:var(--kinno)">
@@ -524,6 +524,57 @@ main{max-width:760px;margin:0 auto;padding:18px 16px 60px}
   <div id="adLog" style="background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.75rem;white-space:pre-wrap;word-break:break-word;max-height:320px;overflow:auto;margin-top:12px;line-height:1.55">Ready. Ad code daalein, phir "Connect &amp; Verify" dabayein.</div>
 </div>
 
+</div>
+<div id="page-audit" class="page-view">
+<style>
+.au-sec{border:1px solid rgba(255,255,255,.14);border-radius:11px;padding:12px 13px;margin-bottom:11px}
+.au-sec h3{margin:0 0 8px;font-size:.92rem;display:flex;align-items:center;gap:8px}
+.au-pill{font-size:.65rem;font-weight:700;padding:2px 9px;border-radius:20px;letter-spacing:.03em}
+.au-pass{background:#1f5c2e;color:#c9f0d2}
+.au-warn{background:#6b5510;color:#f4e2ac}
+.au-fail{background:#6e2222;color:#f5c9c9}
+.au-info{background:#24405e;color:#c6dcf2}
+.au-list{margin:6px 0 0;padding-left:18px;font-size:.79rem;line-height:1.65;color:#c9c9b4}
+.au-list li{margin:2px 0;word-break:break-word}
+.au-none{font-size:.79rem;color:#8a8a75;margin:4px 0 0}
+.au-tbl{width:100%;border-collapse:collapse;font-size:.76rem;margin-top:6px}
+.au-tbl td{padding:4px 6px;border-bottom:1px solid rgba(255,255,255,.07);vertical-align:top}
+.au-tbl td:first-child{color:#8a8a75;white-space:nowrap}
+.au-score{font-size:1.6rem;font-weight:800}
+</style>
+
+<div class="card" style="border-color:var(--kinno)">
+  <h2>🔍 Full Site Audit <span style="font-weight:400;font-size:.75rem;color:#8a8a75">(sab kuch browser mein — koi server nahi)</span></h2>
+  <p style="font-size:.82rem;color:#8a8a75;line-height:1.6;margin-top:0">
+    Poori site ka wahi audit jo manually chalta tha — 12 checks ek saath. Sitemap, robots, ads.txt aur har HTML page parh kar report banti hai.
+  </p>
+  <div class="field">
+    <label for="auPsiKey">PageSpeed API Key <span style="font-weight:400;color:#8a8a75">(optional — Core Web Vitals ke liye)</span></label>
+    <input type="password" id="auPsiKey" placeholder="AIza... (khali chhod dein to speed check skip)">
+  </div>
+  <button type="button" class="run-btn" id="auRunBtn">🚀 Run Full Audit</button>
+  <button type="button" class="copy-btn" id="auExportBtn" disabled>📄 Report Download (.md)</button>
+  <div id="auProgWrap" style="height:7px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-top:12px">
+    <div id="auProg" style="height:100%;width:0;background:var(--kinno);transition:width .25s"></div>
+  </div>
+  <p id="auStatus" style="font-size:.78rem;color:#8a8a75;margin:8px 0 0"></p>
+</div>
+
+<div class="card hidden" id="auScoreCard">
+  <h2>Overall</h2>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+    <div><div class="au-score" id="auScoreVal">—</div><div style="font-size:.7rem;color:#8a8a75">HEALTH</div></div>
+    <div><div class="au-score" id="auFailVal">—</div><div style="font-size:.7rem;color:#8a8a75">FAIL</div></div>
+    <div><div class="au-score" id="auWarnVal">—</div><div style="font-size:.7rem;color:#8a8a75">WARN</div></div>
+    <div><div class="au-score" id="auPassVal">—</div><div style="font-size:.7rem;color:#8a8a75">PASS</div></div>
+    <div><div class="au-score" id="auPagesVal">—</div><div style="font-size:.7rem;color:#8a8a75">PAGES</div></div>
+  </div>
+</div>
+
+<div class="card hidden" id="auResultsCard">
+  <h2>Audit Results</h2>
+  <div id="auResults"></div>
+</div>
 </div>
 </main>
 <script>
@@ -1978,35 +2029,527 @@ function clearHistory(){
     });
   });
 
-  /* ---- third page navigation ---- */
-  document.addEventListener('DOMContentLoaded', function () {
-    var navAds = document.getElementById('navAds');
-    var navPg = document.getElementById('navPostGen');
-    var navWm = document.getElementById('navMonitor');
-    var pgAds = document.getElementById('page-ads');
-    var pgPg = document.getElementById('page-postgen');
-    var pgWm = document.getElementById('page-monitor');
-    if (!navAds || !pgAds) return;
-    var K3 = 'toolnest-personal-page3';
+  /* nav 4-page switcher audit engine mein hai (auditpage.js) */
+})();
+</script><script data-tn-audit="1">
+/* ============ Full Site Audit (Personal Toolkit page 4) ============
+   Har page parse hote hi uske "facts" nikal kar DOM discard kar diya jata hai,
+   taake 116 pages mobile par bhi memory kha kar crash na karein. */
+(function () {
+  var ORIGIN = 'https://toolnest.link';
+  var PUB = 'ca-pub-7690733672429028';
+  var PRIVATE_PAGE = 'personal-toolkit.html';
+  var POLICY = ['about.html', 'contact.html', 'privacy.html', 'terms.html'];
+  var ASSETS = ['styles.css', 'script.js', 'sitemap.xml', 'robots.txt', 'ads.txt', 'llms.txt',
+    'og-image.png', 'favicon.svg', 'favicon-16x16.png', 'favicon-32x32.png', 'favicon-48x48.png', 'share-kit.js'];
 
-    function showAds() {
-      pgPg.classList.remove('active-page');
-      pgWm.classList.remove('active-page');
-      pgAds.classList.add('active-page');
-      navPg.classList.remove('active');
-      navWm.classList.remove('active');
-      navAds.classList.add('active');
-      try { localStorage.setItem(K3, 'ads'); } catch (e) { }
+  var elRun = document.getElementById('auRunBtn');
+  if (!elRun) return;
+  var elExp = document.getElementById('auExportBtn');
+  var elProg = document.getElementById('auProg');
+  var elStat = document.getElementById('auStatus');
+  var elRes = document.getElementById('auResults');
+  var REPORT = null, PAGECOUNT = 0, SECTIONS = [];
+
+  function prog(p) { elProg.style.width = Math.round(p * 100) + '%'; }
+  function stat(m) { elStat.textContent = m; }
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function abs(p) { return ORIGIN + '/' + String(p).replace(/^\//, ''); }
+  function uniq(a) { var s = {}, o = []; a.forEach(function (x) { if (!s[x]) { s[x] = 1; o.push(x); } }); return o; }
+
+  function getText(url) {
+    return fetch(url, { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    });
+  }
+  function pool(items, n, fn, onTick) {
+    var i = 0, done = 0, out = new Array(items.length);
+    return new Promise(function (resolve) {
+      if (!items.length) return resolve(out);
+      function next() {
+        if (i >= items.length) { if (done === items.length) resolve(out); return; }
+        var k = i++;
+        Promise.resolve(fn(items[k], k)).then(function (v) { out[k] = v; }, function (e) { out[k] = { error: e.message }; })
+          .then(function () { done++; if (onTick) onTick(done, items.length); next(); });
+      }
+      for (var j = 0; j < Math.min(n, items.length); j++) next();
+    });
+  }
+
+  function section(title, level, lines, note) {
+    SECTIONS.push({ title: title, level: level, lines: lines || [], note: note || '' });
+  }
+  function buildReport(counts) {
+    var d = new Date();
+    var out = '# ToolNest \u2014 Full Site Audit\n\nDate: ' + d.toISOString().slice(0, 16).replace('T', ' ') +
+      '\nPages scanned: ' + PAGECOUNT +
+      '\nPASS ' + (counts.pass || 0) + ' \u00b7 WARN ' + (counts.warn || 0) + ' \u00b7 FAIL ' + (counts.fail || 0) + '\n\n---\n\n';
+    SECTIONS.forEach(function (s) {
+      out += '## [' + s.level.toUpperCase() + '] ' + s.title + '\n\n';
+      if (s.note) out += s.note + '\n\n';
+      s.lines.forEach(function (l) { out += '- ' + l + '\n'; });
+      out += '\n';
+    });
+    return out;
+  }
+  function render() {
+    var counts = { pass: 0, warn: 0, fail: 0, info: 0 };
+    var html = '';
+    SECTIONS.forEach(function (s) {
+      counts[s.level] = (counts[s.level] || 0) + 1;
+      html += '<div class="au-sec"><h3>' + esc(s.title) + ' <span class="au-pill au-' + s.level + '">' + s.level.toUpperCase() + '</span></h3>';
+      if (s.note) html += '<p class="au-none">' + esc(s.note) + '</p>';
+      if (s.lines.length) {
+        html += '<ul class="au-list">';
+        s.lines.slice(0, 60).forEach(function (l) { html += '<li>' + esc(l) + '</li>'; });
+        if (s.lines.length > 60) html += '<li>\u2026 aur ' + (s.lines.length - 60) + ' (report download karein)</li>';
+        html += '</ul>';
+      }
+      html += '</div>';
+    });
+    elRes.innerHTML = html;
+    document.getElementById('auResultsCard').classList.remove('hidden');
+    document.getElementById('auScoreCard').classList.remove('hidden');
+    document.getElementById('auFailVal').textContent = counts.fail || 0;
+    document.getElementById('auWarnVal').textContent = counts.warn || 0;
+    document.getElementById('auPassVal').textContent = counts.pass || 0;
+    document.getElementById('auPagesVal').textContent = PAGECOUNT;
+    var total = (counts.pass || 0) + (counts.warn || 0) + (counts.fail || 0);
+    var score = total ? Math.round(((counts.pass || 0) + (counts.warn || 0) * 0.5) / total * 100) : 0;
+    var sv = document.getElementById('auScoreVal');
+    sv.textContent = score + '%';
+    sv.style.color = score >= 90 ? '#5fbf6b' : score >= 70 ? '#e8c46a' : '#e07a7a';
+    REPORT = buildReport(counts);
+    return counts;
+  }
+
+  /* ---------- per-page fact extraction ---------- */
+  function extract(file, html, parser) {
+    var d = parser.parseFromString(html, 'text/html');
+    var F = { file: file };
+
+    var t = d.querySelector('title'); F.title = t ? t.textContent.trim() : '';
+    var m = d.querySelector('meta[name="description"]'); F.desc = m ? (m.getAttribute('content') || '').trim() : '';
+    var c = d.querySelector('link[rel="canonical"]'); F.canonical = c ? (c.getAttribute('href') || '').trim() : '';
+    F.noindex = !!d.querySelector('meta[name="robots"][content*="noindex"]');
+
+    F.head = {};
+    [['link[rel="canonical"]', 'canonical'], ['meta[property="og:title"]', 'og:title'],
+    ['meta[property="og:image"]', 'og:image'], ['meta[property="og:url"]', 'og:url'],
+    ['meta[name="twitter:card"]', 'twitter:card'], ['meta[name="viewport"]', 'viewport']]
+      .forEach(function (n) { F.head[n[1]] = !!d.querySelector(n[0]); });
+
+    var h1 = d.querySelectorAll('h1');
+    F.h1count = h1.length;
+    F.h1 = h1.length ? h1[0].textContent.trim() : '';
+    F.h2count = d.querySelectorAll('h2').length;
+    var hs = d.querySelectorAll('h1,h2,h3,h4,h5,h6'), prev = 0;
+    F.headingSkip = false;
+    for (var k = 0; k < hs.length; k++) {
+      var lv = parseInt(hs[k].tagName.charAt(1), 10);
+      if (prev && lv > prev + 1) F.headingSkip = true;
+      prev = lv;
     }
-    function leaveAds() {
-      pgAds.classList.remove('active-page');
-      navAds.classList.remove('active');
-      try { localStorage.removeItem(K3); } catch (e) { }
+
+    F.schemaTypes = []; F.schemaBroken = 0;
+    var blocks = d.querySelectorAll('script[type="application/ld+json"]');
+    F.schemaCount = blocks.length;
+    for (var i = 0; i < blocks.length; i++) {
+      var j;
+      try { j = JSON.parse(blocks[i].textContent); }
+      catch (e) { F.schemaBroken++; continue; }
+      var g = j['@graph'] || [j];
+      for (var q = 0; q < g.length; q++) { if (g[q] && g[q]['@type']) F.schemaTypes.push(g[q]['@type']); }
     }
-    navAds.addEventListener('click', showAds);
-    navPg.addEventListener('click', leaveAds);
-    navWm.addEventListener('click', leaveAds);
-    try { if (localStorage.getItem(K3) === 'ads') showAds(); } catch (e) { }
+
+    var imgs = d.querySelectorAll('img'); F.imgNoAlt = 0;
+    for (var a = 0; a < imgs.length; a++) if (!imgs[a].hasAttribute('alt')) F.imgNoAlt++;
+
+    var ctrls = d.querySelectorAll('input,select,textarea'); F.noLabel = 0;
+    for (var b = 0; b < ctrls.length; b++) {
+      var el = ctrls[b];
+      var ty = (el.getAttribute('type') || '').toLowerCase();
+      if (/^(hidden|submit|button|checkbox|radio|range|file|color)$/.test(ty)) continue;
+      if (el.getAttribute('aria-label')) continue;
+      var id = el.getAttribute('id');
+      if (id && /^[A-Za-z0-9_-]+$/.test(id) && d.querySelector('label[for="' + id + '"]')) continue;
+      if (el.closest && el.closest('label')) continue;
+      F.noLabel++;
+    }
+
+    var ft = d.querySelector('footer');
+    F.hasFooter = !!ft; F.footerLegal = 0; F.footerDupNav = false;
+    if (ft) {
+      var fh = ft.innerHTML;
+      ['about.html', 'privacy.html', 'terms.html', 'contact.html'].forEach(function (x) { if (fh.indexOf(x) > -1) F.footerLegal++; });
+      F.footerDupNav = (fh.match(/foot-legal/g) || []).length > 1;
+    }
+
+    var body = d.body;
+    if (body) {
+      var junk = body.querySelectorAll('script,style');
+      for (var z = junk.length - 1; z >= 0; z--) junk[z].parentNode.removeChild(junk[z]);
+      var txt = (body.textContent || '').replace(/\s+/g, ' ').trim();
+      F.words = txt ? txt.split(' ').length : 0;
+    } else F.words = 0;
+
+    F.internal = []; F.external = [];
+    var nodes = d.querySelectorAll('a[href],img[src],script[src],link[href]');
+    for (var n = 0; n < nodes.length; n++) {
+      var u = (nodes[n].getAttribute('href') || nodes[n].getAttribute('src') || '').trim();
+      if (!u || /^(#|mailto:|tel:|javascript:|data:|whatsapp:)/i.test(u)) continue;
+      if (/^https?:\/\//i.test(u) || u.indexOf('//') === 0) {
+        if (u.indexOf(ORIGIN) === 0) continue;
+        F.external.push(u);
+      } else {
+        var p = u.split('#')[0].split('?')[0].replace(/^\.?\//, '');
+        /* JS template literals / replacement patterns ko link mat samjho */
+        if (!p || p.indexOf('$') > -1 || p.indexOf("'") > -1 || p.indexOf('+') > -1 || p.indexOf('`') > -1) continue;
+        F.internal.push(p);
+      }
+    }
+    F.internal = uniq(F.internal); F.external = uniq(F.external);
+
+    F.noopenerMissing = 0;
+    var blanks = d.querySelectorAll('a[target="_blank"]');
+    for (var bb = 0; bb < blanks.length; bb++) {
+      if ((blanks[bb].getAttribute('rel') || '').indexOf('noopener') === -1) F.noopenerMissing++;
+    }
+
+    F.cards = [];
+    var cards = d.querySelectorAll('a.category-card');
+    for (var cc = 0; cc < cards.length; cc++) {
+      var href = cards[cc].getAttribute('href');
+      if (href) F.cards.push(href);
+    }
+
+    F.hasPub = html.indexOf(PUB) > -1;
+    F.hasAdsScript = html.indexOf('adsbygoogle.js') > -1;
+    F.adUnits = (html.match(/class="adsbygoogle"/g) || []).length;
+    F.wrongPub = uniq((html.match(/ca-pub-\d+/g) || []).filter(function (p) { return p !== PUB; }));
+
+    return F;
+  }
+
+  /* ---------- main ---------- */
+  function runAudit() {
+    SECTIONS = []; REPORT = null;
+    elRun.disabled = true; elExp.disabled = true;
+    elRes.innerHTML = '';
+    prog(0); stat('Sitemap, robots.txt aur ads.txt parh raha hoon\u2026');
+
+    var sitemapUrls = [], robots = '', adstxt = '', indexHtml = '';
+    var pageList = [], facts = {}, missing = [];
+
+    Promise.all([
+      getText(abs('sitemap.xml')).catch(function () { return null; }),
+      getText(abs('robots.txt')).catch(function () { return null; }),
+      getText(abs('ads.txt')).catch(function () { return null; }),
+      getText(abs('index.html'))
+    ]).then(function (r) {
+      var sm = r[0]; robots = r[1] || ''; adstxt = r[2] || ''; indexHtml = r[3];
+      if (sm) sitemapUrls = (sm.match(/<loc>([^<]+)<\/loc>/g) || []).map(function (x) { return x.slice(5, -6).trim(); });
+
+      var tools = uniq((indexHtml.match(/u:"([a-z0-9\-]+\.html)"/g) || []).map(function (x) { return x.slice(3, -1); }));
+      var hubs = uniq((indexHtml.match(/href=([a-z\-]+\.html)><h3>/g) || []).map(function (x) { return x.slice(5, -5); }));
+      pageList = uniq(['index.html'].concat(hubs, tools, POLICY));
+      sitemapUrls.forEach(function (u) {
+        var f = u.replace(ORIGIN + '/', '') || 'index.html';
+        if (pageList.indexOf(f) === -1) pageList.push(f);
+      });
+
+      var parser = new DOMParser();
+      stat('0 / ' + pageList.length + ' pages\u2026');
+      return pool(pageList, 5, function (f) {
+        return getText(abs(f)).then(function (t) {
+          try { facts[f] = extract(f, t, parser); }
+          catch (e) { missing.push(f + ' (parse error: ' + e.message + ')'); }
+          return 1;
+        }, function () { missing.push(f + ' (load fail)'); return 0; });
+      }, function (done, total) {
+        prog(done / total * 0.92);
+        stat(done + ' / ' + total + ' pages\u2026');
+      });
+    }).then(function () {
+      stat('Analyse kar raha hoon\u2026');
+      var files = Object.keys(facts);
+      PAGECOUNT = files.length;
+      analyse(facts, files, sitemapUrls, robots, adstxt, indexHtml, missing);
+      render();
+      prog(1);
+      stat('Audit mukammal \u2014 ' + files.length + ' pages.');
+      elRun.disabled = false; elExp.disabled = false;
+      var key = (document.getElementById('auPsiKey').value || '').trim();
+      if (key) runPsi(key);
+    }).catch(function (e) {
+      stat('Error: ' + e.message);
+      elRun.disabled = false;
+    });
+  }
+
+  /* ---------- checks ---------- */
+  function analyse(F, files, sitemapUrls, robots, adstxt, indexHtml, missing) {
+    var pub = files.filter(function (f) { return f !== PRIVATE_PAGE; });
+
+    if (missing.length) section('Pages jo load nahi huin', 'fail', missing);
+
+    (function adsense() {
+      var lines = [], noMeta = [], noScript = [], wrong = [], slotPages = [], totalUnits = 0;
+      pub.forEach(function (f) {
+        var x = F[f];
+        if (!x.hasPub) noMeta.push(f);
+        if (!x.hasAdsScript) noScript.push(f);
+        x.wrongPub.forEach(function (p) { wrong.push(f + ' \u2192 ' + p); });
+        if (x.adUnits) { slotPages.push(f); totalUnits += x.adUnits; }
+      });
+      var adsOk = adstxt && adstxt.indexOf(PUB.replace('ca-pub-', 'pub-')) > -1 && adstxt.toUpperCase().indexOf('DIRECT') > -1;
+      lines.push('Meta tag: ' + (pub.length - noMeta.length) + ' / ' + pub.length + ' pages');
+      lines.push('Auto ads script: ' + (pub.length - noScript.length) + ' / ' + pub.length + ' pages');
+      lines.push('Ad units lagey pages: ' + slotPages.length + ' (kul ' + totalUnits + ' units)');
+      var heavy = slotPages.filter(function (f) { return F[f].adUnits > 3; });
+      if (heavy.length) lines.push('3 se zyada ads: ' + heavy.slice(0, 10).join(', '));
+      lines.push('ads.txt: ' + (adsOk ? 'sahi \u2014 ' + adstxt.trim().split('\n')[0] : 'MASLA \u2014 ' + (adstxt ? adstxt.trim().slice(0, 60) : 'load nahi hui')));
+      noMeta.forEach(function (f) { lines.push('Meta tag NAHI: ' + f); });
+      noScript.slice(0, 20).forEach(function (f) { lines.push('Auto ads script NAHI: ' + f); });
+      wrong.forEach(function (f) { lines.push('GHALAT publisher ID: ' + f); });
+      section('A1 \u00b7 AdSense Readiness',
+        (noMeta.length || wrong.length || !adsOk) ? 'fail' : noScript.length ? 'warn' : 'pass', lines);
+    })();
+
+    (function duplicates() {
+      function group(key) {
+        var m = {};
+        pub.forEach(function (f) { var v = F[f][key]; if (v) (m[v] = m[v] || []).push(f); });
+        return Object.keys(m).filter(function (k) { return m[k].length > 1; }).map(function (k) { return [k, m[k]]; });
+      }
+      var lines = [];
+      var dt = group('title'), dd = group('desc'), dc = group('canonical'), dh = group('h1');
+      dt.forEach(function (x) { lines.push('DUPLICATE TITLE "' + x[0].slice(0, 45) + '" \u2192 ' + x[1].join(', ')); });
+      dd.forEach(function (x) { lines.push('DUPLICATE DESC "' + x[0].slice(0, 45) + '" \u2192 ' + x[1].join(', ')); });
+      dc.forEach(function (x) { lines.push('DUPLICATE CANONICAL ' + x[0] + ' \u2192 ' + x[1].join(', ')); });
+      dh.forEach(function (x) { lines.push('DUPLICATE H1 "' + x[0].slice(0, 45) + '" \u2192 ' + x[1].join(', ')); });
+      var hard = dt.length + dd.length + dc.length;
+      section('A2 \u00b7 Sitewide Duplicates', hard ? 'fail' : dh.length ? 'warn' : 'pass', lines,
+        hard ? '' : 'Koi duplicate title / description / canonical nahi.');
+    })();
+
+    (function lengths() {
+      var lines = [], lt = 0, ld = 0, mt = 0, md = 0;
+      pub.forEach(function (f) {
+        var x = F[f];
+        if (!x.title) { mt++; lines.push('TITLE MISSING: ' + f); }
+        else if (x.title.length > 60) { lt++; lines.push('Title ' + x.title.length + ': ' + f); }
+        if (!x.desc) { md++; lines.push('DESC MISSING: ' + f); }
+        else if (x.desc.length > 160) { ld++; lines.push('Desc ' + x.desc.length + ': ' + f); }
+      });
+      lines.unshift('Title >60: ' + lt + ' \u00b7 Desc >160: ' + ld + ' \u00b7 Missing: ' + mt + '/' + md);
+      section('A7 \u00b7 Title & Description Lengths', (mt || md) ? 'fail' : (lt + ld) ? 'warn' : 'pass', lines);
+    })();
+
+    (function schema() {
+      var lines = [], broken = [], none = [], types = {};
+      pub.forEach(function (f) {
+        var x = F[f];
+        if (x.schemaBroken) broken.push(f + ' (' + x.schemaBroken + ' block)');
+        if (!x.schemaCount) none.push(f);
+        x.schemaTypes.forEach(function (t) { types[t] = (types[t] || 0) + 1; });
+      });
+      Object.keys(types).sort().forEach(function (t) { lines.push(t + ': ' + types[t]); });
+      broken.forEach(function (f) { lines.push('TOOTA JSON-LD: ' + f); });
+      none.forEach(function (f) { lines.push('Schema nahi: ' + f); });
+      section('A4 \u00b7 JSON-LD Schema', broken.length ? 'fail' : none.length ? 'warn' : 'pass', lines);
+    })();
+
+    (function sitemapDiff() {
+      var lines = [], smf = {}, dupUrl = {}, dups = [];
+      sitemapUrls.forEach(function (u) {
+        var f = u.replace(ORIGIN + '/', '') || 'index.html';
+        smf[f] = 1; dupUrl[u] = (dupUrl[u] || 0) + 1;
+      });
+      Object.keys(dupUrl).forEach(function (u) { if (dupUrl[u] > 1) dups.push(u + ' x' + dupUrl[u]); });
+      var ghosts = Object.keys(smf).filter(function (f) { return files.indexOf(f) === -1; });
+      var notListed = pub.filter(function (f) { return !smf[f]; });
+      lines.push('Sitemap URLs: ' + sitemapUrls.length + ' \u00b7 Public pages: ' + pub.length);
+      if (smf[PRIVATE_PAGE]) lines.push('KHATRA: private page sitemap mein hai!');
+      ghosts.forEach(function (f) { lines.push('Sitemap mein hai, page nahi: ' + f); });
+      notListed.forEach(function (f) { lines.push('Page hai, sitemap mein nahi: ' + f); });
+      dups.forEach(function (u) { lines.push('Duplicate sitemap URL: ' + u); });
+      section('A5 \u00b7 Sitemap vs Asli Pages',
+        (ghosts.length || smf[PRIVATE_PAGE] || dups.length) ? 'fail' : notListed.length ? 'warn' : 'pass', lines);
+    })();
+
+    (function robotsCheck() {
+      var lines = [], lvl = 'pass';
+      if (!robots) { lvl = 'fail'; lines.push('robots.txt load nahi hui'); }
+      else {
+        lines.push(robots.trim().split('\n').join(' | '));
+        if (robots.indexOf(PRIVATE_PAGE) === -1) { lvl = 'fail'; lines.push('KHATRA: ' + PRIVATE_PAGE + ' blocked nahi'); }
+        if (robots.toLowerCase().indexOf('sitemap') === -1) { if (lvl === 'pass') lvl = 'warn'; lines.push('Sitemap declare nahi kiya'); }
+      }
+      section('robots.txt', lvl, lines);
+    })();
+
+    (function inventory() {
+      var lines = [], lvl = 'pass', badges = {}, m;
+      var re = /href=([a-z\-]+\.html)><h3>([\s\S]*?)<\/h3><span class=count>(\d+) tools/g;
+      while ((m = re.exec(indexHtml)) !== null) badges[m[1]] = parseInt(m[3], 10);
+      var totalCards = 0, allCards = {};
+      Object.keys(badges).forEach(function (h) {
+        if (!F[h]) { lines.push('Hub page nahi mila: ' + h); lvl = 'fail'; return; }
+        var n = F[h].cards.length;
+        totalCards += n;
+        F[h].cards.forEach(function (c) { (allCards[c] = allCards[c] || []).push(h); });
+        if (n !== badges[h]) { lines.push('BADGE MISMATCH ' + h + ': badge ' + badges[h] + ', asli cards ' + n); lvl = 'fail'; }
+      });
+      var ti = uniq((indexHtml.match(/u:"([a-z0-9\-]+\.html)"/g) || []).map(function (x) { return x.slice(3, -1); }));
+      var cardList = Object.keys(allCards);
+      ti.forEach(function (f) { if (cardList.indexOf(f) === -1) { lines.push('Search index mein hai, hub par nahi: ' + f); lvl = 'fail'; } });
+      cardList.forEach(function (f) {
+        if (ti.indexOf(f) === -1) { lines.push('Hub card hai, search index mein nahi: ' + f); lvl = 'fail'; }
+        if (allCards[f].length > 1) { lines.push('Do hubs par ek hi tool: ' + f + ' \u2192 ' + allCards[f].join(', ')); lvl = 'fail'; }
+      });
+      lines.unshift('Hub cards: ' + totalCards + ' \u00b7 Search index: ' + ti.length + ' \u00b7 Hubs: ' + Object.keys(badges).length);
+      section('A9 + A10 \u00b7 Tool Inventory Consistency', lvl, lines);
+    })();
+
+    (function headEssentials() {
+      var lines = [], miss = {};
+      pub.forEach(function (f) {
+        var x = F[f];
+        Object.keys(x.head).forEach(function (k) { if (!x.head[k]) (miss[k] = miss[k] || []).push(f); });
+        if (x.canonical) {
+          var want = ORIGIN + '/' + (f === 'index.html' ? '' : f);
+          if (x.canonical.replace(/\/$/, '') !== want.replace(/\/$/, '')) lines.push('Canonical ghalat: ' + f + ' \u2192 ' + x.canonical);
+        }
+        if (x.noindex) lines.push('NOINDEX: ' + f);
+      });
+      Object.keys(miss).forEach(function (k) { lines.push(k + ' missing (' + miss[k].length + '): ' + miss[k].slice(0, 8).join(', ')); });
+      section('Head Essentials (canonical, OG, viewport)', lines.length ? 'warn' : 'pass', lines,
+        lines.length ? '' : 'Har page par canonical, OG, twitter aur viewport maujood.');
+    })();
+
+    (function footer() {
+      var lines = [];
+      pub.forEach(function (f) {
+        var x = F[f];
+        if (!x.hasFooter) { lines.push('Footer nahi: ' + f); return; }
+        if (x.footerLegal < 3) lines.push('Legal links kam (' + x.footerLegal + '/4): ' + f);
+        if (x.footerDupNav) lines.push('Footer nav DUPLICATE: ' + f);
+      });
+      section('Footer Legal Links', lines.length ? 'warn' : 'pass', lines,
+        lines.length ? '' : 'Har page par Privacy / Terms / About / Contact maujood.');
+    })();
+
+    (function a11y() {
+      var lines = [], alt = 0, lab = 0, noH1 = [], multiH1 = [], skip = [], noH2 = [], noop = 0;
+      pub.forEach(function (f) {
+        var x = F[f];
+        if (x.imgNoAlt) { alt += x.imgNoAlt; lines.push('img bina alt (' + x.imgNoAlt + '): ' + f); }
+        if (x.noLabel) { lab += x.noLabel; lines.push('bina label fields (' + x.noLabel + '): ' + f); }
+        if (!x.h1count) noH1.push(f); else if (x.h1count > 1) multiH1.push(f + ' x' + x.h1count);
+        if (x.headingSkip) skip.push(f);
+        if (!x.h2count) noH2.push(f);
+        if (x.noopenerMissing) { noop += x.noopenerMissing; lines.push('rel=noopener nahi (' + x.noopenerMissing + '): ' + f); }
+      });
+      noH1.forEach(function (f) { lines.push('H1 NAHI: ' + f); });
+      multiH1.forEach(function (f) { lines.push('Ek se zyada H1: ' + f); });
+      noH2.forEach(function (f) { lines.push('H2 NAHI: ' + f); });
+      skip.slice(0, 15).forEach(function (f) { lines.push('Heading skip: ' + f); });
+      lines.unshift('Bina alt: ' + alt + ' \u00b7 Bina label: ' + lab + ' \u00b7 H1 masail: ' + (noH1.length + multiH1.length) +
+        ' \u00b7 H2 nahi: ' + noH2.length + ' \u00b7 Heading skip: ' + skip.length + ' \u00b7 noopener: ' + noop);
+      section('A8 \u00b7 Accessibility & Headings',
+        noH1.length ? 'fail' : (alt + lab + multiH1.length + skip.length + noH2.length + noop) ? 'warn' : 'pass', lines);
+    })();
+
+    (function links() {
+      var lines = [], internal = {}, external = {};
+      pub.forEach(function (f) {
+        F[f].internal.forEach(function (p) { (internal[p] = internal[p] || []).push(f); });
+        F[f].external.forEach(function (u) { (external[u] = external[u] || []).push(f); });
+      });
+      var known = files.concat(ASSETS);
+      var unknown = Object.keys(internal).filter(function (p) { return known.indexOf(p) === -1; });
+      var hosts = {};
+      Object.keys(external).forEach(function (u) { try { hosts[new URL(u).hostname] = 1; } catch (e) { } });
+      var unpinned = Object.keys(external).filter(function (u) { return /@latest|\/latest\//.test(u); });
+      var insecure = Object.keys(external).filter(function (u) { return u.indexOf('http://') === 0; });
+      lines.push('Internal targets: ' + Object.keys(internal).length + ' \u00b7 External URLs: ' + Object.keys(external).length);
+      lines.push('External domains: ' + Object.keys(hosts).sort().join(', '));
+      insecure.forEach(function (u) { lines.push('INSECURE http:// \u2014 ' + u); });
+      unpinned.forEach(function (u) { lines.push('CDN version pinned NAHI: ' + u); });
+      unknown.forEach(function (p) { lines.push('Shayad toota link: ' + p + ' (' + internal[p].slice(0, 3).join(', ') + ')'); });
+      section('A11 + A6 \u00b7 Links & Assets',
+        (unknown.length || insecure.length) ? 'fail' : unpinned.length ? 'warn' : 'pass', lines);
+    })();
+
+    (function depth() {
+      var lines = [], thin = 0;
+      pub.forEach(function (f) {
+        if (F[f].words < 600) { thin++; lines.push(f + ': ' + F[f].words + ' words'); }
+      });
+      lines.unshift('600 words se kam: ' + thin + ' / ' + pub.length + ' pages');
+      section('Content Depth (600+ words)', thin > 5 ? 'fail' : thin ? 'warn' : 'pass', lines);
+    })();
+  }
+
+  /* ---------- A3 PageSpeed ---------- */
+  function runPsi(key) {
+    var targets = ['index.html', 'zakat-calculator.html', 'image-tools.html'];
+    stat('PageSpeed chala raha hoon (' + targets.length + ' pages \u2014 thora waqt lagega)\u2026');
+    var lines = [];
+    pool(targets, 1, function (f) {
+      var u = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=' +
+        encodeURIComponent(abs(f)) + '&strategy=mobile&category=performance&key=' + encodeURIComponent(key);
+      return fetch(u).then(function (r) { return r.json(); }).then(function (j) {
+        if (j.error) { lines.push(f + ': ERROR \u2014 ' + String(j.error.message || '').slice(0, 90)); return; }
+        var lr = j.lighthouseResult || {}, a = lr.audits || {};
+        var perf = (lr.categories && lr.categories.performance) ? Math.round(lr.categories.performance.score * 100) : '?';
+        function v(k) { return (a[k] && a[k].displayValue) ? a[k].displayValue : '?'; }
+        lines.push(f + ' \u2192 Perf ' + perf + ' | LCP ' + v('largest-contentful-paint') +
+          ' | CLS ' + v('cumulative-layout-shift') + ' | TBT ' + v('total-blocking-time') +
+          ' | SI ' + v('speed-index'));
+      }).catch(function (e) { lines.push(f + ': ' + e.message); });
+    }).then(function () {
+      section('A3 \u00b7 PageSpeed (mobile)', 'info', lines, 'Google PageSpeed Insights API se.');
+      render();
+      stat('Audit + PageSpeed mukammal.');
+    });
+  }
+
+  elExp.addEventListener('click', function () {
+    if (!REPORT) return;
+    var blob = new Blob([REPORT], { type: 'text/markdown' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'toolnest-audit-' + new Date().toISOString().slice(0, 10) + '.md';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+  });
+  elRun.addEventListener('click', runAudit);
+
+  /* ---------- nav ---------- */
+  document.addEventListener('DOMContentLoaded', function () {
+    var nav = document.getElementById('navAudit');
+    var pg = document.getElementById('page-audit');
+    if (!nav || !pg) return;
+    var pages = ['page-postgen', 'page-monitor', 'page-ads', 'page-audit'];
+    var navs = ['navPostGen', 'navMonitor', 'navAds', 'navAudit'];
+    var K4 = 'toolnest-personal-page4';
+    function show() {
+      pages.forEach(function (id) { var e = document.getElementById(id); if (e) e.classList.toggle('active-page', id === 'page-audit'); });
+      navs.forEach(function (id) { var e = document.getElementById(id); if (e) e.classList.toggle('active', id === 'navAudit'); });
+      try { localStorage.setItem(K4, '1'); localStorage.removeItem('toolnest-personal-page3'); } catch (e) { }
+    }
+    function leave() {
+      pg.classList.remove('active-page'); nav.classList.remove('active');
+      try { localStorage.removeItem(K4); } catch (e) { }
+    }
+    nav.addEventListener('click', show);
+    ['navPostGen', 'navMonitor', 'navAds'].forEach(function (id) {
+      var e = document.getElementById(id); if (e) e.addEventListener('click', leave);
+    });
+    try { if (localStorage.getItem(K4) === '1') show(); } catch (e) { }
   });
 })();
 </script></body>
