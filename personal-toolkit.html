@@ -337,7 +337,167 @@ main{max-width:760px;margin:0 auto;padding:18px 16px 60px}
 
 
 </div>
-<div id="page-monitor" class="page-view">
+<div data-tn-listb="1"><div class="card">
+  <h2>🔗 UTM Link Builder <span style="font-weight:400;font-size:.75rem;color:#8a8a75">(pata chale traffic kahan se aaya)</span></h2>
+  <p style="font-size:.8rem;color:#8a8a75;margin-top:0">Link mein tracking parameters lag jate hain, phir Analytics mein saaf dikhta hai kaunsa platform kaam kar raha hai.</p>
+  <div class="field">
+    <label for="utmTool">Tool</label>
+    <select id="utmTool"></select>
+  </div>
+  <div class="row2">
+    <div class="field">
+      <label for="utmSource">Source (platform)</label>
+      <select id="utmSource">
+        <option value="facebook">facebook</option>
+        <option value="whatsapp">whatsapp</option>
+        <option value="x">x</option>
+        <option value="linkedin">linkedin</option>
+        <option value="instagram">instagram</option>
+        <option value="pinterest">pinterest</option>
+        <option value="quora">quora</option>
+        <option value="reddit">reddit</option>
+        <option value="youtube">youtube</option>
+        <option value="newsletter">newsletter</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="utmMedium">Medium</label>
+      <select id="utmMedium">
+        <option value="social">social</option>
+        <option value="post">post</option>
+        <option value="bio">bio</option>
+        <option value="story">story</option>
+        <option value="email">email</option>
+        <option value="answer">answer</option>
+      </select>
+    </div>
+  </div>
+  <div class="field">
+    <label for="utmCampaign">Campaign <span style="font-weight:400;color:#8a8a75">(khali chhodein to mahina khud lag jayega)</span></label>
+    <input type="text" id="utmCampaign" placeholder="aug2026">
+  </div>
+  <div class="field">
+    <label for="utmOut">Taiyar link</label>
+    <textarea id="utmOut" rows="3" readonly style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.75rem"></textarea>
+  </div>
+  <button type="button" class="copy-btn" id="utmCopyBtn">📋 Copy Link</button>
+</div>
+
+<div class="card">
+  <h2>🗓️ Post Schedule &amp; Calendar Export</h2>
+  <p style="font-size:.8rem;color:#8a8a75;margin-top:0">Posts ki tareekh tay karein aur phone ke calendar mein daal lein. Reminder ke bagair schedule par amal mushkil hota hai.</p>
+  <div class="row2">
+    <div class="field">
+      <label for="schTool">Tool</label>
+      <select id="schTool"></select>
+    </div>
+    <div class="field">
+      <label for="schPlatform">Platform</label>
+      <select id="schPlatform">
+        <option>Facebook</option><option>WhatsApp</option><option>X</option>
+        <option>LinkedIn</option><option>Instagram</option><option>Pinterest</option>
+        <option>Quora</option><option>Reddit</option><option>YouTube</option>
+      </select>
+    </div>
+  </div>
+  <div class="row2">
+    <div class="field">
+      <label for="schDate">Tareekh</label>
+      <input type="date" id="schDate">
+    </div>
+    <div class="field">
+      <label for="schTime">Waqt</label>
+      <input type="time" id="schTime" value="19:00">
+    </div>
+  </div>
+  <button type="button" class="gen-btn" id="schAddBtn">➕ Schedule Mein Add Karein</button>
+  <div id="schList" style="margin-top:12px"></div>
+  <button type="button" class="run-btn" id="schIcsBtn" disabled>📅 Calendar Export (.ics)</button>
+  <button type="button" class="clear-hist-btn" id="schClearBtn">🗑️ Schedule Saaf Karein</button>
+</div>
+
+<div class="card">
+  <h2>📊 Post Performance Log</h2>
+  <p style="font-size:.8rem;color:#8a8a75;margin-top:0">Har post ke natije likhte jayein. Kuch hafton baad khud dikhne lagega ke kya chalta hai aur kya nahi.</p>
+  <div class="row2">
+    <div class="field">
+      <label for="perfTool">Tool</label>
+      <select id="perfTool"></select>
+    </div>
+    <div class="field">
+      <label for="perfPlatform">Platform</label>
+      <select id="perfPlatform">
+        <option>Facebook</option><option>WhatsApp</option><option>X</option>
+        <option>LinkedIn</option><option>Instagram</option><option>Pinterest</option>
+        <option>Quora</option><option>Reddit</option><option>YouTube</option>
+      </select>
+    </div>
+  </div>
+  <div class="row2">
+    <div class="field">
+      <label for="perfViews">Views / Impressions</label>
+      <input type="number" id="perfViews" min="0" placeholder="0">
+    </div>
+    <div class="field">
+      <label for="perfClicks">Clicks</label>
+      <input type="number" id="perfClicks" min="0" placeholder="0">
+    </div>
+  </div>
+  <div class="field">
+    <label for="perfNote">Note <span style="font-weight:400;color:#8a8a75">(optional)</span></label>
+    <input type="text" id="perfNote" placeholder="Sham 7 baje post ki, thumbnail sabz thi">
+  </div>
+  <button type="button" class="gen-btn" id="perfAddBtn">➕ Entry Add Karein</button>
+  <div id="perfSummary" style="margin-top:12px"></div>
+  <div id="perfList"></div>
+  <button type="button" class="copy-btn" id="perfExportBtn">📄 CSV Download</button>
+  <button type="button" class="clear-hist-btn" id="perfClearBtn">🗑️ Log Saaf Karein</button>
+</div>
+
+<div class="card">
+  <h2>✍️ AI Content Studio <span style="font-weight:400;font-size:.75rem;color:#8a8a75">(Gemini key upar se</span></h2>
+  <p style="font-size:.8rem;color:#8a8a75;margin-top:0">Social posts ke ilawa content — Quora jawab, Reddit post, newsletter, comparison article aur Reels script.</p>
+  <div class="field">
+    <label for="acType">Content ki qism</label>
+    <select id="acType">
+      <option value="quora">Quora Answer — sawaal ka jawab + qudrati tool link</option>
+      <option value="reddit">Reddit Post — helpful, promotional nahi</option>
+      <option value="newsletter">Email Newsletter — monthly roundup</option>
+      <option value="comparison">Comparison Article — ToolNest banaam competitor</option>
+      <option value="reels">Reels / Shorts Script — 30-45 second</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="acTool">Tool</label>
+    <select id="acTool"></select>
+  </div>
+  <div class="field" id="acExtraWrap">
+    <label for="acExtra" id="acExtraLabel">Sawaal ya context</label>
+    <input type="text" id="acExtra" placeholder="Marla ko square feet mein kaise convert karein?">
+  </div>
+  <div class="row2">
+    <div class="field">
+      <label for="acLang">Zabaan</label>
+      <select id="acLang">
+        <option value="English">English</option>
+        <option value="Roman Urdu">Roman Urdu</option>
+        <option value="Both">Both</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="acUtm">UTM link lagayein?</label>
+      <select id="acUtm"><option value="yes">Haan</option><option value="no">Nahi</option></select>
+    </div>
+  </div>
+  <button type="button" class="run-btn" id="acGenBtn">🤖 Generate</button>
+  <p id="acStatus" style="font-size:.78rem;color:#8a8a75;margin:8px 0 0"></p>
+  <div class="field" style="margin-top:10px">
+    <label for="acOut">Output</label>
+    <textarea id="acOut" rows="12" style="font-size:.82rem"></textarea>
+  </div>
+  <button type="button" class="copy-btn" id="acCopyBtn">📋 Copy</button>
+  <button type="button" class="copy-btn" id="acDownloadBtn">📄 Download (.md)</button>
+</div></div><div id="page-monitor" class="page-view">
 
 
 <div class="card">
@@ -552,7 +712,7 @@ main{max-width:760px;margin:0 auto;padding:18px 16px 60px}
     <label for="auPsiKey">PageSpeed API Key <span style="font-weight:400;color:#8a8a75">(optional — Core Web Vitals ke liye)</span></label>
     <input type="password" id="auPsiKey" placeholder="AIza... (khali chhod dein to speed check skip)">
   </div>
-  <div class="field" data-tn-psi="1"><label for="auPsiPages">PageSpeed pages <span style="font-weight:400;color:#8a8a75">(comma se alag — jitne chahein)</span></label><input type="text" id="auPsiPages" placeholder="index.html, zakat-calculator.html, image-tools.html"></div><div class="field" data-tn-psi="1"><label for="auPsiStrategy">PageSpeed strategy</label><select id="auPsiStrategy"><option value="mobile">Mobile</option><option value="desktop">Desktop</option></select></div><button type="button" class="run-btn" id="auRunBtn">🚀 Run Full Audit</button>
+  <div class="field" data-tn-psi="1"><label for="auPsiPages">PageSpeed pages <span style="font-weight:400;color:#8a8a75">(comma se alag — jitne chahein)</span></label><input type="text" id="auPsiPages" style="display:none"><input type="text" id="auPsiFilter" placeholder="Tool dhoondein… (jaise zakat, marla, pdf)"><div id="auPsiPicker" style="max-height:200px;overflow:auto;border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:6px 10px;margin-top:7px"></div><p id="auPsiCount" style="font-size:.75rem;color:#8a8a75;margin:6px 0 0"></p></div><div class="field" data-tn-psi="1"><label for="auPsiStrategy">PageSpeed strategy</label><select id="auPsiStrategy"><option value="mobile">Mobile</option><option value="desktop">Desktop</option></select></div><button type="button" class="run-btn" id="auRunBtn">🚀 Run Full Audit</button>
   <button type="button" class="copy-btn" id="auExportBtn" disabled>📄 Report Download (.md)</button>
   <div id="auProgWrap" style="height:7px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-top:12px">
     <div id="auProg" style="height:100%;width:0;background:var(--kinno);transition:width .25s"></div>
@@ -574,7 +734,7 @@ main{max-width:760px;margin:0 auto;padding:18px 16px 60px}
 <div class="card hidden" id="auResultsCard">
   <h2>Audit Results</h2>
   <div id="auResults"></div>
-</div>
+</div><div class="card" data-tn-aisum="1"><h2>🤖 AI Summary <span style="font-weight:400;font-size:.75rem;color:#8a8a75">(Roman Urdu mein — Gemini key upar se)</span></h2><p style="font-size:.8rem;color:#8a8a75;margin-top:0">Audit ki report Gemini ko bhej kar aasan Roman Urdu mein samjhwaein — kya foran theek karna hai, kya baad mein, aur AdSense ke lihaz se kya halat hai.</p><button type="button" class="run-btn" id="auAiBtn">🤖 AI Summary Banayein (Roman Urdu)</button><p id="auAiStatus" style="font-size:.78rem;color:#8a8a75;margin:8px 0 0"></p><div id="auAiOut" style="white-space:pre-wrap;font-size:.85rem;line-height:1.7;margin-top:10px"></div><button type="button" class="copy-btn" id="auAiCopy" style="display:none">📋 Copy Summary</button></div>
 </div>
 </main>
 <script>
@@ -2120,7 +2280,7 @@ function clearHistory(){
     var sv = document.getElementById('auScoreVal');
     sv.textContent = score + '%';
     sv.style.color = score >= 90 ? '#5fbf6b' : score >= 70 ? '#e8c46a' : '#e07a7a';
-    REPORT = buildReport(counts);
+    REPORT = buildReport(counts); try { window.__auReport = REPORT; } catch (e) { }
     return counts;
   }
 
@@ -2572,6 +2732,460 @@ function clearHistory(){
       var e = document.getElementById(id); if (e) e.addEventListener('click', leave);
     });
     try { if (localStorage.getItem(K4) === '1') show(); } catch (e) { }
+  });
+})();
+</script><script data-tn-listb="1">
+/* ============ List B — Post Generator Additions + Audit Upgrades ============ */
+(function () {
+  'use strict';
+  var SITE = 'https://toolnest.link/';
+
+  function $(id) { return document.getElementById(id); }
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function load(k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
+  function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } }
+  function toast(m) {
+    var t = document.createElement('div');
+    t.textContent = m;
+    t.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1f3d2b;color:#f2ecd8;padding:11px 20px;border-radius:24px;font-size:.85rem;z-index:10001;max-width:90vw;text-align:center';
+    document.body.appendChild(t);
+    setTimeout(function () { t.remove(); }, 2000);
+  }
+  function copyText(t, msg) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(t).then(function () { toast(msg || 'Copy ho gaya'); }, fb);
+    } else fb();
+    function fb() {
+      var a = document.createElement('textarea');
+      a.value = t; a.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(a); a.select();
+      try { document.execCommand('copy'); toast(msg || 'Copy ho gaya'); } catch (e) { toast('Copy nahi hua'); }
+      a.remove();
+    }
+  }
+  function dl(name, text, type) {
+    var b = new Blob([text], { type: type || 'text/plain' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(b); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+  }
+
+  function tools() { return (window.TOOL_LIST || []).slice(); }
+  function fillTools(sel) {
+    var el = $(sel);
+    if (!el) return;
+    var list = tools();
+    if (!list.length) { el.innerHTML = '<option value="">Tool list load nahi hui</option>'; return; }
+    var byCat = {};
+    list.forEach(function (t) { (byCat[t.c] = byCat[t.c] || []).push(t); });
+    var h = '';
+    Object.keys(byCat).forEach(function (c) {
+      h += '<optgroup label="' + esc(c) + '">';
+      byCat[c].forEach(function (t) { h += '<option value="' + esc(t.u) + '">' + esc(t.n) + '</option>'; });
+      h += '</optgroup>';
+    });
+    el.innerHTML = h;
+  }
+  function toolName(u) {
+    var f = tools().filter(function (t) { return t.u === u; })[0];
+    return f ? f.n : u;
+  }
+
+  /* ================= B1 · UTM Link Builder ================= */
+  function utmBuild() {
+    var u = $('utmTool'); if (!u) return '';
+    var camp = ($('utmCampaign').value || '').trim();
+    if (!camp) {
+      var d = new Date();
+      camp = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'][d.getMonth()] + d.getFullYear();
+    }
+    return SITE + u.value +
+      '?utm_source=' + encodeURIComponent($('utmSource').value) +
+      '&utm_medium=' + encodeURIComponent($('utmMedium').value) +
+      '&utm_campaign=' + encodeURIComponent(camp);
+  }
+  function initUtm() {
+    if (!$('utmTool')) return;
+    fillTools('utmTool');
+    function sync() { $('utmOut').value = utmBuild(); }
+    ['utmTool', 'utmSource', 'utmMedium', 'utmCampaign'].forEach(function (id) {
+      var e = $(id); if (e) e.addEventListener('input', sync);
+      if (e) e.addEventListener('change', sync);
+    });
+    $('utmCopyBtn').addEventListener('click', function () {
+      var v = $('utmOut').value.trim();
+      if (v) copyText(v, 'UTM link copy ho gaya');
+    });
+    sync();
+  }
+
+  /* ================= B3 · Schedule + .ics ================= */
+  var SCH_KEY = 'tn-post-schedule';
+  function schRender() {
+    var box = $('schList'); if (!box) return;
+    var list = load(SCH_KEY, []);
+    if (!list.length) {
+      box.innerHTML = '<p style="font-size:.8rem;color:#8a8a75;margin:0">Abhi koi post schedule nahi hui.</p>';
+      $('schIcsBtn').disabled = true;
+      return;
+    }
+    list.sort(function (a, b) { return a.when.localeCompare(b.when); });
+    var h = '';
+    list.forEach(function (x, i) {
+      h += '<div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start;border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:8px 10px;margin-bottom:7px">' +
+        '<div style="font-size:.8rem;line-height:1.5"><b>' + esc(toolName(x.tool)) + '</b><br>' +
+        '<span style="color:#8a8a75">' + esc(x.platform) + ' \u00b7 ' + esc(x.when.replace('T', ' ')) + '</span></div>' +
+        '<button type="button" class="ta-del" data-i="' + i + '" aria-label="Delete" style="background:none;border:0;color:#e07a7a;font-size:1.1rem;cursor:pointer;padding:0 4px">\u2715</button></div>';
+    });
+    box.innerHTML = h;
+    box.querySelectorAll('.ta-del').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var l = load(SCH_KEY, []);
+        l.sort(function (a, b2) { return a.when.localeCompare(b2.when); });
+        l.splice(parseInt(b.getAttribute('data-i'), 10), 1);
+        save(SCH_KEY, l); schRender();
+      });
+    });
+    $('schIcsBtn').disabled = false;
+  }
+  function icsStamp(s) { return s.replace(/[-:]/g, '') + '00'; }
+  function initSch() {
+    if (!$('schTool')) return;
+    fillTools('schTool');
+    var d = new Date(); d.setDate(d.getDate() + 1);
+    $('schDate').value = d.toISOString().slice(0, 10);
+    $('schAddBtn').addEventListener('click', function () {
+      var date = $('schDate').value, time = $('schTime').value || '19:00';
+      if (!date) { toast('Tareekh chunein'); return; }
+      var l = load(SCH_KEY, []);
+      l.push({ tool: $('schTool').value, platform: $('schPlatform').value, when: date + 'T' + time });
+      save(SCH_KEY, l); schRender(); toast('Schedule mein add ho gaya');
+    });
+    $('schClearBtn').addEventListener('click', function () {
+      if (!confirm('Poora schedule saaf kar dein?')) return;
+      save(SCH_KEY, []); schRender();
+    });
+    $('schIcsBtn').addEventListener('click', function () {
+      var l = load(SCH_KEY, []);
+      if (!l.length) return;
+      var out = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//ToolNest//Personal Toolkit//EN', 'CALSCALE:GREGORIAN'];
+      l.forEach(function (x, i) {
+        var start = icsStamp(x.when);
+        var end = new Date(x.when);
+        end.setMinutes(end.getMinutes() + 30);
+        var endS = icsStamp(end.toISOString().slice(0, 16));
+        out.push('BEGIN:VEVENT');
+        out.push('UID:tn-' + Date.now() + '-' + i + '@toolnest.link');
+        out.push('DTSTAMP:' + icsStamp(new Date().toISOString().slice(0, 16)) + 'Z');
+        out.push('DTSTART:' + start);
+        out.push('DTEND:' + endS);
+        out.push('SUMMARY:Post ' + toolName(x.tool) + ' on ' + x.platform);
+        out.push('DESCRIPTION:' + SITE + x.tool);
+        out.push('BEGIN:VALARM', 'TRIGGER:-PT30M', 'ACTION:DISPLAY', 'DESCRIPTION:ToolNest post reminder', 'END:VALARM');
+        out.push('END:VEVENT');
+      });
+      out.push('END:VCALENDAR');
+      dl('toolnest-post-schedule.ics', out.join('\r\n'), 'text/calendar');
+      toast('Calendar file download ho rahi hai');
+    });
+    schRender();
+  }
+
+  /* ================= B5 · Performance Log ================= */
+  var PERF_KEY = 'tn-post-performance';
+  function perfRender() {
+    var box = $('perfList'), sum = $('perfSummary');
+    if (!box) return;
+    var l = load(PERF_KEY, []);
+    if (!l.length) {
+      sum.innerHTML = '';
+      box.innerHTML = '<p style="font-size:.8rem;color:#8a8a75;margin:0">Abhi koi entry nahi.</p>';
+      return;
+    }
+    var byPlat = {};
+    l.forEach(function (x) {
+      var p = byPlat[x.platform] = byPlat[x.platform] || { v: 0, c: 0, n: 0 };
+      p.v += (+x.views || 0); p.c += (+x.clicks || 0); p.n++;
+    });
+    var rows = Object.keys(byPlat).map(function (p) {
+      var o = byPlat[p];
+      var ctr = o.v ? (o.c / o.v * 100).toFixed(1) + '%' : '\u2014';
+      return { p: p, v: o.v, c: o.c, n: o.n, ctr: ctr, r: o.v ? o.c / o.v : 0 };
+    }).sort(function (a, b) { return b.r - a.r; });
+    var h = '<table style="width:100%;border-collapse:collapse;font-size:.76rem;margin-bottom:10px">' +
+      '<tr style="color:#8a8a75"><td style="padding:3px 4px">Platform</td><td>Posts</td><td>Views</td><td>Clicks</td><td>CTR</td></tr>';
+    rows.forEach(function (r, i) {
+      h += '<tr style="border-top:1px solid rgba(255,255,255,.08)"><td style="padding:4px">' +
+        (i === 0 ? '\ud83c\udfc6 ' : '') + esc(r.p) + '</td><td>' + r.n + '</td><td>' + r.v + '</td><td>' + r.c + '</td><td>' + r.ctr + '</td></tr>';
+    });
+    h += '</table>';
+    sum.innerHTML = h;
+    var recent = l.slice(-8).reverse();
+    var b = '';
+    recent.forEach(function (x) {
+      b += '<div style="border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:8px 10px;margin-bottom:7px;font-size:.78rem;line-height:1.5">' +
+        '<b>' + esc(toolName(x.tool)) + '</b> \u00b7 ' + esc(x.platform) +
+        '<br><span style="color:#8a8a75">' + esc(x.date) + ' \u00b7 ' + (+x.views || 0) + ' views \u00b7 ' + (+x.clicks || 0) + ' clicks' +
+        (x.note ? ' \u00b7 ' + esc(x.note) : '') + '</span></div>';
+    });
+    if (l.length > 8) b += '<p style="font-size:.75rem;color:#8a8a75;margin:0">\u2026 kul ' + l.length + ' entries (CSV mein sab hain)</p>';
+    box.innerHTML = b;
+  }
+  function initPerf() {
+    if (!$('perfTool')) return;
+    fillTools('perfTool');
+    $('perfAddBtn').addEventListener('click', function () {
+      var v = $('perfViews').value, c = $('perfClicks').value;
+      if (!v && !c) { toast('Views ya clicks likhein'); return; }
+      var l = load(PERF_KEY, []);
+      l.push({
+        date: new Date().toISOString().slice(0, 10),
+        tool: $('perfTool').value, platform: $('perfPlatform').value,
+        views: +v || 0, clicks: +c || 0, note: ($('perfNote').value || '').trim()
+      });
+      save(PERF_KEY, l);
+      $('perfViews').value = ''; $('perfClicks').value = ''; $('perfNote').value = '';
+      perfRender(); toast('Entry add ho gayi');
+    });
+    $('perfClearBtn').addEventListener('click', function () {
+      if (!confirm('Poora performance log saaf kar dein?')) return;
+      save(PERF_KEY, []); perfRender();
+    });
+    $('perfExportBtn').addEventListener('click', function () {
+      var l = load(PERF_KEY, []);
+      if (!l.length) { toast('Log khali hai'); return; }
+      var csv = 'date,tool,platform,views,clicks,note\n';
+      l.forEach(function (x) {
+        csv += [x.date, toolName(x.tool), x.platform, x.views, x.clicks, '"' + String(x.note || '').replace(/"/g, '""') + '"'].join(',') + '\n';
+      });
+      dl('toolnest-post-performance.csv', csv, 'text/csv');
+    });
+    perfRender();
+  }
+
+  /* ================= Gemini ================= */
+  function gKey() { try { return localStorage.getItem('toolnest-gemini-key') || ''; } catch (e) { return ''; } }
+  function gModel() { try { return localStorage.getItem('toolnest-gemini-model') || 'gemini-2.5-flash'; } catch (e) { return 'gemini-2.5-flash'; } }
+  function ask(prompt) {
+    var key = gKey();
+    if (!key) return Promise.reject(new Error('Gemini API key set nahi hai \u2014 upar "AI Settings" mein daal kar Save karein.'));
+    var url = 'https://generativelanguage.googleapis.com/v1beta/models/' +
+      encodeURIComponent(gModel()) + ':generateContent?key=' + encodeURIComponent(key);
+    return fetch(url, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+    }).then(function (r) {
+      if (!r.ok) return r.text().then(function (t) { throw new Error('Gemini error (' + r.status + '): ' + t.slice(0, 200)); });
+      return r.json();
+    }).then(function (d) {
+      var c = d && d.candidates && d.candidates[0];
+      var parts = c && c.content && c.content.parts;
+      var out = parts ? parts.map(function (p) { return p.text || ''; }).join('') : '';
+      if (!out) throw new Error('Gemini ne khali jawab diya');
+      return out.trim();
+    });
+  }
+
+  /* ================= B2 + B4 + B6 + B7 · AI Content Studio ================= */
+  var AC_LABELS = {
+    quora: ['Sawaal jo Quora par poocha gaya', 'Marla ko square feet mein kaise convert karein?'],
+    reddit: ['Subreddit ya mauzu', 'r/pakistan \u2014 plot khareedne wale logon ke liye'],
+    newsletter: ['Is mahine ki khaas baat', 'Naye tools, Urdu invitation cards, wedding planner'],
+    comparison: ['Competitor ka naam', 'Watermarkly'],
+    reels: ['Hook ya mauzu', 'Log Marla convert karte waqt yahan galti karte hain']
+  };
+  function acPrompt(type, tool, url, extra, lang) {
+    var name = toolName(tool);
+    var langLine = lang === 'Roman Urdu'
+      ? 'Roman Urdu mein likhein (Urdu zabaan, English harf) \u2014 saaf aur aam fehm.'
+      : lang === 'Both'
+        ? 'Pehle English mein likhein, phir wahi baat Roman Urdu mein.'
+        : 'Write in clear, plain English.';
+    var base = 'You are helping promote a free browser-based tool called "' + name + '" on ToolNest (' + url + '). ' +
+      'ToolNest tools run entirely in the user\'s browser, nothing is uploaded, no sign-up, no watermark, free forever. ' +
+      'The audience is mainly Pakistan and India. ' + langLine + '\n\n';
+    var P = {
+      quora: 'Write a genuinely helpful Quora answer to this question: "' + extra + '"\n\n' +
+        'Rules: answer the question properly FIRST with real substance (at least 150 words of actual help). ' +
+        'Only near the end, mention the tool naturally as something the reader can use, with the link. ' +
+        'Do not sound like an advertisement. No hype words. No bullet-point spam. Write like an experienced person sharing what they know.',
+      reddit: 'Write a Reddit post for: "' + extra + '"\n\n' +
+        'Rules: Reddit hates promotion. Lead with a real problem or a useful observation. ' +
+        'Be honest that you built the tool if you mention it. Keep it short, conversational, lowercase-friendly. ' +
+        'Give a title line first, then the body. Mentioning the link should feel optional, not the point of the post.',
+      newsletter: 'Write a short monthly email newsletter about: "' + extra + '"\n\n' +
+        'Rules: give a subject line first. Keep it under 250 words. One clear reason to click. ' +
+        'Friendly but not salesy. End with the link. No emoji spam.',
+      comparison: 'Write an honest comparison between "' + name + '" and "' + extra + '".\n\n' +
+        'Rules: be genuinely fair \u2014 state clearly where the competitor is better, because readers trust honesty. ' +
+        'Then state where a browser-based, no-upload, free tool wins. Use a short comparison table. ' +
+        'End with a one-line recommendation about which reader should pick which. Do not invent features or prices you are not sure about.',
+      reels: 'Write a 30-45 second Reels/Shorts script for: "' + extra + '"\n\n' +
+        'Rules: Give it as a table with three columns \u2014 Time, On-screen text, Voiceover. ' +
+        'Hook must land in the first 3 seconds. Keep on-screen text under 6 words per card. ' +
+        'End with a clear call to action pointing to the link.'
+    };
+    return base + (P[type] || P.quora) + '\n\nLink to use: ' + url;
+  }
+  function initAc() {
+    if (!$('acTool')) return;
+    fillTools('acTool');
+    function syncLabel() {
+      var t = $('acType').value, L = AC_LABELS[t] || AC_LABELS.quora;
+      $('acExtraLabel').textContent = L[0];
+      $('acExtra').placeholder = L[1];
+    }
+    $('acType').addEventListener('change', syncLabel);
+    syncLabel();
+
+    $('acGenBtn').addEventListener('click', function () {
+      var type = $('acType').value, tool = $('acTool').value;
+      var extra = ($('acExtra').value || '').trim();
+      if (!extra) { toast('Context ya sawaal likhein'); return; }
+      var url = SITE + tool;
+      if ($('acUtm').value === 'yes') {
+        var src = { quora: 'quora', reddit: 'reddit', newsletter: 'newsletter', comparison: 'blog', reels: 'youtube' }[type] || 'social';
+        var med = { newsletter: 'email', quora: 'answer', reddit: 'answer' }[type] || 'post';
+        var d = new Date();
+        var camp = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'][d.getMonth()] + d.getFullYear();
+        url += '?utm_source=' + src + '&utm_medium=' + med + '&utm_campaign=' + camp;
+      }
+      $('acGenBtn').disabled = true;
+      $('acStatus').textContent = 'Gemini se likhwa raha hoon\u2026';
+      $('acOut').value = '';
+      ask(acPrompt(type, tool, url, extra, $('acLang').value)).then(function (t) {
+        $('acOut').value = t;
+        $('acStatus').textContent = '\u2705 Taiyar \u2014 bhejnay se pehle parh lein.';
+      }).catch(function (e) {
+        $('acStatus').textContent = '\u2717 ' + e.message;
+      }).then(function () { $('acGenBtn').disabled = false; });
+    });
+    $('acCopyBtn').addEventListener('click', function () {
+      var v = $('acOut').value.trim();
+      if (v) copyText(v, 'Copy ho gaya');
+    });
+    $('acDownloadBtn').addEventListener('click', function () {
+      var v = $('acOut').value.trim();
+      if (!v) { toast('Pehle generate karein'); return; }
+      dl('toolnest-' + $('acType').value + '-' + Date.now() + '.md', v, 'text/markdown');
+    });
+  }
+
+  /* ================= Audit · PageSpeed page picker ================= */
+  function initPsiPicker() {
+    var hidden = $('auPsiPages'), box = $('auPsiPicker');
+    if (!hidden || !box) return;
+    var list = tools();
+    var extra = [
+      { n: 'Homepage', u: 'index.html', c: 'Main' },
+      { n: 'About', u: 'about.html', c: 'Main' },
+      { n: 'Privacy Policy', u: 'privacy.html', c: 'Main' }
+    ];
+    var hubs = [];
+    var seen = {};
+    list.forEach(function (t) { if (!seen[t.c]) { seen[t.c] = 1; } });
+    var HUBFILES = {
+      'Image Tools': 'image-tools.html', 'File & PDF': 'pdf-tools.html', 'Text Tools': 'text-tools.html',
+      'Developer': 'dev-tools.html', 'Digital & Web': 'digital-tools.html', 'YouTube': 'youtube-tools.html',
+      'Health & Fitness': 'health-fitness.html', 'Business': 'business-tools.html', 'Design': 'design-tools.html',
+      'Education': 'education-tools.html', 'Finance': 'finance-tools.html', 'Property': 'property-tools.html'
+    };
+    Object.keys(HUBFILES).forEach(function (c) { hubs.push({ n: c + ' (hub)', u: HUBFILES[c], c: 'Hub Pages' }); });
+
+    var all = extra.concat(hubs, list);
+    var chosen = {};
+    (hidden.value || '').split(',').map(function (x) { return x.trim(); }).filter(Boolean)
+      .forEach(function (u) { chosen[u] = 1; });
+    if (!Object.keys(chosen).length) { chosen['index.html'] = 1; }
+
+    function syncHidden() {
+      var arr = all.map(function (x) { return x.u; }).filter(function (u) { return chosen[u]; });
+      hidden.value = arr.join(', ');
+      hidden.dispatchEvent(new Event('change'));
+      var c = $('auPsiCount');
+      if (c) {
+        c.textContent = arr.length ? arr.length + ' page chune hue \u2014 takreeban ' + (arr.length * 20) + ' second lagenge'
+          : 'Koi page nahi chuna \u2014 PageSpeed skip ho jayega';
+        c.style.color = arr.length > 6 ? '#e8c46a' : '#8a8a75';
+      }
+    }
+    function draw(filter) {
+      filter = (filter || '').toLowerCase();
+      var byCat = {}, any = false;
+      all.forEach(function (x) {
+        if (filter && x.n.toLowerCase().indexOf(filter) === -1 && x.u.indexOf(filter) === -1) return;
+        (byCat[x.c] = byCat[x.c] || []).push(x); any = true;
+      });
+      if (!any) { box.innerHTML = '<p style="font-size:.78rem;color:#8a8a75;margin:0">Kuch nahi mila.</p>'; return; }
+      var h = '';
+      Object.keys(byCat).forEach(function (c) {
+        h += '<div style="font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:#8a8a75;margin:8px 0 4px">' + esc(c) + '</div>';
+        byCat[c].forEach(function (x) {
+          h += '<label style="display:flex;align-items:center;gap:8px;padding:4px 2px;font-size:.8rem;cursor:pointer">' +
+            '<input type="checkbox" data-u="' + esc(x.u) + '"' + (chosen[x.u] ? ' checked' : '') +
+            ' style="width:17px;height:17px;accent-color:#e07a2c;flex:none">' +
+            '<span>' + esc(x.n) + '</span></label>';
+        });
+      });
+      box.innerHTML = h;
+      box.querySelectorAll('input[type="checkbox"]').forEach(function (cb) {
+        cb.addEventListener('change', function () {
+          var u = cb.getAttribute('data-u');
+          if (cb.checked) chosen[u] = 1; else delete chosen[u];
+          syncHidden();
+        });
+      });
+    }
+    var f = $('auPsiFilter');
+    if (f) f.addEventListener('input', function () { draw(f.value); });
+    draw('');
+    syncHidden();
+  }
+
+  /* ================= Audit · AI Summary (Roman Urdu) ================= */
+  function initAiSummary() {
+    var btn = $('auAiBtn'), out = $('auAiOut'), st = $('auAiStatus');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var rep = window.__auReport;
+      if (!rep) { st.textContent = '\u2717 Pehle "Run Full Audit" chalayein.'; return; }
+      btn.disabled = true;
+      st.textContent = 'Gemini se samjha raha hoon\u2026';
+      out.textContent = '';
+      var prompt =
+        'Neeche ek website ka technical SEO audit report hai (ToolNest \u2014 99 free browser-based tools ki site, ' +
+        'Pakistan aur India ke users ke liye, Google AdSense approval ke intezar mein).\n\n' +
+        'Aap ek tajurbakaar SEO consultant hain. Is report ko **Roman Urdu** mein samjhaein (Urdu zabaan, English harf). ' +
+        'Aise likhein jaise kisi dost ko samjha rahe hon jo technical nahi hai.\n\n' +
+        'Is tarteeb se likhein:\n' +
+        '1. **Ek jumle mein khulasa** \u2014 site ki halat kaisi hai\n' +
+        '2. **Foran theek karne wali cheezein** \u2014 sirf wo jo waqai zaroori hain, har ek ke saath ye batayein ke kyun ahem hai\n' +
+        '3. **Baad mein dekhne wali cheezein** \u2014 jo abhi rukawat nahi\n' +
+        '4. **Jo theek hai** \u2014 mukhtasar, taake pata chale kya sahi chal raha hai\n' +
+        '5. **AdSense ke lihaz se** \u2014 koi cheez approval rok sakti hai ya nahi\n\n' +
+        'Ehtiyat: PASS wali cheezon ko masla mat banaein. Agar koi WARN mamooli hai to saaf kehdein ke ' +
+        'ye mamooli hai, ghair zaroori fikr na dilayein. Har mashware ke saath wajah zaroor likhein. ' +
+        'Kisi cheez ka andaza mat lagayein jo report mein nahi hai.\n\n' +
+        '--- AUDIT REPORT ---\n\n' + rep.slice(0, 24000);
+      ask(prompt).then(function (t) {
+        out.textContent = t;
+        st.textContent = '\u2705 Taiyar';
+        $('auAiCopy').style.display = '';
+      }).catch(function (e) {
+        st.textContent = '\u2717 ' + e.message;
+      }).then(function () { btn.disabled = false; });
+    });
+    var c = $('auAiCopy');
+    if (c) c.addEventListener('click', function () {
+      var v = out.textContent.trim();
+      if (v) copyText(v, 'Summary copy ho gayi');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    initUtm(); initSch(); initPerf(); initAc();
+    initPsiPicker(); initAiSummary();
   });
 })();
 </script></body>
