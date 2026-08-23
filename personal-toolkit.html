@@ -138,7 +138,7 @@ main{max-width:760px;margin:0 auto;padding:18px 16px 60px}
 </header>
 <div class="page-nav">
   <button type="button" class="page-nav-btn active" id="navPostGen">📤 Social Post Generator</button>
-  <button type="button" class="page-nav-btn" id="navMonitor">🩺 Website Health Monitor</button>
+  <button type="button" class="page-nav-btn" id="navMonitor">🩺 Website Health Monitor</button><button type="button" class="page-nav-btn" id="navAds">📢 Ad Deployer</button>
 </div>
 <main style="padding-top:0">
 <div class="card" id="aiSettingsCard" style="border-color:var(--kinno)">
@@ -436,6 +436,93 @@ main{max-width:760px;margin:0 auto;padding:18px 16px 60px}
   <button type="button" class="clear-hist-btn" id="wmClearHistBtn">Clear History</button>
 </div>
 
+
+</div>
+<div id="page-ads" class="page-view">
+<style>
+.page-nav{flex-wrap:wrap}
+.page-nav-btn{flex:1 1 46%;min-width:0;font-size:.8rem}
+@media(min-width:720px){.page-nav-btn{flex:1 1 0;font-size:.85rem}}
+</style>
+
+<div class="card" style="border-color:var(--kinno)">
+  <h2>📢 AdSense Ad Deployer <span style="font-weight:400;font-size:.75rem;color:#8a8a75">(token stays only in this browser)</span></h2>
+  <p style="font-size:.82rem;color:#8a8a75;line-height:1.6;margin-top:0">
+    Ad code AdSense se lein: <b>Ads → By ad unit → Display ads</b> → naam dein → <b>Create</b> → code copy karein.<br>
+    Agar code mein <code>pagead2…adsbygoogle.js</code> wali line ho to fikr na karein — ye tool khud hata deta hai.
+  </p>
+</div>
+
+<div class="card">
+  <h2>1. Ad Code — jahan lagana ho wahan bharein</h2>
+  <p style="font-size:.8rem;color:#8a8a75;margin-top:0">Khali chhoda hua slot skip ho jayega. Har slot ka alag ad unit banayein taake reporting alag dikhe.</p>
+
+  <div class="field">
+    <label for="adSlotTop">1 · TOP — tool se ooper <span style="font-weight:400;color:#8a8a75">(zyada kamai, tool neeche chala jata hai)</span></label>
+    <textarea id="adSlotTop" rows="4" style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.74rem" placeholder="&lt;ins class=&quot;adsbygoogle&quot; ...&gt;&lt;/ins&gt;"></textarea>
+  </div>
+
+  <div class="field">
+    <label for="adSlotMid">2 · MID — tool ke baad, SEO content se pehle <span style="font-weight:400;color:#8a8a75">(sabse behtar — 36px faasla khud lagta hai)</span></label>
+    <textarea id="adSlotMid" rows="4" style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.74rem" placeholder="&lt;ins class=&quot;adsbygoogle&quot; ...&gt;&lt;/ins&gt;"></textarea>
+  </div>
+
+  <div class="field">
+    <label for="adSlotBot">3 · BOTTOM — content ke aakhir, footer se pehle <span style="font-weight:400;color:#8a8a75">(sabse mehfooz)</span></label>
+    <textarea id="adSlotBot" rows="4" style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.74rem" placeholder="&lt;ins class=&quot;adsbygoogle&quot; ...&gt;&lt;/ins&gt;"></textarea>
+  </div>
+
+  <button type="button" class="copy-btn" id="adSaveCodesBtn">💾 Save Ad Codes (is device par)</button>
+  <p style="font-size:.78rem;color:#8a8a75;margin-bottom:0" id="adSaveStatus"></p>
+</div>
+
+<div class="card">
+  <h2>2. Kahan Lagana Hai</h2>
+  <div class="field">
+    <label for="adScope">Pages</label>
+    <select id="adScope">
+      <option value="tools">99 tool pages</option>
+      <option value="hubs">12 hub pages + homepage (13)</option>
+      <option value="all">Sab (112 pages)</option>
+    </select>
+  </div>
+  <p style="font-size:.78rem;color:#8a8a75;line-height:1.6">
+    <b>Hamesha chhoot jate hain:</b> privacy, terms, about, contact, aur personal-toolkit.html
+  </p>
+  <label style="display:flex;align-items:center;gap:9px;font-size:.85rem;cursor:pointer">
+    <input type="checkbox" id="adRemoveMode" style="width:20px;height:20px;accent-color:var(--kinno)">
+    <span>Ads HATA DEIN (undo) — upar ka code ignore ho jayega</span>
+  </label>
+</div>
+
+<div class="card">
+  <h2>3. GitHub</h2>
+  <div class="row2">
+    <div class="field">
+      <label for="adGhToken">GitHub Token <span style="font-weight:400;color:#8a8a75">(repo scope)</span></label>
+      <input type="password" id="adGhToken" placeholder="ghp_...">
+    </div>
+    <div class="field">
+      <label for="adGhRepo">Repository</label>
+      <input id="adGhRepo" placeholder="saiftiwana/ToolNest" value="saiftiwana/ToolNest">
+    </div>
+  </div>
+  <div class="field">
+    <label for="adGhBranch">Branch</label>
+    <input id="adGhBranch" value="main">
+  </div>
+  <button type="button" class="run-btn" id="adConnectBtn">1 · Connect &amp; Verify</button>
+</div>
+
+<div class="card">
+  <h2>4. Preview &amp; Deploy</h2>
+  <button type="button" class="gen-btn" id="adDryRunBtn" disabled>2 · Dry Run (kuch commit nahi hoga)</button>
+  <button type="button" class="run-btn" id="adCommitBtn" disabled style="background:#3f9e52;border-color:#3f9e52">3 · Commit All Files (1 Commit)</button>
+  <div id="adProgWrap" style="height:7px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-top:12px">
+    <div id="adProg" style="height:100%;width:0;background:var(--kinno);transition:width .25s"></div>
+  </div>
+  <div id="adLog" style="background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.75rem;white-space:pre-wrap;word-break:break-word;max-height:320px;overflow:auto;margin-top:12px;line-height:1.55">Ready. Ad code daalein, phir "Connect &amp; Verify" dabayein.</div>
+</div>
 
 </div>
 </main>
@@ -1609,5 +1696,318 @@ function clearHistory(){
 })();
 
 </script>
-</body>
+<script data-tn-adtool="1">
+/* ============ AdSense Ad Deployer (Personal Toolkit page 3) ============ */
+(function () {
+  var PUB = 'ca-pub-7690733672429028';
+  var API = 'https://api.github.com';
+  var SKIP = { 'privacy.html': 1, 'terms.html': 1, 'about.html': 1, 'contact.html': 1, 'personal-toolkit.html': 1 };
+  var AD_CSS = '\n/* ===== ToolNest manual ad slots ===== */\n.tn-ad{margin:36px 0;text-align:center;clear:both;overflow:hidden;min-height:1px}\n.tn-ad-label{display:block;font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;opacity:.42;margin-bottom:6px}\n.tn-ad ins{display:block;margin:0 auto}\n.tn-ad-top{margin:4px 0 34px}\n.tn-ad-bottom{margin:40px 0 10px}\n@media(max-width:480px){.tn-ad{margin:28px 0}}\n@media print{.tn-ad{display:none!important}}\n';
+
+  var LOG = document.getElementById('adLog');
+  var PROG = document.getElementById('adProg');
+  if (!LOG) return;
+
+  function log(m, c) {
+    var s = document.createElement('span');
+    if (c === 'ok') s.style.color = '#5fbf6b';
+    else if (c === 'err') s.style.color = '#e07a7a';
+    else if (c === 'warn') s.style.color = '#e8c46a';
+    else if (c === 'dim') s.style.color = '#8a8a75';
+    s.textContent = m + '\n';
+    LOG.appendChild(s);
+    LOG.scrollTop = LOG.scrollHeight;
+  }
+  function clr() { LOG.textContent = ''; }
+  function prog(p) { PROG.style.width = Math.round(p * 100) + '%'; }
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function b64enc(str) { var b = new TextEncoder().encode(str), s = '', CH = 0x8000; for (var i = 0; i < b.length; i += CH) { s += String.fromCharCode.apply(null, b.subarray(i, i + CH)); } return btoa(s); }
+  function b64dec(x) { var s = atob(String(x).replace(/\s/g, '')), a = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) a[i] = s.charCodeAt(i); return new TextDecoder('utf-8').decode(a); }
+
+  var TOK = '', REPO = '', BR = '';
+  var TREE = null, BASE = null, BASETREE = null, CHANGES = null, BLOBCACHE = {};
+  var TOOLS = [], HUBS = [], ADS = {}, REMOVE = false, SCOPE = 'tools', COMMITTED = 0;
+
+  function ghOnce(path, opt) {
+    opt = Object.assign({}, opt || {});
+    opt.headers = Object.assign({ 'Authorization': 'Bearer ' + TOK, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' }, opt.headers || {});
+    return fetch(API + path, opt).then(function (r) {
+      if (r.status === 403 || r.status === 429) { var e = new Error('RATE ' + r.status); e.retry = true; throw e; }
+      if (r.status >= 500) { var e2 = new Error('SERVER ' + r.status); e2.retry = true; throw e2; }
+      if (!r.ok) { return r.text().then(function (t) { throw new Error(r.status + ' :: ' + t.slice(0, 180)); }); }
+      return r.json();
+    }, function (n) { var e = new Error('network: ' + n.message); e.retry = true; throw e; });
+  }
+  function gh(path, opt, tries) {
+    tries = (tries === undefined) ? 5 : tries;
+    return ghOnce(path, opt).catch(function (e) {
+      if (!e.retry || tries <= 0) throw e;
+      log('  \u21bb retry (' + tries + ' left)', 'warn');
+      return sleep((6 - tries) * 1200).then(function () { return gh(path, opt, tries - 1); });
+    });
+  }
+  function getBlob(p) { return gh('/repos/' + REPO + '/git/blobs/' + TREE[p]).then(function (b) { return b64dec(b.content); }); }
+
+  function cleanAd(code) {
+    var c = String(code || '').trim();
+    if (!c) return '';
+    c = c.replace(/<script[^>]*src=["']https:\/\/pagead2\.googlesyndication\.com[^"']*["'][^>]*><\/script>/gi, '').trim();
+    return c;
+  }
+  function checkAd(name, c) {
+    if (!c) return true;
+    if (c.indexOf('adsbygoogle') === -1) { log('\u2717 ' + name + ': ye AdSense ka code nahi lag raha', 'err'); return false; }
+    if (c.indexOf(PUB) === -1) log('\u26a0 ' + name + ': publisher ID (' + PUB + ') is code mein nahi hai', 'warn');
+    if (c.indexOf('data-ad-slot') === -1) log('\u26a0 ' + name + ': data-ad-slot nahi mila \u2014 shayad adhoora code', 'warn');
+    if (c.indexOf('<!--') > -1 && c.indexOf('-->') === -1) { log('\u2717 ' + name + ': adhoora HTML comment', 'err'); return false; }
+    return true;
+  }
+
+  function wrapAd(slot, code) {
+    return '<div class="tn-ad tn-ad-' + slot + '" data-tn-ad="' + slot + '">'
+      + '<span class="tn-ad-label">Advertisement</span>'
+      + code + '</div><!--/tn-ad-' + slot + '-->';
+  }
+  function slotRe(slot) {
+    return new RegExp('<div class="tn-ad tn-ad-' + slot + '" data-tn-ad="' + slot + '">[\\s\\S]*?<!--\\/tn-ad-' + slot + '-->', 'g');
+  }
+
+  function applySlots(f, html) {
+    var out = html, notes = [];
+    ['top', 'mid', 'bot'].forEach(function (slot) {
+      var re = slotRe(slot);
+      var has = re.test(out);
+      var code = ADS[slot];
+
+      if (REMOVE || !code) {
+        if (has) { out = out.replace(slotRe(slot), ''); notes.push('-' + slot); }
+        return;
+      }
+      var block = wrapAd(slot, code);
+      if (has) {
+        var before = out;
+        out = out.replace(slotRe(slot), block.replace(/\$/g, '$$$$'));
+        if (out !== before) notes.push('~' + slot);
+        return;
+      }
+      if (slot === 'top') {
+        var m = out.match(/<main[^>]*>/);
+        if (!m) throw new Error('<main> nahi mila');
+        out = out.replace(/<main[^>]*>/, m[0] + block.replace(/\$/g, '$$$$'));
+      } else if (slot === 'mid') {
+        /* tool pages -> seo-content · hub pages -> hub-content · homepage -> "Why Choose" section */
+        var i = out.indexOf('<div class="seo-content"');
+        if (i === -1) i = out.indexOf('<div id="hub-content">');
+        if (i === -1) i = out.indexOf('<div class="section-title"><h2>Why Choose ToolNest');
+        if (i === -1) { log('  \u00b7 ' + f + ': mid anchor nahi mila, skip', 'dim'); return; }
+        out = out.slice(0, i) + block + out.slice(i);
+      } else {
+        if (out.indexOf('</main>') === -1) throw new Error('</main> nahi mila');
+        out = out.replace('</main>', block.replace(/\$/g, '$$$$') + '</main>');
+      }
+      notes.push('+' + slot);
+    });
+    return { content: out, notes: notes };
+  }
+
+  function cssUpdate(css) {
+    var want = !REMOVE && (ADS.top || ADS.mid || ADS.bot);
+    var has = css.indexOf('.tn-ad{') > -1;
+    if (want && !has) return css.replace(/\s*$/, '') + '\n' + AD_CSS;
+    if (REMOVE && has) {
+      var i = css.indexOf('/* ===== ToolNest manual ad slots ===== */');
+      if (i > -1) return css.slice(0, i).replace(/\s*$/, '') + '\n';
+    }
+    return null;
+  }
+
+  /* ---- saved codes ---- */
+  var KEY = 'toolnest-ad-codes';
+  var elTop = document.getElementById('adSlotTop'), elMid = document.getElementById('adSlotMid'), elBot = document.getElementById('adSlotBot');
+  var elRepo = document.getElementById('adGhRepo'), elBr = document.getElementById('adGhBranch');
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+    if (saved.top) elTop.value = saved.top;
+    if (saved.mid) elMid.value = saved.mid;
+    if (saved.bot) elBot.value = saved.bot;
+    if (saved.repo) elRepo.value = saved.repo;
+    if (saved.br) elBr.value = saved.br;
+  } catch (e) { }
+  document.getElementById('adSaveCodesBtn').addEventListener('click', function () {
+    try {
+      localStorage.setItem(KEY, JSON.stringify({ top: elTop.value, mid: elMid.value, bot: elBot.value, repo: elRepo.value, br: elBr.value }));
+      document.getElementById('adSaveStatus').textContent = '\u2705 Saved on this device (token save nahi hota).';
+    } catch (e) { document.getElementById('adSaveStatus').textContent = '\u2717 Save nahi hua: ' + e.message; }
+  });
+
+  /* ---- pipeline ---- */
+  document.getElementById('adConnectBtn').addEventListener('click', function () {
+    clr(); prog(0);
+    TOK = document.getElementById('adGhToken').value.trim();
+    REPO = elRepo.value.trim();
+    BR = elBr.value.trim() || 'main';
+    if (!TOK) { log('\u2717 Token khali hai.', 'err'); return; }
+    if (!/^[\w.-]+\/[\w.-]+$/.test(REPO)) { log('\u2717 Repo format ghalat (owner/repo).', 'err'); return; }
+    log('Connecting to ' + REPO + ' (' + BR + ') ...');
+    gh('/repos/' + REPO).then(function (r) {
+      log('\u2713 Repo: ' + r.full_name, 'ok');
+      return gh('/repos/' + REPO + '/git/ref/heads/' + BR);
+    }).then(function (ref) {
+      BASE = ref.object.sha; log('\u2713 Head: ' + BASE.slice(0, 7), 'ok');
+      return gh('/repos/' + REPO + '/git/commits/' + BASE);
+    }).then(function (c) { BASETREE = c.tree.sha; return gh('/repos/' + REPO + '/git/trees/' + BASETREE + '?recursive=1'); })
+      .then(function (t) {
+        TREE = {}; t.tree.forEach(function (n) { if (n.type === 'blob') TREE[n.path] = n.sha; });
+        log('\u2713 Tree: ' + Object.keys(TREE).length + ' files', 'ok');
+        if (!TREE['styles.css']) throw new Error('styles.css nahi mila');
+        return getBlob('index.html');
+      }).then(function (idx) {
+        var m = idx.match(/u:"([a-z0-9\-]+\.html)"/g) || [];
+        var set = {}; m.forEach(function (x) { var f = x.slice(3, -1); if (TREE[f] && !SKIP[f]) set[f] = 1; });
+        TOOLS = Object.keys(set).sort();
+        var hm = idx.match(/href=([a-z\-]+\.html)><h3>/g) || [];
+        var hs = {}; hm.forEach(function (x) { var f = x.slice(5, -5); if (TREE[f] && !SKIP[f]) hs[f] = 1; });
+        HUBS = Object.keys(hs).sort();
+        log('\u2713 ' + TOOLS.length + ' tool pages, ' + HUBS.length + ' hub pages', 'ok');
+        if (!TOOLS.length || !HUBS.length) throw new Error('page list nahi bani');
+        log('\nReady. Ab "Dry Run" dabayein.', 'ok');
+        document.getElementById('adDryRunBtn').disabled = false;
+      }).catch(function (e) { log('\u2717 ' + e.message, 'err'); });
+  });
+
+  document.getElementById('adDryRunBtn').addEventListener('click', function () {
+    clr(); prog(0); CHANGES = null; BLOBCACHE = {};
+    REMOVE = document.getElementById('adRemoveMode').checked;
+    SCOPE = document.getElementById('adScope').value;
+    ADS = { top: cleanAd(elTop.value), mid: cleanAd(elMid.value), bot: cleanAd(elBot.value) };
+
+    if (!REMOVE) {
+      var okAll = checkAd('TOP', ADS.top) && checkAd('MID', ADS.mid) && checkAd('BOTTOM', ADS.bot);
+      if (!okAll) { log('\nRuk gaya \u2014 pehle code theek karein.', 'err'); return; }
+      if (!ADS.top && !ADS.mid && !ADS.bot) { log('\u2717 Koi ad code nahi diya.', 'err'); return; }
+      log('Slots: ' + ['top', 'mid', 'bot'].filter(function (s) { return ADS[s]; }).join(', '), 'ok');
+      if (ADS.top && ADS.mid && ADS.bot) log('\u26a0 Teeno slots bhare hain \u2014 3 ads per page. Shuru mein 1-2 behtar.', 'warn');
+    } else log('MODE: ADS HATANA (undo)', 'warn');
+
+    var order = (SCOPE === 'tools') ? TOOLS.slice() : (SCOPE === 'hubs') ? HUBS.concat(['index.html']) : TOOLS.concat(HUBS, ['index.html']);
+    order = order.filter(function (f) { return TREE[f] && !SKIP[f]; });
+    var changes = [], i = 0, skipped = 0, errors = 0;
+    log('\nDry run \u2014 ' + order.length + ' pages...\n');
+
+    function step() {
+      if (i >= order.length) {
+        return getBlob('styles.css').then(function (css) {
+          var n = cssUpdate(css);
+          if (n) { changes.push({ path: 'styles.css', content: n }); log('\u2713 styles.css \u2014 ad CSS ' + (REMOVE ? 'hataya' : 'add'), 'ok'); }
+          else log('\u00b7 styles.css \u2014 pehle se ok', 'dim');
+        }).catch(function (e) { log('\u2717 styles.css \u2014 ' + e.message, 'err'); errors++; }).then(function () {
+          CHANGES = changes; prog(1);
+          log('\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500');
+          log('Badlne wali files : ' + changes.length, 'ok');
+          log('Pehle se theek    : ' + skipped, 'dim');
+          if (errors) log('Errors            : ' + errors, 'err');
+          log('\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500');
+          if (changes.length) { log('\nAb "Commit All Files" dabayein.', 'ok'); document.getElementById('adCommitBtn').disabled = false; }
+          else log('\nKuch badalne ko nahi hai.', 'warn');
+        });
+      }
+      var f = order[i++]; prog(i / (order.length + 1));
+      return getBlob(f).then(function (html) {
+        var r;
+        try { r = applySlots(f, html); } catch (e) { log('\u2717 ' + f + ' \u2014 ' + e.message, 'err'); errors++; return; }
+        if (r.content === html) skipped++;
+        else { changes.push({ path: f, content: r.content }); if (changes.length <= 6) log('\u2713 ' + f + ' \u2014 ' + r.notes.join(' '), 'ok'); }
+      }).catch(function (e) { log('\u2717 ' + f + ' \u2014 ' + e.message, 'err'); errors++; })
+        .then(function () { if (i % 25 === 0) log('  ... ' + i + '/' + order.length, 'dim'); return step(); });
+    }
+    step();
+  });
+
+  document.getElementById('adCommitBtn').addEventListener('click', function () {
+    if (!CHANGES || !CHANGES.length) { log('Pehle Dry Run chalayein.', 'warn'); return; }
+    document.getElementById('adCommitBtn').disabled = true;
+    document.getElementById('adDryRunBtn').disabled = true;
+    prog(0);
+    log('\n=== COMMIT SHURU (' + CHANGES.length + ' files) ===', 'ok');
+    var blobs = [], i = 0, reused = 0;
+    function mk() {
+      if (i >= CHANGES.length) return Promise.resolve();
+      var c = CHANGES[i++]; prog(i / CHANGES.length * 0.85);
+      if (BLOBCACHE[c.path]) { blobs.push({ path: c.path, mode: '100644', type: 'blob', sha: BLOBCACHE[c.path] }); reused++; return mk(); }
+      return gh('/repos/' + REPO + '/git/blobs', { method: 'POST', body: JSON.stringify({ content: b64enc(c.content), encoding: 'base64' }) })
+        .then(function (b) {
+          BLOBCACHE[c.path] = b.sha;
+          blobs.push({ path: c.path, mode: '100644', type: 'blob', sha: b.sha });
+          if (i % 10 === 0 || i === CHANGES.length) log('  blobs ' + i + '/' + CHANGES.length, 'dim');
+          return sleep(150).then(mk);
+        });
+    }
+    mk().then(function () {
+      log('\u2713 ' + blobs.length + ' blobs taiyar' + (reused ? ' (' + reused + ' reuse)' : ''), 'ok'); prog(0.88);
+      return gh('/repos/' + REPO + '/git/trees', { method: 'POST', body: JSON.stringify({ base_tree: BASETREE, tree: blobs }) });
+    }).then(function (t) {
+      log('\u2713 Tree: ' + t.sha.slice(0, 7), 'ok'); prog(0.93);
+      var slots = ['top', 'mid', 'bot'].filter(function (s) { return ADS[s]; }).join('+');
+      return gh('/repos/' + REPO + '/git/commits', {
+        method: 'POST', body: JSON.stringify({
+          message: (REMOVE ? 'Remove manual AdSense ad units from pages'
+            : 'Add manual AdSense ad units (' + slots + ') to ' + SCOPE + ' pages with safe spacing'),
+          tree: t.sha, parents: [BASE]
+        })
+      });
+    }).then(function (c) {
+      log('\u2713 Commit: ' + c.sha.slice(0, 7), 'ok'); prog(0.97);
+      return gh('/repos/' + REPO + '/git/refs/heads/' + BR, { method: 'PATCH', body: JSON.stringify({ sha: c.sha, force: false }) });
+    }).then(function (r) {
+      prog(1); COMMITTED = CHANGES ? CHANGES.length : 0; BASE = r.object.sha; BLOBCACHE = {}; CHANGES = null;
+      document.getElementById('adDryRunBtn').disabled = false;
+      return gh('/repos/' + REPO + '/git/commits/' + BASE).then(function (c) {
+        BASETREE = c.tree.sha; return gh('/repos/' + REPO + '/git/trees/' + BASETREE + '?recursive=1');
+      }).then(function (t) { TREE = {}; t.tree.forEach(function (n) { if (n.type === 'blob') TREE[n.path] = n.sha; }); return r; });
+    }).then(function (r) {
+      log('\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550');
+      log('\u2705 HO GAYA! ' + COMMITTED + ' files, 1 commit.', 'ok');
+      log('Commit: ' + r.object.sha.slice(0, 7), 'ok');
+      log('Vercel auto-deploy 1-2 min mein.', 'ok');
+      log('\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550');
+    }).catch(function (e) {
+      log('\u2717 COMMIT FAIL: ' + e.message, 'err');
+      log('Kuch push nahi hua \u2014 repo safe hai. Dobara "Commit" dabayein.', 'warn');
+      document.getElementById('adCommitBtn').disabled = false;
+      document.getElementById('adDryRunBtn').disabled = false;
+    });
+  });
+
+  /* ---- third page navigation ---- */
+  document.addEventListener('DOMContentLoaded', function () {
+    var navAds = document.getElementById('navAds');
+    var navPg = document.getElementById('navPostGen');
+    var navWm = document.getElementById('navMonitor');
+    var pgAds = document.getElementById('page-ads');
+    var pgPg = document.getElementById('page-postgen');
+    var pgWm = document.getElementById('page-monitor');
+    if (!navAds || !pgAds) return;
+    var K3 = 'toolnest-personal-page3';
+
+    function showAds() {
+      pgPg.classList.remove('active-page');
+      pgWm.classList.remove('active-page');
+      pgAds.classList.add('active-page');
+      navPg.classList.remove('active');
+      navWm.classList.remove('active');
+      navAds.classList.add('active');
+      try { localStorage.setItem(K3, 'ads'); } catch (e) { }
+    }
+    function leaveAds() {
+      pgAds.classList.remove('active-page');
+      navAds.classList.remove('active');
+      try { localStorage.removeItem(K3); } catch (e) { }
+    }
+    navAds.addEventListener('click', showAds);
+    navPg.addEventListener('click', leaveAds);
+    navWm.addEventListener('click', leaveAds);
+    try { if (localStorage.getItem(K3) === 'ads') showAds(); } catch (e) { }
+  });
+})();
+</script></body>
 </html>
