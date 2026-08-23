@@ -3188,5 +3188,74 @@ function clearHistory(){
     initPsiPicker(); initAiSummary();
   });
 })();
+</script><script data-tn-nav-fix="1">
+/* ============ Unified 4-Page Nav Controller ============
+   Ye sab se aakhir mein chalta hai, isliye purane adhoore handlers par
+   bhaari padta hai. Har button poori state set karta hai. */
+(function () {
+  var PAGES = [
+    ['navPostGen', 'page-postgen'],
+    ['navMonitor', 'page-monitor'],
+    ['navAds', 'page-ads'],
+    ['navAudit', 'page-audit']
+  ];
+  var KEY = 'toolnest-active-page';
+
+  function apply(target) {
+    PAGES.forEach(function (p) {
+      var btn = document.getElementById(p[0]);
+      var view = document.getElementById(p[1]);
+      if (view) view.classList.toggle('active-page', p[1] === target);
+      if (btn) btn.classList.toggle('active', p[1] === target);
+    });
+    try {
+      localStorage.setItem(KEY, target);
+      localStorage.removeItem('toolnest-personal-page3');
+      localStorage.removeItem('toolnest-personal-page4');
+    } catch (e) { }
+  }
+
+  function firstAvailable() {
+    for (var i = 0; i < PAGES.length; i++) {
+      if (document.getElementById(PAGES[i][1])) return PAGES[i][1];
+    }
+    return null;
+  }
+
+  function saved() {
+    try {
+      var v = localStorage.getItem(KEY);
+      if (v && document.getElementById(v)) return v;
+      if (localStorage.getItem('toolnest-personal-page4') === '1' && document.getElementById('page-audit')) return 'page-audit';
+      if (localStorage.getItem('toolnest-personal-page3') === 'ads' && document.getElementById('page-ads')) return 'page-ads';
+      var old = localStorage.getItem('toolnest-personal-page');
+      if (old === 'wm' && document.getElementById('page-monitor')) return 'page-monitor';
+      if (old === 'pg' && document.getElementById('page-postgen')) return 'page-postgen';
+    } catch (e) { }
+    return null;
+  }
+
+  function init() {
+    if (!firstAvailable()) return;
+    PAGES.forEach(function (p) {
+      var btn = document.getElementById(p[0]);
+      if (!btn || !document.getElementById(p[1])) return;
+      btn.addEventListener('click', function (ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        apply(p[1]);
+      });
+    });
+    apply(saved() || firstAvailable());
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+
+  /* baqi scripts ke handlers ke baad state dobara theek kar do */
+  window.addEventListener('load', function () {
+    var v = saved();
+    if (v) apply(v);
+  });
+})();
 </script></body>
 </html>
