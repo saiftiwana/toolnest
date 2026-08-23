@@ -343,8 +343,8 @@ main{max-width:760px;margin:0 auto;padding:18px 16px 60px}
 <div class="card">
   <h2>Quick Links</h2>
   <div class="row2">
-    <a href="https://search.google.com/search-console?resource_id=https://toolnest.link/" target="_blank" class="run-btn" style="text-decoration:none;text-align:center;display:block;background:var(--grove)">🔍 Search Console</a>
-    <a href="https://analytics.google.com/" target="_blank" class="run-btn" style="text-decoration:none;text-align:center;display:block;background:var(--grove)">📊 Analytics</a>
+    <a href="https://search.google.com/search-console?resource_id=https://toolnest.link/" target="_blank" rel="noopener" class="run-btn" style="text-decoration:none;text-align:center;display:block;background:var(--grove)">🔍 Search Console</a>
+    <a href="https://analytics.google.com/" target="_blank" rel="noopener" class="run-btn" style="text-decoration:none;text-align:center;display:block;background:var(--grove)">📊 Analytics</a>
   </div>
 </div>
 
@@ -2526,6 +2526,20 @@ function clearHistory(){
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
   });
+    /* PageSpeed API key is device par yaad rakhein */
+  (function () {
+    var k = document.getElementById('auPsiKey');
+    if (!k) return;
+    var KEY = 'toolnest-psi-key';
+    try { var v = localStorage.getItem(KEY); if (v) k.value = v; } catch (e) { }
+    k.addEventListener('change', function () {
+      try {
+        if (k.value.trim()) localStorage.setItem(KEY, k.value.trim());
+        else localStorage.removeItem(KEY);
+      } catch (e) { }
+    });
+  })();
+
   elRun.addEventListener('click', runAudit);
 
   /* ---------- nav ---------- */

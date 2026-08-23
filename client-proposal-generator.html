@@ -219,7 +219,7 @@ function pgAddMilestoneRow(prefill){
   const container = pgEl('pgMilestoneList');
   const row = document.createElement('div');
   row.className='row'; row.style.marginTop='6px';
-  row.innerHTML = `<input type="text" class="pg-milestone-title" placeholder="Milestone" style="flex:1;" aria-label="Milestone"><input type="date" class="pg-milestone-date">`;
+  row.innerHTML = `<input type="text" class="pg-milestone-title" placeholder="Milestone" style="flex:1;" aria-label="Milestone"><input type="date" class="pg-milestone-date" aria-label="Milestone date">`;
   const rm = document.createElement('button'); rm.type='button'; rm.className='fl-remove'; rm.textContent='\u2715';
   rm.addEventListener('click', ()=>row.remove());
   row.appendChild(rm);

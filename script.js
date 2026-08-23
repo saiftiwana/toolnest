@@ -139,6 +139,20 @@ function openEmbedModal(title,url){
      card shows a real number instead of whatever text happens to match.
      Falls back to window.TN_RESULT, then to the generic scan below. */
   var TN_MAP={
+    'simple-compound-interest-calculator.html':[['siResult','']],
+    'fraction-calculator.html':[['fracResult','']],
+    'quadratic-equation-solver.html':[['quadResult','']],
+    'standard-deviation-calculator.html':[['sdResult','']],
+    'scientific-notation-converter.html':[['sciResult','']],
+    'hydration-timer.html':[['hydResult','']],
+    'sleep-cycle-planner.html':[['sleepResult','']],
+    'period-ovulation-calculator.html':[['povResult','']],
+    'pregnancy-due-date-calculator.html':[['dueResult','']],
+    'map-scale-distance-calculator.html':[['scaleResult','']],
+    'discount-scholarship-calculator.html':[['discResult','']],
+    'citation-generator.html':[['citOutput','']],
+    'unix-timestamp-converter.html':[['epochResult','']],
+
     'zakat-calculator.html':[['sumZakatDue','My Zakat Due'],['sumTotalWealth','Zakatable Wealth']],
     'marks-grade-calculator.html':[['markResult',''],['fgResult','']],
     'property-loan-mortgage-calculator.html':[['emiResult',''],['mortResult','']],

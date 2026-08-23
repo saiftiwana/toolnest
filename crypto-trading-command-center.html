@@ -858,7 +858,7 @@ function renderJournal(){
         <div class="ctcc-stat" style="flex:1;min-width:90px;"><div class="v ${cls(m.rMultiple)}">${fmt2(m.rMultiple)}R</div><div class="l">R Multiple</div></div>
         <div class="ctcc-stat" style="flex:1;min-width:90px;"><div class="v">${m.durationLabel}</div><div class="l">Duration</div></div>
       </div>
-      ${t.screenshots&&t.screenshots.length?'<div class="ctcc-screens">'+t.screenshots.map(s=>`<img src="${s.data}" title="${s.type}">`).join('')+'</div>':''}
+      ${t.screenshots&&t.screenshots.length?'<div class="ctcc-screens">'+t.screenshots.map(s=>`<img src="${s.data}" title="${s.type}" alt="Uploaded chart screenshot">`).join('')+'</div>':''}
       <div class="ctcc-row" style="margin-top:8px;">
         <button class="ctcc-btn ghost" onclick="editTrade('${t.id}')">Edit</button>
         <button class="ctcc-btn ghost" onclick="openReview('${t.id}')">${t.review?'Edit Review':'Review'}</button>
