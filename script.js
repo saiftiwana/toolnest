@@ -271,11 +271,45 @@ function openEmbedModal(title,url){
     ctx.restore();
   }
 
+  /* D3: har category ka apna rang — breadcrumb schema se category nikaalte hain */
+  var TN_THEMES={
+    'Image Tools':['#16323f','#4ec9dd'], 'File & PDF Tools':['#3a2126','#e8827a'], 'File & PDF':['#3a2126','#e8827a'],
+    'Text Tools':['#282540','#a394e8'], 'Developer Tools':['#14302a','#4fd18b'], 'Developer':['#14302a','#4fd18b'],
+    'Digital & Web Tools':['#1a2c44','#6fadf5'], 'Digital & Web':['#1a2c44','#6fadf5'],
+    'YouTube Tools':['#3a1d21','#f26a5f'], 'YouTube':['#3a1d21','#f26a5f'],
+    'Health & Fitness':['#123128','#57cf90'], 'Business Tools':['#2e2916','#e5bd57'], 'Business':['#2e2916','#e5bd57'],
+    'Design Tools':['#321f39','#cd8ded'], 'Design':['#321f39','#cd8ded'],
+    'Education Tools':['#182840','#7fb5f7'], 'Education':['#182840','#7fb5f7'],
+    'Finance Tools':['#153020','#5fbf6b'], 'Finance':['#153020','#5fbf6b'],
+    'Property Tools':['#32271a','#dda055'], 'Property':['#32271a','#dda055']
+  };
+  function tnCategory(){
+    try{
+      var b=document.querySelectorAll('script[type="application/ld+json"]');
+      for(var i=0;i<b.length;i++){
+        var j=JSON.parse(b[i].textContent);
+        var g=j['@graph']||[j];
+        for(var k=0;k<g.length;k++){
+          if(g[k]&&g[k]['@type']==='BreadcrumbList'){
+            var it=g[k].itemListElement||[];
+            for(var m=0;m<it.length;m++){ if(it[m].position===2) return it[m].name||""; }
+          }
+        }
+      }
+    }catch(e){}
+    return "";
+  }
+  function tnTheme(){
+    var t=TN_THEMES[tnCategory()];
+    return t?{bg:t[0],accent:t[1]}:{bg:BRAND_BG,accent:BRAND_ORANGE};
+  }
+
   function drawCard(canvas,size,title,highlight,qrImg){
     var W=size==='square'?1080:1200, H=size==='square'?1080:630;
     canvas.width=W;canvas.height=H;
     var ctx=canvas.getContext('2d');
-    ctx.fillStyle=BRAND_BG;ctx.fillRect(0,0,W,H);
+    var TH=tnTheme();
+    ctx.fillStyle=TH.bg;ctx.fillRect(0,0,W,H);
 
     var cx=size==='square'?W/2:150, cy=size==='square'?140:130, r=size==='square'?80:70;
     drawToolNestLogoMark(ctx,cx,cy,r);
@@ -294,13 +328,13 @@ function openEmbedModal(title,url){
 
     if(highlight){
       ctx.font='bold 34px Arial';
-      ctx.fillStyle=BRAND_ORANGE;
+      ctx.fillStyle=TH.accent;
       var hY=titleY+90;
       wrapText(ctx,highlight,textX,hY,W-(size==='square'?120:textX+80),44);
     }
 
-    ctx.fillStyle='#182e20';ctx.fillRect(0,H-70,W,70);
-    ctx.fillStyle=BRAND_ORANGE;ctx.font='bold 28px Arial';ctx.textAlign='left';
+    ctx.fillStyle='rgba(0,0,0,.28)';ctx.fillRect(0,H-70,W,70);
+    ctx.fillStyle=TH.accent;ctx.font='bold 28px Arial';ctx.textAlign='left';
     ctx.fillText('toolnest.link',40,H-28);
 
     if(qrImg){
