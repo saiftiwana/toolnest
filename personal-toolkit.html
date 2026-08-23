@@ -552,7 +552,7 @@ main{max-width:760px;margin:0 auto;padding:18px 16px 60px}
     <label for="auPsiKey">PageSpeed API Key <span style="font-weight:400;color:#8a8a75">(optional — Core Web Vitals ke liye)</span></label>
     <input type="password" id="auPsiKey" placeholder="AIza... (khali chhod dein to speed check skip)">
   </div>
-  <button type="button" class="run-btn" id="auRunBtn">🚀 Run Full Audit</button>
+  <div class="field" data-tn-psi="1"><label for="auPsiPages">PageSpeed pages <span style="font-weight:400;color:#8a8a75">(comma se alag — jitne chahein)</span></label><input type="text" id="auPsiPages" placeholder="index.html, zakat-calculator.html, image-tools.html"></div><div class="field" data-tn-psi="1"><label for="auPsiStrategy">PageSpeed strategy</label><select id="auPsiStrategy"><option value="mobile">Mobile</option><option value="desktop">Desktop</option></select></div><button type="button" class="run-btn" id="auRunBtn">🚀 Run Full Audit</button>
   <button type="button" class="copy-btn" id="auExportBtn" disabled>📄 Report Download (.md)</button>
   <div id="auProgWrap" style="height:7px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-top:12px">
     <div id="auProg" style="height:100%;width:0;background:var(--kinno);transition:width .25s"></div>
@@ -2495,12 +2495,17 @@ function clearHistory(){
 
   /* ---------- A3 PageSpeed ---------- */
   function runPsi(key) {
-    var targets = ['index.html', 'zakat-calculator.html', 'image-tools.html'];
+    var pgEl = document.getElementById('auPsiPages');
+    var raw = (pgEl && pgEl.value ? pgEl.value : '').trim();
+    var targets = raw ? raw.split(',').map(function (x) { return x.trim(); }).filter(Boolean)
+                      : ['index.html', 'zakat-calculator.html', 'image-tools.html'];
+    var stEl = document.getElementById('auPsiStrategy');
+    var strategy = (stEl && stEl.value) ? stEl.value : 'mobile';
     stat('PageSpeed chala raha hoon (' + targets.length + ' pages \u2014 thora waqt lagega)\u2026');
     var lines = [];
     pool(targets, 1, function (f) {
       var u = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=' +
-        encodeURIComponent(abs(f)) + '&strategy=mobile&category=performance&key=' + encodeURIComponent(key);
+        encodeURIComponent(abs(f)) + '&strategy=' + strategy + '&category=performance&key=' + encodeURIComponent(key);
       return fetch(u).then(function (r) { return r.json(); }).then(function (j) {
         if (j.error) { lines.push(f + ': ERROR \u2014 ' + String(j.error.message || '').slice(0, 90)); return; }
         var lr = j.lighthouseResult || {}, a = lr.audits || {};
@@ -2526,17 +2531,20 @@ function clearHistory(){
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
   });
-    /* PageSpeed API key is device par yaad rakhein */
+  
+    /* tn-psi-remember: key, pages aur strategy is device par yaad rakhein */
   (function () {
-    var k = document.getElementById('auPsiKey');
-    if (!k) return;
-    var KEY = 'toolnest-psi-key';
-    try { var v = localStorage.getItem(KEY); if (v) k.value = v; } catch (e) { }
-    k.addEventListener('change', function () {
-      try {
-        if (k.value.trim()) localStorage.setItem(KEY, k.value.trim());
-        else localStorage.removeItem(KEY);
-      } catch (e) { }
+    var pairs = [['auPsiKey', 'toolnest-psi-key'], ['auPsiPages', 'toolnest-psi-pages'], ['auPsiStrategy', 'toolnest-psi-strategy']];
+    pairs.forEach(function (p) {
+      var el = document.getElementById(p[0]);
+      if (!el) return;
+      try { var v = localStorage.getItem(p[1]); if (v) el.value = v; } catch (e) { }
+      el.addEventListener('change', function () {
+        try {
+          if (String(el.value).trim()) localStorage.setItem(p[1], String(el.value).trim());
+          else localStorage.removeItem(p[1]);
+        } catch (e) { }
+      });
     });
   })();
 
