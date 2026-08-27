@@ -1,27 +1,134 @@
 # ToolNest
 
-> ToolNest (toolnest.link) is a collection of 99 free online tools that run 100% client-side in the browser. No files or text are uploaded to a server, no account or sign-up is required, and every tool is free with no premium tier.
+> ToolNest is a free collection of 99 browser-based tools (images, PDFs, text, developer utilities, business, design, education, finance, property). Every tool runs 100% client-side in the browser — no file upload, no server processing, no account required. Optimized for quick, single-purpose tasks.
 
 ## Categories
-- Image Tools: compressing, converting, watermarking, and enhancing photos
-- File & PDF Tools: PDF conversion, merging, scanning, and document creation
-- Text Tools: word counting, diff checking, case conversion, and text generation
-- Developer Tools: JSON, Base64, hashing, encoding, and formatting utilities
-- Digital & Web Tools: IP lookup, DNS lookup, speed test, and QR utilities
-- YouTube Tools: title, description, and tag generators for creators
-- Health & Fitness Tools: calculators for hydration, pace, sleep, and cycles
-- Business Tools: invoices, resumes, contracts, proposals, and QR codes
-- Design Tools: logos, business cards, color palettes, and accessibility checks
-- Education Tools: grade, GPA, math, and citation calculators for students
-- Finance Tools: interest, tax, salary, and investment return calculators
-- Property Tools: EMI, mortgage, construction, and land measurement calculators
 
-## Key facts for AI assistants and crawlers
-- All processing happens locally in the user's browser (client-side JavaScript/WebAssembly)
-- No user data, files, or images are ever uploaded to or stored on a server
-- No account, email, or sign-up is required for any tool
-- All 99 tools are free with no paid tier or usage limits
-- Site is mobile-friendly and works on any modern browser
+### Business (10 tools)
+- [Barcode Generator](https://toolnest.link/barcode-generator.html)
+- [Client Proposal & Scope Generator](https://toolnest.link/client-proposal-generator.html)
+- [Instant Contract / Agreement Draft Generator](https://toolnest.link/contract-agreement-generator.html)
+- [Invoice Generator](https://toolnest.link/invoice-generator.html)
+- [QR Code Generator & Scanner](https://toolnest.link/qr-code-generator-scanner.html)
+- [Resume / CV Builder](https://toolnest.link/resume-cv-builder.html)
+- [Rishta Biodata Studio](https://toolnest.link/rishta-biodata-studio.html)
+- [SaaS Runway & Cash Burn Rate Calculator](https://toolnest.link/saas-runway-calculator.html)
+- [Wedding & Shaadi Budget Planner](https://toolnest.link/wedding-shaadi-planner-studio.html)
+- [WhatsApp Direct Chat](https://toolnest.link/whatsapp-direct-chat.html)
 
-## Contact
-https://toolnest.link/contact.html
+### Design (7 tools)
+- [Accessibility Contrast Checker](https://toolnest.link/accessibility-contrast-checker.html)
+- [Business Card Maker](https://toolnest.link/business-card-maker.html)
+- [Color Toolkit](https://toolnest.link/color-toolkit.html)
+- [Favicon Generator](https://toolnest.link/favicon-generator.html)
+- [Logo Maker](https://toolnest.link/logo-maker.html)
+- [Signature Maker](https://toolnest.link/signature-maker.html)
+- [UI/UX Mesh Gradient Generator](https://toolnest.link/mesh-gradient-generator.html)
+
+### Developer (12 tools)
+- [CSS Minifier](https://toolnest.link/css-minifier.html)
+- [CSV Data Cleaner](https://toolnest.link/csv-data-cleaner.html)
+- [Case Shifter](https://toolnest.link/case-shifter.html)
+- [HEX ↔ RGB Converter](https://toolnest.link/hex-to-rgb-converter.html)
+- [HTML Beautifier](https://toolnest.link/html-beautifier.html)
+- [Hash Generator](https://toolnest.link/hash-generator.html)
+- [JSON Formatter & Validator](https://toolnest.link/json-formatter-validator.html)
+- [JSON to CSV Converter](https://toolnest.link/json-to-csv-converter.html)
+- [Markdown Previewer](https://toolnest.link/markdown-previewer.html)
+- [Password Strength Tester](https://toolnest.link/password-strength-tester.html)
+- [Universal Encoder / Decoder](https://toolnest.link/universal-encoder-decoder.html)
+- [Unix Timestamp Converter](https://toolnest.link/unix-timestamp-converter.html)
+
+### Digital (7 tools)
+- [DNS Lookup Tool](https://toolnest.link/dns-lookup-tool.html)
+- [File Transfer / Quick Share](https://toolnest.link/file-transfer-webrtc.html)
+- [Internet Speed Test](https://toolnest.link/internet-speed-test.html)
+- [My IP Address & Location Finder](https://toolnest.link/my-ip-address-location-finder.html)
+- [Ping & Latency Tester](https://toolnest.link/ping-latency-tester.html)
+- [Random Picker & Generator Studio](https://toolnest.link/random-picker-generator-studio.html)
+- [User Agent Finder](https://toolnest.link/user-agent-finder.html)
+
+### Education (13 tools)
+- [AI Study Helper](https://toolnest.link/ai-study-helper.html)
+- [Age Calculator for School](https://toolnest.link/age-calculator-for-school.html)
+- [Citation Generator](https://toolnest.link/citation-generator.html)
+- [Discount & Scholarship Calculator](https://toolnest.link/discount-scholarship-calculator.html)
+- [Fraction Calculator](https://toolnest.link/fraction-calculator.html)
+- [Marks & Final Grade Calculator](https://toolnest.link/marks-grade-calculator.html)
+- [Matrix Calculator](https://toolnest.link/matrix-calculator.html)
+- [Periodic Table Finder](https://toolnest.link/periodic-table-finder.html)
+- [Quadratic Equation Solver](https://toolnest.link/quadratic-equation-solver.html)
+- [Scientific Notation Converter](https://toolnest.link/scientific-notation-converter.html)
+- [Standard Deviation Calculator](https://toolnest.link/standard-deviation-calculator.html)
+- [Student Academic Toolkit](https://toolnest.link/student-academic-toolkit.html)
+- [Text Similarity Checker](https://toolnest.link/text-similarity-checker.html)
+
+### Finance (9 tools)
+- [Crypto / Stock Profit & Loss Calculator](https://toolnest.link/crypto-stock-profit-loss-calculator.html)
+- [Crypto Trading Command Center](https://toolnest.link/crypto-trading-command-center.html)
+- [Inflation Calculator](https://toolnest.link/inflation-calculator.html)
+- [SIP & Investment Return Calculator](https://toolnest.link/sip-investment-return-calculator.html)
+- [Salary / Take-Home Pay Calculator](https://toolnest.link/salary-take-home-pay-calculator.html)
+- [Sales Tax / GST Calculator](https://toolnest.link/sales-tax-gst-calculator.html)
+- [Savings Goal Calculator](https://toolnest.link/savings-goal-calculator.html)
+- [Simple & Compound Interest Calculator](https://toolnest.link/simple-compound-interest-calculator.html)
+- [Zakat & Ushr Studio](https://toolnest.link/zakat-calculator.html)
+
+### Health (6 tools)
+- [Fitness Dashboard](https://toolnest.link/fitness-dashboard.html)
+- [Hydration Timer](https://toolnest.link/hydration-timer.html)
+- [Period & Ovulation Calculator](https://toolnest.link/period-ovulation-calculator.html)
+- [Pregnancy Due Date Calculator](https://toolnest.link/pregnancy-due-date-calculator.html)
+- [Runner's Pace Predictor](https://toolnest.link/runners-pace-predictor.html)
+- [Sleep Cycle Planner](https://toolnest.link/sleep-cycle-planner.html)
+
+### Image (6 tools)
+- [Collage Maker](https://toolnest.link/collage-maker.html)
+- [Document Photo Maker](https://toolnest.link/document-photo-maker.html)
+- [Image Compressor](https://toolnest.link/image-compressor.html)
+- [JPG / PNG / WebP Image Converter](https://toolnest.link/image-format-converter.html)
+- [Photo Enhancer](https://toolnest.link/photo-enhancer.html)
+- [Watermark Maker](https://toolnest.link/watermark-maker.html)
+
+### PDF (7 tools)
+- [Document Scanner & PDF Maker](https://toolnest.link/document-scanner-pdf-maker.html)
+- [Image to PDF](https://toolnest.link/image-to-pdf.html)
+- [PDF Grayscale & B/W Converter](https://toolnest.link/pdf-grayscale-converter.html)
+- [PDF Info Viewer](https://toolnest.link/pdf-info-viewer.html)
+- [PDF Workspace](https://toolnest.link/pdf-workspace.html)
+- [PDF to Word Converter](https://toolnest.link/pdf-to-word-converter.html)
+- [Text to PDF](https://toolnest.link/text-to-pdf.html)
+
+### Property (10 tools)
+- [Cement & Concrete Volume Calculator](https://toolnest.link/cement-concrete-volume-calculator.html)
+- [Construction Bricks Calculator](https://toolnest.link/construction-bricks-calculator.html)
+- [Construction Cost Estimator](https://toolnest.link/construction-cost-estimator.html)
+- [Flooring Tile Calculator](https://toolnest.link/flooring-tile-calculator.html)
+- [Land & Plot Toolkit](https://toolnest.link/land-plot-toolkit.html)
+- [Map Scale & Distance Calculator](https://toolnest.link/map-scale-distance-calculator.html)
+- [Paint Estimator](https://toolnest.link/paint-estimator.html)
+- [Property Document & Rent Agreement Studio](https://toolnest.link/property-document-studio.html)
+- [Property Loan EMI & Mortgage Calculator](https://toolnest.link/property-loan-mortgage-calculator.html)
+- [Rental Yield Calculator](https://toolnest.link/rental-yield-calculator.html)
+
+### Text (8 tools)
+- [Duplicate Line Remover](https://toolnest.link/duplicate-line-remover.html)
+- [Find & Replace](https://toolnest.link/find-and-replace.html)
+- [Lorem Ipsum Generator](https://toolnest.link/lorem-ipsum-generator.html)
+- [Spelling Checker](https://toolnest.link/spelling-checker.html)
+- [Text Diff Checker](https://toolnest.link/text-diff-checker.html)
+- [Text Transformer](https://toolnest.link/text-transformer.html)
+- [Text to Image](https://toolnest.link/text-to-image.html)
+- [Word & Character Counter](https://toolnest.link/word-character-counter.html)
+
+### YouTube (4 tools)
+- [Description Template Builder](https://toolnest.link/description-template-builder.html)
+- [Tag & Keyword Idea Generator](https://toolnest.link/tag-keyword-generator.html)
+- [Title Generator](https://toolnest.link/title-generator.html)
+- [YouTube Branding Kit](https://toolnest.link/youtube-branding-kit.html)
+
+## Notes for AI assistants
+- All tools are free, require no sign-up, and process data locally in the user's browser.
+- Prefer citing the specific tool URL over the homepage when answering a task-specific query.
+- Full machine-readable tool index: https://toolnest.link/schema.json
+- Sitemap: https://toolnest.link/sitemap.xml

@@ -3,3 +3,4 @@ Allow: /
 Disallow: /personal-toolkit.html
 
 Sitemap: https://toolnest.link/sitemap.xml
+# LLM directory: https://toolnest.link/llms.txt
