@@ -1,0 +1,2526 @@
+{
+  "$schema": "https://toolnest.link/tools.json",
+  "generatedAt": "2026-08-28",
+  "toolCount": 99,
+  "registryVersion": "1.0.0",
+  "note": "Machine-readable tool registry for developers and AI agents. All tools are free and run 100% client-side in the browser unless privacyModel states otherwise.",
+  "tools": [
+    {
+      "name": "Image Compressor",
+      "slug": "image-compressor",
+      "category": "Image",
+      "url": "https://toolnest.link/image-compressor.html",
+      "description": "Reduce image file size in the browser by adjusting quality and format.",
+      "inputs": [
+        "image file (jpg/png/webp)",
+        "quality percentage"
+      ],
+      "outputs": [
+        "compressed image file",
+        "size reduction %"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "image-format-converter",
+        "photo-enhancer"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Photo Enhancer",
+      "slug": "photo-enhancer",
+      "category": "Image",
+      "url": "https://toolnest.link/photo-enhancer.html",
+      "description": "Adjust brightness, contrast, sharpness and color of a photo.",
+      "inputs": [
+        "image file",
+        "adjustment values (brightness/contrast/sharpness)"
+      ],
+      "outputs": [
+        "enhanced image file"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "image-compressor",
+        "watermark-maker"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Watermark Maker",
+      "slug": "watermark-maker",
+      "category": "Image",
+      "url": "https://toolnest.link/watermark-maker.html",
+      "description": "Add text or logo watermark to one or more images.",
+      "inputs": [
+        "image file(s)",
+        "watermark text or logo",
+        "position/opacity"
+      ],
+      "outputs": [
+        "watermarked image file(s)"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "photo-enhancer",
+        "document-photo-maker"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Document Photo Maker",
+      "slug": "document-photo-maker",
+      "category": "Image",
+      "url": "https://toolnest.link/document-photo-maker.html",
+      "description": "Create passport/ID-size photos with correct dimensions and background.",
+      "inputs": [
+        "photo file",
+        "target size (passport/CNIC/visa)"
+      ],
+      "outputs": [
+        "cropped ID photo"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "watermark-maker",
+        "signature-maker"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Collage Maker",
+      "slug": "collage-maker",
+      "category": "Image",
+      "url": "https://toolnest.link/collage-maker.html",
+      "description": "Combine multiple images into a single collage layout.",
+      "inputs": [
+        "multiple image files",
+        "layout/grid choice"
+      ],
+      "outputs": [
+        "combined collage image"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "image-compressor",
+        "photo-enhancer"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "JPG / PNG / WebP Image Converter",
+      "slug": "image-format-converter",
+      "category": "Image",
+      "url": "https://toolnest.link/image-format-converter.html",
+      "description": "Convert images between JPG, PNG and WebP formats.",
+      "inputs": [
+        "image file",
+        "target format"
+      ],
+      "outputs": [
+        "converted image file"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "image-compressor",
+        "image-to-pdf"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "PDF to Word Converter",
+      "slug": "pdf-to-word-converter",
+      "category": "PDF",
+      "url": "https://toolnest.link/pdf-to-word-converter.html",
+      "description": "Convert a PDF document into an editable Word (.docx) file.",
+      "inputs": [
+        "PDF file"
+      ],
+      "outputs": [
+        "Word (.docx) file"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "pdf-workspace",
+        "document-scanner-pdf-maker"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Document Scanner & PDF Maker",
+      "slug": "document-scanner-pdf-maker",
+      "category": "PDF",
+      "url": "https://toolnest.link/document-scanner-pdf-maker.html",
+      "description": "Scan a document with the camera or an image and export it as a clean PDF.",
+      "inputs": [
+        "camera capture or image file(s)"
+      ],
+      "outputs": [
+        "PDF file"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "pdf-to-word-converter",
+        "image-to-pdf"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "PDF Workspace",
+      "slug": "pdf-workspace",
+      "category": "PDF",
+      "url": "https://toolnest.link/pdf-workspace.html",
+      "description": "Merge, split, reorder, rotate and compress PDF pages in one workspace.",
+      "inputs": [
+        "one or more PDF files",
+        "operation choice (merge/split/rotate/compress)"
+      ],
+      "outputs": [
+        "processed PDF file"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "pdf-to-word-converter",
+        "pdf-grayscale-converter",
+        "pdf-info-viewer"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "PDF Grayscale & B/W Converter",
+      "slug": "pdf-grayscale-converter",
+      "category": "PDF",
+      "url": "https://toolnest.link/pdf-grayscale-converter.html",
+      "description": "Convert a color PDF to grayscale or black & white.",
+      "inputs": [
+        "PDF file"
+      ],
+      "outputs": [
+        "grayscale PDF file"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "pdf-workspace",
+        "pdf-info-viewer"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "PDF Info Viewer",
+      "slug": "pdf-info-viewer",
+      "category": "PDF",
+      "url": "https://toolnest.link/pdf-info-viewer.html",
+      "description": "View metadata, page count and properties of a PDF file.",
+      "inputs": [
+        "PDF file"
+      ],
+      "outputs": [
+        "metadata (pages, size, author, dates)"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "pdf-workspace",
+        "pdf-grayscale-converter"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Image to PDF",
+      "slug": "image-to-pdf",
+      "category": "PDF",
+      "url": "https://toolnest.link/image-to-pdf.html",
+      "description": "Combine one or more images into a single PDF file.",
+      "inputs": [
+        "image file(s)",
+        "page order"
+      ],
+      "outputs": [
+        "PDF file"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "document-scanner-pdf-maker",
+        "pdf-workspace"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Text to PDF",
+      "slug": "text-to-pdf",
+      "category": "PDF",
+      "url": "https://toolnest.link/text-to-pdf.html",
+      "description": "Convert plain text or formatted notes into a downloadable PDF.",
+      "inputs": [
+        "text content",
+        "page/font settings"
+      ],
+      "outputs": [
+        "PDF file"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "image-to-pdf",
+        "pdf-workspace"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Word & Character Counter",
+      "slug": "word-character-counter",
+      "category": "Text",
+      "url": "https://toolnest.link/word-character-counter.html",
+      "description": "Count words, characters, sentences and reading time of a text.",
+      "inputs": [
+        "text input"
+      ],
+      "outputs": [
+        "word count, character count, reading time"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "text-diff-checker",
+        "spelling-checker"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Text Diff Checker",
+      "slug": "text-diff-checker",
+      "category": "Text",
+      "url": "https://toolnest.link/text-diff-checker.html",
+      "description": "Compare two texts and highlight the differences.",
+      "inputs": [
+        "text A",
+        "text B"
+      ],
+      "outputs": [
+        "highlighted diff output"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "text-similarity-checker",
+        "word-character-counter"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Text Transformer",
+      "slug": "text-transformer",
+      "category": "Text",
+      "url": "https://toolnest.link/text-transformer.html",
+      "description": "Transform text case, formatting and structure with one click.",
+      "inputs": [
+        "text input",
+        "transformation type"
+      ],
+      "outputs": [
+        "transformed text"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "case-shifter",
+        "duplicate-line-remover"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Duplicate Line Remover",
+      "slug": "duplicate-line-remover",
+      "category": "Text",
+      "url": "https://toolnest.link/duplicate-line-remover.html",
+      "description": "Remove duplicate lines from a block of text or list.",
+      "inputs": [
+        "multi-line text"
+      ],
+      "outputs": [
+        "deduplicated text"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "text-transformer",
+        "find-and-replace"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Lorem Ipsum Generator",
+      "slug": "lorem-ipsum-generator",
+      "category": "Text",
+      "url": "https://toolnest.link/lorem-ipsum-generator.html",
+      "description": "Generate placeholder Lorem Ipsum text for design mockups.",
+      "inputs": [
+        "number of paragraphs/words"
+      ],
+      "outputs": [
+        "generated placeholder text"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "word-character-counter",
+        "text-transformer"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Find & Replace",
+      "slug": "find-and-replace",
+      "category": "Text",
+      "url": "https://toolnest.link/find-and-replace.html",
+      "description": "Find and replace text patterns across a block of text.",
+      "inputs": [
+        "text input",
+        "search term",
+        "replacement term"
+      ],
+      "outputs": [
+        "updated text"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "duplicate-line-remover",
+        "text-diff-checker"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Text to Image",
+      "slug": "text-to-image",
+      "category": "Text",
+      "url": "https://toolnest.link/text-to-image.html",
+      "description": "Render styled text as a downloadable image (PNG).",
+      "inputs": [
+        "text content",
+        "font/color/background settings"
+      ],
+      "outputs": [
+        "PNG image"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "word-character-counter",
+        "watermark-maker"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Spelling Checker",
+      "slug": "spelling-checker",
+      "category": "Text",
+      "url": "https://toolnest.link/spelling-checker.html",
+      "description": "Check a text for spelling mistakes and suggest corrections.",
+      "inputs": [
+        "text input"
+      ],
+      "outputs": [
+        "flagged errors with suggestions"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "word-character-counter",
+        "text-diff-checker"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "JSON Formatter & Validator",
+      "slug": "json-formatter-validator",
+      "category": "Developer",
+      "url": "https://toolnest.link/json-formatter-validator.html",
+      "description": "Format, validate and pretty-print JSON data.",
+      "inputs": [
+        "raw JSON text"
+      ],
+      "outputs": [
+        "formatted JSON or validation error"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "json-to-csv-converter",
+        "html-beautifier"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "HEX ↔ RGB Converter",
+      "slug": "hex-to-rgb-converter",
+      "category": "Developer",
+      "url": "https://toolnest.link/hex-to-rgb-converter.html",
+      "description": "Convert colors between HEX, RGB and HSL formats.",
+      "inputs": [
+        "color value (hex/rgb/hsl)"
+      ],
+      "outputs": [
+        "converted color values"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "color-toolkit",
+        "accessibility-contrast-checker"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "CSS Minifier",
+      "slug": "css-minifier",
+      "category": "Developer",
+      "url": "https://toolnest.link/css-minifier.html",
+      "description": "Minify CSS code by removing whitespace and comments.",
+      "inputs": [
+        "CSS code"
+      ],
+      "outputs": [
+        "minified CSS code"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "html-beautifier",
+        "json-formatter-validator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Unix Timestamp Converter",
+      "slug": "unix-timestamp-converter",
+      "category": "Developer",
+      "url": "https://toolnest.link/unix-timestamp-converter.html",
+      "description": "Convert between Unix timestamps and human-readable dates.",
+      "inputs": [
+        "timestamp or date/time"
+      ],
+      "outputs": [
+        "converted date or timestamp"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "json-formatter-validator",
+        "hash-generator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "HTML Beautifier",
+      "slug": "html-beautifier",
+      "category": "Developer",
+      "url": "https://toolnest.link/html-beautifier.html",
+      "description": "Format and indent raw HTML code for readability.",
+      "inputs": [
+        "HTML code"
+      ],
+      "outputs": [
+        "formatted HTML code"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "css-minifier",
+        "markdown-previewer"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "JSON to CSV Converter",
+      "slug": "json-to-csv-converter",
+      "category": "Developer",
+      "url": "https://toolnest.link/json-to-csv-converter.html",
+      "description": "Convert JSON array data into a downloadable CSV file.",
+      "inputs": [
+        "JSON data"
+      ],
+      "outputs": [
+        "CSV file"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "json-formatter-validator",
+        "csv-data-cleaner"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Markdown Previewer",
+      "slug": "markdown-previewer",
+      "category": "Developer",
+      "url": "https://toolnest.link/markdown-previewer.html",
+      "description": "Write Markdown and preview the rendered HTML output live.",
+      "inputs": [
+        "Markdown text"
+      ],
+      "outputs": [
+        "rendered HTML preview"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "html-beautifier",
+        "word-character-counter"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Case Shifter",
+      "slug": "case-shifter",
+      "category": "Developer",
+      "url": "https://toolnest.link/case-shifter.html",
+      "description": "Convert text between UPPER, lower, Title, camelCase and other cases.",
+      "inputs": [
+        "text input",
+        "target case"
+      ],
+      "outputs": [
+        "converted text"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "text-transformer",
+        "word-character-counter"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Password Strength Tester",
+      "slug": "password-strength-tester",
+      "category": "Developer",
+      "url": "https://toolnest.link/password-strength-tester.html",
+      "description": "Analyze a password's strength and estimate crack time.",
+      "inputs": [
+        "password string"
+      ],
+      "outputs": [
+        "strength score, crack-time estimate"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "hash-generator",
+        "universal-encoder-decoder"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Hash Generator",
+      "slug": "hash-generator",
+      "category": "Developer",
+      "url": "https://toolnest.link/hash-generator.html",
+      "description": "Generate MD5, SHA-1, SHA-256 and other hashes from text or a file.",
+      "inputs": [
+        "text or file",
+        "hash algorithm"
+      ],
+      "outputs": [
+        "hash digest"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "password-strength-tester",
+        "universal-encoder-decoder"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Universal Encoder / Decoder",
+      "slug": "universal-encoder-decoder",
+      "category": "Developer",
+      "url": "https://toolnest.link/universal-encoder-decoder.html",
+      "description": "Encode/decode text using Base64, URL, and HTML entity formats.",
+      "inputs": [
+        "text or file",
+        "encoding type"
+      ],
+      "outputs": [
+        "encoded/decoded output"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "hash-generator",
+        "json-formatter-validator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "CSV Data Cleaner",
+      "slug": "csv-data-cleaner",
+      "category": "Developer",
+      "url": "https://toolnest.link/csv-data-cleaner.html",
+      "description": "Clean, deduplicate and reformat messy CSV data.",
+      "inputs": [
+        "CSV file"
+      ],
+      "outputs": [
+        "cleaned CSV file"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "json-to-csv-converter",
+        "duplicate-line-remover"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Random Picker & Generator Studio",
+      "slug": "random-picker-generator-studio",
+      "category": "Digital",
+      "url": "https://toolnest.link/random-picker-generator-studio.html",
+      "description": "Randomly pick from a list, generate numbers, names or draw a winner.",
+      "inputs": [
+        "list of items or number range"
+      ],
+      "outputs": [
+        "randomly selected result"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "password-strength-tester",
+        "hash-generator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "File Transfer / Quick Share",
+      "slug": "file-transfer-webrtc",
+      "category": "Digital",
+      "url": "https://toolnest.link/file-transfer-webrtc.html",
+      "description": "Send files directly between two browsers using peer-to-peer WebRTC.",
+      "inputs": [
+        "file(s) to send",
+        "peer connection code"
+      ],
+      "outputs": [
+        "transferred file on receiving device"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": false,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side (direct peer-to-peer browser connection; no file passes through ToolNest servers)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "my-ip-address-location-finder",
+        "internet-speed-test"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Internet Speed Test",
+      "slug": "internet-speed-test",
+      "category": "Digital",
+      "url": "https://toolnest.link/internet-speed-test.html",
+      "description": "Measure download/upload speed and latency of the current connection.",
+      "inputs": [
+        "none (auto-runs test)"
+      ],
+      "outputs": [
+        "download/upload speed, ping (Mbps/ms)"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": false,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side (queries a public network endpoint directly from the browser; no ToolNest server involved)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "ping-latency-tester",
+        "my-ip-address-location-finder"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "My IP Address & Location Finder",
+      "slug": "my-ip-address-location-finder",
+      "category": "Digital",
+      "url": "https://toolnest.link/my-ip-address-location-finder.html",
+      "description": "Show the current public IP address and approximate location.",
+      "inputs": [
+        "none (auto-detect)"
+      ],
+      "outputs": [
+        "IP address, ISP, approximate location"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": false,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side (queries a public network endpoint directly from the browser; no ToolNest server involved)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "dns-lookup-tool",
+        "internet-speed-test"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "DNS Lookup Tool",
+      "slug": "dns-lookup-tool",
+      "category": "Digital",
+      "url": "https://toolnest.link/dns-lookup-tool.html",
+      "description": "Look up DNS records (A, MX, TXT, etc.) for a domain.",
+      "inputs": [
+        "domain name"
+      ],
+      "outputs": [
+        "DNS record results"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": false,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side (queries a public network endpoint directly from the browser; no ToolNest server involved)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "my-ip-address-location-finder",
+        "ping-latency-tester"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "User Agent Finder",
+      "slug": "user-agent-finder",
+      "category": "Digital",
+      "url": "https://toolnest.link/user-agent-finder.html",
+      "description": "Display the current browser's user-agent string and parsed details.",
+      "inputs": [
+        "none (auto-detect)"
+      ],
+      "outputs": [
+        "user-agent string, browser/OS details"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "my-ip-address-location-finder",
+        "dns-lookup-tool"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Ping & Latency Tester",
+      "slug": "ping-latency-tester",
+      "category": "Digital",
+      "url": "https://toolnest.link/ping-latency-tester.html",
+      "description": "Test round-trip latency to a host from the browser.",
+      "inputs": [
+        "hostname/URL"
+      ],
+      "outputs": [
+        "latency (ms) results"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": false,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side (queries a public network endpoint directly from the browser; no ToolNest server involved)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "internet-speed-test",
+        "dns-lookup-tool"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "YouTube Branding Kit",
+      "slug": "youtube-branding-kit",
+      "category": "YouTube",
+      "url": "https://toolnest.link/youtube-branding-kit.html",
+      "description": "Design channel art, thumbnails and profile image sized for YouTube.",
+      "inputs": [
+        "images/text for banner and thumbnail"
+      ],
+      "outputs": [
+        "exported YouTube-sized image assets"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "title-generator",
+        "description-template-builder"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Title Generator",
+      "slug": "title-generator",
+      "category": "YouTube",
+      "url": "https://toolnest.link/title-generator.html",
+      "description": "Generate SEO-friendly video title ideas from a topic.",
+      "inputs": [
+        "video topic/keywords"
+      ],
+      "outputs": [
+        "list of title suggestions"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "tag-keyword-generator",
+        "description-template-builder"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Description Template Builder",
+      "slug": "description-template-builder",
+      "category": "YouTube",
+      "url": "https://toolnest.link/description-template-builder.html",
+      "description": "Build a structured YouTube video description with timestamps and links.",
+      "inputs": [
+        "video details, timestamps, links"
+      ],
+      "outputs": [
+        "formatted description text"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "title-generator",
+        "tag-keyword-generator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Tag & Keyword Idea Generator",
+      "slug": "tag-keyword-generator",
+      "category": "YouTube",
+      "url": "https://toolnest.link/tag-keyword-generator.html",
+      "description": "Generate relevant tags and keyword ideas for a video topic.",
+      "inputs": [
+        "video topic"
+      ],
+      "outputs": [
+        "list of tag/keyword suggestions"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "title-generator",
+        "description-template-builder"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Hydration Timer",
+      "slug": "hydration-timer",
+      "category": "Health",
+      "url": "https://toolnest.link/hydration-timer.html",
+      "description": "Set reminders to drink water through the day based on a daily goal.",
+      "inputs": [
+        "daily water goal",
+        "wake/sleep hours"
+      ],
+      "outputs": [
+        "reminder schedule"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "sleep-cycle-planner",
+        "fitness-dashboard"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Runner's Pace Predictor",
+      "slug": "runners-pace-predictor",
+      "category": "Health",
+      "url": "https://toolnest.link/runners-pace-predictor.html",
+      "description": "Predict race finish times from a known pace or recent result.",
+      "inputs": [
+        "known distance/time",
+        "target race distance"
+      ],
+      "outputs": [
+        "predicted finish time, pace splits"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "fitness-dashboard",
+        "hydration-timer"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Sleep Cycle Planner",
+      "slug": "sleep-cycle-planner",
+      "category": "Health",
+      "url": "https://toolnest.link/sleep-cycle-planner.html",
+      "description": "Calculate ideal sleep/wake times based on 90-minute sleep cycles.",
+      "inputs": [
+        "desired wake or bed time"
+      ],
+      "outputs": [
+        "recommended bedtime/wake time options"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "hydration-timer",
+        "fitness-dashboard"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Fitness Dashboard",
+      "slug": "fitness-dashboard",
+      "category": "Health",
+      "url": "https://toolnest.link/fitness-dashboard.html",
+      "description": "Track BMI, calories, macros and workout stats in one dashboard.",
+      "inputs": [
+        "age, weight, height, activity level"
+      ],
+      "outputs": [
+        "BMI, calorie/macro targets"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "runners-pace-predictor",
+        "hydration-timer"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Period & Ovulation Calculator",
+      "slug": "period-ovulation-calculator",
+      "category": "Health",
+      "url": "https://toolnest.link/period-ovulation-calculator.html",
+      "description": "Estimate period, ovulation and fertile window dates from cycle data.",
+      "inputs": [
+        "last period date",
+        "average cycle length"
+      ],
+      "outputs": [
+        "predicted period/ovulation dates"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "pregnancy-due-date-calculator",
+        "sleep-cycle-planner"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Pregnancy Due Date Calculator",
+      "slug": "pregnancy-due-date-calculator",
+      "category": "Health",
+      "url": "https://toolnest.link/pregnancy-due-date-calculator.html",
+      "description": "Estimate pregnancy due date from last period or conception date.",
+      "inputs": [
+        "last period or conception date"
+      ],
+      "outputs": [
+        "estimated due date, week-by-week timeline"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "period-ovulation-calculator",
+        "age-calculator-for-school"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Resume / CV Builder",
+      "slug": "resume-cv-builder",
+      "category": "Business",
+      "url": "https://toolnest.link/resume-cv-builder.html",
+      "description": "Build and export a formatted resume/CV from entered details.",
+      "inputs": [
+        "personal, education and work details",
+        "template choice"
+      ],
+      "outputs": [
+        "formatted resume (PDF)"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "invoice-generator",
+        "client-proposal-generator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Invoice Generator",
+      "slug": "invoice-generator",
+      "category": "Business",
+      "url": "https://toolnest.link/invoice-generator.html",
+      "description": "Create a professional invoice with line items, tax and totals.",
+      "inputs": [
+        "client details, line items, tax rate"
+      ],
+      "outputs": [
+        "invoice PDF"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "resume-cv-builder",
+        "contract-agreement-generator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Barcode Generator",
+      "slug": "barcode-generator",
+      "category": "Business",
+      "url": "https://toolnest.link/barcode-generator.html",
+      "description": "Generate standard barcodes (Code128, EAN, UPC) from a value.",
+      "inputs": [
+        "value/number",
+        "barcode type"
+      ],
+      "outputs": [
+        "barcode image"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "qr-code-generator-scanner",
+        "invoice-generator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Instant Contract / Agreement Draft Generator",
+      "slug": "contract-agreement-generator",
+      "category": "Business",
+      "url": "https://toolnest.link/contract-agreement-generator.html",
+      "description": "Draft a simple contract/agreement from filled-in party and term details.",
+      "inputs": [
+        "party names, terms, dates"
+      ],
+      "outputs": [
+        "draft agreement document"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "client-proposal-generator",
+        "invoice-generator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Client Proposal & Scope Generator",
+      "slug": "client-proposal-generator",
+      "category": "Business",
+      "url": "https://toolnest.link/client-proposal-generator.html",
+      "description": "Generate a client proposal with scope, timeline and pricing sections.",
+      "inputs": [
+        "project scope, deliverables, pricing"
+      ],
+      "outputs": [
+        "formatted proposal document"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "contract-agreement-generator",
+        "invoice-generator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "SaaS Runway & Cash Burn Rate Calculator",
+      "slug": "saas-runway-calculator",
+      "category": "Business",
+      "url": "https://toolnest.link/saas-runway-calculator.html",
+      "description": "Calculate startup runway in months from cash balance and burn rate.",
+      "inputs": [
+        "cash balance",
+        "monthly burn rate"
+      ],
+      "outputs": [
+        "runway in months, burn projections"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "sip-investment-return-calculator",
+        "savings-goal-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "WhatsApp Direct Chat",
+      "slug": "whatsapp-direct-chat",
+      "category": "Business",
+      "url": "https://toolnest.link/whatsapp-direct-chat.html",
+      "description": "Generate a direct WhatsApp chat link/button with a pre-filled message.",
+      "inputs": [
+        "phone number",
+        "pre-filled message"
+      ],
+      "outputs": [
+        "wa.me chat link"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "qr-code-generator-scanner",
+        "barcode-generator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "QR Code Generator & Scanner",
+      "slug": "qr-code-generator-scanner",
+      "category": "Business",
+      "url": "https://toolnest.link/qr-code-generator-scanner.html",
+      "description": "Generate custom QR codes and scan QR codes using the camera.",
+      "inputs": [
+        "text/URL to encode, or camera scan"
+      ],
+      "outputs": [
+        "QR code image or decoded text"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "barcode-generator",
+        "whatsapp-direct-chat"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Rishta Biodata Studio",
+      "slug": "rishta-biodata-studio",
+      "category": "Business",
+      "url": "https://toolnest.link/rishta-biodata-studio.html",
+      "description": "Create a formatted marriage biodata document from entered details.",
+      "inputs": [
+        "personal, family and preference details"
+      ],
+      "outputs": [
+        "formatted biodata (PDF)"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "resume-cv-builder",
+        "wedding-shaadi-planner-studio"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Wedding & Shaadi Budget Planner",
+      "slug": "wedding-shaadi-planner-studio",
+      "category": "Business",
+      "url": "https://toolnest.link/wedding-shaadi-planner-studio.html",
+      "description": "Plan and track wedding budget across categories and vendors.",
+      "inputs": [
+        "total budget, category allocations"
+      ],
+      "outputs": [
+        "budget breakdown, remaining balance"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "rishta-biodata-studio",
+        "savings-goal-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Logo Maker",
+      "slug": "logo-maker",
+      "category": "Design",
+      "url": "https://toolnest.link/logo-maker.html",
+      "description": "Design a simple logo using text, icons and color combinations.",
+      "inputs": [
+        "brand name, icon/style choice, colors"
+      ],
+      "outputs": [
+        "logo image (PNG/SVG)"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "business-card-maker",
+        "favicon-generator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Business Card Maker",
+      "slug": "business-card-maker",
+      "category": "Design",
+      "url": "https://toolnest.link/business-card-maker.html",
+      "description": "Design and export a print-ready business card.",
+      "inputs": [
+        "name, title, contact details, template"
+      ],
+      "outputs": [
+        "business card image/PDF"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "logo-maker",
+        "resume-cv-builder"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "UI/UX Mesh Gradient Generator",
+      "slug": "mesh-gradient-generator",
+      "category": "Design",
+      "url": "https://toolnest.link/mesh-gradient-generator.html",
+      "description": "Generate smooth mesh gradient backgrounds for UI design.",
+      "inputs": [
+        "color stops, mesh points"
+      ],
+      "outputs": [
+        "gradient CSS/image export"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "color-toolkit",
+        "accessibility-contrast-checker"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Favicon Generator",
+      "slug": "favicon-generator",
+      "category": "Design",
+      "url": "https://toolnest.link/favicon-generator.html",
+      "description": "Generate favicon files in all required sizes from one image.",
+      "inputs": [
+        "source image"
+      ],
+      "outputs": [
+        "favicon .ico/.png set"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "logo-maker",
+        "business-card-maker"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Signature Maker",
+      "slug": "signature-maker",
+      "category": "Design",
+      "url": "https://toolnest.link/signature-maker.html",
+      "description": "Draw or type a signature and export it as a transparent PNG.",
+      "inputs": [
+        "drawn or typed signature"
+      ],
+      "outputs": [
+        "signature image (PNG)"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "document-photo-maker",
+        "logo-maker"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Color Toolkit",
+      "slug": "color-toolkit",
+      "category": "Design",
+      "url": "https://toolnest.link/color-toolkit.html",
+      "description": "Explore color palettes, gradients and conversions in one toolkit.",
+      "inputs": [
+        "base color or palette input"
+      ],
+      "outputs": [
+        "palette, shades, converted values"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "hex-to-rgb-converter",
+        "accessibility-contrast-checker"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Accessibility Contrast Checker",
+      "slug": "accessibility-contrast-checker",
+      "category": "Design",
+      "url": "https://toolnest.link/accessibility-contrast-checker.html",
+      "description": "Check text/background color contrast against WCAG accessibility standards.",
+      "inputs": [
+        "foreground color",
+        "background color"
+      ],
+      "outputs": [
+        "contrast ratio, WCAG pass/fail"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "color-toolkit",
+        "hex-to-rgb-converter"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Student Academic Toolkit",
+      "slug": "student-academic-toolkit",
+      "category": "Education",
+      "url": "https://toolnest.link/student-academic-toolkit.html",
+      "description": "Combined GPA, CGPA, attendance and grade tools for students.",
+      "inputs": [
+        "grades/credit hours or attendance data"
+      ],
+      "outputs": [
+        "GPA/CGPA, attendance %"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "marks-grade-calculator",
+        "age-calculator-for-school"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Marks & Final Grade Calculator",
+      "slug": "marks-grade-calculator",
+      "category": "Education",
+      "url": "https://toolnest.link/marks-grade-calculator.html",
+      "description": "Calculate final grade/percentage from marks across subjects or assessments.",
+      "inputs": [
+        "marks obtained, total marks, weightage"
+      ],
+      "outputs": [
+        "percentage, final grade"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "student-academic-toolkit",
+        "discount-scholarship-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Scientific Notation Converter",
+      "slug": "scientific-notation-converter",
+      "category": "Education",
+      "url": "https://toolnest.link/scientific-notation-converter.html",
+      "description": "Convert numbers between standard and scientific notation.",
+      "inputs": [
+        "number value"
+      ],
+      "outputs": [
+        "scientific/standard notation result"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "fraction-calculator",
+        "matrix-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Text Similarity Checker",
+      "slug": "text-similarity-checker",
+      "category": "Education",
+      "url": "https://toolnest.link/text-similarity-checker.html",
+      "description": "Compare two texts and estimate their similarity percentage.",
+      "inputs": [
+        "text A",
+        "text B"
+      ],
+      "outputs": [
+        "similarity percentage, matched segments"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "text-diff-checker",
+        "citation-generator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Citation Generator",
+      "slug": "citation-generator",
+      "category": "Education",
+      "url": "https://toolnest.link/citation-generator.html",
+      "description": "Generate APA, MLA and Chicago style citations from source details.",
+      "inputs": [
+        "source details (author, title, year, etc.)",
+        "citation style"
+      ],
+      "outputs": [
+        "formatted citation text"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "text-similarity-checker",
+        "student-academic-toolkit"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Age Calculator for School",
+      "slug": "age-calculator-for-school",
+      "category": "Education",
+      "url": "https://toolnest.link/age-calculator-for-school.html",
+      "description": "Calculate exact age and school-admission eligibility from a birth date.",
+      "inputs": [
+        "date of birth",
+        "reference/cutoff date"
+      ],
+      "outputs": [
+        "age (years/months/days), eligibility"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "student-academic-toolkit",
+        "pregnancy-due-date-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Quadratic Equation Solver",
+      "slug": "quadratic-equation-solver",
+      "category": "Education",
+      "url": "https://toolnest.link/quadratic-equation-solver.html",
+      "description": "Solve quadratic equations and show step-by-step roots.",
+      "inputs": [
+        "coefficients a, b, c"
+      ],
+      "outputs": [
+        "roots, discriminant, steps"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "fraction-calculator",
+        "matrix-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Fraction Calculator",
+      "slug": "fraction-calculator",
+      "category": "Education",
+      "url": "https://toolnest.link/fraction-calculator.html",
+      "description": "Add, subtract, multiply and divide fractions with step-by-step results.",
+      "inputs": [
+        "two or more fractions",
+        "operation"
+      ],
+      "outputs": [
+        "simplified result fraction"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "quadratic-equation-solver",
+        "scientific-notation-converter"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Standard Deviation Calculator",
+      "slug": "standard-deviation-calculator",
+      "category": "Education",
+      "url": "https://toolnest.link/standard-deviation-calculator.html",
+      "description": "Calculate mean, variance and standard deviation of a data set.",
+      "inputs": [
+        "list of numbers"
+      ],
+      "outputs": [
+        "mean, variance, standard deviation"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "matrix-calculator",
+        "fraction-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Discount & Scholarship Calculator",
+      "slug": "discount-scholarship-calculator",
+      "category": "Education",
+      "url": "https://toolnest.link/discount-scholarship-calculator.html",
+      "description": "Calculate discounted fee or scholarship amount from percentage rules.",
+      "inputs": [
+        "original amount",
+        "discount/scholarship %"
+      ],
+      "outputs": [
+        "final payable amount"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "marks-grade-calculator",
+        "salary-take-home-pay-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Matrix Calculator",
+      "slug": "matrix-calculator",
+      "category": "Education",
+      "url": "https://toolnest.link/matrix-calculator.html",
+      "description": "Perform matrix addition, multiplication, determinant and inverse operations.",
+      "inputs": [
+        "matrix values",
+        "operation"
+      ],
+      "outputs": [
+        "resulting matrix or value"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "quadratic-equation-solver",
+        "standard-deviation-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Periodic Table Finder",
+      "slug": "periodic-table-finder",
+      "category": "Education",
+      "url": "https://toolnest.link/periodic-table-finder.html",
+      "description": "Look up element details (atomic number, mass, properties) from the periodic table.",
+      "inputs": [
+        "element name or symbol"
+      ],
+      "outputs": [
+        "element properties"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "scientific-notation-converter",
+        "student-academic-toolkit"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "AI Study Helper",
+      "slug": "ai-study-helper",
+      "category": "Education",
+      "url": "https://toolnest.link/ai-study-helper.html",
+      "description": "Get AI-assisted explanations and answers for study questions using your own API key.",
+      "inputs": [
+        "study question/text",
+        "user-supplied AI API key"
+      ],
+      "outputs": [
+        "AI-generated explanation/answer"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": false,
+      "apiAvailability": "external-byok",
+      "privacyModel": "client-side (optional external AI call using the user's own API key; no ToolNest server involved)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "student-academic-toolkit",
+        "citation-generator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "SIP & Investment Return Calculator",
+      "slug": "sip-investment-return-calculator",
+      "category": "Finance",
+      "url": "https://toolnest.link/sip-investment-return-calculator.html",
+      "description": "Project investment growth from monthly SIP contributions and return rate.",
+      "inputs": [
+        "monthly investment, rate, duration"
+      ],
+      "outputs": [
+        "projected maturity value"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "simple-compound-interest-calculator",
+        "savings-goal-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Simple & Compound Interest Calculator",
+      "slug": "simple-compound-interest-calculator",
+      "category": "Finance",
+      "url": "https://toolnest.link/simple-compound-interest-calculator.html",
+      "description": "Calculate simple and compound interest on a principal amount.",
+      "inputs": [
+        "principal, rate, time",
+        "interest type"
+      ],
+      "outputs": [
+        "interest amount, final value"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "sip-investment-return-calculator",
+        "inflation-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Sales Tax / GST Calculator",
+      "slug": "sales-tax-gst-calculator",
+      "category": "Finance",
+      "url": "https://toolnest.link/sales-tax-gst-calculator.html",
+      "description": "Calculate sales tax/GST amount and total price from a base amount.",
+      "inputs": [
+        "amount",
+        "tax rate %"
+      ],
+      "outputs": [
+        "tax amount, total amount"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "salary-take-home-pay-calculator",
+        "discount-scholarship-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Crypto / Stock Profit & Loss Calculator",
+      "slug": "crypto-stock-profit-loss-calculator",
+      "category": "Finance",
+      "url": "https://toolnest.link/crypto-stock-profit-loss-calculator.html",
+      "description": "Calculate profit or loss on a crypto/stock trade from buy/sell prices.",
+      "inputs": [
+        "buy price, sell price, quantity, fees"
+      ],
+      "outputs": [
+        "profit/loss amount and %"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "crypto-trading-command-center",
+        "simple-compound-interest-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Inflation Calculator",
+      "slug": "inflation-calculator",
+      "category": "Finance",
+      "url": "https://toolnest.link/inflation-calculator.html",
+      "description": "Calculate the inflation-adjusted value of money between two years.",
+      "inputs": [
+        "amount, start year, end year, inflation rate"
+      ],
+      "outputs": [
+        "inflation-adjusted value"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "simple-compound-interest-calculator",
+        "salary-take-home-pay-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Salary / Take-Home Pay Calculator",
+      "slug": "salary-take-home-pay-calculator",
+      "category": "Finance",
+      "url": "https://toolnest.link/salary-take-home-pay-calculator.html",
+      "description": "Calculate net take-home salary after tax and deductions.",
+      "inputs": [
+        "gross salary, tax slabs/deductions"
+      ],
+      "outputs": [
+        "net take-home salary"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "sales-tax-gst-calculator",
+        "inflation-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Savings Goal Calculator",
+      "slug": "savings-goal-calculator",
+      "category": "Finance",
+      "url": "https://toolnest.link/savings-goal-calculator.html",
+      "description": "Calculate how much to save monthly to reach a target amount by a date.",
+      "inputs": [
+        "target amount, target date, current savings"
+      ],
+      "outputs": [
+        "required monthly saving"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "sip-investment-return-calculator",
+        "saas-runway-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Zakat & Ushr Studio",
+      "slug": "zakat-calculator",
+      "category": "Finance",
+      "url": "https://toolnest.link/zakat-calculator.html",
+      "description": "Calculate Zakat and Ushr due based on assets, cash, gold and Nisab value.",
+      "inputs": [
+        "cash, gold/silver, assets, liabilities"
+      ],
+      "outputs": [
+        "Zakat/Ushr payable amount"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "savings-goal-calculator",
+        "sip-investment-return-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Crypto Trading Command Center",
+      "slug": "crypto-trading-command-center",
+      "category": "Finance",
+      "url": "https://toolnest.link/crypto-trading-command-center.html",
+      "description": "Track crypto positions, P&L and market data with optional AI insights using your own API key.",
+      "inputs": [
+        "holdings/positions",
+        "user-supplied AI API key (optional)"
+      ],
+      "outputs": [
+        "portfolio P&L, market overview"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": false,
+      "apiAvailability": "external-byok",
+      "privacyModel": "client-side (optional external AI call using the user's own API key; no ToolNest server involved)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "crypto-stock-profit-loss-calculator",
+        "sip-investment-return-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Land & Plot Toolkit",
+      "slug": "land-plot-toolkit",
+      "category": "Property",
+      "url": "https://toolnest.link/land-plot-toolkit.html",
+      "description": "Convert and calculate land area across Marla, Kanal, Acre and other units.",
+      "inputs": [
+        "area value",
+        "source and target unit"
+      ],
+      "outputs": [
+        "converted area value"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "map-scale-distance-calculator",
+        "construction-cost-estimator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Construction Bricks Calculator",
+      "slug": "construction-bricks-calculator",
+      "category": "Property",
+      "url": "https://toolnest.link/construction-bricks-calculator.html",
+      "description": "Estimate the number of bricks required for a wall from its dimensions.",
+      "inputs": [
+        "wall dimensions, brick size"
+      ],
+      "outputs": [
+        "estimated brick count"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "cement-concrete-volume-calculator",
+        "construction-cost-estimator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Cement & Concrete Volume Calculator",
+      "slug": "cement-concrete-volume-calculator",
+      "category": "Property",
+      "url": "https://toolnest.link/cement-concrete-volume-calculator.html",
+      "description": "Calculate cement, sand, aggregate and volume needed for concrete work.",
+      "inputs": [
+        "dimensions, mix ratio"
+      ],
+      "outputs": [
+        "material quantities (bags/volume)"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "construction-bricks-calculator",
+        "paint-estimator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Paint Estimator",
+      "slug": "paint-estimator",
+      "category": "Property",
+      "url": "https://toolnest.link/paint-estimator.html",
+      "description": "Estimate paint quantity and cost needed to cover a given area.",
+      "inputs": [
+        "wall area, number of coats",
+        "paint coverage rate"
+      ],
+      "outputs": [
+        "required paint quantity, estimated cost"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "flooring-tile-calculator",
+        "construction-cost-estimator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Flooring Tile Calculator",
+      "slug": "flooring-tile-calculator",
+      "category": "Property",
+      "url": "https://toolnest.link/flooring-tile-calculator.html",
+      "description": "Calculate the number of floor tiles required for a room area.",
+      "inputs": [
+        "room dimensions, tile size"
+      ],
+      "outputs": [
+        "required tile count, wastage allowance"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "paint-estimator",
+        "cement-concrete-volume-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Property Loan EMI & Mortgage Calculator",
+      "slug": "property-loan-mortgage-calculator",
+      "category": "Property",
+      "url": "https://toolnest.link/property-loan-mortgage-calculator.html",
+      "description": "Calculate monthly EMI and total interest on a property loan/mortgage.",
+      "inputs": [
+        "loan amount, interest rate, tenure"
+      ],
+      "outputs": [
+        "monthly EMI, total interest"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "rental-yield-calculator",
+        "construction-cost-estimator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Rental Yield Calculator",
+      "slug": "rental-yield-calculator",
+      "category": "Property",
+      "url": "https://toolnest.link/rental-yield-calculator.html",
+      "description": "Calculate rental yield percentage from property price and rental income.",
+      "inputs": [
+        "property value",
+        "annual rental income"
+      ],
+      "outputs": [
+        "gross/net rental yield %"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "property-loan-mortgage-calculator",
+        "savings-goal-calculator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Construction Cost Estimator",
+      "slug": "construction-cost-estimator",
+      "category": "Property",
+      "url": "https://toolnest.link/construction-cost-estimator.html",
+      "description": "Estimate total construction cost from covered area and per-unit rate.",
+      "inputs": [
+        "covered area, construction grade/rate"
+      ],
+      "outputs": [
+        "estimated total cost"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "cement-concrete-volume-calculator",
+        "land-plot-toolkit"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Map Scale & Distance Calculator",
+      "slug": "map-scale-distance-calculator",
+      "category": "Property",
+      "url": "https://toolnest.link/map-scale-distance-calculator.html",
+      "description": "Convert map scale distances to real-world distance and area.",
+      "inputs": [
+        "map distance, scale ratio"
+      ],
+      "outputs": [
+        "real-world distance/area"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "land-plot-toolkit",
+        "construction-cost-estimator"
+      ],
+      "lastUpdated": "2026-08-28"
+    },
+    {
+      "name": "Property Document & Rent Agreement Studio",
+      "slug": "property-document-studio",
+      "category": "Property",
+      "url": "https://toolnest.link/property-document-studio.html",
+      "description": "Generate rent agreements and property document drafts from entered details.",
+      "inputs": [
+        "party details, property details, terms"
+      ],
+      "outputs": [
+        "formatted document (PDF)"
+      ],
+      "supportedLanguages": [
+        "en"
+      ],
+      "offlineCapable": true,
+      "apiAvailability": "planned",
+      "privacyModel": "client-side-only (fully offline capable, no network request required)",
+      "version": "1.0.0",
+      "relatedTools": [
+        "contract-agreement-generator",
+        "land-plot-toolkit"
+      ],
+      "lastUpdated": "2026-08-28"
+    }
+  ]
+}
