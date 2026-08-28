@@ -54,7 +54,7 @@
 <details style="margin-top:14px;"><summary>🆓 Free Gemini API key kaise banayein?</summary><ol style="line-height:1.9;font-size:.9rem;"><li><strong>aistudio.google.com</strong> kholein aur apne Gmail se sign in karein.</li><li>Left menu mein <strong>"Get API Key"</strong> par tap karein.</li><li><strong>"Create API Key"</strong> dabayein — koi bhi naya project select kar lein jab pooche.</li><li>Key copy karein (<code>AIza...</code> se shuru hogi) aur upar wale box mein paste karein.</li><li><strong>Bilkul free hai</strong> — koi credit card nahi maangi jayegi.</li></ol></details>
 </div>
 
-<div class="sh-tabs"><button class="sh-tab active" data-tab="study">📘 Study Helper</button><button class="sh-tab" data-tab="mock">📝 Mock Exam</button><button class="sh-tab" data-tab="css">🎓 CSS Foundation</button><button class="sh-tab" data-tab="english">📖 Improve English</button><button class="sh-tab" data-tab="upload">📄 Upload &amp; Ask</button><button class="sh-tab" data-tab="flash">🗂️ Flashcards</button></div>
+<div class="sh-tabs"><button class="sh-tab active" data-tab="study">📘 Study Helper</button><button class="sh-tab" data-tab="mock">📝 Mock Exam</button><button class="sh-tab" data-tab="css">🎓 CSS Foundation</button><button class="sh-tab" data-tab="english">📖 Improve English</button><button class="sh-tab" data-tab="upload">📄 Upload &amp; Ask</button><button class="sh-tab" data-tab="flash">🗂️ Flashcards</button><button class="sh-tab" data-tab="progress">📊 Progress</button></div>
 
 <!-- STUDY HELPER -->
 <div class="sh-section active" id="tab-study"><div class="sh-card"><h2>Study Helper</h2><p class="desc">Class 9-12 (Medical, Non-Medical, ICS) — koi bhi sawal poochein.</p>
@@ -87,13 +87,14 @@
 </div></div>
 
 <!-- CSS FOUNDATION -->
-<div class="sh-section" id="tab-css"><div class="sh-card"><h2>CSS Foundation</h2><p class="desc">English, Essay, Precis, Vocabulary, GK, Current Affairs, Pakistan Affairs, Islamiat, Analytical Thinking, Reading Comprehension, Sentence Correction.</p>
+<div class="sh-section" id="tab-css"><div class="sh-card"><h2>CSS Foundation</h2><p class="desc">English, Essay, Precis, Vocabulary, General Science &amp; Ability, MPT Screening Test, Current Affairs, Pakistan Affairs, Islamiat, Analytical Thinking, Reading Comprehension, Sentence Correction — matched to FPSC's real paper structure.</p>
 <div class="sh-csstabs" id="cssTabs">
 <button class="sh-csstab active" data-css="english">English</button>
 <button class="sh-csstab" data-css="essay">Essay Writing</button>
 <button class="sh-csstab" data-css="precis">Precis Writing</button>
 <button class="sh-csstab" data-css="vocab">Vocabulary</button>
-<button class="sh-csstab" data-css="gk">General Knowledge</button>
+<button class="sh-csstab" data-css="gk">General Science &amp; Ability</button>
+<button class="sh-csstab" data-css="mpt">MPT Screening Test</button>
 <button class="sh-csstab" data-css="current">Current Affairs</button>
 <button class="sh-csstab" data-css="pakaffairs">Pakistan Affairs</button>
 <button class="sh-csstab" data-css="islamiat">Islamiat</button>
@@ -110,13 +111,17 @@
 
 <div class="sh-csspanel" id="css-vocab"><div class="row"><button onclick="shGenerateVocab()">Get Words</button></div><div id="vocabErr"></div><div id="vocabList"></div></div>
 
-<div class="sh-csspanel" id="css-gk"><label class="field-label-block" for="cssGkQ">Sawal likhein</label><textarea id="cssGkQ" placeholder="e.g. What is the difference between GDP and GNP?"></textarea><div class="row" style="margin-top:10px;"><button onclick="shGenericAsk('General Knowledge topics tested in CSS','cssGkQ','cssGkResult','cssGkErr',this)">Ask</button></div><div id="cssGkErr"></div><div class="result-panel" id="cssGkPanel"><div class="sh-result" id="cssGkResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="cssGkResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('cssGkResult','gk-answer.txt')">⬇️ Download</button></div></div></div>
+<div class="sh-csspanel" id="css-gk"><p class="sh-note">FPSC ka 100-marks laazmi paper — do hisse: Everyday Science aur Quantitative/Mental Ability. Yahan dono se sawaal poochh sakte hain.</p><label class="field-label-block" for="cssGkQ">Sawal likhein</label><textarea id="cssGkQ" placeholder="e.g. Explain the difference between speed and velocity, or: Solve — a train covers 60km in 45 minutes, find its speed"></textarea><div class="row" style="margin-top:10px;"><button onclick="shGenericAsk('General Science and Ability for CSS — this is a 100-mark compulsory FPSC paper covering Everyday Science (physics, chemistry, biology, environment, IT basics) AND Quantitative/Mental Ability (arithmetic, algebra, geometry, series, logical reasoning). Show full step-by-step working for any numerical question and verify the final answer before stating it.','cssGkQ','cssGkResult','cssGkErr',this)">Ask</button></div><div id="cssGkErr"></div><div class="result-panel" id="cssGkPanel"><div class="sh-result" id="cssGkResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="cssGkResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('cssGkResult','general-science-ability-answer.txt')">⬇️ Download</button></div></div></div>
 
-<div class="sh-csspanel" id="css-current"><label class="field-label-block" for="cssCurrentQ">Sawal likhein</label><textarea id="cssCurrentQ" placeholder="e.g. Explain the significance of CPEC for Pakistan's economy"></textarea><div class="row" style="margin-top:10px;"><button onclick="shGenericAsk('Current Affairs (national and international developments) for CSS preparation','cssCurrentQ','cssCurrentResult','cssCurrentErr',this)">Ask</button></div><div id="cssCurrentErr"></div><div class="result-panel" id="cssCurrentPanel"><div class="sh-result" id="cssCurrentResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="cssCurrentResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('cssCurrentResult','current-affairs-answer.txt')">⬇️ Download</button></div></div></div>
+<div class="sh-csspanel" id="css-mpt"><p class="sh-note"><strong>Pehla darwaza:</strong> MPT (MCQ-based Preliminary Test) pass kiye bagair CSS ka written exam diya hi nahi ja sakta. Iske number 1200 written marks mein shamil nahi hote.</p>
+<div class="row"><div class="field"><label class="field-label" for="mptSection">Section</label><select id="mptSection"><option>English</option><option>Urdu</option><option>Islamic Studies / Civics</option><option>General Abilities</option><option>Current Affairs</option><option>Pakistan Affairs</option><option>Everyday Science</option></select></div></div>
+<div class="row" style="margin-top:10px;"><button onclick="shMptQuiz()">Generate 8 MCQs</button></div>
+<div id="mptErr"></div><div id="mptQuiz"></div></div>
+<div class="sh-csspanel" id="css-current"><p class="sh-note">⚠️ AI ki Current Affairs maloomat purani ho sakti hai — taza waqiat ke liye akhbar ya kisi mautabar khabar wali site se tasdeeq zaroor karein.</p><label class="field-label-block" for="cssCurrentQ">Sawal likhein</label><textarea id="cssCurrentQ" placeholder="e.g. Explain the significance of CPEC for Pakistan's economy"></textarea><div class="row" style="margin-top:10px;"><button onclick="shGenericAsk('Current Affairs (national and international developments) for CSS preparation','cssCurrentQ','cssCurrentResult','cssCurrentErr',this)">Ask</button></div><div id="cssCurrentErr"></div><div class="result-panel" id="cssCurrentPanel"><div class="sh-result" id="cssCurrentResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="cssCurrentResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('cssCurrentResult','current-affairs-answer.txt')">⬇️ Download</button></div></div></div>
 
-<div class="sh-csspanel" id="css-pakaffairs"><label class="field-label-block" for="cssPakQ">Sawal likhein</label><textarea id="cssPakQ" placeholder="e.g. Explain the significance of the 1973 Constitution"></textarea><div class="row" style="margin-top:10px;"><button onclick="shGenericAsk('Pakistan Affairs (history, politics, geography of Pakistan) for CSS preparation','cssPakQ','cssPakResult','cssPakErr',this)">Ask</button></div><div id="cssPakErr"></div><div class="result-panel" id="cssPakPanel"><div class="sh-result" id="cssPakResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="cssPakResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('cssPakResult','pakistan-affairs-answer.txt')">⬇️ Download</button></div></div></div>
+<div class="sh-csspanel" id="css-pakaffairs"><label class="field-label-block" for="cssPakQ">Sawal likhein</label><textarea id="cssPakQ" placeholder="e.g. Explain the significance of the 1973 Constitution"></textarea><div class="row" style="margin-top:10px;"><button onclick="shGenericAsk('Pakistan Affairs (history, politics, geography of Pakistan) for CSS preparation','cssPakQ','cssPakResult','cssPakErr',this,'Pakistan Studies')">Ask</button></div><div id="cssPakErr"></div><div class="result-panel" id="cssPakPanel"><div class="sh-result" id="cssPakResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="cssPakResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('cssPakResult','pakistan-affairs-answer.txt')">⬇️ Download</button></div></div></div>
 
-<div class="sh-csspanel" id="css-islamiat"><label class="field-label-block" for="cssIslQ">Sawal likhein</label><textarea id="cssIslQ" placeholder="e.g. Explain the concept of Ijma in Islamic jurisprudence"></textarea><div class="row" style="margin-top:10px;"><button onclick="shGenericAsk('Islamiat (Islamic studies) for CSS preparation','cssIslQ','cssIslResult','cssIslErr',this)">Ask</button></div><div id="cssIslErr"></div><div class="result-panel" id="cssIslPanel"><div class="sh-result" id="cssIslResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="cssIslResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('cssIslResult','islamiat-answer.txt')">⬇️ Download</button></div></div></div>
+<div class="sh-csspanel" id="css-islamiat"><label class="field-label-block" for="cssIslQ">Sawal likhein</label><textarea id="cssIslQ" placeholder="e.g. Explain the concept of Ijma in Islamic jurisprudence"></textarea><div class="row" style="margin-top:10px;"><button onclick="shGenericAsk('Islamiat (Islamic studies) for CSS preparation — quote ayat in Arabic with Urdu tarjuma and give surah/ayat number, name hadith sources, never invent a reference','cssIslQ','cssIslResult','cssIslErr',this,'Islamic Education')">Ask</button></div><div id="cssIslErr"></div><div class="result-panel" id="cssIslPanel"><div class="sh-result" id="cssIslResult"></div><div class="sh-resultbar"><button class="secondary" data-copy="cssIslResult" data-copy-mode="text">📋 Copy</button><button class="secondary" onclick="shDownload('cssIslResult','islamiat-answer.txt')">⬇️ Download</button></div></div></div>
 
 <div class="sh-csspanel" id="css-analytical"><div class="row"><button onclick="shAnalyticalQuiz()">Start Quiz</button></div><div id="analyticalErr"></div><div id="analyticalQuiz"></div></div>
 
@@ -160,6 +165,11 @@
 <div id="flashCards"></div>
 </div></div>
 
+<!-- PROGRESS -->
+<div class="sh-section" id="tab-progress"><div class="sh-card"><h2>📊 Progress</h2><p class="desc">Sab kuch sirf <strong>is browser</strong> mein save hota hai — kahin upload nahi hota, koi account nahi. Browser cache saaf karne se ye mit jayega.</p>
+<div id="progressBox"></div>
+</div></div>
+
 </div>
 
 <div class="seo-content">
@@ -180,20 +190,21 @@
 <p>This instant AI homework helper and CSS exam prep tool runs entirely on Google's free Gemini API, called directly from your own browser using your own personal API key — the same technology used by paid CSS coaching platforms, now free and private. Study Helper answers are tailored to your selected class and subject with five response modes (Explain, Solve, Summarize, Practice, Quiz). Mock Exam builds a fresh board-format paper with MCQs, short and long questions, and a marking scheme every time you generate one. CSS Foundation runs eleven connected tools — English, Essay Writing, Precis Writing, Vocabulary, General Knowledge, Current Affairs, Pakistan Affairs, Islamiat, Analytical Thinking, Reading Comprehension, and Sentence Correction — each built around real FPSC-style exam patterns.</p>
 
 <h3>Key Features</h3>
-<p>As a free study tool with no signup and zero server uploads, every calculation and every AI call happens using your own key, with nothing saved anywhere except your own browser's local storage. The Mock Exam generator produces board-exam-style papers matching real Pakistani board difficulty and mark distribution, with instant answer keys. The Precis Writing tool generates a fresh 250-word passage, checks your precis like an FPSC examiner, scores it out of 20, and shows a model precis for comparison. The Analytical Thinking and Reading Comprehension tools generate fresh logical-reasoning and passage-based MCQs with instant feedback, while Upload &amp; Ask lets you question your own textbook PDF directly, without it ever being stored.</p>
+<p>As a free study tool with no signup and zero server uploads, every calculation and every AI call happens using your own key, with nothing saved anywhere except your own browser's local storage. The Mock Exam generator produces board-exam-style papers matching real Pakistani board difficulty and mark distribution, with clickable MCQs and AI-graded short and long answers so you get a real score, not just an answer key. The Precis Writing tool generates a fresh 250-word passage, checks your precis like an FPSC examiner, scores it out of 20, and shows a model precis for comparison. CSS Foundation now follows FPSC's real compulsory-paper structure, including General Science & Ability and the MPT screening test that candidates must pass before the written exam. The Analytical Thinking and Reading Comprehension tools generate fresh logical-reasoning and passage-based MCQs with instant feedback, while Upload &amp; Ask lets you question your own textbook PDF directly, without it ever being stored.</p>
 
 <h3>Common Use Cases</h3>
-<p>A Class 9 Biology student stuck on a diagram-based question opens Study Helper, selects Explain mode, and gets a clear, exam-focused answer in seconds. An FSc Pre-Medical student preparing for a mid-term uses Mock Exam to generate a full board-format practice paper the night before a test. A CSS aspirant fresh out of Intermediate opens Precis Writing daily to build the single most examiner-weighted skill in the CSS English paper, while another uses Sentence Correction and Vocabulary Builder as a five-minute daily warm-up. A student revising the night before an exam uses Flashcards to flip through key formulas and definitions instead of re-reading an entire chapter.</p>
+<p>A Class 9 Biology student stuck on a diagram-based question opens Study Helper, selects Explain mode, and gets a clear, exam-focused answer in seconds. An FSc Pre-Medical student preparing for a mid-term uses Mock Exam to generate a full board-format practice paper the night before a test. A CSS aspirant fresh out of Intermediate opens Precis Writing daily to build the single most examiner-weighted skill in the CSS English paper, while another uses Sentence Correction and Vocabulary Builder as a five-minute daily warm-up. A student revising the night before an exam uses Flashcards to flip through key formulas and definitions instead of re-reading an entire chapter. A Class 10 Urdu or Islamiat student gets exam-accurate answers written in proper Urdu script, matching how the board actually marks those papers.</p>
 
 <h3>Tips</h3>
-<p>Mock Exam and CSS Foundation results are AI-generated practice material, not official past papers — use them to build exam temperament and identify weak areas, not as a substitute for the official FPSC syllabus and past papers. Because nothing is stored on any server, remember to Copy, Download, or Print anything you want to keep before closing the tab. If a tool ever shows an "AI error," double-check that your API key is pasted correctly in AI Settings and that your free Google quota hasn't been used up for the day — it resets every 24 hours.</p>
+<p>Mock Exam and CSS Foundation results are AI-generated practice material, not official past papers — use them to build exam temperament and identify weak areas, not as a substitute for the official FPSC syllabus and past papers. The new Progress tab tracks your quiz attempts and daily streak entirely inside your own browser, so weak topics surface automatically without any account or upload. Because nothing is stored on any server, remember to Copy, Download, or Print anything you want to keep before closing the tab. If a tool ever shows an "AI error," double-check that your API key is pasted correctly in AI Settings and that your free Google quota hasn't been used up for the day — it resets every 24 hours.</p>
 
 <h3>Frequently Asked Questions</h3>
 <div class="faq-block">
 <details><summary>Is this tool really free to use?</summary><p>Yes. Google's Gemini API has a genuinely free tier with no credit card required, and this tool itself has no cost, no subscription, and no sign-up.</p></details>
 <details><summary>Do I need to create an account?</summary><p>No sign-up is required. Just paste your own free Gemini API key into the AI Settings section once and start using any tool immediately.</p></details>
 <details><summary>Is my data uploaded or stored anywhere?</summary><p>No. Nothing is saved on any server. Your API key is stored only in your browser's local storage, and your questions, answers, and uploaded PDFs are never stored — they exist only for the single request you make.</p></details>
-<details><summary>What classes and subjects does it cover?</summary><p>Class 9 and 10 (Biology, Physics, Chemistry, Mathematics, Computer Science) and Class 11-12 across Medical, Non-Medical and ICS groups (English, Computer Science, Statistics, Economics, Physics, Chemistry, Biology, Mathematics).</p></details>
+<details><summary>What classes and subjects does it cover?</summary><p>Class 9-10 (English, Urdu, Islamiat, Pakistan Studies, Biology, Physics, Chemistry, Mathematics, Computer Science) and Class 11-12 across Medical, Non-Medical and ICS groups, including the compulsory Urdu, Islamic Education and Pakistan Studies papers written in proper Urdu script.</p></details>
+<details><summary>Is my progress saved anywhere?</summary><p>Only in your own browser’s local storage — nothing is uploaded. The Progress tab shows your streak and weak topics based on quiz attempts on this device; clearing your browser data clears it too.</p></details>
 <details><summary>How does the Mock Exam generator work?</summary><p>Select a class and subject and it instantly builds a full board-exam-style paper — 8 MCQs, 7 short questions, and 3 long questions — matching real Pakistani board format, with a complete marking scheme you can reveal any time.</p></details>
 <details><summary>Are these real CSS past papers?</summary><p>No. All CSS Foundation content — essay topics, precis passages, reading comprehension, and mock questions — is freshly generated by AI in the style of real FPSC papers, so you get unlimited fresh practice material instead of memorizing a fixed set of old papers.</p></details>
 <details><summary>Can I upload my own textbook or notes?</summary><p>Yes, under Upload &amp; Ask. Upload any PDF (up to about 15MB) and ask a question directly about its content — the file is sent only to the AI for that single answer and is never saved anywhere.</p></details>
@@ -259,6 +270,7 @@ document.getElementById('shRemoveKey').addEventListener('click',function(){
 
 /* ---------- Core Gemini caller ---------- */
 async function callGemini(promptText,systemText,jsonMode){
+  shTrackActivity();
   var s=getSettings();
   if(!s.apiKey){throw new Error('Pehle upar "AI Settings" mein apni free Gemini API key daalein.');}
   var body={contents:[{role:'user',parts:[{text:promptText}]}]};
@@ -274,6 +286,195 @@ async function callGemini(promptText,systemText,jsonMode){
   if(!text)throw new Error('AI ne khaali jawab diya.');
   return text;
 }
+/* ---------- Progress tracking (localStorage only — nothing leaves the browser) ---------- */
+var SH_QUIZ_KEY='sh_quiz_log';
+var SH_STREAK_KEY='sh_streak_days';
+var SH_MAX_LOG=300;
+
+function shTrackActivity(){
+  try{
+    var today=new Date().toLocaleDateString('en-CA');
+    var days=JSON.parse(localStorage.getItem(SH_STREAK_KEY)||'[]');
+    if(days.indexOf(today)===-1){
+      days.push(today);
+      if(days.length>400)days=days.slice(days.length-400);
+      localStorage.setItem(SH_STREAK_KEY,JSON.stringify(days));
+    }
+  }catch(e){}
+}
+
+function shCurrentStreak(){
+  try{
+    var days=JSON.parse(localStorage.getItem(SH_STREAK_KEY)||'[]');
+    if(!days.length)return {current:0,today:false};
+    var set={};days.forEach(function(d){set[d]=1;});
+    var todayStr=new Date().toLocaleDateString('en-CA');
+    var today=!!set[todayStr];
+    var count=0;var cur=new Date();
+    if(!today)cur.setDate(cur.getDate()-1);
+    for(var i=0;i<400;i++){
+      var key=cur.toLocaleDateString('en-CA');
+      if(set[key]){count++;cur.setDate(cur.getDate()-1);}else break;
+    }
+    return {current:count,today:today};
+  }catch(e){return {current:0,today:false};}
+}
+
+function shRecordQuiz(subject,topic,question,correct,chosen,answer){
+  shTrackActivity();
+  try{
+    var log=JSON.parse(localStorage.getItem(SH_QUIZ_KEY)||'[]');
+    log.push({subject:subject||'',topic:topic||'',question:question,correct:!!correct,chosen:chosen||'',answer:answer||'',t:Date.now()});
+    if(log.length>SH_MAX_LOG)log=log.slice(log.length-SH_MAX_LOG);
+    localStorage.setItem(SH_QUIZ_KEY,JSON.stringify(log));
+  }catch(e){}
+}
+
+function shQuizStats(){
+  var log=[];
+  try{log=JSON.parse(localStorage.getItem(SH_QUIZ_KEY)||'[]');}catch(e){}
+  var total=log.length,wrong=log.filter(function(x){return !x.correct;}).length;
+  var buckets={};
+  log.forEach(function(x){
+    var key=(x.subject||'Other')+' :: '+(x.topic||'General');
+    if(!buckets[key])buckets[key]={subject:x.subject||'Other',topic:x.topic||'General',right:0,wrong:0};
+    if(x.correct)buckets[key].right++;else buckets[key].wrong++;
+  });
+  var weak=Object.keys(buckets).map(function(k){
+    var b=buckets[k];var tot=b.right+b.wrong;
+    return {subject:b.subject,topic:b.topic,right:b.right,wrong:b.wrong,total:tot,accuracy:tot?Math.round(b.right/tot*100):0};
+  }).filter(function(b){return b.total>=3&&b.accuracy<70;}).sort(function(a,b){return a.accuracy-b.accuracy;}).slice(0,8);
+  var mistakes=log.filter(function(x){return !x.correct;}).slice(-40).reverse();
+  return {total:total,wrong:wrong,weak:weak,mistakes:mistakes};
+}
+
+function shClearProgress(){
+  if(!confirm('Poora progress record mit a dein? Ye wapas nahi aa sakta.'))return;
+  try{localStorage.removeItem(SH_QUIZ_KEY);localStorage.removeItem(SH_STREAK_KEY);}catch(e){}
+  shRenderProgress();
+}
+
+function shRenderProgress(){
+  var box=document.getElementById('progressBox');
+  if(!box)return;
+  var streak=shCurrentStreak();
+  var stats=shQuizStats();
+  var h='';
+  h+='<div class="sh-mcq" style="display:flex;align-items:center;gap:12px;">';
+  h+='<span style="font-size:1.8rem;">'+(streak.today?'🔥':'💤')+'</span>';
+  h+='<div><strong style="font-size:1.3rem;">'+streak.current+' din</strong><div class="sh-note">'+(streak.today?'lagataar — aaj bhi ho gaya':'ka silsila tha — aaj kuch karein to barhega')+'</div></div>';
+  h+='</div>';
+  if(stats.total>0){
+    var acc=Math.round((stats.total-stats.wrong)/stats.total*100);
+    h+='<div class="sh-mcq"><strong>'+stats.total+'</strong> sawaal is device par · <strong style="color:'+(acc>=70?'#2f9e52':'#c0392b')+'">'+acc+'%</strong> sahi</div>';
+  }
+  if(stats.weak.length){
+    h+='<h3 style="margin-top:16px;">Kamzor Topics</h3>';
+    stats.weak.forEach(function(w){
+      h+='<div class="sh-mcq"><strong>'+w.topic+'</strong> <span class="sh-note">('+w.subject+')</span><div class="sh-note">'+w.right+'/'+w.total+' sahi — '+w.accuracy+'%</div></div>';
+    });
+  }
+  if(stats.mistakes.length){
+    h+='<h3 style="margin-top:16px;">Halia Galtiyan</h3>';
+    stats.mistakes.forEach(function(m){
+      h+='<div class="sh-mcq"><div class="sh-note">'+(m.subject||'')+(m.topic?' · '+m.topic:'')+'</div>'+m.question+
+         (m.chosen?'<div class="sh-note" style="color:#c0392b;">Aap ne likha: '+m.chosen+'</div>':'')+
+         (m.answer?'<div class="sh-note" style="color:#2f9e52;">Sahi jawab: '+m.answer+'</div>':'')+'</div>';
+    });
+  }
+  if(!stats.total&&!streak.current){
+    h+='<p class="sh-note">Abhi koi record nahi. Mock Exam, MPT, ya Analytical/Reading quiz try karein — record yahan khud ban jayega.</p>';
+  }
+  h+='<div class="row" style="margin-top:16px;"><button class="secondary" onclick="shClearProgress()">🗑️ Record Saaf Karein</button></div>';
+  box.innerHTML=h;
+}
+
+/* ---------- Roman Urdu / Urdu explain-again button ---------- */
+function shAttachExtras(panelId,resultId,subj){
+  var panel=document.getElementById(panelId);
+  if(!panel||panel.querySelector('.sh-explain-extra'))return;
+  var wrap=document.createElement('div');
+  wrap.className='sh-explain-extra';
+  wrap.style.marginTop='10px';
+  wrap.innerHTML='<div class="row" style="gap:8px;"><button type="button" class="secondary" onclick="shExplainAgain(\''+resultId+'\',\'roman\')">🗣️ Roman Urdu mein samjhao</button><button type="button" class="secondary" onclick="shExplainAgain(\''+resultId+'\',\'urdu\')">اردو میں</button></div><div id="'+resultId+'_explain" style="margin-top:10px;"></div>';
+  panel.appendChild(wrap);
+}
+
+async function shExplainAgain(resultId,style){
+  var srcEl=document.getElementById(resultId);
+  var outEl=document.getElementById(resultId+'_explain');
+  if(!srcEl||!outEl)return;
+  var text=srcEl.textContent.trim();
+  if(!text)return;
+  outEl.innerHTML='<p class="sh-note">Samjha raha hoon…</p>';
+  try{
+    var sys="You are re-explaining an academic answer in the student's own language so it actually clicks. She is a Pakistani student whose first language is Urdu. "+
+      (style==='urdu'?'اردو رسم الخط میں لکھیں، سادہ اور عام فہم زبان استعمال کریں۔':'Write in Roman Urdu — Urdu language, English letters, simple everyday words.')+
+      ' Do NOT translate word by word — explain the idea so it clicks. Keep technical terms in English (explain what they mean, then keep using the English word). Keep formulas, numbers and equations exactly as they are. Start with the main idea in one or two lines. Keep it shorter than the original. Do not add new facts.';
+    var out=await callGemini('Original answer to re-explain:\n\n'+text,sys,false);
+    outEl.innerHTML='';
+    var p=document.createElement('div');
+    p.className='sh-result';
+    p.textContent=out;
+    if(style==='urdu'){p.setAttribute('dir','rtl');p.style.textAlign='right';p.style.lineHeight='2';}
+    outEl.appendChild(p);
+  }catch(e){outEl.innerHTML='<div class="sh-error">'+e.message+'</div>';}
+}
+
+/* ---------- Written answer grading (Mock Exam short/long questions) ---------- */
+function shEscAttr(t){
+  return String(t||'')
+    .replace(/\\/g,'\\\\')
+    .replace(/'/g,"\\'")
+    .replace(/\r?\n/g,' ')
+    .replace(/"/g,'&quot;');
+}
+function shWrittenGraderHtml(id,question,maxMarks,subj,modelAnswer){
+  return '<div style="margin-top:8px;">'+
+    '<button type="button" class="secondary" id="'+id+'_toggle" onclick="shToggleGrader(\''+id+'\')">✍️ Apna jawab likh kar check karayein</button>'+
+    '<div id="'+id+'_box" style="display:none;margin-top:8px;">'+
+      '<textarea id="'+id+'_ans" placeholder="Apna jawab yahan likhein..." rows="4" style="width:100%;"></textarea>'+
+      '<div class="row" style="margin-top:8px;"><button type="button" onclick="shGradeWritten(\''+id+'\','+
+        '\''+shEscAttr(question)+'\','+maxMarks+',\''+shEscAttr(subj)+'\',\''+shEscAttr(modelAnswer)+'\')">Check karayein</button></div>'+
+      '<div id="'+id+'_result" style="margin-top:8px;"></div>'+
+    '</div></div>';
+}
+function shToggleGrader(id){
+  var box=document.getElementById(id+'_box');
+  if(box)box.style.display=(box.style.display==='none')?'block':'none';
+}
+async function shGradeWritten(id,question,maxMarks,subj,modelAnswer){
+  var ansEl=document.getElementById(id+'_ans');
+  var outEl=document.getElementById(id+'_result');
+  var answer=ansEl?ansEl.value.trim():'';
+  if(!answer){outEl.innerHTML='<div class="sh-error">Pehle apna jawab likhein.</div>';return;}
+  outEl.innerHTML='<p class="sh-note">Check ho raha hai…</p>';
+  try{
+    var schema='Respond with ONLY valid JSON (no markdown fences): {"score":number,"verdict":string,"correct":[string],"missing":[string],"improve":[string]}';
+    var isUrdu=shIsRtl(subj);
+    var prompt='You are a Pakistani board examiner marking one student answer.\nSubject: '+subj+'\nMaximum marks: '+maxMarks+'\nQuestion: '+question+
+      (modelAnswer?('\nOfficial model answer (use as the standard): '+modelAnswer):'')+
+      '\nStudent answer:\n'+answer+
+      '\nMark honestly — do not inflate the score to be kind, but keep tone encouraging (student is a teenager). Give marks for correct points, not length.'+
+      (isUrdu?' Write verdict/correct/missing/improve in Urdu script.':'')+
+      '\n'+schema;
+    var raw=await callGemini(prompt,null,true);
+    var r=JSON.parse(raw);
+    var score=Math.max(0,Math.min(maxMarks,Number(r.score)||0));
+    var pct=Math.round(score/maxMarks*100);
+    var color=pct>=70?'#2f9e52':pct>=40?'#b5892a':'#c0392b';
+    var dirAttr=isUrdu?' dir="rtl" style="text-align:right;line-height:2"':'';
+    var h='<div class="sh-mcq"'+dirAttr+'><strong style="color:'+color+';font-size:1.2rem;">'+score+' / '+maxMarks+'</strong>';
+    if(r.verdict)h+='<p>'+r.verdict+'</p>';
+    if(r.correct&&r.correct.length){h+='<p class="sh-note" style="color:#2f9e52;"><strong>Sahi tha:</strong> '+r.correct.join(' · ')+'</p>';}
+    if(r.missing&&r.missing.length){h+='<p class="sh-note" style="color:#c0392b;"><strong>Reh gaya:</strong> '+r.missing.join(' · ')+'</p>';}
+    if(r.improve&&r.improve.length){h+='<p class="sh-note"><strong>Agli baar:</strong> '+r.improve.join(' · ')+'</p>';}
+    h+='</div>';
+    outEl.innerHTML=h;
+    shTrackActivity();
+  }catch(e){outEl.innerHTML='<div class="sh-error">'+e.message+'</div>';}
+}
+
 function shDownload(elId,filename){
   var text=document.getElementById(elId).textContent;
   var blob=new Blob([text],{type:'text/plain'});
@@ -291,6 +492,7 @@ document.querySelectorAll('.sh-tab').forEach(function(btn){
     document.querySelectorAll('.sh-section').forEach(function(s){s.classList.remove('active');});
     btn.classList.add('active');
     document.getElementById('tab-'+btn.getAttribute('data-tab')).classList.add('active');
+    if(btn.getAttribute('data-tab')==='progress')shRenderProgress();
   });
 });
 document.querySelectorAll('.sh-csstab').forEach(function(btn){
@@ -303,12 +505,27 @@ document.querySelectorAll('.sh-csstab').forEach(function(btn){
 });
 
 /* ---------- Study Helper ---------- */
-var SUBJECTS_MATRIC=['English','Biology','Physics','Chemistry','Mathematics','Computer Science'];
-var SUBJECTS_INTER=['English','Computer Science','Statistics','Economics','Physics','Chemistry','Biology','Mathematics'];
+var SUBJECTS_MATRIC=['English','Urdu','Islamiat','Pakistan Studies','Biology','Physics','Chemistry','Mathematics','Computer Science'];
+var SUBJECTS_INTER=['English','Urdu','Islamic Education','Pakistan Studies','Computer Science','Statistics','Economics','Physics','Chemistry','Biology','Mathematics'];
 function fillSubjects(classSelId,subjSelId){
   var cls=document.getElementById(classSelId).value;
   var list=(cls==='Class 9'||cls==='Class 10')?SUBJECTS_MATRIC:SUBJECTS_INTER;
   document.getElementById(subjSelId).innerHTML=list.map(function(s){return '<option>'+s+'</option>';}).join('');
+}
+/* ---------- Urdu-script subjects: RTL + accuracy guidance ---------- */
+var SH_RTL_SUBJECTS=['Urdu','Islamiat','Islamic Education','Pakistan Studies'];
+function shIsRtl(subj){return SH_RTL_SUBJECTS.indexOf(subj)>-1;}
+function shApplyRtl(elId,subj){
+  var el=document.getElementById(elId);
+  if(!el)return;
+  if(shIsRtl(subj)){el.setAttribute('dir','rtl');el.style.textAlign='right';el.style.lineHeight='2';}
+  else{el.removeAttribute('dir');el.style.textAlign='';el.style.lineHeight='';}
+}
+function shSubjectGuidance(subj){
+  if(subj==='Urdu')return ' IMPORTANT: Subject is Urdu. Write the answer in proper Urdu script (not Roman Urdu) unless the student typed their question in Roman Urdu. Cover what Pakistani boards actually ask: nasar ka khulasa, nazm ki tashreeh with poet name and context, muhavare/zarb-ul-amsal with meaning and a sentence, grammar (ism, fail, harf, wahid-jama, muzakkar-muannas), and likhna (mazmoon, khat, darkhwast). Keep language simple and exam-focused.';
+  if(subj==='Islamiat'||subj==='Islamic Education')return ' IMPORTANT: Subject is Islamiat/Islamic Education. Write in Urdu script by default. Quote Quranic ayat in Arabic with Urdu tarjuma and give surah name and ayat number; name the source for well-known ahadith. Never invent an ayat, hadith or reference — if unsure, say so plainly instead of guessing. Be accurate and neutral; where scholars differ, say so rather than presenting one view as the only one.';
+  if(subj==='Pakistan Studies')return ' IMPORTANT: Subject is Pakistan Studies. Write in Urdu script by default (switch to English if the student writes in English). This paper is marked on accuracy of dates, names and events — be careful and say so if unsure of an exact date.';
+  return '';
 }
 document.getElementById('studyClass').addEventListener('change',function(){fillSubjects('studyClass','studySubject');});
 document.getElementById('mockClass').addEventListener('change',function(){fillSubjects('mockClass','mockSubject');});
@@ -349,11 +566,13 @@ document.getElementById('studyAskBtn').addEventListener('click',async function()
   clearErr('studyErrorBox');
   if(!q){showErr('studyErrorBox','Pehle apna sawal likhein.');return;}
   setBtnLoading(btn,true,'Ask AI');
-  var sysPrompt='You are a study assistant for a Pakistani student. Class: '+cls+'. Subject: '+subj+'. Board: '+board+'. Mode: '+studyMode+'. Give a clear, exam-focused answer with short headings and bullet points where useful. Show full working for math/numerical questions. If the student refers to a specific chapter/question number without providing the textbook content, answer from general syllabus knowledge but clearly note that exact textbook wording may differ — recommend they use the Upload & Ask tool with their actual book for guaranteed accuracy.';
+  var sysPrompt='You are a study assistant for a Pakistani student. Class: '+cls+'. Subject: '+subj+'. Board: '+board+'. Mode: '+studyMode+'. Give a clear, exam-focused answer with short headings and bullet points where useful. Show full working for math/numerical questions. If the student refers to a specific chapter/question number without providing the textbook content, answer from general syllabus knowledge but clearly note that exact textbook wording may differ — recommend they use the Upload & Ask tool with their actual book for guaranteed accuracy.'+shSubjectGuidance(subj);
   try{
     var answer=await callGemini(q,sysPrompt,false);
     document.getElementById('studyResult').textContent=answer;
+    shApplyRtl('studyResult',subj);
     document.getElementById('studyResultPanel').style.display='block';
+    shAttachExtras('studyResultPanel','studyResult',subj);
   }catch(e){showErr('studyErrorBox',e.message);}
   setBtnLoading(btn,false,'Ask AI');
 });
@@ -364,41 +583,51 @@ document.getElementById('mockBtn').addEventListener('click',async function(){
   clearErr('mockErrorBox');document.getElementById('mockPaper').innerHTML='';
   setBtnLoading(btn,true,'Generate Mock Exam');
   var schema='Respond with ONLY valid JSON (no markdown fences): {"title":string,"totalMarks":number,"mcqs":[{"question":string,"options":[string,string,string,string],"correctIndex":number}] (exactly 8 items),"shortQuestions":[string] (exactly 7 items, attempt any 5),"longQuestions":[string] (exactly 3 items, attempt any 2),"modelAnswers":{"shortAnswers":[string] (7 items),"longAnswerHints":[string] (3 items)}}';
-  var prompt='Generate a full board-exam-style model paper for a Pakistani student.\\nClass: '+cls+'\\nSubject: '+subj+'\\nMatch real Pakistani board exam style and difficulty.\\n'+schema;
+  var prompt='Generate a full board-exam-style model paper for a Pakistani student.\\nClass: '+cls+'\\nSubject: '+subj+'\\nMatch real Pakistani board exam style and difficulty.'+shSubjectGuidance(subj)+'\\n'+schema;
   try{
     var raw=await callGemini(prompt,null,true);
     var paper=JSON.parse(raw);
-    renderMockPaper(paper);
+    renderMockPaper(paper,subj);
   }catch(e){showErr('mockErrorBox',e.message);}
   setBtnLoading(btn,false,'Generate Mock Exam');
 });
-function renderMockPaper(p){
-  var h='<div class="sh-result"><strong>'+p.title+'</strong><br>Total Marks: '+p.totalMarks+'</div>';
-  h+='<h3 style="margin-top:16px;">Section A — MCQs (1 mark each)</h3>';
-  p.mcqs.forEach(function(q,i){
-    h+='<div class="sh-mcq"><strong>'+(i+1)+'. '+q.question+'</strong>';
-    q.options.forEach(function(o,oi){h+='<div class="sh-note" data-correct="'+(oi===q.correctIndex?'1':'0')+'">'+String.fromCharCode(65+oi)+'. '+o+(oi===q.correctIndex?' <span class="sh-badge">✓ correct</span>':'')+'</div>';});
-    h+='</div>';
-  });
+function renderMockPaper(p,subj){
+  window.__mockPaper=p;window.__mockSubj=subj;
+  var rtl=shIsRtl(subj);
+  var dirAttr=rtl?' dir="rtl" style="text-align:right;line-height:2"':'';
+  var h='<div class="sh-result"'+dirAttr+'><strong>'+p.title+'</strong><br>Total Marks: '+p.totalMarks+'</div>';
+  h+='<h3 style="margin-top:16px;">Section A — MCQs (1 mark each) — tap an option to test yourself</h3>';
+  h+='<div id="mockMcqBox"'+dirAttr+'></div>';
   h+='<h3 style="margin-top:16px;">Section B — Short Questions (attempt any 5, 3 marks each)</h3>';
-  p.shortQuestions.forEach(function(q,i){h+='<div class="sh-mcq">'+(i+1)+'. '+q+'<div class="sh-note" style="margin-top:6px;color:#2f9e52;">'+p.modelAnswers.shortAnswers[i]+'</div></div>';});
+  p.shortQuestions.forEach(function(q,i){
+    h+='<div class="sh-mcq"'+dirAttr+'>'+(i+1)+'. '+q+'<div class="sh-note" style="margin-top:6px;color:#2f9e52;">'+p.modelAnswers.shortAnswers[i]+'</div>'+
+       shWrittenGraderHtml('mockShort'+i,q,3,subj,p.modelAnswers.shortAnswers[i])+'</div>';
+  });
   h+='<h3 style="margin-top:16px;">Section C — Long Questions (attempt any 2, 12 marks each)</h3>';
-  p.longQuestions.forEach(function(q,i){h+='<div class="sh-mcq">'+(i+1)+'. '+q+'<div class="sh-note" style="margin-top:6px;color:#2f9e52;">'+p.modelAnswers.longAnswerHints[i]+'</div></div>';});
+  p.longQuestions.forEach(function(q,i){
+    h+='<div class="sh-mcq"'+dirAttr+'>'+(i+1)+'. '+q+'<div class="sh-note" style="margin-top:6px;color:#2f9e52;">'+p.modelAnswers.longAnswerHints[i]+'</div>'+
+       shWrittenGraderHtml('mockLong'+i,q,12,subj,p.modelAnswers.longAnswerHints[i])+'</div>';
+  });
   h+='<div class="sh-resultbar"><button class="secondary" onclick="window.print()">🖨️ Print / Save PDF</button></div>';
   document.getElementById('mockPaper').innerHTML=h;
+  var mcqQs=p.mcqs.map(function(q){return {question:q.question,options:q.options,correctIndex:q.correctIndex,explanation:''};});
+  renderQuiz(mcqQs,'mockMcqBox',false,subj,'Mock Exam · '+subj);
 }
 
 /* ---------- Generic CSS Q&A (English, GK, Current Affairs, Pakistan Affairs, Islamiat) ---------- */
-async function shGenericAsk(topicLabel,qElId,resultElId,errBoxId,btn){
+async function shGenericAsk(topicLabel,qElId,resultElId,errBoxId,btn,rtlSubj){
   var q=document.getElementById(qElId).value.trim();
   clearErr(errBoxId);
   if(!q){showErr(errBoxId,'Pehle sawal likhein.');return;}
   setBtnLoading(btn,true,'Ask');
   try{
-    var sys='You are a CSS (Pakistan) exam foundation tutor. Topic area: '+topicLabel+'. Keep the answer foundational, clear, and exam-focused with short headings and bullet points.';
+    var sys='You are a CSS (Pakistan) exam foundation tutor. Topic area: '+topicLabel+'. Keep the answer foundational, clear, and exam-focused with short headings and bullet points.'+shSubjectGuidance(rtlSubj||'');
     var answer=await callGemini(q,sys,false);
     document.getElementById(resultElId).textContent=answer;
-    document.getElementById(resultElId).closest('.result-panel').style.display='block';
+    shApplyRtl(resultElId,rtlSubj||'');
+    var panel=document.getElementById(resultElId).closest('.result-panel');
+    panel.style.display='block';
+    shAttachExtras(panel.id,resultElId,rtlSubj||'');
   }catch(e){showErr(errBoxId,e.message);}
   setBtnLoading(btn,false,'Ask');
 }
@@ -469,10 +698,25 @@ async function shAnalyticalQuiz(){
     var schema='Respond with ONLY valid JSON: {"questions":[{"question":string,"options":[string,string,string,string],"correctIndex":number,"explanation":string}]} (exactly 5 items)';
     var raw=await callGemini('Generate 5 analytical/logical reasoning MCQs (CSS/NTS style: sequences, syllogisms, blood relations, coding-decoding).\\n'+schema,null,true);
     var data=JSON.parse(raw);
-    renderQuiz(data.questions,'analyticalQuiz',true);
+    renderQuiz(data.questions,'analyticalQuiz',true,'CSS','Analytical Thinking');
   }catch(e){document.getElementById('analyticalQuiz').innerHTML='';showErr('analyticalErr',e.message);}
 }
-function renderQuiz(questions,containerId,showExplain){
+async function shMptQuiz(){
+  clearErr('mptErr');document.getElementById('mptQuiz').innerHTML='Loading...';
+  var section=document.getElementById('mptSection').value;
+  var isUrdu=(section==='Urdu');
+  try{
+    var schema='Respond with ONLY valid JSON: {"questions":[{"question":string,"options":[string,string,string,string],"correctIndex":number,"explanation":string}]} (exactly 8 items)';
+    var prompt='You are setting questions for the FPSC MPT (MCQ-based Preliminary Test) — the screening test a candidate must pass before applying for the CSS written exam.\nSection: '+section+'\nMatch real MPT difficulty: mostly factual, a few needing reasoning. Never invent a fact, date or reference.'+(isUrdu?' Write the question, options and explanation in Urdu script (not Roman Urdu).':'')+'\n'+schema;
+    var raw=await callGemini(prompt,null,true);
+    var data=JSON.parse(raw);
+    renderQuiz(data.questions,'mptQuiz',true,'CSS MPT',section);
+    if(isUrdu){var box=document.getElementById('mptQuiz');box.setAttribute('dir','rtl');box.style.textAlign='right';}
+    else{document.getElementById('mptQuiz').removeAttribute('dir');}
+  }catch(e){document.getElementById('mptQuiz').innerHTML='';showErr('mptErr',e.message);}
+}
+function renderQuiz(questions,containerId,showExplain,subj,topicLabel){
+  window['__quiz_'+containerId]={questions:questions,subj:subj||'',topic:topicLabel||containerId};
   var h='';
   questions.forEach(function(q,qi){
     h+='<div class="sh-mcq"><strong>'+(qi+1)+'. '+q.question+'</strong>';
@@ -488,6 +732,11 @@ function shAnswerQuiz(btn,qi,oi,correctIdx,containerId){
   if(oi!==correctIdx)btn.classList.add('wrong');
   var exp=mcq.querySelector('.sh-explain-'+containerId+'-'+qi);
   if(exp)exp.style.display='block';
+  var store=window['__quiz_'+containerId];
+  if(store&&store.questions&&store.questions[qi]){
+    var q=store.questions[qi];
+    shRecordQuiz(store.subj,store.topic,q.question,oi===correctIdx,q.options[oi],q.options[correctIdx]);
+  }
 }
 
 /* ---------- Reading Comprehension ---------- */
@@ -498,7 +747,7 @@ async function shReadingQuiz(){
     var raw=await callGemini('Write an original passage + 5 comprehension MCQs for CSS Reading Comprehension practice.\\n'+schema,null,true);
     var data=JSON.parse(raw);
     document.getElementById('readingPassage').innerHTML='<div class="sh-result">'+data.passage+'</div>';
-    renderQuiz(data.questions,'readingQuiz',false);
+    renderQuiz(data.questions,'readingQuiz',false,'CSS','Reading Comprehension');
   }catch(e){document.getElementById('readingPassage').innerHTML='';showErr('readingErr',e.message);}
 }
 
@@ -552,7 +801,7 @@ async function shDailyPractice(){
     h+='<h3 style="color:var(--grove);margin-top:16px;">4. Writing Task</h3><div class="sh-mcq">'+d.writingTask+'<textarea style="margin-top:10px;" placeholder="Apna jawab yahan likhein..." aria-label="Apna jawab yahan likhein"></textarea></div>';
     h+='<h3 style="color:var(--grove);margin-top:16px;">5. Mini Quiz</h3><div id="dailyQuiz"></div>';
     document.getElementById('dailyPractice').innerHTML=h;
-    renderQuiz(d.quiz,'dailyQuiz',false);
+    renderQuiz(d.quiz,'dailyQuiz',false,'English','Daily Practice');
   }catch(e){document.getElementById('dailyPractice').innerHTML='';showErr('dailyErr',e.message);}
 }
 
