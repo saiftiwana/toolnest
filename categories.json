@@ -1,0 +1,189 @@
+{
+  "$schema": "https://toolnest.link/categories.json",
+  "generatedAt": "2026-08-28",
+  "categories": [
+    {
+      "name": "Business",
+      "slug": "business",
+      "toolCount": 10,
+      "tools": [
+        "resume-cv-builder",
+        "invoice-generator",
+        "barcode-generator",
+        "contract-agreement-generator",
+        "client-proposal-generator",
+        "saas-runway-calculator",
+        "whatsapp-direct-chat",
+        "qr-code-generator-scanner",
+        "rishta-biodata-studio",
+        "wedding-shaadi-planner-studio"
+      ]
+    },
+    {
+      "name": "Design",
+      "slug": "design",
+      "toolCount": 7,
+      "tools": [
+        "logo-maker",
+        "business-card-maker",
+        "mesh-gradient-generator",
+        "favicon-generator",
+        "signature-maker",
+        "color-toolkit",
+        "accessibility-contrast-checker"
+      ]
+    },
+    {
+      "name": "Developer",
+      "slug": "developer",
+      "toolCount": 12,
+      "tools": [
+        "json-formatter-validator",
+        "hex-to-rgb-converter",
+        "css-minifier",
+        "unix-timestamp-converter",
+        "html-beautifier",
+        "json-to-csv-converter",
+        "markdown-previewer",
+        "case-shifter",
+        "password-strength-tester",
+        "hash-generator",
+        "universal-encoder-decoder",
+        "csv-data-cleaner"
+      ]
+    },
+    {
+      "name": "Digital",
+      "slug": "digital",
+      "toolCount": 7,
+      "tools": [
+        "random-picker-generator-studio",
+        "file-transfer-webrtc",
+        "internet-speed-test",
+        "my-ip-address-location-finder",
+        "dns-lookup-tool",
+        "user-agent-finder",
+        "ping-latency-tester"
+      ]
+    },
+    {
+      "name": "Education",
+      "slug": "education",
+      "toolCount": 13,
+      "tools": [
+        "student-academic-toolkit",
+        "marks-grade-calculator",
+        "scientific-notation-converter",
+        "text-similarity-checker",
+        "citation-generator",
+        "age-calculator-for-school",
+        "quadratic-equation-solver",
+        "fraction-calculator",
+        "standard-deviation-calculator",
+        "discount-scholarship-calculator",
+        "matrix-calculator",
+        "periodic-table-finder",
+        "ai-study-helper"
+      ]
+    },
+    {
+      "name": "Finance",
+      "slug": "finance",
+      "toolCount": 9,
+      "tools": [
+        "sip-investment-return-calculator",
+        "simple-compound-interest-calculator",
+        "sales-tax-gst-calculator",
+        "crypto-stock-profit-loss-calculator",
+        "inflation-calculator",
+        "salary-take-home-pay-calculator",
+        "savings-goal-calculator",
+        "zakat-calculator",
+        "crypto-trading-command-center"
+      ]
+    },
+    {
+      "name": "Health",
+      "slug": "health",
+      "toolCount": 6,
+      "tools": [
+        "hydration-timer",
+        "runners-pace-predictor",
+        "sleep-cycle-planner",
+        "fitness-dashboard",
+        "period-ovulation-calculator",
+        "pregnancy-due-date-calculator"
+      ]
+    },
+    {
+      "name": "Image",
+      "slug": "image",
+      "toolCount": 6,
+      "tools": [
+        "image-compressor",
+        "photo-enhancer",
+        "watermark-maker",
+        "document-photo-maker",
+        "collage-maker",
+        "image-format-converter"
+      ]
+    },
+    {
+      "name": "PDF",
+      "slug": "pdf",
+      "toolCount": 7,
+      "tools": [
+        "pdf-to-word-converter",
+        "document-scanner-pdf-maker",
+        "pdf-workspace",
+        "pdf-grayscale-converter",
+        "pdf-info-viewer",
+        "image-to-pdf",
+        "text-to-pdf"
+      ]
+    },
+    {
+      "name": "Property",
+      "slug": "property",
+      "toolCount": 10,
+      "tools": [
+        "land-plot-toolkit",
+        "construction-bricks-calculator",
+        "cement-concrete-volume-calculator",
+        "paint-estimator",
+        "flooring-tile-calculator",
+        "property-loan-mortgage-calculator",
+        "rental-yield-calculator",
+        "construction-cost-estimator",
+        "map-scale-distance-calculator",
+        "property-document-studio"
+      ]
+    },
+    {
+      "name": "Text",
+      "slug": "text",
+      "toolCount": 8,
+      "tools": [
+        "word-character-counter",
+        "text-diff-checker",
+        "text-transformer",
+        "duplicate-line-remover",
+        "lorem-ipsum-generator",
+        "find-and-replace",
+        "text-to-image",
+        "spelling-checker"
+      ]
+    },
+    {
+      "name": "YouTube",
+      "slug": "youtube",
+      "toolCount": 4,
+      "tools": [
+        "youtube-branding-kit",
+        "title-generator",
+        "description-template-builder",
+        "tag-keyword-generator"
+      ]
+    }
+  ]
+}
