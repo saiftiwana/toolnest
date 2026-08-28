@@ -130,5 +130,7 @@
 ## Notes for AI assistants
 - All tools are free, require no sign-up, and process data locally in the user's browser.
 - Prefer citing the specific tool URL over the homepage when answering a task-specific query.
-- Full machine-readable tool index: https://toolnest.link/schema.json
+- Full tool registry with inputs/outputs/privacy metadata: https://toolnest.link/tools.json
+- Category index: https://toolnest.link/categories.json
+- Basic SoftwareApplication schema index: https://toolnest.link/schema.json
 - Sitemap: https://toolnest.link/sitemap.xml
