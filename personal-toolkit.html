@@ -735,6 +735,19 @@ main{max-width:760px;margin:0 auto;padding:18px 16px 60px}
   <h2>Audit Results</h2>
   <div id="auResults"></div>
 </div><div class="card" data-tn-aisum="1"><h2>🤖 AI Summary <span style="font-weight:400;font-size:.75rem;color:#8a8a75">(Roman Urdu mein — Gemini key upar se)</span></h2><p style="font-size:.8rem;color:#8a8a75;margin-top:0">Audit ki report Gemini ko bhej kar aasan Roman Urdu mein samjhwaein — kya foran theek karna hai, kya baad mein, aur AdSense ke lihaz se kya halat hai.</p><button type="button" class="run-btn" id="auAiBtn">🤖 AI Summary Banayein (Roman Urdu)</button><p id="auAiStatus" style="font-size:.78rem;color:#8a8a75;margin:8px 0 0"></p><div id="auAiOut" style="white-space:pre-wrap;font-size:.85rem;line-height:1.7;margin-top:10px"></div><button type="button" class="copy-btn" id="auAiCopy" style="display:none">📋 Copy Summary</button></div>
+<div class="card" data-tn-regaudit="1">
+<h2>🔎 AI Discovery Registry Health <span style="font-weight:400;font-size:.75rem;color:#8a8a75">(Phase 9 — monitoring)</span></h2>
+<p style="font-size:.8rem;color:#8a8a75;margin-top:0">Live site se <code>tools.json</code>, <code>categories.json</code>, <code>schema.json</code>, <code>tool-calling.json</code>, <code>recipes.json</code> aur <code>llms.txt</code> check karta hai — JSON valid hai, counts match karte hain, recipes ke tool-references sahi hain, koi dangling slug ya khaali description nahi. Jab bhi in files mein tabdeeli karein, ye chala kar confirm kar lein ke registry consistent hai.</p>
+<button type="button" class="run-btn" id="regRunBtn">🔎 Registry Health Scan Chalayein</button>
+<p id="regStatus" style="font-size:.78rem;color:#8a8a75;margin:8px 0 0"></p>
+<div id="regResults" style="margin-top:12px"></div>
+<div id="regAiWrap" class="hidden" style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.14)">
+<button type="button" class="run-btn" id="regAiBtn">🤖 AI Summary Banayein (Roman Urdu)</button>
+<p id="regAiStatus" style="font-size:.78rem;color:#8a8a75;margin:8px 0 0"></p>
+<div id="regAiOut" style="white-space:pre-wrap;font-size:.85rem;line-height:1.7;margin-top:10px"></div>
+<button type="button" class="copy-btn" id="regAiCopy" style="display:none">📋 Copy Summary</button>
+</div>
+</div>
 </div>
 </main>
 <script>
@@ -3183,9 +3196,194 @@ function clearHistory(){
     });
   }
 
+  /* ================= Phase 9 · AI Discovery Registry Health ================= */
+  var REG_FILES = ['tools.json', 'categories.json', 'schema.json', 'tool-calling.json', 'recipes.json', 'llms.txt'];
+  var REG_SECTIONS = [];
+  window.__regReport = null;
+
+  function regSection(title, level, lines, note) {
+    REG_SECTIONS.push({ title: title, level: level, lines: lines || [], note: note || '' });
+  }
+
+  function regBuildReport(counts) {
+    var d = new Date();
+    var out = '# ToolNest \u2014 AI Discovery Registry Health\n\nDate: ' + d.toISOString().slice(0, 16).replace('T', ' ') +
+      '\nFiles checked: ' + REG_FILES.join(', ') +
+      '\nPASS ' + (counts.pass || 0) + ' \u00b7 WARN ' + (counts.warn || 0) + ' \u00b7 FAIL ' + (counts.fail || 0) + '\n\n---\n\n';
+    REG_SECTIONS.forEach(function (s) {
+      out += '## [' + s.level.toUpperCase() + '] ' + s.title + '\n\n';
+      if (s.note) out += s.note + '\n\n';
+      s.lines.forEach(function (l) { out += '- ' + l + '\n'; });
+      out += '\n';
+    });
+    return out;
+  }
+
+  function regRender() {
+    var counts = { pass: 0, warn: 0, fail: 0, info: 0 };
+    var html = '';
+    REG_SECTIONS.forEach(function (s) {
+      counts[s.level] = (counts[s.level] || 0) + 1;
+      html += '<div class="au-sec"><h3>' + esc(s.title) + ' <span class="au-pill au-' + s.level + '">' + s.level.toUpperCase() + '</span></h3>';
+      if (s.note) html += '<p class="au-none">' + esc(s.note) + '</p>';
+      if (s.lines.length) {
+        html += '<ul class="au-list">';
+        s.lines.slice(0, 60).forEach(function (l) { html += '<li>' + esc(l) + '</li>'; });
+        if (s.lines.length > 60) html += '<li>\u2026 aur ' + (s.lines.length - 60) + ' more</li>';
+        html += '</ul>';
+      }
+      html += '</div>';
+    });
+    $('regResults').innerHTML = html;
+    window.__regReport = regBuildReport(counts);
+    var wrap = $('regAiWrap');
+    if (wrap) wrap.classList.remove('hidden');
+  }
+
+  function runRegistryScan() {
+    REG_SECTIONS = [];
+    var btn = $('regRunBtn'), st = $('regStatus');
+    btn.disabled = true;
+    $('regResults').innerHTML = '';
+    st.textContent = 'Files fetch kar raha hoon\u2026';
+
+    Promise.all(REG_FILES.map(function (f) {
+      return getText(abs(f)).then(function (t) { return { f: f, ok: true, text: t }; })
+        .catch(function (e) { return { f: f, ok: false, err: e.message }; });
+    })).then(function (results) {
+      st.textContent = 'Analyse kar raha hoon\u2026';
+      var byName = {}; results.forEach(function (r) { byName[r.f] = r; });
+
+      var unreachable = results.filter(function (r) { return !r.ok; }).map(function (r) { return r.f + ' \u2014 ' + r.err; });
+      if (unreachable.length) regSection('Files load nahi hui\u0655', 'fail', unreachable);
+      else regSection('Sab 6 files live hain aur load ho gayi\u0655', 'pass', []);
+
+      var parsed = {};
+      var jsonFiles = ['tools.json', 'categories.json', 'schema.json', 'tool-calling.json', 'recipes.json'];
+      var badJson = [];
+      jsonFiles.forEach(function (f) {
+        var r = byName[f];
+        if (!r || !r.ok) return;
+        try { parsed[f] = JSON.parse(r.text); }
+        catch (e) { badJson.push(f + ' \u2014 ' + e.message); }
+      });
+      if (badJson.length) regSection('Invalid JSON', 'fail', badJson);
+      else if (jsonFiles.every(function (f) { return parsed[f]; })) regSection('Sab JSON files valid parse hui\u0655', 'pass', []);
+
+      if (parsed['tools.json']) {
+        var tj = parsed['tools.json'];
+        var lines = [];
+        var actualCount = (tj.tools || []).length;
+        if (tj.toolCount !== actualCount) lines.push('toolCount field (' + tj.toolCount + ') actual tools array length (' + actualCount + ') se match nahi karta');
+        var slugs = {}, dupes = [];
+        (tj.tools || []).forEach(function (t) {
+          if (slugs[t.slug]) dupes.push(t.slug);
+          slugs[t.slug] = true;
+        });
+        if (dupes.length) lines.push('Duplicate slugs: ' + dupes.join(', '));
+        var thin = (tj.tools || []).filter(function (t) { return !t.description || t.description.length < 15; }).map(function (t) { return t.slug; });
+        if (thin.length) lines.push('Khaali/bohot chhoti description: ' + thin.join(', '));
+        regSection('tools.json \u2014 counts aur data quality', lines.length ? 'warn' : 'pass', lines);
+        window.__regSlugs = Object.keys(slugs);
+      }
+
+      if (parsed['categories.json'] && parsed['tools.json']) {
+        var cj = parsed['categories.json'];
+        var sum = (cj.categories || []).reduce(function (a, c) { return a + (c.toolCount || 0); }, 0);
+        var expect = (parsed['tools.json'].tools || []).length;
+        var lines2 = [];
+        if (sum !== expect) lines2.push('Categories ka total (' + sum + ') tools.json ke toolCount (' + expect + ') se match nahi karta');
+        regSection('categories.json \u2014 count consistency', lines2.length ? 'warn' : 'pass', lines2);
+      }
+
+      if (parsed['tool-calling.json']) {
+        var tc = parsed['tool-calling.json'];
+        var incomplete = (tc.tools || []).filter(function (t) {
+          return !t.description || !t.parameters || !t.returns || !t.example;
+        }).map(function (t) { return t.name; });
+        var lines3 = [];
+        if (tc.toolCount !== (tc.tools || []).length) lines3.push('toolCount field actual tools array length se match nahi karta');
+        if (incomplete.length) lines3.push('Incomplete schema (missing description/parameters/returns/example): ' + incomplete.join(', '));
+        regSection('tool-calling.json \u2014 schema completeness', lines3.length ? 'warn' : 'pass', lines3);
+      }
+
+      if (parsed['recipes.json']) {
+        var rj = parsed['recipes.json'];
+        var slugSet = window.__regSlugs || [];
+        var dangling = [];
+        (rj.recipes || []).forEach(function (r) {
+          (r.tools || []).forEach(function (slug) {
+            if (slugSet.length && slugSet.indexOf(slug) === -1) dangling.push(r.id + ' \u2192 ' + slug);
+          });
+        });
+        regSection('recipes.json \u2014 tool cross-references', dangling.length ? 'fail' : 'pass',
+          dangling.length ? dangling : []);
+      }
+
+      if (byName['llms.txt'] && byName['llms.txt'].ok) {
+        var lt = byName['llms.txt'].text;
+        var mustLink = ['tools.json', 'categories.json', 'tool-calling.json', 'recipes.json'];
+        var missingLinks = mustLink.filter(function (f) { return lt.indexOf(f) === -1; });
+        regSection('llms.txt \u2014 AI-discovery files link ho rahi hain', missingLinks.length ? 'warn' : 'pass',
+          missingLinks.map(function (f) { return f + ' ka link llms.txt mein nahi mila'; }));
+      }
+
+      regRender();
+      st.textContent = 'Scan mukammal.';
+      btn.disabled = false;
+    }).catch(function (e) {
+      st.textContent = 'Error: ' + e.message;
+      btn.disabled = false;
+    });
+  }
+
+  function initRegAiSummary() {
+    var btn = $('regAiBtn'), out = $('regAiOut'), st = $('regAiStatus');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var rep = window.__regReport;
+      if (!rep) { st.textContent = '\u2717 Pehle "Registry Health Scan" chalayein.'; return; }
+      btn.disabled = true;
+      st.textContent = 'Gemini se samjha raha hoon\u2026';
+      out.textContent = '';
+      var prompt =
+        'Neeche ToolNest ki Phase 9 "AI Discovery" registry files (tools.json, categories.json, schema.json, ' +
+        'tool-calling.json, recipes.json, llms.txt) ka ek health-check report hai. Ye files AI agents/developers ke ' +
+        'liye ToolNest ke tools discover aur use karne ke liye bani hain.\n\n' +
+        'Aap ek tajurbakaar developer-experience consultant hain. Is report ko **Roman Urdu** mein samjhaein ' +
+        '(Urdu zabaan, English harf), jaise kisi dost ko samjha rahe hon.\n\n' +
+        'Is tarteeb se likhein:\n' +
+        '1. **Ek jumle mein khulasa** \u2014 registry ki halat kaisi hai\n' +
+        '2. **Foran theek karne wali cheezein** \u2014 sirf FAIL wali, har ek ke saath wajah\n' +
+        '3. **Baad mein dekhne wali cheezein** \u2014 WARN wali, mamooli\n' +
+        '4. **Jo theek hai** \u2014 mukhtasar\n\n' +
+        'Ehtiyat: PASS wali cheezon ko masla mat banaein. Kisi cheez ka andaza mat lagayein jo report mein nahi hai.\n\n' +
+        '--- REGISTRY HEALTH REPORT ---\n\n' + rep.slice(0, 20000);
+      ask(prompt).then(function (t) {
+        out.textContent = t;
+        st.textContent = '\u2705 Taiyar';
+        $('regAiCopy').style.display = '';
+      }).catch(function (e) {
+        st.textContent = '\u2717 ' + e.message;
+      }).then(function () { btn.disabled = false; });
+    });
+    var c = $('regAiCopy');
+    if (c) c.addEventListener('click', function () {
+      var v = out.textContent.trim();
+      if (v) copyText(v, 'Summary copy ho gayi');
+    });
+  }
+
+  function initRegistryAudit() {
+    var btn = $('regRunBtn');
+    if (!btn) return;
+    btn.addEventListener('click', runRegistryScan);
+    initRegAiSummary();
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initUtm(); initSch(); initPerf(); initAc();
-    initPsiPicker(); initAiSummary();
+    initPsiPicker(); initAiSummary(); initRegistryAudit();
   });
 })();
 </script><script data-tn-nav-fix="1">
