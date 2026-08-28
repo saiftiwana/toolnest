@@ -1,25 +1,126 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin><link rel="dns-prefetch" href="https://pagead2.googlesyndication.com"><meta name="google-adsense-account" content="ca-pub-7690733672429028"><script>try{if(window.self!==window.top){(window.adsbygoogle=window.adsbygoogle||[]).pauseAdRequests=1;}}catch(e){}</script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7690733672429028" crossorigin="anonymous"></script><title>Free Text Diff Checker – Compare Two Texts | ToolNest</title><meta name="description" content="Compare two text files online free, side by side, line by line. 100% private, client side."><link rel="canonical" href="https://toolnest.link/text-diff-checker.html"><meta property="og:title" content="Free Text Diff Checker | ToolNest"><meta property="og:description" content="Find differences between two text files free in your browser."><meta property="og:type" content="website"><meta property="og:url" content="https://toolnest.link/text-diff-checker.html"><meta property="og:image" content="https://toolnest.link/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Free Text Diff Checker | ToolNest"><meta name="twitter:description" content="Find differences between two text files free in your browser."><meta name="twitter:image" content="https://toolnest.link/og-image.png"><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="styles.css"></head><body><header class="hero"><div class="site-header-bar"><a class="brand-row" href="index.html" title="Go to ToolNest homepage" aria-label="ToolNest — go to homepage"><svg width="34" height="34" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M16 54 Q50 26 84 54" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 67 Q50 42 78 67" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M29 79 Q50 58 71 79" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="79" cy="23" r="20" fill="#e07a2c" stroke="#1f3d2b" stroke-width="3"/><text x="79" y="28.5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><span>ToolNest</span><span class="home-hint" aria-hidden="true">🏠 Home</span></a><button id="themeToggle" class="theme-toggle">🌙</button></div><h1>Text Diff Checker</h1><p>Compare two text blocks and spot every change — free, private.</p></header><main>
-<div class="card"><h2>Text Diff Checker</h2><p class="desc">See which lines were added or removed between two text versions — free, private.</p><div class="row"><div class="field"><label class="field-label" for="diffA">Original text</label><textarea id="diffA" placeholder="Original text" style="flex:1;"></textarea></div><div class="field"><label class="field-label" for="diffB">Changed text</label><textarea id="diffB" placeholder="Changed text" style="flex:1;"></textarea></div></div><div class="row" style="margin-top:12px;"><button id="diffBtn">Compare</button><button class="secondary" data-copy="diffResult" data-copy-mode="text">📋 Copy</button><button class="secondary" id="diffReset">Reset</button></div><p class="stat" id="diffSummary"></p><div id="diffResult" style="margin-top:12px; font-family:monospace; white-space:pre-wrap; font-size:.9rem;"></div>
-<div class="seo-content"><h3>How to Use the Text Diff Checker</h3><ol><li><strong>Insert Documents:</strong> Paste the original text into the left field and the revised text into the right field.</li><li><strong>Run Comparison:</strong> Click "Compare Text" to highlight line-by-line additions and deletions.</li><li><strong>Review Changes:</strong> Easily spot added lines (marked +) and removed lines (marked -) in the output.</li></ol>
+<div class="card"><h2>Text Diff Checker</h2><p class="desc">See which lines were added, removed or edited between two text versions — and exactly which words changed inside each edited line. Free and private.</p><div class="row"><div class="field"><label class="field-label" for="diffA">Original text</label><textarea id="diffA" placeholder="Original text" style="flex:1;"></textarea></div><div class="field"><label class="field-label" for="diffB">Changed text</label><textarea id="diffB" placeholder="Changed text" style="flex:1;"></textarea></div></div><div class="row" style="margin-top:12px;"><button id="diffBtn">Compare</button><button class="secondary" data-copy="diffPlain">📋 Copy</button><button class="secondary" id="diffReset">Reset</button></div><p class="stat" id="diffSummary"></p><div id="diffResult" style="margin-top:12px; font-family:monospace; white-space:pre-wrap; font-size:.9rem;"></div><textarea id="diffPlain" aria-hidden="true" tabindex="-1" style="display:none;"></textarea>
+<div class="seo-content"><h3>How to Use the Text Diff Checker</h3><ol><li><strong>Insert Documents:</strong> Paste the original text into the left field and the revised text into the right field.</li><li><strong>Run Comparison:</strong> Click "Compare" to align both versions and highlight every added, removed and edited line.</li><li><strong>Review Changes:</strong> Easily spot added lines (marked +) and removed lines (marked -) in the output.</li></ol>
 <h3>Why Use This Tool</h3><p>Finding differences between two text documents side by side is exactly what this compare-two-text-files tool is built for — entirely private, with nothing uploaded to a server. Whether you're comparing two versions of an article or checking a code snippet for changes, this client-side text comparison tool spots every line difference instantly. It gives a quick sanity check before finalizing a document, catching accidental changes that might otherwise slip through unnoticed.</p>
-<h3>How It Works</h3><p>This text comparison tool and find-differences-in-text checker runs a line-by-line comparison algorithm directly in your browser, aligning matching lines and flagging any that were added or removed between the two versions. It's a free, privacy-first alternative to Diffchecker and Online-Text-Compare, since neither text block ever leaves your device.</p>
+<h3>How It Works</h3><p>This text comparison tool and find-differences-in-text checker runs a longest-common-subsequence (LCS) alignment directly in your browser. Instead of comparing line 1 against line 1 and line 2 against line 2, it works out the longest run of lines the two versions genuinely share, then reports only the real insertions and deletions around that run. This is why adding a single line at the top of a document no longer marks every following line as changed — the rest of the file is still recognised as unchanged. Where a line was edited rather than added or deleted, a second word-level LCS pass runs inside that line and highlights only the words that actually differ. Both passes happen entirely on your device, so it is a free, privacy-first alternative to Diffchecker and Online-Text-Compare, with neither text block ever leaving your browser.</p>
 <h3>Key Features</h3><p>The side-by-side diff checker marks unchanged lines plainly, added lines with a plus sign, and removed lines with a minus sign, giving a clear visual delta view similar to what developers see in a code version control diff. Because it's a text delta viewer built for general text, it works equally well on prose paragraphs, configuration files, or code snippets. The output can be copied directly for pasting into a report or shared with a collaborator who needs to review the exact changes. No signup or file upload is required, so you can run as many comparisons as needed in a single session. A quick summary line now shows exactly how many lines were added, removed, and left unchanged, and a Reset button clears both boxes in one click.</p>
 <h3>Common Use Cases</h3><p>Writers compare a draft against an edited version to see exactly what a proofreader changed. Developers quickly check two versions of a config file for unexpected differences. Students compare their essay draft against a revised version submitted by a study partner, and translators check whether a document's wording changed between revisions. Content editors verify that a rewritten article draft did not accidentally drop an important paragraph during editing.</p>
 <h3>Tips for Best Results</h3><p>For the clearest comparison, make sure both text blocks are formatted consistently — inconsistent line breaks can cause the diff to flag lines as changed even when only whitespace differs. Reviewing the output line-by-line rather than skimming ensures you don't miss a subtle single-word change. Trimming trailing whitespace from both texts beforehand can prevent false-positive differences caused only by invisible spaces.</p>
 <h3>Privacy &amp; Security</h3><p>Because ToolNest processes everything entirely within your browser using client-side JavaScript, your files never leave your device. There is no server-side storage, no third-party analytics attached to your data, and no risk of a breach exposing files you processed months ago.</p>
-<div class="faq-block"><details><summary>How can I compare two text blocks to spot changes easily?</summary><p>Paste the original text and the revised text into the two boxes, then click Compare Text to see line-by-line differences.</p></details><details><summary>Is my compared text sent to any server during checking?</summary><p>No, the comparison runs entirely in your browser using local JavaScript.</p></details><details><summary>Does the diff checker highlight word-level changes within a line?</summary><p>The comparison works at the line level, marking entire lines as added or removed rather than individual words.</p></details><details><summary>Can I use this tool to compare code snippets?</summary><p>Yes, it works on any plain text, including code, configuration files, and prose.</p></details></div></div><div class="seo-content"><h3>Related Text Tools</h3><ul style="line-height:2;padding-left:20px;"><li><a href="text-transformer.html">Text Transformer</a></li><li><a href="word-character-counter.html">Word & Character Counter</a></li><li><a href="duplicate-line-remover.html">Duplicate Line Remover</a></li><li><a href="lorem-ipsum-generator.html">Lorem Ipsum Generator</a></li><li><a href="find-and-replace.html">Find & Replace</a></li><li><a href="text-to-image.html">Text to Image</a></li><li><a href="spelling-checker.html">Spelling Checker</a></li></ul><p class="hub-backlink" style="margin-top:8px">Browse all <a href="text-tools.html">Text Tools</a> on ToolNest.</p></div></div>
+<div class="faq-block"><details><summary>How can I compare two text blocks to spot changes easily?</summary><p>Paste the original text and the revised text into the two boxes, then click Compare to see every added, removed and edited line.</p></details><details><summary>Is my compared text sent to any server during checking?</summary><p>No, the comparison runs entirely in your browser using local JavaScript.</p></details><details><summary>Does the diff checker highlight word-level changes within a line?</summary><p>The comparison works at the line level, marking entire lines as added or removed rather than individual words.</p></details><details><summary>Can I use this tool to compare code snippets?</summary><p>Yes, it works on any plain text, including code, configuration files, and prose.</p></details></div></div><div class="seo-content"><h3>Related Text Tools</h3><ul style="line-height:2;padding-left:20px;"><li><a href="text-transformer.html">Text Transformer</a></li><li><a href="word-character-counter.html">Word & Character Counter</a></li><li><a href="duplicate-line-remover.html">Duplicate Line Remover</a></li><li><a href="lorem-ipsum-generator.html">Lorem Ipsum Generator</a></li><li><a href="find-and-replace.html">Find & Replace</a></li><li><a href="text-to-image.html">Text to Image</a></li><li><a href="spelling-checker.html">Spelling Checker</a></li></ul><p class="hub-backlink" style="margin-top:8px">Browse all <a href="text-tools.html">Text Tools</a> on ToolNest.</p></div></div>
 </main><footer><div class="wrap"><div class="foot-brand"><svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#1f3d2b"/><path d="M16 54 Q50 26 84 54" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M22 67 Q50 42 78 67" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M29 79 Q50 58 71 79" stroke="#f2ecd8" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="79" cy="23" r="20" fill="#e07a2c" stroke="#1f3d2b" stroke-width="3"/><text x="79" y="28.5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f3d2b" text-anchor="middle">99</text></svg><strong>ToolNest</strong></div><nav><a href="index.html">Home</a><a href="image-tools.html">Image</a><a href="pdf-tools.html">PDF</a><a href="text-tools.html">Text</a><a href="dev-tools.html">Dev</a><a href="digital-tools.html">Digital</a><a href="youtube-tools.html">YouTube</a><a href="health-fitness.html">Health</a><a href="business-tools.html">Business</a><a href="design-tools.html">Design</a><a href="education-tools.html">Education</a><a href="finance-tools.html">Finance</a><a href="property-tools.html">Property</a></nav><nav class="foot-legal" aria-label="Legal and information links"><a href="about.html">About</a><a href="embed.html">Embed a Tool</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></nav><p class="copy">© 2026 ToolNest — 99 Free Tools.</p></div></footer>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://toolnest.link/"},{"@type":"ListItem","position":2,"name":"Text Tools","item":"https://toolnest.link/text-tools.html"},{"@type":"ListItem","position":3,"name":"Text Diff Checker","item":"https://toolnest.link/text-diff-checker.html"}]},
 {"@type":"SoftwareApplication","name":"Text Diff Checker","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/text-diff-checker.html"},
-{"@type":"HowTo","name":"How to Compare Two Text Blocks","step":[{"@type":"HowToStep","text":"Paste original and revised text."},{"@type":"HowToStep","text":"Click Compare Text."},{"@type":"HowToStep","text":"Review added and removed lines."}]},
+{"@type":"HowTo","name":"How to Compare Two Text Blocks","step":[{"@type":"HowToStep","text":"Paste original and revised text."},{"@type":"HowToStep","text":"Click Compare to align both versions."},{"@type":"HowToStep","text":"Review added, removed and edited lines with the changed words highlighted."}]},
 {"@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"How can I compare two text blocks to spot changes easily?","acceptedAnswer":{"@type":"Answer","text":"Paste the original text and the revised text into the two boxes, then click Compare Text to see line-by-line differences."}},
+{"@type":"Question","name":"How can I compare two text blocks to spot changes easily?","acceptedAnswer":{"@type":"Answer","text":"Paste the original text and the revised text into the two boxes, then click Compare to see every added, removed and edited line."}},
 {"@type":"Question","name":"Is my compared text sent to any server during checking?","acceptedAnswer":{"@type":"Answer","text":"No, the comparison runs entirely in your browser using local JavaScript."}},
 {"@type":"Question","name":"Does the diff checker highlight word-level changes within a line?","acceptedAnswer":{"@type":"Answer","text":"The comparison works at the line level, marking entire lines as added or removed rather than individual words."}},
 {"@type":"Question","name":"Can I use this tool to compare code snippets?","acceptedAnswer":{"@type":"Answer","text":"Yes, it works on any plain text, including code, configuration files, and prose."}}
 ]}
 ]}
 </script>
-<script>document.querySelectorAll('[data-copy]').forEach(btn=>{btn.addEventListener('click',()=>{const target=document.getElementById(btn.getAttribute('data-copy'));if(!target)return;const text=btn.getAttribute('data-copy-mode')==='text'?target.textContent:target.value;if(!text)return;const done=()=>{const old=btn.textContent;btn.textContent='✅ Copied';setTimeout(()=>btn.textContent=old,1200);};if(window.toolnestCopyText){window.toolnestCopyText(text,done);}else{navigator.clipboard.writeText(text).then(done);}});});document.getElementById('diffBtn').addEventListener('click',()=>{const a=document.getElementById('diffA').value.split('\n');const b=document.getElementById('diffB').value.split('\n');let out='';let added=0,removed=0,unchanged=0;const maxLen=Math.max(a.length,b.length);for(let i=0;i<maxLen;i++){const lineA=a[i]??'';const lineB=b[i]??'';if(lineA===lineB){out+=`  ${lineA}\n`;unchanged++;}else{if(lineA){out+=`- ${lineA}\n`;removed++;}if(lineB){out+=`+ ${lineB}\n`;added++;}}}document.getElementById('diffResult').textContent=out;document.getElementById('diffSummary').textContent=`Added: ${added} | Removed: ${removed} | Unchanged: ${unchanged}`;});document.getElementById('diffReset').addEventListener('click',()=>{document.getElementById('diffA').value='';document.getElementById('diffB').value='';document.getElementById('diffResult').textContent='';document.getElementById('diffSummary').textContent='';});</script><script src="script.js"></script></body></html>
+<script>document.querySelectorAll('[data-copy]').forEach(btn=>{btn.addEventListener('click',()=>{const target=document.getElementById(btn.getAttribute('data-copy'));if(!target)return;const text=btn.getAttribute('data-copy-mode')==='text'?target.textContent:target.value;if(!text)return;const done=()=>{const old=btn.textContent;btn.textContent='✅ Copied';setTimeout(()=>btn.textContent=old,1200);};if(window.toolnestCopyText){window.toolnestCopyText(text,done);}else{navigator.clipboard.writeText(text).then(done);}});});(function(){
+var $=function(id){return document.getElementById(id);};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+
+/* longest common subsequence over an array of tokens, returns aligned ops */
+function lcsDiff(a,b){
+  var n=a.length,m=b.length;
+  /* trim common prefix / suffix first - big win on real documents */
+  var pre=0; while(pre<n&&pre<m&&a[pre]===b[pre]) pre++;
+  var suf=0; while(suf<n-pre&&suf<m-pre&&a[n-1-suf]===b[m-1-suf]) suf++;
+  var A=a.slice(pre,n-suf), B=b.slice(pre,m-suf);
+  var ops=[],i;
+  for(i=0;i<pre;i++) ops.push(['=',a[i],b[i]]);
+
+  var N=A.length,M=B.length;
+  if(N&&M){
+    if(N*M>4000000){
+      /* too large for a full LCS table - degrade to positional alignment */
+      var mx=Math.max(N,M);
+      for(i=0;i<mx;i++){
+        var la=i<N?A[i]:null, lb=i<M?B[i]:null;
+        if(la!==null&&lb!==null&&la===lb) ops.push(['=',la,lb]);
+        else{ if(la!==null) ops.push(['-',la,null]); if(lb!==null) ops.push(['+',null,lb]); }
+      }
+    } else {
+      var w=M+1, dp=new Uint32Array((N+1)*w), r, c;
+      for(r=N-1;r>=0;r--){
+        for(c=M-1;c>=0;c--){
+          dp[r*w+c] = A[r]===B[c] ? dp[(r+1)*w+c+1]+1
+                    : Math.max(dp[(r+1)*w+c], dp[r*w+c+1]);
+        }
+      }
+      r=0;c=0;
+      while(r<N&&c<M){
+        if(A[r]===B[c]){ ops.push(['=',A[r],B[c]]); r++; c++; }
+        else if(dp[(r+1)*w+c]>=dp[r*w+c+1]){ ops.push(['-',A[r],null]); r++; }
+        else { ops.push(['+',null,B[c]]); c++; }
+      }
+      while(r<N){ ops.push(['-',A[r],null]); r++; }
+      while(c<M){ ops.push(['+',null,B[c]]); c++; }
+    }
+  } else {
+    for(i=0;i<N;i++) ops.push(['-',A[i],null]);
+    for(i=0;i<M;i++) ops.push(['+',null,B[i]]);
+  }
+
+  for(i=0;i<suf;i++) ops.push(['=',a[n-suf+i],b[m-suf+i]]);
+  return ops;
+}
+
+/* word level highlight for a replaced line pair */
+function wordMark(oldLine,newLine){
+  var ta=oldLine.split(/(\s+)/), tb=newLine.split(/(\s+)/);
+  var ops=lcsDiff(ta,tb), o='',nw='';
+  for(var i=0;i<ops.length;i++){
+    var op=ops[i];
+    if(op[0]==='='){ o+=esc(op[1]); nw+=esc(op[2]); }
+    else if(op[0]==='-'){ if(op[1].trim()==='') o+=esc(op[1]); else o+='<mark style="background:#ffc9c4;color:#7a1d16;">'+esc(op[1])+'</mark>'; }
+    else { if(op[2].trim()==='') nw+=esc(op[2]); else nw+='<mark style="background:#bfe8cd;color:#0f4a2a;">'+esc(op[2])+'</mark>'; }
+  }
+  return [o,nw];
+}
+
+var ROW='display:block;padding:2px 8px;border-left:3px solid transparent;white-space:pre-wrap;word-break:break-word;';
+var SAME=ROW+'color:#5c5748;';
+var DEL =ROW+'background:#fdecea;border-left-color:#b3261e;';
+var ADD =ROW+'background:#e9f6ee;border-left-color:#1c7a4a;';
+
+$('diffBtn').addEventListener('click',function(){
+  var a=$('diffA').value.split('\n'), b=$('diffB').value.split('\n');
+  var ops=lcsDiff(a,b);
+  var added=0,removed=0,changed=0,unchanged=0;
+  var html='', plain='', i=0;
+
+  while(i<ops.length){
+    if(ops[i][0]==='='){
+      html+='<span style="'+SAME+'">  '+esc(ops[i][1])+'</span>';
+      plain+='  '+ops[i][1]+'\n';
+      unchanged++; i++; continue;
+    }
+    /* collect one contiguous block of - then + */
+    var dels=[],adds=[];
+    while(i<ops.length&&ops[i][0]==='-'){ dels.push(ops[i][1]); i++; }
+    while(i<ops.length&&ops[i][0]==='+'){ adds.push(ops[i][2]); i++; }
+
+    var pairs=Math.min(dels.length,adds.length), k;
+    for(k=0;k<pairs;k++){
+      var mk=wordMark(dels[k],adds[k]);
+      html+='<span style="'+DEL+'">- '+mk[0]+'</span>';
+      html+='<span style="'+ADD+'">+ '+mk[1]+'</span>';
+      plain+='- '+dels[k]+'\n+ '+adds[k]+'\n';
+      changed++;
+    }
+    for(k=pairs;k<dels.length;k++){ html+='<span style="'+DEL+'">- '+esc(dels[k])+'</span>'; plain+='- '+dels[k]+'\n'; removed++; }
+    for(k=pairs;k<adds.length;k++){ html+='<span style="'+ADD+'">+ '+esc(adds[k])+'</span>'; plain+='+ '+adds[k]+'\n'; added++; }
+  }
+
+  $('diffResult').innerHTML = html || '<span style="'+SAME+'">Both texts are identical.</span>';
+  $('diffPlain').value = plain;
+  $('diffSummary').textContent='Changed: '+changed+' | Added: '+added+' | Removed: '+removed+' | Unchanged: '+unchanged;
+});
+})();document.getElementById('diffReset').addEventListener('click',()=>{document.getElementById('diffA').value='';document.getElementById('diffB').value='';document.getElementById('diffResult').textContent='';document.getElementById('diffSummary').textContent='';});</script><script src="script.js"></script></body></html>
