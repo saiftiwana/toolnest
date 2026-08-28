@@ -1,0 +1,1047 @@
+{
+  "$schema": "https://toolnest.link/tool-calling.json",
+  "generatedAt": "2026-08-28",
+  "specVersion": "1.0.0",
+  "note": "Structured function-calling schemas for ToolNest's deterministic utility functions. These are NOT hosted HTTP API endpoints — ToolNest has no backend. Each tool below is executed by calling the corresponding function in the open-source toolnest-core npm package (https://github.com/saiftiwana/toolnest-core), client-side or in your own Node/browser environment. All execution is deterministic code — no AI model is involved in running these tools.",
+  "flow": "User Intent -> Tool Registry (/tools.json) -> Correct Tool -> Structured Input -> Deterministic Execution (toolnest-core) -> Structured Output",
+  "errorFormat": {
+    "type": "object",
+    "properties": {
+      "error": {
+        "type": "boolean",
+        "const": true
+      },
+      "code": {
+        "type": "string"
+      },
+      "message": {
+        "type": "string"
+      }
+    },
+    "example": {
+      "error": true,
+      "code": "INVALID_INPUT",
+      "message": "principal, rate and time must be non-negative"
+    }
+  },
+  "toolCount": 18,
+  "tools": [
+    {
+      "name": "simple-interest",
+      "description": "Calculate simple interest on a principal amount over a period of years.",
+      "category": "Finance",
+      "module": "toolnest-core/finance.js",
+      "function": "simpleInterest",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "principal": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Principal amount"
+          },
+          "rate": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Annual interest rate in percent, e.g. 5 for 5%"
+          },
+          "time": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Time period in years"
+          }
+        },
+        "required": [
+          "principal",
+          "rate",
+          "time"
+        ]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "interest": {
+            "type": "number"
+          },
+          "totalAmount": {
+            "type": "number"
+          }
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "simple-interest",
+          "input": {
+            "principal": 1000,
+            "rate": 5,
+            "time": 2
+          }
+        },
+        "result": {
+          "interest": 100,
+          "totalAmount": 1100
+        }
+      }
+    },
+    {
+      "name": "compound-interest",
+      "description": "Calculate compound interest on a principal amount with configurable compounding frequency.",
+      "category": "Finance",
+      "module": "toolnest-core/finance.js",
+      "function": "compoundInterest",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "principal": {
+            "type": "number",
+            "minimum": 0
+          },
+          "rate": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Annual interest rate in percent"
+          },
+          "time": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Time period in years"
+          },
+          "compoundsPerYear": {
+            "type": "number",
+            "minimum": 1,
+            "default": 1,
+            "description": "Compounding frequency per year"
+          }
+        },
+        "required": [
+          "principal",
+          "rate",
+          "time"
+        ]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "interest": {
+            "type": "number"
+          },
+          "totalAmount": {
+            "type": "number"
+          }
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "compound-interest",
+          "input": {
+            "principal": 1000,
+            "rate": 10,
+            "time": 2,
+            "compoundsPerYear": 4
+          }
+        },
+        "result": {
+          "interest": 218.40289750991724,
+          "totalAmount": 1218.4028975099172
+        }
+      }
+    },
+    {
+      "name": "loan-emi",
+      "description": "Calculate the monthly EMI (Equated Monthly Installment) for a loan.",
+      "category": "Finance",
+      "module": "toolnest-core/finance.js",
+      "function": "emiCalculator",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "loanAmount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "annualRatePercent": {
+            "type": "number",
+            "minimum": 0
+          },
+          "tenureMonths": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "loanAmount",
+          "annualRatePercent",
+          "tenureMonths"
+        ]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "emi": {
+            "type": "number"
+          },
+          "totalPayment": {
+            "type": "number"
+          },
+          "totalInterest": {
+            "type": "number"
+          }
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "loan-emi",
+          "input": {
+            "loanAmount": 500000,
+            "annualRatePercent": 9,
+            "tenureMonths": 60
+          }
+        },
+        "result": {
+          "emi": 10379.177613176937,
+          "totalPayment": 622750.6567906162,
+          "totalInterest": 122750.65679061622
+        }
+      }
+    },
+    {
+      "name": "percent-of",
+      "description": "Calculate the value that a given percentage represents of a base value.",
+      "category": "Finance",
+      "module": "toolnest-core/percentage.js",
+      "function": "percentOf",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number",
+            "description": "Base value"
+          },
+          "percent": {
+            "type": "number",
+            "description": "Percentage to apply"
+          }
+        },
+        "required": [
+          "value",
+          "percent"
+        ]
+      },
+      "returns": {
+        "type": "number"
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "percent-of",
+          "input": {
+            "value": 200,
+            "percent": 15
+          }
+        },
+        "result": 30
+      }
+    },
+    {
+      "name": "percentage-change",
+      "description": "Calculate the percentage change between an old value and a new value.",
+      "category": "Finance",
+      "module": "toolnest-core/percentage.js",
+      "function": "percentageChange",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "oldValue": {
+            "type": "number"
+          },
+          "newValue": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "oldValue",
+          "newValue"
+        ]
+      },
+      "returns": {
+        "type": "number",
+        "description": "Percent change; positive = increase, negative = decrease"
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "oldValue is 0 (division by zero)"
+        },
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "percentage-change",
+          "input": {
+            "oldValue": 100,
+            "newValue": 130
+          }
+        },
+        "result": 30
+      }
+    },
+    {
+      "name": "discounted-price",
+      "description": "Calculate the discount amount and final price after applying a percentage discount.",
+      "category": "Finance",
+      "module": "toolnest-core/percentage.js",
+      "function": "discountedPrice",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "originalPrice": {
+            "type": "number",
+            "minimum": 0
+          },
+          "discountPercent": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "originalPrice",
+          "discountPercent"
+        ]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "discountAmount": {
+            "type": "number"
+          },
+          "finalPrice": {
+            "type": "number"
+          }
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "discounted-price",
+          "input": {
+            "originalPrice": 1000,
+            "discountPercent": 25
+          }
+        },
+        "result": {
+          "discountAmount": 250,
+          "finalPrice": 750
+        }
+      }
+    },
+    {
+      "name": "convert-area",
+      "description": "Convert an area value between land/area units (Marla, Kanal, Acre, Hectare, Sq Ft, Sq Yard, Sq Meter). Matches the units used in the Land & Plot Toolkit.",
+      "category": "Property",
+      "module": "toolnest-core/area.js",
+      "function": "convertArea",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number",
+            "minimum": 0
+          },
+          "fromUnit": {
+            "type": "string",
+            "enum": [
+              "marla",
+              "kanal",
+              "acre",
+              "hectare",
+              "sqft",
+              "sqyd",
+              "sqm"
+            ]
+          },
+          "toUnit": {
+            "type": "string",
+            "enum": [
+              "marla",
+              "kanal",
+              "acre",
+              "hectare",
+              "sqft",
+              "sqyd",
+              "sqm"
+            ]
+          },
+          "sqftPerMarla": {
+            "type": "number",
+            "minimum": 0,
+            "default": 225,
+            "description": "225 = ToolNest standard, 272.25 = older/regional standard"
+          }
+        },
+        "required": [
+          "value",
+          "fromUnit",
+          "toUnit"
+        ]
+      },
+      "returns": {
+        "type": "number"
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "fromUnit or toUnit is not a supported unit"
+        },
+        {
+          "code": "INVALID_INPUT",
+          "when": "sqftPerMarla is 0 or negative"
+        },
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "convert-area",
+          "input": {
+            "value": 25,
+            "fromUnit": "kanal",
+            "toUnit": "marla"
+          }
+        },
+        "result": 500
+      }
+    },
+    {
+      "name": "hex-to-rgb",
+      "description": "Convert a HEX color string to RGB components.",
+      "category": "Design",
+      "module": "toolnest-core/color.js",
+      "function": "hexToRgb",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "hex": {
+            "type": "string",
+            "description": "e.g. \"#3fb950\", \"3fb950\", or shorthand \"#3f5\""
+          }
+        },
+        "required": [
+          "hex"
+        ]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "r": {
+            "type": "integer"
+          },
+          "g": {
+            "type": "integer"
+          },
+          "b": {
+            "type": "integer"
+          }
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "hex is not a valid 3 or 6 digit hex color"
+        },
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "hex-to-rgb",
+          "input": {
+            "hex": "#58a6ff"
+          }
+        },
+        "result": {
+          "r": 88,
+          "g": 166,
+          "b": 255
+        }
+      }
+    },
+    {
+      "name": "rgb-to-hex",
+      "description": "Convert RGB color components to a HEX color string.",
+      "category": "Design",
+      "module": "toolnest-core/color.js",
+      "function": "rgbToHex",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "r": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          },
+          "g": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          },
+          "b": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          }
+        },
+        "required": [
+          "r",
+          "g",
+          "b"
+        ]
+      },
+      "returns": {
+        "type": "string"
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "r, g, or b is outside 0-255"
+        },
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "rgb-to-hex",
+          "input": {
+            "r": 63,
+            "g": 185,
+            "b": 80
+          }
+        },
+        "result": "#3fb950"
+      }
+    },
+    {
+      "name": "calculate-age",
+      "description": "Calculate exact age in years, months and days between a birth date and a reference date.",
+      "category": "Education",
+      "module": "toolnest-core/date.js",
+      "function": "calculateAge",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "birthDate": {
+            "type": "string",
+            "format": "date",
+            "description": "ISO date string, e.g. \"2000-05-15\""
+          },
+          "referenceDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Defaults to the current date if omitted"
+          }
+        },
+        "required": [
+          "birthDate"
+        ]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "years": {
+            "type": "integer"
+          },
+          "months": {
+            "type": "integer"
+          },
+          "days": {
+            "type": "integer"
+          },
+          "totalDays": {
+            "type": "integer"
+          }
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "birthDate is after referenceDate, or either date is invalid"
+        },
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "calculate-age",
+          "input": {
+            "birthDate": "2000-05-15",
+            "referenceDate": "2026-08-28"
+          }
+        },
+        "result": {
+          "years": 26,
+          "months": 3,
+          "days": 13,
+          "totalDays": 9601
+        }
+      }
+    },
+    {
+      "name": "word-count",
+      "description": "Count the number of whitespace-separated words in a text.",
+      "category": "Text",
+      "module": "toolnest-core/text.js",
+      "function": "wordCount",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ]
+      },
+      "returns": {
+        "type": "integer"
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "word-count",
+          "input": {
+            "text": "ToolNest is a free tool ecosystem"
+          }
+        },
+        "result": 6
+      }
+    },
+    {
+      "name": "char-count",
+      "description": "Count the number of characters in a text, optionally excluding whitespace.",
+      "category": "Text",
+      "module": "toolnest-core/text.js",
+      "function": "charCount",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "includeSpaces": {
+            "type": "boolean",
+            "default": true
+          }
+        },
+        "required": [
+          "text"
+        ]
+      },
+      "returns": {
+        "type": "integer"
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "char-count",
+          "input": {
+            "text": "hello world",
+            "includeSpaces": false
+          }
+        },
+        "result": 10
+      }
+    },
+    {
+      "name": "estimate-reading-time",
+      "description": "Estimate reading time in minutes for a given word count.",
+      "category": "Text",
+      "module": "toolnest-core/text.js",
+      "function": "estimateReadingTimeMinutes",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "words": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "wordsPerMinute": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 200
+          }
+        },
+        "required": [
+          "words"
+        ]
+      },
+      "returns": {
+        "type": "integer"
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "estimate-reading-time",
+          "input": {
+            "words": 600
+          }
+        },
+        "result": 3
+      }
+    },
+    {
+      "name": "mean",
+      "description": "Calculate the arithmetic mean of a list of numbers.",
+      "category": "Education",
+      "module": "toolnest-core/stats.js",
+      "function": "mean",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "required": [
+          "values"
+        ]
+      },
+      "returns": {
+        "type": "number"
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "values is empty"
+        },
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "mean",
+          "input": {
+            "values": [
+              78,
+              85,
+              62,
+              90,
+              74
+            ]
+          }
+        },
+        "result": 77.8
+      }
+    },
+    {
+      "name": "variance",
+      "description": "Calculate the variance of a list of numbers (sample or population).",
+      "category": "Education",
+      "module": "toolnest-core/stats.js",
+      "function": "variance",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "population": {
+            "type": "boolean",
+            "default": false,
+            "description": "true = population variance (÷n), false = sample variance (÷n-1)"
+          }
+        },
+        "required": [
+          "values"
+        ]
+      },
+      "returns": {
+        "type": "number"
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "values has fewer than 2 numbers"
+        },
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "variance",
+          "input": {
+            "values": [
+              78,
+              85,
+              62,
+              90,
+              74
+            ]
+          }
+        },
+        "result": 116.2
+      }
+    },
+    {
+      "name": "standard-deviation",
+      "description": "Calculate the standard deviation of a list of numbers (sample or population).",
+      "category": "Education",
+      "module": "toolnest-core/stats.js",
+      "function": "standardDeviation",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "population": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "values"
+        ]
+      },
+      "returns": {
+        "type": "number"
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "values has fewer than 2 numbers"
+        },
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "standard-deviation",
+          "input": {
+            "values": [
+              78,
+              85,
+              62,
+              90,
+              74
+            ]
+          }
+        },
+        "result": 10.779610382569492
+      }
+    },
+    {
+      "name": "calculate-gpa",
+      "description": "Calculate credit-weighted GPA from a list of courses.",
+      "category": "Education",
+      "module": "toolnest-core/grade.js",
+      "function": "calculateGPA",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "courses": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "gradePoints": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 4
+                },
+                "creditHours": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "gradePoints",
+                "creditHours"
+              ]
+            }
+          }
+        },
+        "required": [
+          "courses"
+        ]
+      },
+      "returns": {
+        "type": "number"
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "courses is empty"
+        },
+        {
+          "code": "INVALID_INPUT",
+          "when": "a course has creditHours <= 0"
+        },
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "calculate-gpa",
+          "input": {
+            "courses": [
+              {
+                "gradePoints": 4,
+                "creditHours": 3
+              },
+              {
+                "gradePoints": 3.3,
+                "creditHours": 4
+              },
+              {
+                "gradePoints": 3.7,
+                "creditHours": 3
+              }
+            ]
+          }
+        },
+        "result": 3.63
+      }
+    },
+    {
+      "name": "percentage-to-grade",
+      "description": "Convert a percentage score (0-100) to a common letter grade (A+ through F).",
+      "category": "Education",
+      "module": "toolnest-core/grade.js",
+      "function": "percentageToGrade",
+      "version": "1.0.0",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "percentage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          }
+        },
+        "required": [
+          "percentage"
+        ]
+      },
+      "returns": {
+        "type": "string",
+        "enum": [
+          "A+",
+          "A",
+          "B+",
+          "B",
+          "C+",
+          "C",
+          "D",
+          "F"
+        ]
+      },
+      "errors": [
+        {
+          "code": "INVALID_INPUT",
+          "when": "percentage is outside 0-100"
+        },
+        {
+          "code": "INVALID_INPUT",
+          "when": "a required parameter is missing or the wrong type"
+        }
+      ],
+      "example": {
+        "call": {
+          "tool": "percentage-to-grade",
+          "input": {
+            "percentage": 82
+          }
+        },
+        "result": "A"
+      }
+    }
+  ]
+}
