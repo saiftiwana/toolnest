@@ -133,4 +133,6 @@
 - Full tool registry with inputs/outputs/privacy metadata: https://toolnest.link/tools.json
 - Category index: https://toolnest.link/categories.json
 - Basic SoftwareApplication schema index: https://toolnest.link/schema.json
+- Structured function-calling schemas (deterministic, via the open-source toolnest-core library, not a hosted API): https://toolnest.link/tool-calling.json
+- Documented multi-tool workflows: https://toolnest.link/recipes.json
 - Sitemap: https://toolnest.link/sitemap.xml
