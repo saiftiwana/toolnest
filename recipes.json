@@ -1,0 +1,133 @@
+{
+  "$schema": "https://toolnest.link/recipes.json",
+  "generatedAt": "2026-08-28",
+  "note": "Documented combinations of existing ToolNest tools (see /tools.json) into common end-to-end workflows, with an integration example showing the deterministic parts reproduced via toolnest-core.",
+  "recipeCount": 3,
+  "recipes": [
+    {
+      "id": "student-academic-recipe",
+      "title": "Student Academic Recipe",
+      "goal": "Go from raw semester marks to a final GPA, a letter grade, and whether you qualify for a merit scholarship.",
+      "tools": [
+        "student-academic-toolkit",
+        "marks-grade-calculator",
+        "discount-scholarship-calculator"
+      ],
+      "inputFlow": [
+        "Enter per-course grade points and credit hours into student-academic-toolkit to compute GPA",
+        "Enter overall marks obtained/total into marks-grade-calculator to get a percentage and letter grade",
+        "Enter your institution's tuition fee and the scholarship percentage tier your grade qualifies for into discount-scholarship-calculator"
+      ],
+      "outputFlow": "GPA (student-academic-toolkit) -> percentage/letter grade (marks-grade-calculator) -> discounted fee amount (discount-scholarship-calculator)",
+      "example": {
+        "input": {
+          "courses": [
+            {
+              "gradePoints": 3.8,
+              "creditHours": 3
+            },
+            {
+              "gradePoints": 3.5,
+              "creditHours": 4
+            },
+            {
+              "gradePoints": 4.0,
+              "creditHours": 3
+            }
+          ],
+          "percentage": 88,
+          "tuitionFee": 150000,
+          "scholarshipPercent": 25
+        },
+        "output": {
+          "gpa": 3.74,
+          "grade": "A",
+          "scholarshipDiscount": 37500,
+          "finalFee": 112500
+        }
+      },
+      "integrationExample": "import { calculateGPA, percentageToGrade, discountedPrice } from 'toolnest-core';\n\nconst gpa = calculateGPA([\n  { gradePoints: 3.8, creditHours: 3 },\n  { gradePoints: 3.5, creditHours: 4 },\n  { gradePoints: 4.0, creditHours: 3 }\n]); // 3.74\n\nconst grade = percentageToGrade(88); // 'A'\n\nconst scholarship = discountedPrice(150000, 25);\n// { discountAmount: 37500, finalPrice: 112500 }",
+      "limitations": [
+        "Scholarship eligibility tiers (which percentage a given grade unlocks) vary by institution and are not encoded here — the tools compute the math, not the eligibility policy.",
+        "GPA scale assumed is 0-4.0; institutions on a different scale (e.g. 0-5) should adjust gradePoints accordingly before calling calculateGPA."
+      ]
+    },
+    {
+      "id": "property-investment-recipe",
+      "title": "Property Investment Recipe",
+      "goal": "Go from a raw plot size to a standardized area, a construction cost estimate, a monthly loan EMI, and the expected rental yield if you rent it out.",
+      "tools": [
+        "land-plot-toolkit",
+        "construction-cost-estimator",
+        "property-loan-mortgage-calculator",
+        "rental-yield-calculator"
+      ],
+      "inputFlow": [
+        "Enter plot size and unit into land-plot-toolkit to get a standardized area (sq ft / Marla / Kanal)",
+        "Enter covered area and construction grade/rate into construction-cost-estimator for a build cost estimate",
+        "Enter total financing needed, interest rate and tenure into property-loan-mortgage-calculator for the monthly EMI",
+        "Enter expected annual rental income and property value into rental-yield-calculator for the yield percentage"
+      ],
+      "outputFlow": "Standardized area (land-plot-toolkit) -> estimated cost (construction-cost-estimator) -> monthly EMI (property-loan-mortgage-calculator) -> rental yield % (rental-yield-calculator)",
+      "example": {
+        "input": {
+          "plotSize": {
+            "value": 10,
+            "unit": "kanal"
+          },
+          "loan": {
+            "amount": 8000000,
+            "annualRatePercent": 11,
+            "tenureMonths": 240
+          },
+          "expectedAnnualRent": 480000,
+          "propertyValue": 10000000
+        },
+        "output": {
+          "plotAreaInMarla": 200,
+          "monthlyEMI": 82575.07,
+          "totalInterestOverTenure": 11818017.13,
+          "rentalYieldPercent": 4.8
+        }
+      },
+      "integrationExample": "import { convertArea, emiCalculator } from 'toolnest-core';\n\nconst areaInMarla = convertArea(10, 'kanal', 'marla'); // 200\n\nconst loan = emiCalculator({\n  loanAmount: 8000000,\n  annualRatePercent: 11,\n  tenureMonths: 240\n}); // { emi: 82575.07..., totalPayment: ..., totalInterest: ... }\n\n// Rental yield isn't in toolnest-core yet (simple formula, no shared function needed):\nconst rentalYieldPercent = (480000 / 10000000) * 100; // 4.8",
+      "limitations": [
+        "Construction cost estimation depends on regional material/labour rates entered by the user in construction-cost-estimator; toolnest-core does not encode regional pricing.",
+        "Rental yield here is gross yield (annual rent / property value). It does not subtract maintenance, taxes or vacancy — treat it as a starting estimate, not net ROI."
+      ]
+    },
+    {
+      "id": "freelancer-finance-recipe",
+      "title": "Freelancer / Small Business Finance Recipe",
+      "goal": "Go from a raw invoice amount to a tax-compliant invoice and a monthly savings target from that income.",
+      "tools": [
+        "sales-tax-gst-calculator",
+        "invoice-generator",
+        "savings-goal-calculator"
+      ],
+      "inputFlow": [
+        "Enter the base amount and applicable tax rate into sales-tax-gst-calculator to get the tax amount and total",
+        "Enter client details, line items and the calculated total into invoice-generator to produce a PDF invoice",
+        "Enter a savings target (e.g. the total invoice amount) and a deadline into savings-goal-calculator for the required monthly saving"
+      ],
+      "outputFlow": "Tax amount + total (sales-tax-gst-calculator) -> formatted invoice PDF (invoice-generator) -> required monthly saving (savings-goal-calculator)",
+      "example": {
+        "input": {
+          "baseAmount": 80000,
+          "taxRatePercent": 18,
+          "savingsMonths": 12
+        },
+        "output": {
+          "taxAmount": 14400,
+          "totalInvoice": 94400,
+          "requiredMonthlySaving": 7866.67
+        }
+      },
+      "integrationExample": "import { percentOf } from 'toolnest-core';\n\nconst gst = percentOf(80000, 18); // 14400\nconst totalInvoice = 80000 + gst; // 94400\n\n// Savings goal isn't in toolnest-core yet (simple division, no shared function needed):\nconst requiredMonthlySaving = totalInvoice / 12; // 7866.67",
+      "limitations": [
+        "Tax rate (GST/sales tax) varies by jurisdiction and must be entered by the user — toolnest-core does not hardcode any country's tax rules.",
+        "invoice-generator produces the formatted PDF client-side; it is not callable as a pure function since PDF layout/rendering is not a deterministic data transform in the same sense as the calculators."
+      ]
+    }
+  ]
+}
