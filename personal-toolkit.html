@@ -138,7 +138,7 @@ main{max-width:760px;margin:0 auto;padding:18px 16px 60px}
 </header>
 <div class="page-nav">
   <button type="button" class="page-nav-btn active" id="navPostGen">📤 Social Post Generator</button>
-  <button type="button" class="page-nav-btn" id="navMonitor">🩺 Website Health Monitor</button><button type="button" class="page-nav-btn" id="navAds">📢 Ad Deployer</button><button type="button" class="page-nav-btn" id="navAudit">🔍 Full Audit</button><style data-tn-nav="1">.page-nav{flex-wrap:wrap}.page-nav-btn{flex:1 1 46%;min-width:0;font-size:.78rem}@media(min-width:760px){.page-nav-btn{flex:1 1 0;font-size:.85rem}}</style>
+  <button type="button" class="page-nav-btn" id="navMonitor">🩺 Website Health Monitor</button><button type="button" class="page-nav-btn" id="navAds">📢 Ad Deployer</button><button type="button" class="page-nav-btn" id="navAudit">🔍 Full Audit</button><button type="button" class="page-nav-btn" id="navDeploy">🚀 Deployer</button><style data-tn-nav="1">.page-nav{flex-wrap:wrap}.page-nav-btn{flex:1 1 46%;min-width:0;font-size:.78rem}@media(min-width:760px){.page-nav-btn{flex:1 1 0;font-size:.85rem}}</style>
 </div>
 <main style="padding-top:0">
 <div class="card" id="aiSettingsCard" style="border-color:var(--kinno)">
@@ -736,6 +736,403 @@ main{max-width:760px;margin:0 auto;padding:18px 16px 60px}
   <div id="auResults"></div>
 </div><div class="card" data-tn-aisum="1"><h2>🤖 AI Summary <span style="font-weight:400;font-size:.75rem;color:#8a8a75">(Roman Urdu mein — Gemini key upar se)</span></h2><p style="font-size:.8rem;color:#8a8a75;margin-top:0">Audit ki report Gemini ko bhej kar aasan Roman Urdu mein samjhwaein — kya foran theek karna hai, kya baad mein, aur AdSense ke lihaz se kya halat hai.</p><button type="button" class="run-btn" id="auAiBtn">🤖 AI Summary Banayein (Roman Urdu)</button><p id="auAiStatus" style="font-size:.78rem;color:#8a8a75;margin:8px 0 0"></p><div id="auAiOut" style="white-space:pre-wrap;font-size:.85rem;line-height:1.7;margin-top:10px"></div><button type="button" class="copy-btn" id="auAiCopy" style="display:none">📋 Copy Summary</button></div>
 </div>
+<div id="page-deploy" class="page-view">
+
+<div class="card" style="border-color:var(--kinno)">
+  <h2>🚀 Local File Deployer <span style="font-weight:400;font-size:.75rem;color:#8a8a75">(token stays only in this browser)</span></h2>
+  <p style="font-size:.82rem;color:#8a8a75;line-height:1.6;margin-top:0">
+    Naye chat mein Claude se files ya zip lein, extract karke yahan folder ya files select karein.
+    <b>Scan &amp; Dry Run</b> har file ka GitHub se genuine hash-compare karta hai — sirf asli
+    naye, badle, ya hataye gaye files hi commit hoti hain, baaqi khud-ba-khud skip ho jati hain.
+  </p>
+</div>
+
+<div class="card">
+  <h2>1. Repository &amp; Token</h2>
+  <div class="row2">
+    <div class="field">
+      <label for="depGhToken">GitHub Token <span style="font-weight:400;color:#8a8a75">(repo scope)</span></label>
+      <input type="password" id="depGhToken" placeholder="ghp_...">
+    </div>
+    <div class="field">
+      <label for="depGhRepo">Repository</label>
+      <input id="depGhRepo" placeholder="saiftiwana/ToolNest" value="saiftiwana/ToolNest">
+    </div>
+  </div>
+  <div class="row2">
+    <div class="field">
+      <label for="depGhBranch">Branch</label>
+      <input id="depGhBranch" value="main">
+    </div>
+    <div class="field">
+      <label for="depTargetFolder">Target folder in repo <span style="font-weight:400;color:#8a8a75">(optional)</span></label>
+      <input id="depTargetFolder" placeholder="blank = repo root">
+    </div>
+  </div>
+  <div class="field">
+    <label for="depMsg">Commit message</label>
+    <input id="depMsg" value="Batch update: ToolNest files">
+  </div>
+</div>
+
+<div class="card">
+  <h2>2. Batch Files</h2>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
+    <label class="copy-btn" style="flex:1;min-width:150px;text-align:center;cursor:pointer">📄 Choose Files
+      <input id="depPickFiles" type="file" multiple style="display:none">
+    </label>
+    <label class="copy-btn" style="flex:1;min-width:150px;text-align:center;cursor:pointer">📁 Choose Folder
+      <input id="depPickFolder" type="file" multiple webkitdirectory style="display:none">
+    </label>
+  </div>
+  <p style="font-size:.78rem;color:#8a8a75;margin:10px 0 0" id="depFileSummary">Koi file select nahi hui.</p>
+  <div id="depFileList" style="font-size:.75rem;color:#8a8a75;margin-top:6px;max-height:110px;overflow:auto"></div>
+  <div class="field" style="margin-top:10px">
+    <label for="depDeletePaths">Delete these paths <span style="font-weight:400;color:#8a8a75">(optional, comma-separated)</span></label>
+    <input id="depDeletePaths" placeholder="e.g. admin/old-file.html, unused/page.html">
+  </div>
+  <button type="button" class="copy-btn" id="depClearBtn">Clear selection</button>
+</div>
+
+<div class="card">
+  <h2>3. Scan &amp; Deploy</h2>
+  <button type="button" class="run-btn" id="depScanBtn">1 · Scan &amp; Dry Run</button>
+  <button type="button" class="run-btn" id="depDeployBtn" disabled style="background:#3f9e52;border-color:#3f9e52">2 · Push Single Commit</button>
+
+  <div id="depSummary" style="font-size:.85rem;margin-top:12px;display:flex;gap:14px;flex-wrap:wrap"></div>
+  <div style="max-height:300px;overflow:auto;border:1px solid rgba(255,255,255,.12);border-radius:8px;margin-top:8px">
+    <table style="width:100%;border-collapse:collapse;font-size:.78rem" id="depTbl">
+      <thead><tr style="text-align:left"><th style="padding:6px 8px">Path</th><th style="padding:6px 8px">Status</th><th style="padding:6px 8px">Size</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div id="depProgWrap" style="height:7px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-top:12px">
+    <div id="depProg" style="height:100%;width:0;background:var(--kinno);transition:width .25s"></div>
+  </div>
+  <div id="depLog" style="background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.75rem;white-space:pre-wrap;word-break:break-word;max-height:320px;overflow:auto;margin-top:12px;line-height:1.55">Ready.</div>
+  <p style="font-size:.75rem;color:#8a8a75;margin-top:10px">⚠️ Token save nahi hota — sirf is tab ki memory mein rehta hai jab tak page khula hai. Commit hote hi Vercel khud auto-deploy kar dega (GitHub se connected hai).</p>
+</div>
+
+</div>
+<script data-tn-deployer="1">
+(function(){
+  function $(id){ return document.getElementById(id); }
+  var LOG = $('depLog');
+  function log(m, cls){
+    var s = document.createElement('span');
+    if (cls==='ok') s.style.color = '#7fd6a2';
+    else if (cls==='warn') s.style.color = '#f0c274';
+    else if (cls==='err') s.style.color = '#ff9a90';
+    else if (cls==='dim') s.style.color = '#8d8877';
+    s.textContent = m + "\n";
+    LOG.appendChild(s);
+    LOG.scrollTop = LOG.scrollHeight;
+  }
+  function setProg(pct){ $('depProg').style.width = pct + '%'; }
+
+  /* ---------- pure-JS SHA-1 (git blob compatible, no crypto.subtle dependency) ---------- */
+  function sha1(bytes){
+    function rotl(n,b){ return (n<<b)|(n>>>(32-b)); }
+    var withOne = new Uint8Array(((bytes.length + 9 + 63) >> 6) << 6);
+    withOne.set(bytes);
+    withOne[bytes.length] = 0x80;
+    var dv = new DataView(withOne.buffer);
+    var ml = bytes.length * 8;
+    var hi = Math.floor(ml / 0x100000000), lo = ml >>> 0;
+    dv.setUint32(withOne.length - 8, hi, false);
+    dv.setUint32(withOne.length - 4, lo, false);
+    var h0=0x67452301,h1=0xEFCDAB89,h2=0x98BADCFE,h3=0x10325476,h4=0xC3D2E1F0;
+    var w = new Array(80);
+    for (var chunk=0; chunk<withOne.length; chunk+=64){
+      for (var i=0;i<16;i++) w[i] = dv.getUint32(chunk + i*4, false);
+      for (i=16;i<80;i++) w[i] = rotl(w[i-3]^w[i-8]^w[i-14]^w[i-16], 1);
+      var a=h0,b=h1,c=h2,d=h3,e=h4;
+      for (i=0;i<80;i++){
+        var f,k;
+        if (i<20){ f=(b&c)|((~b)&d); k=0x5A827999; }
+        else if (i<40){ f=b^c^d; k=0x6ED9EBA1; }
+        else if (i<60){ f=(b&c)|(b&d)|(c&d); k=0x8F1BBCDC; }
+        else { f=b^c^d; k=0xCA62C1D6; }
+        var temp = (rotl(a,5) + f + e + k + w[i]) >>> 0;
+        e=d; d=c; c=rotl(b,30); b=a; a=temp;
+      }
+      h0=(h0+a)>>>0; h1=(h1+b)>>>0; h2=(h2+c)>>>0; h3=(h3+d)>>>0; h4=(h4+e)>>>0;
+    }
+    function hex(n){ return ('00000000'+(n>>>0).toString(16)).slice(-8); }
+    return hex(h0)+hex(h1)+hex(h2)+hex(h3)+hex(h4);
+  }
+  function gitBlobSha1(bytes){
+    var header = new TextEncoder().encode('blob ' + bytes.length + '\0');
+    var full = new Uint8Array(header.length + bytes.length);
+    full.set(header,0); full.set(bytes, header.length);
+    return sha1(full);
+  }
+  function bytesToB64(bytes){
+    var bin='', CH=0x8000;
+    for (var i=0;i<bytes.length;i+=CH) bin += String.fromCharCode.apply(null, bytes.subarray(i,i+CH));
+    return btoa(bin);
+  }
+  function b64ToBytes(b64){
+    var bin = atob(String(b64).replace(/\s/g,''));
+    var bytes = new Uint8Array(bin.length);
+    for (var i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+    return bytes;
+  }
+
+  var CFG = {};
+  function api(path, opts){
+    opts = opts || {};
+    var url = path.indexOf('http')===0 ? path : 'https://api.github.com/repos/'+CFG.owner+'/'+CFG.repo+path;
+    var headers = Object.assign({
+      'Authorization':'Bearer '+CFG.token,
+      'Accept':'application/vnd.github+json',
+      'X-GitHub-Api-Version':'2022-11-28'
+    }, opts.headers||{});
+    var attempt = 0;
+    function go(){
+      attempt++;
+      return fetch(url, {method:opts.method||'GET', headers:headers, body:opts.body})
+        .then(function(r){
+          if (r.status===403 || r.status===429 || r.status>=500){
+            if (attempt<5){
+              var wait = Math.pow(2,attempt)*500;
+              log('  retry '+attempt+' ('+r.status+') in '+wait+'ms…','warn');
+              return new Promise(function(res){ setTimeout(res, wait); }).then(go);
+            }
+          }
+          if (!r.ok) return r.text().then(function(t){ throw new Error(r.status+' '+path+' :: '+t.slice(0,200)); });
+          return r.json();
+        });
+    }
+    return go();
+  }
+  function pool(items, limit, fn){
+    return new Promise(function(resolve, reject){
+      var i=0, active=0, done=0, failed=false;
+      var results = new Array(items.length);
+      if (!items.length) return resolve(results);
+      function next(){
+        if (failed) return;
+        if (done === items.length) return resolve(results);
+        while (active < limit && i < items.length){
+          var idx = i; i+=1; active+=1;
+          (function(k){
+            fn(items[k], k).then(function(r){
+              results[k]=r; active-=1; done+=1;
+              setProg(Math.round(done/items.length*100));
+              next();
+            }, function(err){ failed=true; reject(err); });
+          })(idx);
+        }
+      }
+      next();
+    });
+  }
+
+  var SELECTED = {};
+
+  function relPathFor(file, fromFolder){
+    var p = fromFolder && file.webkitRelativePath ? file.webkitRelativePath : file.name;
+    if (fromFolder && p.indexOf('/') > -1){ p = p.slice(p.indexOf('/') + 1); }
+    var tf = $('depTargetFolder').value.trim().replace(/^\/+|\/+$/g,'');
+    if (tf) p = tf + '/' + p;
+    return p;
+  }
+  function addFiles(fileListObj, fromFolder){
+    for (var i=0;i<fileListObj.length;i++){
+      var f = fileListObj[i];
+      SELECTED[relPathFor(f, fromFolder)] = f;
+    }
+    renderFileSummary();
+  }
+  function renderFileSummary(){
+    var paths = Object.keys(SELECTED).sort();
+    var box = $('depFileSummary'), list = $('depFileList');
+    if (!paths.length){ box.textContent = 'Koi file select nahi hui.'; list.innerHTML=''; return; }
+    var totalBytes = paths.reduce(function(a,p){ return a + (SELECTED[p].size||0); }, 0);
+    box.innerHTML = '<b>'+paths.length+'</b> files select hui (' + Math.round(totalBytes/1024) + ' KB)';
+    list.innerHTML = paths.join('<br>');
+  }
+
+  $('depPickFiles').addEventListener('change', function(e){ addFiles(e.target.files, false); e.target.value=''; });
+  $('depPickFolder').addEventListener('change', function(e){ addFiles(e.target.files, true); e.target.value=''; });
+  $('depClearBtn').addEventListener('click', function(){
+    SELECTED = {};
+    renderFileSummary();
+    $('depTbl').querySelector('tbody').innerHTML = '';
+    $('depSummary').innerHTML = '';
+    $('depDeployBtn').disabled = true;
+    log('Selection clear ki gayi.','dim');
+  });
+
+  function readFileBytes(file){
+    return new Promise(function(resolve, reject){
+      var r = new FileReader();
+      r.onload = function(){ resolve(new Uint8Array(r.result)); };
+      r.onerror = function(){ reject(new Error('Read fail: '+file.name)); };
+      r.readAsArrayBuffer(file);
+    });
+  }
+
+  var PLAN = [], BASE = {};
+
+  function readCfg(){
+    var full = $('depGhRepo').value.trim();
+    var parts = full.split('/').map(function(s){return s.trim();}).filter(Boolean);
+    if (parts.length !== 2) throw new Error('Repository "owner/repo" format mein hona chahiye, misal saiftiwana/ToolNest.');
+    CFG = { owner: parts[0], repo: parts[1], branch: $('depGhBranch').value.trim(), token: $('depGhToken').value.trim() };
+    if (!CFG.branch) throw new Error('Branch chahiye.');
+    if (!CFG.token) throw new Error('GitHub token chahiye.');
+  }
+
+  function scan(){
+    var paths = Object.keys(SELECTED);
+    var delPaths = $('depDeletePaths').value.split(',').map(function(s){return s.trim();}).filter(Boolean);
+    if (!paths.length && !delPaths.length){ log('✖ Koi file select nahi hui aur koi delete path bhi nahi diya.','err'); return; }
+    try { readCfg(); } catch(e){ log('✖ '+e.message,'err'); return; }
+
+    $('depScanBtn').disabled = true;
+    setProg(0);
+    PLAN = [];
+    LOG.textContent = '';
+    log('Branch resolve kar raha hoon…');
+
+    var localBytes = {};
+
+    api('/git/ref/heads/'+CFG.branch)
+      .then(function(ref){
+        BASE.commit = ref.object.sha;
+        log('  HEAD commit: '+BASE.commit.slice(0,10),'dim');
+        return api('/git/commits/'+BASE.commit);
+      })
+      .then(function(c){ BASE.tree = c.tree.sha; return api('/git/trees/'+BASE.tree+'?recursive=1'); })
+      .then(function(tree){
+        if (tree.truncated) throw new Error('Repo tree truncated — bohat bara repo hai.');
+        var live = {};
+        tree.tree.forEach(function(n){ if (n.type==='blob') live[n.path]=n.sha; });
+        log('Repo mein '+Object.keys(live).length+' files mili. Local files hash kar raha hoon…');
+
+        return pool(paths, 4, function(p){
+          return readFileBytes(SELECTED[p]).then(function(bytes){
+            localBytes[p] = bytes;
+            var localSha = gitBlobSha1(bytes);
+            var liveSha = live[p];
+            var status = !liveSha ? 'new' : (liveSha !== localSha ? 'changed' : 'skip');
+            PLAN.push({ path:p, status: status, size: bytes.length });
+          });
+        }).then(function(){
+          delPaths.forEach(function(p){
+            if (live[p]) PLAN.push({ path:p, status:'delete', size:0 });
+            else PLAN.push({ path:p, status:'skip', size:0, note:'delete: path repo mein nahi mila' });
+          });
+          BASE.localBytes = localBytes;
+          render();
+        });
+      })
+      .catch(function(e){ log('✖ '+e.message,'err'); $('depScanBtn').disabled=false; setProg(0); });
+  }
+
+  function render(){
+    var news = PLAN.filter(function(p){ return p.status==='new'; }).length;
+    var chgs = PLAN.filter(function(p){ return p.status==='changed'; }).length;
+    var dels = PLAN.filter(function(p){ return p.status==='delete'; }).length;
+    var skip = PLAN.filter(function(p){ return p.status==='skip'; }).length;
+    var actionable = news+chgs+dels;
+
+    $('depSummary').innerHTML =
+      '<span><b>'+news+'</b> new</span><span><b>'+chgs+'</b> changed</span>'+
+      '<span><b>'+dels+'</b> delete</span><span><b>'+skip+'</b> skip (unchanged)</span>';
+
+    var tb = $('depTbl').querySelector('tbody');
+    tb.innerHTML = '';
+    var order = {new:0, changed:1, delete:2, skip:3};
+    var colors = {new:'#f5942f', changed:'#e0b840', delete:'#e05a4e', skip:'#8d8877'};
+    PLAN.slice().sort(function(a,b){ return order[a.status]-order[b.status] || a.path.localeCompare(b.path); })
+      .forEach(function(p){
+        var tr = document.createElement('tr');
+        tr.innerHTML = '<td style="padding:6px 8px;border-top:1px solid rgba(255,255,255,.08);word-break:break-all">'+p.path+(p.note?' <span style="color:#8d8877">('+p.note+')</span>':'')+'</td>'+
+          '<td style="padding:6px 8px;border-top:1px solid rgba(255,255,255,.08)"><span style="color:'+colors[p.status]+';font-weight:700;font-size:.72rem">'+p.status+'</span></td>'+
+          '<td style="padding:6px 8px;border-top:1px solid rgba(255,255,255,.08)">'+(p.status==='delete'?'—':Math.round(p.size/1024*10)/10+' KB')+'</td>';
+        tb.appendChild(tr);
+      });
+
+    log('✔ Dry-run mukammal: '+news+' new, '+chgs+' changed, '+dels+' delete, '+skip+' skip.','ok');
+    $('depScanBtn').disabled = false;
+    $('depDeployBtn').disabled = actionable === 0;
+    setProg(0);
+  }
+
+  function deploy(){
+    var actionable = PLAN.filter(function(p){ return p.status!=='skip'; });
+    if (!actionable.length) return;
+    var news = actionable.filter(function(p){return p.status==='new';}).length;
+    var chgs = actionable.filter(function(p){return p.status==='changed';}).length;
+    var dels = actionable.filter(function(p){return p.status==='delete';}).length;
+    if (!confirm(news+' new + '+chgs+' changed + '+dels+' delete = '+actionable.length+' changes, branch "'+CFG.branch+'" par commit hongi. Continue?')) return;
+
+    $('depDeployBtn').disabled = true;
+    log('Blobs bana raha hoon ('+(news+chgs)+')…');
+
+    var uploads = actionable.filter(function(p){ return p.status!=='delete'; });
+    var deletes = actionable.filter(function(p){ return p.status==='delete'; });
+
+    pool(uploads, 4, function(p){
+      var bytes = BASE.localBytes[p.path];
+      return api('/git/blobs', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ content: bytesToB64(bytes), encoding:'base64' })
+      }).then(function(b){ return { path:p.path, mode:'100644', type:'blob', sha:b.sha }; });
+    })
+    .then(function(uploadEntries){
+      var deleteEntries = deletes.map(function(p){ return { path:p.path, mode:'100644', type:'blob', sha:null }; });
+      var entries = uploadEntries.concat(deleteEntries);
+      log('Tree bana raha hoon ('+entries.length+' entries)…');
+      return api('/git/trees', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ base_tree: BASE.tree, tree: entries })
+      });
+    })
+    .then(function(tree){
+      log('Commit bana raha hoon…');
+      return api('/git/commits', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ message: $('depMsg').value, tree: tree.sha, parents:[BASE.commit] })
+      });
+    })
+    .then(function(commit){
+      log('Ref update kar raha hoon…');
+      return api('/git/refs/heads/'+CFG.branch, {
+        method:'PATCH', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ sha: commit.sha, force:false })
+      }).then(function(){ return commit; });
+    })
+    .then(function(commit){
+      log('✔ Commit ho gaya: '+commit.sha.slice(0,10),'ok');
+      log('Verify kar raha hoon (byte-exact, sample)…');
+      var sample = uploads.slice(0, 6);
+      return pool(sample, 3, function(p){
+        return api('/contents/'+encodeURIComponent(p.path)+'?ref='+CFG.branch)
+          .then(function(c){
+            var liveBytes = b64ToBytes(c.content);
+            var okk = gitBlobSha1(BASE.localBytes[p.path]) === gitBlobSha1(liveBytes);
+            log((okk?'  ✔ ':'  ✖ ') + p.path + (okk?' byte-exact':' MISMATCH'), okk?'ok':'err');
+            return okk;
+          });
+      }).then(function(res){
+        var allOk = res.every(Boolean);
+        log(allOk ? '✔ Verification pass. Vercel khud auto-deploy kar dega.' : '✖ Kuch files verify nahi hui.', allOk?'ok':'err');
+        setProg(0);
+      });
+    })
+    .catch(function(e){ log('✖ '+e.message,'err'); $('depDeployBtn').disabled=false; setProg(0); });
+  }
+
+  $('depScanBtn').addEventListener('click', scan);
+  $('depDeployBtn').addEventListener('click', deploy);
+})();
+</script>
+
 </main>
 <script>
 (function(){
@@ -3197,7 +3594,8 @@ function clearHistory(){
     ['navPostGen', 'page-postgen'],
     ['navMonitor', 'page-monitor'],
     ['navAds', 'page-ads'],
-    ['navAudit', 'page-audit']
+    ['navAudit', 'page-audit'],
+    ['navDeploy', 'page-deploy']
   ];
   var KEY = 'toolnest-active-page';
 
