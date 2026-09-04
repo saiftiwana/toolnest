@@ -16,7 +16,7 @@
 <div class="progress-track" id="pwdProgressTrack" style="display:none;"><div class="progress-fill" id="pwdProgressFill"></div></div>
 <p class="stat" id="pwdStatus" style="font-size:.85rem; white-space:pre-line;"></p>
 </div>
-<div class="seo-content"><!-- batch1-content-depth-v1 -->
+<div class="seo-content"><!-- batch1-content-depth-v1 v21-batch02-seo -->
 <h3>Getting Editable Text Out of a Locked PDF</h3><p>A PDF is built to look the same everywhere, which is exactly why it's painful to edit — there's no cursor to click into, no paragraph to reflow. This converter reads the text layer out of your PDF and rebuilds it as a real .docx file you can open in Word or Google Docs and edit like any other document.</p>
 <h3>How the Conversion Works</h3><p>The tool parses the PDF's internal structure to locate its text objects, paragraph breaks, and basic formatting cues, then reconstructs that content into the DOCX XML format using an in-browser conversion library — no server upload involved. Because it works from the PDF's actual embedded text layer, results are strongest on PDFs that were originally created digitally (exported from Word, Google Docs, or similar) rather than scanned.</p>
 <h3>A Worked Example</h3><p>A 6-page rental agreement exported from Word to PDF converts back with paragraphs, headings, and bullet lists intact, ready for a lawyer to add tracked-change edits in Word within seconds. Compare that to a 6-page PDF that's actually a scanned image of a printed contract — that file has no underlying text layer at all, so a converter working from text extraction returns an empty or near-empty document, since there's no text to extract, only pixels.</p>
@@ -39,12 +39,6 @@
 {"@context":"https://schema.org","@graph":[
 {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://toolnest.link/"},{"@type":"ListItem","position":2,"name":"File & PDF","item":"https://toolnest.link/pdf-tools.html"},{"@type":"ListItem","position":3,"name":"PDF to Word Converter","item":"https://toolnest.link/pdf-to-word-converter.html"}]},
 {"@type":"SoftwareApplication","name":"PDF to Word Converter","applicationCategory":"BusinessApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/pdf-to-word-converter.html"},
-{"@type":"HowTo","name":"How to Convert a PDF to a Word Document","step":[
-{"@type":"HowToStep","text":"Upload a PDF file."},
-{"@type":"HowToStep","text":"Click Convert to Word."},
-{"@type":"HowToStep","text":"Review the conversion status."},
-{"@type":"HowToStep","text":"Download the .docx file."}
-]},
 {"@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Why did my converted document come out blank or nearly empty?","acceptedAnswer":{"@type":"Answer","text":"This usually means the source PDF is a scanned image rather than a digitally created document — there's no embedded text layer to extract, since the \"text\" is actually pixels in a photo."}},
 {"@type":"Question","name":"Will tables and columns convert correctly?","acceptedAnswer":{"@type":"Answer","text":"Simple tables usually convert well; complex multi-column layouts or PDFs with heavy design work sometimes need manual formatting fixes afterward in Word."}},
