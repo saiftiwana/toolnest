@@ -24,7 +24,7 @@
 <div class="ba-col"><canvas class="preview" id="pgAfterCanvas"></canvas><p>After (page 1)</p></div>
 </div>
 </div>
-<div class="seo-content"><!-- batch1-content-depth-v1 -->
+<div class="seo-content"><!-- batch1-content-depth-v1 v21-batch05-seo -->
 <h3>Stripping Color Out of a PDF for Printing</h3><p>Office printers charge far more per page for color than black-and-white, and plenty of documents — contracts, forms, reports full of body text — don't need color at all. This tool converts every page of a PDF to grayscale or pure black-and-white directly in your browser, so what prints matches what you actually need.</p>
 <h3>Grayscale vs Black-and-White, and Why It Matters</h3><p>Grayscale conversion maps every color pixel to its equivalent brightness value, preserving shading and gradients — a chart with a blue-to-red gradient becomes a smooth light-to-dark gradient rather than solid color, which keeps photos and diagrams readable. Black-and-white (threshold) conversion instead pushes every pixel to pure black or pure white based on a brightness cutoff, which is ideal for scanned text documents where you want maximum contrast and the smallest possible file size, but destroys subtle shading in photos.</p>
 <h3>A Concrete Example</h3><p>A 40-page report with a colored company logo on page 1 and mostly black text on white for the remaining 39 pages converts to grayscale in seconds — the logo becomes a soft gray version of itself rather than disappearing, and the file often shrinks noticeably since grayscale pixel data compresses more efficiently than full RGB color. Run the same document through the black-and-white threshold mode instead, and the logo's subtle shading collapses into stark black shapes — fine for a pure-text contract, less ideal if that logo's legibility matters.</p>
@@ -47,14 +47,6 @@
 {"@context":"https://schema.org","@graph":[
 {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://toolnest.link/"},{"@type":"ListItem","position":2,"name":"File & PDF","item":"https://toolnest.link/pdf-tools.html"},{"@type":"ListItem","position":3,"name":"PDF Grayscale & B/W Converter","item":"https://toolnest.link/pdf-grayscale-converter.html"}]},
 {"@type":"SoftwareApplication","name":"PDF Grayscale & B/W Converter","applicationCategory":"BusinessApplication","operatingSystem":"Any (Web Browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://toolnest.link/pdf-grayscale-converter.html"},
-{"@type":"HowTo","name":"How to Convert a PDF to Grayscale or Black and White","step":[
-{"@type":"HowToStep","text":"Upload a PDF file."},
-{"@type":"HowToStep","text":"Choose Grayscale or Black & White mode."},
-{"@type":"HowToStep","text":"Set a page range if needed."},
-{"@type":"HowToStep","text":"Click Convert PDF."},
-{"@type":"HowToStep","text":"Review the before and after preview."},
-{"@type":"HowToStep","text":"Download the converted PDF."}
-]},
 {"@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Which mode should I use for a scanned contract with a signature?","acceptedAnswer":{"@type":"Answer","text":"Black-and-white threshold mode usually works best for scanned text-and-signature documents, since it maximizes contrast and keeps the file small while a signature remains clearly visible."}},
 {"@type":"Question","name":"Will grayscale conversion make my file size smaller?","acceptedAnswer":{"@type":"Answer","text":"Usually yes, since grayscale pixel data requires less information per pixel than full RGB color, though the exact reduction depends on how much color was in the original pages."}},
