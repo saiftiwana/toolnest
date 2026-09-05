@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /personal-toolkit.html
+Disallow: /changelog.html
 
 Sitemap: https://toolnest.link/sitemap.xml
 # LLM directory: https://toolnest.link/llms.txt
