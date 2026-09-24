@@ -1,0 +1,12 @@
+{
+  // Cloudflare Workers static-assets config for ToolNest.
+  // html_handling:"none" keeps every .html URL exact - no auto redirect / extension stripping,
+  // matching the site's existing Vercel cleanUrls:false behavior.
+  "name": "toolnest",
+  "compatibility_date": "2026-09-24",
+  "assets": {
+    "directory": "./",
+    "html_handling": "none",
+    "not_found_handling": "404-page"
+  }
+}
