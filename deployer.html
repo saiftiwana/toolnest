@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ToolNest Deployer</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;max-width:640px;margin:40px auto;padding:0 16px;color:#1c1c1c;line-height:1.55}
+  h1{font-size:1.4rem;margin-bottom:4px}
+  .sub{color:#666;margin-top:0}
+  .box{border:1px solid #ddd;border-radius:10px;padding:16px;margin:16px 0}
+  label{display:block;font-weight:600;margin:12px 0 4px}
+  input[type=password],input[type=text]{width:100%;padding:9px 10px;border:1px solid #bbb;border-radius:6px;font-size:1rem;box-sizing:border-box}
+  button{background:#e85d04;color:#fff;border:0;border-radius:6px;padding:10px 18px;font-size:1rem;cursor:pointer;margin-top:12px}
+  button:disabled{background:#ccc;cursor:not-allowed}
+  button.alt{background:#fff;color:#333;border:1px solid #bbb}
+  #log{background:#111;color:#e8e8e8;border-radius:8px;padding:12px;white-space:pre-wrap;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9rem;min-height:120px}
+  .ok{color:#1a7f37}.err{color:#c0392b}
+  .note{font-size:.9rem;color:#555}
+  code{background:#f2f2f2;padding:1px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<h1>🚀 ToolNest Deployer</h1>
+<p class="sub">Ek file ko seedha GitHub repo mein push karein — phir Cloudflare khud auto-deploy kar dega (~1 minute).</p>
+
+<div class="box">
+  <p><b>Target repo:</b> <code>saiftiwana/toolnest</code> &nbsp;|&nbsp; <b>Branch:</b> <code>main</code> &nbsp;|&nbsp; <b>Folder:</b> root (koi prefix nahi)</p>
+  <label for="token">GitHub token (PAT)</label>
+  <input type="password" id="token" placeholder="ghp_... ya github_pat_..." autocomplete="off">
+  <p class="note">Token sirf is page ki memory mein rehta hai — kahin save nahi hota, page refresh par khatam ho jayega. Token banane ke liye: GitHub → Settings → Developer settings → Personal access tokens (classic) → <b>repo</b> scope ke sath banayein. RoznamaAds account ka token bhi chalega (wo is repo par Write collaborator hai).</p>
+  <button class="alt" id="clearTokenBtn">Token saaf karein</button>
+
+  <label for="fileInput">File chunein (ZIP nahi — andar wali file, jese <code>best-electric-screwdrivers.html</code>)</label>
+  <input type="file" id="fileInput">
+  <div id="fileInfo" class="note" style="margin-top:8px">Koi file select nahi hui.</div>
+
+  <button id="pushBtn" disabled>📤 Push karein</button>
+</div>
+
+<div class="box">
+  <b>Status log</b>
+  <div id="log" style="margin-top:10px">Tayyar hai — token dalein aur file chunein.</div>
+</div>
+
+<p class="note">Push ke baad file <code>https://www.toolnest.link/&lt;filename&gt;</code> par ~1 minute mein live ho jayegi. Ye page homepage se link nahi hai — sirf wahi kholega jise URL pata hai.</p>
+
+<script>
+const OWNER = 'saiftiwana';
+const REPO = 'toolnest';
+const BRANCH = 'main';
+let chosenFile = null;
+let existingSha = null;
+
+const logEl = document.getElementById('log');
+function log(msg){ logEl.textContent += '\n' + msg; logEl.scrollTop = logEl.scrollHeight; }
+function setLog(msg){ logEl.textContent = msg; }
+
+function headers(token){
+  return {'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'};
+}
+function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+async function ghFetch(url, opt, tries){
+  tries = (tries === undefined) ? 3 : tries;
+  let res;
+  try { res = await fetch(url, opt); }
+  catch(e){
+    if (tries <= 0) throw new Error('network: ' + e.message);
+    await sleep(1000); return ghFetch(url, opt, tries - 1);
+  }
+  if ((res.status === 403 || res.status === 429 || res.status >= 500) && tries > 0){
+    await sleep(1500); return ghFetch(url, opt, tries - 1);
+  }
+  return res;
+}
+function readAsBase64(file){
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result.split(',')[1]);
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
+}
+
+document.getElementById('clearTokenBtn').onclick = () => {
+  document.getElementById('token').value = '';
+  setLog('Token saaf kar diya gaya.');
+};
+
+document.getElementById('fileInput').onchange = async (e) => {
+  chosenFile = e.target.files[0] || null;
+  existingSha = null;
+  const btn = document.getElementById('pushBtn');
+  if (!chosenFile){
+    document.getElementById('fileInfo').textContent = 'Koi file select nahi hui.';
+    btn.disabled = true;
+    return;
+  }
+  document.getElementById('fileInfo').innerHTML =
+    '<b>' + chosenFile.name + '</b> — ' + (chosenFile.size / 1024).toFixed(1) + ' KB — repo path: <code>' + chosenFile.name + '</code>';
+  const token = document.getElementById('token').value.trim();
+  if (!token){
+    setLog('File select ho gayi. Ab GitHub token dalein — phir Push button khud enable ho jayega.');
+    btn.disabled = true;
+    return;
+  }
+  setLog('Check kar rahe hain ke ye file repo mein pehle se hai ya nayi...');
+  try {
+    const res = await ghFetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + encodeURIComponent(chosenFile.name) + '?ref=' + BRANCH, {headers: headers(token)});
+    if (res.status === 404){
+      setLog('✅ File NAYI hai — Push dabayein, ye create ho jayegi.');
+    } else if (res.ok){
+      const data = await res.json();
+      existingSha = data.sha;
+      setLog('✅ File pehle se maujood hai — Push dabayein, ye UPDATE ho jayegi.');
+    } else {
+      setLog('❌ Check fail: ' + res.status + ' — token ghalat ho sakta hai ya scope (repo) nahi hai.');
+      btn.disabled = true;
+      return;
+    }
+    btn.disabled = false;
+  } catch(err){
+    setLog('❌ Check fail: ' + err.message);
+    btn.disabled = true;
+  }
+};
+
+document.getElementById('token').addEventListener('input', () => {
+  if (chosenFile) document.getElementById('fileInput').onchange({target: {files: [chosenFile]}});
+});
+
+document.getElementById('pushBtn').onclick = async () => {
+  const token = document.getElementById('token').value.trim();
+  const btn = document.getElementById('pushBtn');
+  if (!token){ setLog('❌ Pehle GitHub token dalein.'); return; }
+  if (!chosenFile){ setLog('❌ Pehle file chunein.'); return; }
+  btn.disabled = true;
+  try {
+    setLog('File parh rahe hain (' + (chosenFile.size / 1024).toFixed(1) + ' KB)...');
+    const base64 = await readAsBase64(chosenFile);
+    const body = {message: 'Deploy via ToolNest Deployer: ' + chosenFile.name, content: base64, branch: BRANCH};
+    if (existingSha) body.sha = existingSha;
+    setLog('GitHub par push ho raha hai...');
+    const res = await ghFetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + encodeURIComponent(chosenFile.name), {
+      method: 'PUT', headers: {...headers(token), 'Content-Type': 'application/json'}, body: JSON.stringify(body)
+    });
+    if (!res.ok) throw new Error('Push fail: ' + res.status + ' ' + (await res.text()).slice(0, 300));
+    const data = await res.json();
+    const sha = (data.commit && data.commit.sha) ? data.commit.sha.slice(0, 7) : '?';
+    setLog('✅ Pushed! Commit: ' + sha + '\nCommit: https://github.com/' + OWNER + '/' + REPO + '/commit/' + (data.commit ? data.commit.sha : '') + '\nLive link (~1 min mein): https://www.toolnest.link/' + chosenFile.name + '\nCloudflare auto-deploy shuru ho gaya hai.');
+  } catch(err){
+    setLog('❌ ' + err.message);
+    btn.disabled = false;
+  }
+};
+</script>
+</body>
+</html>
