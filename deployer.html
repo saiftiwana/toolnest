@@ -16,14 +16,13 @@
   button:disabled{background:#ccc;cursor:not-allowed}
   button.alt{background:#fff;color:#333;border:1px solid #bbb}
   #log{background:#111;color:#e8e8e8;border-radius:8px;padding:12px;white-space:pre-wrap;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9rem;min-height:120px}
-  .ok{color:#1a7f37}.err{color:#c0392b}
   .note{font-size:.9rem;color:#555}
   code{background:#f2f2f2;padding:1px 5px;border-radius:4px}
 </style>
 </head>
 <body>
 <h1>🚀 ToolNest Deployer</h1>
-<p class="sub">Ek file ko seedha GitHub repo mein push karein — phir Cloudflare khud auto-deploy kar dega (~1 minute).</p>
+<p class="sub">Ek file ko seedha GitHub repo mein push karein — phir Cloudflare khud auto-deploy kar dega (~1 minute). <b>Har push par sitemap.xml khud update ho jayega</b> — naya landing page ho to us ka URL sitemap mein auto-add ho jata hai.</p>
 
 <div class="box">
   <p><b>Target repo:</b> <code>saiftiwana/toolnest</code> &nbsp;|&nbsp; <b>Branch:</b> <code>main</code> &nbsp;|&nbsp; <b>Folder:</b> root (koi prefix nahi)</p>
@@ -44,12 +43,13 @@
   <div id="log" style="margin-top:10px">Tayyar hai — token dalein aur file chunein.</div>
 </div>
 
-<p class="note">Push ke baad file <code>https://www.toolnest.link/&lt;filename&gt;</code> par ~1 minute mein live ho jayegi. Ye page homepage se link nahi hai — sirf wahi kholega jise URL pata hai.</p>
+<p class="note">Push ke baad file <code>https://www.toolnest.link/&lt;filename&gt;</code> par ~1 minute mein live ho jayegi. Ye page homepage se link nahi hai — sirf wahi kholega jise URL pata hai. Sitemap: <code>https://www.toolnest.link/sitemap.xml</code> (GSC mein yehi submit hai).</p>
 
 <script>
 const OWNER = 'saiftiwana';
 const REPO = 'toolnest';
 const BRANCH = 'main';
+const SITE = 'https://www.toolnest.link';
 let chosenFile = null;
 let existingSha = null;
 
@@ -81,6 +81,77 @@ function readAsBase64(file){
     r.onerror = reject;
     r.readAsDataURL(file);
   });
+}
+function strToBase64(str){
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  const CHUNK = 0x8000;
+  for (let i = 0; i < bytes.length; i += CHUNK){
+    bin += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK));
+  }
+  return btoa(bin);
+}
+function base64ToStr(b64){
+  return decodeURIComponent(escape(atob(b64.replace(/\n/g, ''))));
+}
+
+/* ---------- Auto sitemap: har push ke baad repo ke saare .html pages
+   sitemap mein hon — jo missing ho wo add karo (kabhi delete nahi karo). ---------- */
+async function syncSitemap(token){
+  try {
+    log('🗺️ Sitemap sync ho raha hai...');
+    const treeRes = await ghFetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/git/trees/' + BRANCH + '?recursive=1', {headers: headers(token)});
+    if (!treeRes.ok) throw new Error('tree fetch fail: ' + treeRes.status);
+    const tree = await treeRes.json();
+    const expected = new Set([SITE + '/']);
+    for (const node of (tree.tree || [])){
+      if (node.type !== 'blob') continue;
+      const p = node.path;
+      if (!p.endsWith('.html')) continue;
+      if (p === 'deployer.html' || p === '404.html') continue;
+      if (p.includes('/')) continue;
+      if (p === 'index.html') expected.add(SITE + '/');
+      else expected.add(SITE + '/' + p);
+    }
+    let smRes = await ghFetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/sitemap.xml?ref=' + BRANCH, {headers: headers(token)});
+    let smSha = null, blocks = [], have = new Set();
+    if (smRes.ok){
+      const smData = await smRes.json();
+      smSha = smData.sha;
+      const xml = base64ToStr(smData.content);
+      const found = xml.match(/<url>[\s\S]*?<\/url>/g) || [];
+      for (const b of found){
+        const m = b.match(/<loc>([^<]+)<\/loc>/);
+        if (m) have.add(m[1].trim());
+        blocks.push(b);
+      }
+    } else if (smRes.status !== 404){
+      throw new Error('sitemap fetch fail: ' + smRes.status);
+    }
+    const today = new Date().toISOString().slice(0, 10);
+    const missing = [];
+    for (const url of expected){
+      if (!have.has(url)) missing.push(url);
+    }
+    if (missing.length === 0){
+      log('🗺️ Sitemap pehle se complete hai — koi change nahi.');
+      return;
+    }
+    for (const url of missing){
+      blocks.push('  <url>\n    <loc>' + url + '</loc>\n    <lastmod>' + today + '</lastmod>\n  </url>');
+      log('🗺️ Sitemap mein add: ' + url);
+    }
+    const newXml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + blocks.join('\n') + '\n</urlset>\n';
+    const body = {message: 'Auto sitemap: add ' + missing.length + ' page(s)', content: strToBase64(newXml), branch: BRANCH};
+    if (smSha) body.sha = smSha;
+    const putRes = await ghFetch('https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/sitemap.xml', {
+      method: 'PUT', headers: {...headers(token), 'Content-Type': 'application/json'}, body: JSON.stringify(body)
+    });
+    if (!putRes.ok) throw new Error('sitemap push fail: ' + putRes.status + ' ' + (await putRes.text()).slice(0, 200));
+    log('✅ Sitemap update ho gaya (' + missing.length + ' naya URL).');
+  } catch(err){
+    log('⚠️ Sitemap sync nahi ho saka: ' + err.message + ' — page phir bhi live hai, agli push par dobara try hoga.');
+  }
 }
 
 document.getElementById('clearTokenBtn').onclick = () => {
@@ -149,6 +220,11 @@ document.getElementById('pushBtn').onclick = async () => {
     const data = await res.json();
     const sha = (data.commit && data.commit.sha) ? data.commit.sha.slice(0, 7) : '?';
     setLog('✅ Pushed! Commit: ' + sha + '\nCommit: https://github.com/' + OWNER + '/' + REPO + '/commit/' + (data.commit ? data.commit.sha : '') + '\nLive link (~1 min mein): https://www.toolnest.link/' + chosenFile.name + '\nCloudflare auto-deploy shuru ho gaya hai.');
+    if (chosenFile.name.endsWith('.html')){
+      await syncSitemap(token);
+    } else {
+      log('🗺️ Ye HTML file nahi hai — sitemap change nahi hua.');
+    }
   } catch(err){
     setLog('❌ ' + err.message);
     btn.disabled = false;

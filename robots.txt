@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /deployer.html
 Sitemap: https://www.toolnest.link/sitemap.xml
