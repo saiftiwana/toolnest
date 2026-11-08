@@ -550,6 +550,10 @@
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="affiliate-disclosure.html">Affiliate Disclosure</a>
       <a href="mailto:toolnest.link@gmail.com">toolnest.link@gmail.com</a>
+      <a href="about.html">About</a>
+      <a href="how-we-choose.html">How We Choose</a>
+      <a href="editorial-policy.html">Editorial Policy</a>
+      <a href="contact.html">Contact</a>
     </nav>
     <span>As an Amazon Associate I earn from qualifying purchases.</span>
   </div>
@@ -570,6 +574,15 @@
   // Placeholder price buttons: stay on the page instead of jumping to top.
   document.querySelectorAll('a.disabled').forEach(function (a) {
     a.addEventListener('click', function (e) { e.preventDefault(); });
+  });
+</script>
+<script>
+  // ToolNest: report outbound Amazon affiliate clicks to GA4.
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="amazon.com"]') : null;
+    if (a && typeof gtag === 'function') {
+      gtag('event', 'affiliate_click', { link_url: a.href, page_path: location.pathname });
+    }
   });
 </script>
 </body>

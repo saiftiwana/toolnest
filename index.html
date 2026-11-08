@@ -193,6 +193,48 @@
     </div>
   </section>
 
+  <section id="categories">
+    <h2>Browse by category</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="flag">Category</span>
+        <b>Power Tools &amp; Drills</b>
+        <p>Combo kits and compact drivers for home projects, compared on torque, batteries and value.</p>
+        <a class="go" href="best-drill-impact-driver-combo-kits.html">Best Drill + Impact Driver Combo Kits →</a><br />
+        <a class="go" href="best-electric-screwdrivers.html">Best Electric Screwdrivers →</a>
+      </div>
+      <div class="card">
+        <span class="flag">Category</span>
+        <b>Measuring &amp; Layout</b>
+        <p>Straight lines, true levels and tapes you can trust, for shelves, galleries and trim.</p>
+        <a class="go" href="best-laser-levels-for-hanging-pictures.html">Best Laser Levels →</a><br />
+        <a class="go" href="best-tape-measures.html">Best Tape Measures →</a>
+      </div>
+      <div class="card">
+        <span class="flag">Category</span>
+        <b>Hand Tools &amp; Sets</b>
+        <p>Complete tool sets that cover the jobs every home throws at you, without the filler.</p>
+        <a class="go" href="best-tool-sets-for-homeowners.html">Best Tool Sets for Homeowners →</a>
+      </div>
+      <div class="card">
+        <span class="flag">Category</span>
+        <b>Gifts</b>
+        <p>Tool gifts for DIYers, dads and handymen — picks that actually get used.</p>
+        <a class="go" href="best-tool-gifts-for-men.html">Best Tool Gifts for Men →</a>
+      </div>
+      <div class="card">
+        <span class="flag soon">Coming soon</span>
+        <b>Tool Storage</b>
+        <p>Guides coming soon.</p>
+      </div>
+      <div class="card">
+        <span class="flag soon">Coming soon</span>
+        <b>Workshop &amp; Garage</b>
+        <p>Guides coming soon.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="method">
     <h2>How we choose</h2>
     <div class="method">
@@ -226,10 +268,19 @@
 <footer>
   <div class="wrap">
     <span><strong style="color:var(--ink)">ToolNest.link</strong> — honest tool picks for home DIY.</span>
-    <span><a href="privacy-policy.html">Privacy Policy</a> · <a href="affiliate-disclosure.html">Affiliate Disclosure</a></span>
+    <span><a href="privacy-policy.html">Privacy Policy</a> · <a href="affiliate-disclosure.html">Affiliate Disclosure</a> · <a href="about.html">About</a> · <a href="how-we-choose.html">How We Choose</a> · <a href="editorial-policy.html">Editorial Policy</a> · <a href="contact.html">Contact</a></span>
     <span>As an Amazon Associate I earn from qualifying purchases.</span>
   </div>
 </footer>
 
+<script>
+  // ToolNest: report outbound Amazon affiliate clicks to GA4.
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="amazon.com"]') : null;
+    if (a && typeof gtag === 'function') {
+      gtag('event', 'affiliate_click', { link_url: a.href, page_path: location.pathname });
+    }
+  });
+</script>
 </body>
 </html>

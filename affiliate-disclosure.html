@@ -14,6 +14,7 @@
 <meta name="color-scheme" content="light dark" />
 <meta name="description" content="ToolNest Affiliate Disclosure — how our Amazon affiliate links work, what commission means for you, and why our picks stay independent." />
 <link rel="icon" href="data:," />
+<link rel="canonical" href="https://www.toolnest.link/affiliate-disclosure.html" />
 <title>Affiliate Disclosure — ToolNest</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -105,10 +106,19 @@
 <footer>
   <div class="wrap">
     <span><strong style="color:var(--ink)">ToolNest.link</strong> — honest tool picks for home DIY.</span>
-    <span><a href="privacy-policy.html">Privacy Policy</a> · <a href="affiliate-disclosure.html">Affiliate Disclosure</a></span>
+    <span><a href="privacy-policy.html">Privacy Policy</a> · <a href="affiliate-disclosure.html">Affiliate Disclosure</a> · <a href="about.html">About</a> · <a href="how-we-choose.html">How We Choose</a> · <a href="editorial-policy.html">Editorial Policy</a> · <a href="contact.html">Contact</a></span>
     <span>As an Amazon Associate I earn from qualifying purchases.</span>
   </div>
 </footer>
 
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a574f3232bec9bef',t:'MTc5NDE0NDgwOQ=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a574f3232bec9bef',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a574f3232bec9bef',t:'MTc5NDE0NDgwOQ=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a574f3232bec9bef',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>
+  // ToolNest: report outbound Amazon affiliate clicks to GA4.
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="amazon.com"]') : null;
+    if (a && typeof gtag === 'function') {
+      gtag('event', 'affiliate_click', { link_url: a.href, page_path: location.pathname });
+    }
+  });
+</script>
+</body>
 </html>
